@@ -90,7 +90,7 @@ namespace EnACT
         /// </summary>
         private void InitVideoPlayer()
         {
-            //FlashVideoPlayer.LoadMovie(0, @"C:\Users\imdc\Documents\enact\EnACT AS3 Engine\Engine.swf");
+            FlashVideoPlayer.LoadMovie(0, @"C:\Users\imdc\Documents\enact\EnACT AS3 Engine\Engine.swf");
         }
 
         /// <summary>
@@ -237,21 +237,20 @@ namespace EnACT
             }
         }
 
+        private bool isPlaying = true;
+
         private void PlayAndPause_Click(object sender, EventArgs e)
         {
-            //if (FlashVideoPlayer.IsPlaying())
-            //{
-            //    //FlashVideoPlayer.Stop();
-            //    //PlayAndPause.Text = "Pause";
-            //    //FlashVideoPlayer.FrameNum = 0;
-            //    Console.WriteLine("Playing: {0}", FlashVideoPlayer.IsPlaying());
-            //}
-            //else
-            //{
-            //    FlashVideoPlayer.Playing = true;
-            //    PlayAndPause.Text = "Play";
-            //    Console.WriteLine("Not Playing: {0}", FlashVideoPlayer.IsPlaying());
-            //}
+            if (isPlaying)
+            {
+                FlashVideoPlayer.CallFunction("<invoke name=\"pause\" returntype=\"xml\"></invoke>");
+                isPlaying = false;
+            }
+            else
+            {
+                FlashVideoPlayer.CallFunction("<invoke name=\"play\" returntype=\"xml\"></invoke>");
+                isPlaying = true;
+            }
         }
 
         private void JorgeButton_Click(object sender, EventArgs e)
