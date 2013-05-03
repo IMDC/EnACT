@@ -70,6 +70,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="EnactXMLWriter.cs" />
+    <Compile Include="EngineView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EngineView.Designer.cs">
+      <DependentUpon>EngineView.cs</DependentUpon>
+    </Compile>
     <Compile Include="JorgeForm.cs">
       <SubType>Form</SubType>
     </Compile>

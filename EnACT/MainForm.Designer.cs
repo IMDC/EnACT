@@ -48,9 +48,9 @@
             this.DeleteRowBut = new System.Windows.Forms.Button();
             this.MoveRowUpBut = new System.Windows.Forms.Button();
             this.MoveRowDownBut = new System.Windows.Forms.Button();
-            this.FlashVideoPlayer = new AxShockwaveFlashObjects.AxShockwaveFlash();
             this.PlayAndPause = new System.Windows.Forms.Button();
             this.JorgeButton = new System.Windows.Forms.Button();
+            this.FlashVideoPlayer = new EngineView();
             this.MainFormMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FlashVideoPlayer)).BeginInit();
@@ -218,15 +218,6 @@
             this.MoveRowDownBut.UseVisualStyleBackColor = true;
             this.MoveRowDownBut.Click += new System.EventHandler(this.MoveRowDownBut_Click);
             // 
-            // FlashVideoPlayer
-            // 
-            this.FlashVideoPlayer.Enabled = true;
-            this.FlashVideoPlayer.Location = new System.Drawing.Point(12, 27);
-            this.FlashVideoPlayer.Name = "FlashVideoPlayer";
-            this.FlashVideoPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("FlashVideoPlayer.OcxState")));
-            this.FlashVideoPlayer.Size = new System.Drawing.Size(480, 360);
-            this.FlashVideoPlayer.TabIndex = 11;
-            // 
             // PlayAndPause
             // 
             this.PlayAndPause.Location = new System.Drawing.Point(647, 188);
@@ -246,6 +237,15 @@
             this.JorgeButton.Text = "Jorge Button";
             this.JorgeButton.UseVisualStyleBackColor = true;
             this.JorgeButton.Click += new System.EventHandler(this.JorgeButton_Click);
+            // 
+            // FlashVideoPlayer
+            // 
+            this.FlashVideoPlayer.Enabled = true;
+            this.FlashVideoPlayer.Location = new System.Drawing.Point(12, 27);
+            this.FlashVideoPlayer.Name = "FlashVideoPlayer";
+            this.FlashVideoPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("FlashVideoPlayer.OcxState")));
+            this.FlashVideoPlayer.Size = new System.Drawing.Size(480, 360);
+            this.FlashVideoPlayer.TabIndex = 11;
             // 
             // MainForm
             // 
@@ -298,7 +298,7 @@
         private System.Windows.Forms.Button DeleteRowBut;
         private System.Windows.Forms.Button MoveRowUpBut;
         private System.Windows.Forms.Button MoveRowDownBut;
-        private AxShockwaveFlashObjects.AxShockwaveFlash FlashVideoPlayer;
+        private EngineView FlashVideoPlayer;
         private System.Windows.Forms.Button PlayAndPause;
         private System.Windows.Forms.Button JorgeButton;
     }
