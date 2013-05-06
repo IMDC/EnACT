@@ -50,7 +50,7 @@
             this.MoveRowDownBut = new System.Windows.Forms.Button();
             this.PlayAndPause = new System.Windows.Forms.Button();
             this.JorgeButton = new System.Windows.Forms.Button();
-            this.FlashVideoPlayer = new EngineView();
+            this.FlashVideoPlayer = new EnACT.EngineView();
             this.MainFormMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FlashVideoPlayer)).BeginInit();
@@ -66,7 +66,7 @@
             this.debugToolStripMenuItem});
             this.MainFormMenu.Location = new System.Drawing.Point(0, 0);
             this.MainFormMenu.Name = "MainFormMenu";
-            this.MainFormMenu.Size = new System.Drawing.Size(784, 24);
+            this.MainFormMenu.Size = new System.Drawing.Size(944, 24);
             this.MainFormMenu.TabIndex = 0;
             this.MainFormMenu.Text = "MainMenuForm";
             // 
@@ -143,14 +143,14 @@
             this.CaptionView.Name = "CaptionView";
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.CaptionView.Size = new System.Drawing.Size(760, 157);
+            this.CaptionView.Size = new System.Drawing.Size(920, 277);
             this.CaptionView.TabIndex = 1;
             this.CaptionView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.CaptionView_CellValueChanged);
             // 
             // PopulateButton
             // 
             this.PopulateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.PopulateButton.Location = new System.Drawing.Point(647, 85);
+            this.PopulateButton.Location = new System.Drawing.Point(807, 85);
             this.PopulateButton.Name = "PopulateButton";
             this.PopulateButton.Size = new System.Drawing.Size(125, 23);
             this.PopulateButton.TabIndex = 4;
@@ -160,7 +160,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(647, 56);
+            this.button1.Location = new System.Drawing.Point(807, 56);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(125, 23);
             this.button1.TabIndex = 5;
@@ -170,7 +170,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(647, 27);
+            this.button2.Location = new System.Drawing.Point(807, 27);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(125, 23);
             this.button2.TabIndex = 6;
@@ -180,7 +180,7 @@
             // 
             // InsertRowBut
             // 
-            this.InsertRowBut.Location = new System.Drawing.Point(647, 335);
+            this.InsertRowBut.Location = new System.Drawing.Point(807, 341);
             this.InsertRowBut.Name = "InsertRowBut";
             this.InsertRowBut.Size = new System.Drawing.Size(125, 23);
             this.InsertRowBut.TabIndex = 7;
@@ -190,7 +190,7 @@
             // 
             // DeleteRowBut
             // 
-            this.DeleteRowBut.Location = new System.Drawing.Point(647, 364);
+            this.DeleteRowBut.Location = new System.Drawing.Point(807, 370);
             this.DeleteRowBut.Name = "DeleteRowBut";
             this.DeleteRowBut.Size = new System.Drawing.Size(125, 23);
             this.DeleteRowBut.TabIndex = 8;
@@ -200,7 +200,7 @@
             // 
             // MoveRowUpBut
             // 
-            this.MoveRowUpBut.Location = new System.Drawing.Point(647, 277);
+            this.MoveRowUpBut.Location = new System.Drawing.Point(807, 283);
             this.MoveRowUpBut.Name = "MoveRowUpBut";
             this.MoveRowUpBut.Size = new System.Drawing.Size(125, 23);
             this.MoveRowUpBut.TabIndex = 9;
@@ -210,7 +210,7 @@
             // 
             // MoveRowDownBut
             // 
-            this.MoveRowDownBut.Location = new System.Drawing.Point(647, 306);
+            this.MoveRowDownBut.Location = new System.Drawing.Point(807, 312);
             this.MoveRowDownBut.Name = "MoveRowDownBut";
             this.MoveRowDownBut.Size = new System.Drawing.Size(125, 23);
             this.MoveRowDownBut.TabIndex = 10;
@@ -220,7 +220,7 @@
             // 
             // PlayAndPause
             // 
-            this.PlayAndPause.Location = new System.Drawing.Point(647, 188);
+            this.PlayAndPause.Location = new System.Drawing.Point(595, 85);
             this.PlayAndPause.Name = "PlayAndPause";
             this.PlayAndPause.Size = new System.Drawing.Size(125, 23);
             this.PlayAndPause.TabIndex = 12;
@@ -230,7 +230,7 @@
             // 
             // JorgeButton
             // 
-            this.JorgeButton.Location = new System.Drawing.Point(647, 159);
+            this.JorgeButton.Location = new System.Drawing.Point(807, 165);
             this.JorgeButton.Name = "JorgeButton";
             this.JorgeButton.Size = new System.Drawing.Size(125, 23);
             this.JorgeButton.TabIndex = 13;
@@ -251,7 +251,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 562);
+            this.ClientSize = new System.Drawing.Size(944, 682);
             this.Controls.Add(this.JorgeButton);
             this.Controls.Add(this.PlayAndPause);
             this.Controls.Add(this.FlashVideoPlayer);
@@ -266,7 +266,7 @@
             this.Controls.Add(this.MainFormMenu);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.MainMenuStrip = this.MainFormMenu;
-            this.MinimumSize = new System.Drawing.Size(800, 600);
+            this.MinimumSize = new System.Drawing.Size(960, 720);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EnACT";
