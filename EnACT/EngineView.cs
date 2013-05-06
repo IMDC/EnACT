@@ -25,7 +25,7 @@ namespace EnACT
         /// </summary>
         public void Pause()
         {
-            CallFunction("<invoke name=\"pause\" returntype=\"xml\"></invoke>");
+            CallFunction("<invoke name=\"" + "pause" + "\" returntype=\"xml\"></invoke>");
         }
 
         /// <summary>
@@ -33,7 +33,15 @@ namespace EnACT
         /// </summary>
         public override void Play()
         {
-            CallFunction("<invoke name=\"play\" returntype=\"xml\"></invoke>");
+            CallFunction("<invoke name=\"" + "play" + "\" returntype=\"xml\"></invoke>");
+        }
+
+        /// <summary>
+        /// Toggles the play state of the video.
+        /// </summary>
+        public void TogglePlay()
+        {
+            CallFunction("<invoke name=\"" + "togglePlay" + "\" returntype=\"xml\"></invoke>");
         }
     }//Class
 }//Namespace

@@ -226,7 +226,7 @@
             this.PlayAndPause.TabIndex = 12;
             this.PlayAndPause.Text = "Play";
             this.PlayAndPause.UseVisualStyleBackColor = true;
-            this.PlayAndPause.Click += new System.EventHandler(this.PlayAndPause_Click);
+            this.PlayAndPause.Click += new System.EventHandler(this.TogglePlay);
             // 
             // JorgeButton
             // 

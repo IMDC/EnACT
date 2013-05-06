@@ -238,20 +238,9 @@ namespace EnACT
             }
         }
 
-        private bool isPlaying = true;
-
-        private void PlayAndPause_Click(object sender, EventArgs e)
+        private void TogglePlay(object sender, EventArgs e)
         {
-            if (isPlaying)
-            {
-                FlashVideoPlayer.Pause();
-                isPlaying = false;
-            }
-            else
-            {
-                FlashVideoPlayer.Play();
-                isPlaying = true;
-            }
+            FlashVideoPlayer.TogglePlay();
         }
 
         private void JorgeButton_Click(object sender, EventArgs e)
