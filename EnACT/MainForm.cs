@@ -90,6 +90,7 @@ namespace EnACT
         /// </summary>
         private void InitVideoPlayer()
         {
+            //This method can not be called in the EngineView constructor, so we have to call it here.
             FlashVideoPlayer.LoadMovie(0, @"C:\Users\imdc\Documents\enact\EnACT AS3 Engine\Engine.swf");
         }
 
@@ -243,12 +244,12 @@ namespace EnACT
         {
             if (isPlaying)
             {
-                FlashVideoPlayer.CallFunction("<invoke name=\"pause\" returntype=\"xml\"></invoke>");
+                FlashVideoPlayer.Pause();
                 isPlaying = false;
             }
             else
             {
-                FlashVideoPlayer.CallFunction("<invoke name=\"play\" returntype=\"xml\"></invoke>");
+                FlashVideoPlayer.Play();
                 isPlaying = true;
             }
         }
