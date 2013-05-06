@@ -78,8 +78,8 @@ namespace EnACT
                         CaptionList.Add(new Caption(lines[i], CurrentSpeaker));
                     }
                 }
-            }
-        }
+            }//for
+        }//ParseScriptFile
 
         /// <summary>
         /// Parses an srt file into caption and speaker data useable by enact.
@@ -169,8 +169,8 @@ namespace EnACT
                         }
                     }
                 }
-            }
+            }//for
             SpeakerSet[CurrentSpeaker.Name] = CurrentSpeaker;
-        }
-    }
-}
+        }//ParseSRTFile
+    }//Class
+}//Namespace

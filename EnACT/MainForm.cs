@@ -91,7 +91,7 @@ namespace EnACT
         private void InitVideoPlayer()
         {
             //This method can not be called in the EngineView constructor, so we have to call it here.
-            FlashVideoPlayer.LoadMovie(0, @"C:\Users\imdc\Documents\enact\EnACT AS3 Engine\Engine.swf");
+            FlashVideoPlayer.LoadMovie(0, @"C:\Users\imdc\Documents\enact\EnACT AS3 Engine\EditorEngine.swf");
         }
 
         /// <summary>
@@ -272,5 +272,5 @@ namespace EnACT
                 OutFolderPath + @"\Settings.xml", Settings);
             w.WriteAll();
         }
-    }
-}
+    }//Class
+}//Namespace

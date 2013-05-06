@@ -35,5 +35,5 @@ namespace EnACT
         {
             CallFunction("<invoke name=\"play\" returntype=\"xml\"></invoke>");
         }
-    }
-}
+    }//Class
+}//Namespace
