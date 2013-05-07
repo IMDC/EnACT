@@ -301,9 +301,11 @@ namespace EnACT
 
         private void PlayheadTimer_Tick(object sender, EventArgs e)
         {
-            int vidPos = (int) FlashVideoPlayer.GetPlayheadTime()*10;
-            if(TimeLine.Minimum <= vidPos && vidPos <= TimeLine.Maximum)
+            int vidPos = (int)FlashVideoPlayer.GetPlayheadTime() * 10;
+            if (TimeLine.Minimum <= vidPos && vidPos <= TimeLine.Maximum)
                 TimeLine.Value = vidPos;
+            TimeLine.Update();
+            //Console.WriteLine(FlashVideoPlayer.GetPlayheadTime());
         }
 
         private void TimeLine_ValueChanged(object sender, EventArgs e)

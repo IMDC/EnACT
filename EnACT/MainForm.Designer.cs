@@ -224,7 +224,7 @@
             // 
             // PlayAndPause
             // 
-            this.PlayAndPause.Location = new System.Drawing.Point(176, 444);
+            this.PlayAndPause.Location = new System.Drawing.Point(498, 179);
             this.PlayAndPause.Name = "PlayAndPause";
             this.PlayAndPause.Size = new System.Drawing.Size(125, 23);
             this.PlayAndPause.TabIndex = 12;
@@ -234,7 +234,7 @@
             // 
             // JorgeButton
             // 
-            this.JorgeButton.Location = new System.Drawing.Point(807, 165);
+            this.JorgeButton.Location = new System.Drawing.Point(807, 114);
             this.JorgeButton.Name = "JorgeButton";
             this.JorgeButton.Size = new System.Drawing.Size(125, 23);
             this.JorgeButton.TabIndex = 13;
@@ -244,9 +244,9 @@
             // 
             // TimeLine
             // 
-            this.TimeLine.Location = new System.Drawing.Point(12, 393);
+            this.TimeLine.Location = new System.Drawing.Point(498, 208);
             this.TimeLine.Name = "TimeLine";
-            this.TimeLine.Size = new System.Drawing.Size(480, 45);
+            this.TimeLine.Size = new System.Drawing.Size(446, 45);
             this.TimeLine.TabIndex = 14;
             this.TimeLine.ValueChanged += new System.EventHandler(this.TimeLine_ValueChanged);
             // 
