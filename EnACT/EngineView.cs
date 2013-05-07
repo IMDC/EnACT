@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AxShockwaveFlashObjects;
+using System.Xml;
 
 namespace EnACT
 {
@@ -42,6 +43,21 @@ namespace EnACT
         public void TogglePlay()
         {
             CallFunction("<invoke name=\"" + "togglePlay" + "\" returntype=\"xml\"></invoke>");
+        }
+
+        /// <summary>
+        /// Returns true or false if the Engine is playing a video or not.
+        /// </summary>
+        /// <returns>true or false</returns>
+        public override Boolean IsPlaying()
+        {
+            String returnXML = CallFunction("<invoke name=\"" + "isPlaying" + "\" returntype=\"xml\"></invoke>");
+            //Console.WriteLine(returnXML);
+            switch (returnXML)
+            {
+                case @"<true/>": return true;
+                default: return false;
+            }
         }
     }//Class
 }//Namespace

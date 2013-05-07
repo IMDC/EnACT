@@ -241,6 +241,11 @@ namespace EnACT
         private void TogglePlay(object sender, EventArgs e)
         {
             FlashVideoPlayer.TogglePlay();
+
+            if (FlashVideoPlayer.IsPlaying())
+                PlayAndPause.Text = "Pause";
+            else
+                PlayAndPause.Text = "Play";
         }
 
         private void JorgeButton_Click(object sender, EventArgs e)

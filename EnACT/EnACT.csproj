@@ -94,6 +94,10 @@
       <DependentUpon>CaptionData.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="EngineView.resx">
+      <DependentUpon>EngineView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="JorgeForm.resx">
       <DependentUpon>JorgeForm.cs</DependentUpon>
       <SubType>Designer</SubType>
