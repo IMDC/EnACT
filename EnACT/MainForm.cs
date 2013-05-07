@@ -62,6 +62,8 @@ namespace EnACT
             InitCaptionView();
             //Set up VideoPlayer
             InitVideoPlayer();
+
+            PlayheadTimer.Interval = 10;
         }
 
         /// <summary>
@@ -238,6 +240,7 @@ namespace EnACT
             }
         }
 
+        private Boolean isPlaying = false;
         /// <summary>
         /// Toggles the video playing state between playing and paused
         /// </summary>
@@ -245,12 +248,25 @@ namespace EnACT
         /// <param name="e">Event Arguments</param>
         private void TogglePlay(object sender, EventArgs e)
         {
-            FlashVideoPlayer.TogglePlay();
-
-            if (FlashVideoPlayer.IsPlaying())
-                PlayAndPause.Text = "Pause";
-            else
+            //FlashVideoPlayer.TogglePlay();
+            if (isPlaying)
+            {
+                FlashVideoPlayer.Pause();
+                PlayheadTimer.Stop();
                 PlayAndPause.Text = "Play";
+                isPlaying = false;
+            }
+            else
+            {
+                FlashVideoPlayer.Play();
+                PlayheadTimer.Start();
+                PlayAndPause.Text = "Pause";
+                isPlaying = true;
+            }
+            //if (FlashVideoPlayer.IsPlaying())
+            //    PlayAndPause.Text = "Pause";
+            //else
+            //    PlayAndPause.Text = "Play";
         }
 
         private void JorgeButton_Click(object sender, EventArgs e)
@@ -279,7 +295,20 @@ namespace EnACT
         /// <param name="e">Event Args</param>
         private void FlashVideoPlayer_VideoLoaded(object sender, EventArgs e)
         {
-            FlashVideoPlayer.VideoLength();
+            Double vidLength = FlashVideoPlayer.VideoLength();
+            TimeLine.Maximum = (int) vidLength * 10;
+        }
+
+        private void PlayheadTimer_Tick(object sender, EventArgs e)
+        {
+            int vidPos = (int) FlashVideoPlayer.GetPlayheadTime()*10;
+            if(TimeLine.Minimum <= vidPos && vidPos <= TimeLine.Maximum)
+                TimeLine.Value = vidPos;
+        }
+
+        private void TimeLine_ValueChanged(object sender, EventArgs e)
+        {
+            //FlashVideoPlayer.SetPlayHeadTime((double)TimeLine.Value/10.0);
         }
     }//Class
 }//Namespace

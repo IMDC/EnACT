@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
@@ -50,9 +51,12 @@
             this.MoveRowDownBut = new System.Windows.Forms.Button();
             this.PlayAndPause = new System.Windows.Forms.Button();
             this.JorgeButton = new System.Windows.Forms.Button();
+            this.TimeLine = new System.Windows.Forms.TrackBar();
+            this.PlayheadTimer = new System.Windows.Forms.Timer(this.components);
             this.FlashVideoPlayer = new EnACT.EngineView();
             this.MainFormMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TimeLine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FlashVideoPlayer)).BeginInit();
             this.SuspendLayout();
             // 
@@ -139,11 +143,11 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.CaptionView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.CaptionView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.CaptionView.Location = new System.Drawing.Point(12, 393);
+            this.CaptionView.Location = new System.Drawing.Point(12, 480);
             this.CaptionView.Name = "CaptionView";
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.CaptionView.Size = new System.Drawing.Size(920, 277);
+            this.CaptionView.Size = new System.Drawing.Size(920, 190);
             this.CaptionView.TabIndex = 1;
             this.CaptionView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.CaptionView_CellValueChanged);
             // 
@@ -220,7 +224,7 @@
             // 
             // PlayAndPause
             // 
-            this.PlayAndPause.Location = new System.Drawing.Point(595, 85);
+            this.PlayAndPause.Location = new System.Drawing.Point(176, 444);
             this.PlayAndPause.Name = "PlayAndPause";
             this.PlayAndPause.Size = new System.Drawing.Size(125, 23);
             this.PlayAndPause.TabIndex = 12;
@@ -238,6 +242,18 @@
             this.JorgeButton.UseVisualStyleBackColor = true;
             this.JorgeButton.Click += new System.EventHandler(this.JorgeButton_Click);
             // 
+            // TimeLine
+            // 
+            this.TimeLine.Location = new System.Drawing.Point(12, 393);
+            this.TimeLine.Name = "TimeLine";
+            this.TimeLine.Size = new System.Drawing.Size(480, 45);
+            this.TimeLine.TabIndex = 14;
+            this.TimeLine.ValueChanged += new System.EventHandler(this.TimeLine_ValueChanged);
+            // 
+            // PlayheadTimer
+            // 
+            this.PlayheadTimer.Tick += new System.EventHandler(this.PlayheadTimer_Tick);
+            // 
             // FlashVideoPlayer
             // 
             this.FlashVideoPlayer.Enabled = true;
@@ -253,6 +269,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 682);
+            this.Controls.Add(this.TimeLine);
             this.Controls.Add(this.JorgeButton);
             this.Controls.Add(this.PlayAndPause);
             this.Controls.Add(this.FlashVideoPlayer);
@@ -274,6 +291,7 @@
             this.MainFormMenu.ResumeLayout(false);
             this.MainFormMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TimeLine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FlashVideoPlayer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -302,6 +320,8 @@
         private EngineView FlashVideoPlayer;
         private System.Windows.Forms.Button PlayAndPause;
         private System.Windows.Forms.Button JorgeButton;
+        private System.Windows.Forms.TrackBar TimeLine;
+        private System.Windows.Forms.Timer PlayheadTimer;
     }
 }
 

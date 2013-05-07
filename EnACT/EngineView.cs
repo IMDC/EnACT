@@ -94,6 +94,26 @@ namespace EnACT
             return length;
         }
 
+        public double GetPlayheadTime()
+        {
+            String returnString = CallFunction("<invoke name=\"" + "getPlayheadTime" + "\" returntype=\"xml\"></invoke>");
+                
+
+            //Turn the string into an xml doc
+            XmlDocument xmlRequest = new XmlDocument();
+            xmlRequest.LoadXml(returnString);
+
+            //Get the value from the tag wrappers
+            double length = Convert.ToDouble(xmlRequest["number"].InnerText);
+            return length;
+        }
+
+        public void SetPlayHeadTime(Double time)
+        {
+            CallFunction("<invoke name=\"" + "setPlayheadTime" + "\" returntype=\"xml\">"
+                + "<arguments><number>" + time + "</number></arguments></invoke>");
+        }
+
         /// <summary>
         /// Handles the recieving of method calls from the .swf object.
         /// </summary>
