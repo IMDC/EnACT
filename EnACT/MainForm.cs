@@ -238,6 +238,11 @@ namespace EnACT
             }
         }
 
+        /// <summary>
+        /// Toggles the video playing state between playing and paused
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Arguments</param>
         private void TogglePlay(object sender, EventArgs e)
         {
             FlashVideoPlayer.TogglePlay();
@@ -265,6 +270,16 @@ namespace EnACT
                 OutFolderPath + @"\dialogues.xml", CaptionList,
                 OutFolderPath + @"\Settings.xml", Settings);
             w.WriteAll();
+        }
+
+        /// <summary>
+        /// Handles the event fired when FlashVideoPlayer is done loading
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void FlashVideoPlayer_VideoLoaded(object sender, EventArgs e)
+        {
+            FlashVideoPlayer.VideoLength();
         }
     }//Class
 }//Namespace

@@ -246,6 +246,7 @@
             this.FlashVideoPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("FlashVideoPlayer.OcxState")));
             this.FlashVideoPlayer.Size = new System.Drawing.Size(480, 360);
             this.FlashVideoPlayer.TabIndex = 11;
+            this.FlashVideoPlayer.VideoLoaded += new EnACT.EngineView.VideoLoadedHandler(this.FlashVideoPlayer_VideoLoaded);
             // 
             // MainForm
             // 

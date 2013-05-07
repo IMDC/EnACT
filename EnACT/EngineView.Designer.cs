@@ -36,6 +36,7 @@
             // 
             this.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("$this.OcxState")));
             this.Size = new System.Drawing.Size(192, 192);
+            this.FlashCall += new AxShockwaveFlashObjects._IShockwaveFlashEvents_FlashCallEventHandler(this.EngineView_FlashCall);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
