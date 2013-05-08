@@ -127,6 +127,12 @@
     <Compile Include="SettingsXML.cs" />
     <Compile Include="Speaker.cs" />
     <Compile Include="TextParser.cs" />
+    <Compile Include="Timeline.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Timeline.Designer.cs">
+      <DependentUpon>Timeline.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>

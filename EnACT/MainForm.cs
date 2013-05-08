@@ -296,15 +296,15 @@ namespace EnACT
         private void FlashVideoPlayer_VideoLoaded(object sender, EventArgs e)
         {
             Double vidLength = FlashVideoPlayer.VideoLength();
-            TimeLine.Maximum = (int) vidLength * 10;
+            GhettoTimeLine.Maximum = (int) vidLength * 10;
         }
 
         private void PlayheadTimer_Tick(object sender, EventArgs e)
         {
             int vidPos = (int)FlashVideoPlayer.GetPlayheadTime() * 10;
-            if (TimeLine.Minimum <= vidPos && vidPos <= TimeLine.Maximum)
-                TimeLine.Value = vidPos;
-            TimeLine.Update();
+            if (GhettoTimeLine.Minimum <= vidPos && vidPos <= GhettoTimeLine.Maximum)
+                GhettoTimeLine.Value = vidPos;
+            GhettoTimeLine.Update();
             //Console.WriteLine(FlashVideoPlayer.GetPlayheadTime());
         }
 

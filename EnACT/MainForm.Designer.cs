@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainFormMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,12 +51,13 @@
             this.MoveRowDownBut = new System.Windows.Forms.Button();
             this.PlayAndPause = new System.Windows.Forms.Button();
             this.JorgeButton = new System.Windows.Forms.Button();
-            this.TimeLine = new System.Windows.Forms.TrackBar();
+            this.GhettoTimeLine = new System.Windows.Forms.TrackBar();
             this.PlayheadTimer = new System.Windows.Forms.Timer(this.components);
             this.FlashVideoPlayer = new EnACT.EngineView();
+            this.Timeline = new EnACT.Timeline();
             this.MainFormMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TimeLine)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GhettoTimeLine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FlashVideoPlayer)).BeginInit();
             this.SuspendLayout();
             // 
@@ -134,19 +135,19 @@
             this.CaptionView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.CaptionView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.CaptionView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.CaptionView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CaptionView.Location = new System.Drawing.Point(12, 480);
             this.CaptionView.Name = "CaptionView";
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.CaptionView.Size = new System.Drawing.Size(920, 190);
             this.CaptionView.TabIndex = 1;
             this.CaptionView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.CaptionView_CellValueChanged);
@@ -184,7 +185,7 @@
             // 
             // InsertRowBut
             // 
-            this.InsertRowBut.Location = new System.Drawing.Point(807, 341);
+            this.InsertRowBut.Location = new System.Drawing.Point(807, 317);
             this.InsertRowBut.Name = "InsertRowBut";
             this.InsertRowBut.Size = new System.Drawing.Size(125, 23);
             this.InsertRowBut.TabIndex = 7;
@@ -194,7 +195,7 @@
             // 
             // DeleteRowBut
             // 
-            this.DeleteRowBut.Location = new System.Drawing.Point(807, 370);
+            this.DeleteRowBut.Location = new System.Drawing.Point(807, 346);
             this.DeleteRowBut.Name = "DeleteRowBut";
             this.DeleteRowBut.Size = new System.Drawing.Size(125, 23);
             this.DeleteRowBut.TabIndex = 8;
@@ -204,7 +205,7 @@
             // 
             // MoveRowUpBut
             // 
-            this.MoveRowUpBut.Location = new System.Drawing.Point(807, 283);
+            this.MoveRowUpBut.Location = new System.Drawing.Point(807, 259);
             this.MoveRowUpBut.Name = "MoveRowUpBut";
             this.MoveRowUpBut.Size = new System.Drawing.Size(125, 23);
             this.MoveRowUpBut.TabIndex = 9;
@@ -214,7 +215,7 @@
             // 
             // MoveRowDownBut
             // 
-            this.MoveRowDownBut.Location = new System.Drawing.Point(807, 312);
+            this.MoveRowDownBut.Location = new System.Drawing.Point(807, 288);
             this.MoveRowDownBut.Name = "MoveRowDownBut";
             this.MoveRowDownBut.Size = new System.Drawing.Size(125, 23);
             this.MoveRowDownBut.TabIndex = 10;
@@ -242,13 +243,13 @@
             this.JorgeButton.UseVisualStyleBackColor = true;
             this.JorgeButton.Click += new System.EventHandler(this.JorgeButton_Click);
             // 
-            // TimeLine
+            // GhettoTimeLine
             // 
-            this.TimeLine.Location = new System.Drawing.Point(498, 208);
-            this.TimeLine.Name = "TimeLine";
-            this.TimeLine.Size = new System.Drawing.Size(446, 45);
-            this.TimeLine.TabIndex = 14;
-            this.TimeLine.ValueChanged += new System.EventHandler(this.TimeLine_ValueChanged);
+            this.GhettoTimeLine.Location = new System.Drawing.Point(498, 208);
+            this.GhettoTimeLine.Name = "GhettoTimeLine";
+            this.GhettoTimeLine.Size = new System.Drawing.Size(446, 45);
+            this.GhettoTimeLine.TabIndex = 14;
+            this.GhettoTimeLine.ValueChanged += new System.EventHandler(this.TimeLine_ValueChanged);
             // 
             // PlayheadTimer
             // 
@@ -264,12 +265,20 @@
             this.FlashVideoPlayer.TabIndex = 11;
             this.FlashVideoPlayer.VideoLoaded += new EnACT.EngineView.VideoLoadedHandler(this.FlashVideoPlayer_VideoLoaded);
             // 
+            // Timeline
+            // 
+            this.Timeline.Location = new System.Drawing.Point(12, 393);
+            this.Timeline.Name = "Timeline";
+            this.Timeline.Size = new System.Drawing.Size(920, 81);
+            this.Timeline.TabIndex = 15;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 682);
-            this.Controls.Add(this.TimeLine);
+            this.Controls.Add(this.Timeline);
+            this.Controls.Add(this.GhettoTimeLine);
             this.Controls.Add(this.JorgeButton);
             this.Controls.Add(this.PlayAndPause);
             this.Controls.Add(this.FlashVideoPlayer);
@@ -291,7 +300,7 @@
             this.MainFormMenu.ResumeLayout(false);
             this.MainFormMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TimeLine)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GhettoTimeLine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FlashVideoPlayer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -320,8 +329,9 @@
         private EngineView FlashVideoPlayer;
         private System.Windows.Forms.Button PlayAndPause;
         private System.Windows.Forms.Button JorgeButton;
-        private System.Windows.Forms.TrackBar TimeLine;
+        private System.Windows.Forms.TrackBar GhettoTimeLine;
         private System.Windows.Forms.Timer PlayheadTimer;
+        private Timeline Timeline;
     }
 }
 
