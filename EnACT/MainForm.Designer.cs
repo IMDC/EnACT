@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainFormMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -136,20 +136,20 @@
             this.CaptionView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.CaptionView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.CaptionView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.CaptionView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CaptionView.Location = new System.Drawing.Point(12, 478);
             this.CaptionView.Name = "CaptionView";
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.CaptionView.Size = new System.Drawing.Size(789, 192);
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.CaptionView.Size = new System.Drawing.Size(864, 192);
             this.CaptionView.TabIndex = 1;
             this.CaptionView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.CaptionView_CellValueChanged);
             // 
@@ -189,50 +189,50 @@
             // InsertRowBut
             // 
             this.InsertRowBut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.InsertRowBut.Location = new System.Drawing.Point(807, 536);
+            this.InsertRowBut.Location = new System.Drawing.Point(882, 584);
             this.InsertRowBut.Name = "InsertRowBut";
-            this.InsertRowBut.Size = new System.Drawing.Size(125, 23);
+            this.InsertRowBut.Size = new System.Drawing.Size(50, 40);
             this.InsertRowBut.TabIndex = 7;
-            this.InsertRowBut.Text = "Insert Row";
+            this.InsertRowBut.Text = "Insert";
             this.InsertRowBut.UseVisualStyleBackColor = true;
             this.InsertRowBut.Click += new System.EventHandler(this.InsertRowBut_Click);
             // 
             // DeleteRowBut
             // 
             this.DeleteRowBut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DeleteRowBut.Location = new System.Drawing.Point(807, 565);
+            this.DeleteRowBut.Location = new System.Drawing.Point(882, 630);
             this.DeleteRowBut.Name = "DeleteRowBut";
-            this.DeleteRowBut.Size = new System.Drawing.Size(125, 23);
+            this.DeleteRowBut.Size = new System.Drawing.Size(50, 40);
             this.DeleteRowBut.TabIndex = 8;
-            this.DeleteRowBut.Text = "Delete Row";
+            this.DeleteRowBut.Text = "Delete";
             this.DeleteRowBut.UseVisualStyleBackColor = true;
             this.DeleteRowBut.Click += new System.EventHandler(this.DeleteRowBut_Click);
             // 
             // MoveRowUpBut
             // 
             this.MoveRowUpBut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.MoveRowUpBut.Location = new System.Drawing.Point(807, 478);
+            this.MoveRowUpBut.Location = new System.Drawing.Point(882, 478);
             this.MoveRowUpBut.Name = "MoveRowUpBut";
-            this.MoveRowUpBut.Size = new System.Drawing.Size(125, 23);
+            this.MoveRowUpBut.Size = new System.Drawing.Size(50, 40);
             this.MoveRowUpBut.TabIndex = 9;
-            this.MoveRowUpBut.Text = "Move Row Up";
+            this.MoveRowUpBut.Text = "Up";
             this.MoveRowUpBut.UseVisualStyleBackColor = true;
             this.MoveRowUpBut.Click += new System.EventHandler(this.MoveRowUpBut_Click);
             // 
             // MoveRowDownBut
             // 
             this.MoveRowDownBut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.MoveRowDownBut.Location = new System.Drawing.Point(807, 507);
+            this.MoveRowDownBut.Location = new System.Drawing.Point(882, 524);
             this.MoveRowDownBut.Name = "MoveRowDownBut";
-            this.MoveRowDownBut.Size = new System.Drawing.Size(125, 23);
+            this.MoveRowDownBut.Size = new System.Drawing.Size(50, 40);
             this.MoveRowDownBut.TabIndex = 10;
-            this.MoveRowDownBut.Text = "Move Row Down";
+            this.MoveRowDownBut.Text = "Down";
             this.MoveRowDownBut.UseVisualStyleBackColor = true;
             this.MoveRowDownBut.Click += new System.EventHandler(this.MoveRowDownBut_Click);
             // 
             // PlayAndPause
             // 
-            this.PlayAndPause.Location = new System.Drawing.Point(338, 85);
+            this.PlayAndPause.Location = new System.Drawing.Point(562, 193);
             this.PlayAndPause.Name = "PlayAndPause";
             this.PlayAndPause.Size = new System.Drawing.Size(125, 23);
             this.PlayAndPause.TabIndex = 12;
@@ -255,9 +255,9 @@
             // 
             this.GhettoTimeLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.GhettoTimeLine.Location = new System.Drawing.Point(338, 34);
+            this.GhettoTimeLine.Location = new System.Drawing.Point(338, 222);
             this.GhettoTimeLine.Name = "GhettoTimeLine";
-            this.GhettoTimeLine.Size = new System.Drawing.Size(446, 45);
+            this.GhettoTimeLine.Size = new System.Drawing.Size(594, 45);
             this.GhettoTimeLine.TabIndex = 14;
             this.GhettoTimeLine.ValueChanged += new System.EventHandler(this.TimeLine_ValueChanged);
             // 
@@ -269,6 +269,7 @@
             // 
             this.Timeline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.Timeline.AutoScroll = true;
             this.Timeline.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.Timeline.Location = new System.Drawing.Point(12, 273);
             this.Timeline.MinimumSize = new System.Drawing.Size(0, 199);
