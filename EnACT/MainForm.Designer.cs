@@ -53,8 +53,8 @@
             this.JorgeButton = new System.Windows.Forms.Button();
             this.GhettoTimeLine = new System.Windows.Forms.TrackBar();
             this.PlayheadTimer = new System.Windows.Forms.Timer(this.components);
-            this.FlashVideoPlayer = new EnACT.EngineView();
             this.Timeline = new EnACT.Timeline();
+            this.FlashVideoPlayer = new EnACT.EngineView();
             this.MainFormMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GhettoTimeLine)).BeginInit();
@@ -63,6 +63,7 @@
             // 
             // MainFormMenu
             // 
+            this.MainFormMenu.BackColor = System.Drawing.SystemColors.Control;
             this.MainFormMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
@@ -144,11 +145,11 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.CaptionView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.CaptionView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.CaptionView.Location = new System.Drawing.Point(12, 480);
+            this.CaptionView.Location = new System.Drawing.Point(12, 478);
             this.CaptionView.Name = "CaptionView";
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.CaptionView.Size = new System.Drawing.Size(920, 190);
+            this.CaptionView.Size = new System.Drawing.Size(789, 192);
             this.CaptionView.TabIndex = 1;
             this.CaptionView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.CaptionView_CellValueChanged);
             // 
@@ -165,6 +166,7 @@
             // 
             // button1
             // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Location = new System.Drawing.Point(807, 56);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(125, 23);
@@ -175,6 +177,7 @@
             // 
             // button2
             // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Location = new System.Drawing.Point(807, 27);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(125, 23);
@@ -185,7 +188,8 @@
             // 
             // InsertRowBut
             // 
-            this.InsertRowBut.Location = new System.Drawing.Point(807, 317);
+            this.InsertRowBut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.InsertRowBut.Location = new System.Drawing.Point(807, 536);
             this.InsertRowBut.Name = "InsertRowBut";
             this.InsertRowBut.Size = new System.Drawing.Size(125, 23);
             this.InsertRowBut.TabIndex = 7;
@@ -195,7 +199,8 @@
             // 
             // DeleteRowBut
             // 
-            this.DeleteRowBut.Location = new System.Drawing.Point(807, 346);
+            this.DeleteRowBut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DeleteRowBut.Location = new System.Drawing.Point(807, 565);
             this.DeleteRowBut.Name = "DeleteRowBut";
             this.DeleteRowBut.Size = new System.Drawing.Size(125, 23);
             this.DeleteRowBut.TabIndex = 8;
@@ -205,7 +210,8 @@
             // 
             // MoveRowUpBut
             // 
-            this.MoveRowUpBut.Location = new System.Drawing.Point(807, 259);
+            this.MoveRowUpBut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.MoveRowUpBut.Location = new System.Drawing.Point(807, 478);
             this.MoveRowUpBut.Name = "MoveRowUpBut";
             this.MoveRowUpBut.Size = new System.Drawing.Size(125, 23);
             this.MoveRowUpBut.TabIndex = 9;
@@ -215,7 +221,8 @@
             // 
             // MoveRowDownBut
             // 
-            this.MoveRowDownBut.Location = new System.Drawing.Point(807, 288);
+            this.MoveRowDownBut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.MoveRowDownBut.Location = new System.Drawing.Point(807, 507);
             this.MoveRowDownBut.Name = "MoveRowDownBut";
             this.MoveRowDownBut.Size = new System.Drawing.Size(125, 23);
             this.MoveRowDownBut.TabIndex = 10;
@@ -225,7 +232,7 @@
             // 
             // PlayAndPause
             // 
-            this.PlayAndPause.Location = new System.Drawing.Point(498, 179);
+            this.PlayAndPause.Location = new System.Drawing.Point(338, 85);
             this.PlayAndPause.Name = "PlayAndPause";
             this.PlayAndPause.Size = new System.Drawing.Size(125, 23);
             this.PlayAndPause.TabIndex = 12;
@@ -235,6 +242,7 @@
             // 
             // JorgeButton
             // 
+            this.JorgeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.JorgeButton.Location = new System.Drawing.Point(807, 114);
             this.JorgeButton.Name = "JorgeButton";
             this.JorgeButton.Size = new System.Drawing.Size(125, 23);
@@ -245,7 +253,9 @@
             // 
             // GhettoTimeLine
             // 
-            this.GhettoTimeLine.Location = new System.Drawing.Point(498, 208);
+            this.GhettoTimeLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.GhettoTimeLine.Location = new System.Drawing.Point(338, 34);
             this.GhettoTimeLine.Name = "GhettoTimeLine";
             this.GhettoTimeLine.Size = new System.Drawing.Size(446, 45);
             this.GhettoTimeLine.TabIndex = 14;
@@ -255,22 +265,26 @@
             // 
             this.PlayheadTimer.Tick += new System.EventHandler(this.PlayheadTimer_Tick);
             // 
+            // Timeline
+            // 
+            this.Timeline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.Timeline.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Timeline.Location = new System.Drawing.Point(12, 273);
+            this.Timeline.MinimumSize = new System.Drawing.Size(0, 199);
+            this.Timeline.Name = "Timeline";
+            this.Timeline.Size = new System.Drawing.Size(920, 199);
+            this.Timeline.TabIndex = 15;
+            // 
             // FlashVideoPlayer
             // 
             this.FlashVideoPlayer.Enabled = true;
             this.FlashVideoPlayer.Location = new System.Drawing.Point(12, 27);
             this.FlashVideoPlayer.Name = "FlashVideoPlayer";
             this.FlashVideoPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("FlashVideoPlayer.OcxState")));
-            this.FlashVideoPlayer.Size = new System.Drawing.Size(480, 360);
+            this.FlashVideoPlayer.Size = new System.Drawing.Size(320, 240);
             this.FlashVideoPlayer.TabIndex = 11;
             this.FlashVideoPlayer.VideoLoaded += new EnACT.EngineView.VideoLoadedHandler(this.FlashVideoPlayer_VideoLoaded);
-            // 
-            // Timeline
-            // 
-            this.Timeline.Location = new System.Drawing.Point(12, 393);
-            this.Timeline.Name = "Timeline";
-            this.Timeline.Size = new System.Drawing.Size(920, 81);
-            this.Timeline.TabIndex = 15;
             // 
             // MainForm
             // 
