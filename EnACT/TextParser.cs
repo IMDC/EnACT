@@ -24,6 +24,7 @@ namespace EnACT
             this.CaptionList = CaptionList;
         }
 
+        #region ParseScriptFile
         /// <summary>
         /// Reads in the Script file located at scriptPath and parses it into
         /// CaptionList and SpeakerSet
@@ -80,20 +81,125 @@ namespace EnACT
                 }
             }//for
         }//ParseScriptFile
+        #endregion
 
+        #region ParseESRFile
+        public void ParseESRFile(String scriptPath)
+        {
+            String[] lines = System.IO.File.ReadAllLines(@scriptPath); //Read in file
+
+            //Start off with the Default speaker
+            Speaker CurrentSpeaker = SpeakerSet[Speaker.DEFAULTNAME] ;
+            //Set the Description Speaker to the description speaker contained in the set.
+            Speaker DescriptionSpeaker = SpeakerSet[Speaker.DESCRIPTIONNAME];
+
+            Regex numberLineRegex = new Regex(@"^\d+$");    //Line number
+            //Time stamp regex, ex "00:00:35,895 --> 00:00:37,790" will match
+            //Regex timeStampRegex = new Regex(@"^\d\d:\d\d:\d\d,\d\d\d --> \d\d:\d\d:\d\d,\d\d\d$");
+
+            Regex timeStampRegex = new Regex(@"\d\d:\d\d:\d\d,\d\d\d");
+
+            Boolean lastLineWasTimeStamp = false;
+
+            String beginTime = "";
+            String endTime = "";
+            String captionLine = "";
+            String speakerName = "";
+
+            //Will continue a caption if set to true
+            bool continueCaptionFlag = false;
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                //Remove unecessary whitespace from beginning and end of line
+                lines[i] = lines[i].Trim();
+
+                if (String.IsNullOrEmpty(lines[i]))
+                {
+                    //If the flag is true, then we have already read in a caption
+                    if (continueCaptionFlag)
+                    {
+                        CaptionList.Add(new Caption(captionLine,CurrentSpeaker,beginTime, endTime));
+                        //Reset the captionFlag
+                        continueCaptionFlag = false;
+                    }
+                    //Console.WriteLine("Caption Line: {0}", captionLine);
+                }
+                //If the line is not empty
+                else
+                {
+                    //If the line is a number line
+                    if (numberLineRegex.IsMatch(lines[i]))
+                    {
+                        lastLineWasTimeStamp = false;
+                    }
+                    else
+                    {
+                        MatchCollection matches = timeStampRegex.Matches(lines[i]);
+                        //If the line is a timestamp line
+                        if (0 < matches.Count)
+                        {
+                            //Console.WriteLine("Timestamp Line. Begin: {0}, End: {1}", matches[0], matches[1]);
+
+                            //Turn the SRT timestamps into EnACT-readable timestamps by removing the last two
+                            //digits and replacing the comma with a period.
+                            beginTime = matches[0].ToString();
+                            beginTime = beginTime.Substring(0, beginTime.Length - 2).Replace(',', '.');
+
+                            endTime = matches[1].ToString();
+                            endTime = endTime.Substring(0, endTime.Length - 2).Replace(',', '.');
+                            lastLineWasTimeStamp = true;
+                        }
+                        //If it ends with a colon the line is a speaker line
+                        else if (lines[i].EndsWith(":") && lastLineWasTimeStamp)
+                        {
+                            speakerName = lines[i].Substring(0, lines[i].Length - 1);
+                            lastLineWasTimeStamp = false;
+                            if (SpeakerSet.ContainsKey(speakerName))
+                            {
+                                CurrentSpeaker = SpeakerSet[speakerName];
+                            }
+                            else
+                            {
+                                SpeakerSet[speakerName] = new Speaker(speakerName);
+                                CurrentSpeaker = SpeakerSet[speakerName];
+                            }
+                        }
+
+                        //Else the line is a caption
+                        else
+                        {
+                            if (continueCaptionFlag)
+                            {
+                                captionLine += "\n" + lines[i];
+                            }
+                            else
+                            {
+                                captionLine = lines[i];
+                                continueCaptionFlag = true;
+                            }
+                            lastLineWasTimeStamp = false;
+                        }
+                    }
+                }
+            }//for
+            SpeakerSet[CurrentSpeaker.Name] = CurrentSpeaker;
+        }//ParseSRTFile
+        #endregion
+
+        #region ParseSRTFile
         /// <summary>
         /// Parses an srt file into caption and speaker data useable by enact.
+        /// NOTE. Will not look for speakers, and every caption will be attributed to
+        /// the default speaker.
         /// </summary>
         /// <param name="scriptPath">The full path of the SRT file to be parsed</param>
         public void ParseSRTFile(String scriptPath)
         {
-            //TODO Have Method parse Speaker names instead of using a default.
-
             String[] lines = System.IO.File.ReadAllLines(@scriptPath); //Read in file
-            String speakerName = "";
 
             //Start off with the Default speaker
-            Speaker CurrentSpeaker = new Speaker("CARLO") ;
+            Speaker CurrentSpeaker = new Speaker("CARLO");
             //Set the Description Speaker to the description speaker contained in the set.
             Speaker DescriptionSpeaker = SpeakerSet[Speaker.DESCRIPTIONNAME];
 
@@ -120,7 +226,7 @@ namespace EnACT
                     //If the flag is true, then we have already read in a caption
                     if (continueCaptionFlag)
                     {
-                        CaptionList.Add(new Caption(captionLine,CurrentSpeaker,beginTime, endTime));
+                        CaptionList.Add(new Caption(captionLine, CurrentSpeaker, beginTime, endTime));
                         //Reset the captionFlag
                         continueCaptionFlag = false;
                     }
@@ -171,6 +277,7 @@ namespace EnACT
                 }
             }//for
             SpeakerSet[CurrentSpeaker.Name] = CurrentSpeaker;
-        }//ParseSRTFile
+        }//ParseESRFile
+        #endregion
     }//Class
 }//Namespace

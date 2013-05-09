@@ -55,6 +55,7 @@
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.Timeline = new EnACT.Timeline();
             this.EngineView = new EnACT.EngineView();
+            this.Button_ParseESR = new System.Windows.Forms.Button();
             this.MenuStrip_MainForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_Timeline)).BeginInit();
@@ -142,7 +143,7 @@
             // Button_Populate
             // 
             this.Button_Populate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Button_Populate.Location = new System.Drawing.Point(807, 85);
+            this.Button_Populate.Location = new System.Drawing.Point(807, 114);
             this.Button_Populate.Name = "Button_Populate";
             this.Button_Populate.Size = new System.Drawing.Size(125, 23);
             this.Button_Populate.TabIndex = 4;
@@ -153,7 +154,7 @@
             // Button_WriteXML
             // 
             this.Button_WriteXML.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Button_WriteXML.Location = new System.Drawing.Point(807, 56);
+            this.Button_WriteXML.Location = new System.Drawing.Point(807, 85);
             this.Button_WriteXML.Name = "Button_WriteXML";
             this.Button_WriteXML.Size = new System.Drawing.Size(125, 23);
             this.Button_WriteXML.TabIndex = 5;
@@ -234,7 +235,7 @@
             // Button_JorgeButton
             // 
             this.Button_JorgeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Button_JorgeButton.Location = new System.Drawing.Point(807, 114);
+            this.Button_JorgeButton.Location = new System.Drawing.Point(807, 143);
             this.Button_JorgeButton.Name = "Button_JorgeButton";
             this.Button_JorgeButton.Size = new System.Drawing.Size(125, 23);
             this.Button_JorgeButton.TabIndex = 13;
@@ -268,6 +269,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.Timeline.AutoScroll = true;
             this.Timeline.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Timeline.CData = null;
             this.Timeline.Location = new System.Drawing.Point(12, 273);
             this.Timeline.MinimumSize = new System.Drawing.Size(0, 199);
             this.Timeline.Name = "Timeline";
@@ -286,11 +288,23 @@
             this.EngineView.TabIndex = 11;
             this.EngineView.VideoLoaded += new EnACT.EngineView.VideoLoadedHandler(this.FlashVideoPlayer_VideoLoaded);
             // 
+            // Button_ParseESR
+            // 
+            this.Button_ParseESR.Location = new System.Drawing.Point(807, 56);
+            this.Button_ParseESR.Name = "Button_ParseESR";
+            this.Button_ParseESR.Size = new System.Drawing.Size(125, 23);
+            this.Button_ParseESR.TabIndex = 16;
+            this.Button_ParseESR.Text = "Parse .esr";
+            this.ToolTip.SetToolTip(this.Button_ParseESR, "Parse a .esr file");
+            this.Button_ParseESR.UseVisualStyleBackColor = true;
+            this.Button_ParseESR.Click += new System.EventHandler(this.Button_ParseESR_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 682);
+            this.Controls.Add(this.Button_ParseESR);
             this.Controls.Add(this.Timeline);
             this.Controls.Add(this.TrackBar_Timeline);
             this.Controls.Add(this.Button_JorgeButton);
@@ -346,6 +360,7 @@
         private Timeline Timeline;
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
         private System.Windows.Forms.ToolTip ToolTip;
+        private System.Windows.Forms.Button Button_ParseESR;
     }
 }
 

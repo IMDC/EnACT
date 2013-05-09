@@ -324,5 +324,11 @@ namespace EnACT
         {
             //FlashVideoPlayer.SetPlayHeadTime((double)TimeLine.Value/10.0);
         }
+
+        private void Button_ParseESR_Click(object sender, EventArgs e)
+        {
+            TextParser t = new TextParser(SpeakerSet, CaptionList);
+            t.ParseESRFile(@"C:\Users\imdc\Documents\enact\Testing\testScript.esr");
+        }
     }//Class
 }//Namespace
