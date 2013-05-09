@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace EnACT
 {
@@ -12,6 +13,11 @@ namespace EnACT
     /// </summary>
     public class Timestamp
     {
+        /// <summary>
+        /// A regular expression that will validate a correct timestamp
+        /// </summary>
+        private static Regex validTimestamp = new Regex(@"^[0-9][0-9]:[0-9][0-9]:[0-9][0-9].[0-9]$");
+
         /// <summary>
         /// The internal storage of the timestamp. Stored as the number of seconds.
         /// </summary>
@@ -108,6 +114,27 @@ namespace EnACT
         public Timestamp(double time)
         {
             AsDouble = time;
+        }
+
+        /// <summary>
+        /// Checks to see if a possible timestamp is valid or not. If the timestamp
+        /// is in the form XX:XX:XX.X where X is a numerical digit from 0-9, it will
+        /// return true, and false otherwise.
+        /// </summary>
+        /// <param name="ts">The timestamp to validate</param>
+        /// <returns>true if valid, false if not valid</returns>
+        public static bool TimeStampValidates(String ts)
+        {
+            if (validTimestamp.IsMatch(ts))
+            {
+                Console.WriteLine("Timestamp {0} Validated!", ts);
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Timestamp {0} failed to Validate!", ts);
+                return false;
+            }
         }
 
         /// <summary>

@@ -133,26 +133,6 @@ namespace EnACT
         }
 
         /// <summary>
-        /// Checks to see if a possible timestamp is valid or not. If the timestamp
-        /// is in the form XX:XX:XX.X where X is a numerical digit from 0-9, it will
-        /// return true, and false otherwise.
-        /// </summary>
-        /// <param name="TimeStamp">The timestamp to validate</param>
-        /// <returns>true if valid, false if not valid</returns>
-        public static bool TimeStampValidates(String TimeStamp)
-        {
-            Regex r = new Regex(@"^[0-9][0-9]:[0-9][0-9]:[0-9][0-9].[0-9]$");
-
-            if (r.IsMatch(TimeStamp))
-            {
-                Console.WriteLine("Validated!");
-                return true;
-            }
-            Console.WriteLine("Not Validated!");
-            return false;
-        }
-
-        /// <summary>
         /// Takes in a string and feeds it into the wordlist, splitting it up
         /// and turning each word in the string into a captionWord
         /// </summary>
