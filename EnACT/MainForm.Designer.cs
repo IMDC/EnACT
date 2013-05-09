@@ -53,9 +53,9 @@
             this.PlayheadTimer = new System.Windows.Forms.Timer(this.components);
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.Button_ParseESR = new System.Windows.Forms.Button();
             this.Timeline = new EnACT.Timeline();
             this.EngineView = new EnACT.EngineView();
-            this.Button_ParseESR = new System.Windows.Forms.Button();
             this.MenuStrip_MainForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_Timeline)).BeginInit();
@@ -263,6 +263,18 @@
             this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.debugToolStripMenuItem.Text = "Debug";
             // 
+            // Button_ParseESR
+            // 
+            this.Button_ParseESR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Button_ParseESR.Location = new System.Drawing.Point(807, 56);
+            this.Button_ParseESR.Name = "Button_ParseESR";
+            this.Button_ParseESR.Size = new System.Drawing.Size(125, 23);
+            this.Button_ParseESR.TabIndex = 16;
+            this.Button_ParseESR.Text = "Parse .esr";
+            this.ToolTip.SetToolTip(this.Button_ParseESR, "Parse a .esr file");
+            this.Button_ParseESR.UseVisualStyleBackColor = true;
+            this.Button_ParseESR.Click += new System.EventHandler(this.Button_ParseESR_Click);
+            // 
             // Timeline
             // 
             this.Timeline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -287,17 +299,6 @@
             this.EngineView.Size = new System.Drawing.Size(320, 240);
             this.EngineView.TabIndex = 11;
             this.EngineView.VideoLoaded += new EnACT.EngineView.VideoLoadedHandler(this.FlashVideoPlayer_VideoLoaded);
-            // 
-            // Button_ParseESR
-            // 
-            this.Button_ParseESR.Location = new System.Drawing.Point(807, 56);
-            this.Button_ParseESR.Name = "Button_ParseESR";
-            this.Button_ParseESR.Size = new System.Drawing.Size(125, 23);
-            this.Button_ParseESR.TabIndex = 16;
-            this.Button_ParseESR.Text = "Parse .esr";
-            this.ToolTip.SetToolTip(this.Button_ParseESR, "Parse a .esr file");
-            this.Button_ParseESR.UseVisualStyleBackColor = true;
-            this.Button_ParseESR.Click += new System.EventHandler(this.Button_ParseESR_Click);
             // 
             // MainForm
             // 

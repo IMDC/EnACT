@@ -84,14 +84,16 @@ namespace EnACT
         #endregion
 
         #region ParseESRFile
+        /// <summary>
+        /// Parses an ESR File
+        /// </summary>
+        /// <param name="scriptPath">The path of the script file</param>
         public void ParseESRFile(String scriptPath)
         {
             String[] lines = System.IO.File.ReadAllLines(@scriptPath); //Read in file
 
             //Start off with the Default speaker
             Speaker CurrentSpeaker = SpeakerSet[Speaker.DEFAULTNAME] ;
-            //Set the Description Speaker to the description speaker contained in the set.
-            Speaker DescriptionSpeaker = SpeakerSet[Speaker.DESCRIPTIONNAME];
 
             Regex numberLineRegex = new Regex(@"^\d+$");    //Line number
             //Time stamp regex, ex "00:00:35,895 --> 00:00:37,790" will match
@@ -107,21 +109,22 @@ namespace EnACT
             String speakerName = "";
 
             //Will continue a caption if set to true
-            bool continueCaptionFlag = false;
+            bool fullCaptionParsedFlag = false;
 
             for (int i = 0; i < lines.Length; i++)
             {
                 //Remove unecessary whitespace from beginning and end of line
                 lines[i] = lines[i].Trim();
 
+                //Empty or iteration after last line
                 if (String.IsNullOrEmpty(lines[i]))
                 {
                     //If the flag is true, then we have already read in a caption
-                    if (continueCaptionFlag)
+                    if (fullCaptionParsedFlag)
                     {
                         CaptionList.Add(new Caption(captionLine,CurrentSpeaker,beginTime, endTime));
                         //Reset the captionFlag
-                        continueCaptionFlag = false;
+                        fullCaptionParsedFlag = false;
                     }
                     //Console.WriteLine("Caption Line: {0}", captionLine);
                 }
@@ -165,23 +168,34 @@ namespace EnACT
                                 CurrentSpeaker = SpeakerSet[speakerName];
                             }
                         }
-
+                        //If the line is surrounded with square brackets it is a description
+                        else if(lines[i][0] == '[' && lines[i][lines[i].Length - 1] == ']')
+                        {
+                            captionLine = lines[i].Substring(1, lines[i].Length - 2);
+                            CurrentSpeaker = SpeakerSet[Speaker.DESCRIPTIONNAME];
+                            fullCaptionParsedFlag = true;
+                        }
                         //Else the line is a caption
                         else
                         {
-                            if (continueCaptionFlag)
+                            if (fullCaptionParsedFlag)
                             {
                                 captionLine += "\n" + lines[i];
                             }
                             else
                             {
                                 captionLine = lines[i];
-                                continueCaptionFlag = true;
+                                fullCaptionParsedFlag = true;
                             }
                             lastLineWasTimeStamp = false;
                         }
                     }
-                }
+                    //If it's the last line and we have a full caption
+                    if (i == lines.Length - 1 && fullCaptionParsedFlag)
+                    {
+                        CaptionList.Add(new Caption(captionLine, CurrentSpeaker, beginTime, endTime));
+                    }
+                }//else
             }//for
             SpeakerSet[CurrentSpeaker.Name] = CurrentSpeaker;
         }//ParseSRTFile
