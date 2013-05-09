@@ -93,7 +93,7 @@ namespace EnACT
         private void InitVideoPlayer()
         {
             //This method can not be called in the EngineView constructor, so we have to call it here.
-            FlashVideoPlayer.LoadMovie(0, @"C:\Users\imdc\Documents\enact\EnACT AS3 Engine\EditorEngine.swf");
+            EngineView.LoadMovie(0, @"C:\Users\imdc\Documents\enact\EnACT AS3 Engine\EditorEngine.swf");
         }
 
         /// <summary>
@@ -251,16 +251,16 @@ namespace EnACT
             //FlashVideoPlayer.TogglePlay();
             if (isPlaying)
             {
-                FlashVideoPlayer.Pause();
+                EngineView.Pause();
                 PlayheadTimer.Stop();
-                PlayAndPause.Text = "Play";
+                Button_PlayAndPause.Text = "Play";
                 isPlaying = false;
             }
             else
             {
-                FlashVideoPlayer.Play();
+                EngineView.Play();
                 PlayheadTimer.Start();
-                PlayAndPause.Text = "Pause";
+                Button_PlayAndPause.Text = "Pause";
                 isPlaying = true;
             }
             //if (FlashVideoPlayer.IsPlaying())
@@ -295,16 +295,16 @@ namespace EnACT
         /// <param name="e">Event Args</param>
         private void FlashVideoPlayer_VideoLoaded(object sender, EventArgs e)
         {
-            Double vidLength = FlashVideoPlayer.VideoLength();
-            GhettoTimeLine.Maximum = (int) vidLength * 10;
+            Double vidLength = EngineView.VideoLength();
+            TrackBar_Timeline.Maximum = (int) vidLength * 10;
         }
 
         private void PlayheadTimer_Tick(object sender, EventArgs e)
         {
-            int vidPos = (int)FlashVideoPlayer.GetPlayheadTime() * 10;
-            if (GhettoTimeLine.Minimum <= vidPos && vidPos <= GhettoTimeLine.Maximum)
-                GhettoTimeLine.Value = vidPos;
-            GhettoTimeLine.Update();
+            int vidPos = (int)EngineView.GetPlayheadTime() * 10;
+            if (TrackBar_Timeline.Minimum <= vidPos && vidPos <= TrackBar_Timeline.Maximum)
+                TrackBar_Timeline.Value = vidPos;
+            TrackBar_Timeline.Update();
             //Console.WriteLine(FlashVideoPlayer.GetPlayheadTime());
         }
 

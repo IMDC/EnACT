@@ -32,49 +32,49 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.MainFormMenu = new System.Windows.Forms.MenuStrip();
+            this.MenuStrip_MainForm = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.parseTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CaptionView = new System.Windows.Forms.DataGridView();
-            this.PopulateButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.InsertRowBut = new System.Windows.Forms.Button();
-            this.DeleteRowBut = new System.Windows.Forms.Button();
-            this.MoveRowUpBut = new System.Windows.Forms.Button();
-            this.MoveRowDownBut = new System.Windows.Forms.Button();
-            this.PlayAndPause = new System.Windows.Forms.Button();
-            this.JorgeButton = new System.Windows.Forms.Button();
-            this.GhettoTimeLine = new System.Windows.Forms.TrackBar();
+            this.Button_Populate = new System.Windows.Forms.Button();
+            this.Button_WriteXML = new System.Windows.Forms.Button();
+            this.Button_ParseScript = new System.Windows.Forms.Button();
+            this.Button_InsertRow = new System.Windows.Forms.Button();
+            this.Button_DeleteRow = new System.Windows.Forms.Button();
+            this.Button_MoveRowUp = new System.Windows.Forms.Button();
+            this.Button_MoveRowDown = new System.Windows.Forms.Button();
+            this.Button_PlayAndPause = new System.Windows.Forms.Button();
+            this.Button_JorgeButton = new System.Windows.Forms.Button();
+            this.TrackBar_Timeline = new System.Windows.Forms.TrackBar();
             this.PlayheadTimer = new System.Windows.Forms.Timer(this.components);
+            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.Timeline = new EnACT.Timeline();
-            this.FlashVideoPlayer = new EnACT.EngineView();
-            this.MainFormMenu.SuspendLayout();
+            this.EngineView = new EnACT.EngineView();
+            this.MenuStrip_MainForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GhettoTimeLine)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FlashVideoPlayer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrackBar_Timeline)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EngineView)).BeginInit();
             this.SuspendLayout();
             // 
-            // MainFormMenu
+            // MenuStrip_MainForm
             // 
-            this.MainFormMenu.BackColor = System.Drawing.SystemColors.Control;
-            this.MainFormMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuStrip_MainForm.BackColor = System.Drawing.SystemColors.Control;
+            this.MenuStrip_MainForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.helpToolStripMenuItem,
             this.debugToolStripMenuItem});
-            this.MainFormMenu.Location = new System.Drawing.Point(0, 0);
-            this.MainFormMenu.Name = "MainFormMenu";
-            this.MainFormMenu.Size = new System.Drawing.Size(944, 24);
-            this.MainFormMenu.TabIndex = 0;
-            this.MainFormMenu.Text = "MainMenuForm";
+            this.MenuStrip_MainForm.Location = new System.Drawing.Point(0, 0);
+            this.MenuStrip_MainForm.Name = "MenuStrip_MainForm";
+            this.MenuStrip_MainForm.Size = new System.Drawing.Size(944, 24);
+            this.MenuStrip_MainForm.TabIndex = 0;
+            this.MenuStrip_MainForm.Text = "MainMenuForm";
             // 
             // fileToolStripMenuItem
             // 
@@ -115,20 +115,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // debugToolStripMenuItem
-            // 
-            this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.parseTestToolStripMenuItem});
-            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
-            this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.debugToolStripMenuItem.Text = "Debug";
-            // 
-            // parseTestToolStripMenuItem
-            // 
-            this.parseTestToolStripMenuItem.Name = "parseTestToolStripMenuItem";
-            this.parseTestToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
-            this.parseTestToolStripMenuItem.Text = "Parse Test";
-            // 
             // CaptionView
             // 
             this.CaptionView.AllowUserToAddRows = false;
@@ -153,117 +139,128 @@
             this.CaptionView.TabIndex = 1;
             this.CaptionView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.CaptionView_CellValueChanged);
             // 
-            // PopulateButton
+            // Button_Populate
             // 
-            this.PopulateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.PopulateButton.Location = new System.Drawing.Point(807, 85);
-            this.PopulateButton.Name = "PopulateButton";
-            this.PopulateButton.Size = new System.Drawing.Size(125, 23);
-            this.PopulateButton.TabIndex = 4;
-            this.PopulateButton.Text = "Populate";
-            this.PopulateButton.UseVisualStyleBackColor = true;
-            this.PopulateButton.Click += new System.EventHandler(this.PopulateButton_Click);
+            this.Button_Populate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Button_Populate.Location = new System.Drawing.Point(807, 85);
+            this.Button_Populate.Name = "Button_Populate";
+            this.Button_Populate.Size = new System.Drawing.Size(125, 23);
+            this.Button_Populate.TabIndex = 4;
+            this.Button_Populate.Text = "Populate";
+            this.Button_Populate.UseVisualStyleBackColor = true;
+            this.Button_Populate.Click += new System.EventHandler(this.PopulateButton_Click);
             // 
-            // button1
+            // Button_WriteXML
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(807, 56);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(125, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Write XML";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.WriteXML);
+            this.Button_WriteXML.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Button_WriteXML.Location = new System.Drawing.Point(807, 56);
+            this.Button_WriteXML.Name = "Button_WriteXML";
+            this.Button_WriteXML.Size = new System.Drawing.Size(125, 23);
+            this.Button_WriteXML.TabIndex = 5;
+            this.Button_WriteXML.Text = "Write XML";
+            this.Button_WriteXML.UseVisualStyleBackColor = true;
+            this.Button_WriteXML.Click += new System.EventHandler(this.WriteXML);
             // 
-            // button2
+            // Button_ParseScript
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(807, 27);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(125, 23);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Parse Script";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.ParseText);
+            this.Button_ParseScript.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Button_ParseScript.Location = new System.Drawing.Point(807, 27);
+            this.Button_ParseScript.Name = "Button_ParseScript";
+            this.Button_ParseScript.Size = new System.Drawing.Size(125, 23);
+            this.Button_ParseScript.TabIndex = 6;
+            this.Button_ParseScript.Text = "Parse Script";
+            this.Button_ParseScript.UseVisualStyleBackColor = true;
+            this.Button_ParseScript.Click += new System.EventHandler(this.ParseText);
             // 
-            // InsertRowBut
+            // Button_InsertRow
             // 
-            this.InsertRowBut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.InsertRowBut.Location = new System.Drawing.Point(882, 584);
-            this.InsertRowBut.Name = "InsertRowBut";
-            this.InsertRowBut.Size = new System.Drawing.Size(50, 40);
-            this.InsertRowBut.TabIndex = 7;
-            this.InsertRowBut.Text = "Insert";
-            this.InsertRowBut.UseVisualStyleBackColor = true;
-            this.InsertRowBut.Click += new System.EventHandler(this.InsertRowBut_Click);
+            this.Button_InsertRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Button_InsertRow.Location = new System.Drawing.Point(882, 584);
+            this.Button_InsertRow.Name = "Button_InsertRow";
+            this.Button_InsertRow.Size = new System.Drawing.Size(50, 40);
+            this.Button_InsertRow.TabIndex = 7;
+            this.Button_InsertRow.Text = "Insert";
+            this.ToolTip.SetToolTip(this.Button_InsertRow, "Insert a new row above the currently selected row");
+            this.Button_InsertRow.UseVisualStyleBackColor = true;
+            this.Button_InsertRow.Click += new System.EventHandler(this.InsertRowBut_Click);
             // 
-            // DeleteRowBut
+            // Button_DeleteRow
             // 
-            this.DeleteRowBut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DeleteRowBut.Location = new System.Drawing.Point(882, 630);
-            this.DeleteRowBut.Name = "DeleteRowBut";
-            this.DeleteRowBut.Size = new System.Drawing.Size(50, 40);
-            this.DeleteRowBut.TabIndex = 8;
-            this.DeleteRowBut.Text = "Delete";
-            this.DeleteRowBut.UseVisualStyleBackColor = true;
-            this.DeleteRowBut.Click += new System.EventHandler(this.DeleteRowBut_Click);
+            this.Button_DeleteRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Button_DeleteRow.Location = new System.Drawing.Point(882, 630);
+            this.Button_DeleteRow.Name = "Button_DeleteRow";
+            this.Button_DeleteRow.Size = new System.Drawing.Size(50, 40);
+            this.Button_DeleteRow.TabIndex = 8;
+            this.Button_DeleteRow.Text = "Delete";
+            this.ToolTip.SetToolTip(this.Button_DeleteRow, "Delete the currently selected row");
+            this.Button_DeleteRow.UseVisualStyleBackColor = true;
+            this.Button_DeleteRow.Click += new System.EventHandler(this.DeleteRowBut_Click);
             // 
-            // MoveRowUpBut
+            // Button_MoveRowUp
             // 
-            this.MoveRowUpBut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.MoveRowUpBut.Location = new System.Drawing.Point(882, 478);
-            this.MoveRowUpBut.Name = "MoveRowUpBut";
-            this.MoveRowUpBut.Size = new System.Drawing.Size(50, 40);
-            this.MoveRowUpBut.TabIndex = 9;
-            this.MoveRowUpBut.Text = "Up";
-            this.MoveRowUpBut.UseVisualStyleBackColor = true;
-            this.MoveRowUpBut.Click += new System.EventHandler(this.MoveRowUpBut_Click);
+            this.Button_MoveRowUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Button_MoveRowUp.Location = new System.Drawing.Point(882, 478);
+            this.Button_MoveRowUp.Name = "Button_MoveRowUp";
+            this.Button_MoveRowUp.Size = new System.Drawing.Size(50, 40);
+            this.Button_MoveRowUp.TabIndex = 9;
+            this.Button_MoveRowUp.Text = "Up";
+            this.ToolTip.SetToolTip(this.Button_MoveRowUp, "Move the currently selected row up");
+            this.Button_MoveRowUp.UseVisualStyleBackColor = true;
+            this.Button_MoveRowUp.Click += new System.EventHandler(this.MoveRowUpBut_Click);
             // 
-            // MoveRowDownBut
+            // Button_MoveRowDown
             // 
-            this.MoveRowDownBut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.MoveRowDownBut.Location = new System.Drawing.Point(882, 524);
-            this.MoveRowDownBut.Name = "MoveRowDownBut";
-            this.MoveRowDownBut.Size = new System.Drawing.Size(50, 40);
-            this.MoveRowDownBut.TabIndex = 10;
-            this.MoveRowDownBut.Text = "Down";
-            this.MoveRowDownBut.UseVisualStyleBackColor = true;
-            this.MoveRowDownBut.Click += new System.EventHandler(this.MoveRowDownBut_Click);
+            this.Button_MoveRowDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Button_MoveRowDown.Location = new System.Drawing.Point(882, 524);
+            this.Button_MoveRowDown.Name = "Button_MoveRowDown";
+            this.Button_MoveRowDown.Size = new System.Drawing.Size(50, 40);
+            this.Button_MoveRowDown.TabIndex = 10;
+            this.Button_MoveRowDown.Text = "Down";
+            this.ToolTip.SetToolTip(this.Button_MoveRowDown, "Move the currently selected row down");
+            this.Button_MoveRowDown.UseVisualStyleBackColor = true;
+            this.Button_MoveRowDown.Click += new System.EventHandler(this.MoveRowDownBut_Click);
             // 
-            // PlayAndPause
+            // Button_PlayAndPause
             // 
-            this.PlayAndPause.Location = new System.Drawing.Point(562, 193);
-            this.PlayAndPause.Name = "PlayAndPause";
-            this.PlayAndPause.Size = new System.Drawing.Size(125, 23);
-            this.PlayAndPause.TabIndex = 12;
-            this.PlayAndPause.Text = "Play";
-            this.PlayAndPause.UseVisualStyleBackColor = true;
-            this.PlayAndPause.Click += new System.EventHandler(this.TogglePlay);
+            this.Button_PlayAndPause.Location = new System.Drawing.Point(562, 193);
+            this.Button_PlayAndPause.Name = "Button_PlayAndPause";
+            this.Button_PlayAndPause.Size = new System.Drawing.Size(125, 23);
+            this.Button_PlayAndPause.TabIndex = 12;
+            this.Button_PlayAndPause.Text = "Play";
+            this.ToolTip.SetToolTip(this.Button_PlayAndPause, "Play or Pause the Video");
+            this.Button_PlayAndPause.UseVisualStyleBackColor = true;
+            this.Button_PlayAndPause.Click += new System.EventHandler(this.TogglePlay);
             // 
-            // JorgeButton
+            // Button_JorgeButton
             // 
-            this.JorgeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.JorgeButton.Location = new System.Drawing.Point(807, 114);
-            this.JorgeButton.Name = "JorgeButton";
-            this.JorgeButton.Size = new System.Drawing.Size(125, 23);
-            this.JorgeButton.TabIndex = 13;
-            this.JorgeButton.Text = "Jorge Button";
-            this.JorgeButton.UseVisualStyleBackColor = true;
-            this.JorgeButton.Click += new System.EventHandler(this.JorgeButton_Click);
+            this.Button_JorgeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Button_JorgeButton.Location = new System.Drawing.Point(807, 114);
+            this.Button_JorgeButton.Name = "Button_JorgeButton";
+            this.Button_JorgeButton.Size = new System.Drawing.Size(125, 23);
+            this.Button_JorgeButton.TabIndex = 13;
+            this.Button_JorgeButton.Text = "Jorge Button";
+            this.Button_JorgeButton.UseVisualStyleBackColor = true;
+            this.Button_JorgeButton.Click += new System.EventHandler(this.JorgeButton_Click);
             // 
-            // GhettoTimeLine
+            // TrackBar_Timeline
             // 
-            this.GhettoTimeLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.TrackBar_Timeline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.GhettoTimeLine.Location = new System.Drawing.Point(338, 222);
-            this.GhettoTimeLine.Name = "GhettoTimeLine";
-            this.GhettoTimeLine.Size = new System.Drawing.Size(594, 45);
-            this.GhettoTimeLine.TabIndex = 14;
-            this.GhettoTimeLine.ValueChanged += new System.EventHandler(this.TimeLine_ValueChanged);
+            this.TrackBar_Timeline.Location = new System.Drawing.Point(338, 222);
+            this.TrackBar_Timeline.Name = "TrackBar_Timeline";
+            this.TrackBar_Timeline.Size = new System.Drawing.Size(594, 45);
+            this.TrackBar_Timeline.TabIndex = 14;
+            this.TrackBar_Timeline.ValueChanged += new System.EventHandler(this.TimeLine_ValueChanged);
             // 
             // PlayheadTimer
             // 
             this.PlayheadTimer.Tick += new System.EventHandler(this.PlayheadTimer_Tick);
+            // 
+            // debugToolStripMenuItem
+            // 
+            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.debugToolStripMenuItem.Text = "Debug";
             // 
             // Timeline
             // 
@@ -275,17 +272,19 @@
             this.Timeline.MinimumSize = new System.Drawing.Size(0, 199);
             this.Timeline.Name = "Timeline";
             this.Timeline.Size = new System.Drawing.Size(920, 199);
+            this.Timeline.SpeakerSet = null;
             this.Timeline.TabIndex = 15;
+            this.Timeline.VideoLength = 0;
             // 
-            // FlashVideoPlayer
+            // EngineView
             // 
-            this.FlashVideoPlayer.Enabled = true;
-            this.FlashVideoPlayer.Location = new System.Drawing.Point(12, 27);
-            this.FlashVideoPlayer.Name = "FlashVideoPlayer";
-            this.FlashVideoPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("FlashVideoPlayer.OcxState")));
-            this.FlashVideoPlayer.Size = new System.Drawing.Size(320, 240);
-            this.FlashVideoPlayer.TabIndex = 11;
-            this.FlashVideoPlayer.VideoLoaded += new EnACT.EngineView.VideoLoadedHandler(this.FlashVideoPlayer_VideoLoaded);
+            this.EngineView.Enabled = true;
+            this.EngineView.Location = new System.Drawing.Point(12, 27);
+            this.EngineView.Name = "EngineView";
+            this.EngineView.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("EngineView.OcxState")));
+            this.EngineView.Size = new System.Drawing.Size(320, 240);
+            this.EngineView.TabIndex = 11;
+            this.EngineView.VideoLoaded += new EnACT.EngineView.VideoLoadedHandler(this.FlashVideoPlayer_VideoLoaded);
             // 
             // MainForm
             // 
@@ -293,30 +292,30 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 682);
             this.Controls.Add(this.Timeline);
-            this.Controls.Add(this.GhettoTimeLine);
-            this.Controls.Add(this.JorgeButton);
-            this.Controls.Add(this.PlayAndPause);
-            this.Controls.Add(this.FlashVideoPlayer);
-            this.Controls.Add(this.MoveRowDownBut);
-            this.Controls.Add(this.MoveRowUpBut);
-            this.Controls.Add(this.DeleteRowBut);
-            this.Controls.Add(this.InsertRowBut);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.PopulateButton);
+            this.Controls.Add(this.TrackBar_Timeline);
+            this.Controls.Add(this.Button_JorgeButton);
+            this.Controls.Add(this.Button_PlayAndPause);
+            this.Controls.Add(this.EngineView);
+            this.Controls.Add(this.Button_MoveRowDown);
+            this.Controls.Add(this.Button_MoveRowUp);
+            this.Controls.Add(this.Button_DeleteRow);
+            this.Controls.Add(this.Button_InsertRow);
+            this.Controls.Add(this.Button_ParseScript);
+            this.Controls.Add(this.Button_WriteXML);
+            this.Controls.Add(this.Button_Populate);
             this.Controls.Add(this.CaptionView);
-            this.Controls.Add(this.MainFormMenu);
+            this.Controls.Add(this.MenuStrip_MainForm);
             this.Cursor = System.Windows.Forms.Cursors.Default;
-            this.MainMenuStrip = this.MainFormMenu;
+            this.MainMenuStrip = this.MenuStrip_MainForm;
             this.MinimumSize = new System.Drawing.Size(960, 720);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EnACT";
-            this.MainFormMenu.ResumeLayout(false);
-            this.MainFormMenu.PerformLayout();
+            this.MenuStrip_MainForm.ResumeLayout(false);
+            this.MenuStrip_MainForm.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GhettoTimeLine)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FlashVideoPlayer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrackBar_Timeline)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EngineView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -324,29 +323,29 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip MainFormMenu;
+        private System.Windows.Forms.MenuStrip MenuStrip_MainForm;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem parseTestToolStripMenuItem;
         private System.Windows.Forms.DataGridView CaptionView;
-        private System.Windows.Forms.Button PopulateButton;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button InsertRowBut;
-        private System.Windows.Forms.Button DeleteRowBut;
-        private System.Windows.Forms.Button MoveRowUpBut;
-        private System.Windows.Forms.Button MoveRowDownBut;
-        private EngineView FlashVideoPlayer;
-        private System.Windows.Forms.Button PlayAndPause;
-        private System.Windows.Forms.Button JorgeButton;
-        private System.Windows.Forms.TrackBar GhettoTimeLine;
+        private System.Windows.Forms.Button Button_Populate;
+        private System.Windows.Forms.Button Button_WriteXML;
+        private System.Windows.Forms.Button Button_ParseScript;
+        private System.Windows.Forms.Button Button_InsertRow;
+        private System.Windows.Forms.Button Button_DeleteRow;
+        private System.Windows.Forms.Button Button_MoveRowUp;
+        private System.Windows.Forms.Button Button_MoveRowDown;
+        private EngineView EngineView;
+        private System.Windows.Forms.Button Button_PlayAndPause;
+        private System.Windows.Forms.Button Button_JorgeButton;
+        private System.Windows.Forms.TrackBar TrackBar_Timeline;
         private System.Windows.Forms.Timer PlayheadTimer;
         private Timeline Timeline;
+        private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
+        private System.Windows.Forms.ToolTip ToolTip;
     }
 }
 
