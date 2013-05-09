@@ -79,7 +79,7 @@ namespace EnACT
             //Set the view to select a whole row when you click on a column
             CaptionView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-            //Set the first column to readonly
+            //Set the first column to be un-editable
             CaptionView.Columns[CaptionData.NPOS].ReadOnly = true;
 
             //Disable visibility of the Caption Object column

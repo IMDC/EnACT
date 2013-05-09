@@ -10,6 +10,7 @@ namespace EnACT
     /// </summary>
     public class CaptionData : DataTable
     {
+        #region Constants
         /// <summary>
         /// Number column position (0)
         /// </summary>
@@ -59,12 +60,41 @@ namespace EnACT
         /// Caption object column name
         /// </summary>
         public const String CNAME = "Caption";
+        #endregion
+
+        #region Members
+        /// <summary>
+        /// Column that holds the Caption Number
+        /// </summary>
+        private DataColumn NumberColumn;
+        /// <summary>
+        /// Column that holds BeginTimestamp
+        /// </summary>
+        private DataColumn BeginColum;
+        /// <summary>
+        /// Column that holds EndTimestamp
+        /// </summary>
+        private DataColumn EndColumn;
+        /// <summary>
+        /// Column that holds Speaker Name
+        /// </summary>
+        private DataColumn SpeakerColumn;
+        /// <summary>
+        /// Column that holds Caption Text
+        /// </summary>
+        private DataColumn TextColumn;
+        /// <summary>
+        /// Column that holds the caption object
+        /// </summary>
+        private DataColumn CaptionColumn;
 
         /// <summary>
         /// A set of Speaker objects, each speaker being mapped to by its name
         /// </summary>
         public Dictionary<String, Speaker> SpeakerSet { set; get; }
+        #endregion
 
+        #region Constuctors
         /// <summary>
         /// Constructs a CaptionData object with a given SpeakerSet and a title of
         /// "CaptionTable"
@@ -79,15 +109,62 @@ namespace EnACT
         /// <param name="SpeakerSet">The set of speakers to be referred to</param>
         public CaptionData(String name, Dictionary<String, Speaker> SpeakerSet) : base(name)
         {
+            InitializeComponent();
             this.SpeakerSet = SpeakerSet;
-
-            Columns.Add(new DataColumn(NNAME, typeof(int)));
-            Columns.Add(new DataColumn(BNAME, typeof(String)));
-            Columns.Add(new DataColumn(ENAME, typeof(String)));
-            Columns.Add(new DataColumn(SNAME, typeof(String)));
-            Columns.Add(new DataColumn(TNAME, typeof(String)));
-            Columns.Add(new DataColumn(CNAME, typeof(Caption)));
         }
+
+        /// <summary>
+        /// Initializes component
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.NumberColumn = new System.Data.DataColumn();
+            this.BeginColum = new System.Data.DataColumn();
+            this.EndColumn = new System.Data.DataColumn();
+            this.SpeakerColumn = new System.Data.DataColumn();
+            this.TextColumn = new System.Data.DataColumn();
+            this.CaptionColumn = new System.Data.DataColumn();
+            ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
+            // 
+            // NumberColumn
+            // 
+            this.NumberColumn.ColumnName = "Number";
+            this.NumberColumn.DataType = typeof(int);
+            // 
+            // BeginColum
+            // 
+            this.BeginColum.ColumnName = "Begin";
+            // 
+            // EndColumn
+            // 
+            this.EndColumn.ColumnName = "End";
+            // 
+            // SpeakerColumn
+            // 
+            this.SpeakerColumn.ColumnName = "Speaker";
+            // 
+            // TextColumn
+            // 
+            this.TextColumn.ColumnName = "Text";
+            // 
+            // CaptionColumn
+            // 
+            this.CaptionColumn.ColumnName = "Caption";
+            this.CaptionColumn.DataType = typeof(EnACT.Caption);
+            // 
+            // CaptionData
+            // 
+            this.Columns.AddRange(new System.Data.DataColumn[] {
+            this.NumberColumn,
+            this.BeginColum,
+            this.EndColumn,
+            this.SpeakerColumn,
+            this.TextColumn,
+            this.CaptionColumn});
+            ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
+
+        }
+        #endregion
 
         /// <summary>
         /// Populates the CaptionData's Table with the data contained in CaptionList
@@ -215,15 +292,6 @@ namespace EnACT
             Rows.InsertAt(r1, index2);
 
             RenumerateTopToBottom(Math.Min(index1, index2));
-        }
-
-        /// <summary>
-        /// Initializes component
-        /// </summary>
-        private void InitializeComponent()
-        {
-            ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
         }
 
         /// <summary>
