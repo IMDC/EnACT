@@ -24,6 +24,21 @@ namespace EnACT
             "BottomRight"
         };
 
+        /// <summary>
+        /// Represents the length of the flash video, in seconds
+        /// </summary>
+        public double VideoLength { set; get; }
+
+        /// <summary>
+        /// A set of Speaker objects, each speaker being mapped to by its name
+        /// </summary>
+        public Dictionary<String, Speaker> SpeakerSet { set; get; }
+
+        /// <summary>
+        /// The Caption Table shown by CaptionView
+        /// </summary>
+        public CaptionData CData { set; get; }
+
         public Timeline()
         {
             InitializeComponent();
@@ -34,7 +49,7 @@ namespace EnACT
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
-            
+
             ResizeRedraw = true; //Redraw the component everytime the form gets resized
         }
 
@@ -67,9 +82,8 @@ namespace EnACT
                 g.DrawString(CaptionPositions[(int)i], f, b, r);
                 g.DrawRectangle(p,r.X,r.Y,r.Width,r.Height);
 
-                
+                //Draw line separator line
                 g.DrawLine(linePen,x+w,y,Width,y);
-
             }
             //Console.WriteLine("Clip Rect X: {0}, Y: {1}, W: {2}, H: {3}", e.ClipRectangle.X, e.ClipRectangle.Y, e.ClipRectangle.Width, e.ClipRectangle.Height);
         }

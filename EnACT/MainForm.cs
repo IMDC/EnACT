@@ -62,6 +62,8 @@ namespace EnACT
             InitCaptionView();
             //Set up VideoPlayer
             InitVideoPlayer();
+            //Set up Timeline
+            InitTimeline();
 
             PlayheadTimer.Interval = 10;
         }
@@ -94,6 +96,15 @@ namespace EnACT
         {
             //This method can not be called in the EngineView constructor, so we have to call it here.
             EngineView.LoadMovie(0, @"C:\Users\imdc\Documents\enact\EnACT AS3 Engine\EditorEngine.swf");
+        }
+        
+        /// <summary>
+        /// Initialization for the Timeline
+        /// </summary>
+        private void InitTimeline()
+        {
+            Timeline.SpeakerSet = SpeakerSet;
+            Timeline.CData = CData;
         }
 
         /// <summary>
@@ -297,6 +308,7 @@ namespace EnACT
         {
             Double vidLength = EngineView.VideoLength();
             TrackBar_Timeline.Maximum = (int) vidLength * 10;
+            Timeline.VideoLength = vidLength;
         }
 
         private void PlayheadTimer_Tick(object sender, EventArgs e)
