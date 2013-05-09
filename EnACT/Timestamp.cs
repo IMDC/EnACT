@@ -40,24 +40,25 @@ namespace EnACT
         {
             get
             {
-                if (Double.IsNaN(time) || time < 0.0)
+                double timeDouble = time;
+                if (Double.IsNaN(timeDouble) || timeDouble < 0.0)
                     return "00:00:00.0";
 
-                string timeStamp = string.Empty;
+                string timeString = string.Empty;
 
-                int hour = (int)time / 3600;
-                timeStamp += hour.ToString("00:");
+                int hour = (int)timeDouble / 3600;
+                timeString += hour.ToString("00:");
 
-                time %= 3600;
+                timeDouble %= 3600;
 
-                int minutes = (int)time / 60;
-                timeStamp += minutes.ToString("00:");
+                int minutes = (int)timeDouble / 60;
+                timeString += minutes.ToString("00:");
 
-                time %= 60;
+                timeDouble %= 60;
 
-                timeStamp += time.ToString("00.0");
+                timeString += timeDouble.ToString("00.0");
 
-                return timeStamp;
+                return timeString;
             }
             set
             {
@@ -87,7 +88,6 @@ namespace EnACT
                         weight *= 60;
                     }
                 }
-
                 time = seconds;
             }
         }
@@ -144,7 +144,8 @@ namespace EnACT
         /// <returns>This timestamp as a String</returns>
         public override string ToString()
         {
-            return AsString;
+            //return AsString;
+            return AsDouble.ToString();
         }
     }
 }

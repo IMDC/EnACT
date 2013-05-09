@@ -328,7 +328,7 @@ namespace EnACT
         private void Button_ParseESR_Click(object sender, EventArgs e)
         {
             TextParser t = new TextParser(SpeakerSet, CaptionList);
-            t.ParseESRFile(@"C:\Users\imdc\Documents\enact\Testing\testScript.esr");
+            t.ParseESRFile(@"C:\Users\imdc\Documents\enact\Testing\testScript_2.esr");
         }
     }//Class
 }//Namespace
