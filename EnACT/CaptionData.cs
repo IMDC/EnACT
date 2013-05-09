@@ -244,14 +244,14 @@ namespace EnACT
                 //Set Begin value
                 case BPOS:
                     if (Caption.TimeStampValidates((String)Rows[Row][Column]))
-                        c.Begin = (String)Rows[Row][Column];
+                        c.Begin.AsString = (String)Rows[Row][Column];
                     else
                         Rows[Row][Column] = c.Begin; //Reset if invalid
                     break;
                 //Set End value
                 case EPOS:
                     if (Caption.TimeStampValidates((String)Rows[Row][Column]))
-                        c.End = (String) Rows[Row][Column];
+                        c.End.AsString = (String) Rows[Row][Column];
                     else
                         Rows[Row][Column] = c.Begin; //Reset if invalid
                     break;

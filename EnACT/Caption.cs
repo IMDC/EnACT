@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace EnACT
 {
+    #region Enums
     /// <summary>
     /// The Emotion enum represents which type of emotion the caption will
     /// be displayed in.
@@ -56,7 +57,9 @@ namespace EnACT
 		Center = 1,
 		Right = 2
 	}
+    #endregion
 
+    #region Caption Class
     /// <summary>
     /// The caption Class represents a Captioned line of text.
     /// </summary>
@@ -66,13 +69,13 @@ namespace EnACT
         /// A timestamp representing the begin time of a caption. Set in the 
         /// form XX:XX:XX.X where X is a digit from 0-9.
         /// </summary>
-        public String Begin { set; get; }
+        public Timestamp Begin { set; get; }
 
         /// <summary>
         /// A timestamp representing the begin time of a caption. Set in the 
         /// form XX:XX:XX.X where X is a digit from 0-9.
         /// </summary>
-        public String End { set; get; }
+        public Timestamp End { set; get; }
 
         /// <summary>
         /// A reference to a speaker in the program's speaker list.
@@ -117,8 +120,8 @@ namespace EnACT
         /// <param name="End">The timestamp representing the ending of the caption</param>
         public Caption(String line, Speaker speaker, String Begin, String End)
         {
-            this.Begin = Begin;
-            this.End = End;
+            this.Begin = new Timestamp(Begin);
+            this.End = new Timestamp(End);
 
             this.Speaker = speaker;
             this.Location = Location.BottomCentre;
@@ -199,7 +202,9 @@ namespace EnACT
             return this.WordListText();
         }
     }
+    #endregion
 
+    #region CaptionWord Class
     /// <summary>
     /// Represents an emotive word in a caption.
     /// </summary>
@@ -240,4 +245,5 @@ namespace EnACT
             return Text;
         }
     }
+    #endregion
 }

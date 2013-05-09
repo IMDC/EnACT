@@ -160,8 +160,8 @@ namespace EnACT
                     {
                         w.WriteStartElement("caption");
                         {
-                            w.WriteAttributeString("begin", c.Begin);
-                            w.WriteAttributeString("end", c.End);
+                            w.WriteAttributeString("begin", c.Begin.AsString);
+                            w.WriteAttributeString("end", c.End.AsString);
                             w.WriteAttributeString("speaker", c.Speaker.Name);
                             //Both location and alignment refer to hashcode
                             w.WriteAttributeString("location", Convert.ToString(c.Location.GetHashCode()));
