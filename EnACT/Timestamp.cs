@@ -138,14 +138,53 @@ namespace EnACT
         }
 
         /// <summary>
+        /// Implicitly converts a Timestamp to a double
+        /// </summary>
+        /// <param name="t">Timestamp to convert</param>
+        /// <returns>The timestamp's double representation</returns>
+        public static implicit operator double(Timestamp t)
+        {
+            return t.AsDouble;
+        }
+
+        /// <summary>
+        /// Implicitly converts a double into a Timestamp
+        /// </summary>
+        /// <param name="d">The double to convert</param>
+        /// <returns>The Timestamp with the double's value</returns>
+        public static implicit operator Timestamp(double d)
+        {
+            return new Timestamp(d);
+        }
+
+        /// <summary>
+        /// Implicitly converts a Timestamp to a string
+        /// </summary>
+        /// <param name="t">The Timestamp to convert</param>
+        /// <returns>The Timestamp's string representation</returns>
+        public static implicit operator string(Timestamp t)
+        {
+            return t.AsString;
+        }
+
+        /// <summary>
+        /// Implicitly converts a string to a Timestamp
+        /// </summary>
+        /// <param name="s">The string to convert</param>
+        /// <returns>The timestamp with the string's value</returns>
+        public static implicit operator Timestamp(string s)
+        {
+            return new Timestamp(s);
+        }
+        
+        /// <summary>
         /// Returns the string value of this TimeStamp. Returns the same as
         /// the AsString property
         /// </summary>
         /// <returns>This timestamp as a String</returns>
         public override string ToString()
         {
-            //return AsString;
-            return AsDouble.ToString();
+            return AsString;
         }
     }
 }

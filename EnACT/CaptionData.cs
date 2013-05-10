@@ -306,22 +306,20 @@ namespace EnACT
             switch (Column)
             {
                 //Nothing should be done for Number
-                case NPOS: 
-                    //Do nothing
-                    break;
+                case NPOS: break;
                 //Set Begin value
                 case BPOS:
                     if (Timestamp.TimeStampValidates((String)Rows[Row][Column]))
-                        c.Begin.AsString = (String)Rows[Row][Column];
+                        c.Begin = (String)Rows[Row][Column];
                     else
                         Rows[Row][Column] = c.Begin; //Reset if invalid
                     break;
                 //Set End value
                 case EPOS:
                     if (Timestamp.TimeStampValidates((String)Rows[Row][Column]))
-                        c.End.AsString = (String) Rows[Row][Column];
+                        c.End = (String) Rows[Row][Column];
                     else
-                        Rows[Row][Column] = c.Begin; //Reset if invalid
+                        Rows[Row][Column] = c.End; //Reset if invalid
                     break;
                 //Change speakers
                 case SPOS:
