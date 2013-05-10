@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace EnACT
 {
-    #region Enums
+    #region Caption Enums
     /// <summary>
     /// The Emotion enum represents which type of emotion the caption will
     /// be displayed in.
@@ -35,7 +35,7 @@ namespace EnACT
     /// The Location Enum represents in which of the 9 possible areas a caption
     /// will be displayed in.
     /// </summary>
-	public enum Location 
+	public enum ScreenLocation 
     {
 		BottomLeft = 1,
 		BottomCentre = 2,
@@ -85,7 +85,7 @@ namespace EnACT
         /// <summary>
         /// The location of a caption on the screen (Eg top left, centre right, etc)
         /// </summary>
-        public Location Location { set; get;}
+        public ScreenLocation Location { set; get;}
 
         /// <summary>
         /// The textual alignment of a caption (eg Left, Centre, Right)
@@ -124,7 +124,7 @@ namespace EnACT
             this.End = new Timestamp(End);
 
             this.Speaker = speaker;
-            this.Location = Location.BottomCentre;
+            this.Location = ScreenLocation.BottomCentre;
             this.Alignment = Alignment.Center;
 
             this.WordList = new List<CaptionWord>();

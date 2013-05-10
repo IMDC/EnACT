@@ -184,6 +184,8 @@ namespace EnACT
         private void CaptionView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             CData.ModifyCaptionData(e.RowIndex, e.ColumnIndex);
+            Timeline.Invalidate();
+            Timeline.Update();
         }
 
         /// <summary>
