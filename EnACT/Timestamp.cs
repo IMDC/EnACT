@@ -10,7 +10,9 @@ namespace EnACT
     /// <summary>
     /// Represents a timestamp in the form XX:XX:XX.X where X is a digit from 0-9.
     /// It can be set or retrieved as either a String or a Double, but is internally 
-    /// represented as a double in the form of seconds.
+    /// represented as a double in the form of seconds. A Timestamp can not be negative.
+    /// If a negative value is assigned to a timestamp, then an InvalidException will 
+    /// be thrown.
     /// </summary>
     public class Timestamp
     {
@@ -30,7 +32,12 @@ namespace EnACT
         public double AsDouble
         {
             get { return time; }
-            set { time = value; }
+            set 
+            {
+                if (value < 0.0)
+                    throw new InvalidTimestampException("Double value is negative: " + value); 
+                time = value; 
+            }
         }
 
         /// <summary>
@@ -66,7 +73,7 @@ namespace EnACT
                 if (value == null || value == String.Empty)
                     time = 0;
                 if (!TimeStampValidates(value))
-                    throw new InvalidTimestampStringException("String value is not a valid Timestamp");
+                    throw new InvalidTimestampException("String value is not a valid Timestamp");
 
 
                 double seconds = 0;
@@ -193,26 +200,26 @@ namespace EnACT
     }
     #endregion
 
-    #region InvalidTimestampStringException Class
-    public class InvalidTimestampStringException : Exception
+    #region InvalidTimestampException Class
+    public class InvalidTimestampException : Exception
     {
         /// <summary>
-        /// Initializes a new instance of the InvalidTimestampStringException class.
+        /// Initializes a new instance of the InvalidTimestampException class.
         /// </summary>
-        public InvalidTimestampStringException() : base() { }
+        public InvalidTimestampException() : base() { }
         /// <summary>
-        /// Initializes a new instance of the InvalidTimestampStringException class with a 
+        /// Initializes a new instance of the InvalidTimestampException class with a 
         /// specified error message.
         /// </summary>
         /// <param name="message"></param>
-        public InvalidTimestampStringException(string message) : base(message) { }
+        public InvalidTimestampException(string message) : base(message) { }
         /// <summary>
-        /// Initializes a new instance of the InvalidTimestampStringException class with 
+        /// Initializes a new instance of the InvalidTimestampException class with 
         /// serialized data.
         /// </summary>
         /// <param name="message"></param>
         /// <param name="innerException"></param>
-        public InvalidTimestampStringException(string message, System.Exception innerException)
+        public InvalidTimestampException(string message, System.Exception innerException)
             : base(message, innerException) { }
     }
     #endregion

@@ -310,7 +310,7 @@ namespace EnACT
                 //Set Begin value
                 case BPOS:
                     try { c.Begin = (String)Rows[Row][Column]; } //Attempt to set it
-                    catch (InvalidTimestampStringException)
+                    catch (InvalidTimestampException)
                     {
                         Rows[Row][Column] = c.Begin; //Reset if invalid
                     }
@@ -318,7 +318,7 @@ namespace EnACT
                 //Set End value
                 case EPOS:
                     try { c.End = (String)Rows[Row][Column]; } //Attempt to set it
-                    catch (InvalidTimestampStringException)
+                    catch (InvalidTimestampException)
                     {
                         Rows[Row][Column] = c.End; //Reset if invalid
                     }
