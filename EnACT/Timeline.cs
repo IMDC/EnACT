@@ -36,9 +36,8 @@ namespace EnACT
 
         private double TimelineLength 
         {
-            get { return VideoLength * 10; }
+            get { return VideoLength * pixelsPerSecond; }
         }
-
 
         private int pixelsPerSecond;
 
@@ -82,19 +81,14 @@ namespace EnACT
             //Get graphics object
             Graphics g = e.Graphics;
 
+            float heightForDrawing = Height - ScrollBar.Height;
+
             Pen p = new Pen(Color.Black, 1);
             Brush b = new SolidBrush(Color.Black);
             float x, y, w, h;  //Vars for xs,ys,witdths and heights of drawables
 
             //Draw black outline around control
-            g.DrawRectangle(p, 0, 0, Width-1, Height-1);
-
-
-            if (DrawLocationNames)
-                //Set drawing origin to the point where Location labels end.
-                //Anything drawn after this will have a location relative to
-                //(LOCATION_LABEL_WIDTH, 0)
-                g.TranslateTransform(LOCATION_LABEL_WIDTH, 0);
+            g.DrawRectangle(p, 0, 0, Width-1, heightForDrawing-1);
 
             //Draw CaptionPosition Labels
             Font f = new Font(this.Font.FontFamily, 10); //CaptionPositions font
@@ -103,8 +97,8 @@ namespace EnACT
             linePen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             linePen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
 
-            x = -LOCATION_LABEL_WIDTH;//0
-            h = Height / LocationNames.Length;
+            x = 0;
+            h = heightForDrawing / LocationNames.Length;
             w = LOCATION_LABEL_WIDTH;
             for(float i =0; i<LocationNames.Length; i++)
             {
@@ -124,6 +118,12 @@ namespace EnACT
             //Draw captions on screen if they exist
             if (CData != null)
             {
+                if (DrawLocationNames)
+                    //Set drawing origin to the point where Location labels end.
+                    //Anything drawn after this will have a location relative to
+                    //(LOCATION_LABEL_WIDTH, 0)
+                    g.TranslateTransform(LOCATION_LABEL_WIDTH+1, 0);
+
                 LeftEndTime = 0;
                 RightEndTime = VideoLength;
 
@@ -136,7 +136,7 @@ namespace EnACT
                     {
                         Console.WriteLine("Caption: #{0} is within bounds", r[CaptionData.NPOS]);
                         y = 0;
-                        h = Height / LocationNames.Length;
+                        h = heightForDrawing / LocationNames.Length;
                         switch (c.Location)
                         {
                             case ScreenLocation.TopLeft: y = 0 * h; break;
@@ -162,5 +162,15 @@ namespace EnACT
             //Console.WriteLine("Clip Rect X: {0}, Y: {1}, W: {2}, H: {3}", e.ClipRectangle.X, e.ClipRectangle.Y, e.ClipRectangle.Width, e.ClipRectangle.Height);
         }
         #endregion
+
+        private void ScrollBar_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ScrollBar_Scroll(object sender, ScrollEventArgs e)
+        {
+
+        }
     }//Class
 }//Namespace
