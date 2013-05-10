@@ -19,7 +19,7 @@ namespace EnACT
         /// <summary>
         /// A regular expression that will validate a correct timestamp
         /// </summary>
-        private static Regex validTimestamp = new Regex(@"^[0-9][0-9]:[0-9][0-9]:[0-9][0-9].[0-9]$");
+        private static Regex validTimestamp = new Regex(@"^[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\.[0-9]$");
 
         /// <summary>
         /// The internal storage of the timestamp. Stored as the number of seconds.
@@ -143,7 +143,7 @@ namespace EnACT
             }
             else
             {
-                Console.WriteLine("Timestamp {0} failed to Validate!", ts);
+                //Console.WriteLine("Timestamp {0} failed to Validate!", ts);
                 return false;
             }
         }
