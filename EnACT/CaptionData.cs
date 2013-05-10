@@ -309,17 +309,19 @@ namespace EnACT
                 case NPOS: break;
                 //Set Begin value
                 case BPOS:
-                    if (Timestamp.TimeStampValidates((String)Rows[Row][Column]))
-                        c.Begin = (String)Rows[Row][Column];
-                    else
+                    try { c.Begin = (String)Rows[Row][Column]; } //Attempt to set it
+                    catch (InvalidTimestampStringException)
+                    {
                         Rows[Row][Column] = c.Begin; //Reset if invalid
+                    }
                     break;
                 //Set End value
                 case EPOS:
-                    if (Timestamp.TimeStampValidates((String)Rows[Row][Column]))
-                        c.End = (String) Rows[Row][Column];
-                    else
+                    try { c.End = (String)Rows[Row][Column]; } //Attempt to set it
+                    catch (InvalidTimestampStringException)
+                    {
                         Rows[Row][Column] = c.End; //Reset if invalid
+                    }
                     break;
                 //Change speakers
                 case SPOS:

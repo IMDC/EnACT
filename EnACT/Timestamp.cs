@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace EnACT
 {
+    #region Timestamp Class
     /// <summary>
     /// Represents a timestamp in the form XX:XX:XX.X where X is a digit from 0-9.
     /// It can be set or retrieved as either a String or a Double, but is internally 
@@ -64,6 +65,9 @@ namespace EnACT
             {
                 if (value == null || value == String.Empty)
                     time = 0;
+                if (!TimeStampValidates(value))
+                    throw new InvalidTimestampStringException("String value is not a valid Timestamp");
+
 
                 double seconds = 0;
 
@@ -187,4 +191,29 @@ namespace EnACT
             return AsString;
         }
     }
+    #endregion
+
+    #region InvalidTimestampStringException Class
+    public class InvalidTimestampStringException : Exception
+    {
+        /// <summary>
+        /// Initializes a new instance of the InvalidTimestampStringException class.
+        /// </summary>
+        public InvalidTimestampStringException() : base() { }
+        /// <summary>
+        /// Initializes a new instance of the InvalidTimestampStringException class with a 
+        /// specified error message.
+        /// </summary>
+        /// <param name="message"></param>
+        public InvalidTimestampStringException(string message) : base(message) { }
+        /// <summary>
+        /// Initializes a new instance of the InvalidTimestampStringException class with 
+        /// serialized data.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="innerException"></param>
+        public InvalidTimestampStringException(string message, System.Exception innerException)
+            : base(message, innerException) { }
+    }
+    #endregion
 }
