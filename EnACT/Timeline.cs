@@ -52,9 +52,9 @@ namespace EnACT
         public Dictionary<String, Speaker> SpeakerSet { set; get; }
 
         /// <summary>
-        /// The Caption Table shown by CaptionView
+        /// A list of captions retrieved from a transcript file.
         /// </summary>
-        public CaptionData CData { set; get; }
+        public List<Caption> CaptionList { set; get; }
 
         public Timeline()
         {
@@ -116,7 +116,7 @@ namespace EnACT
             }
 
             //Draw captions on screen if they exist
-            if (CData != null)
+            if (CaptionList != null)
             {
                 if (DrawLocationNames)
                     //Set drawing origin to the point where Location labels end.
@@ -128,13 +128,12 @@ namespace EnACT
                 RightEndTime = VideoLength;
 
                 //float x, y, w, h;  //Vars for xs,ys,witdths and heights o
-                foreach (DataRow r in CData.Rows)
+                foreach (Caption c in CaptionList)
                 {
-                    Caption c = (Caption) r[CaptionData.CPOS];
                     if ((LeftEndTime <= c.Begin && c.Begin <= RightEndTime)
                     || (LeftEndTime <= c.End && c.End <= RightEndTime))
                     {
-                        Console.WriteLine("Caption: #{0} is within bounds", r[CaptionData.NPOS]);
+                        //Console.WriteLine("Caption: #{0} is within bounds", r[CaptionData.NPOS]);
                         y = 0;
                         h = heightForDrawing / LocationNames.Length;
                         switch (c.Location)

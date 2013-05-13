@@ -22,11 +22,6 @@ namespace EnACT
         public static Speaker DescriptionSpeaker = new Speaker(Speaker.DESCRIPTIONNAME);
 
         /// <summary>
-        /// The Caption Table shown by CaptionView
-        /// </summary>
-        public CaptionData CData { set; get; }
-
-        /// <summary>
         /// A set of Speaker objects, each speaker being mapped to by its name
         /// </summary>
         public Dictionary<String, Speaker> SpeakerSet { set; get; }
@@ -73,20 +68,22 @@ namespace EnACT
         /// </summary>
         private void InitCaptionView()
         {
-            CData = new CaptionData(SpeakerSet);
-            CaptionView.DataSource = CData;
+            //CData = new CaptionData(SpeakerSet);
+            //CaptionView.DataSource = CData;
+            //CaptionView.DataSource = CaptionList;
+            CaptionView.SpeakerSet = SpeakerSet;
+            CaptionView.CaptionSource = CaptionList;
 
-            //Set the view to select a whole row when you click on a column
-            CaptionView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            
 
             //Set the first column to be un-editable
-            CaptionView.Columns[CaptionData.NPOS].ReadOnly = true;
+            //CaptionView.Columns[CaptionData.NPOS].ReadOnly = true;
 
             //Disable visibility of the Caption Object column
-            CaptionView.Columns[CaptionData.CPOS].Visible = false;
+            //CaptionView.Columns[CaptionData.CPOS].Visible = false;
 
             //Set the last column to take up the remaining horizontal space in the view
-            CaptionView.Columns[CaptionData.TPOS].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //CaptionView.Columns[CaptionData.TPOS].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         /// <summary>
@@ -104,30 +101,31 @@ namespace EnACT
         private void InitTimeline()
         {
             Timeline.SpeakerSet = SpeakerSet;
-            Timeline.CData = CData;
+            Timeline.CaptionList = CaptionList;
         }
 
         /// <summary>
         /// Populates the Caption Table with captions read in from a script file.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
         private void PopulateButton_Click(object sender, EventArgs e)
         {
-            CData.PopulateTable(CaptionList);
+            CaptionView.UpdateView();
         }
 
         private void ParseText(object sender, EventArgs e)
         {
             TextParser t = new TextParser(SpeakerSet, CaptionList);
             t.ParseScriptFile(@"C:\Users\imdc\Documents\enact\Testing\testScript.txt");
+            CaptionView.UpdateView();
         }
 
         /// <summary>
         /// Writes the three EnACT xml files.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">EventArgs</param>
         private void WriteXML(object sender, EventArgs e)
         {
             EnactXMLWriter w = new EnactXMLWriter(SpeakerSet,CaptionList,Settings);
@@ -135,19 +133,14 @@ namespace EnACT
         }
 
         /// <summary>
-        /// Inserts a new row underneath where the user has selected in the 
+        /// Inserts a new row where the user has selected in the 
         /// caption View.
         /// </summary>
         /// <param name="sender">Object sender</param>
         /// <param name="e">Event Arguments</param>
         private void InsertRowBut_Click(object sender, EventArgs e)
         {
-            //If the user has a row selected
-            if(CaptionView.CurrentRow!=null)
-                CData.AddRowAt(CaptionView.CurrentRow.Index);
-            //Else there is no current selection or the table is empty
-            else
-                CData.AddRowAt(0);
+            CaptionView.AddRow();
         }
 
         /// <summary>
@@ -158,21 +151,7 @@ namespace EnACT
         /// <param name="e">The Event Arguments</param>
         private void DeleteRowBut_Click(object sender, EventArgs e)
         {
-            /* TODO: .NET 4.5 has a SortedSet<T> object. If we upgrade to 4.5, 
-             * use that instead of a list. Unfortunately it is not available
-             * in .NET 3.5 or older.
-             */
-            List<int> rowList = new List<int>();
-
-            //Add the index of each selected row to a list and remove them
-            foreach (DataGridViewRow r in CaptionView.SelectedRows)
-            {
-                rowList.Add(r.Index);
-            }
-            CData.RemoveRows(rowList);
-
-            //Deselect everything
-            //CaptionView.ClearSelection();
+            CaptionView.DeleteSelectedRows();
         }
 
         /// <summary>
@@ -183,7 +162,6 @@ namespace EnACT
         /// <param name="e">Event Arguments</param>
         private void CaptionView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            CData.ModifyCaptionData(e.RowIndex, e.ColumnIndex);
             Timeline.Invalidate();
             Timeline.Update();
         }
@@ -195,7 +173,7 @@ namespace EnACT
         /// <param name="e">Event Arguments</param>
         private void MoveRowUpBut_Click(object sender, EventArgs e)
         {
-            MoveRow(MoveDirection.Up);
+            CaptionView.MoveRowUp();
         }
 
         /// <summary>
@@ -205,52 +183,7 @@ namespace EnACT
         /// <param name="e">Event Arguments</param>
         private void MoveRowDownBut_Click(object sender, EventArgs e)
         {
-            MoveRow(MoveDirection.Down);
-        }
-
-        /// <summary>
-        /// Moves the currently selected row in CaptionView based on its index number 
-        /// and the direction to move it.
-        /// </summary>
-        /// <param name="direction">Either Movedirection.Up or Movedirection.Down 
-        /// depending on which direction to move the row.</param>
-        private void MoveRow(MoveDirection direction)
-        {
-            if (CaptionView.CurrentRow == null)
-                return;
-
-            int captionViewIndex = CaptionView.CurrentRow.Index;    //The row index of the Caption View
-
-            //If there is a sorted column that is not the number column
-            if (CaptionView.SortedColumn != null && CaptionView.SortedColumn.Index != CaptionData.NPOS)
-                return;     //Don't swap
-
-            //The row index of the Caption Data table
-            int captionDataIndex = (int)CaptionView[CaptionData.NPOS, captionViewIndex].Value - 1;
-
-            //If the row is being moved up and is within bounds
-            if (direction == MoveDirection.Up && 0 < captionViewIndex)
-            {
-                if (CaptionView.SortOrder.Equals(SortOrder.Descending))
-                    CData.SwapRows(captionDataIndex, captionDataIndex + 1);
-                else
-                    CData.SwapRows(captionDataIndex, captionDataIndex - 1);
-
-                //Change selected row the new position
-                CaptionView.CurrentCell = CaptionView[0, captionViewIndex - 1];
-
-            }
-            //If the row is being moved down and the row is within bounds
-            else if (direction == MoveDirection.Down && captionViewIndex < CaptionView.Rows.Count - 1)
-            {
-                if (CaptionView.SortOrder.Equals(SortOrder.Descending))
-                    CData.SwapRows(captionDataIndex, captionDataIndex - 1);
-                else
-                    CData.SwapRows(captionDataIndex, captionDataIndex + 1);
-
-                //Change selected row the new position
-                CaptionView.CurrentCell = CaptionView[0, captionViewIndex + 1];
-            }
+            CaptionView.MoveRowDown();
         }
 
         private Boolean isPlaying = false;
@@ -261,7 +194,6 @@ namespace EnACT
         /// <param name="e">Event Arguments</param>
         private void TogglePlay(object sender, EventArgs e)
         {
-            //FlashVideoPlayer.TogglePlay();
             if (isPlaying)
             {
                 EngineView.Pause();
@@ -276,12 +208,9 @@ namespace EnACT
                 Button_PlayAndPause.Text = "Pause";
                 isPlaying = true;
             }
-            //if (FlashVideoPlayer.IsPlaying())
-            //    PlayAndPause.Text = "Pause";
-            //else
-            //    PlayAndPause.Text = "Play";
         }
 
+        #region Jorge
         private void JorgeButton_Click(object sender, EventArgs e)
         {
             JorgeForm TheJorgeForm = new JorgeForm(SpeakerSet,CaptionList,Settings, this);
@@ -300,6 +229,7 @@ namespace EnACT
                 OutFolderPath + @"\Settings.xml", Settings);
             w.WriteAll();
         }
+        #endregion
 
         /// <summary>
         /// Handles the event fired when FlashVideoPlayer is done loading
@@ -331,6 +261,7 @@ namespace EnACT
         {
             TextParser t = new TextParser(SpeakerSet, CaptionList);
             t.ParseESRFile(@"C:\Users\imdc\Documents\enact\Testing\testScript_2.esr");
+            CaptionView.UpdateView();
         }
     }//Class
 }//Namespace

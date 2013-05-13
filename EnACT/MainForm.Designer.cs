@@ -39,7 +39,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CaptionView = new System.Windows.Forms.DataGridView();
+            this.CaptionView = new CaptionView();
             this.Button_Populate = new System.Windows.Forms.Button();
             this.Button_WriteXML = new System.Windows.Forms.Button();
             this.Button_ParseScript = new System.Windows.Forms.Button();
@@ -281,7 +281,6 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.Timeline.AutoScroll = true;
             this.Timeline.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.Timeline.CData = null;
             this.Timeline.Location = new System.Drawing.Point(12, 273);
             this.Timeline.MinimumSize = new System.Drawing.Size(0, 199);
             this.Timeline.Name = "Timeline";
@@ -345,7 +344,7 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.DataGridView CaptionView;
+        private CaptionView CaptionView;
         private System.Windows.Forms.Button Button_Populate;
         private System.Windows.Forms.Button Button_WriteXML;
         private System.Windows.Forms.Button Button_ParseScript;
