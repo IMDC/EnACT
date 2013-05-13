@@ -9,6 +9,50 @@ namespace EnACT
 {
     class CaptionView : DataGridView
     {
+        #region Constants
+        /// <summary>
+        /// Number column position (0)
+        /// </summary>
+        public const int NPOS = 0;
+        /// <summary>
+        /// Begin time column position (1)
+        /// </summary>
+        public const int BPOS = 1;
+        /// <summary>
+        /// End time column position (2)
+        /// </summary>
+        public const int EPOS = 2;
+        /// <summary>
+        /// Speaker name column position (3)
+        /// </summary>
+        public const int SPOS = 3;
+        /// <summary>
+        /// Caption text column position (4)
+        /// </summary>
+        public const int TPOS = 4;
+
+        /// <summary>
+        /// Number column name
+        /// </summary>
+        public const String NNAME = "Number";
+        /// <summary>
+        /// Begin time column name
+        /// </summary>
+        public const String BNAME = "Begin";
+        /// <summary>
+        /// End time column name
+        /// </summary>
+        public const String ENAME = "End";
+        /// <summary>
+        /// Speaker-name column name
+        /// </summary>
+        public const String SNAME = "Speaker";
+        /// <summary>
+        /// Caption text column name
+        /// </summary>
+        public const String TNAME = "Text";
+        #endregion
+
         /// <summary>
         /// A set of Speaker objects, each speaker being mapped to by its name
         /// </summary>
@@ -20,9 +64,16 @@ namespace EnACT
         public List<Caption> CaptionList { private set; get; }
 
         /// <summary>
-        /// A caption list that can automatically update the CaptionView
+        /// A caption list that can automatically update the CaptionView. Use this object
+        /// instead of CaptionList when coding in CaptionView
         /// </summary>
         private BindingList<Caption> BindingList { set; get; }
+
+        DataGridViewColumn NumberColumn;
+        DataGridViewColumn BeginColumn;
+        DataGridViewColumn EndColumn;
+        DataGridViewColumn SpeakerColumn;
+        DataGridViewColumn TextColumn;
 
         /// <summary>
         /// Sets the CaptionView's CaptionList and initializes it for Caption View.
@@ -35,7 +86,7 @@ namespace EnACT
                 CaptionList = value;
                 BindingList = new BindingList<Caption>(value);
 
-                DataSource = BindingList;
+                DataSource = BindingList;   //Bind list to view
             }
             get { return CaptionList; }
         }
@@ -47,6 +98,47 @@ namespace EnACT
         {
             //Set the view to select a whole row when you click on a column
             SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            //Don't create columns for each property.
+            AutoGenerateColumns = false;
+
+            //Init Columns
+            NumberColumn = new DataGridViewTextBoxColumn();
+            NumberColumn.Name = NNAME;
+            NumberColumn.HeaderText = NNAME;
+            NumberColumn.ReadOnly = true;   //Set Number column to read only
+
+            BeginColumn = new DataGridViewTextBoxColumn();
+            BeginColumn.Name = BNAME;
+            BeginColumn.HeaderText = BNAME;
+            BeginColumn.ValueType = typeof(string);
+            BeginColumn.DataPropertyName = BNAME;
+
+            EndColumn = new DataGridViewTextBoxColumn();
+            EndColumn.Name = ENAME;
+            EndColumn.HeaderText = ENAME;
+            EndColumn.ValueType = typeof(string);
+            EndColumn.DataPropertyName = ENAME;
+
+            SpeakerColumn = new DataGridViewTextBoxColumn();
+            SpeakerColumn.Name = SNAME;
+            SpeakerColumn.HeaderText = SNAME;
+            SpeakerColumn.DataPropertyName = SNAME;
+
+            TextColumn = new DataGridViewTextBoxColumn();
+            TextColumn.Name = TNAME;
+            TextColumn.HeaderText = TNAME;
+            TextColumn.DataPropertyName = TNAME;
+
+            //Add Columns to View
+            Columns.Add(NumberColumn);
+            Columns.Add(BeginColumn);
+            Columns.Add(EndColumn);
+            Columns.Add(SpeakerColumn);
+            Columns.Add(TextColumn);
+
+            //Set the last column to fill up remaining space
+            Columns[Columns.Count-1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         /// <summary>
@@ -76,10 +168,7 @@ namespace EnACT
             //Add the index of each selected row to a list and remove them
             foreach (DataGridViewRow r in SelectedRows)
             {
-                //rowList.Add(r.Index);
                 cList.Add(BindingList[r.Index]);
-                //c = BindingList[r.Index];
-
             }
 
             //Start from the bottom of the list
@@ -151,6 +240,54 @@ namespace EnACT
         public void UpdateView()
         {
             BindingList.ResetBindings();
+        }
+
+        private void InitializeComponent()
+        {
+            ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
+            this.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        public void ValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            //int Row = e.RowIndex;
+            //int Column = e.ColumnIndex;
+            //Caption c = BindingList[Row];
+            //switch (Column)
+            //{
+            //    //Nothing should be done for Number
+            //    case NPOS: break;
+            //    //Set Begin value
+            //    case BPOS:
+            //        try { c.Begin = (String)Rows[Row].Cells[Column].Value; } //Attempt to set it
+            //        catch (InvalidTimestampException)
+            //        {
+            //            Rows[Row].Cells[Column].Value = c.Begin; //Reset if invalid
+            //        }
+            //        break;
+            //    //Set End value
+            //    case EPOS:
+            //        try { c.End = (String)Rows[Row].Cells[Column].Value; } //Attempt to set it
+            //        catch (InvalidTimestampException)
+            //        {
+            //            Rows[Row].Cells[Column].Value = c.End; //Reset if invalid
+            //        }
+            //        break;
+            //    //Change speakers
+            //    case SPOS:
+            //        //ModifySpeaker(Row);
+            //        break;
+            //    //Create a new WordList
+            //    case TPOS:
+            //        c.FeedWordList((String)Rows[Row].Cells[Column].Value);
+            //        break;
+            //    default:
+            //        Console.WriteLine("No case found: {0}", Column);
+            //        break;
+            //}
         }
     }
 }

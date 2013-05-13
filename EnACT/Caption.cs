@@ -97,6 +97,12 @@ namespace EnACT
         /// </summary>
         public List<CaptionWord> WordList { set; get; }
 
+        public String Text
+        {
+            set{ FeedWordList(value); }
+            get{ return WordListText(); }
+        }
+
         /// <summary>
         /// Constructs a Caption object with a blank line and the DefaultSpeaker
         /// </summary>

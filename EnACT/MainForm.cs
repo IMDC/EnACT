@@ -74,8 +74,6 @@ namespace EnACT
             CaptionView.SpeakerSet = SpeakerSet;
             CaptionView.CaptionSource = CaptionList;
 
-            
-
             //Set the first column to be un-editable
             //CaptionView.Columns[CaptionData.NPOS].ReadOnly = true;
 
@@ -162,6 +160,8 @@ namespace EnACT
         /// <param name="e">Event Arguments</param>
         private void CaptionView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            Console.WriteLine("Value Changed");
+            CaptionView.ValueChanged(sender, e);
             Timeline.Invalidate();
             Timeline.Update();
         }
