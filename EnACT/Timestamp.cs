@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.ComponentModel;
 
 namespace EnACT
 {
@@ -14,6 +15,7 @@ namespace EnACT
     /// If a negative value is assigned to a timestamp, then an InvalidException will 
     /// be thrown.
     /// </summary>
+    //[TypeConverter(typeof(TimestampTypeConverter))]
     public class Timestamp
     {
         /// <summary>

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.ComponentModel;
+using System.ComponentModel.Design.Serialization;
+using System.Reflection;
 
 namespace EnACT
 {
@@ -111,19 +113,22 @@ namespace EnACT
             BeginColumn = new DataGridViewTextBoxColumn();
             BeginColumn.Name = BNAME;
             BeginColumn.HeaderText = BNAME;
-            BeginColumn.ValueType = typeof(string);
+            BeginColumn.ValueType = typeof(Timestamp);
             BeginColumn.DataPropertyName = BNAME;
+            BeginColumn.CellTemplate = new CaptionViewTimestampCell();
 
             EndColumn = new DataGridViewTextBoxColumn();
             EndColumn.Name = ENAME;
             EndColumn.HeaderText = ENAME;
-            EndColumn.ValueType = typeof(string);
+            EndColumn.ValueType = typeof(Timestamp);
             EndColumn.DataPropertyName = ENAME;
+            EndColumn.CellTemplate = new CaptionViewTimestampCell();
 
             SpeakerColumn = new DataGridViewTextBoxColumn();
             SpeakerColumn.Name = SNAME;
             SpeakerColumn.HeaderText = SNAME;
             SpeakerColumn.DataPropertyName = SNAME;
+            SpeakerColumn.CellTemplate = new CaptionViewSpeakerCell();
 
             TextColumn = new DataGridViewTextBoxColumn();
             TextColumn.Name = TNAME;
@@ -246,6 +251,13 @@ namespace EnACT
         {
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
+            // 
+            // CaptionView
+            // 
+            this.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.CaptionView_CellParsing);
+            this.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.CaptionView_CellFormatting);
+            this.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.CaptionView_CellValidating);
+            this.CellValuePushed += new System.Windows.Forms.DataGridViewCellValueEventHandler(this.CaptionView_CellValuePushed);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -289,5 +301,134 @@ namespace EnACT
             //        break;
             //}
         }
+
+        private void CaptionView_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
+        {
+            switch (e.ColumnIndex)
+            {
+                case BPOS:
+                case EPOS: break;
+                case SPOS: 
+                    Speaker s = new Speaker(e.Value.ToString());
+                    SpeakerSet[s.Name] = s;
+                    e.Value = s;
+                break;
+                default: break;
+            }
+            e.ParsingApplied = true;
+        }
+
+        private void CaptionView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
+        }
+
+        private void CaptionView_CellValuePushed(object sender, DataGridViewCellValueEventArgs e)
+        {
+
+        }
+
+        private void CaptionView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+        }
     }
+
+    class CaptionViewTimestampCell : DataGridViewTextBoxCell
+    {
+        public CaptionViewTimestampCell() : base() { }
+
+        public override object ParseFormattedValue(object formattedValue,
+            DataGridViewCellStyle cellStyle, TypeConverter formattedValueTypeConverter,
+            TypeConverter valueTypeConverter)
+        {
+            //return new Timestamp((String)formattedValue);
+            Timestamp t;
+            try
+            {
+                t = new Timestamp((String)formattedValue);
+            }
+            catch(InvalidTimestampException)
+            {
+                t = (Timestamp)Value;
+            }
+            return t;   
+        }
+    }
+
+    class CaptionViewSpeakerCell : DataGridViewTextBoxCell
+    {
+        public CaptionViewSpeakerCell() : base() {}
+
+        public override object  ParseFormattedValue(object formattedValue, 
+            DataGridViewCellStyle cellStyle, TypeConverter formattedValueTypeConverter, 
+            TypeConverter valueTypeConverter)
+        {
+            return new Speaker(formattedValue.ToString());//base.ParseFormattedValue(formattedValue, cellStyle, formattedValueTypeConverter, valueTypeConverter);
+        }
+    }
+
+    //class TimestampTypeConverter : TypeConverter
+    //{
+    //    public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+    //    {
+    //        if (sourceType is string)
+    //            return true;
+    //        else
+    //            return base.CanConvertFrom(context, sourceType);
+    //    }
+
+    //    public override object ConvertFrom(ITypeDescriptorContext context, 
+    //        System.Globalization.CultureInfo culture, object value)
+    //    {
+    //        if (value == null)
+    //            return new Timestamp();
+
+    //        if (value is String)
+    //        {
+    //            String vstring = value as String;
+    //            return new Timestamp(vstring);
+    //        }
+    //        else
+    //            return base.ConvertFrom(context, culture, value);
+    //    }
+
+    //    public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+    //    {
+    //        if ((destinationType == typeof(string)) |
+    //            (destinationType == typeof(InstanceDescriptor)))
+    //            return true;
+    //        else
+    //        return base.CanConvertTo(context, destinationType);
+    //    }
+
+    //    public override object ConvertTo(ITypeDescriptorContext context, 
+    //        System.Globalization.CultureInfo culture, object value, Type destinationType)
+    //    {
+    //        if (value != null && !(value is Timestamp))
+    //            throw new Exception("Value is of wrong type");
+
+    //        if (destinationType == typeof(String))
+    //        {
+    //            Timestamp t = value as Timestamp;
+    //            return t.AsString;
+    //        }
+
+    //        if (destinationType == typeof(InstanceDescriptor))
+    //        {
+    //            if (value == null)
+    //                return null;
+
+    //            Timestamp t = value as Timestamp;
+
+    //            MemberInfo mi = typeof(Timestamp).GetConstructor(new Type [] {typeof(String)} );
+    //            object[] args = new object[] {t.AsString};
+
+    //            if (mi != null)
+    //                return new InstanceDescriptor(mi, args);
+    //            else
+    //                return null;
+    //        }
+    //        return base.ConvertTo(context, culture, value, destinationType);
+    //    }
+    //}
 }
