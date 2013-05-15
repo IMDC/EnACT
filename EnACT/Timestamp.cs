@@ -15,7 +15,7 @@ namespace EnACT
     /// If a negative value is assigned to a timestamp, then an InvalidException will 
     /// be thrown.
     /// </summary>
-    //[TypeConverter(typeof(TimestampTypeConverter))]
+    [TypeConverter(typeof(TimestampTypeConverter))]
     public class Timestamp
     {
         /// <summary>
@@ -76,7 +76,6 @@ namespace EnACT
                     time = 0;
                 if (!TimeStampValidates(value))
                     throw new InvalidTimestampException("String value is not a valid Timestamp");
-
 
                 double seconds = 0;
 

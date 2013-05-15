@@ -115,14 +115,14 @@ namespace EnACT
             BeginColumn.HeaderText = BNAME;
             BeginColumn.ValueType = typeof(Timestamp);
             BeginColumn.DataPropertyName = BNAME;
-            BeginColumn.CellTemplate = new CaptionViewTimestampCell();
+            //BeginColumn.CellTemplate = new CaptionViewTimestampCell();
 
             EndColumn = new DataGridViewTextBoxColumn();
             EndColumn.Name = ENAME;
             EndColumn.HeaderText = ENAME;
             EndColumn.ValueType = typeof(Timestamp);
             EndColumn.DataPropertyName = ENAME;
-            EndColumn.CellTemplate = new CaptionViewTimestampCell();
+            //EndColumn.CellTemplate = new CaptionViewTimestampCell();
 
             SpeakerColumn = new DataGridViewTextBoxColumn();
             SpeakerColumn.Name = SNAME;
@@ -251,13 +251,6 @@ namespace EnACT
         {
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
-            // 
-            // CaptionView
-            // 
-            this.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.CaptionView_CellParsing);
-            this.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.CaptionView_CellFormatting);
-            this.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.CaptionView_CellValidating);
-            this.CellValuePushed += new System.Windows.Forms.DataGridViewCellValueEventHandler(this.CaptionView_CellValuePushed);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -318,18 +311,9 @@ namespace EnACT
             e.ParsingApplied = true;
         }
 
-        private void CaptionView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void CaptionView_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
         {
 
-        }
-
-        private void CaptionView_CellValuePushed(object sender, DataGridViewCellValueEventArgs e)
-        {
-
-        }
-
-        private void CaptionView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
         }
     }
 
@@ -366,69 +350,4 @@ namespace EnACT
             return new Speaker(formattedValue.ToString());//base.ParseFormattedValue(formattedValue, cellStyle, formattedValueTypeConverter, valueTypeConverter);
         }
     }
-
-    //class TimestampTypeConverter : TypeConverter
-    //{
-    //    public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
-    //    {
-    //        if (sourceType is string)
-    //            return true;
-    //        else
-    //            return base.CanConvertFrom(context, sourceType);
-    //    }
-
-    //    public override object ConvertFrom(ITypeDescriptorContext context, 
-    //        System.Globalization.CultureInfo culture, object value)
-    //    {
-    //        if (value == null)
-    //            return new Timestamp();
-
-    //        if (value is String)
-    //        {
-    //            String vstring = value as String;
-    //            return new Timestamp(vstring);
-    //        }
-    //        else
-    //            return base.ConvertFrom(context, culture, value);
-    //    }
-
-    //    public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
-    //    {
-    //        if ((destinationType == typeof(string)) |
-    //            (destinationType == typeof(InstanceDescriptor)))
-    //            return true;
-    //        else
-    //        return base.CanConvertTo(context, destinationType);
-    //    }
-
-    //    public override object ConvertTo(ITypeDescriptorContext context, 
-    //        System.Globalization.CultureInfo culture, object value, Type destinationType)
-    //    {
-    //        if (value != null && !(value is Timestamp))
-    //            throw new Exception("Value is of wrong type");
-
-    //        if (destinationType == typeof(String))
-    //        {
-    //            Timestamp t = value as Timestamp;
-    //            return t.AsString;
-    //        }
-
-    //        if (destinationType == typeof(InstanceDescriptor))
-    //        {
-    //            if (value == null)
-    //                return null;
-
-    //            Timestamp t = value as Timestamp;
-
-    //            MemberInfo mi = typeof(Timestamp).GetConstructor(new Type [] {typeof(String)} );
-    //            object[] args = new object[] {t.AsString};
-
-    //            if (mi != null)
-    //                return new InstanceDescriptor(mi, args);
-    //            else
-    //                return null;
-    //        }
-    //        return base.ConvertTo(context, culture, value, destinationType);
-    //    }
-    //}
 }
