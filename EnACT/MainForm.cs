@@ -43,7 +43,8 @@ namespace EnACT
         {
             InitializeComponent();
 
-            SpeakerSet = new Dictionary<String, Speaker>();
+            //Construct the speakerset with a comparator that ignores case;
+            SpeakerSet = new Dictionary<String, Speaker>(StringComparer.OrdinalIgnoreCase);
 
             //Add the default speaker to the set of speakers
             SpeakerSet[DefaultSpeaker.Name] = DefaultSpeaker;
@@ -161,7 +162,6 @@ namespace EnACT
         private void CaptionView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             Console.WriteLine("Value Changed");
-            CaptionView.ValueChanged(sender, e);
             Timeline.Invalidate();
             Timeline.Update();
         }

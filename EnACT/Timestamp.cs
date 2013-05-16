@@ -15,7 +15,7 @@ namespace EnACT
     /// If a negative value is assigned to a timestamp, then an InvalidException will 
     /// be thrown.
     /// </summary>
-    [TypeConverter(typeof(TimestampTypeConverter))]
+    //[TypeConverter(typeof(TimestampTypeConverter))]
     public class Timestamp
     {
         /// <summary>

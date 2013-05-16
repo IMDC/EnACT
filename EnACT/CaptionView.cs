@@ -121,22 +121,20 @@ namespace EnACT
             BeginColumn.HeaderText = BNAME;
             BeginColumn.ValueType = typeof(Timestamp);
             BeginColumn.DataPropertyName = BNAME;
-            BeginColumn.CellTemplate = new CaptionViewTimestampCell();
-            //DataGridViewCell c = new CaptionViewTimestampCell();
-            //c.Style.
+            //BeginColumn.CellTemplate = new CaptionViewTimestampCell();
 
             EndColumn = new DataGridViewTextBoxColumn();
             EndColumn.Name = ENAME;
             EndColumn.HeaderText = ENAME;
             EndColumn.ValueType = typeof(Timestamp);
             EndColumn.DataPropertyName = ENAME;
-            EndColumn.CellTemplate = new CaptionViewTimestampCell();
+            //EndColumn.CellTemplate = new CaptionViewTimestampCell();
 
             SpeakerColumn = new DataGridViewTextBoxColumn();
             SpeakerColumn.Name = SNAME;
             SpeakerColumn.HeaderText = SNAME;
             SpeakerColumn.DataPropertyName = SNAME;
-            SpeakerColumn.CellTemplate = new CaptionViewSpeakerCell();
+            //SpeakerColumn.CellTemplate = new CaptionViewSpeakerCell();
 
             TextColumn = new DataGridViewTextBoxColumn();
             TextColumn.Name = TNAME;
@@ -276,59 +274,52 @@ namespace EnACT
         #endregion
 
         #region events
-        public void ValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            //int Row = e.RowIndex;
-            //int Column = e.ColumnIndex;
-            //Caption c = BindingList[Row];
-            //switch (Column)
-            //{
-            //    //Nothing should be done for Number
-            //    case NPOS: break;
-            //    //Set Begin value
-            //    case BPOS:
-            //        try { c.Begin = (String)Rows[Row].Cells[Column].Value; } //Attempt to set it
-            //        catch (InvalidTimestampException)
-            //        {
-            //            Rows[Row].Cells[Column].Value = c.Begin; //Reset if invalid
-            //        }
-            //        break;
-            //    //Set End value
-            //    case EPOS:
-            //        try { c.End = (String)Rows[Row].Cells[Column].Value; } //Attempt to set it
-            //        catch (InvalidTimestampException)
-            //        {
-            //            Rows[Row].Cells[Column].Value = c.End; //Reset if invalid
-            //        }
-            //        break;
-            //    //Change speakers
-            //    case SPOS:
-            //        //ModifySpeaker(Row);
-            //        break;
-            //    //Create a new WordList
-            //    case TPOS:
-            //        c.FeedWordList((String)Rows[Row].Cells[Column].Value);
-            //        break;
-            //    default:
-            //        Console.WriteLine("No case found: {0}", Column);
-            //        break;
-            //}
-        }
-
+        /// <summary>
+        /// Parses a cell once the user has exited from it. Will convert the cell values into
+        /// Data usable by captions.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
         private void CaptionView_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
         {
-            //switch (e.ColumnIndex)
-            //{
-            //    case BPOS:
-            //    case EPOS: break;
-            //    case SPOS: 
-            //        Speaker s = new Speaker(e.Value.ToString());
-            //        SpeakerSet[s.Name] = s;
-            //        e.Value = s;
-            //    break;
-            //    default: break;
-            //}
-            //e.ParsingApplied = true;
+            int r = e.RowIndex;
+            int c = e.ColumnIndex;
+            //Caption c = BindingList[r];
+            switch (e.ColumnIndex)
+            {
+                //Set Begin or End value
+                case BPOS:
+                case EPOS:
+                    try
+                    {
+                        //Attempt to convert the value
+                        e.Value = new Timestamp(e.Value.ToString());
+                    }
+                    catch (InvalidTimestampException)
+                    {
+                        //Leave the value as it is
+                        e.Value = (Timestamp) Rows[r].Cells[c].Value;
+                    }
+                    finally
+                    {
+                        e.ParsingApplied = true;
+                    }
+                    break;
+                case SPOS:
+                    String s = (String) e.Value;
+                    if (SpeakerSet.ContainsKey(s))
+                    {
+                        e.Value = SpeakerSet[s];
+                    }
+                    else
+                    {
+                        SpeakerSet[s] = new Speaker(s);
+                        e.Value = SpeakerSet[s];
+                    }
+                    e.ParsingApplied = true;
+                    break;
+                default: break;
+            }
         }
         #endregion
     }
