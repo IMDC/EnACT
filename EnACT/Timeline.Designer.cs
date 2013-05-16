@@ -38,6 +38,7 @@
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.DoubleBuffered = true;
             this.Name = "Timeline";
+            this.Scroll += new System.Windows.Forms.ScrollEventHandler(this.Timeline_Scroll);
             this.ResumeLayout(false);
 
         }

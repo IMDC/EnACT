@@ -270,7 +270,7 @@ namespace EnACT
 
         private void DebugButton_Click(object sender, EventArgs e)
         {
-            Timeline.AutoScrollMinSize = new System.Drawing.Size(10000,0);
+            Timeline.AutoScrollMinSize = new System.Drawing.Size(1200,0);
         }
     }//Class
 }//Namespace

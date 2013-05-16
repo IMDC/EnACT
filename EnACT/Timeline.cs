@@ -81,15 +81,16 @@ namespace EnACT
             //Get graphics object
             Graphics g = e.Graphics;
 
-            float heightForDrawing;
+            float availableHeight;
 
+            //Set value based one whether or not the scrollbar is visible
             if (HorizontalScroll.Visible)
             {
-                heightForDrawing = Height - SystemInformation.HorizontalScrollBarHeight;
+                availableHeight = Height - SystemInformation.HorizontalScrollBarHeight;
             }
             else
             {
-                heightForDrawing = Height;
+                availableHeight = Height;
             }
 
             Pen p = new Pen(Color.Black, 1);
@@ -97,7 +98,7 @@ namespace EnACT
             float x, y, w, h;  //Vars for xs,ys,witdths and heights of drawables
 
             //Draw black outline around control
-            g.DrawRectangle(p, 0, 0, Width-1, heightForDrawing-1);
+            g.DrawRectangle(p, 0, 0, Width-1, availableHeight-1);
 
             //Draw CaptionPosition Labels
             Font f = new Font(this.Font.FontFamily, 10); //CaptionPositions font
@@ -107,7 +108,7 @@ namespace EnACT
             linePen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
 
             x = 0;
-            h = heightForDrawing / LocationNames.Length;
+            h = availableHeight / LocationNames.Length;
             w = LOCATION_LABEL_WIDTH;
             for(float i =0; i<LocationNames.Length; i++)
             {
@@ -144,7 +145,7 @@ namespace EnACT
                     {
                         //Console.WriteLine("Caption: #{0} is within bounds", r[CaptionData.NPOS]);
                         y = 0;
-                        h = heightForDrawing / LocationNames.Length;
+                        h = availableHeight / LocationNames.Length;
                         switch (c.Location)
                         {
                             case ScreenLocation.TopLeft: y = 0 * h; break;
@@ -170,5 +171,13 @@ namespace EnACT
             //Console.WriteLine("Clip Rect X: {0}, Y: {1}, W: {2}, H: {3}", e.ClipRectangle.X, e.ClipRectangle.Y, e.ClipRectangle.Width, e.ClipRectangle.Height);
         }
         #endregion
+
+        private void Timeline_Scroll(object sender, ScrollEventArgs e)
+        {
+            this.Refresh();
+
+                //this.Invalidate(new Rectangle(LOCATION_LABEL_WIDTH, 0, Width - LOCATION_LABEL_WIDTH, Height));
+         
+        }
     }//Class
 }//Namespace
