@@ -55,6 +55,7 @@ namespace EnACT
         public const String TNAME = "Text";
         #endregion
 
+        #region Members and Properties
         /// <summary>
         /// A set of Speaker objects, each speaker being mapped to by its name
         /// </summary>
@@ -89,10 +90,15 @@ namespace EnACT
                 BindingList = new BindingList<Caption>(value);
 
                 DataSource = BindingList;   //Bind list to view
+                //Re-initialize component to set up event handlers
+                //DON'T REMOVE THIS!!!
+                InitializeComponent();
             }
             get { return CaptionList; }
         }
-        
+        #endregion
+
+        #region Constructor
         /// <summary>
         /// Constructs a new CaptionView
         /// </summary>
@@ -115,14 +121,16 @@ namespace EnACT
             BeginColumn.HeaderText = BNAME;
             BeginColumn.ValueType = typeof(Timestamp);
             BeginColumn.DataPropertyName = BNAME;
-            //BeginColumn.CellTemplate = new CaptionViewTimestampCell();
+            BeginColumn.CellTemplate = new CaptionViewTimestampCell();
+            //DataGridViewCell c = new CaptionViewTimestampCell();
+            //c.Style.
 
             EndColumn = new DataGridViewTextBoxColumn();
             EndColumn.Name = ENAME;
             EndColumn.HeaderText = ENAME;
             EndColumn.ValueType = typeof(Timestamp);
             EndColumn.DataPropertyName = ENAME;
-            //EndColumn.CellTemplate = new CaptionViewTimestampCell();
+            EndColumn.CellTemplate = new CaptionViewTimestampCell();
 
             SpeakerColumn = new DataGridViewTextBoxColumn();
             SpeakerColumn.Name = SNAME;
@@ -145,7 +153,9 @@ namespace EnACT
             //Set the last column to fill up remaining space
             Columns[Columns.Count-1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
+        #endregion
 
+        #region Row Manipulation
         /// <summary>
         /// Adds a row to the CaptionsList at the index of the currently selected row
         /// </summary>
@@ -237,7 +247,9 @@ namespace EnACT
             BindingList[index1] = BindingList[index2];
             BindingList[index2] = temp;
         }
+        #endregion
 
+        #region UpdateView
         /// <summary>
         /// Updates this CaptionView so that it displays the current list of items. This method
         /// should be called anytime CaptionList is updated outside of CaptionView.
@@ -246,16 +258,24 @@ namespace EnACT
         {
             BindingList.ResetBindings();
         }
+        #endregion
 
+        #region Initialize
         private void InitializeComponent()
         {
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
+            // 
+            // CaptionView
+            // 
+            this.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.CaptionView_CellParsing);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
         }
+        #endregion
 
+        #region events
         public void ValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             //int Row = e.RowIndex;
@@ -297,26 +317,26 @@ namespace EnACT
 
         private void CaptionView_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
         {
-            switch (e.ColumnIndex)
-            {
-                case BPOS:
-                case EPOS: break;
-                case SPOS: 
-                    Speaker s = new Speaker(e.Value.ToString());
-                    SpeakerSet[s.Name] = s;
-                    e.Value = s;
-                break;
-                default: break;
-            }
-            e.ParsingApplied = true;
+            //switch (e.ColumnIndex)
+            //{
+            //    case BPOS:
+            //    case EPOS: break;
+            //    case SPOS: 
+            //        Speaker s = new Speaker(e.Value.ToString());
+            //        SpeakerSet[s.Name] = s;
+            //        e.Value = s;
+            //    break;
+            //    default: break;
+            //}
+            //e.ParsingApplied = true;
         }
-
-        private void CaptionView_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
-        {
-
-        }
+        #endregion
     }
 
+    #region CaptionViewTimeStampCell Class
+    /// <summary>
+    /// A DataGridViewCell that is meant to hold timestamp values
+    /// </summary>
     class CaptionViewTimestampCell : DataGridViewTextBoxCell
     {
         public CaptionViewTimestampCell() : base() { }
@@ -325,20 +345,25 @@ namespace EnACT
             DataGridViewCellStyle cellStyle, TypeConverter formattedValueTypeConverter,
             TypeConverter valueTypeConverter)
         {
-            //return new Timestamp((String)formattedValue);
-            Timestamp t;
+            Timestamp t = null;
             try
             {
-                t = new Timestamp((String)formattedValue);
+                //Attempt to parse the value
+                t = (Timestamp)base.ParseFormattedValue(formattedValue, 
+                    cellStyle, formattedValueTypeConverter, valueTypeConverter);
             }
-            catch(InvalidTimestampException)
+            catch (InvalidTimestampException)
             {
-                t = (Timestamp)Value;
+                //Reset the value if not a valid timestamp
+                //RaiseDataError(new DataGridViewDataErrorEventArgs(e,ColumnIndex,RowIndex,DataGridViewDataErrorContexts.Parsing));
+                //t = (Timestamp)Value;
             }
-            return t;   
+            return t;
         }
     }
+    #endregion
 
+    #region CaptionViewSpeakerCell Class
     class CaptionViewSpeakerCell : DataGridViewTextBoxCell
     {
         public CaptionViewSpeakerCell() : base() {}
@@ -350,4 +375,5 @@ namespace EnACT
             return new Speaker(formattedValue.ToString());//base.ParseFormattedValue(formattedValue, cellStyle, formattedValueTypeConverter, valueTypeConverter);
         }
     }
+    #endregion
 }
