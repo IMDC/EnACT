@@ -10,9 +10,5 @@ namespace EnACT
     /// </summary>
     public static class Utilities
     {
-        public static Boolean ContainsKeyIgnoreCase(this Dictionary<String, Speaker> SpeakerSet, String name)
-        {
-            return SpeakerSet.ContainsKey(name.ToUpper());
-        }
     }
 }
