@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MenuStrip_MainForm = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,7 +39,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CaptionView = new CaptionView();
+            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Button_Populate = new System.Windows.Forms.Button();
             this.Button_WriteXML = new System.Windows.Forms.Button();
             this.Button_ParseScript = new System.Windows.Forms.Button();
@@ -51,15 +51,21 @@
             this.Button_JorgeButton = new System.Windows.Forms.Button();
             this.TrackBar_Timeline = new System.Windows.Forms.TrackBar();
             this.PlayheadTimer = new System.Windows.Forms.Timer(this.components);
-            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.Button_ParseESR = new System.Windows.Forms.Button();
+            this.DebugButton = new System.Windows.Forms.Button();
             this.Timeline = new EnACT.Timeline();
             this.EngineView = new EnACT.EngineView();
+            this.CaptionView = new EnACT.CaptionView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MenuStrip_MainForm.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_Timeline)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EngineView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).BeginInit();
             this.SuspendLayout();
             // 
             // MenuStrip_MainForm
@@ -116,29 +122,11 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // CaptionView
+            // debugToolStripMenuItem
             // 
-            this.CaptionView.AllowUserToAddRows = false;
-            this.CaptionView.AllowUserToDeleteRows = false;
-            this.CaptionView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.CaptionView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.CaptionView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.CaptionView.Location = new System.Drawing.Point(12, 478);
-            this.CaptionView.Name = "CaptionView";
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.CaptionView.Size = new System.Drawing.Size(864, 192);
-            this.CaptionView.TabIndex = 1;
-            this.CaptionView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.CaptionView_CellValueChanged);
+            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.debugToolStripMenuItem.Text = "Debug";
             // 
             // Button_Populate
             // 
@@ -257,12 +245,6 @@
             // 
             this.PlayheadTimer.Tick += new System.EventHandler(this.PlayheadTimer_Tick);
             // 
-            // debugToolStripMenuItem
-            // 
-            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
-            this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.debugToolStripMenuItem.Text = "Debug";
-            // 
             // Button_ParseESR
             // 
             this.Button_ParseESR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -275,15 +257,30 @@
             this.Button_ParseESR.UseVisualStyleBackColor = true;
             this.Button_ParseESR.Click += new System.EventHandler(this.Button_ParseESR_Click);
             // 
+            // DebugButton
+            // 
+            this.DebugButton.Location = new System.Drawing.Point(662, 27);
+            this.DebugButton.Name = "DebugButton";
+            this.DebugButton.Size = new System.Drawing.Size(139, 139);
+            this.DebugButton.TabIndex = 17;
+            this.DebugButton.Text = "Random Debug Button";
+            this.DebugButton.UseVisualStyleBackColor = true;
+            this.DebugButton.Click += new System.EventHandler(this.DebugButton_Click);
+            // 
             // Timeline
             // 
             this.Timeline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.Timeline.AutoScroll = true;
+            this.Timeline.AutoScrollMinSize = new System.Drawing.Size(920, 0);
             this.Timeline.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Timeline.CaptionList = null;
+            this.Timeline.DrawLocationNames = true;
+            this.Timeline.LeftEndTime = 0;
             this.Timeline.Location = new System.Drawing.Point(12, 273);
             this.Timeline.MinimumSize = new System.Drawing.Size(0, 199);
             this.Timeline.Name = "Timeline";
+            this.Timeline.RightEndTime = 0;
             this.Timeline.Size = new System.Drawing.Size(920, 199);
             this.Timeline.SpeakerSet = null;
             this.Timeline.TabIndex = 15;
@@ -299,11 +296,70 @@
             this.EngineView.TabIndex = 11;
             this.EngineView.VideoLoaded += new EnACT.EngineView.VideoLoadedHandler(this.FlashVideoPlayer_VideoLoaded);
             // 
+            // CaptionView
+            // 
+            this.CaptionView.AllowUserToAddRows = false;
+            this.CaptionView.AllowUserToDeleteRows = false;
+            this.CaptionView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.CaptionView.CaptionSource = null;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.CaptionView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.CaptionView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.CaptionView.Location = new System.Drawing.Point(12, 478);
+            this.CaptionView.Name = "CaptionView";
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.CaptionView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.CaptionView.Size = new System.Drawing.Size(864, 192);
+            this.CaptionView.SpeakerSet = null;
+            this.CaptionView.TabIndex = 1;
+            this.CaptionView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.CaptionView_CellValueChanged);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Number";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Begin";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Begin";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "End";
+            this.dataGridViewTextBoxColumn3.HeaderText = "End";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Speaker";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Speaker";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "Text";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Text";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 682);
+            this.Controls.Add(this.DebugButton);
             this.Controls.Add(this.Button_ParseESR);
             this.Controls.Add(this.Timeline);
             this.Controls.Add(this.TrackBar_Timeline);
@@ -327,9 +383,9 @@
             this.Text = "EnACT";
             this.MenuStrip_MainForm.ResumeLayout(false);
             this.MenuStrip_MainForm.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_Timeline)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EngineView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -361,6 +417,12 @@
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
         private System.Windows.Forms.ToolTip ToolTip;
         private System.Windows.Forms.Button Button_ParseESR;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.Button DebugButton;
     }
 }
 

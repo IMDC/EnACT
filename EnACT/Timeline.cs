@@ -81,7 +81,16 @@ namespace EnACT
             //Get graphics object
             Graphics g = e.Graphics;
 
-            float heightForDrawing = Height - ScrollBar.Height;
+            float heightForDrawing;
+
+            if (HorizontalScroll.Visible)
+            {
+                heightForDrawing = Height - SystemInformation.HorizontalScrollBarHeight;
+            }
+            else
+            {
+                heightForDrawing = Height;
+            }
 
             Pen p = new Pen(Color.Black, 1);
             Brush b = new SolidBrush(Color.Black);
@@ -161,15 +170,5 @@ namespace EnACT
             //Console.WriteLine("Clip Rect X: {0}, Y: {1}, W: {2}, H: {3}", e.ClipRectangle.X, e.ClipRectangle.Y, e.ClipRectangle.Width, e.ClipRectangle.Height);
         }
         #endregion
-
-        private void ScrollBar_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ScrollBar_Scroll(object sender, ScrollEventArgs e)
-        {
-
-        }
     }//Class
 }//Namespace

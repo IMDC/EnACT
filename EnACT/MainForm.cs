@@ -6,6 +6,7 @@ namespace EnACT
 {
     public partial class MainForm : Form
     {
+        #region Members
         /// <summary>
         /// Direction used by MoveRow buttons to determine whether to move the row up or down
         /// </summary>
@@ -35,7 +36,9 @@ namespace EnACT
         /// The object that represents the EnACT engine xml settings file
         /// </summary>
         public SettingsXML Settings { set; get; }
+        #endregion
 
+        #region Constructor and Init Methods
         /// <summary>
         /// Constructs a Mainform object. Initializes all components
         /// </summary>
@@ -102,6 +105,7 @@ namespace EnACT
             Timeline.SpeakerSet = SpeakerSet;
             Timeline.CaptionList = CaptionList;
         }
+        #endregion
 
         /// <summary>
         /// Populates the Caption Table with captions read in from a script file.
@@ -262,6 +266,11 @@ namespace EnACT
             TextParser t = new TextParser(SpeakerSet, CaptionList);
             t.ParseESRFile(@"C:\Users\imdc\Documents\enact\Testing\testScript_2.esr");
             CaptionView.UpdateView();
+        }
+
+        private void DebugButton_Click(object sender, EventArgs e)
+        {
+            Timeline.AutoScrollMinSize = new System.Drawing.Size(10000,0);
         }
     }//Class
 }//Namespace
