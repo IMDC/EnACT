@@ -87,16 +87,16 @@ namespace EnACT
             set
             {
                 //Make sure value isn't null
-                if(value != null)
-                {
-                    CaptionList = value;
-                    BindingList = new BindingList<Caption>(value);
+                if(value == null)
+                    return;
 
-                    DataSource = BindingList;   //Bind list to view
-                    //Re-initialize component to set up event handlers
-                    //DON'T REMOVE THIS!!!
-                    InitializeComponent();
-                }
+                CaptionList = value;
+                BindingList = new BindingList<Caption>(value);
+
+                DataSource = BindingList;   //Bind list to view
+                //Re-initialize component to set up event handlers
+                //DON'T REMOVE THIS!!!
+                InitializeComponent();
             }
             get { return CaptionList; }
         }
