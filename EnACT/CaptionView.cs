@@ -94,9 +94,7 @@ namespace EnACT
                 BindingList = new BindingList<Caption>(value);
 
                 DataSource = BindingList;   //Bind list to view
-                //Re-initialize component to set up event handlers
-                //DON'T REMOVE THIS!!!
-                InitializeComponent();
+                HookUpEvents();
             }
             get { return CaptionList; }
         }
@@ -278,6 +276,18 @@ namespace EnACT
         #endregion
 
         #region events
+        /// <summary>
+        /// Re-adds all events to this instance of CaptionView. Call this method after setting the DataSource
+        /// </summary>
+        private void HookUpEvents()
+        {
+            /* For some reason events get reset when the datasource changes, for reasons currently 
+             * unkown. Make sure to add all event handlers to this method as it is called right 
+             * after the DataSource is set.
+             */
+            this.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.CaptionView_CellParsing);
+        }
+
         /// <summary>
         /// Parses a cell once the user has exited from it. Will convert the cell values into
         /// Data usable by captions.
