@@ -360,48 +360,4 @@ namespace EnACT
         }
         #endregion
     }
-
-    #region CaptionViewTimeStampCell Class
-    /// <summary>
-    /// A DataGridViewCell that is meant to hold timestamp values
-    /// </summary>
-    class CaptionViewTimestampCell : DataGridViewTextBoxCell
-    {
-        public CaptionViewTimestampCell() : base() { }
-
-        public override object ParseFormattedValue(object formattedValue,
-            DataGridViewCellStyle cellStyle, TypeConverter formattedValueTypeConverter,
-            TypeConverter valueTypeConverter)
-        {
-            Timestamp t = null;
-            try
-            {
-                //Attempt to parse the value
-                t = (Timestamp)base.ParseFormattedValue(formattedValue, 
-                    cellStyle, formattedValueTypeConverter, valueTypeConverter);
-            }
-            catch (InvalidTimestampException)
-            {
-                //Reset the value if not a valid timestamp
-                //RaiseDataError(new DataGridViewDataErrorEventArgs(e,ColumnIndex,RowIndex,DataGridViewDataErrorContexts.Parsing));
-                //t = (Timestamp)Value;
-            }
-            return t;
-        }
-    }
-    #endregion
-
-    #region CaptionViewSpeakerCell Class
-    class CaptionViewSpeakerCell : DataGridViewTextBoxCell
-    {
-        public CaptionViewSpeakerCell() : base() {}
-
-        public override object  ParseFormattedValue(object formattedValue, 
-            DataGridViewCellStyle cellStyle, TypeConverter formattedValueTypeConverter, 
-            TypeConverter valueTypeConverter)
-        {
-            return new Speaker(formattedValue.ToString());//base.ParseFormattedValue(formattedValue, cellStyle, formattedValueTypeConverter, valueTypeConverter);
-        }
-    }
-    #endregion
 }
