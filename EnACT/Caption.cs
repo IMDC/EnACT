@@ -65,17 +65,60 @@ namespace EnACT
     /// </summary>
     public class Caption
     {
-        /// <summary>
-        /// A timestamp representing the begin time of a caption. Set in the 
-        /// form XX:XX:XX.X where X is a digit from 0-9.
-        /// </summary>
-        public Timestamp Begin { set; get; }
+        private Timestamp begin;
+        private Timestamp end;
+        private Timestamp duration;
 
         /// <summary>
         /// A timestamp representing the begin time of a caption. Set in the 
         /// form XX:XX:XX.X where X is a digit from 0-9.
         /// </summary>
-        public Timestamp End { set; get; }
+        public Timestamp Begin 
+        { 
+            set
+            {
+                begin = value;
+                if(end != null)
+                    duration = end - begin;
+            }
+            get { return begin; } 
+        }
+
+        /// <summary>
+        /// A timestamp representing the begin time of a caption. Set in the 
+        /// form XX:XX:XX.X where X is a digit from 0-9.
+        /// </summary>
+        public Timestamp End
+        {
+            set
+            {
+                end = value;
+                if(begin != null)
+                    duration = end - begin;
+            }
+            get { return end; }
+        }
+
+        /// <summary>
+        /// A timestamp representing how long the duration of this caption is.
+        /// Setting the duration will also alter the End timestamp by setting
+        /// it as End = Begin + Duration, or a copy of Duration if begin is null.
+        /// </summary>
+        public Timestamp Duration
+        {
+            set
+            {
+                duration = value;
+                if (begin != null)
+                    end = begin + duration;
+                //Assume a null value would be 0.0 seconds
+                else
+                    //Create a new object instead of copying refrences.
+                    end = new Timestamp(duration.AsDouble);
+                    
+            }
+            get { return duration; }
+        }
 
         /// <summary>
         /// A reference to a speaker in the program's speaker list.

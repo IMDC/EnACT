@@ -25,13 +25,17 @@ namespace EnACT
         /// </summary>
         public const int EPOS = 2;
         /// <summary>
-        /// Speaker name column position (3)
+        /// Duration column position (3)
         /// </summary>
-        public const int SPOS = 3;
+        public const int DPOS = 3;
         /// <summary>
-        /// Caption text column position (4)
+        /// Speaker name column position (4)
         /// </summary>
-        public const int TPOS = 4;
+        public const int SPOS = 4;
+        /// <summary>
+        /// Caption text column position (5)
+        /// </summary>
+        public const int TPOS = 5;
 
         /// <summary>
         /// Number column name
@@ -45,6 +49,10 @@ namespace EnACT
         /// End time column name
         /// </summary>
         public const String ENAME = "End";
+        /// <summary>
+        /// Duration column name
+        /// </summary>
+        public const String DNAME = "Duration";
         /// <summary>
         /// Speaker-name column name
         /// </summary>
@@ -75,6 +83,7 @@ namespace EnACT
         DataGridViewColumn NumberColumn;
         DataGridViewColumn BeginColumn;
         DataGridViewColumn EndColumn;
+        DataGridViewColumn DurationColumn;
         DataGridViewColumn SpeakerColumn;
         DataGridViewColumn TextColumn;
 
@@ -139,6 +148,12 @@ namespace EnACT
             EndColumn.DataPropertyName = ENAME;
             //EndColumn.CellTemplate = new CaptionViewTimestampCell();
 
+            DurationColumn = new DataGridViewTextBoxColumn();
+            DurationColumn.Name = DNAME;
+            DurationColumn.HeaderText = DNAME;
+            DurationColumn.ValueType = typeof(Timestamp);
+            DurationColumn.DataPropertyName = DNAME;
+
             SpeakerColumn = new DataGridViewTextBoxColumn();
             SpeakerColumn.Name = SNAME;
             SpeakerColumn.HeaderText = SNAME;
@@ -154,6 +169,7 @@ namespace EnACT
             Columns.Add(NumberColumn);
             Columns.Add(BeginColumn);
             Columns.Add(EndColumn);
+            Columns.Add(DurationColumn);
             Columns.Add(SpeakerColumn);
             Columns.Add(TextColumn);
 
@@ -316,6 +332,7 @@ namespace EnACT
                 //Set Begin or End value
                 case BPOS:
                 case EPOS:
+                case DPOS:
                     try
                     {
                         //Attempt to convert the value

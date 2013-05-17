@@ -142,7 +142,7 @@ namespace EnACT
                 {
                     if (((LeftEndTime <= c.Begin && c.Begin <= RightEndTime) //Begin is in drawing area
                     || (LeftEndTime <= c.End && c.End <= RightEndTime))      //End is in drawing area
-                    && 0.1 <= c.End - c.Begin )     //Duration of caption is less than 0.1
+                    && 0.1 <= c.Duration)     //Duration of caption is less than 0.1
                     {
                         //Console.WriteLine("Caption: #{0} is within bounds", r[CaptionData.NPOS]);
                         y = 0;

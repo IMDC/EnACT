@@ -129,6 +129,17 @@ namespace EnACT
         }
 
         /// <summary>
+        /// Adds two timestamps together in the form t1.AsDouble + t2.AsDouble.
+        /// </summary>
+        /// <param name="t1">First timestamp to add</param>
+        /// <param name="t2">Second timestamp to add</param>
+        /// <returns></returns>
+        public static Timestamp operator +(Timestamp t1, Timestamp t2)
+        {
+            return t1.AsDouble + t2.AsDouble;
+        }
+
+        /// <summary>
         /// Checks to see if a possible timestamp is valid or not. If the timestamp
         /// is in the form XX:XX:XX.X where X is a numerical digit from 0-9, it will
         /// return true, and false otherwise.
