@@ -140,8 +140,9 @@ namespace EnACT
                 //float x, y, w, h;  //Vars for xs,ys,witdths and heights o
                 foreach (Caption c in CaptionList)
                 {
-                    if ((LeftEndTime <= c.Begin && c.Begin <= RightEndTime)
-                    || (LeftEndTime <= c.End && c.End <= RightEndTime))
+                    if (((LeftEndTime <= c.Begin && c.Begin <= RightEndTime) //Begin is in drawing area
+                    || (LeftEndTime <= c.End && c.End <= RightEndTime))      //End is in drawing area
+                    && 0.1 <= c.End - c.Begin )     //Duration of caption is less than 0.1
                     {
                         //Console.WriteLine("Caption: #{0} is within bounds", r[CaptionData.NPOS]);
                         y = 0;
@@ -162,22 +163,24 @@ namespace EnACT
                         x = (float)c.Begin*pixelsPerSecond;
                         w = (float)c.End*pixelsPerSecond - x;
 
-                        y+= 2; h -=3;
+                        //Create a small space between the line dividers and the caption rectangles
+                        //y+= 2; h -=4;
+                        y += 1; h -= 2;
 
-                        g.FillRectangle(new SolidBrush(Color.Green), x, y, w, h);
+                        //g.FillRectangle(new SolidBrush(Color.Green), x, y, w, h);
+                        g.FillOutlinedRoundedRectangle(new SolidBrush(Color.Green), p, x, y, w, h);
                     }
                 }
             }
-            //Console.WriteLine("Clip Rect X: {0}, Y: {1}, W: {2}, H: {3}", e.ClipRectangle.X, e.ClipRectangle.Y, e.ClipRectangle.Width, e.ClipRectangle.Height);
+            //Console.WriteLine("Clip Rect X: {0}, Y: {1}, W: {2}, H: {3}", e.ClipRectangle.X, 
+            //e.ClipRectangle.Y, e.ClipRectangle.Width, e.ClipRectangle.Height);
         }
         #endregion
 
         private void Timeline_Scroll(object sender, ScrollEventArgs e)
         {
-            this.Refresh();
-
-                //this.Invalidate(new Rectangle(LOCATION_LABEL_WIDTH, 0, Width - LOCATION_LABEL_WIDTH, Height));
-         
+            //this.Refresh();
+            //this.Invalidate(new Rectangle(LOCATION_LABEL_WIDTH, 0, Width - LOCATION_LABEL_WIDTH, Height));
         }
     }//Class
 }//Namespace
