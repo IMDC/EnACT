@@ -139,14 +139,12 @@ namespace EnACT
             BeginColumn.HeaderText = BNAME;
             BeginColumn.ValueType = typeof(Timestamp);
             BeginColumn.DataPropertyName = BNAME;
-            //BeginColumn.CellTemplate = new CaptionViewTimestampCell();
 
             EndColumn = new DataGridViewTextBoxColumn();
             EndColumn.Name = ENAME;
             EndColumn.HeaderText = ENAME;
             EndColumn.ValueType = typeof(Timestamp);
             EndColumn.DataPropertyName = ENAME;
-            //EndColumn.CellTemplate = new CaptionViewTimestampCell();
 
             DurationColumn = new DataGridViewTextBoxColumn();
             DurationColumn.Name = DNAME;
@@ -158,7 +156,6 @@ namespace EnACT
             SpeakerColumn.Name = SNAME;
             SpeakerColumn.HeaderText = SNAME;
             SpeakerColumn.DataPropertyName = SNAME;
-            //SpeakerColumn.CellTemplate = new CaptionViewSpeakerCell();
 
             TextColumn = new DataGridViewTextBoxColumn();
             TextColumn.Name = TNAME;

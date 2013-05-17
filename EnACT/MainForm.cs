@@ -72,20 +72,9 @@ namespace EnACT
         /// </summary>
         private void InitCaptionView()
         {
-            //CData = new CaptionData(SpeakerSet);
-            //CaptionView.DataSource = CData;
-            //CaptionView.DataSource = CaptionList;
+
             CaptionView.SpeakerSet = SpeakerSet;
             CaptionView.CaptionSource = CaptionList;
-
-            //Set the first column to be un-editable
-            //CaptionView.Columns[CaptionData.NPOS].ReadOnly = true;
-
-            //Disable visibility of the Caption Object column
-            //CaptionView.Columns[CaptionData.CPOS].Visible = false;
-
-            //Set the last column to take up the remaining horizontal space in the view
-            //CaptionView.Columns[CaptionData.TPOS].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         /// <summary>
@@ -165,7 +154,6 @@ namespace EnACT
         /// <param name="e">Event Arguments</param>
         private void CaptionView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            //Console.WriteLine("Value Changed");
             Timeline.Invalidate();
             Timeline.Update();
         }
@@ -253,7 +241,6 @@ namespace EnACT
             if (TrackBar_Timeline.Minimum <= vidPos && vidPos <= TrackBar_Timeline.Maximum)
                 TrackBar_Timeline.Value = vidPos;
             TrackBar_Timeline.Update();
-            //Console.WriteLine(FlashVideoPlayer.GetPlayheadTime());
         }
 
         private void TimeLine_ValueChanged(object sender, EventArgs e)
