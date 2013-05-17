@@ -165,7 +165,7 @@ namespace EnACT
         /// <param name="e">Event Arguments</param>
         private void CaptionView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            Console.WriteLine("Value Changed");
+            //Console.WriteLine("Value Changed");
             Timeline.Invalidate();
             Timeline.Update();
         }
@@ -271,6 +271,7 @@ namespace EnACT
         private void DebugButton_Click(object sender, EventArgs e)
         {
             Timeline.AutoScrollMinSize = new System.Drawing.Size(1200,0);
+            CaptionView.Rows[0].HeaderCell.Value = "Hello";
         }
     }//Class
 }//Namespace

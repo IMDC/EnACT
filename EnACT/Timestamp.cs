@@ -139,7 +139,7 @@ namespace EnACT
         {
             if (validTimestamp.IsMatch(ts))
             {
-                Console.WriteLine("Timestamp {0} Validated!", ts);
+                //Console.WriteLine("Timestamp {0} Validated!", ts);
                 return true;
             }
             else

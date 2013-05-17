@@ -106,6 +106,13 @@ namespace EnACT
         /// </summary>
         public CaptionView()
         {
+            //Make the component use a doublebuffer, which will reduce flicker made by 
+            //redrawing the control
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);
+
             //Set the view to select a whole row when you click on a column
             SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
@@ -162,11 +169,15 @@ namespace EnACT
         public void AddRow()
         {
             //If the user has a row selected
-            if(CurrentRow!=null)
+            if (CurrentRow != null)
+            {
                 BindingList.Insert(CurrentRow.Index, new Caption());
+            }
             //Else there is no current selection or the table is empty
             else
+            {
                 BindingList.Insert(0, new Caption());
+            }
         }
 
         /// <summary>
@@ -194,7 +205,6 @@ namespace EnACT
             {
                 BindingList.Remove(c);
             }
-
             //Deselect everything
             //CaptionView.ClearSelection();
         }
@@ -268,6 +278,7 @@ namespace EnACT
             // 
             // CaptionView
             // 
+            this.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.CaptionView_RowPrePaint);
             this.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.CaptionView_CellParsing);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
@@ -285,6 +296,7 @@ namespace EnACT
              * unkown. Make sure to add all event handlers to this method as it is called right 
              * after the DataSource is set.
              */
+            this.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.CaptionView_RowPrePaint);
             this.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.CaptionView_CellParsing);
         }
 
@@ -334,6 +346,17 @@ namespace EnACT
                     break;
                 default: break;
             }
+        }
+
+        /// <summary>
+        /// Event that gets called before the paint method. Sets the Value of the current row's
+        /// number cell to the index of that row +1
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void CaptionView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            Rows[e.RowIndex].Cells[NPOS].Value = e.RowIndex + 1;
         }
         #endregion
     }
