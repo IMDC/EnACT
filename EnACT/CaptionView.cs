@@ -301,7 +301,7 @@ namespace EnACT
         /// Parses a cell once the user has entered data into it.
         /// </summary>
         /// <param name="e">Event Args</param>
-        protected override void  OnCellParsing(DataGridViewCellParsingEventArgs e)
+        protected override void OnCellParsing(DataGridViewCellParsingEventArgs e)
         {
             int r = e.RowIndex;
             int c = e.ColumnIndex;
@@ -349,7 +349,7 @@ namespace EnACT
         /// to the row number the column is in, indexed from 1.
         /// </summary>
         /// <param name="e"></param>
-        protected override void  OnRowPrePaint(DataGridViewRowPrePaintEventArgs e)
+        protected override void OnRowPrePaint(DataGridViewRowPrePaintEventArgs e)
         {
             Rows[e.RowIndex].Cells[NPOS].Value = e.RowIndex + 1;
             base.OnRowPrePaint(e);
