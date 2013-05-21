@@ -93,7 +93,7 @@ namespace EnACT
                 availableHeight = Height;
             }
 
-            Pen p = new Pen(Color.Black, 1);
+            Pen p = new Pen(Color.Black, 1); //A black pen with a width of 1
             Brush b = new SolidBrush(Color.Black);
             float x, y, w, h;  //Vars for xs,ys,witdths and heights of drawables
 
@@ -177,10 +177,31 @@ namespace EnACT
         }
         #endregion
 
-        private void Timeline_Scroll(object sender, ScrollEventArgs e)
+        #region Events
+        protected override void OnMouseDown(MouseEventArgs e)
         {
-            //this.Refresh();
-            //this.Invalidate(new Rectangle(LOCATION_LABEL_WIDTH, 0, Width - LOCATION_LABEL_WIDTH, Height));
+            base.OnMouseDown(e);
+            if (e.Button != MouseButtons.Left)
+                return;
+
+            Console.WriteLine("Mouse Down!"); 
         }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+            if (e.Button != MouseButtons.Left)
+                return;
+            Console.WriteLine("Mouse Up!"); 
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+            if (e.Button != MouseButtons.Left)
+                return;
+            Console.WriteLine("Mouse Moved!"); 
+        }
+        #endregion
     }//Class
 }//Namespace
