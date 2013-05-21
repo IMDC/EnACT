@@ -6,13 +6,17 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace EnACT
 {
     public partial class Timeline : UserControl
     {
         #region Constants, Members and Constructors
-        public readonly string [] LocationNames = 
+        /// <summary>
+        /// A readonly string array of Labels for Marking locations for captions.
+        /// </summary>
+        public readonly string [] LocationLabels = 
         {
             "Top Left",
             "Top Center",
@@ -25,34 +29,53 @@ namespace EnACT
             "BottomRight"
         };
 
+        /// <summary>
+        /// How many pixels in width are drawn for a second of time by default.
+        /// </summary>
         private const int DEFAULT_PIXELS_PER_SECOND = 50;
+        /// <summary>
+        /// How much the pixels per second is changed by with each increase or decrease
+        /// </summary>
         private const int ZOOM_MULTIPLIER = 5;
+        /// <summary>
+        /// How wide the label boxes are
+        /// </summary>
         private const int LOCATION_LABEL_WIDTH = 95;
+        /// <summary>
+        /// Half the width of the playhead's triangle
+        /// </summary>
+        private const float PLAYHEAD_HALF_WIDTH = 10;
+
+        /// <summary>
+        /// The time value of the Timeline at the right end of the control
+        /// </summary>
+        private double rightBoundTime;
+        /// <summary>
+        /// The time value of the Timeline at the left end of the control
+        /// </summary>
+        private double leftBoundTime;
+        /// <summary>
+        /// How many pixels in width are drawn for a second of time.
+        /// </summary>
+        private int pixelsPerSecond;
 
         /// <summary>
         /// Represents the length of the flash video, in seconds
         /// </summary>
         public double VideoLength { set; get; }
-
-        private double TimelineLength 
-        {
-            get { return VideoLength * pixelsPerSecond; }
-        }
-
+        /// <summary>
+        /// The position of the Video's playhead in seconds.
+        /// </summary>
         public double PlayHeadTime { set; get; }
-
-        private int pixelsPerSecond;
-
-        public Boolean DrawLocationNames { set; get; }
-
-        public double LeftEndTime { set; get; }
-        public double RightEndTime { set; get; }
+        /// <summary>
+        /// Boolean that represents whether to draw location labels or not
+        /// </summary>
+        public Boolean DrawLocationLabels { set; get; }
 
         /// <summary>
         /// A set of Speaker objects, each speaker being mapped to by its name
         /// </summary>
         public Dictionary<String, Speaker> SpeakerSet { set; get; }
-
         /// <summary>
         /// A list of captions retrieved from a transcript file.
         /// </summary>
@@ -72,19 +95,24 @@ namespace EnACT
             ResizeRedraw = true; //Redraw the component everytime the form gets resized
 
             pixelsPerSecond = DEFAULT_PIXELS_PER_SECOND;
-            DrawLocationNames = true;
+            DrawLocationLabels = true;
         }
         #endregion
 
         #region OnPaint
         protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(e);
+            #region Var declaration and Control outline
+            base.OnPaint(e); //Call parent method
             //Get graphics object
             Graphics g = e.Graphics;
 
-            float availableHeight;
+            //Vars used throughout method
+            float x, y, w, h;  //Vars for xs,ys,witdths and heights of drawables
+            Pen outlinePen = new Pen(Color.Black, 1); //Black outline with width of 1 pixel
+            Brush textBrush = new SolidBrush(Color.Black);  //Black brush
 
+            float availableHeight; //The amount of height in the component available to draw on
             //Set value based one whether or not the scrollbar is visible
             if (HorizontalScroll.Visible)
             {
@@ -95,65 +123,61 @@ namespace EnACT
                 availableHeight = Height;
             }
 
-            Pen p = new Pen(Color.Black, 1); //A black pen with a width of 1
-            Brush b = new SolidBrush(Color.Black);
-            float x, y, w, h;  //Vars for xs,ys,witdths and heights of drawables
-
             //Draw black outline around control
-            g.DrawRectangle(p, 0, 0, Width-1, availableHeight-1);
+            g.DrawRectangle(outlinePen, 0, 0, Width-1, availableHeight-1);
+            #endregion
 
+            #region Draw labels and dash lines
             //Draw CaptionPosition Labels
             Font f = new Font(this.Font.FontFamily, 10); //CaptionPositions font
-            Pen linePen = new Pen(Color.Black); //Pen for drawing dotted lines
 
-            linePen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            linePen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
+            Pen dashLinePen = new Pen(Color.Black); //Pen for drawing dotted lines
+            dashLinePen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            dashLinePen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
 
             x = 0;
-            h = availableHeight / LocationNames.Length;
+            h = availableHeight / LocationLabels.Length;
             w = LOCATION_LABEL_WIDTH;
-            for(float i =0; i<LocationNames.Length; i++)
+            for(float i =0; i<LocationLabels.Length; i++)
             {
                 y = i*h;
                 //Only draw alignment names if true;
-                if (DrawLocationNames)
+                if (DrawLocationLabels)
                 {
                     RectangleF r = new RectangleF(x, y, w, h);
-                    g.DrawString(LocationNames[(int)i], f, b, r);
-                    g.DrawRectangle(p, r.X, r.Y, r.Width, r.Height);
+                    g.DrawString(LocationLabels[(int)i], f, textBrush, r);
+                    g.DrawRectangle(outlinePen, r.X, r.Y, r.Width, r.Height);
                 }
 
                 //Draw line separator line
-                g.DrawLine(linePen,x+w,y,Width,y);
+                g.DrawLine(dashLinePen,x+w,y,Width,y);
             }
+            #endregion
 
-            //Draw Playhead
-            Pen playHeadPen = new Pen(Color.DarkGray, 4);
-            x = (float)PlayHeadTime * pixelsPerSecond + LOCATION_LABEL_WIDTH;
-            g.DrawLine(playHeadPen, x, 0, x, availableHeight);
+            #region Move drawing origin
+            if (DrawLocationLabels)
+                //Set drawing origin to the point where Location labels end.
+                //Anything drawn after this will have a location relative to
+                //(LOCATION_LABEL_WIDTH + 1, 0)
+                g.TranslateTransform(LOCATION_LABEL_WIDTH + 1, 0);
+            #endregion
 
-            //Draw captions on screen if they exist
+            #region Draw Captions
             if (CaptionList != null)
             {
-                if (DrawLocationNames)
-                    //Set drawing origin to the point where Location labels end.
-                    //Anything drawn after this will have a location relative to
-                    //(LOCATION_LABEL_WIDTH, 0)
-                    g.TranslateTransform(LOCATION_LABEL_WIDTH+1, 0);
-
-                LeftEndTime = 0;
-                RightEndTime = VideoLength;
+                leftBoundTime = 0;
+                rightBoundTime = VideoLength;
 
                 //float x, y, w, h;  //Vars for xs,ys,witdths and heights o
                 foreach (Caption c in CaptionList)
                 {
-                    if (((LeftEndTime <= c.Begin && c.Begin <= RightEndTime) //Begin is in drawing area
-                    || (LeftEndTime <= c.End && c.End <= RightEndTime))      //End is in drawing area
+                    if (((leftBoundTime <= c.Begin && c.Begin <= rightBoundTime) //Begin is in drawing area
+                    || (leftBoundTime <= c.End && c.End <= rightBoundTime))      //End is in drawing area
                     && 0.1 <= c.Duration)     //Duration of caption is less than 0.1
                     {
                         //Console.WriteLine("Caption: #{0} is within bounds", r[CaptionData.NPOS]);
                         y = 0;
-                        h = availableHeight / LocationNames.Length;
+                        h = availableHeight / LocationLabels.Length;
                         switch (c.Location)
                         {
                             case ScreenLocation.TopLeft: y = 0 * h; break;
@@ -171,16 +195,34 @@ namespace EnACT
                         w = (float)c.End*pixelsPerSecond - x;
 
                         //Create a small space between the line dividers and the caption rectangles
-                        //y+= 2; h -=4;
+                        //y+= 2; h -=4; //Gives one extra pixel of whitespace on top and bottom
                         y += 1; h -= 2;
 
                         //g.FillRectangle(new SolidBrush(Color.Green), x, y, w, h);
-                        g.FillOutlinedRoundedRectangle(new SolidBrush(Color.Green), p, x, y, w, h);
+                        g.FillOutlinedRoundedRectangle(new SolidBrush(Color.Green), outlinePen, x, y, w, h);
                     }
                 }
             }
-            //Console.WriteLine("Clip Rect X: {0}, Y: {1}, W: {2}, H: {3}", e.ClipRectangle.X, 
-            //e.ClipRectangle.Y, e.ClipRectangle.Width, e.ClipRectangle.Height);
+            #endregion
+
+            #region Draw Playhead
+            Brush playHeadBrush = new SolidBrush(Color.Black);
+            Pen playHeadPen = new Pen(playHeadBrush, 2);
+
+            //Get playhead position
+            x = (float)PlayHeadTime * pixelsPerSecond;
+            
+            //Make triangle head
+            GraphicsPath phPath = new GraphicsPath();
+            phPath.AddLine(x - PLAYHEAD_HALF_WIDTH, 0, x, PLAYHEAD_HALF_WIDTH);
+            phPath.AddLine(x, PLAYHEAD_HALF_WIDTH, x + PLAYHEAD_HALF_WIDTH, 0);
+            phPath.AddLine(x + PLAYHEAD_HALF_WIDTH, 0, x - PLAYHEAD_HALF_WIDTH, 0);
+            Region phRegion = new Region(phPath);
+
+            //Draw
+            g.FillRegion(playHeadBrush, phRegion);
+            g.DrawLine(playHeadPen, x, 0, x, availableHeight);
+            #endregion
         }
         #endregion
 

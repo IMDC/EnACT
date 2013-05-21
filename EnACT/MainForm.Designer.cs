@@ -275,12 +275,10 @@
             this.Timeline.AutoScrollMinSize = new System.Drawing.Size(920, 0);
             this.Timeline.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.Timeline.CaptionList = null;
-            this.Timeline.DrawLocationNames = true;
-            this.Timeline.LeftEndTime = 0;
+            this.Timeline.DrawLocationLabels = true;
             this.Timeline.Location = new System.Drawing.Point(12, 273);
             this.Timeline.MinimumSize = new System.Drawing.Size(0, 199);
             this.Timeline.Name = "Timeline";
-            this.Timeline.RightEndTime = 0;
             this.Timeline.Size = new System.Drawing.Size(920, 199);
             this.Timeline.SpeakerSet = null;
             this.Timeline.TabIndex = 15;
