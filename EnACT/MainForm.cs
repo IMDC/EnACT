@@ -237,9 +237,14 @@ namespace EnACT
 
         private void PlayheadTimer_Tick(object sender, EventArgs e)
         {
-            int vidPos = (int)EngineView.GetPlayheadTime() * 10;
+            double playHeadTime = EngineView.GetPlayheadTime();
+            int vidPos = (int)playHeadTime * 10;
             if (TrackBar_Timeline.Minimum <= vidPos && vidPos <= TrackBar_Timeline.Maximum)
                 TrackBar_Timeline.Value = vidPos;
+
+            Timeline.PlayHeadTime = playHeadTime;
+            Timeline.Invalidate();
+
             TrackBar_Timeline.Update();
         }
 

@@ -39,6 +39,8 @@ namespace EnACT
             get { return VideoLength * pixelsPerSecond; }
         }
 
+        public double PlayHeadTime { set; get; }
+
         private int pixelsPerSecond;
 
         public Boolean DrawLocationNames { set; get; }
@@ -124,6 +126,11 @@ namespace EnACT
                 //Draw line separator line
                 g.DrawLine(linePen,x+w,y,Width,y);
             }
+
+            //Draw Playhead
+            Pen playHeadPen = new Pen(Color.DarkGray, 4);
+            x = (float)PlayHeadTime * pixelsPerSecond + LOCATION_LABEL_WIDTH;
+            g.DrawLine(playHeadPen, x, 0, x, availableHeight);
 
             //Draw captions on screen if they exist
             if (CaptionList != null)
