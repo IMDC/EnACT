@@ -89,7 +89,7 @@ namespace EnACT
 
         /// <summary>
         /// Sets the CaptionView's CaptionList and initializes it for Caption View.
-        /// Returns the Captionlist.
+        /// Gets the Captionlist.
         /// </summary>
         public List<Caption> CaptionSource
         {
@@ -103,7 +103,6 @@ namespace EnACT
                 BindingList = new BindingList<Caption>(value);
 
                 DataSource = BindingList;   //Bind list to view
-                HookUpEvents();
             }
             get { return CaptionList; }
         }
@@ -291,42 +290,24 @@ namespace EnACT
             // 
             // CaptionView
             // 
-            this.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.CaptionView_RowPrePaint);
-            this.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.CaptionView_CellParsing);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
         }
         #endregion
 
-        #region events
+        #region Events
         /// <summary>
-        /// Re-adds all events to this instance of CaptionView. Call this method after setting the DataSource
+        /// Parses a cell once the user has entered data into it.
         /// </summary>
-        private void HookUpEvents()
-        {
-            /* For some reason events get reset when the datasource changes, for reasons currently 
-             * unkown. Make sure to add all event handlers to this method as it is called right 
-             * after the DataSource is set.
-             */
-            this.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.CaptionView_RowPrePaint);
-            this.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.CaptionView_CellParsing);
-        }
-
-        /// <summary>
-        /// Parses a cell once the user has exited from it. Will convert the cell values into
-        /// Data usable by captions.
-        /// </summary>
-        /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
-        private void CaptionView_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
+        protected override void  OnCellParsing(DataGridViewCellParsingEventArgs e)
         {
             int r = e.RowIndex;
             int c = e.ColumnIndex;
-            //Caption c = BindingList[r];
             switch (e.ColumnIndex)
             {
-                //Set Begin or End value
+                //Set Begin, End, or Duration value
                 case BPOS:
                 case EPOS:
                 case DPOS:
@@ -360,17 +341,18 @@ namespace EnACT
                     break;
                 default: break;
             }
+            base.OnCellParsing(e);
         }
 
         /// <summary>
-        /// Event that gets called before the paint method. Sets the Value of the current row's
-        /// number cell to the index of that row +1
+        /// Method called before a row is Painted. Sets the value of the number column
+        /// to the row number the column is in, indexed from 1.
         /// </summary>
-        /// <param name="sender">Sender</param>
-        /// <param name="e">Event Args</param>
-        private void CaptionView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        /// <param name="e"></param>
+        protected override void  OnRowPrePaint(DataGridViewRowPrePaintEventArgs e)
         {
             Rows[e.RowIndex].Cells[NPOS].Value = e.RowIndex + 1;
+            base.OnRowPrePaint(e);
         }
         #endregion
     }
