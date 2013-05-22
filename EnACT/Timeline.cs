@@ -54,15 +54,48 @@ namespace EnACT
         /// The time value of the Timeline at the left end of the control
         /// </summary>
         private double leftBoundTime;
+
+        /// <summary>
+        /// Backing variable for the PixelsPerSecond property. Use the PixelsPerSecond
+        /// property to set this variable.
+        /// </summary>
+        private int pps;
         /// <summary>
         /// How many pixels in width are drawn for a second of time.
         /// </summary>
-        private int pixelsPerSecond;
+        public int PixelsPerSecond
+        {
+            set
+            {
+                pps = value;
+                CaptionDrawingWitdh = pps * vidLen;
+            }
+            get { return pps; }
+        }
 
         /// <summary>
-        /// Represents the length of the flash video, in seconds
+        /// The width of the total space (VideoLength*pixelsPerSecond) in pixels 
+        /// available for drawing captions
         /// </summary>
-        public double VideoLength { set; get; }
+        private double CaptionDrawingWitdh { set; get; }
+       
+        /// <summary>
+        /// Backing variable for the VideoLength property. Use the VideoLength property to 
+        /// set this variable
+        /// </summary>
+        private double vidLen;
+        /// <summary>
+        /// Represents the length of the flash video, in seconds. Also sets the CaptionDrawingWidth
+        /// </summary>
+        public double VideoLength
+        {
+            set 
+            {
+                vidLen = value;
+                CaptionDrawingWitdh = vidLen * pps;
+            }
+            get { return vidLen; }
+        }
         /// <summary>
         /// The position of the Video's playhead in seconds.
         /// </summary>
@@ -94,7 +127,7 @@ namespace EnACT
 
             ResizeRedraw = true; //Redraw the component everytime the form gets resized
 
-            pixelsPerSecond = DEFAULT_PIXELS_PER_SECOND;
+            PixelsPerSecond = DEFAULT_PIXELS_PER_SECOND;
             DrawLocationLabels = true;
         }
         #endregion
@@ -114,7 +147,7 @@ namespace EnACT
 
             float availableHeight; //The amount of height in the component available to draw on
             //Set value based one whether or not the scrollbar is visible
-            if (HorizontalScroll.Visible)
+            if (ScrollBar.Visible)
             {
                 availableHeight = Height - SystemInformation.HorizontalScrollBarHeight;
             }
@@ -191,14 +224,13 @@ namespace EnACT
                             case ScreenLocation.BottomRight: y = 8 * h; break;
                             default: y = 0; break;
                         }
-                        x = (float)c.Begin*pixelsPerSecond;
-                        w = (float)c.End*pixelsPerSecond - x;
+                        x = (float)c.Begin*PixelsPerSecond;
+                        w = (float)c.End*PixelsPerSecond - x;
 
                         //Create a small space between the line dividers and the caption rectangles
                         //y+= 2; h -=4; //Gives one extra pixel of whitespace on top and bottom
                         y += 1; h -= 2;
 
-                        //g.FillRectangle(new SolidBrush(Color.Green), x, y, w, h);
                         g.FillOutlinedRoundedRectangle(new SolidBrush(Color.Green), outlinePen, x, y, w, h);
                     }
                 }
@@ -210,7 +242,7 @@ namespace EnACT
             Pen playHeadPen = new Pen(playHeadBrush, 2);
 
             //Get playhead position
-            x = (float)PlayHeadTime * pixelsPerSecond;
+            x = (float)PlayHeadTime * PixelsPerSecond;
             
             //Make triangle head
             GraphicsPath phPath = new GraphicsPath();
@@ -226,7 +258,7 @@ namespace EnACT
         }
         #endregion
 
-        #region Events
+        #region Mouse Events
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
