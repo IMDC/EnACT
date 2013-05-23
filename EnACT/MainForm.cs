@@ -154,8 +154,7 @@ namespace EnACT
         /// <param name="e">Event Arguments</param>
         private void CaptionView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            Timeline.Invalidate();
-            Timeline.Update();
+            Timeline.RedrawCaptionsRegion();
         }
 
         /// <summary>

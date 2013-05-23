@@ -405,11 +405,17 @@ namespace EnACT
         }
         #endregion
 
+        /// <summary>
+        /// Updates the Timeline's position, setting the playhead and centering it in the
+        /// middle of the Timeline. Will also update the scrollbar.
+        /// </summary>
+        /// <param name="currentTime"></param>
         public void UpdateTimeLinePosition(double currentTime)
         {
-                ScrollBar.Value = Math.Min((int)(ScrollBar.Maximum * (currentTime / VideoLength)),
-                    ScrollBar.Maximum);
-                PlayHeadTime = currentTime;
+            ScrollBar.Value = Math.Min((int)(ScrollBar.Maximum * (currentTime / VideoLength)),
+                ScrollBar.Maximum);
+            PlayHeadTime = currentTime;
+            if (LeftBoundTime < currentTime - TimeWidth / 2 || currentTime + TimeWidth / 2 < RightBoundTime)
                 LeftBoundTime = currentTime - TimeWidth / 2;
         }
     }//Class
