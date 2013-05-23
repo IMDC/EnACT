@@ -78,8 +78,17 @@ namespace EnACT
             set
             {
                 begin = value;
-                if(end != null)
-                    duration = end - begin;
+                if (end != null)
+                {
+                    if (begin < end)
+                        duration = end - begin;
+                    else
+                    {
+                        //Make end time the same as begin time
+                        end = new Timestamp(begin.AsDouble);
+                        duration = 0;
+                    }
+                }
             }
             get { return begin; } 
         }
