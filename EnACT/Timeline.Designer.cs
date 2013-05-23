@@ -39,6 +39,8 @@
             this.ScrollBar.Name = "ScrollBar";
             this.ScrollBar.Size = new System.Drawing.Size(150, 17);
             this.ScrollBar.TabIndex = 0;
+            this.ScrollBar.ValueChanged += new System.EventHandler(this.ScrollBar_ValueChanged);
+            this.ScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.ScrollBar_Scroll);
             // 
             // Timeline
             // 

@@ -34,6 +34,10 @@ namespace EnACT
         /// </summary>
         private const int DEFAULT_PIXELS_PER_SECOND = 50;
         /// <summary>
+        /// How many seconds of time the Timeline will show by default
+        /// </summary>
+        private const double DEFAULT_TIME_WIDTH = 10;
+        /// <summary>
         /// How much the pixels per second is changed by with each increase or decrease
         /// </summary>
         private const int ZOOM_MULTIPLIER = 5;
@@ -47,13 +51,63 @@ namespace EnACT
         private const float PLAYHEAD_HALF_WIDTH = 10;
 
         /// <summary>
+        /// Backing variable for rightBoundTime
+        /// </summary>
+        private double rbTime;
+        /// <summary>
         /// The time value of the Timeline at the right end of the control
         /// </summary>
-        private double rightBoundTime;
+        private double RightBoundTime
+        {
+            set { rbTime = value; }
+            get { return rbTime; }
+        }
+
+        /// <summary>
+        /// Backing variable for LeftBoundTime
+        /// </summary>
+        private double lbTime;
         /// <summary>
         /// The time value of the Timeline at the left end of the control
         /// </summary>
-        private double leftBoundTime;
+        private double LeftBoundTime
+        {
+            set 
+            { 
+                lbTime = value;
+                //CenterBoundTime = value + TimeWidth / 2;
+            }
+            get { return lbTime; }
+        }
+
+        /// <summary>
+        /// Backing variable for CenterBoundTime
+        /// </summary>
+        private double cbTime;
+        /// <summary>
+        /// The time value of the Timeline that is represented by the Scrollbar.Value
+        /// property. It is in-between rightBoundTime and LeftBoundTime
+        /// </summary>
+        private double CenterBoundTime
+        {
+            set
+            {
+                cbTime = value;
+                //Set the left bound, but don't set it to less than 0
+                lbTime = Math.Max(0, cbTime - TimeWidth / 2);
+                //Set the right bound, but don't set it to more than the videoLength
+                rbTime = Math.Min(cbTime + TimeWidth / 2, VideoLength);
+            }
+            get
+            {
+                return cbTime;
+            }
+        }
+
+        /// <summary>
+        /// How many seconds of time the Timeline will show
+        /// </summary>
+        public double TimeWidth { set; get; }
 
         /// <summary>
         /// Backing variable for the PixelsPerSecond property. Use the PixelsPerSecond
@@ -68,7 +122,7 @@ namespace EnACT
             set
             {
                 pps = value;
-                CaptionDrawingWitdh = pps * vidLen;
+                CaptionDrawingWidth = pps * vidLen;
             }
             get { return pps; }
         }
@@ -77,7 +131,7 @@ namespace EnACT
         /// The width of the total space (VideoLength*pixelsPerSecond) in pixels 
         /// available for drawing captions
         /// </summary>
-        private double CaptionDrawingWitdh { set; get; }
+        private double CaptionDrawingWidth { set; get; }
        
         /// <summary>
         /// Backing variable for the VideoLength property. Use the VideoLength property to 
@@ -92,7 +146,7 @@ namespace EnACT
             set 
             {
                 vidLen = value;
-                CaptionDrawingWitdh = vidLen * pps;
+                CaptionDrawingWidth = vidLen * pps;
             }
             get { return vidLen; }
         }
@@ -128,6 +182,12 @@ namespace EnACT
             ResizeRedraw = true; //Redraw the component everytime the form gets resized
 
             PixelsPerSecond = DEFAULT_PIXELS_PER_SECOND;
+            //Set timewidth to default
+            TimeWidth = DEFAULT_TIME_WIDTH;
+
+            //Set scrollbar to the beginning
+            ScrollBar.Value = 0;
+
             DrawLocationLabels = true;
         }
         #endregion
@@ -144,6 +204,8 @@ namespace EnACT
             float x, y, w, h;  //Vars for xs,ys,witdths and heights of drawables
             Pen outlinePen = new Pen(Color.Black, 1); //Black outline with width of 1 pixel
             Brush textBrush = new SolidBrush(Color.Black);  //Black brush
+
+            //PixelsPerSecond = (int) (CaptionDrawingWidth / TimeWidth);
 
             float availableHeight; //The amount of height in the component available to draw on
             //Set value based one whether or not the scrollbar is visible
@@ -198,14 +260,11 @@ namespace EnACT
             #region Draw Captions
             if (CaptionList != null)
             {
-                leftBoundTime = 0;
-                rightBoundTime = VideoLength;
-
                 //float x, y, w, h;  //Vars for xs,ys,witdths and heights o
                 foreach (Caption c in CaptionList)
                 {
-                    if (((leftBoundTime <= c.Begin && c.Begin <= rightBoundTime) //Begin is in drawing area
-                    || (leftBoundTime <= c.End && c.End <= rightBoundTime))      //End is in drawing area
+                    if (((LeftBoundTime <= c.Begin && c.Begin <= RightBoundTime) //Begin is in drawing area
+                    || (LeftBoundTime <= c.End && c.End <= RightBoundTime))      //End is in drawing area
                     && 0.1 <= c.Duration)     //Duration of caption is less than 0.1
                     {
                         //Console.WriteLine("Caption: #{0} is within bounds", r[CaptionData.NPOS]);
@@ -224,8 +283,8 @@ namespace EnACT
                             case ScreenLocation.BottomRight: y = 8 * h; break;
                             default: y = 0; break;
                         }
-                        x = (float)c.Begin*PixelsPerSecond;
-                        w = (float)c.End*PixelsPerSecond - x;
+                        x = (float)(c.Begin-LeftBoundTime)*PixelsPerSecond;
+                        w = (float)(c.End - LeftBoundTime) * PixelsPerSecond - x;
 
                         //Create a small space between the line dividers and the caption rectangles
                         //y+= 2; h -=4; //Gives one extra pixel of whitespace on top and bottom
@@ -282,6 +341,39 @@ namespace EnACT
             if (e.Button != MouseButtons.Left)
                 return;
             Console.WriteLine("Mouse Moved!"); 
+        }
+        #endregion
+
+        #region ScrollBar Events
+        /// <summary>
+        /// Occurs when the scroll box has been moved by either a mouse or 
+        /// keyboard action.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void ScrollBar_Scroll(object sender, ScrollEventArgs e)
+        {
+        }
+
+        /// <summary>
+        /// Occurs when the Value property is changed, either by a Scroll event or 
+        /// programmatically.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void ScrollBar_ValueChanged(object sender, EventArgs e)
+        {
+            //Get the percent progress of value
+            double valuePercent = ((double)ScrollBar.Value)/ ScrollBar.Maximum;
+            CenterBoundTime = VideoLength * valuePercent;
+            Console.WriteLine("CenterBoundTime: {0}", CenterBoundTime);
+
+            //Redraw area with captions
+            if(DrawLocationLabels)
+                Invalidate(new Rectangle(LOCATION_LABEL_WIDTH+1,1,
+                    Width-LOCATION_LABEL_WIDTH-2, Height-2));
+            else
+                Invalidate(new Rectangle(1,1,Width-2,Height-2));
         }
         #endregion
     }//Class
