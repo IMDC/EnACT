@@ -403,13 +403,21 @@ namespace EnACT
             TimeWidth *= ZOOM_MULTIPLIER;
             RedrawCaptionsRegion();
         }
+
+        /// <summary>
+        /// Resets the zoom level back to DEFAULT_TIME_WIDTH
+        /// </summary>
+        public void ZoomReset()
+        {
+            TimeWidth = DEFAULT_TIME_WIDTH;
+        }
         #endregion
 
         /// <summary>
         /// Updates the Timeline's position, setting the playhead and centering it in the
         /// middle of the Timeline. Will also update the scrollbar.
         /// </summary>
-        /// <param name="currentTime"></param>
+        /// <param name="currentTime">The position the playhead is to be set at</param>
         public void UpdateTimeLinePosition(double currentTime)
         {
             ScrollBar.Value = Math.Min((int)(ScrollBar.Maximum * (currentTime / VideoLength)),

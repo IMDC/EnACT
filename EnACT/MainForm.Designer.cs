@@ -57,6 +57,7 @@
             this.Button_ZoomTimelineIn = new System.Windows.Forms.Button();
             this.Button_ZoomTimelineOut = new System.Windows.Forms.Button();
             this.DebugButton = new System.Windows.Forms.Button();
+            this.Button_ZoomReset = new System.Windows.Forms.Button();
             this.Timeline = new EnACT.Timeline();
             this.EngineView = new EnACT.EngineView();
             this.CaptionView = new EnACT.CaptionView();
@@ -298,6 +299,17 @@
             this.DebugButton.UseVisualStyleBackColor = true;
             this.DebugButton.Click += new System.EventHandler(this.DebugButton_Click);
             // 
+            // Button_ZoomReset
+            // 
+            this.Button_ZoomReset.Location = new System.Drawing.Point(618, 193);
+            this.Button_ZoomReset.Name = "Button_ZoomReset";
+            this.Button_ZoomReset.Size = new System.Drawing.Size(82, 23);
+            this.Button_ZoomReset.TabIndex = 21;
+            this.Button_ZoomReset.Text = "Reset Zoom";
+            this.ToolTip.SetToolTip(this.Button_ZoomReset, "Reset the zoom level back to the default zoom level");
+            this.Button_ZoomReset.UseVisualStyleBackColor = true;
+            this.Button_ZoomReset.Click += new System.EventHandler(this.Button_ZoomReset_Click);
+            // 
             // Timeline
             // 
             this.Timeline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -359,6 +371,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 682);
+            this.Controls.Add(this.Button_ZoomReset);
             this.Controls.Add(this.Button_ZoomTimelineOut);
             this.Controls.Add(this.Button_ZoomTimelineIn);
             this.Controls.Add(this.Button_ShowLabels);
@@ -424,6 +437,7 @@
         private System.Windows.Forms.Button Button_ShowLabels;
         private System.Windows.Forms.Button Button_ZoomTimelineIn;
         private System.Windows.Forms.Button Button_ZoomTimelineOut;
+        private System.Windows.Forms.Button Button_ZoomReset;
     }
 }
 

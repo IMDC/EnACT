@@ -298,5 +298,10 @@ namespace EnACT
         {
             Timeline.ZoomOut();
         }
+
+        private void Button_ZoomReset_Click(object sender, EventArgs e)
+        {
+            Timeline.ZoomReset();
+        }
     }//Class
 }//Namespace
