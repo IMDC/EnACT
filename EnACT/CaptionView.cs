@@ -290,6 +290,7 @@ namespace EnACT
             // 
             // CaptionView
             // 
+            this.AutoGenerateColumns = false;
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 

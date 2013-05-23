@@ -53,8 +53,10 @@
             this.PlayheadTimer = new System.Windows.Forms.Timer(this.components);
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.Button_ParseESR = new System.Windows.Forms.Button();
-            this.DebugButton = new System.Windows.Forms.Button();
             this.Button_ShowLabels = new System.Windows.Forms.Button();
+            this.Button_ZoomTimelineIn = new System.Windows.Forms.Button();
+            this.Button_ZoomTimelineOut = new System.Windows.Forms.Button();
+            this.DebugButton = new System.Windows.Forms.Button();
             this.Timeline = new EnACT.Timeline();
             this.EngineView = new EnACT.EngineView();
             this.CaptionView = new EnACT.CaptionView();
@@ -207,7 +209,7 @@
             // 
             // Button_PlayAndPause
             // 
-            this.Button_PlayAndPause.Location = new System.Drawing.Point(562, 193);
+            this.Button_PlayAndPause.Location = new System.Drawing.Point(807, 193);
             this.Button_PlayAndPause.Name = "Button_PlayAndPause";
             this.Button_PlayAndPause.Size = new System.Drawing.Size(125, 23);
             this.Button_PlayAndPause.TabIndex = 12;
@@ -253,16 +255,6 @@
             this.Button_ParseESR.UseVisualStyleBackColor = true;
             this.Button_ParseESR.Click += new System.EventHandler(this.Button_ParseESR_Click);
             // 
-            // DebugButton
-            // 
-            this.DebugButton.Location = new System.Drawing.Point(662, 27);
-            this.DebugButton.Name = "DebugButton";
-            this.DebugButton.Size = new System.Drawing.Size(139, 139);
-            this.DebugButton.TabIndex = 17;
-            this.DebugButton.Text = "Random Debug Button";
-            this.DebugButton.UseVisualStyleBackColor = true;
-            this.DebugButton.Click += new System.EventHandler(this.DebugButton_Click);
-            // 
             // Button_ShowLabels
             // 
             this.Button_ShowLabels.Location = new System.Drawing.Point(338, 193);
@@ -274,10 +266,43 @@
             this.Button_ShowLabels.UseVisualStyleBackColor = true;
             this.Button_ShowLabels.Click += new System.EventHandler(this.Button_ShowLabels_Click);
             // 
+            // Button_ZoomTimelineIn
+            // 
+            this.Button_ZoomTimelineIn.Location = new System.Drawing.Point(456, 193);
+            this.Button_ZoomTimelineIn.Name = "Button_ZoomTimelineIn";
+            this.Button_ZoomTimelineIn.Size = new System.Drawing.Size(75, 23);
+            this.Button_ZoomTimelineIn.TabIndex = 19;
+            this.Button_ZoomTimelineIn.Text = "Zoom In";
+            this.ToolTip.SetToolTip(this.Button_ZoomTimelineIn, "Zoom the timeline inwards, showing less");
+            this.Button_ZoomTimelineIn.UseVisualStyleBackColor = true;
+            this.Button_ZoomTimelineIn.Click += new System.EventHandler(this.Button_ZoomTimelineIn_Click);
+            // 
+            // Button_ZoomTimelineOut
+            // 
+            this.Button_ZoomTimelineOut.Location = new System.Drawing.Point(537, 193);
+            this.Button_ZoomTimelineOut.Name = "Button_ZoomTimelineOut";
+            this.Button_ZoomTimelineOut.Size = new System.Drawing.Size(75, 23);
+            this.Button_ZoomTimelineOut.TabIndex = 20;
+            this.Button_ZoomTimelineOut.Text = "Zoom Out";
+            this.ToolTip.SetToolTip(this.Button_ZoomTimelineOut, "Zoom the timeline outwards, showing more");
+            this.Button_ZoomTimelineOut.UseVisualStyleBackColor = true;
+            this.Button_ZoomTimelineOut.Click += new System.EventHandler(this.Button_ZoomTimelineOut_Click);
+            // 
+            // DebugButton
+            // 
+            this.DebugButton.Location = new System.Drawing.Point(662, 27);
+            this.DebugButton.Name = "DebugButton";
+            this.DebugButton.Size = new System.Drawing.Size(139, 139);
+            this.DebugButton.TabIndex = 17;
+            this.DebugButton.Text = "Random Debug Button";
+            this.DebugButton.UseVisualStyleBackColor = true;
+            this.DebugButton.Click += new System.EventHandler(this.DebugButton_Click);
+            // 
             // Timeline
             // 
             this.Timeline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.Timeline.AutoScroll = true;
             this.Timeline.AutoScrollMinSize = new System.Drawing.Size(920, 0);
             this.Timeline.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.Timeline.CaptionList = null;
@@ -334,6 +359,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 682);
+            this.Controls.Add(this.Button_ZoomTimelineOut);
+            this.Controls.Add(this.Button_ZoomTimelineIn);
             this.Controls.Add(this.Button_ShowLabels);
             this.Controls.Add(this.DebugButton);
             this.Controls.Add(this.Button_ParseESR);
@@ -395,6 +422,8 @@
         private System.Windows.Forms.Button Button_ParseESR;
         private System.Windows.Forms.Button DebugButton;
         private System.Windows.Forms.Button Button_ShowLabels;
+        private System.Windows.Forms.Button Button_ZoomTimelineIn;
+        private System.Windows.Forms.Button Button_ZoomTimelineOut;
     }
 }
 

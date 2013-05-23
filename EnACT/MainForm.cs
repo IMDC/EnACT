@@ -288,5 +288,15 @@ namespace EnACT
                 Timeline.RedrawInnerRegion();
             }
         }
+
+        private void Button_ZoomTimelineIn_Click(object sender, EventArgs e)
+        {
+            Timeline.ZoomIn();
+        }
+
+        private void Button_ZoomTimelineOut_Click(object sender, EventArgs e)
+        {
+            Timeline.ZoomOut();
+        }
     }//Class
 }//Namespace

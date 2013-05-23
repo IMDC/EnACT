@@ -34,9 +34,9 @@ namespace EnACT
         /// </summary>
         private const double DEFAULT_TIME_WIDTH = 10;
         /// <summary>
-        /// How much the pixels per second is changed by with each increase or decrease
+        /// The number TimeWidth is multiplied/divided by when it is changed
         /// </summary>
-        private const int ZOOM_MULTIPLIER = 5;
+        private const int ZOOM_MULTIPLIER = 2;
         /// <summary>
         /// How wide the label boxes are
         /// </summary>
@@ -383,5 +383,23 @@ namespace EnACT
             RedrawCaptionsRegion();
         }
         #endregion
+
+        /// <summary>
+        /// Zooms the Timeline inwards, decreasing the Timewidth
+        /// </summary>
+        public void ZoomIn()
+        {
+            TimeWidth /= ZOOM_MULTIPLIER;
+            RedrawCaptionsRegion();
+        }
+
+        /// <summary>
+        /// Zooms the Timeline outwards, increasing the Timewidth
+        /// </summary>
+        public void ZoomOut()
+        {
+            TimeWidth *= ZOOM_MULTIPLIER;
+            RedrawCaptionsRegion();
+        }
     }//Class
 }//Namespace
