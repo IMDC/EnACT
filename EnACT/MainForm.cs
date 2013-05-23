@@ -265,6 +265,28 @@ namespace EnACT
         private void DebugButton_Click(object sender, EventArgs e)
         {
             //Timeline.AutoScrollMinSize = new System.Drawing.Size(1200,0);
+            Timeline.DrawLocationLabels = false;
+            Timeline.RedrawCaptionsRegion();
+        }
+
+        /// <summary>
+        /// Toggles drawing of caption location labels
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_ShowLabels_Click(object sender, EventArgs e)
+        {
+            if (Timeline.DrawLocationLabels)
+            {
+                Timeline.DrawLocationLabels = false;
+                Timeline.RedrawCaptionsRegion();
+            }
+            else
+            {
+                Timeline.DrawLocationLabels = true;
+                //Redraw entire region, including labels
+                Timeline.RedrawInnerRegion();
+            }
         }
     }//Class
 }//Namespace

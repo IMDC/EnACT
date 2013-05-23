@@ -12,7 +12,7 @@ namespace EnACT
 {
     public partial class Timeline : UserControl
     {
-        #region Constants, Members and Constructors
+        #region Constants and Members
         /// <summary>
         /// A readonly string array of Labels for Marking locations for captions.
         /// </summary>
@@ -142,7 +142,9 @@ namespace EnACT
         /// A list of captions retrieved from a transcript file.
         /// </summary>
         public List<Caption> CaptionList { set; get; }
+        #endregion
 
+        #region Constructor
         public Timeline()
         {
             InitializeComponent();
@@ -179,9 +181,6 @@ namespace EnACT
             Pen outlinePen = new Pen(Color.Black, 1); //Black outline with width of 1 pixel
             Brush textBrush = new SolidBrush(Color.Black);  //Black brush
 
-            //PixelsPerSecond = (int) (CaptionDrawingWidth / TimeWidth);
-            float pixelsPerSecond = (float)((Width-LOCATION_LABEL_WIDTH-3) / TimeWidth);
-
             float availableHeight; //The amount of height in the component available to draw on
             //Set value based one whether or not the scrollbar is visible
             if (ScrollBar.Visible)
@@ -192,6 +191,16 @@ namespace EnACT
             {
                 availableHeight = Height;
             }
+
+            float availableWidth; //The amount of width in the component available for captions
+            //Set value based on whether or not labels are visible
+            if (DrawLocationLabels)
+                availableWidth = (float)(Width - LOCATION_LABEL_WIDTH - 3);
+            else
+                availableWidth = Width - 2;
+
+            //How many pixels are drawn for each second of time.
+            float pixelsPerSecond = (float)(availableWidth / TimeWidth);
 
             //Draw black outline around control
             g.DrawRectangle(outlinePen, 0, 0, Width-1, availableHeight-1);
@@ -217,10 +226,13 @@ namespace EnACT
                     RectangleF r = new RectangleF(x, y, w, h);
                     g.DrawString(LocationLabels[(int)i], f, textBrush, r);
                     g.DrawRectangle(outlinePen, r.X, r.Y, r.Width, r.Height);
-                }
 
-                //Draw line separator line
-                g.DrawLine(dashLinePen,x+w,y,Width,y);
+                    //Draw line separator line
+                    g.DrawLine(dashLinePen, x + w, y, Width, y);
+                }
+                else
+                    //Draw line separator line
+                    g.DrawLine(dashLinePen, x, y, Width, y);
             }
             #endregion
 
@@ -300,8 +312,11 @@ namespace EnACT
         /// </summary>
         public void RedrawCaptionsRegion()
         {
-            Invalidate(new Rectangle(LOCATION_LABEL_WIDTH+1,1,
-                Width-LOCATION_LABEL_WIDTH-2, Height-2));;
+            if (DrawLocationLabels)
+                Invalidate(new Rectangle(LOCATION_LABEL_WIDTH+1,1,
+                    Width-LOCATION_LABEL_WIDTH-2, Height-2));
+            else
+                RedrawInnerRegion();
         }
 
         /// <summary>
@@ -365,10 +380,7 @@ namespace EnACT
             Console.WriteLine("LeftBoundTime: {0}", LeftBoundTime);
 
             //Redraw area with captions
-            if (DrawLocationLabels)
-                RedrawCaptionsRegion();
-            else
-                RedrawInnerRegion();
+            RedrawCaptionsRegion();
         }
         #endregion
     }//Class
