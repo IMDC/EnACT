@@ -80,12 +80,12 @@ namespace EnACT
         /// </summary>
         private BindingList<Caption> BindingList { set; get; }
 
-        DataGridViewColumn NumberColumn;
-        DataGridViewColumn BeginColumn;
-        DataGridViewColumn EndColumn;
-        DataGridViewColumn DurationColumn;
-        DataGridViewColumn SpeakerColumn;
-        DataGridViewColumn TextColumn;
+        private DataGridViewColumn NumberColumn;
+        private DataGridViewColumn BeginColumn;
+        private DataGridViewColumn EndColumn;
+        private DataGridViewColumn DurationColumn;
+        private DataGridViewColumn SpeakerColumn;
+        private DataGridViewColumn TextColumn;
 
         /// <summary>
         /// Sets the CaptionView's CaptionList and initializes it for Caption View.
