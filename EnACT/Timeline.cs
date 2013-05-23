@@ -30,10 +30,6 @@ namespace EnACT
         };
 
         /// <summary>
-        /// How many pixels in width are drawn for a second of time by default.
-        /// </summary>
-        private const int DEFAULT_PIXELS_PER_SECOND = 50;
-        /// <summary>
         /// How many seconds of time the Timeline will show by default
         /// </summary>
         private const double DEFAULT_TIME_WIDTH = 10;
@@ -46,7 +42,7 @@ namespace EnACT
         /// </summary>
         private const int LOCATION_LABEL_WIDTH = 95;
         /// <summary>
-        /// Half the width of the playhead's triangle
+        /// Half the width of the playhead's triangle in pixels
         /// </summary>
         private const float PLAYHEAD_HALF_WIDTH = 10;
 
@@ -108,30 +104,6 @@ namespace EnACT
         /// How many seconds of time the Timeline will show
         /// </summary>
         public double TimeWidth { set; get; }
-
-        /// <summary>
-        /// Backing variable for the PixelsPerSecond property. Use the PixelsPerSecond
-        /// property to set this variable.
-        /// </summary>
-        private int pps;
-        /// <summary>
-        /// How many pixels in width are drawn for a second of time.
-        /// </summary>
-        public int PixelsPerSecond
-        {
-            set
-            {
-                pps = value;
-                CaptionDrawingWidth = pps * vidLen;
-            }
-            get { return pps; }
-        }
-
-        /// <summary>
-        /// The width of the total space (VideoLength*pixelsPerSecond) in pixels 
-        /// available for drawing captions
-        /// </summary>
-        private double CaptionDrawingWidth { set; get; }
        
         /// <summary>
         /// Backing variable for the VideoLength property. Use the VideoLength property to 
@@ -146,7 +118,6 @@ namespace EnACT
             set 
             {
                 vidLen = value;
-                CaptionDrawingWidth = vidLen * pps;
             }
             get { return vidLen; }
         }
@@ -181,7 +152,6 @@ namespace EnACT
 
             ResizeRedraw = true; //Redraw the component everytime the form gets resized
 
-            PixelsPerSecond = DEFAULT_PIXELS_PER_SECOND;
             //Set timewidth to default
             TimeWidth = DEFAULT_TIME_WIDTH;
 
@@ -206,6 +176,7 @@ namespace EnACT
             Brush textBrush = new SolidBrush(Color.Black);  //Black brush
 
             //PixelsPerSecond = (int) (CaptionDrawingWidth / TimeWidth);
+            float pixelsPerSecond = (float)((Width-LOCATION_LABEL_WIDTH-3) / TimeWidth);
 
             float availableHeight; //The amount of height in the component available to draw on
             //Set value based one whether or not the scrollbar is visible
@@ -260,7 +231,6 @@ namespace EnACT
             #region Draw Captions
             if (CaptionList != null)
             {
-                //float x, y, w, h;  //Vars for xs,ys,witdths and heights o
                 foreach (Caption c in CaptionList)
                 {
                     if (((LeftBoundTime <= c.Begin && c.Begin <= RightBoundTime) //Begin is in drawing area
@@ -283,8 +253,9 @@ namespace EnACT
                             case ScreenLocation.BottomRight: y = 8 * h; break;
                             default: y = 0; break;
                         }
-                        x = (float)(c.Begin-LeftBoundTime)*PixelsPerSecond;
-                        w = (float)(c.End - LeftBoundTime) * PixelsPerSecond - x;
+                        x = (float)(c.Begin - LeftBoundTime) * pixelsPerSecond;
+                        w = (float)(c.Duration - LeftBoundTime) * pixelsPerSecond;
+                        //w = (float)(c.End - LeftBoundTime) * pixelsPerSecond - x;
 
                         //Create a small space between the line dividers and the caption rectangles
                         //y+= 2; h -=4; //Gives one extra pixel of whitespace on top and bottom
@@ -301,7 +272,7 @@ namespace EnACT
             Pen playHeadPen = new Pen(playHeadBrush, 2);
 
             //Get playhead position
-            x = (float)PlayHeadTime * PixelsPerSecond;
+            x = (float)PlayHeadTime * pixelsPerSecond;
             
             //Make triangle head
             GraphicsPath phPath = new GraphicsPath();
