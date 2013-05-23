@@ -364,6 +364,13 @@ namespace EnACT
         /// <param name="e">Event Args</param>
         private void ScrollBar_Scroll(object sender, ScrollEventArgs e)
         {
+            //Get the percent progress of value
+            double valuePercent = ((double)ScrollBar.Value) / ScrollBar.Maximum;
+            LeftBoundTime = VideoLength * valuePercent;
+            Console.WriteLine("LeftBoundTime: {0}", LeftBoundTime);
+
+            //Redraw area with captions
+            RedrawCaptionsRegion();
         }
 
         /// <summary>
@@ -374,16 +381,11 @@ namespace EnACT
         /// <param name="e">Event Args</param>
         private void ScrollBar_ValueChanged(object sender, EventArgs e)
         {
-            //Get the percent progress of value
-            double valuePercent = ((double)ScrollBar.Value)/ ScrollBar.Maximum;
-            LeftBoundTime = VideoLength * valuePercent;
-            Console.WriteLine("LeftBoundTime: {0}", LeftBoundTime);
 
-            //Redraw area with captions
-            RedrawCaptionsRegion();
         }
         #endregion
 
+        #region Zoom methods
         /// <summary>
         /// Zooms the Timeline inwards, decreasing the Timewidth
         /// </summary>
@@ -400,6 +402,15 @@ namespace EnACT
         {
             TimeWidth *= ZOOM_MULTIPLIER;
             RedrawCaptionsRegion();
+        }
+        #endregion
+
+        public void UpdateTimeLinePosition(double currentTime)
+        {
+                ScrollBar.Value = Math.Min((int)(ScrollBar.Maximum * (currentTime / VideoLength)),
+                    ScrollBar.Maximum);
+                PlayHeadTime = currentTime;
+                LeftBoundTime = currentTime - TimeWidth / 2;
         }
     }//Class
 }//Namespace

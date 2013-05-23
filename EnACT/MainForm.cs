@@ -242,7 +242,8 @@ namespace EnACT
             if (TrackBar_Timeline.Minimum <= vidPos && vidPos <= TrackBar_Timeline.Maximum)
                 TrackBar_Timeline.Value = vidPos;
 
-            Timeline.PlayHeadTime = playHeadTime;
+            //Timeline.PlayHeadTime = playHeadTime;
+            Timeline.UpdateTimeLinePosition(playHeadTime);
             
             //Redraw Timeline
             Timeline.RedrawCaptionsRegion();
