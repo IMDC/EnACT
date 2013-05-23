@@ -239,9 +239,9 @@ namespace EnACT
                 {
                     if (((LeftBoundTime <= c.Begin && c.Begin <= RightBoundTime)//Begin is in drawing area
                     || (LeftBoundTime <= c.End && c.End <= RightBoundTime)      //End is in drawing area
-                    || (c.Begin <= LeftBoundTime && RightBoundTime <= c.End) )   //Caption spans more than 
+                    || (c.Begin <= LeftBoundTime && RightBoundTime <= c.End) )  //Caption spans more than 
                                                                                 //the whole drawing area
-                    && 0.1 <= c.Duration)     //Duration of caption is less than 0.1
+                    && 0.1 <= c.Duration)                           //Duration of caption is less than 0.1
                     {
                         //Console.WriteLine("Caption: #{0} is within bounds", r[CaptionData.NPOS]);
                         y = 0;
@@ -278,7 +278,7 @@ namespace EnACT
             Pen playHeadPen = new Pen(playHeadBrush, 2);
 
             //Get playhead position
-            x = (float)PlayHeadTime * pixelsPerSecond;
+            x =(float)(PlayHeadTime - LeftBoundTime) * pixelsPerSecond;
             
             //Make triangle head
             GraphicsPath phPath = new GraphicsPath();
@@ -291,6 +291,25 @@ namespace EnACT
             g.FillRegion(playHeadBrush, phRegion);
             g.DrawLine(playHeadPen, x, 0, x, availableHeight);
             #endregion
+        }
+        #endregion
+
+        #region Redraw Methods
+        /// <summary>
+        /// Invalidates the area where captions are drawn, leaving the rest alone.
+        /// </summary>
+        public void RedrawCaptionsRegion()
+        {
+            Invalidate(new Rectangle(LOCATION_LABEL_WIDTH+1,1,
+                Width-LOCATION_LABEL_WIDTH-2, Height-2));;
+        }
+
+        /// <summary>
+        /// Invalidates the area inside the outline, leaving the outline alone.
+        /// </summary>
+        public void RedrawInnerRegion()
+        {
+            Invalidate(new Rectangle(1, 1, Width - 2, Height - 2));
         }
         #endregion
 
@@ -346,11 +365,10 @@ namespace EnACT
             Console.WriteLine("LeftBoundTime: {0}", LeftBoundTime);
 
             //Redraw area with captions
-            if(DrawLocationLabels)
-                Invalidate(new Rectangle(LOCATION_LABEL_WIDTH+1,1,
-                    Width-LOCATION_LABEL_WIDTH-2, Height-2));
+            if (DrawLocationLabels)
+                RedrawCaptionsRegion();
             else
-                Invalidate(new Rectangle(1,1,Width-2,Height-2));
+                RedrawInnerRegion();
         }
         #endregion
     }//Class

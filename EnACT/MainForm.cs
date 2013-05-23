@@ -243,7 +243,9 @@ namespace EnACT
                 TrackBar_Timeline.Value = vidPos;
 
             Timeline.PlayHeadTime = playHeadTime;
-            Timeline.Invalidate();
+            
+            //Redraw Timeline
+            Timeline.RedrawCaptionsRegion();
 
             TrackBar_Timeline.Update();
         }
