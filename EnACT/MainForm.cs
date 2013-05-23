@@ -72,7 +72,7 @@ namespace EnACT
         /// </summary>
         private void InitCaptionView()
         {
-
+            CaptionView.InitColumns();  //Set up columns
             CaptionView.SpeakerSet = SpeakerSet;
             CaptionView.CaptionSource = CaptionList;
         }

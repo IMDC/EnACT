@@ -126,8 +126,18 @@ namespace EnACT
 
             //Don't create columns for each property.
             AutoGenerateColumns = false;
+        }
 
-            //Init Columns
+        /// <summary>
+        /// Initializes columns for the Caption View.
+        /// </summary>
+        public void InitColumns()
+        {
+            /* Do not call this method from the constructor of Caption View. It will
+             * create a bug within the Visual Studio designer that will duplicate 
+             * columns. Instead, it is better to call this method from the form or
+             * component that implements Caption view.
+             */
             NumberColumn = new DataGridViewTextBoxColumn();
             NumberColumn.Name = NNAME;
             NumberColumn.HeaderText = NNAME;
@@ -170,7 +180,7 @@ namespace EnACT
             Columns.Add(TextColumn);
 
             //Set the last column to fill up remaining space
-            Columns[Columns.Count-1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Columns[Columns.Count - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
         #endregion
 
