@@ -69,9 +69,13 @@ namespace EnACT
         private double LeftBoundTime
         {
             set 
-            { 
-                lbTime = value;
-                //CenterBoundTime = value + TimeWidth / 2;
+            {
+                //Set the left bound, but don't set it to less than 0
+                lbTime = Math.Max(0,value);
+                cbTime = value + TimeWidth / 2;
+                //Set the right bound
+                rbTime = value + TimeWidth;
+                
             }
             get { return lbTime; }
         }
@@ -254,8 +258,8 @@ namespace EnACT
                             default: y = 0; break;
                         }
                         x = (float)(c.Begin - LeftBoundTime) * pixelsPerSecond;
-                        w = (float)(c.Duration - LeftBoundTime) * pixelsPerSecond;
-                        //w = (float)(c.End - LeftBoundTime) * pixelsPerSecond - x;
+                        //w = (float)(c.Duration - LeftBoundTime) * pixelsPerSecond;
+                        w = (float)(c.End - LeftBoundTime) * pixelsPerSecond - x;
 
                         //Create a small space between the line dividers and the caption rectangles
                         //y+= 2; h -=4; //Gives one extra pixel of whitespace on top and bottom
@@ -336,8 +340,8 @@ namespace EnACT
         {
             //Get the percent progress of value
             double valuePercent = ((double)ScrollBar.Value)/ ScrollBar.Maximum;
-            CenterBoundTime = VideoLength * valuePercent;
-            Console.WriteLine("CenterBoundTime: {0}", CenterBoundTime);
+            LeftBoundTime = VideoLength * valuePercent;
+            Console.WriteLine("LeftBoundTime: {0}", LeftBoundTime);
 
             //Redraw area with captions
             if(DrawLocationLabels)
