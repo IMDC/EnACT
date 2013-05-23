@@ -237,8 +237,10 @@ namespace EnACT
             {
                 foreach (Caption c in CaptionList)
                 {
-                    if (((LeftBoundTime <= c.Begin && c.Begin <= RightBoundTime) //Begin is in drawing area
-                    || (LeftBoundTime <= c.End && c.End <= RightBoundTime))      //End is in drawing area
+                    if (((LeftBoundTime <= c.Begin && c.Begin <= RightBoundTime)//Begin is in drawing area
+                    || (LeftBoundTime <= c.End && c.End <= RightBoundTime)      //End is in drawing area
+                    || (c.Begin <= LeftBoundTime && RightBoundTime <= c.End) )   //Caption spans more than 
+                                                                                //the whole drawing area
                     && 0.1 <= c.Duration)     //Duration of caption is less than 0.1
                     {
                         //Console.WriteLine("Caption: #{0} is within bounds", r[CaptionData.NPOS]);
