@@ -103,6 +103,7 @@ namespace EnACT
                 BindingList = new BindingList<Caption>(value);
 
                 DataSource = BindingList;   //Bind list to view
+                BindingList.ListChanged += new ListChangedEventHandler(BindingList_ListChanged);
             }
             get { return CaptionList; }
         }
@@ -364,6 +365,16 @@ namespace EnACT
         {
             Rows[e.RowIndex].Cells[NPOS].Value = e.RowIndex + 1;
             base.OnRowPrePaint(e);
+        }
+
+        /// <summary>
+        /// Event that is called when bindinglist is changed.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        void BindingList_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            //Console.WriteLine(e.ListChangedType.ToString());
         }
         #endregion
     }

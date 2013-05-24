@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.ComponentModel;
 
 namespace EnACT
 {
@@ -63,11 +64,21 @@ namespace EnACT
     /// <summary>
     /// The caption Class represents a Captioned line of text.
     /// </summary>
-    public class Caption
+    public class Caption : INotifyPropertyChanged
     {
         private Timestamp begin;
         private Timestamp end;
         private Timestamp duration;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
 
         /// <summary>
         /// A timestamp representing the begin time of a caption. Set in the 
@@ -89,6 +100,7 @@ namespace EnACT
                         duration = 0;
                     }
                 }
+                NotifyPropertyChanged("Begin");
             }
             get { return begin; } 
         }
@@ -104,6 +116,7 @@ namespace EnACT
                 end = value;
                 if(begin != null)
                     duration = end - begin;
+                NotifyPropertyChanged("End");
             }
             get { return end; }
         }
@@ -124,15 +137,24 @@ namespace EnACT
                 else
                     //Create a new object instead of copying refrences.
                     end = new Timestamp(duration.AsDouble);
-                    
+                NotifyPropertyChanged("Duration");
             }
             get { return duration; }
         }
 
+        private Speaker speaker;
         /// <summary>
         /// A reference to a speaker in the program's speaker list.
         /// </summary>
-        public Speaker Speaker { set; get; }
+        public Speaker Speaker 
+        {
+            set
+            {
+                speaker = value;
+                NotifyPropertyChanged("Duration");
+            }
+            get { return speaker; }
+        }
 
         /// <summary>
         /// The location of a caption on the screen (Eg top left, centre right, etc)
@@ -151,7 +173,11 @@ namespace EnACT
 
         public String Text
         {
-            set{ FeedWordList(value); }
+            set
+            { 
+                FeedWordList(value);
+                NotifyPropertyChanged("Text");
+            }
             get{ return WordListText(); }
         }
 
