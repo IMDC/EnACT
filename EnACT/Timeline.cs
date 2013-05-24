@@ -46,6 +46,10 @@ namespace EnACT
         /// </summary>
         private const float PLAYHEAD_HALF_WIDTH = 10;
 
+        private const float PLAYHEAD_BAR_HEIGHT = PLAYHEAD_HALF_WIDTH * 2;
+
+        private Timestamp[] playheadBarTimes;
+
         /// <summary>
         /// Backing variable for rightBoundTime
         /// </summary>
@@ -165,6 +169,17 @@ namespace EnACT
             ScrollBar.Value = 0;
 
             DrawLocationLabels = true;
+
+            //Set leftboundTime
+            LeftBoundTime = 0;
+
+            //Create an array of 3 timestamps
+            playheadBarTimes = new Timestamp[] 
+            {
+                new Timestamp(LeftBoundTime), 
+                new Timestamp(CenterBoundTime), 
+                new Timestamp(RightBoundTime)
+            };
         }
         #endregion
 
@@ -181,16 +196,12 @@ namespace EnACT
             Pen outlinePen = new Pen(Color.Black, 1); //Black outline with width of 1 pixel
             Brush textBrush = new SolidBrush(Color.Black);  //Black brush
 
-            float availableHeight; //The amount of height in the component available to draw on
-            //Set value based one whether or not the scrollbar is visible
+            //The amount of height in the component available to draw on
+            float availableHeight = Height - PLAYHEAD_BAR_HEIGHT; 
+
+            //Subtract the height of the scrollbar if it is visible
             if (ScrollBar.Visible)
-            {
-                availableHeight = Height - SystemInformation.HorizontalScrollBarHeight;
-            }
-            else
-            {
-                availableHeight = Height;
-            }
+                availableHeight -= SystemInformation.HorizontalScrollBarHeight;
 
             float availableWidth; //The amount of width in the component available for captions
             //Set value based on whether or not labels are visible
@@ -203,8 +214,10 @@ namespace EnACT
             float pixelsPerSecond = (float)(availableWidth / TimeWidth);
 
             //Draw black outline around control
-            g.DrawRectangle(outlinePen, 0, 0, Width-1, availableHeight-1);
+            g.DrawRectangle(outlinePen, 0, 0, Width-1, availableHeight + PLAYHEAD_BAR_HEIGHT-1);
             #endregion
+
+            g.TranslateTransform(0, PLAYHEAD_BAR_HEIGHT);
 
             #region Draw labels and dash lines
             //Draw CaptionPosition Labels
@@ -227,8 +240,11 @@ namespace EnACT
                     g.DrawString(LocationLabels[(int)i], f, textBrush, r);
                     g.DrawRectangle(outlinePen, r.X, r.Y, r.Width, r.Height);
 
-                    //Draw line separator line
-                    g.DrawLine(dashLinePen, x + w, y, Width, y);
+                    //Draw separator line
+                    if(i == 0) //First line wil be solid, not dashed.
+                        g.DrawLine(outlinePen, x + w, y, Width, y);
+                    else
+                        g.DrawLine(dashLinePen, x + w, y, Width, y);
                 }
                 else
                     //Draw line separator line
@@ -285,6 +301,19 @@ namespace EnACT
             }
             #endregion
 
+            #region PlayheadBar Times
+            foreach (Timestamp t in playheadBarTimes)
+            {
+                if(t.AsDouble < LeftBoundTime)
+                    t.AsDouble += TimeWidth;    //Shift it 1 unit down the line
+                if (RightBoundTime < t.AsDouble)
+                    t.AsDouble -= TimeWidth;
+                x = (float)(t - LeftBoundTime) * pixelsPerSecond;
+                y = -PLAYHEAD_BAR_HEIGHT;
+                g.DrawString(t.AsString, f, textBrush, x, y);
+            }
+            #endregion
+
             #region Draw Playhead
             Brush playHeadBrush = new SolidBrush(Color.Black);
             Pen playHeadPen = new Pen(playHeadBrush, 2);
@@ -297,11 +326,12 @@ namespace EnACT
             phPath.AddLine(x - PLAYHEAD_HALF_WIDTH, 0, x, PLAYHEAD_HALF_WIDTH);
             phPath.AddLine(x, PLAYHEAD_HALF_WIDTH, x + PLAYHEAD_HALF_WIDTH, 0);
             phPath.AddLine(x + PLAYHEAD_HALF_WIDTH, 0, x - PLAYHEAD_HALF_WIDTH, 0);
+            
             Region phRegion = new Region(phPath);
-
+            phRegion.Translate(0, -PLAYHEAD_BAR_HEIGHT);
             //Draw
             g.FillRegion(playHeadBrush, phRegion);
-            g.DrawLine(playHeadPen, x, 0, x, availableHeight);
+            g.DrawLine(playHeadPen, x, -PLAYHEAD_BAR_HEIGHT, x, availableHeight);
             #endregion
         }
         #endregion

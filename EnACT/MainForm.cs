@@ -264,9 +264,7 @@ namespace EnACT
 
         private void DebugButton_Click(object sender, EventArgs e)
         {
-            //Timeline.AutoScrollMinSize = new System.Drawing.Size(1200,0);
-            Timeline.DrawLocationLabels = false;
-            Timeline.RedrawCaptionsRegion();
+
         }
 
         /// <summary>
