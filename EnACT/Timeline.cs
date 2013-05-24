@@ -422,6 +422,7 @@ namespace EnACT
         public void ZoomIn()
         {
             TimeWidth /= ZOOM_MULTIPLIER;
+            LeftBoundTime = LeftBoundTime;
             RedrawCaptionsRegion();
         }
 
@@ -431,6 +432,7 @@ namespace EnACT
         public void ZoomOut()
         {
             TimeWidth *= ZOOM_MULTIPLIER;
+            LeftBoundTime = LeftBoundTime;
             RedrawCaptionsRegion();
         }
 
@@ -440,9 +442,12 @@ namespace EnACT
         public void ZoomReset()
         {
             TimeWidth = DEFAULT_TIME_WIDTH;
+            LeftBoundTime = LeftBoundTime;
+            RedrawCaptionsRegion();
         }
         #endregion
 
+        #region UpdateTimeLinePosition
         /// <summary>
         /// Updates the Timeline's position, setting the playhead and centering it in the
         /// middle of the Timeline. Will also update the scrollbar.
@@ -456,5 +461,6 @@ namespace EnACT
             if (LeftBoundTime < currentTime - TimeWidth / 2 || currentTime + TimeWidth / 2 < RightBoundTime)
                 LeftBoundTime = currentTime - TimeWidth / 2;
         }
+        #endregion
     }//Class
 }//Namespace

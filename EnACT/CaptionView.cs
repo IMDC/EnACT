@@ -360,11 +360,11 @@ namespace EnACT
         /// Method called before a row is Painted. Sets the value of the number column
         /// to the row number the column is in, indexed from 1.
         /// </summary>
-        /// <param name="e"></param>
-        protected override void OnRowPrePaint(DataGridViewRowPrePaintEventArgs e)
+        /// <param name="e">Event Args</param>
+        protected override void OnRowPostPaint(DataGridViewRowPostPaintEventArgs e)
         {
+            base.OnRowPostPaint(e);
             Rows[e.RowIndex].Cells[NPOS].Value = e.RowIndex + 1;
-            base.OnRowPrePaint(e);
         }
 
         /// <summary>
@@ -375,8 +375,11 @@ namespace EnACT
         void BindingList_ListChanged(object sender, ListChangedEventArgs e)
         {
             //Console.WriteLine(e.ListChangedType.ToString());
-            //Redraw the current row
-            InvalidateRow(e.NewIndex);
+            //Redraw the current row if it is in bounds
+            if (0 <= e.NewIndex && e.NewIndex < Rows.Count)
+            {
+                InvalidateRow(e.NewIndex);
+            }
         }
         #endregion
     }

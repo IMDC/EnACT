@@ -264,7 +264,10 @@ namespace EnACT
 
         private void DebugButton_Click(object sender, EventArgs e)
         {
-
+            for (int i = 0; i < 100; i++)
+            {
+                Button_ParseESR_Click(sender, e);
+            }
         }
 
         /// <summary>
