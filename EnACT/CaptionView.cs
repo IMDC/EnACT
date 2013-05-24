@@ -375,6 +375,8 @@ namespace EnACT
         void BindingList_ListChanged(object sender, ListChangedEventArgs e)
         {
             //Console.WriteLine(e.ListChangedType.ToString());
+            //Redraw the current row
+            InvalidateRow(e.NewIndex);
         }
         #endregion
     }
