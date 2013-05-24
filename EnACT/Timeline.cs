@@ -423,6 +423,7 @@ namespace EnACT
         {
             TimeWidth /= ZOOM_MULTIPLIER;
             LeftBoundTime = LeftBoundTime;
+            ResetPlayHeadBarTimes();
             RedrawCaptionsRegion();
         }
 
@@ -433,6 +434,7 @@ namespace EnACT
         {
             TimeWidth *= ZOOM_MULTIPLIER;
             LeftBoundTime = LeftBoundTime;
+            ResetPlayHeadBarTimes();
             RedrawCaptionsRegion();
         }
 
@@ -443,6 +445,7 @@ namespace EnACT
         {
             TimeWidth = DEFAULT_TIME_WIDTH;
             LeftBoundTime = LeftBoundTime;
+            ResetPlayHeadBarTimes();
             RedrawCaptionsRegion();
         }
         #endregion
@@ -462,5 +465,15 @@ namespace EnACT
                 LeftBoundTime = currentTime - TimeWidth / 2;
         }
         #endregion
+
+        /// <summary>
+        /// Resets the playheadBarTime
+        /// </summary>
+        public void ResetPlayHeadBarTimes()
+        {
+            playheadBarTimes[0] = LeftBoundTime;
+            playheadBarTimes[1] = CenterBoundTime;
+            playheadBarTimes[2] = RightBoundTime;
+        }
     }//Class
 }//Namespace
