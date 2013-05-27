@@ -75,6 +75,16 @@ namespace EnACT
         /// The level of Zoom the Timeline is at.
         /// </summary>
         private int zoomLevel;
+
+        /// <summary>
+        /// The amount of pixels drawn per second of caption time
+        /// </summary>
+        private float pixelsPerSecond;
+
+        /// <summary>
+        /// The width of the component that is available for drawing captions
+        /// </summary>
+        private float availableWidth;
         #endregion
 
         #region Private Properties
@@ -213,6 +223,9 @@ namespace EnACT
 
             //Set the zoom level
             zoomLevel = DEFAULT_ZOOM_LEVEL;
+
+            RedrawInnerRegion();
+            SetScrollBarValues();
         }
         #endregion
 
@@ -236,7 +249,6 @@ namespace EnACT
             if (ScrollBar.Visible)
                 availableHeight -= SystemInformation.HorizontalScrollBarHeight;
 
-            float availableWidth; //The amount of width in the component available for captions
             //Set value based on whether or not labels are visible
             if (DrawLocationLabels)
                 availableWidth = (float)(Width - LOCATION_LABEL_WIDTH - 3);
@@ -244,24 +256,7 @@ namespace EnACT
                 availableWidth = Width - 2;
 
             //How many pixels are drawn for each second of time.
-            float pixelsPerSecond = (float)(availableWidth / TimeWidth);
-
-            //Configure Scrollbar size
-            ScrollBar.Minimum = 0;
-            //ScrollBar.SmallChange = (int)(TimeWidth*pixelsPerSecond) / 10;
-            //ScrollBar.LargeChange = (int)(TimeWidth * pixelsPerSecond);
-            //ScrollBar.Maximum = (int)(VideoLength * pixelsPerSecond + ScrollBar.LargeChange);
-            ScrollBar.SmallChange = (int)availableWidth / 10;
-            ScrollBar.LargeChange = (int)availableWidth;
-            ScrollBar.Maximum = (int)(VideoLength * pixelsPerSecond + ScrollBar.LargeChange);
-
-            if (VideoLength < TimeWidth)
-            {
-                ScrollBar.Visible = false;
-                ScrollBar.Value = 0;
-            }
-            else
-                ScrollBar.Visible = true;
+            pixelsPerSecond = (float)(availableWidth / TimeWidth);
 
             //Draw black outline around control
             g.DrawRectangle(outlinePen, 0, 0, Width-1, availableHeight + PLAYHEAD_BAR_HEIGHT-1);
@@ -447,11 +442,16 @@ namespace EnACT
         /// <param name="e">Event Args</param>
         private void ScrollBar_Scroll(object sender, ScrollEventArgs e)
         {
-            //Get the percent progress of value
-            double valuePercent = ((double)ScrollBar.Value) / ScrollBar.Maximum;
-            LeftBoundTime = VideoLength * valuePercent;
-            Console.WriteLine("LeftBoundTime: {0}", LeftBoundTime);
-
+            //If the value is 0, snap the leftBoundTime to 0 to prevent rounding errors.
+            if (e.NewValue == 0)
+                LeftBoundTime = 0;
+            else
+            {
+                //Get the percent progress of value
+                double valuePercent = ((double)ScrollBar.Value) / ScrollBar.Maximum;
+                LeftBoundTime = VideoLength * valuePercent;
+            }
+            
             //Redraw area with captions
             RedrawCaptionsRegion();
         }
@@ -464,7 +464,32 @@ namespace EnACT
         /// <param name="e">Event Args</param>
         private void ScrollBar_ValueChanged(object sender, EventArgs e)
         {
+            //Console.WriteLine("LeftBoundTime: {0}, Scrollbar Value: {1}", LeftBoundTime, ScrollBar.Value);
+        }
 
+        /// <summary>
+        /// Adjusts the size of the scrollbar based on the length of the video and the TimeWidth
+        /// </summary>
+        public void SetScrollBarValues()
+        {
+            ScrollBar.Minimum = 0; //Min size should always be 0
+            ScrollBar.SmallChange = (int)(availableWidth / 10);
+            ScrollBar.LargeChange = (int)availableWidth;
+
+            /* The ScrollBar.Maximum values is defined as the total amount of pixels to
+             * draw out the entire video at the current timewidth plus 1 large change value.
+             * This is due to a bug with the windows scrollbar.
+             */
+            ScrollBar.Maximum = (int)(VideoLength * pixelsPerSecond + ScrollBar.LargeChange);
+
+            //If the timewidth is greater than the video length, hide the scrollbar.
+            if (VideoLength < TimeWidth)
+            {
+                ScrollBar.Visible = false;
+                ScrollBar.Value = 0;
+            }
+            else
+                ScrollBar.Visible = true;
         }
         #endregion
 
@@ -481,6 +506,7 @@ namespace EnACT
                 ResetPlayHeadBarTimes();
                 RedrawCaptionsRegion();
                 zoomLevel++; //Increase zoom level
+                SetScrollBarValues();
             }
         }
 
@@ -496,6 +522,7 @@ namespace EnACT
                 ResetPlayHeadBarTimes();
                 RedrawCaptionsRegion();
                 zoomLevel--; //Decrease zoom level
+                SetScrollBarValues();
             }
         }
 
@@ -509,6 +536,7 @@ namespace EnACT
             LeftBoundTime = LeftBoundTime;
             ResetPlayHeadBarTimes();
             RedrawCaptionsRegion();
+            SetScrollBarValues();
         }
         #endregion
 
@@ -520,14 +548,19 @@ namespace EnACT
         /// <param name="currentTime">The position the playhead is to be set at</param>
         public void UpdateTimeLinePosition(double currentTime)
         {
-            ScrollBar.Value = Math.Min((int)(ScrollBar.Maximum * (currentTime / VideoLength)),
-                ScrollBar.Maximum);
             PlayHeadTime = currentTime;
-            if (LeftBoundTime < currentTime - TimeWidth / 2 || currentTime + TimeWidth / 2 < RightBoundTime)
+            //If LeftBoundTime or RightBoundTime are not half of a Timewidth away from the current time and
+            //the scrollbar hasn't reached its maximum scrollable position yet
+            if ((LeftBoundTime < currentTime - TimeWidth / 2 || currentTime + TimeWidth / 2 < RightBoundTime)
+                && ScrollBar.Value < ScrollBar.Maximum - ScrollBar.LargeChange )
                 LeftBoundTime = currentTime - TimeWidth / 2;
+            //Set scroll value to the value of LeftBoundTime
+            ScrollBar.Value = Math.Min((int)(ScrollBar.Maximum * (LeftBoundTime / VideoLength)),
+                ScrollBar.Maximum);
         }
         #endregion
 
+        #region Playhead Bar
         /// <summary>
         /// Resets the playheadBarTime
         /// </summary>
@@ -537,7 +570,9 @@ namespace EnACT
             playheadBarTimes[1] = CenterBoundTime;
             playheadBarTimes[2] = RightBoundTime;
         }
+        #endregion
 
+        #region ToggleDrawLocationLabels
         public void ToggleDrawLocationLabels()
         {
             if (DrawLocationLabels)
@@ -551,6 +586,8 @@ namespace EnACT
                 //Redraw entire region, including labels
                 RedrawInnerRegion();
             }
+            SetScrollBarValues();
         }
+        #endregion
     }//Class
 }//Namespace

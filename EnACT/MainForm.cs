@@ -232,6 +232,8 @@ namespace EnACT
             Double vidLength = EngineView.VideoLength();
             TrackBar_Timeline.Maximum = (int) vidLength * 10;
             Timeline.VideoLength = vidLength;
+            Timeline.RedrawInnerRegion();
+            Timeline.SetScrollBarValues();
         }
 
         private void PlayheadTimer_Tick(object sender, EventArgs e)
