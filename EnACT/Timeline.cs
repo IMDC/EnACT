@@ -12,7 +12,7 @@ namespace EnACT
 {
     public partial class Timeline : UserControl
     {
-        #region Constants and Members
+        #region Constants
         /// <summary>
         /// A readonly string array of Labels for Marking locations for captions.
         /// </summary>
@@ -38,6 +38,19 @@ namespace EnACT
         /// </summary>
         private const int ZOOM_MULTIPLIER = 2;
         /// <summary>
+        /// The Default zoom level
+        /// </summary>
+        private const int DEFAULT_ZOOM_LEVEL = 10;
+        /// <summary>
+        /// The highest level of zoom (zooming in) the timeline will allow
+        /// </summary>
+        private const int MAX_ZOOM_LEVEL = 13;
+        /// <summary>
+        /// The lowest level of zoom the Timeline will allow
+        /// </summary>
+        private const int MIN_ZOOM_LEVEL = 0;
+
+        /// <summary>
         /// How wide the label boxes are
         /// </summary>
         private const int LOCATION_LABEL_WIDTH = 95;
@@ -46,10 +59,25 @@ namespace EnACT
         /// </summary>
         private const float PLAYHEAD_HALF_WIDTH = 10;
 
+        /// <summary>
+        /// The draw height in pixels of the playhead bar
+        /// </summary>
         private const float PLAYHEAD_BAR_HEIGHT = PLAYHEAD_HALF_WIDTH * 2;
+        #endregion
 
+        #region Private fields
+        /// <summary>
+        /// An array of Timestamps used to keep track of position in the Timeline
+        /// </summary>
         private Timestamp[] playheadBarTimes;
 
+        /// <summary>
+        /// The level of Zoom the Timeline is at.
+        /// </summary>
+        private int zoomLevel;
+        #endregion
+
+        #region Private Properties
         /// <summary>
         /// Backing variable for rightBoundTime
         /// </summary>
@@ -107,7 +135,9 @@ namespace EnACT
                 return cbTime;
             }
         }
+        #endregion
 
+        #region Public Properties
         /// <summary>
         /// How many seconds of time the Timeline will show
         /// </summary>
@@ -180,6 +210,9 @@ namespace EnACT
                 new Timestamp(CenterBoundTime), 
                 new Timestamp(RightBoundTime)
             };
+
+            //Set the zoom level
+            zoomLevel = DEFAULT_ZOOM_LEVEL;
         }
         #endregion
 
@@ -421,10 +454,14 @@ namespace EnACT
         /// </summary>
         public void ZoomIn()
         {
-            TimeWidth /= ZOOM_MULTIPLIER;
-            LeftBoundTime = LeftBoundTime;
-            ResetPlayHeadBarTimes();
-            RedrawCaptionsRegion();
+            if(zoomLevel < MAX_ZOOM_LEVEL)
+            {
+                TimeWidth /= ZOOM_MULTIPLIER;
+                LeftBoundTime = LeftBoundTime;
+                ResetPlayHeadBarTimes();
+                RedrawCaptionsRegion();
+                zoomLevel++; //Increase zoom level
+            }
         }
 
         /// <summary>
@@ -432,10 +469,14 @@ namespace EnACT
         /// </summary>
         public void ZoomOut()
         {
-            TimeWidth *= ZOOM_MULTIPLIER;
-            LeftBoundTime = LeftBoundTime;
-            ResetPlayHeadBarTimes();
-            RedrawCaptionsRegion();
+            if(MIN_ZOOM_LEVEL < zoomLevel)
+            {
+                TimeWidth *= ZOOM_MULTIPLIER;
+                LeftBoundTime = LeftBoundTime;
+                ResetPlayHeadBarTimes();
+                RedrawCaptionsRegion();
+                zoomLevel--; //Decrease zoom level
+            }
         }
 
         /// <summary>
@@ -443,6 +484,7 @@ namespace EnACT
         /// </summary>
         public void ZoomReset()
         {
+            zoomLevel = DEFAULT_ZOOM_LEVEL;
             TimeWidth = DEFAULT_TIME_WIDTH;
             LeftBoundTime = LeftBoundTime;
             ResetPlayHeadBarTimes();
