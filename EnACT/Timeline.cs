@@ -246,6 +246,23 @@ namespace EnACT
             //How many pixels are drawn for each second of time.
             float pixelsPerSecond = (float)(availableWidth / TimeWidth);
 
+            //Configure Scrollbar size
+            ScrollBar.Minimum = 0;
+            //ScrollBar.SmallChange = (int)(TimeWidth*pixelsPerSecond) / 10;
+            //ScrollBar.LargeChange = (int)(TimeWidth * pixelsPerSecond);
+            //ScrollBar.Maximum = (int)(VideoLength * pixelsPerSecond + ScrollBar.LargeChange);
+            ScrollBar.SmallChange = (int)availableWidth / 10;
+            ScrollBar.LargeChange = (int)availableWidth;
+            ScrollBar.Maximum = (int)(VideoLength * pixelsPerSecond + ScrollBar.LargeChange);
+
+            if (VideoLength < TimeWidth)
+            {
+                ScrollBar.Visible = false;
+                ScrollBar.Value = 0;
+            }
+            else
+                ScrollBar.Visible = true;
+
             //Draw black outline around control
             g.DrawRectangle(outlinePen, 0, 0, Width-1, availableHeight + PLAYHEAD_BAR_HEIGHT-1);
 
