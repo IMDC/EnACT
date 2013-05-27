@@ -57,12 +57,12 @@ namespace EnACT
         /// <summary>
         /// Half the width of the playhead's triangle in pixels
         /// </summary>
-        private const float PLAYHEAD_HALF_WIDTH = 10;
+        private const int PLAYHEAD_HALF_WIDTH = 10;
 
         /// <summary>
         /// The draw height in pixels of the playhead bar
         /// </summary>
-        private const float PLAYHEAD_BAR_HEIGHT = PLAYHEAD_HALF_WIDTH * 2;
+        private const int PLAYHEAD_BAR_HEIGHT = PLAYHEAD_HALF_WIDTH * 2;
         #endregion
 
         #region Private fields
@@ -375,8 +375,12 @@ namespace EnACT
         public void RedrawCaptionsRegion()
         {
             if (DrawLocationLabels)
-                Invalidate(new Rectangle(LOCATION_LABEL_WIDTH+1,1,
-                    Width-LOCATION_LABEL_WIDTH-2, Height-2));
+            {
+                Region r = new Region(new Rectangle(LOCATION_LABEL_WIDTH + 1, 1,
+                    Width - LOCATION_LABEL_WIDTH - 2, Height - 2));
+                r.Union(new Rectangle(1, 1, Width - 2, PLAYHEAD_BAR_HEIGHT));
+                Invalidate(r);
+            }
             else
                 RedrawInnerRegion();
         }
