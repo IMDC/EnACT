@@ -248,9 +248,9 @@ namespace EnACT
 
             //Draw black outline around control
             g.DrawRectangle(outlinePen, 0, 0, Width-1, availableHeight + PLAYHEAD_BAR_HEIGHT-1);
-            #endregion
 
             g.TranslateTransform(0, PLAYHEAD_BAR_HEIGHT);
+            #endregion
 
             #region Draw labels and dash lines
             //Draw CaptionPosition Labels
@@ -272,16 +272,15 @@ namespace EnACT
                     RectangleF r = new RectangleF(x, y, w, h);
                     g.DrawString(LocationLabels[(int)i], f, textBrush, r);
                     g.DrawRectangle(outlinePen, r.X, r.Y, r.Width, r.Height);
-
-                    //Draw separator line
-                    if(i == 0) //First line wil be solid, not dashed.
-                        g.DrawLine(outlinePen, x + w, y, Width, y);
-                    else
-                        g.DrawLine(dashLinePen, x + w, y, Width, y);
                 }
                 else
-                    //Draw line separator line
-                    g.DrawLine(dashLinePen, x, y, Width, y);
+                    w = 0;
+
+                //Draw separator line
+                if (i == 0) //First line wil be solid, not dashed.
+                    g.DrawLine(outlinePen, x + w, y, Width, y);
+                else
+                    g.DrawLine(dashLinePen, x + w, y, Width, y);
             }
             #endregion
 
@@ -516,6 +515,21 @@ namespace EnACT
             playheadBarTimes[0] = LeftBoundTime;
             playheadBarTimes[1] = CenterBoundTime;
             playheadBarTimes[2] = RightBoundTime;
+        }
+
+        public void ToggleDrawLocationLabels()
+        {
+            if (DrawLocationLabels)
+            {
+                DrawLocationLabels = false;
+                RedrawCaptionsRegion();
+            }
+            else
+            {
+                DrawLocationLabels = true;
+                //Redraw entire region, including labels
+                RedrawInnerRegion();
+            }
         }
     }//Class
 }//Namespace

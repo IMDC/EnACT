@@ -252,7 +252,6 @@ namespace EnACT
 
         private void TimeLine_ValueChanged(object sender, EventArgs e)
         {
-            //FlashVideoPlayer.SetPlayHeadTime((double)TimeLine.Value/10.0);
         }
 
         private void Button_ParseESR_Click(object sender, EventArgs e)
@@ -277,17 +276,7 @@ namespace EnACT
         /// <param name="e"></param>
         private void Button_ShowLabels_Click(object sender, EventArgs e)
         {
-            if (Timeline.DrawLocationLabels)
-            {
-                Timeline.DrawLocationLabels = false;
-                Timeline.RedrawCaptionsRegion();
-            }
-            else
-            {
-                Timeline.DrawLocationLabels = true;
-                //Redraw entire region, including labels
-                Timeline.RedrawInnerRegion();
-            }
+            Timeline.ToggleDrawLocationLabels();
         }
 
         private void Button_ZoomTimelineIn_Click(object sender, EventArgs e)
