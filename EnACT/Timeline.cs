@@ -456,6 +456,23 @@ namespace EnACT
         }
 
         /// <summary>
+        /// Raises the MouseClick event. If the click is inside the playhead bar, it will
+        /// move the playhead to that location
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnMouseClick(MouseEventArgs e)
+        {
+            base.OnMouseClick(e);
+            RectangleF playheadBarRect = new RectangleF(LOCATION_LABEL_WIDTH, 0, Width, PLAYHEAD_BAR_HEIGHT);
+            if (playheadBarRect.Contains(e.Location))
+            {
+                //Set playhead time based on click location
+                PlayHeadTime = (double)((e.X- LOCATION_LABEL_WIDTH) / pixelsPerSecond + LeftBoundTime);
+                RedrawCaptionsRegion(); //redraw the playhead
+            }
+        }
+
+        /// <summary>
         /// Raises the MouseWheel event.
         /// </summary>
         /// <param name="e">Event Args</param>
