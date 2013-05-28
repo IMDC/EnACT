@@ -482,6 +482,11 @@ namespace EnACT
              */
             ScrollBar.Maximum = (int)(VideoLength * pixelsPerSecond + ScrollBar.LargeChange);
 
+            //Set scroll value to the value of LeftBoundTime
+            if(VideoLength != 0)
+                ScrollBar.Value = Math.Min((int)(ScrollBar.Maximum * (LeftBoundTime / VideoLength)),
+                    ScrollBar.Maximum);
+
             //If the timewidth is greater than the video length, hide the scrollbar.
             if (VideoLength < TimeWidth)
             {
