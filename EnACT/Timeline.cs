@@ -30,6 +30,16 @@ namespace EnACT
         };
 
         /// <summary>
+        /// An enum representing what action is being performed by the mouse.
+        /// </summary>
+        private enum MouseMoveAction
+        {
+            movePlayhead,
+            moveCaption,
+            noAction
+        };
+
+        /// <summary>
         /// How many seconds of time the Timeline will show by default
         /// </summary>
         private const double DEFAULT_TIME_WIDTH = 10;
@@ -89,6 +99,11 @@ namespace EnACT
         /// The width of the component that is available for drawing captions
         /// </summary>
         private float availableWidth;
+
+        /// <summary>
+        /// The current action being performed by the mouse.
+        /// </summary>
+        private MouseMoveAction mouseMoveAction;
         #endregion
 
         #region Private Properties
@@ -227,6 +242,9 @@ namespace EnACT
 
             //Set the zoom level
             zoomLevel = DEFAULT_ZOOM_LEVEL;
+
+            //Set default action
+            mouseMoveAction = MouseMoveAction.noAction;
 
             RedrawInnerRegion();
             SetScrollBarValues();
@@ -428,6 +446,15 @@ namespace EnACT
             base.OnMouseDown(e);
             if (e.Button != MouseButtons.Left)
                 return;
+
+            RectangleF playheadBarRect = new RectangleF(LOCATION_LABEL_WIDTH, 0, 
+                Width - LOCATION_LABEL_WIDTH, PLAYHEAD_BAR_HEIGHT);
+
+            if (playheadBarRect.Contains(e.Location))
+            {
+                //Set Action
+                mouseMoveAction = MouseMoveAction.movePlayhead;
+            }
             Console.WriteLine("Mouse Down!"); 
         }
 
@@ -440,6 +467,9 @@ namespace EnACT
             base.OnMouseUp(e);
             if (e.Button != MouseButtons.Left)
                 return;
+
+            //Reset the action
+            mouseMoveAction = MouseMoveAction.noAction;
             Console.WriteLine("Mouse Up!"); 
         }
 
@@ -452,6 +482,13 @@ namespace EnACT
             base.OnMouseMove(e);
             if (e.Button != MouseButtons.Left)
                 return;
+
+            if (mouseMoveAction == MouseMoveAction.movePlayhead)
+            {
+                //Set playhead time based on click location
+                PlayHeadTime = (double)((e.X - LOCATION_LABEL_WIDTH) / pixelsPerSecond + LeftBoundTime);
+                RedrawCaptionsRegion(); //redraw the playhead
+            }
             Console.WriteLine("Mouse Moved!"); 
         }
 
@@ -463,7 +500,10 @@ namespace EnACT
         protected override void OnMouseClick(MouseEventArgs e)
         {
             base.OnMouseClick(e);
-            RectangleF playheadBarRect = new RectangleF(LOCATION_LABEL_WIDTH, 0, Width, PLAYHEAD_BAR_HEIGHT);
+
+            RectangleF playheadBarRect = new RectangleF(LOCATION_LABEL_WIDTH, 0,
+                Width - LOCATION_LABEL_WIDTH, PLAYHEAD_BAR_HEIGHT);
+
             if (playheadBarRect.Contains(e.Location))
             {
                 //Set playhead time based on click location
@@ -471,7 +511,9 @@ namespace EnACT
                 RedrawCaptionsRegion(); //redraw the playhead
             }
         }
+        #endregion
 
+        #region OnMouseWheel Event
         /// <summary>
         /// Raises the MouseWheel event.
         /// </summary>
@@ -491,7 +533,9 @@ namespace EnACT
                 ScrollBar_Scroll(this, new ScrollEventArgs(ScrollEventType.SmallIncrement, ScrollBar.Value));
             }
         }
+        #endregion
 
+        #region Mouse Focus Events
         /// <summary>
         /// Raises the MouseEnter event. Gives focus to the control.
         /// </summary>
