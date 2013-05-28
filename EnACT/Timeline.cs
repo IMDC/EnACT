@@ -34,6 +34,10 @@ namespace EnACT
         /// </summary>
         private const double DEFAULT_TIME_WIDTH = 10;
         /// <summary>
+        /// How many seconds of time are shown after the video end
+        /// </summary>
+        private const double ENDTIMEBUFFER = 5;
+        /// <summary>
         /// The number TimeWidth is multiplied/divided by when it is changed
         /// </summary>
         private const int ZOOM_MULTIPLIER = 2;
@@ -539,7 +543,7 @@ namespace EnACT
              * draw out the entire video at the current timewidth plus 1 large change value.
              * This is due to a bug with the windows scrollbar.
              */
-            ScrollBar.Maximum = (int)(VideoLength * pixelsPerSecond + ScrollBar.LargeChange);
+            ScrollBar.Maximum = (int)((VideoLength+ENDTIMEBUFFER) * pixelsPerSecond + ScrollBar.LargeChange);
 
             //Set scroll value to the value of LeftBoundTime
             if(VideoLength != 0)
