@@ -304,6 +304,14 @@ namespace EnACT
                 g.TranslateTransform(LOCATION_LABEL_WIDTH + 1, 0);
             #endregion
 
+            #region Draw End Marker
+            if (LeftBoundTime <= VideoLength && VideoLength <= RightBoundTime)
+            {
+                x = (float)(VideoLength - LeftBoundTime) * pixelsPerSecond;
+                g.DrawLine(new Pen(Color.Red, 2), x, -PLAYHEAD_BAR_HEIGHT, x, availableHeight);
+            }
+            #endregion
+
             #region Draw Captions
             if (CaptionList != null)
             {
@@ -450,14 +458,17 @@ namespace EnACT
         protected override void OnMouseWheel(MouseEventArgs e)
         {
             base.OnMouseWheel(e);
-            //Console.WriteLine("Mousewheel Delta: {0}", e.Delta);
-            if (ScrollBar.Minimum > ScrollBar.Value - e.Delta)
-                ScrollBar.Value = 0;
-            else if (ScrollBar.Value - e.Delta > ScrollBar.Maximum - ScrollBar.LargeChange)
-                ScrollBar.Value = ScrollBar.Maximum - ScrollBar.LargeChange;
-            else
-                ScrollBar.Value -= e.Delta;
-            ScrollBar_Scroll(this, new ScrollEventArgs(ScrollEventType.SmallIncrement, ScrollBar.Value));
+            if (ScrollBar.Visible)
+            {
+                //Console.WriteLine("Mousewheel Delta: {0}", e.Delta);
+                if (ScrollBar.Minimum > ScrollBar.Value - e.Delta)
+                    ScrollBar.Value = 0;
+                else if (ScrollBar.Value - e.Delta > ScrollBar.Maximum - ScrollBar.LargeChange)
+                    ScrollBar.Value = ScrollBar.Maximum - ScrollBar.LargeChange;
+                else
+                    ScrollBar.Value -= e.Delta;
+                ScrollBar_Scroll(this, new ScrollEventArgs(ScrollEventType.SmallIncrement, ScrollBar.Value));
+            }
         }
 
         /// <summary>
