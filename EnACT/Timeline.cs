@@ -431,6 +431,19 @@ namespace EnACT
                 return;
             Console.WriteLine("Mouse Moved!"); 
         }
+
+        protected override void OnMouseWheel(MouseEventArgs e)
+        {
+            base.OnMouseWheel(e);
+            //Console.WriteLine("Mousewheel Delta: {0}", e.Delta);
+            if (ScrollBar.Minimum > ScrollBar.Value - e.Delta)
+                ScrollBar.Value = 0;
+            else if (ScrollBar.Value - e.Delta > ScrollBar.Maximum - ScrollBar.LargeChange)
+                ScrollBar.Value = ScrollBar.Maximum - ScrollBar.LargeChange;
+            else
+                ScrollBar.Value -= e.Delta;
+            ScrollBar_Scroll(this, new ScrollEventArgs(ScrollEventType.SmallIncrement, ScrollBar.Value));
+        }
         #endregion
 
         #region ScrollBar Events
