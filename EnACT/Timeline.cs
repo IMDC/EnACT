@@ -407,15 +407,22 @@ namespace EnACT
         #endregion
 
         #region Mouse Events
+        /// <summary>
+        /// Raises the MouseDown event.
+        /// </summary>
+        /// <param name="e">Event Args</param>
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
             if (e.Button != MouseButtons.Left)
                 return;
-
             Console.WriteLine("Mouse Down!"); 
         }
 
+        /// <summary>
+        /// Raises the MouseUp event.
+        /// </summary>
+        /// <param name="e">Event Args</param>
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
@@ -424,6 +431,10 @@ namespace EnACT
             Console.WriteLine("Mouse Up!"); 
         }
 
+        /// <summary>
+        /// Raises the MouseMove event.
+        /// </summary>
+        /// <param name="e">Event Args</param>
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
@@ -432,6 +443,10 @@ namespace EnACT
             Console.WriteLine("Mouse Moved!"); 
         }
 
+        /// <summary>
+        /// Raises the MouseWheel event.
+        /// </summary>
+        /// <param name="e">Event Args</param>
         protected override void OnMouseWheel(MouseEventArgs e)
         {
             base.OnMouseWheel(e);
@@ -443,6 +458,26 @@ namespace EnACT
             else
                 ScrollBar.Value -= e.Delta;
             ScrollBar_Scroll(this, new ScrollEventArgs(ScrollEventType.SmallIncrement, ScrollBar.Value));
+        }
+
+        /// <summary>
+        /// Raises the MouseEnter event. Gives focus to the control.
+        /// </summary>
+        /// <param name="e">Event Args</param>
+        protected override void OnMouseEnter(EventArgs e)
+        {
+            base.OnMouseEnter(e);
+            this.Focus();
+        }
+
+        /// <summary>
+        /// Raises the MouseLeave event.
+        /// </summary>
+        /// <param name="e">Event Args</param>
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            base.OnMouseLeave(e);
+            InvokeLostFocus(this, new EventArgs());
         }
         #endregion
 
