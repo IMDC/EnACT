@@ -382,9 +382,18 @@ namespace EnACT
                     t.AsDouble += TimeWidth;    //Shift it 1 unit down the line
                 if (RightBoundTime < t.AsDouble)
                     t.AsDouble -= TimeWidth;
+
                 x = (float)(t - LeftBoundTime) * pixelsPerSecond;
                 y = -PLAYHEAD_BAR_HEIGHT;
-                g.DrawString(t.AsString, f, textBrush, x, y);
+                w = 70;
+
+                //Make a rectangle centered at x
+                RectangleF timeRect = new RectangleF(x-w/2, y, w, PLAYHEAD_BAR_HEIGHT);
+                //Draw string in centered rectangle
+                g.DrawString(t.AsString, f, textBrush, timeRect);
+
+                //Draw a little line marking the actual position of the timestamp
+                g.DrawLine(outlinePen, x, -PLAYHEAD_HALF_WIDTH/2, x, 0);
             }
             #endregion
 
