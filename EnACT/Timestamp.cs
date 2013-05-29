@@ -18,11 +18,14 @@ namespace EnACT
     //[TypeConverter(typeof(TimestampTypeConverter))]
     public class Timestamp
     {
+        #region Regex
         /// <summary>
         /// A regular expression that will validate a correct timestamp
         /// </summary>
         private static Regex validTimestamp = new Regex(@"^[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\.[0-9]$");
+        #endregion
 
+        #region AsDouble
         /// <summary>
         /// The internal storage of the timestamp. Stored as the number of seconds.
         /// </summary>
@@ -41,7 +44,9 @@ namespace EnACT
                 time = value; 
             }
         }
+        #endregion
 
+        #region AsString
         /// <summary>
         /// A property representing the timestamp in string form. Will produce
         /// a string in the form XX:XX:XX.X where X is a digit from 0-9.
@@ -103,7 +108,9 @@ namespace EnACT
                 time = seconds;
             }
         }
+        #endregion
 
+        #region Constructor
         /// <summary>
         /// Constucts a timestamp with a time value of 0, or a timestamp
         /// value of 00:00:00.0
@@ -127,7 +134,9 @@ namespace EnACT
         {
             AsDouble = time;
         }
+        #endregion
 
+        #region Operator Overrides
         /// <summary>
         /// Adds two timestamps together in the form t1.AsDouble + t2.AsDouble.
         /// </summary>
@@ -138,7 +147,9 @@ namespace EnACT
         {
             return t1.AsDouble + t2.AsDouble;
         }
+        #endregion
 
+        #region Validation
         /// <summary>
         /// Checks to see if a possible timestamp is valid or not. If the timestamp
         /// is in the form XX:XX:XX.X where X is a numerical digit from 0-9, it will
@@ -159,7 +170,9 @@ namespace EnACT
                 return false;
             }
         }
+        #endregion
 
+        #region Conversion
         /// <summary>
         /// Implicitly converts a Timestamp to a double
         /// </summary>
@@ -199,7 +212,9 @@ namespace EnACT
         {
             return new Timestamp(s);
         }
-        
+        #endregion
+
+        #region Object Override Methods
         /// <summary>
         /// Returns the string value of this TimeStamp. Returns the same as
         /// the AsString property
@@ -209,6 +224,62 @@ namespace EnACT
         {
             return AsString;
         }
+
+        /// <summary>
+        /// Determines whether the specified Object is equal to the current Timestamp. 
+        /// </summary>
+        /// <param name="obj">The Object to compare with the current Timestamp</param>
+        /// <returns>true if the specified Object is equal to the current Timestamp; 
+        /// otherwise, false</returns>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (obj is Timestamp)
+            {
+                Timestamp t = (Timestamp)obj;
+                return time.Equals(t.AsDouble);
+            }
+            else if (obj is Double)
+            {
+                Double d = (Double) obj;
+                return time.Equals(d);
+            }
+            else if (obj is String)
+            {
+                String s = (String)obj;
+                return AsString.Equals(s);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Determines whether two Timestamps are equal
+        /// </summary>
+        /// <param name="t">The Timestamp to compare with the current Timestamp.</param>
+        /// <returns> true if the specified Timestamp is equal to the current Timestamp; 
+        /// otherwise, false. </returns>
+        public bool Equals(Timestamp t)
+        {
+            if (t == null)
+                return false;
+
+            return time.Equals(t.AsDouble);
+        }
+
+        /// <summary>
+        /// Gets the Hash of the timestamp. Returns the Double value's hash value
+        /// </summary>
+        /// <returns>The hash code of the double representation of this timestamp</returns>
+        public override int GetHashCode()
+        {
+            return time.GetHashCode();
+        }
+        #endregion
     }
     #endregion
 
