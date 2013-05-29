@@ -250,7 +250,7 @@ namespace EnACT
             LeftBoundTime = 0;
 
             //Create an array of 5 timestamps
-            playheadBarTimes = new Timestamp[5];//[] 
+            playheadBarTimes = new Timestamp[5];
             //Set the timestamps
             SetPlayHeadBarTimes();
 
@@ -728,6 +728,17 @@ namespace EnACT
             playheadBarTimes[2] = Math.Max(0,TimeWidth * multiplier);
             playheadBarTimes[3] = Math.Max(0,TimeWidth * multiplier + halfTimeWidth);
             playheadBarTimes[4] = Math.Max(0,TimeWidth * multiplier + TimeWidth);
+
+            /* If the first two times are the same value (ie, both are 0), then set the first value to
+             * null, as setting both to 0 will cause the timeline to draw both times, making the
+             * 00:00:00.0 timestamp look thicker than the others. This will typically happen when the 
+             * CenterBoundTime is less than 1 Timewidth unit.
+             */
+            if (playheadBarTimes[0].Equals(playheadBarTimes[1]))
+                playheadBarTimes[0] = null;
+            //Do the same for the second Time
+            if (playheadBarTimes[1].Equals(playheadBarTimes[2]))
+                playheadBarTimes[1] = null;
         }
         #endregion
 
