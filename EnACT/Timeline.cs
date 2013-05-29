@@ -133,7 +133,7 @@ namespace EnACT
             {
                 //Set the left bound, but don't set it to less than 0
                 lbTime = Math.Max(0,value);
-                cbTime = value + TimeWidth / 2;
+                cbTime = value + halfTimeWidth;
                 //Set the right bound
                 rbTime = value + TimeWidth;
                 
@@ -155,22 +155,39 @@ namespace EnACT
             {
                 cbTime = value;
                 //Set the left bound, but don't set it to less than 0
-                lbTime = Math.Max(0, cbTime - TimeWidth / 2);
+                lbTime = Math.Max(0, cbTime - halfTimeWidth);
                 //Set the right bound, but don't set it to more than the videoLength
-                rbTime = Math.Min(cbTime + TimeWidth / 2, VideoLength);
+                rbTime = Math.Min(cbTime + halfTimeWidth, VideoLength);
             }
             get
             {
                 return cbTime;
             }
         }
+
+        /// <summary>
+        /// Represents TimeWidth divided by 2
+        /// </summary>
+        private double halfTimeWidth;
         #endregion
 
         #region Public Properties
         /// <summary>
+        /// Backing field for TimeWidth property
+        /// </summary>
+        private double tw;
+        /// <summary>
         /// How many seconds of time the Timeline will show
         /// </summary>
-        public double TimeWidth { set; get; }
+        public double TimeWidth 
+        {
+            set
+            {
+                tw = value;
+                halfTimeWidth = tw / 2;
+            }
+            get { return tw; }
+        }
        
         /// <summary>
         /// Backing variable for the VideoLength property. Use the VideoLength property to 
@@ -689,9 +706,9 @@ namespace EnACT
             PlayHeadTime = currentTime;
             //If LeftBoundTime or RightBoundTime are not half of a Timewidth away from the current time and
             //the scrollbar hasn't reached its maximum scrollable position yet
-            if ((LeftBoundTime < currentTime - TimeWidth / 2 || currentTime + TimeWidth / 2 < RightBoundTime)
+            if ((LeftBoundTime < currentTime - halfTimeWidth || currentTime + halfTimeWidth < RightBoundTime)
                 && ScrollBar.Value < ScrollBar.Maximum - ScrollBar.LargeChange )
-                LeftBoundTime = currentTime - TimeWidth / 2;
+                LeftBoundTime = currentTime - halfTimeWidth;
             //Set scroll value to the value of LeftBoundTime
             ScrollBar.Value = Math.Min((int)(ScrollBar.Maximum * (LeftBoundTime / VideoLength)),
                 ScrollBar.Maximum);
