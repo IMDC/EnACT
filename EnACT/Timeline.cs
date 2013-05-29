@@ -249,13 +249,10 @@ namespace EnACT
             //Set leftboundTime
             LeftBoundTime = 0;
 
-            //Create an array of 3 timestamps
-            playheadBarTimes = new Timestamp[] 
-            {
-                new Timestamp(LeftBoundTime), 
-                new Timestamp(CenterBoundTime), 
-                new Timestamp(RightBoundTime)
-            };
+            //Create an array of 5 timestamps
+            playheadBarTimes = new Timestamp[5];//[] 
+            //Set the timestamps
+            SetPlayHeadBarTimes();
 
             //Set the zoom level
             zoomLevel = DEFAULT_ZOOM_LEVEL;
@@ -393,12 +390,14 @@ namespace EnACT
             #endregion
 
             #region PlayheadBar Times
+            //Set the times
+            SetPlayHeadBarTimes();
+
             foreach (Timestamp t in playheadBarTimes)
             {
-                if(t.AsDouble < LeftBoundTime)
-                    t.AsDouble += TimeWidth;    //Shift it 1 unit down the line
-                if (RightBoundTime < t.AsDouble)
-                    t.AsDouble -= TimeWidth;
+                //Skip the timestamp if null
+                if (t == null)
+                    continue;
 
                 x = (float)(t - LeftBoundTime) * pixelsPerSecond;
                 y = -PLAYHEAD_BAR_HEIGHT;
@@ -658,7 +657,7 @@ namespace EnACT
             {
                 TimeWidth /= ZOOM_MULTIPLIER;
                 LeftBoundTime = LeftBoundTime;
-                ResetPlayHeadBarTimes();
+                SetPlayHeadBarTimes();
                 RedrawCaptionsRegion();
                 zoomLevel++; //Increase zoom level
                 SetScrollBarValues();
@@ -674,7 +673,7 @@ namespace EnACT
             {
                 TimeWidth *= ZOOM_MULTIPLIER;
                 LeftBoundTime = LeftBoundTime;
-                ResetPlayHeadBarTimes();
+                SetPlayHeadBarTimes();
                 RedrawCaptionsRegion();
                 zoomLevel--; //Decrease zoom level
                 SetScrollBarValues();
@@ -689,7 +688,7 @@ namespace EnACT
             zoomLevel = DEFAULT_ZOOM_LEVEL;
             TimeWidth = DEFAULT_TIME_WIDTH;
             LeftBoundTime = LeftBoundTime;
-            ResetPlayHeadBarTimes();
+            SetPlayHeadBarTimes();
             RedrawCaptionsRegion();
             SetScrollBarValues();
         }
@@ -717,13 +716,18 @@ namespace EnACT
 
         #region Playhead Bar
         /// <summary>
-        /// Resets the playheadBarTime
+        /// Sets the playHeadBarTimes so that they will be in multiples of halfTimeWidth
         /// </summary>
-        public void ResetPlayHeadBarTimes()
+        public void SetPlayHeadBarTimes()
         {
-            playheadBarTimes[0] = LeftBoundTime;
-            playheadBarTimes[1] = CenterBoundTime;
-            playheadBarTimes[2] = RightBoundTime;
+            int multiplier = (int) Math.Floor(CenterBoundTime / TimeWidth);
+
+            //Set the times in intervals of halfTimeWidth
+            playheadBarTimes[0] = Math.Max(0,TimeWidth * multiplier - TimeWidth);
+            playheadBarTimes[1] = Math.Max(0,TimeWidth * multiplier - halfTimeWidth);
+            playheadBarTimes[2] = Math.Max(0,TimeWidth * multiplier);
+            playheadBarTimes[3] = Math.Max(0,TimeWidth * multiplier + halfTimeWidth);
+            playheadBarTimes[4] = Math.Max(0,TimeWidth * multiplier + TimeWidth);
         }
         #endregion
 
