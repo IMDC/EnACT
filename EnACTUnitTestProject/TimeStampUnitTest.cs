@@ -40,7 +40,7 @@ namespace EnACTUnitTestProject
 
         #region Assignment
         /// <summary>
-        /// Tests the assignment of strings and doubles to timestamps
+        /// Tests the assignment and implicit conversion of strings and doubles to timestamps
         /// </summary>
         [TestMethod]
         public void TimestampSimpleAssignmentTest()
@@ -150,6 +150,54 @@ namespace EnACTUnitTestProject
                 Assert.Fail(); 
             }
             catch (InvalidTimestampException) { }
+        }
+        #endregion
+
+        #region Equality
+        /// <summary>
+        /// Tests the Timestamp.Equals() method
+        /// </summary>
+        [TestMethod]
+        public void TimestampEqualityTest()
+        {
+            //Arrange
+            double d1 = 10;
+            double d2 = 15;
+            double d3 = 5;
+
+            String s1 = "12:34:56.7";
+            String s2 = "30:30:30.3";
+            String s3 = "00:00:05.0";
+
+            Timestamp td;
+            Timestamp ts;
+            Timestamp t3;
+            Timestamp t4;
+
+            Object o5;
+
+            //Act
+            td = new Timestamp(d1);
+            ts = new Timestamp(s1);
+            t3 = new Timestamp(d3);
+            t4 = new Timestamp(s3);
+            o5 = new Timestamp(d3);
+
+            //Assert
+            Assert.IsTrue(td.Equals(d1));
+            Assert.IsFalse(td.Equals(d2));
+
+            Assert.IsTrue(ts.Equals(s1));
+            Assert.IsFalse(ts.Equals(s2));
+
+            Assert.IsTrue(t3.Equals(d3));
+            Assert.IsTrue(t3.Equals(s3));
+            //Test it against itself
+            Assert.IsTrue(t3.Equals(t3));
+            //Test it agaist different Timestamp with same value
+            Assert.IsTrue(t3.Equals(t4));
+            //Test it agaist object
+            Assert.IsTrue(t3.Equals(o5));
         }
         #endregion
     }
