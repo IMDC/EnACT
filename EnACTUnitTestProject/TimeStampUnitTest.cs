@@ -16,7 +16,7 @@ namespace EnACTUnitTestProject
         /// Tests the assignment of strings and doubles to timestamps
         /// </summary>
         [TestMethod]
-        public void AssignmentTest()
+        public void TimestampSimpleAssignmentTest()
         {
             //Arrange
             double d = 5;
@@ -37,6 +37,26 @@ namespace EnACTUnitTestProject
             //Assert
             Assert.AreEqual(expected, td.AsDouble);
             Assert.AreEqual(expected, ts.AsDouble);
+        }
+
+        /// <summary>
+        /// Tests the assignment of a negative double value to a Timestamp
+        /// </summary>
+        [TestMethod]
+        public void TimestampNegativeAssignmentTest()
+        {
+            //Arrange
+            double negativeD = -5;
+
+            Timestamp t;
+            //Act and Assert
+            try
+            {
+                t = new Timestamp(negativeD);
+                //If the line above doesn't throw an exception then the test fails
+                Assert.Fail();
+            }
+            catch (InvalidTimestampException) { }
         }
         #endregion
 
@@ -79,28 +99,28 @@ namespace EnACTUnitTestProject
             Timestamp tb2;
             Timestamp tb3;
 
-            //Act
+            //Act and Assert
             try 
             { 
                 tb1 = new Timestamp(badString1);
-                //Assert
-                Assert.Fail(); //If the line above doesn't throw an exception then the test fails
+                //If the line above doesn't throw an exception then the test fails
+                Assert.Fail(); 
             }
             catch (InvalidTimestampException) { }
 
             try 
             { 
                 tb2 = new Timestamp(badString2);
-                //Assert
-                Assert.Fail(); //If the line above doesn't throw an exception then the test fails
+                //If the line above doesn't throw an exception then the test fails
+                Assert.Fail(); 
             }
             catch (InvalidTimestampException) { }
 
             try 
             {
                 tb3 = new Timestamp(badString3);
-                //Assert
-                Assert.Fail(); //If the line above doesn't throw an exception then the test fails
+                //If the line above doesn't throw an exception then the test fails
+                Assert.Fail(); 
             }
             catch (InvalidTimestampException) { }
         }
