@@ -214,17 +214,7 @@ namespace EnACT
         }
         #endregion
 
-        #region Object Override Methods
-        /// <summary>
-        /// Returns the string value of this TimeStamp. Returns the same as
-        /// the AsString property
-        /// </summary>
-        /// <returns>This timestamp as a String</returns>
-        public override string ToString()
-        {
-            return AsString;
-        }
-
+        #region Equality
         /// <summary>
         /// Determines whether the specified Object is equal to the current Timestamp. 
         /// </summary>
@@ -269,6 +259,40 @@ namespace EnACT
                 return false;
 
             return time.Equals(t.AsDouble);
+        }
+
+        /// <summary>
+        /// Determines whether a Timestamp and a Double are equal
+        /// </summary>
+        /// <param name="t">The double to compare with the current Timestamp.</param>
+        /// <returns> true if the specified double is equal to the current Timestamp; 
+        /// otherwise, false. </returns>
+        public bool Equals(double d)
+        {
+            return time.Equals(d);
+        }
+
+        /// <summary>
+        /// Determines whether a Timestamp and a String are equal
+        /// </summary>
+        /// <param name="t">The String to compare with the current Timestamp.</param>
+        /// <returns> true if the specified String is equal to the current Timestamp; 
+        /// otherwise, false. </returns>
+        public bool Equals(String s)
+        {
+            return AsString.Equals(s);
+        }
+        #endregion
+
+        #region Object Override Methods
+        /// <summary>
+        /// Returns the string value of this TimeStamp. Returns the same as
+        /// the AsString property
+        /// </summary>
+        /// <returns>This timestamp as a String</returns>
+        public override string ToString()
+        {
+            return AsString;
         }
 
         /// <summary>

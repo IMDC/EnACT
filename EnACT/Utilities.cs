@@ -12,6 +12,7 @@ namespace EnACT
     /// </summary>
     public static class Utilities
     {
+        #region FillOutlinedRoundedRectangle
         /// <summary>
         /// Draws a rectangle shape with rounded edges. The rectangle will be drawn
         /// using a brush to fill the inside, and a pen for the outline, allowing
@@ -63,5 +64,6 @@ namespace EnACT
             //Draw outline
             g.DrawPath(outLinePen, gp);
         }
+        #endregion
     }
 }

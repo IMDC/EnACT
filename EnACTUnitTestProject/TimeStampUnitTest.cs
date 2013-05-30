@@ -198,6 +198,10 @@ namespace EnACTUnitTestProject
             Assert.IsTrue(t3.Equals(t4));
             //Test it agaist object
             Assert.IsTrue(t3.Equals(o5));
+
+            //Assert double and string equality
+            Assert.IsTrue(d3.Equals(t3));
+            Assert.IsTrue(s3.Equals(t3));
         }
         #endregion
 
