@@ -66,10 +66,13 @@ namespace EnACT
     /// </summary>
     public class Caption : INotifyPropertyChanged
     {
+        #region Private fields
         private Timestamp begin;
         private Timestamp end;
         private Timestamp duration;
+        #endregion
 
+        #region PropertyChanged Event
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged(String info)
@@ -79,7 +82,9 @@ namespace EnACT
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
         }
+        #endregion
 
+        #region Timestamp Properties
         /// <summary>
         /// A timestamp representing the begin time of a caption. Set in the 
         /// form XX:XX:XX.X where X is a digit from 0-9.
@@ -141,7 +146,9 @@ namespace EnACT
             }
             get { return duration; }
         }
+        #endregion
 
+        #region Public Properties
         private Speaker speaker;
         /// <summary>
         /// A reference to a speaker in the program's speaker list.
@@ -180,7 +187,9 @@ namespace EnACT
             }
             get{ return WordListText(); }
         }
+        #endregion
 
+        #region Constructor
         /// <summary>
         /// Constructs a Caption object with a blank line and the DefaultSpeaker
         /// </summary>
@@ -215,7 +224,9 @@ namespace EnACT
 
             this.FeedWordList(line);
         }
+        #endregion
 
+        #region FeedWordList
         /// <summary>
         /// Takes in a string and feeds it into the wordlist, splitting it up
         /// and turning each word in the string into a captionWord
@@ -234,7 +245,9 @@ namespace EnACT
                     this.WordList.Add(new CaptionWord(word));
             }
         }
+        #endregion
 
+        #region WordListText
         /// <summary>
         /// Returns the captions in WordList as a string, with each CaptionWord being
         /// separated by spaces (' ').
@@ -251,11 +264,13 @@ namespace EnACT
                 s.Append(" ");
             }
             //Append the last element without adding a space after it
-            if(0 < WordList.Count)
+            if (0 < WordList.Count)
                 s.Append(WordList[WordList.Count - 1].ToString());
             return s.ToString();
-        }
+        } 
+        #endregion
 
+        #region ToString
         /// <summary>
         /// Returns the text sentence that this caption represents.
         /// Calls the WordListText method, and returns its value.
@@ -264,7 +279,8 @@ namespace EnACT
         public override string ToString()
         {
             return this.WordListText();
-        }
+        } 
+        #endregion
     }
     #endregion
 }

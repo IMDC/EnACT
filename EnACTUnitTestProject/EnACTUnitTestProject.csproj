@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimeStampUnitTest.cs" />
+    <Compile Include="CaptionUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EnACT\EnACT.csproj">
