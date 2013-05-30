@@ -11,6 +11,33 @@ namespace EnACTUnitTestProject
     [TestClass]
     public class TimeStampUnitTest
     {
+        #region Constructor
+        /// <summary>
+        /// Tests the constructors of Timestamp to see that they construct Timestamp properly
+        /// </summary>
+        [TestMethod]
+        public void TimestampConstuctorTest()
+        {
+            //Arrange
+            double d = 100;
+            String s = "12:34:56.7";
+
+            Timestamp t;
+            Timestamp td;
+            Timestamp ts;
+
+            //Act
+            t = new Timestamp();
+            td = new Timestamp(d);
+            ts = new Timestamp(s);
+
+            //Assert
+            Assert.AreEqual(0, t.AsDouble);
+            Assert.AreEqual(d, td.AsDouble);
+            Assert.AreEqual(s, ts.AsString);
+        }
+        #endregion
+
         #region Assignment
         /// <summary>
         /// Tests the assignment of strings and doubles to timestamps
