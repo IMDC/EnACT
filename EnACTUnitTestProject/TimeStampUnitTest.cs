@@ -200,5 +200,42 @@ namespace EnACTUnitTestProject
             Assert.IsTrue(t3.Equals(o5));
         }
         #endregion
+
+        #region Operators
+        /// <summary>
+        /// Tests the Timestamp's overridden + operator
+        /// </summary>
+        [TestMethod]
+        public void TimestampOperatorAdditionTest()
+        {
+            //Arrange
+            double d1 = 5;
+            double d2 = 6;
+            double expected = 11;
+
+            Timestamp tExpected;
+            Timestamp t1;
+            Timestamp t2;
+            Timestamp t3;
+            Timestamp t4;
+            Timestamp t5;
+            Timestamp t6;
+
+            //Act
+            tExpected = new Timestamp(expected);
+            t1 = new Timestamp(d1);
+            t2 = new Timestamp(d2);
+            t3 = d1 + d2;
+            t4 = t1 + d2;
+            t5 = d1 + t2;
+            t6 = t1 + t2;
+
+            //Assert
+            Assert.AreEqual(expected, t3.AsDouble);
+            Assert.AreEqual(expected, t4.AsDouble);
+            Assert.AreEqual(expected, t5.AsDouble);
+            Assert.AreEqual(expected, t6.AsDouble);
+        }
+        #endregion
     }
 }
