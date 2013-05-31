@@ -461,7 +461,7 @@ namespace EnACT
         }
         #endregion
 
-        #region Mouse Events
+        #region Mouse Click Events
         /// <summary>
         /// Raises the MouseDown event.
         /// </summary>
@@ -510,8 +510,14 @@ namespace EnACT
 
             if (mouseMoveAction == MouseMoveAction.movePlayhead)
             {
+                int xPos = e.X;
+
+                //Subtract the width of Location Labels if they're being shown
+                if (DrawLocationLabels)
+                    xPos -= LOCATION_LABEL_WIDTH;
+
                 //Set playhead time based on click location
-                PlayHeadTime = (double)((e.X - LOCATION_LABEL_WIDTH) / pixelsPerSecond + LeftBoundTime);
+                PlayHeadTime = (double)(xPos / pixelsPerSecond + LeftBoundTime);
                 RedrawCaptionsRegion(); //redraw the playhead
             }
             Console.WriteLine("Mouse Moved!"); 
@@ -531,8 +537,14 @@ namespace EnACT
 
             if (playheadBarRect.Contains(e.Location))
             {
+                int xPos = e.X;
+
+                //Subtract the width of Location Labels if they're being shown
+                if (DrawLocationLabels)
+                    xPos -= LOCATION_LABEL_WIDTH;
+
                 //Set playhead time based on click location
-                PlayHeadTime = (double)((e.X- LOCATION_LABEL_WIDTH) / pixelsPerSecond + LeftBoundTime);
+                PlayHeadTime = (double)(xPos / pixelsPerSecond + LeftBoundTime);
                 RedrawCaptionsRegion(); //redraw the playhead
             }
         }
