@@ -472,13 +472,23 @@ namespace EnACT
             if (e.Button != MouseButtons.Left)
                 return;
 
-            RectangleF playheadBarRect = new RectangleF(LOCATION_LABEL_WIDTH, 0, 
+            int xPos = e.X;
+
+            //Subtract the width of Location Labels if they're being shown
+            if (DrawLocationLabels)
+                xPos -= LOCATION_LABEL_WIDTH;
+
+            RectangleF playheadBarRect = new RectangleF(xPos, 0, 
                 Width - LOCATION_LABEL_WIDTH, PLAYHEAD_BAR_HEIGHT);
 
             if (playheadBarRect.Contains(e.Location))
             {
                 //Set Action
                 mouseMoveAction = MouseMoveAction.movePlayhead;
+
+                //Set playhead time based on click location
+                PlayHeadTime = (double)(xPos / pixelsPerSecond + LeftBoundTime);
+                RedrawCaptionsRegion(); //redraw the playhead
             }
             Console.WriteLine("Mouse Down!"); 
         }
@@ -532,17 +542,17 @@ namespace EnACT
         {
             base.OnMouseClick(e);
 
-            RectangleF playheadBarRect = new RectangleF(LOCATION_LABEL_WIDTH, 0,
+            int xPos = e.X;
+
+            //Subtract the width of Location Labels if they're being shown
+            if (DrawLocationLabels)
+                xPos -= LOCATION_LABEL_WIDTH;
+
+            RectangleF playheadBarRect = new RectangleF(xPos, 0,
                 Width - LOCATION_LABEL_WIDTH, PLAYHEAD_BAR_HEIGHT);
 
             if (playheadBarRect.Contains(e.Location))
             {
-                int xPos = e.X;
-
-                //Subtract the width of Location Labels if they're being shown
-                if (DrawLocationLabels)
-                    xPos -= LOCATION_LABEL_WIDTH;
-
                 //Set playhead time based on click location
                 PlayHeadTime = (double)(xPos / pixelsPerSecond + LeftBoundTime);
                 RedrawCaptionsRegion(); //redraw the playhead
