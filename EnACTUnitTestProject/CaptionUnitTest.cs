@@ -32,5 +32,92 @@ namespace EnACTUnitTestProject
             //Assert
             Assert.AreEqual(expectedDuration, c.Duration.AsDouble);
         }
+
+        /// <summary>
+        /// This method tests setting the Caption.Begin property
+        /// </summary>
+        [TestMethod]
+        public void CaptionChangeBeginTimestampTest()
+        {
+            //Arrange
+            double beginTime = 5;
+            double endTime = 20;
+
+            double newBeginTime = 15;
+
+            double expectedBegin = 15;
+            double expectedEnd = 20;
+            double expectedDuration = 5;
+
+            Caption c;
+
+            //Act
+            c = new Caption("", new Speaker(), new Timestamp(beginTime), new Timestamp(endTime));
+
+            c.Begin = newBeginTime;
+
+            //Assert
+            Assert.AreEqual(expectedBegin, c.Begin.AsDouble);
+            Assert.AreEqual(expectedEnd, c.End.AsDouble);
+            Assert.AreEqual(expectedDuration, c.Duration.AsDouble);
+        }
+
+        /// <summary>
+        /// This method tests setting the Caption.End property
+        /// </summary>
+        [TestMethod]
+        public void CaptionChangeEndTimestampTest()
+        {
+            //Arrange
+            double beginTime = 5;
+            double endTime = 20;
+
+            double newEndTime = 25;
+
+            double expectedBegin = 5;
+            double expectedEnd = 25;
+            double expectedDuration = 20;
+
+            Caption c;
+
+            //Act
+            c = new Caption("", new Speaker(), new Timestamp(beginTime), new Timestamp(endTime));
+
+            c.End = newEndTime;
+
+            //Assert
+            Assert.AreEqual(expectedBegin, c.Begin.AsDouble);
+            Assert.AreEqual(expectedEnd, c.End.AsDouble);
+            Assert.AreEqual(expectedDuration, c.Duration.AsDouble);
+        }
+
+        /// <summary>
+        /// This method tests setting the Caption.Duration property
+        /// </summary>
+        [TestMethod]
+        public void CaptionChangeDurationTimestampTest()
+        {
+            //Arrange
+            double beginTime = 5;
+            double endTime = 20;
+
+            double newDurationTime = 30;
+
+            double expectedBegin = 5;
+            double expectedEnd = 35;
+            double expectedDuration = 30;
+
+            Caption c;
+
+            //Act
+            c = new Caption("", new Speaker(), new Timestamp(beginTime), new Timestamp(endTime));
+
+            c.Duration = newDurationTime;
+
+            //Assert
+            Assert.AreEqual(expectedBegin, c.Begin.AsDouble);
+            Assert.AreEqual(expectedEnd, c.End.AsDouble);
+            Assert.AreEqual(expectedDuration, c.Duration.AsDouble);
+        }
     }
 }
