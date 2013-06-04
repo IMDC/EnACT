@@ -36,7 +36,18 @@ namespace EnACT
         {
             movePlayhead,
             moveCaption,
+            changeCaptionTime,
             noAction
+        };
+
+        /// <summary>
+        /// An enum representing what caption timestamp to change when adjusting the time of a caption
+        /// </summary>
+        private enum TimestamptoChange
+        {
+            begin,
+            end,
+            none
         };
 
         /// <summary>
@@ -77,6 +88,8 @@ namespace EnACT
         /// The draw height in pixels of the playhead bar
         /// </summary>
         private const int PLAYHEAD_BAR_HEIGHT = PLAYHEAD_HALF_WIDTH * 2;
+
+        private const int CAPTION_SELECTION_WIDTH = 3;
         #endregion
 
         #region Private fields
@@ -104,6 +117,10 @@ namespace EnACT
         /// The current action being performed by the mouse.
         /// </summary>
         private MouseMoveAction mouseMoveAction;
+
+        private Caption selectedCaption;
+
+        private TimestamptoChange timestampToChange;
         #endregion
 
         #region Private Properties
@@ -478,6 +495,8 @@ namespace EnACT
             if (DrawLocationLabels)
                 xPos -= LOCATION_LABEL_WIDTH;
 
+            double currentTime = (double)(xPos / pixelsPerSecond + LeftBoundTime);
+
             RectangleF playheadBarRect = new RectangleF(xPos, 0, 
                 Width - LOCATION_LABEL_WIDTH, PLAYHEAD_BAR_HEIGHT);
 
@@ -487,10 +506,40 @@ namespace EnACT
                 mouseMoveAction = MouseMoveAction.movePlayhead;
 
                 //Set playhead time based on click location
-                PlayHeadTime = (double)(xPos / pixelsPerSecond + LeftBoundTime);
+                PlayHeadTime = currentTime;
                 RedrawCaptionsRegion(); //redraw the playhead
             }
-            Console.WriteLine("Mouse Down!"); 
+            else
+            {
+                double beginX;
+                double endX;
+                foreach (Caption c in CaptionList)
+                {
+                    beginX = (c.Begin - LeftBoundTime) * pixelsPerSecond;
+
+                    //if (c.Begin - 0.05 <= currentTime && currentTime <= c.Begin + 0.05)
+                    if (xPos - CAPTION_SELECTION_WIDTH <= beginX && beginX <= xPos + CAPTION_SELECTION_WIDTH)
+                    {
+                        selectedCaption = c;
+                        mouseMoveAction = MouseMoveAction.changeCaptionTime;
+                        timestampToChange = TimestamptoChange.begin;
+                        Console.WriteLine("C.Begin");
+                        break;
+                    }
+
+                    endX = (c.End - LeftBoundTime) * pixelsPerSecond;
+                    //if (c.End - 0.05 <= currentTime && currentTime <= c.End + 0.05)
+                    if (xPos - CAPTION_SELECTION_WIDTH <= endX && endX <= xPos + CAPTION_SELECTION_WIDTH)
+                    {
+                        selectedCaption = c;
+                        mouseMoveAction = MouseMoveAction.changeCaptionTime;
+                        timestampToChange = TimestamptoChange.end;
+                        Console.WriteLine("C.End");
+                        break;
+                    }
+                }
+            }
+            //Console.WriteLine("Mouse Down!"); 
         }
 
         /// <summary>
@@ -503,9 +552,13 @@ namespace EnACT
             if (e.Button != MouseButtons.Left)
                 return;
 
+            //Clear selected caption
+            selectedCaption = null;
+
             //Reset the action
             mouseMoveAction = MouseMoveAction.noAction;
-            Console.WriteLine("Mouse Up!"); 
+            timestampToChange = TimestamptoChange.none;
+            //Console.WriteLine("Mouse Up!"); 
         }
 
         /// <summary>
@@ -518,19 +571,32 @@ namespace EnACT
             if (e.Button != MouseButtons.Left)
                 return;
 
+            int xPos = e.X;
+
+            //Subtract the width of Location Labels if they're being shown
+            if (DrawLocationLabels)
+                xPos -= LOCATION_LABEL_WIDTH;
+
             if (mouseMoveAction == MouseMoveAction.movePlayhead)
             {
-                int xPos = e.X;
-
-                //Subtract the width of Location Labels if they're being shown
-                if (DrawLocationLabels)
-                    xPos -= LOCATION_LABEL_WIDTH;
-
                 //Set playhead time based on click location
                 PlayHeadTime = (double)(xPos / pixelsPerSecond + LeftBoundTime);
                 RedrawCaptionsRegion(); //redraw the playhead
             }
-            Console.WriteLine("Mouse Moved!"); 
+            else if (mouseMoveAction == MouseMoveAction.changeCaptionTime)
+            {
+                double currentTime = (double)(xPos / pixelsPerSecond + LeftBoundTime);
+                if (timestampToChange == TimestamptoChange.begin)
+                {
+                    selectedCaption.Begin = currentTime;
+                }
+                else if (timestampToChange == TimestamptoChange.end)
+                {
+                    selectedCaption.End = currentTime;
+                }
+                RedrawCaptionsRegion();
+            }
+            //Console.WriteLine("Mouse Moved!"); 
         }
 
         /// <summary>
