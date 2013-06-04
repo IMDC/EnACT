@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
 using System.Reflection;
+using System.Drawing;
 
 namespace EnACT
 {
@@ -63,7 +64,7 @@ namespace EnACT
         public const String TNAME = "Text";
         #endregion
 
-        #region Members and Properties
+        #region Fields and Properties
         /// <summary>
         /// A set of Speaker objects, each speaker being mapped to by its name
         /// </summary>
@@ -107,6 +108,28 @@ namespace EnACT
             }
             get { return CaptionList; }
         }
+
+        /// <summary>
+        /// Backing field for UserInputEnabled
+        /// </summary>
+        private bool uInEn;
+
+        /// <summary>
+        /// Property that represents whether user input is allowed or not. When set, it will
+        /// enable or disable user input on the control
+        /// </summary>
+        public bool UserInputEnabled 
+        {
+            set
+            {
+                uInEn = value;
+                if (uInEn)  //Value == true
+                    EnableUserInput();
+                else
+                    DisableUserInput();
+            }
+            get { return uInEn; }  
+        }
         #endregion
 
         #region Constructor
@@ -127,6 +150,9 @@ namespace EnACT
 
             //Don't create columns for each property.
             AutoGenerateColumns = false;
+
+            //Allow user input
+            UserInputEnabled = true;
         }
 
         /// <summary>
@@ -402,6 +428,34 @@ namespace EnACT
         {
             base.OnMouseLeave(e);
             this.InvokeLostFocus(this, new EventArgs());
+        }
+        #endregion
+
+        #region Enable/Disable User Input
+        /// <summary>
+        /// Called from the setter of the UserInputEnabled property. Enables the
+        /// CaptionView and changes the colors back to the original colors.
+        /// </summary>
+        private void EnableUserInput()
+        {
+            ReadOnly = false;
+            ForeColor = SystemColors.ControlText;
+            ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
+            EnableHeadersVisualStyles = true;
+
+        }
+
+        /// <summary>
+        /// Called from the setter of the UserInputEnabled property. Makes the
+        /// Captionview readonly and grays-out the text.
+        /// </summary>
+        private void DisableUserInput()
+        {
+            Console.WriteLine("Forcolor: {0}", ForeColor.ToString());
+            ReadOnly = true;
+            ForeColor = SystemColors.GrayText;
+            ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.GrayText;
+            EnableHeadersVisualStyles = false;
         }
         #endregion
     }
