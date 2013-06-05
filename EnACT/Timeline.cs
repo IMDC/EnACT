@@ -246,6 +246,8 @@ namespace EnACT
         /// An event that is called when the user changes the Playhead on the Timeline
         /// </summary>
         public event EventHandler<TimelinePlayheadChangedEventArgs> PlayheadChanged;
+
+        public event EventHandler<TimelineCaptionTimestampChangedEventArgs> CaptionTimestampChanged;
         #endregion
 
         #region Constructor
@@ -600,10 +602,12 @@ namespace EnACT
                 if (timestampToChange == TimestamptoChange.begin)
                 {
                     selectedCaption.Begin = currentTime;
+                    OnCaptionTimestampChanged(new TimelineCaptionTimestampChangedEventArgs());
                 }
                 else if (timestampToChange == TimestamptoChange.end)
                 {
                     selectedCaption.End = currentTime;
+                    OnCaptionTimestampChanged(new TimelineCaptionTimestampChangedEventArgs());
                 }
                 RedrawCaptionsRegion();
             }
@@ -873,6 +877,24 @@ namespace EnACT
              * will be set as null in-between the null check and the handler call.
              */
             EventHandler<TimelinePlayheadChangedEventArgs> handler = PlayheadChanged;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Invokes the CaptionTimestampChanged event, which happens when any of Caption.Begin,
+        /// Caption.End, or Caption.Duration are changed from the Timeline.
+        /// </summary>
+        /// <param name="e"></param>
+        private void OnCaptionTimestampChanged(TimelineCaptionTimestampChangedEventArgs e)
+        {
+            /* Make a local copy of the event to prevent the case where the handler
+             * will be set as null in-between the null check and the handler call.
+             */
+            EventHandler<TimelineCaptionTimestampChangedEventArgs> handler = CaptionTimestampChanged;
 
             if (handler != null)
             {

@@ -329,6 +329,7 @@
             this.Timeline.TimeWidth = 10D;
             this.Timeline.VideoLength = 0D;
             this.Timeline.PlayheadChanged += new System.EventHandler<EnACT.TimelinePlayheadChangedEventArgs>(this.Timeline_PlayheadChanged);
+            this.Timeline.CaptionTimestampChanged += new System.EventHandler<EnACT.TimelineCaptionTimestampChangedEventArgs>(this.Timeline_CaptionTimestampChanged);
             // 
             // EngineView
             // 

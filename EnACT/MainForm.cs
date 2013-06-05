@@ -306,5 +306,13 @@ namespace EnACT
             EngineView.SetPlayHeadTime(e.PlayheadTime);
             EngineView.Play();
         }
+
+        private void Timeline_CaptionTimestampChanged(object sender, TimelineCaptionTimestampChangedEventArgs e)
+        {
+            //Console.WriteLine("Caption Timestamp Changed!");
+
+            //Update CaptionView
+            CaptionView.Invalidate();
+        }
     }//Class
 }//Namespace

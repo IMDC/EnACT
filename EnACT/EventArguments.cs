@@ -26,4 +26,14 @@ namespace EnACT
             PlayheadTime = playheadTime;
         }
     }//Class
+
+    /// <summary>
+    /// Provides data for the Timeline.CaptionTimestampChanged event
+    /// </summary>
+    public class TimelineCaptionTimestampChangedEventArgs : EventArgs
+    {
+        public TimelineCaptionTimestampChangedEventArgs()
+        {
+        }
+    }
 }
