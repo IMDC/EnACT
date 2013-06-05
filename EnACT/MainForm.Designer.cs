@@ -338,7 +338,7 @@
             this.EngineView.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("EngineView.OcxState")));
             this.EngineView.Size = new System.Drawing.Size(320, 240);
             this.EngineView.TabIndex = 11;
-            this.EngineView.VideoLoaded += new EnACT.EngineView.VideoLoadedHandler(this.FlashVideoPlayer_VideoLoaded);
+            this.EngineView.VideoLoaded += new System.EventHandler(this.FlashVideoPlayer_VideoLoaded);
             // 
             // CaptionView
             // 

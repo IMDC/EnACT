@@ -516,7 +516,7 @@ namespace EnACT
                 PlayHeadTime = currentTime;
                 RedrawCaptionsRegion(); //redraw the playhead
                 //Invoke PlayheadChanged event
-                OnPlayheadChangedEvent(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
+                OnPlayheadChanged(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
             }
             else
             {
@@ -592,7 +592,7 @@ namespace EnACT
                 PlayHeadTime = (double)(xPos / pixelsPerSecond + LeftBoundTime);
                 RedrawCaptionsRegion(); //redraw the playhead
                 //Invoke PlayheadChanged event
-                OnPlayheadChangedEvent(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
+                OnPlayheadChanged(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
             }
             else if (mouseMoveAction == MouseMoveAction.changeCaptionTime)
             {
@@ -633,7 +633,7 @@ namespace EnACT
                 //Set playhead time based on click location
                 PlayHeadTime = (double)(xPos / pixelsPerSecond + LeftBoundTime);
                 //Invoke PlayheadChanged event
-                OnPlayheadChangedEvent(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
+                OnPlayheadChanged(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
                 RedrawCaptionsRegion(); //redraw the playhead
             }
         }
@@ -867,7 +867,7 @@ namespace EnACT
         /// is changed by the user.
         /// </summary>
         /// <param name="e"></param>
-        private void OnPlayheadChangedEvent(TimelinePlayheadChangedEventArgs e)
+        private void OnPlayheadChanged(TimelinePlayheadChangedEventArgs e)
         {
             /* Make a local copy of the event to prevent the case where the handler
              * will be set as null in-between the null check and the handler call.
