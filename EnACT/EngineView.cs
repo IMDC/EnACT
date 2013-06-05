@@ -16,10 +16,10 @@ namespace EnACT
     /// </summary>
     public partial class EngineView : AxShockwaveFlash
     {
-        //A delegate (like a C function pointer) for handling the VideoLoaded event
-        public delegate void VideoLoadedHandler(object sender, EventArgs e);
-        //An event that is fired when the Flash Video is finished loading
-        public event VideoLoadedHandler VideoLoaded;
+        /// <summary>
+        /// An event that is invoked when the Flash Video is finished loading
+        /// </summary>
+        public event EventHandler VideoLoaded;
 
         public EngineView() : base()
         {
@@ -32,10 +32,15 @@ namespace EnACT
         /// <param name="e">Event Arguments</param>
         public virtual void OnVideoLoaded(EventArgs e)
         {
-            Console.WriteLine("Event Fired!");
-            if (VideoLoaded != null)
+            /* Make a local copy of the event to prevent the case where the handler
+             * will be set as null in-between the null check and the handler call.
+             */
+            EventHandler handler = VideoLoaded;
+
+            Console.WriteLine("VideoLoaded Event Fired!");
+            if (handler != null)
             {
-                VideoLoaded(this, e);
+                handler(this, e);
             }
         }
 
