@@ -56,8 +56,8 @@
             this.Button_ShowLabels = new System.Windows.Forms.Button();
             this.Button_ZoomTimelineIn = new System.Windows.Forms.Button();
             this.Button_ZoomTimelineOut = new System.Windows.Forms.Button();
-            this.DebugButton = new System.Windows.Forms.Button();
             this.Button_ZoomReset = new System.Windows.Forms.Button();
+            this.DebugButton = new System.Windows.Forms.Button();
             this.Timeline = new EnACT.Timeline();
             this.EngineView = new EnACT.EngineView();
             this.CaptionView = new EnACT.CaptionView();
@@ -232,8 +232,8 @@
             // 
             // TrackBar_Timeline
             // 
-            this.TrackBar_Timeline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.TrackBar_Timeline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TrackBar_Timeline.Location = new System.Drawing.Point(338, 222);
             this.TrackBar_Timeline.Name = "TrackBar_Timeline";
             this.TrackBar_Timeline.Size = new System.Drawing.Size(594, 45);
@@ -289,16 +289,6 @@
             this.Button_ZoomTimelineOut.UseVisualStyleBackColor = true;
             this.Button_ZoomTimelineOut.Click += new System.EventHandler(this.Button_ZoomTimelineOut_Click);
             // 
-            // DebugButton
-            // 
-            this.DebugButton.Location = new System.Drawing.Point(662, 27);
-            this.DebugButton.Name = "DebugButton";
-            this.DebugButton.Size = new System.Drawing.Size(139, 139);
-            this.DebugButton.TabIndex = 17;
-            this.DebugButton.Text = "Random Debug Button";
-            this.DebugButton.UseVisualStyleBackColor = true;
-            this.DebugButton.Click += new System.EventHandler(this.DebugButton_Click);
-            // 
             // Button_ZoomReset
             // 
             this.Button_ZoomReset.Location = new System.Drawing.Point(618, 193);
@@ -310,10 +300,20 @@
             this.Button_ZoomReset.UseVisualStyleBackColor = true;
             this.Button_ZoomReset.Click += new System.EventHandler(this.Button_ZoomReset_Click);
             // 
+            // DebugButton
+            // 
+            this.DebugButton.Location = new System.Drawing.Point(662, 27);
+            this.DebugButton.Name = "DebugButton";
+            this.DebugButton.Size = new System.Drawing.Size(139, 139);
+            this.DebugButton.TabIndex = 17;
+            this.DebugButton.Text = "Random Debug Button";
+            this.DebugButton.UseVisualStyleBackColor = true;
+            this.DebugButton.Click += new System.EventHandler(this.DebugButton_Click);
+            // 
             // Timeline
             // 
-            this.Timeline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.Timeline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Timeline.AutoScroll = true;
             this.Timeline.AutoScrollMinSize = new System.Drawing.Size(920, 0);
             this.Timeline.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -322,12 +322,13 @@
             this.Timeline.Location = new System.Drawing.Point(12, 273);
             this.Timeline.MinimumSize = new System.Drawing.Size(0, 199);
             this.Timeline.Name = "Timeline";
-            this.Timeline.PlayHeadTime = 0;
+            this.Timeline.PlayHeadTime = 0D;
             this.Timeline.Size = new System.Drawing.Size(920, 199);
             this.Timeline.SpeakerSet = null;
             this.Timeline.TabIndex = 15;
-            this.Timeline.TimeWidth = 10;
-            this.Timeline.VideoLength = 0;
+            this.Timeline.TimeWidth = 10D;
+            this.Timeline.VideoLength = 0D;
+            this.Timeline.PlayheadChanged += new System.EventHandler<EnACT.TimelinePlayheadChangedEventArgs>(this.Timeline_PlayheadChanged);
             // 
             // EngineView
             // 
@@ -343,14 +344,14 @@
             // 
             this.CaptionView.AllowUserToAddRows = false;
             this.CaptionView.AllowUserToDeleteRows = false;
-            this.CaptionView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.CaptionView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.CaptionView.CaptionSource = null;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -364,6 +365,7 @@
             this.CaptionView.Size = new System.Drawing.Size(864, 192);
             this.CaptionView.SpeakerSet = null;
             this.CaptionView.TabIndex = 1;
+            this.CaptionView.UserInputEnabled = true;
             this.CaptionView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.CaptionView_CellValueChanged);
             // 
             // MainForm

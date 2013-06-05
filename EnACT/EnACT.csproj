@@ -88,6 +88,7 @@
     <Compile Include="EngineView.Designer.cs">
       <DependentUpon>EngineView.cs</DependentUpon>
     </Compile>
+    <Compile Include="EventArguments.cs" />
     <Compile Include="JorgeForm.cs">
       <SubType>Form</SubType>
     </Compile>

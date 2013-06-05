@@ -241,6 +241,13 @@ namespace EnACT
         public List<Caption> CaptionList { set; get; }
         #endregion
 
+        #region Events
+        /// <summary>
+        /// An event that is called when the user changes the Playhead on the Timeline
+        /// </summary>
+        public event EventHandler<TimelinePlayheadChangedEventArgs> PlayheadChanged;
+        #endregion
+
         #region Constructor
         public Timeline()
         {
@@ -508,6 +515,8 @@ namespace EnACT
                 //Set playhead time based on click location
                 PlayHeadTime = currentTime;
                 RedrawCaptionsRegion(); //redraw the playhead
+                //Invoke PlayheadChanged event
+                OnPlayheadChangedEvent(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
             }
             else
             {
@@ -582,6 +591,8 @@ namespace EnACT
                 //Set playhead time based on click location
                 PlayHeadTime = (double)(xPos / pixelsPerSecond + LeftBoundTime);
                 RedrawCaptionsRegion(); //redraw the playhead
+                //Invoke PlayheadChanged event
+                OnPlayheadChangedEvent(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
             }
             else if (mouseMoveAction == MouseMoveAction.changeCaptionTime)
             {
@@ -621,6 +632,8 @@ namespace EnACT
             {
                 //Set playhead time based on click location
                 PlayHeadTime = (double)(xPos / pixelsPerSecond + LeftBoundTime);
+                //Invoke PlayheadChanged event
+                OnPlayheadChangedEvent(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
                 RedrawCaptionsRegion(); //redraw the playhead
             }
         }
@@ -845,6 +858,26 @@ namespace EnACT
                 RedrawInnerRegion();
             }
             SetScrollBarValues();
+        }
+        #endregion
+
+        #region Event Invocation Methods
+        /// <summary>
+        /// Invokes the PlayheadChanged event, which should happen everytime the playhead
+        /// is changed by the user.
+        /// </summary>
+        /// <param name="e"></param>
+        private void OnPlayheadChangedEvent(TimelinePlayheadChangedEventArgs e)
+        {
+            /* Make a local copy of the event to prevent the case where the handler
+             * will be set as null in-between the null check and the handler call.
+             */
+            EventHandler<TimelinePlayheadChangedEventArgs> handler = PlayheadChanged;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
         }
         #endregion
     }//Class

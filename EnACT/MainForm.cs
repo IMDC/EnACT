@@ -270,11 +270,6 @@ namespace EnACT
                 CaptionView.UserInputEnabled = false;
             else
                 CaptionView.UserInputEnabled = true;
-
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    Button_ParseESR_Click(sender, e);
-            //}
         }
 
         /// <summary>
@@ -300,6 +295,16 @@ namespace EnACT
         private void Button_ZoomReset_Click(object sender, EventArgs e)
         {
             Timeline.ZoomReset();
+        }
+
+        private void Timeline_PlayheadChanged(object sender, TimelinePlayheadChangedEventArgs e)
+        {
+            Console.WriteLine("Playhead Changed!");
+
+            //Pause video, change time, and then play to prevent confusing the player
+            EngineView.Pause();
+            EngineView.SetPlayHeadTime(e.PlayheadTime);
+            EngineView.Play();
         }
     }//Class
 }//Namespace
