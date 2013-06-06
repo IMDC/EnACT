@@ -118,9 +118,17 @@ namespace EnACT
         /// </summary>
         private MouseMoveAction mouseMoveAction;
 
+        /// <summary>
+        /// The caption selected to be modified by mouse movements
+        /// </summary>
         private Caption selectedCaption;
 
         private TimestamptoChange timestampToChange;
+
+        /// <summary>
+        /// Represents TimeWidth divided by 2
+        /// </summary>
+        private double halfTimeWidth;
         #endregion
 
         #region Private Properties
@@ -195,11 +203,6 @@ namespace EnACT
                     return 0;
             }
         }
-
-        /// <summary>
-        /// Represents TimeWidth divided by 2
-        /// </summary>
-        private double halfTimeWidth;
         #endregion
 
         #region Public Properties
