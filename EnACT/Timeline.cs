@@ -271,6 +271,12 @@ namespace EnACT
         /// Caption.End or Caption.Duration
         /// </summary>
         public event EventHandler<TimelineCaptionTimestampChangedEventArgs> CaptionTimestampChanged;
+
+        /// <summary>
+        /// An event that is raised when the user selects and moves a caption on the timeline
+        /// with the mouse
+        /// </summary>
+        public event EventHandler CaptionMoved;
         #endregion
 
         #region Constructor
@@ -656,6 +662,8 @@ namespace EnACT
                 selectedCaption.Begin = currentTime - selectedCaptionDifference;
                 selectedCaption.Duration = oldDuration;
 
+                OnCaptionMoved(EventArgs.Empty);
+
                 RedrawCaptionsRegion();
             }
             //Console.WriteLine("Mouse Moved!"); 
@@ -919,7 +927,7 @@ namespace EnACT
         /// Invokes the PlayheadChanged event, which should happen everytime the playhead
         /// is changed by the user.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Event Args</param>
         private void OnPlayheadChanged(TimelinePlayheadChangedEventArgs e)
         {
             /* Make a local copy of the event to prevent the case where the handler
@@ -937,13 +945,31 @@ namespace EnACT
         /// Invokes the CaptionTimestampChanged event, which happens when any of Caption.Begin,
         /// Caption.End, or Caption.Duration are changed from the Timeline.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Event Arg</param>
         private void OnCaptionTimestampChanged(TimelineCaptionTimestampChangedEventArgs e)
         {
             /* Make a local copy of the event to prevent the case where the handler
              * will be set as null in-between the null check and the handler call.
              */
             EventHandler<TimelineCaptionTimestampChangedEventArgs> handler = CaptionTimestampChanged;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Invokes the CaptionMoved event, which happens when a Caption is moved by the mouse
+        /// in the Timeline
+        /// </summary>
+        /// <param name="e">Event Arg</param>
+        private void OnCaptionMoved(EventArgs e)
+        {
+            /* Make a local copy of the event to prevent the case where the handler
+             * will be set as null in-between the null check and the handler call.
+             */
+            EventHandler handler = CaptionMoved;
 
             if (handler != null)
             {

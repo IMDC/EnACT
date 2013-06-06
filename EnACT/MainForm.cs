@@ -316,7 +316,13 @@ namespace EnACT
         {
             //Console.WriteLine("Caption Timestamp Changed!");
 
-            //Update CaptionView
+            //Force Captionview to be repainted
+            CaptionView.Invalidate();
+        }
+
+        private void Timeline_CaptionMoved(object sender, EventArgs e)
+        {
+            //Force Captionview to be repainted
             CaptionView.Invalidate();
         }
     }//Class

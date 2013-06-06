@@ -330,6 +330,7 @@
             this.Timeline.VideoLength = 0D;
             this.Timeline.PlayheadChanged += new System.EventHandler<EnACT.TimelinePlayheadChangedEventArgs>(this.Timeline_PlayheadChanged);
             this.Timeline.CaptionTimestampChanged += new System.EventHandler<EnACT.TimelineCaptionTimestampChangedEventArgs>(this.Timeline_CaptionTimestampChanged);
+            this.Timeline.CaptionMoved += new System.EventHandler(this.Timeline_CaptionMoved);
             // 
             // EngineView
             // 
