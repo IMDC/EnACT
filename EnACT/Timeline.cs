@@ -264,6 +264,10 @@ namespace EnACT
         /// </summary>
         public event EventHandler<TimelinePlayheadChangedEventArgs> PlayheadChanged;
 
+        /// <summary>
+        /// An event that is called when the user changes a Caption Timestamp, such as
+        /// Caption.End or Caption.Duration
+        /// </summary>
         public event EventHandler<TimelineCaptionTimestampChangedEventArgs> CaptionTimestampChanged;
         #endregion
 
