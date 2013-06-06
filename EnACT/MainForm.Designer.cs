@@ -61,6 +61,7 @@
             this.Timeline = new EnACT.Timeline();
             this.EngineView = new EnACT.EngineView();
             this.CaptionView = new EnACT.CaptionView();
+            this.Label_PlayheadTime = new System.Windows.Forms.Label();
             this.MenuStrip_MainForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_Timeline)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EngineView)).BeginInit();
@@ -370,11 +371,21 @@
             this.CaptionView.UserInputEnabled = true;
             this.CaptionView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.CaptionView_CellValueChanged);
             // 
+            // Label_PlayheadTime
+            // 
+            this.Label_PlayheadTime.AutoSize = true;
+            this.Label_PlayheadTime.Location = new System.Drawing.Point(348, 37);
+            this.Label_PlayheadTime.Name = "Label_PlayheadTime";
+            this.Label_PlayheadTime.Size = new System.Drawing.Size(102, 13);
+            this.Label_PlayheadTime.TabIndex = 22;
+            this.Label_PlayheadTime.Text = "00:00:00 / 00:00:00";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 682);
+            this.Controls.Add(this.Label_PlayheadTime);
             this.Controls.Add(this.Button_ZoomReset);
             this.Controls.Add(this.Button_ZoomTimelineOut);
             this.Controls.Add(this.Button_ZoomTimelineIn);
@@ -442,6 +453,7 @@
         private System.Windows.Forms.Button Button_ZoomTimelineIn;
         private System.Windows.Forms.Button Button_ZoomTimelineOut;
         private System.Windows.Forms.Button Button_ZoomReset;
+        private System.Windows.Forms.Label Label_PlayheadTime;
     }
 }
 
