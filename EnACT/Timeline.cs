@@ -183,6 +183,20 @@ namespace EnACT
         }
 
         /// <summary>
+        /// Gets the x origin value based on whether or not labels are drawn
+        /// </summary>
+        private int XCaptionOrigin
+        {
+            get
+            {
+                if (DrawLocationLabels)
+                    return LOCATION_LABEL_WIDTH;
+                else
+                    return 0;
+            }
+        }
+
+        /// <summary>
         /// Represents TimeWidth divided by 2
         /// </summary>
         private double halfTimeWidth;
@@ -900,6 +914,30 @@ namespace EnACT
             {
                 handler(this, e);
             }
+        }
+        #endregion
+
+        #region Time and Ordinate Conversion
+        /// <summary>
+        /// Converts X Coordinate to a time based on Leftboundtime and whether Location
+        /// Labels are being drawn.
+        /// </summary>
+        /// <param name="x">X Coordinate to convert</param>
+        /// <returns>Time represented by the X Coordinate</returns>
+        private double XCoordinateToTime(int x)
+        {
+            return (double)(XCaptionOrigin / pixelsPerSecond + LeftBoundTime);
+        }
+
+        /// <summary>
+        /// Converts a time into an X Coordinate on the timeline based on leftbound time and
+        /// whether Location Labels are being drawn
+        /// </summary>
+        /// <param name="time">Time to convert</param>
+        /// <returns>An X Coordinate represented by the time</returns>
+        private float TimeToXCoordinate(double time)
+        {
+            return (float)((time - LeftBoundTime) * pixelsPerSecond + XCaptionOrigin);
         }
         #endregion
     }//Class
