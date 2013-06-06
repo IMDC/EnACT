@@ -123,6 +123,8 @@ namespace EnACT
         /// </summary>
         private Caption selectedCaption;
 
+        private double selectedCaptionDifference;
+
         private TimestamptoChange timestampToChange;
 
         /// <summary>
@@ -508,7 +510,7 @@ namespace EnACT
         }
         #endregion
 
-        #region Mouse Click Events
+        #region OnMouseDown
         /// <summary>
         /// Raises the MouseDown event.
         /// </summary>
@@ -569,11 +571,22 @@ namespace EnACT
                         Console.WriteLine("C.End");
                         break;
                     }
+
+                    if (beginX <= xPos && xPos <= endX)
+                    {
+                        selectedCaption = c;
+                        selectedCaptionDifference = currentTime - c.Begin;
+                        mouseMoveAction = MouseMoveAction.moveCaption;
+                        Console.WriteLine("MoveCaption");
+                        break;
+                    }
                 }
             }
             //Console.WriteLine("Mouse Down!"); 
         }
+        #endregion
 
+        #region OnMouseUp
         /// <summary>
         /// Raises the MouseUp event.
         /// </summary>
@@ -592,7 +605,9 @@ namespace EnACT
             timestampToChange = TimestamptoChange.none;
             //Console.WriteLine("Mouse Up!"); 
         }
+        #endregion
 
+        #region OnMouseMove
         /// <summary>
         /// Raises the MouseMove event.
         /// </summary>
@@ -632,9 +647,22 @@ namespace EnACT
                 }
                 RedrawCaptionsRegion();
             }
+            else if (mouseMoveAction == MouseMoveAction.moveCaption)
+            {
+                Console.WriteLine("Something!");
+                double currentTime = XCoordinateToTime(e.X); //(double)(xPos / pixelsPerSecond + LeftBoundTime);
+                double oldDuration = selectedCaption.Duration;
+
+                selectedCaption.Begin = currentTime - selectedCaptionDifference;
+                selectedCaption.Duration = oldDuration;
+
+                RedrawCaptionsRegion();
+            }
             //Console.WriteLine("Mouse Moved!"); 
         }
+        #endregion
 
+        #region OnMouseClick
         /// <summary>
         /// Raises the MouseClick event. If the click is inside the playhead bar, it will
         /// move the playhead to that location
@@ -933,7 +961,7 @@ namespace EnACT
         /// <returns>Time represented by the X Coordinate</returns>
         private double XCoordinateToTime(int x)
         {
-            return (double)(XCaptionOrigin / pixelsPerSecond + LeftBoundTime);
+            return (double)((x - XCaptionOrigin) / pixelsPerSecond + LeftBoundTime);
         }
 
         /// <summary>
