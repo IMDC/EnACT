@@ -301,10 +301,15 @@ namespace EnACT
         {
             Console.WriteLine("Playhead Changed!");
 
+            bool wasPlaying = EngineView.IsPlaying();
+
             //Pause video, change time, and then play to prevent confusing the player
             EngineView.Pause();
             EngineView.SetPlayHeadTime(e.PlayheadTime);
-            EngineView.Play();
+
+            //Only play if Engine was playing previously
+            if(wasPlaying)
+                EngineView.Play();
         }
 
         private void Timeline_CaptionTimestampChanged(object sender, TimelineCaptionTimestampChangedEventArgs e)
