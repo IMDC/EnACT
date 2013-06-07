@@ -620,31 +620,26 @@ namespace EnACT
             if (e.Button != MouseButtons.Left)
                 return;
 
-            int xPos = e.X;
-
-            //Subtract the width of Location Labels if they're being shown
-            if (DrawLocationLabels)
-                xPos -= LOCATION_LABEL_WIDTH;
+            double mouseClickTime = XCoordinateToTime(e.X);
 
             if (mouseMoveAction == MouseMoveAction.movePlayhead)
             {
                 //Set playhead time based on click location
-                PlayHeadTime = (double)(xPos / pixelsPerSecond + LeftBoundTime);
+                PlayHeadTime = mouseClickTime;
                 RedrawCaptionsRegion(); //redraw the playhead
                 //Invoke PlayheadChanged event
                 OnPlayheadChanged(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
             }
             else if (mouseMoveAction == MouseMoveAction.changeCaptionTime)
             {
-                double currentTime = (double)(xPos / pixelsPerSecond + LeftBoundTime);
                 if (timestampToChange == TimestamptoChange.begin)
                 {
-                    selectedCaption.Begin = currentTime;
+                    selectedCaption.Begin = mouseClickTime;
                     OnCaptionTimestampChanged(new TimelineCaptionTimestampChangedEventArgs());
                 }
                 else if (timestampToChange == TimestamptoChange.end)
                 {
-                    selectedCaption.End = currentTime;
+                    selectedCaption.End = mouseClickTime;
                     OnCaptionTimestampChanged(new TimelineCaptionTimestampChangedEventArgs());
                 }
                 RedrawCaptionsRegion();
@@ -652,10 +647,10 @@ namespace EnACT
             else if (mouseMoveAction == MouseMoveAction.moveCaption)
             {
                 Console.WriteLine("Something!");
-                double currentTime = XCoordinateToTime(e.X); //(double)(xPos / pixelsPerSecond + LeftBoundTime);
+                 //(double)(xPos / pixelsPerSecond + LeftBoundTime);
                 double oldDuration = selectedCaption.Duration;
 
-                selectedCaption.Begin = currentTime - selectedCaptionDifference;
+                selectedCaption.Begin = mouseClickTime - selectedCaptionDifference;
                 selectedCaption.Duration = oldDuration;
 
                 OnCaptionMoved(EventArgs.Empty);
