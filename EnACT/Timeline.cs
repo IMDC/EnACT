@@ -625,7 +625,11 @@ namespace EnACT
             if (mouseMoveAction == MouseMoveAction.movePlayhead)
             {
                 //Set playhead time based on click location
-                PlayHeadTime = mouseClickTime;
+                if (mouseClickTime <= 0)
+                    PlayHeadTime = 0;
+                else
+                    PlayHeadTime = mouseClickTime;
+
                 RedrawCaptionsRegion(); //redraw the playhead
                 //Invoke PlayheadChanged event
                 OnPlayheadChanged(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
@@ -671,19 +675,15 @@ namespace EnACT
         {
             base.OnMouseClick(e);
 
-            int xPos = e.X;
+            double mouseClickTime = XCoordinateToTime(e.X);
 
-            //Subtract the width of Location Labels if they're being shown
-            if (DrawLocationLabels)
-                xPos -= LOCATION_LABEL_WIDTH;
-
-            RectangleF playheadBarRect = new RectangleF(xPos, 0,
+            RectangleF playheadBarRect = new RectangleF(0, 0,
                 Width - LOCATION_LABEL_WIDTH, PLAYHEAD_BAR_HEIGHT);
 
-            if (playheadBarRect.Contains(e.Location))
+            if (playheadBarRect.Contains(e.Location) && 0 <= mouseClickTime)
             {
-                //Set playhead time based on click location
-                PlayHeadTime = (double)(xPos / pixelsPerSecond + LeftBoundTime);
+                PlayHeadTime = mouseClickTime;
+
                 //Invoke PlayheadChanged event
                 OnPlayheadChanged(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
                 RedrawCaptionsRegion(); //redraw the playhead
