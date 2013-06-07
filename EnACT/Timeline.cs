@@ -30,27 +30,6 @@ namespace EnACT
         };
 
         /// <summary>
-        /// An enum representing what action is being performed by the mouse.
-        /// </summary>
-        private enum MouseMoveAction
-        {
-            movePlayhead,
-            moveCaption,
-            changeCaptionTime,
-            noAction
-        };
-
-        /// <summary>
-        /// An enum representing what caption timestamp to change when adjusting the time of a caption
-        /// </summary>
-        private enum TimestamptoChange
-        {
-            begin,
-            end,
-            none
-        };
-
-        /// <summary>
         /// How many seconds of time the Timeline will show by default
         /// </summary>
         private const double DEFAULT_TIME_WIDTH = 10;
@@ -113,19 +92,7 @@ namespace EnACT
         /// </summary>
         private float availableWidth;
 
-        /// <summary>
-        /// The current action being performed by the mouse.
-        /// </summary>
-        private MouseMoveAction mouseMoveAction;
-
-        /// <summary>
-        /// The caption selected to be modified by mouse movements
-        /// </summary>
-        private Caption selectedCaption;
-
-        private double selectedCaptionDifference;
-
-        private TimestamptoChange timestampToChange;
+        private TimelineMouseSelection mouseSelection;
 
         /// <summary>
         /// Represents TimeWidth divided by 2
@@ -312,8 +279,8 @@ namespace EnACT
             //Set the zoom level
             zoomLevel = DEFAULT_ZOOM_LEVEL;
 
-            //Set default action
-            mouseMoveAction = MouseMoveAction.noAction;
+            //Set the mouseSelection to no selection
+            mouseSelection = TimelineMouseSelection.NoSelection;
 
             RedrawInnerRegion();
             SetScrollBarValues();
@@ -535,7 +502,7 @@ namespace EnACT
             if (playheadBarRect.Contains(e.Location))
             {
                 //Set Action
-                mouseMoveAction = MouseMoveAction.movePlayhead;
+                mouseSelection = new TimelineMouseSelection(TimelineMouseAction.movePlayhead);
 
                 //Set playhead time based on click location
                 PlayHeadTime = mouseClickTime;
@@ -554,9 +521,7 @@ namespace EnACT
                     //If selecting the beginning of a caption
                     if (e.X - CAPTION_SELECTION_WIDTH <= beginX && beginX <= e.X + CAPTION_SELECTION_WIDTH)
                     {
-                        selectedCaption = c;
-                        mouseMoveAction = MouseMoveAction.changeCaptionTime;
-                        timestampToChange = TimestamptoChange.begin;
+                        mouseSelection = new TimelineMouseSelection(TimelineMouseAction.changeCaptionBegin, c);
                         Console.WriteLine("C.Begin");
                         break;
                     }
@@ -566,9 +531,7 @@ namespace EnACT
                     //If selecting the end of the Caption
                     if (e.X - CAPTION_SELECTION_WIDTH <= endX && endX <= e.X + CAPTION_SELECTION_WIDTH)
                     {
-                        selectedCaption = c;
-                        mouseMoveAction = MouseMoveAction.changeCaptionTime;
-                        timestampToChange = TimestamptoChange.end;
+                        mouseSelection = new TimelineMouseSelection(TimelineMouseAction.changeCaptionEnd, c);
                         Console.WriteLine("C.End");
                         break;
                     }
@@ -576,9 +539,8 @@ namespace EnACT
                     //If selecting the center of the caption
                     if (beginX <= e.X && e.X <= endX)
                     {
-                        selectedCaption = c;
-                        selectedCaptionDifference = mouseClickTime - c.Begin;
-                        mouseMoveAction = MouseMoveAction.moveCaption;
+                        mouseSelection = new TimelineMouseSelection(TimelineMouseAction.moveCaption, c,
+                            mouseClickTime - c.Begin);
                         Console.WriteLine("MoveCaption");
                         break;
                     }
@@ -600,11 +562,7 @@ namespace EnACT
                 return;
 
             //Clear selected caption
-            selectedCaption = null;
-
-            //Reset the action
-            mouseMoveAction = MouseMoveAction.noAction;
-            timestampToChange = TimestamptoChange.none;
+            mouseSelection = TimelineMouseSelection.NoSelection;
             //Console.WriteLine("Mouse Up!"); 
         }
         #endregion
@@ -623,7 +581,7 @@ namespace EnACT
             //The time represented by the mouse click location
             double mouseClickTime = XCoordinateToTime(e.X);
 
-            if (mouseMoveAction == MouseMoveAction.movePlayhead)
+            if (mouseSelection.Action == TimelineMouseAction.movePlayhead)
             {
                 //Set playhead time based on click location
                 if (mouseClickTime <= 0)
@@ -635,28 +593,28 @@ namespace EnACT
                 //Invoke PlayheadChanged event
                 OnPlayheadChanged(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
             }
-            else if (mouseMoveAction == MouseMoveAction.changeCaptionTime)
+            else if (mouseSelection.Action == TimelineMouseAction.changeCaptionBegin)
             {
-                if (timestampToChange == TimestamptoChange.begin)
-                {
-                    selectedCaption.Begin = mouseClickTime;
+                    mouseSelection.SelectedCaption.Begin = mouseClickTime;
                     OnCaptionTimestampChanged(new TimelineCaptionTimestampChangedEventArgs());
-                }
-                else if (timestampToChange == TimestamptoChange.end)
-                {
-                    selectedCaption.End = mouseClickTime;
-                    OnCaptionTimestampChanged(new TimelineCaptionTimestampChangedEventArgs());
-                }
+                    RedrawCaptionsRegion();
+            }
+            else if (mouseSelection.Action == TimelineMouseAction.changeCaptionEnd)
+            {
+                mouseSelection.SelectedCaption.End = mouseClickTime;
+                OnCaptionTimestampChanged(new TimelineCaptionTimestampChangedEventArgs());
                 RedrawCaptionsRegion();
             }
-            else if (mouseMoveAction == MouseMoveAction.moveCaption)
+            else if (mouseSelection.Action == TimelineMouseAction.moveCaption)
             {
                 Console.WriteLine("Something!");
                  //(double)(xPos / pixelsPerSecond + LeftBoundTime);
-                double oldDuration = selectedCaption.Duration;
+                double oldDuration = mouseSelection.SelectedCaption.Duration;
 
-                selectedCaption.Begin = mouseClickTime - selectedCaptionDifference;
-                selectedCaption.Duration = oldDuration;
+                mouseSelection.SelectedCaption.Begin = 
+                    mouseClickTime - mouseSelection.SelectedCaptionTimeDifference;
+
+                mouseSelection.SelectedCaption.Duration = oldDuration;
 
                 OnCaptionMoved(EventArgs.Empty);
 

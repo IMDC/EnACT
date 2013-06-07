@@ -156,6 +156,7 @@
     <Compile Include="Timeline.Designer.cs">
       <DependentUpon>Timeline.cs</DependentUpon>
     </Compile>
+    <Compile Include="TimelineMouseSelection.cs" />
     <Compile Include="Timestamp.cs" />
     <Compile Include="TimestampTypeConverter.cs" />
     <Compile Include="Utilities.cs" />
