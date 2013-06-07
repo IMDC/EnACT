@@ -527,15 +527,9 @@ namespace EnACT
             if (e.Button != MouseButtons.Left)
                 return;
 
-            int xPos = e.X;
+            double currentTime = XCoordinateToTime(e.X);
 
-            //Subtract the width of Location Labels if they're being shown
-            if (DrawLocationLabels)
-                xPos -= LOCATION_LABEL_WIDTH;
-
-            double currentTime = (double)(xPos / pixelsPerSecond + LeftBoundTime);
-
-            RectangleF playheadBarRect = new RectangleF(xPos, 0, 
+            RectangleF playheadBarRect = new RectangleF(XCaptionOrigin, 0, 
                 Width - LOCATION_LABEL_WIDTH, PLAYHEAD_BAR_HEIGHT);
 
             if (playheadBarRect.Contains(e.Location))
@@ -558,7 +552,7 @@ namespace EnACT
                     beginX = (c.Begin - LeftBoundTime) * pixelsPerSecond;
 
                     //if (c.Begin - 0.05 <= currentTime && currentTime <= c.Begin + 0.05)
-                    if (xPos - CAPTION_SELECTION_WIDTH <= beginX && beginX <= xPos + CAPTION_SELECTION_WIDTH)
+                    if (e.X - CAPTION_SELECTION_WIDTH <= beginX && beginX <= e.X + CAPTION_SELECTION_WIDTH)
                     {
                         selectedCaption = c;
                         mouseMoveAction = MouseMoveAction.changeCaptionTime;
@@ -569,7 +563,7 @@ namespace EnACT
 
                     endX = (c.End - LeftBoundTime) * pixelsPerSecond;
                     //if (c.End - 0.05 <= currentTime && currentTime <= c.End + 0.05)
-                    if (xPos - CAPTION_SELECTION_WIDTH <= endX && endX <= xPos + CAPTION_SELECTION_WIDTH)
+                    if (e.X - CAPTION_SELECTION_WIDTH <= endX && endX <= e.X + CAPTION_SELECTION_WIDTH)
                     {
                         selectedCaption = c;
                         mouseMoveAction = MouseMoveAction.changeCaptionTime;
@@ -578,7 +572,7 @@ namespace EnACT
                         break;
                     }
 
-                    if (beginX <= xPos && xPos <= endX)
+                    if (beginX <= e.X && e.X <= endX)
                     {
                         selectedCaption = c;
                         selectedCaptionDifference = currentTime - c.Begin;
