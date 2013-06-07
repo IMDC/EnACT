@@ -597,21 +597,22 @@ namespace EnACT
                     break;
 
                 case TimelineMouseAction.changeCaptionBegin:
-                    mouseSelection.SelectedCaption.Begin = mouseClickTime;
+                    mouseSelection.Caption.Begin = mouseClickTime;
                     OnCaptionTimestampChanged(new TimelineCaptionTimestampChangedEventArgs());
                     break;
 
                 case TimelineMouseAction.changeCaptionEnd:
-                    mouseSelection.SelectedCaption.End = mouseClickTime;
+                    mouseSelection.Caption.End = mouseClickTime;
                     OnCaptionTimestampChanged(new TimelineCaptionTimestampChangedEventArgs());
                     break;
 
                 case TimelineMouseAction.moveCaption:
-                    mouseSelection.SelectedCaption.MoveTo(mouseClickTime - mouseSelection.SelectedCaptionTimeDifference);
+                    mouseSelection.Caption.MoveTo(mouseClickTime - mouseSelection.MouseClickTimeDifference);
                     OnCaptionMoved(EventArgs.Empty);
                     break;
 
                 case TimelineMouseAction.noAction:
+                    //Nothing to do here
                     return;
 
                 default: //Should not happen, so throw an exception if it does
