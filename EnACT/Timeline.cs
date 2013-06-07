@@ -527,7 +527,7 @@ namespace EnACT
             if (e.Button != MouseButtons.Left)
                 return;
 
-            double currentTime = XCoordinateToTime(e.X);
+            double mouseClickTime = XCoordinateToTime(e.X);
 
             RectangleF playheadBarRect = new RectangleF(XCaptionOrigin, 0, 
                 Width - LOCATION_LABEL_WIDTH, PLAYHEAD_BAR_HEIGHT);
@@ -538,20 +538,20 @@ namespace EnACT
                 mouseMoveAction = MouseMoveAction.movePlayhead;
 
                 //Set playhead time based on click location
-                PlayHeadTime = currentTime;
+                PlayHeadTime = mouseClickTime;
                 RedrawCaptionsRegion(); //redraw the playhead
                 //Invoke PlayheadChanged event
                 OnPlayheadChanged(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
             }
             else
             {
-                double beginX;
-                double endX;
+                double beginX;  //X-Coord of c.Begin
+                double endX;    //X-Coord of c.End
                 foreach (Caption c in CaptionList)
                 {
-                    beginX = (c.Begin - LeftBoundTime) * pixelsPerSecond;
+                    beginX = TimeToXCoordinate(c.Begin);
 
-                    //if (c.Begin - 0.05 <= currentTime && currentTime <= c.Begin + 0.05)
+                    //If selecting the beginning of a caption
                     if (e.X - CAPTION_SELECTION_WIDTH <= beginX && beginX <= e.X + CAPTION_SELECTION_WIDTH)
                     {
                         selectedCaption = c;
@@ -561,8 +561,9 @@ namespace EnACT
                         break;
                     }
 
-                    endX = (c.End - LeftBoundTime) * pixelsPerSecond;
-                    //if (c.End - 0.05 <= currentTime && currentTime <= c.End + 0.05)
+                    endX = TimeToXCoordinate(c.End);
+
+                    //If selecting the end of the Caption
                     if (e.X - CAPTION_SELECTION_WIDTH <= endX && endX <= e.X + CAPTION_SELECTION_WIDTH)
                     {
                         selectedCaption = c;
@@ -572,18 +573,19 @@ namespace EnACT
                         break;
                     }
 
+                    //If selecting the center of the caption
                     if (beginX <= e.X && e.X <= endX)
                     {
                         selectedCaption = c;
-                        selectedCaptionDifference = currentTime - c.Begin;
+                        selectedCaptionDifference = mouseClickTime - c.Begin;
                         mouseMoveAction = MouseMoveAction.moveCaption;
                         Console.WriteLine("MoveCaption");
                         break;
                     }
-                }
-            }
+                }//foreach
+            }//else
             //Console.WriteLine("Mouse Down!"); 
-        }
+        }//OnMouseDown
         #endregion
 
         #region OnMouseUp
