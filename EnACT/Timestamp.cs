@@ -15,7 +15,6 @@ namespace EnACT
     /// If a negative value is assigned to a timestamp, then an InvalidException will 
     /// be thrown.
     /// </summary>
-    //[TypeConverter(typeof(TimestampTypeConverter))]
     public class Timestamp
     {
         #region Regex
@@ -25,23 +24,41 @@ namespace EnACT
         private static Regex validTimestamp = new Regex(@"^[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\.[0-9]$");
         #endregion
 
-        #region AsDouble
+        #region Private Fields
         /// <summary>
         /// The internal storage of the timestamp. Stored as the number of seconds.
         /// </summary>
         private double time;
 
         /// <summary>
-        /// A property representing the timestamp as a double.
+        /// The string representation of the timestamp. Generated when Timestamp is set or retrieved
+        /// as a String.
+        /// </summary>
+        private string timestampString;
+
+        /// <summary>
+        /// Boolean representing if the timestampString has been generated for this timestamp. If it
+        /// is false, then it needs to be generated again.
+        /// </summary>
+        private bool timestampStringGenerated;
+        #endregion
+
+        #region AsDouble
+        /// <summary>
+        /// A property representing the timestamp as a double. Get this property when  the Timestamp 
+        /// has to explicitly be represented as a double.
         /// </summary>
         public double AsDouble
         {
             get { return time; }
             set 
             {
+                //There can not be negative timestamps
                 if (value < 0.0)
                     throw new InvalidTimestampException("Double value is negative: " + value); 
-                time = value; 
+                time = value;
+                //Need to regenerate the string
+                timestampStringGenerated = false;
             }
         }
         #endregion
@@ -49,38 +66,57 @@ namespace EnACT
         #region AsString
         /// <summary>
         /// A property representing the timestamp in string form. Will produce
-        /// a string in the form XX:XX:XX.X where X is a digit from 0-9.
+        /// a string in the form XX:XX:XX.X where X is a digit from 0-9. Get this
+        /// property when the Timestamp has to expiclitly be represented as a String.
         /// </summary>
         public String AsString
         {
             get
             {
+                //If timestampString has already been generated, then return it
+                if (timestampStringGenerated)
+                    return timestampString;
+                
+                //Otherwise generate it
                 double timeDouble = time;
-                if (Double.IsNaN(timeDouble) || timeDouble < 0.0)
-                    return "00:00:00.0";
-
                 string timeString = string.Empty;
 
-                int hour = (int)timeDouble / 3600;
-                timeString += hour.ToString("00:");
+                if (Double.IsNaN(timeDouble) || timeDouble < 0.0)
+                {
+                    //Should not happen
+                    timeString = "00:00:00.0";
+                }
+                else
+                {
+                    //Get hours
+                    int hour = (int)timeDouble / 3600;
+                    timeString += hour.ToString("00:");
 
-                timeDouble %= 3600;
+                    timeDouble %= 3600;
 
-                int minutes = (int)timeDouble / 60;
-                timeString += minutes.ToString("00:");
+                    //Get minutes
+                    int minutes = (int)timeDouble / 60;
+                    timeString += minutes.ToString("00:");
 
-                timeDouble %= 60;
+                    timeDouble %= 60;
 
-                timeString += timeDouble.ToString("00.0");
+                    //Remainder is the remaining seconds
+                    timeString += timeDouble.ToString("00.0");
+                }
 
-                return timeString;
+                //Store the generated value for future retrieval
+                timestampString = timeString;
+                timestampStringGenerated = true;
+
+                return timestampString;
             }
             set
             {
-                if (value == null || value == String.Empty)
-                    time = 0;
                 if (!TimeStampValidates(value))
                     throw new InvalidTimestampException("String value is not a valid Timestamp");
+
+                if (value == null || value == String.Empty)
+                    time = 0;
 
                 double seconds = 0;
 
@@ -105,7 +141,12 @@ namespace EnACT
                         weight *= 60;
                     }
                 }
+                //Set double value
                 time = seconds;
+
+                //Set string value
+                timestampString = value;
+                timestampStringGenerated = true;
             }
         }
         #endregion
