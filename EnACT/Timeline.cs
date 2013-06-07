@@ -92,6 +92,9 @@ namespace EnACT
         /// </summary>
         private float availableWidth;
 
+        /// <summary>
+        /// An object containing data about what the mouse currently has selected
+        /// </summary>
         private TimelineMouseSelection mouseSelection;
 
         /// <summary>
@@ -561,7 +564,7 @@ namespace EnACT
             if (e.Button != MouseButtons.Left)
                 return;
 
-            //Clear selected caption
+            //Clear mouseSelection
             mouseSelection = TimelineMouseSelection.NoSelection;
             //Console.WriteLine("Mouse Up!"); 
         }
@@ -581,45 +584,47 @@ namespace EnACT
             //The time represented by the mouse click location
             double mouseClickTime = XCoordinateToTime(e.X);
 
-            if (mouseSelection.Action == TimelineMouseAction.movePlayhead)
+            switch (mouseSelection.Action)
             {
-                //Set playhead time based on click location
-                if (mouseClickTime <= 0)
-                    PlayHeadTime = 0;
-                else
-                    PlayHeadTime = mouseClickTime;
+                case TimelineMouseAction.movePlayhead:
+                    //Set playhead time based on click location
+                    if (mouseClickTime <= 0)
+                        PlayHeadTime = 0;
+                    else
+                        PlayHeadTime = mouseClickTime;
+                    //Invoke PlayheadChanged event
+                    OnPlayheadChanged(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
+                    break;
 
-                RedrawCaptionsRegion(); //redraw the playhead
-                //Invoke PlayheadChanged event
-                OnPlayheadChanged(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
-            }
-            else if (mouseSelection.Action == TimelineMouseAction.changeCaptionBegin)
-            {
+                case TimelineMouseAction.changeCaptionBegin:
                     mouseSelection.SelectedCaption.Begin = mouseClickTime;
                     OnCaptionTimestampChanged(new TimelineCaptionTimestampChangedEventArgs());
-                    RedrawCaptionsRegion();
+                    break;
+
+                case TimelineMouseAction.changeCaptionEnd:
+                    mouseSelection.SelectedCaption.End = mouseClickTime;
+                    OnCaptionTimestampChanged(new TimelineCaptionTimestampChangedEventArgs());
+                    break;
+
+                case TimelineMouseAction.moveCaption:
+                    double oldDuration = mouseSelection.SelectedCaption.Duration;
+
+                    mouseSelection.SelectedCaption.Begin = 
+                        mouseClickTime - mouseSelection.SelectedCaptionTimeDifference;
+                    mouseSelection.SelectedCaption.Duration = oldDuration;
+
+                    OnCaptionMoved(EventArgs.Empty);
+                    break;
+
+                case TimelineMouseAction.noAction:
+                    return;
+
+                default: //Should not happen, so throw an exception if it does
+                    throw new Exception(String.Format("mouseSelection.Action {0} not in code",
+                        mouseSelection.Action));
             }
-            else if (mouseSelection.Action == TimelineMouseAction.changeCaptionEnd)
-            {
-                mouseSelection.SelectedCaption.End = mouseClickTime;
-                OnCaptionTimestampChanged(new TimelineCaptionTimestampChangedEventArgs());
-                RedrawCaptionsRegion();
-            }
-            else if (mouseSelection.Action == TimelineMouseAction.moveCaption)
-            {
-                Console.WriteLine("Something!");
-                 //(double)(xPos / pixelsPerSecond + LeftBoundTime);
-                double oldDuration = mouseSelection.SelectedCaption.Duration;
 
-                mouseSelection.SelectedCaption.Begin = 
-                    mouseClickTime - mouseSelection.SelectedCaptionTimeDifference;
-
-                mouseSelection.SelectedCaption.Duration = oldDuration;
-
-                OnCaptionMoved(EventArgs.Empty);
-
-                RedrawCaptionsRegion();
-            }
+            RedrawCaptionsRegion();
             //Console.WriteLine("Mouse Moved!"); 
         }
         #endregion
