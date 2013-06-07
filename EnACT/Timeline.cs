@@ -620,6 +620,7 @@ namespace EnACT
             if (e.Button != MouseButtons.Left)
                 return;
 
+            //The time represented by the mouse click location
             double mouseClickTime = XCoordinateToTime(e.X);
 
             if (mouseMoveAction == MouseMoveAction.movePlayhead)
@@ -675,6 +676,7 @@ namespace EnACT
         {
             base.OnMouseClick(e);
 
+            //The time represented by the mouse click location
             double mouseClickTime = XCoordinateToTime(e.X);
 
             RectangleF playheadBarRect = new RectangleF(0, 0,
@@ -873,6 +875,7 @@ namespace EnACT
         /// </summary>
         public void SetPlayHeadBarTimes()
         {
+            //How many units of timewidth to multiply playheadBarTimes by
             int multiplier = (int) Math.Floor(CenterBoundTime / TimeWidth);
 
             //Set the times in intervals of halfTimeWidth
