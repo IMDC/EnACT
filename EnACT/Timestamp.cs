@@ -53,9 +53,16 @@ namespace EnACT
             get { return time; }
             set 
             {
-                //There can not be negative timestamps
+                //Check for a valid time
                 if (value < 0.0)
-                    throw new InvalidTimestampException("Double value is negative: " + value); 
+                    throw new InvalidTimestampException("Timestamp.AsDouble value can not be negative: " + value);
+                else if (Double.IsNaN(value))
+                    throw new InvalidTimestampException("Timestamp.AsDouble value can not be NaN");
+                else if (Double.IsPositiveInfinity(value))
+                    throw new InvalidTimestampException("Timestamp.AsDouble value can not be Positive Infinity");
+                else if (Double.IsNegativeInfinity(value))
+                    throw new InvalidTimestampException("Timestamp.AsDouble value can not be Negative Infinity");
+
                 time = value;
                 //Need to regenerate the string
                 timestampStringGenerated = false;

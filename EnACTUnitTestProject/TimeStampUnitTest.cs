@@ -85,6 +85,65 @@ namespace EnACTUnitTestProject
             }
             catch (InvalidTimestampException) { }
         }
+
+        [TestMethod]
+        public void InvalidDoubleTimestampTest()
+        {
+            //Arrange
+            Timestamp t1;
+            Timestamp t2;
+            Timestamp t3;
+            Timestamp t4;
+            Timestamp t5;
+            Timestamp t6;
+
+            //Act & Assert
+            try
+            {
+                t1 = new Timestamp(Double.NaN);
+                //If the line above doesn't throw an exception then the test fails
+                Assert.Fail(); 
+            }
+            catch (InvalidTimestampException) { }
+
+            try
+            {
+                t2 = new Timestamp(Double.PositiveInfinity);
+                //If the line above doesn't throw an exception then the test fails
+                Assert.Fail(); 
+            }
+            catch (InvalidTimestampException) { }
+
+            try
+            {
+                t3 = new Timestamp(Double.NegativeInfinity);
+                //If the line above doesn't throw an exception then the test fails
+                Assert.Fail();
+            }
+            catch (InvalidTimestampException) { }
+
+            try
+            {
+                t4 = new Timestamp(Double.MaxValue);
+                Console.WriteLine(t4.AsString);
+                //If the line above doesn't throw an exception then the test fails
+                Assert.Fail();
+            }
+            catch (InvalidTimestampException) { }
+
+            try
+            {
+                t5 = new Timestamp(Double.MinValue);
+                //If the line above doesn't throw an exception then the test fails
+                Assert.Fail(); 
+            }
+            catch (InvalidTimestampException) { }
+
+            try { t6 = new Timestamp(Double.Epsilon); }
+            //If the above throws an exception, then the test fails
+            catch (InvalidTimestampException) { Assert.Fail(); }
+            
+        }
         #endregion
 
         #region Timestamp Validation
