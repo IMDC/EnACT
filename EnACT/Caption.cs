@@ -189,6 +189,20 @@ namespace EnACT
         }
         #endregion
 
+        #region MoveTo
+        /// <summary>
+        /// Moves the caption to a new starting and ending point, maintaining the same Duration
+        /// </summary>
+        /// <param name="beginTime">The time this Caption will begin at</param>
+        public void MoveTo(double beginTime)
+        {
+            this.begin = beginTime;
+            this.end = begin + duration;
+
+            NotifyPropertyChanged("Begin");
+        }
+        #endregion
+
         #region Constructor
         /// <summary>
         /// Constructs a Caption object with a blank line and the DefaultSpeaker

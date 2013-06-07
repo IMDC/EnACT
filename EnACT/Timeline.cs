@@ -607,12 +607,7 @@ namespace EnACT
                     break;
 
                 case TimelineMouseAction.moveCaption:
-                    double oldDuration = mouseSelection.SelectedCaption.Duration;
-
-                    mouseSelection.SelectedCaption.Begin = 
-                        mouseClickTime - mouseSelection.SelectedCaptionTimeDifference;
-                    mouseSelection.SelectedCaption.Duration = oldDuration;
-
+                    mouseSelection.SelectedCaption.MoveTo(mouseClickTime - mouseSelection.SelectedCaptionTimeDifference);
                     OnCaptionMoved(EventArgs.Empty);
                     break;
 
