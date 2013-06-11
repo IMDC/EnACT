@@ -11,7 +11,7 @@ namespace EnACTUnitTestProject
     [TestClass]
     public class TimeStampUnitTest
     {
-        #region Constructor
+        #region Constructor Test
         /// <summary>
         /// Tests the constructors of Timestamp to see that they construct Timestamp properly
         /// </summary>
@@ -96,6 +96,8 @@ namespace EnACTUnitTestProject
             Timestamp t4;
             Timestamp t5;
             Timestamp t6;
+            Timestamp t7;
+            Timestamp t8;
 
             //Act & Assert
             try
@@ -125,7 +127,6 @@ namespace EnACTUnitTestProject
             try
             {
                 t4 = new Timestamp(Double.MaxValue);
-                Console.WriteLine(t4.AsString);
                 //If the line above doesn't throw an exception then the test fails
                 Assert.Fail();
             }
@@ -142,6 +143,18 @@ namespace EnACTUnitTestProject
             try { t6 = new Timestamp(Double.Epsilon); }
             //If the above throws an exception, then the test fails
             catch (InvalidTimestampException) { Assert.Fail(); }
+
+            try { t7 = new Timestamp(Timestamp.MAX_TIME_D); }
+            //If the above throws an exception, then the test fails
+            catch (InvalidTimestampException) { Assert.Fail(); }
+
+            try
+            {
+                t8 = new Timestamp(Timestamp.MAX_TIME_D + Timestamp.MIN_TIME_DIFFERENCE);
+                //If the line above doesn't throw an exception then the test fails
+                Assert.Fail();
+            }
+            catch (InvalidTimestampException) { }
             
         }
         #endregion

@@ -17,6 +17,23 @@ namespace EnACT
     /// </summary>
     public class Timestamp
     {
+        #region Constants
+        /// <summary>
+        /// The highest time value that can be assigned to a Timestamp as a double
+        /// </summary>
+        public const double MAX_TIME_D = 35999.9;
+
+        /// <summary>
+        /// The highest time value that can be assigned to a Timestamp as a string
+        /// </summary>
+        public const string MAX_TIME_S = "99:59:59.0";
+
+        /// <summary>
+        /// The smallest amount of time that will differentiate one caption from another.
+        /// </summary>
+        public const double MIN_TIME_DIFFERENCE = 0.1;
+        #endregion
+
         #region Regex
         /// <summary>
         /// A regular expression that will validate a correct timestamp
@@ -62,6 +79,8 @@ namespace EnACT
                     throw new InvalidTimestampException("Timestamp.AsDouble value can not be Positive Infinity");
                 else if (Double.IsNegativeInfinity(value))
                     throw new InvalidTimestampException("Timestamp.AsDouble value can not be Negative Infinity");
+                else if (MAX_TIME_D < value)
+                    throw new InvalidTimestampException("Timestamp.AsDouble is too large");
 
                 time = value;
                 //Need to regenerate the string
