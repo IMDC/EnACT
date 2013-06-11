@@ -318,7 +318,7 @@ namespace EnACTUnitTestProject
             Assert.AreEqual(expectedDouble, t1.AsDouble);
             Assert.AreEqual(expectedDouble, t2.AsDouble);
             Assert.AreEqual(expectedString, t1.AsString);
-            Assert.AreEqual(expectedString, t1.AsString);
+            Assert.AreEqual(expectedString, t2.AsString);
         }
         #endregion
 
