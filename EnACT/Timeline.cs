@@ -113,7 +113,6 @@ namespace EnACT
         /// </summary>
         private double RightBoundTime
         {
-            set { rbTime = value; }
             get { return rbTime; }
         }
 
@@ -130,9 +129,9 @@ namespace EnACT
             {
                 //Set the left bound, but don't set it to less than 0
                 lbTime = Math.Max(0,value);
-                cbTime = value + halfTimeWidth;
+                cbTime = lbTime + halfTimeWidth;
                 //Set the right bound
-                rbTime = value + TimeWidth;
+                rbTime = lbTime + TimeWidth;
                 
             }
             get { return lbTime; }
@@ -148,14 +147,6 @@ namespace EnACT
         /// </summary>
         private double CenterBoundTime
         {
-            set
-            {
-                cbTime = value;
-                //Set the left bound, but don't set it to less than 0
-                lbTime = Math.Max(0, cbTime - halfTimeWidth);
-                //Set the right bound, but don't set it to more than the videoLength
-                rbTime = Math.Min(cbTime + halfTimeWidth, VideoLength);
-            }
             get
             {
                 return cbTime;
