@@ -86,6 +86,9 @@ namespace EnACTUnitTestProject
             catch (InvalidTimestampException) { }
         }
 
+        /// <summary>
+        /// Tests the assignment of several double corner cases to Timestamp.AsDouble
+        /// </summary>
         [TestMethod]
         public void InvalidDoubleTimestampTest()
         {
@@ -144,13 +147,13 @@ namespace EnACTUnitTestProject
             //If the above throws an exception, then the test fails
             catch (InvalidTimestampException) { Assert.Fail(); }
 
-            try { t7 = new Timestamp(Timestamp.MAX_TIME_D); }
+            try { t7 = new Timestamp(Timestamp.MAX_TIME_DOUBLE); }
             //If the above throws an exception, then the test fails
             catch (InvalidTimestampException) { Assert.Fail(); }
 
             try
             {
-                t8 = new Timestamp(Timestamp.MAX_TIME_D + Timestamp.MIN_TIME_DIFFERENCE);
+                t8 = new Timestamp(Timestamp.MAX_TIME_DOUBLE + Timestamp.MIN_TIME_DIFFERENCE);
                 //If the line above doesn't throw an exception then the test fails
                 Assert.Fail();
             }
@@ -274,6 +277,31 @@ namespace EnACTUnitTestProject
             //Assert double and string equality
             Assert.IsTrue(d3.Equals(t3));
             Assert.IsTrue(s3.Equals(t3));
+        }
+
+        /// <summary>
+        /// Tests the MAX_TIME constants to ensure that they are equal when set
+        /// or retrieved.
+        /// </summary>
+        [TestMethod]
+        public void TimestampMaxValueEqualityTest()
+        {
+            //Arrange
+            double expectedDouble = Timestamp.MAX_TIME_DOUBLE;
+            string expectedString = Timestamp.MAX_TIME_STRING;
+
+            Timestamp t1;
+            Timestamp t2;
+
+            //Act
+            t1 = new Timestamp(Timestamp.MAX_TIME_DOUBLE);
+            t2 = new Timestamp(Timestamp.MAX_TIME_STRING);
+
+            //Assert
+            Assert.AreEqual(expectedDouble, t1.AsDouble);
+            Assert.AreEqual(expectedDouble, t2.AsDouble);
+            Assert.AreEqual(expectedString, t1.AsString);
+            Assert.AreEqual(expectedString, t1.AsString);
         }
         #endregion
 

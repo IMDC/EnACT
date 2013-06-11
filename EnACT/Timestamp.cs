@@ -21,12 +21,12 @@ namespace EnACT
         /// <summary>
         /// The highest time value that can be assigned to a Timestamp as a double
         /// </summary>
-        public const double MAX_TIME_D = 35999.9;
+        public const double MAX_TIME_DOUBLE = 359999.9;
 
         /// <summary>
         /// The highest time value that can be assigned to a Timestamp as a string
         /// </summary>
-        public const string MAX_TIME_S = "99:59:59.0";
+        public const string MAX_TIME_STRING = "99:59:59.9";
 
         /// <summary>
         /// The smallest amount of time that will differentiate one caption from another.
@@ -79,7 +79,7 @@ namespace EnACT
                     throw new InvalidTimestampException("Timestamp.AsDouble value can not be Positive Infinity");
                 else if (Double.IsNegativeInfinity(value))
                     throw new InvalidTimestampException("Timestamp.AsDouble value can not be Negative Infinity");
-                else if (MAX_TIME_D < value)
+                else if (MAX_TIME_DOUBLE < value)
                     throw new InvalidTimestampException("Timestamp.AsDouble is too large");
 
                 time = value;
