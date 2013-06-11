@@ -464,9 +464,16 @@ namespace EnACT
                 for (int i = 0; i < LocationLabels.Length; i++)
                 {
                     y = labelYs[i];
+
+                    //Shrink height of last label rect by 1 to draw bottom line
+                    if (i == LocationLabels.Length - 1)
+                        h -= 1;
+
                     RectangleF r = new RectangleF(x, y, w, h);
-                    g.DrawString(LocationLabels[i], f, textBrush, r);
+                    g.FillRectangle(new SolidBrush(Color.White), r.X, r.Y, r.Width, r.Height);
                     g.DrawRectangle(outlinePen, r.X, r.Y, r.Width, r.Height);
+                    g.DrawString(LocationLabels[i], f, textBrush, r);
+                    
                 }
             }
             #endregion
