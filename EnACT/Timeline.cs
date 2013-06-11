@@ -709,7 +709,7 @@ namespace EnACT
         }
         #endregion
 
-        #region ScrollBar Events
+        #region ScrollBar
         /// <summary>
         /// Occurs when the scroll box has been moved by either a mouse or 
         /// keyboard action.
@@ -782,11 +782,15 @@ namespace EnACT
         {
             if(zoomLevel < MAX_ZOOM_LEVEL)
             {
+                //Change zoom level
                 TimeWidth /= ZOOM_MULTIPLIER;
-                LeftBoundTime = LeftBoundTime;
+                zoomLevel++; //Increase zoom level
+
+                //Center on playhead
+                LeftBoundTime = PlayHeadTime - halfTimeWidth;
                 SetPlayHeadBarTimes();
                 RedrawCaptionsRegion();
-                zoomLevel++; //Increase zoom level
+                
                 SetScrollBarValues();
             }
         }
@@ -798,11 +802,19 @@ namespace EnACT
         {
             if(MIN_ZOOM_LEVEL < zoomLevel)
             {
+                //Change zoom level
                 TimeWidth *= ZOOM_MULTIPLIER;
-                LeftBoundTime = LeftBoundTime;
+                zoomLevel--; //Decrease zoom level
+
+                //Change values
+                if (VideoLength < TimeWidth)
+                    LeftBoundTime = 0;
+                else
+                    //Set LeftboundTime to itself, updating CenterBoundTime and RightBoundTime
+                    LeftBoundTime = LeftBoundTime;
+
                 SetPlayHeadBarTimes();
                 RedrawCaptionsRegion();
-                zoomLevel--; //Decrease zoom level
                 SetScrollBarValues();
             }
         }
@@ -812,9 +824,12 @@ namespace EnACT
         /// </summary>
         public void ZoomReset()
         {
+            //Reset Zoom level
             zoomLevel = DEFAULT_ZOOM_LEVEL;
             TimeWidth = DEFAULT_TIME_WIDTH;
-            LeftBoundTime = LeftBoundTime;
+
+            //Center on Playhead
+            LeftBoundTime = PlayHeadTime - halfTimeWidth;
             SetPlayHeadBarTimes();
             RedrawCaptionsRegion();
             SetScrollBarValues();
