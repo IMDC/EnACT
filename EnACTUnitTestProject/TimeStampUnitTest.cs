@@ -158,7 +158,24 @@ namespace EnACTUnitTestProject
                 Assert.Fail();
             }
             catch (InvalidTimestampException) { }
-            
+        }
+
+        /// <summary>
+        /// Tests the assignment of string corner cases to Timestamp.AsString
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(InvalidTimestampException))]
+        public void InvalidStringTimestampTest()
+        {
+            //Arrange
+            string s1 = "99:99:99.0";
+
+            Timestamp t1;
+
+            //Act
+            t1 = new Timestamp(s1);
+
+            //Assert is handled by ExpectedException attribute
         }
         #endregion
 

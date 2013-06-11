@@ -144,6 +144,10 @@ namespace EnACT
                 if (value == null || value == String.Empty)
                     time = 0;
 
+                //If value is lexicographically greater than MAX_TIME_STRING
+                if(0 < String.Compare(value, MAX_TIME_STRING))
+                    throw new InvalidTimestampException("Timestamp.AsString is too large");
+
                 double seconds = 0;
 
                 string[] time_array = value.Split(':');
