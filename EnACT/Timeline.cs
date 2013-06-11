@@ -303,6 +303,8 @@ namespace EnACT
             Pen outlinePen = new Pen(Color.Black, 1); //Black outline with width of 1 pixel
             Brush textBrush = new SolidBrush(Color.Black);  //Black brush
 
+            Font f = new Font(this.Font.FontFamily, 10); //Caption font
+
             //The amount of height in the component available to draw on
             float availableHeight = Height - PLAYHEAD_BAR_HEIGHT; 
 
@@ -325,35 +327,26 @@ namespace EnACT
             g.TranslateTransform(0, PLAYHEAD_BAR_HEIGHT);
             #endregion
 
-            #region Draw labels and dash lines
-            //Draw CaptionPosition Labels
-            Font f = new Font(this.Font.FontFamily, 10); //CaptionPositions font
-
+            #region Draw Dash Lines
             Pen dashLinePen = new Pen(Color.Black); //Pen for drawing dotted lines
             dashLinePen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             dashLinePen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
 
-            x = 0;
+            float[] labelYs = new float[LocationLabels.Length];
+
+            x = XCaptionOrigin;
             h = availableHeight / LocationLabels.Length;
-            w = LOCATION_LABEL_WIDTH;
-            for(float i =0; i<LocationLabels.Length; i++)
+
+            for(int i =0; i<LocationLabels.Length; i++)
             {
                 y = i*h;
-                //Only draw alignment names if true;
-                if (DrawLocationLabels)
-                {
-                    RectangleF r = new RectangleF(x, y, w, h);
-                    g.DrawString(LocationLabels[(int)i], f, textBrush, r);
-                    g.DrawRectangle(outlinePen, r.X, r.Y, r.Width, r.Height);
-                }
-                else
-                    w = 0;
+                labelYs[i] = y;
 
                 //Draw separator line
                 if (i == 0) //First line wil be solid, not dashed.
-                    g.DrawLine(outlinePen, x + w, y, Width, y);
+                    g.DrawLine(outlinePen, x, y, Width, y);
                 else
-                    g.DrawLine(dashLinePen, x + w, y, Width, y);
+                    g.DrawLine(dashLinePen, x, y, Width, y);
             }
             #endregion
 
@@ -456,6 +449,26 @@ namespace EnACT
             //Draw
             g.FillRegion(playHeadBrush, phRegion);
             g.DrawLine(playHeadPen, x, -PLAYHEAD_BAR_HEIGHT, x, availableHeight);
+            #endregion
+
+            #region Draw Location Labels
+            if (DrawLocationLabels)
+            {
+                //Move origin back to actual origin
+                g.TranslateTransform(-LOCATION_LABEL_WIDTH -1, 0);
+
+                x = 0;
+                h = availableHeight / LocationLabels.Length;
+                w = LOCATION_LABEL_WIDTH;
+
+                for (int i = 0; i < LocationLabels.Length; i++)
+                {
+                    y = labelYs[i];
+                    RectangleF r = new RectangleF(x, y, w, h);
+                    g.DrawString(LocationLabels[i], f, textBrush, r);
+                    g.DrawRectangle(outlinePen, r.X, r.Y, r.Width, r.Height);
+                }
+            }
             #endregion
         }
         #endregion
