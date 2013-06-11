@@ -163,7 +163,7 @@ namespace EnACT
         /// <param name="e">Event Arguments</param>
         private void CaptionView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            Timeline.RedrawCaptionsRegion();
+            Timeline.Redraw();
         }
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace EnACT
             UpdatePlayheadLabel();
 
             Timeline.VideoLength = vidLength;
-            Timeline.RedrawInnerRegion();
+            Timeline.Redraw();
             Timeline.SetScrollBarValues();
         }
 
@@ -265,7 +265,7 @@ namespace EnACT
             Timeline.UpdateTimeLinePosition(playHeadTime);
             
             //Redraw Timeline
-            Timeline.RedrawCaptionsRegion();
+            Timeline.Redraw();
 
             TrackBar_Timeline.Update();
         }

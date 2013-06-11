@@ -285,7 +285,7 @@ namespace EnACT
             //Set the mouseSelection to no selection
             mouseSelection = TimelineMouseSelection.NoSelection;
 
-            RedrawInnerRegion();
+            Redraw();
             SetScrollBarValues();
         }
         #endregion
@@ -473,27 +473,11 @@ namespace EnACT
         }
         #endregion
 
-        #region Redraw Methods
-        /// <summary>
-        /// Invalidates the area where captions are drawn, leaving the rest alone.
-        /// </summary>
-        public void RedrawCaptionsRegion()
-        {
-            if (DrawLocationLabels)
-            {
-                Region r = new Region(new Rectangle(LOCATION_LABEL_WIDTH + 1, 1,
-                    Width - LOCATION_LABEL_WIDTH - 2, Height - 2));
-                r.Union(new Rectangle(1, 1, Width - 2, PLAYHEAD_BAR_HEIGHT));
-                Invalidate(r);
-            }
-            else
-                RedrawInnerRegion();
-        }
-
+        #region Redraw Method
         /// <summary>
         /// Invalidates the area inside the outline, leaving the outline alone.
         /// </summary>
-        public void RedrawInnerRegion()
+        public void Redraw()
         {
             Invalidate(new Rectangle(1, 1, Width - 2, Height - 2));
         }
@@ -522,7 +506,7 @@ namespace EnACT
 
                 //Set playhead time based on click location
                 PlayHeadTime = mouseClickTime;
-                RedrawCaptionsRegion(); //redraw the playhead
+                Redraw(); //redraw the playhead
                 //Invoke PlayheadChanged event
                 OnPlayheadChanged(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
             }
@@ -633,7 +617,7 @@ namespace EnACT
                         mouseSelection.Action));
             }
 
-            RedrawCaptionsRegion();
+            Redraw();
             //Console.WriteLine("Mouse Moved!"); 
         }
         #endregion
@@ -660,7 +644,7 @@ namespace EnACT
 
                 //Invoke PlayheadChanged event
                 OnPlayheadChanged(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
-                RedrawCaptionsRegion(); //redraw the playhead
+                Redraw(); //redraw the playhead
             }
         }
         #endregion
@@ -729,7 +713,7 @@ namespace EnACT
             }
             
             //Redraw area with captions
-            RedrawCaptionsRegion();
+            Redraw();
         }
 
         /// <summary>
@@ -789,7 +773,7 @@ namespace EnACT
                 //Center on playhead
                 LeftBoundTime = PlayHeadTime - halfTimeWidth;
                 SetPlayHeadBarTimes();
-                RedrawCaptionsRegion();
+                Redraw();
                 
                 SetScrollBarValues();
             }
@@ -814,7 +798,7 @@ namespace EnACT
                     LeftBoundTime = LeftBoundTime;
 
                 SetPlayHeadBarTimes();
-                RedrawCaptionsRegion();
+                Redraw();
                 SetScrollBarValues();
             }
         }
@@ -831,7 +815,7 @@ namespace EnACT
             //Center on Playhead
             LeftBoundTime = PlayHeadTime - halfTimeWidth;
             SetPlayHeadBarTimes();
-            RedrawCaptionsRegion();
+            Redraw();
             SetScrollBarValues();
         }
         #endregion
@@ -891,15 +875,13 @@ namespace EnACT
             if (DrawLocationLabels)
             {
                 DrawLocationLabels = false;
-                RedrawCaptionsRegion();
             }
             else
             {
                 DrawLocationLabels = true;
-                //Redraw entire region, including labels
-                RedrawInnerRegion();
             }
             SetScrollBarValues();
+            Redraw();
         }
         #endregion
 
