@@ -118,17 +118,23 @@ namespace EnACT
                     int hour = (int)timeDouble / 3600;
                     timeString += hour.ToString("00:");
 
-                    timeDouble %= 3600;
+                    if(3600 < timeDouble)
+                        timeDouble %= 3600;
 
                     //Get minutes
                     int minutes = (int)timeDouble / 60;
                     timeString += minutes.ToString("00:");
 
-                    timeDouble %= 60;
+                    if (60 < timeDouble)
+                        timeDouble %= 60;
 
                     //Remainder is the remaining seconds
                     timeString += timeDouble.ToString("00.0");
                 }
+
+                //Check to ensure Timestamp validates, and isn't something like "00:-35791394:NaN"
+                if (!TimeStampValidates(timeString))
+                    throw new InvalidTimestampException("String value is not a valid Timestamp");
 
                 //Store the generated value for future retrieval
                 timestampString = timeString;
