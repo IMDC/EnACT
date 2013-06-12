@@ -114,22 +114,24 @@ namespace EnACT
                 }
                 else
                 {
+                    int timeInt = (int)time;
+
+                    //Subtract everything in the ones column and greater
+                    timeDouble -= timeInt;
+
                     //Get hours
-                    int hour = (int)timeDouble / 3600;
-                    timeString += hour.ToString("00:");
+                    int hours = timeInt / 3600;
+                    timeInt %= 3600;
 
-                    if(3600 < timeDouble)
-                        timeDouble %= 3600;
+                    //Get minues
+                    int minutes = timeInt / 60;
+                    timeInt %= 60;
 
-                    //Get minutes
-                    int minutes = (int)timeDouble / 60;
-                    timeString += minutes.ToString("00:");
+                    //Seconds is the remainder of timeInt and the decimal part left in timedouble earlier
+                    timeDouble += timeInt;
 
-                    if (60 < timeDouble)
-                        timeDouble %= 60;
-
-                    //Remainder is the remaining seconds
-                    timeString += timeDouble.ToString("00.0");
+                    //Format string
+                    timeString = hours.ToString("00:") + minutes.ToString("00:") + timeDouble.ToString("00.0") ;
                 }
 
                 //Check to ensure Timestamp validates, and isn't something like "00:-35791394:NaN"
