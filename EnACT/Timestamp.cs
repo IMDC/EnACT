@@ -38,7 +38,7 @@ namespace EnACT
         /// <summary>
         /// A regular expression that will validate a correct timestamp
         /// </summary>
-        private static Regex validTimestamp = new Regex(@"^[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\.[0-9]$");
+        private static Regex validTimestamp = new Regex(@"^[0-9][0-9]:[0-5][0-9]:[0-5][0-9]\.[0-9]$");
         #endregion
 
         #region Private Fields
