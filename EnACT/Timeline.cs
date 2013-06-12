@@ -829,13 +829,13 @@ namespace EnACT
         }
         #endregion
 
-        #region UpdateTimeLinePosition
+        #region UpdatePlayheadPosition
         /// <summary>
         /// Updates the Timeline's position, setting the playhead and centering it in the
         /// middle of the Timeline. Will also update the scrollbar.
         /// </summary>
         /// <param name="currentTime">The position the playhead is to be set at</param>
-        public void UpdateTimeLinePosition(double currentTime)
+        public void UpdatePlayheadPosition(double currentTime)
         {
             PlayHeadTime = currentTime;
             //If LeftBoundTime or RightBoundTime are not half of a Timewidth away from the current time and

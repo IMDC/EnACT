@@ -262,7 +262,7 @@ namespace EnACT
             //Set label
             UpdatePlayheadLabel();
 
-            Timeline.UpdateTimeLinePosition(playHeadTime);
+            Timeline.UpdatePlayheadPosition(playHeadTime);
             
             //Redraw Timeline
             Timeline.Redraw();
