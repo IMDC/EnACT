@@ -13,10 +13,6 @@ namespace EnACT
         /// </summary>
         private enum MoveDirection { Up, Down };
 
-        private Timestamp playheadTime;
-
-        private Timestamp videoLengthTime;
-
         /// <summary>
         /// Default speaker, used when no speaker is currently specified
         /// </summary>
@@ -61,10 +57,6 @@ namespace EnACT
 
             CaptionList = new List<Caption>();
             Settings = new SettingsXML();
-
-            //Create times for Label_PlayheadTime
-            playheadTime = new Timestamp();
-            videoLengthTime = new Timestamp();
 
             //Set up the CaptionView
             InitCaptionView();
@@ -241,8 +233,8 @@ namespace EnACT
             Double vidLength = EngineView.VideoLength();
             TrackBar_Timeline.Maximum = (int) vidLength * 10;
 
-            videoLengthTime = vidLength;
-            UpdatePlayheadLabel();
+            //Set Label
+            PlayheadLabel.VideoLength = vidLength;
 
             Timeline.VideoLength = vidLength;
             Timeline.Redraw();
@@ -251,18 +243,15 @@ namespace EnACT
 
         private void PlayheadTimer_Tick(object sender, EventArgs e)
         {
-            double playHeadTime = EngineView.GetPlayheadTime();
-            int vidPos = (int)playHeadTime * 10;
+            double phTime = EngineView.GetPlayheadTime();
+            int vidPos = (int)phTime * 10;
             if (TrackBar_Timeline.Minimum <= vidPos && vidPos <= TrackBar_Timeline.Maximum)
                 TrackBar_Timeline.Value = vidPos;
 
             //Set playhead time for label
-            this.playheadTime = playHeadTime;
+            PlayheadLabel.PlayheadTime = phTime;
 
-            //Set label
-            UpdatePlayheadLabel();
-
-            Timeline.UpdatePlayheadPosition(playHeadTime);
+            Timeline.UpdatePlayheadPosition(phTime);
             
             //Redraw Timeline
             Timeline.Redraw();
@@ -324,8 +313,8 @@ namespace EnACT
             EngineView.Pause();
             EngineView.SetPlayHeadTime(e.PlayheadTime);
 
-            playheadTime = e.PlayheadTime;
-            UpdatePlayheadLabel();
+            //Update label
+            PlayheadLabel.PlayheadTime = e.PlayheadTime;
 
             //Only play if Engine was playing previously
             if(wasPlaying)
@@ -344,11 +333,6 @@ namespace EnACT
         {
             //Force Captionview to be repainted
             CaptionView.Invalidate();
-        }
-
-        private void UpdatePlayheadLabel()
-        {
-            Label_PlayheadTime.Text = String.Format("{0} / {1}", this.playheadTime, this.videoLengthTime);
         }
     }//Class
 }//Namespace

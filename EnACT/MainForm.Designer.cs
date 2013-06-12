@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            EnACT.Timestamp timestamp1 = new EnACT.Timestamp();
+            EnACT.Timestamp timestamp2 = new EnACT.Timestamp();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -58,10 +60,10 @@
             this.Button_ZoomTimelineOut = new System.Windows.Forms.Button();
             this.Button_ZoomReset = new System.Windows.Forms.Button();
             this.DebugButton = new System.Windows.Forms.Button();
+            this.PlayheadLabel = new EnACT.PlayheadLabel();
             this.Timeline = new EnACT.Timeline();
             this.EngineView = new EnACT.EngineView();
             this.CaptionView = new EnACT.CaptionView();
-            this.Label_PlayheadTime = new System.Windows.Forms.Label();
             this.MenuStrip_MainForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_Timeline)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EngineView)).BeginInit();
@@ -311,6 +313,21 @@
             this.DebugButton.UseVisualStyleBackColor = true;
             this.DebugButton.Click += new System.EventHandler(this.DebugButton_Click);
             // 
+            // PlayheadLabel
+            // 
+            this.PlayheadLabel.AutoSize = true;
+            this.PlayheadLabel.Location = new System.Drawing.Point(338, 32);
+            this.PlayheadLabel.Name = "PlayheadLabel";
+            timestamp1.AsDouble = 0D;
+            timestamp1.AsString = "00:00:00.0";
+            this.PlayheadLabel.PlayheadTime = timestamp1;
+            this.PlayheadLabel.Size = new System.Drawing.Size(120, 13);
+            this.PlayheadLabel.TabIndex = 23;
+            this.PlayheadLabel.Text = "00:00:00.0 / 00:00:00.0";
+            timestamp2.AsDouble = 0D;
+            timestamp2.AsString = "00:00:00.0";
+            this.PlayheadLabel.VideoLength = timestamp2;
+            // 
             // Timeline
             // 
             this.Timeline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -371,21 +388,12 @@
             this.CaptionView.UserInputEnabled = true;
             this.CaptionView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.CaptionView_CellValueChanged);
             // 
-            // Label_PlayheadTime
-            // 
-            this.Label_PlayheadTime.AutoSize = true;
-            this.Label_PlayheadTime.Location = new System.Drawing.Point(348, 37);
-            this.Label_PlayheadTime.Name = "Label_PlayheadTime";
-            this.Label_PlayheadTime.Size = new System.Drawing.Size(102, 13);
-            this.Label_PlayheadTime.TabIndex = 22;
-            this.Label_PlayheadTime.Text = "00:00:00 / 00:00:00";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 682);
-            this.Controls.Add(this.Label_PlayheadTime);
+            this.Controls.Add(this.PlayheadLabel);
             this.Controls.Add(this.Button_ZoomReset);
             this.Controls.Add(this.Button_ZoomTimelineOut);
             this.Controls.Add(this.Button_ZoomTimelineIn);
@@ -453,7 +461,7 @@
         private System.Windows.Forms.Button Button_ZoomTimelineIn;
         private System.Windows.Forms.Button Button_ZoomTimelineOut;
         private System.Windows.Forms.Button Button_ZoomReset;
-        private System.Windows.Forms.Label Label_PlayheadTime;
+        private PlayheadLabel PlayheadLabel;
     }
 }
 
