@@ -110,44 +110,32 @@ namespace EnACT
 
         #region Private Properties
         /// <summary>
-        /// Backing variable for rightBoundTime
+        /// Backing field for rightBoundTime
         /// </summary>
         private double rbTime;
         /// <summary>
         /// The time value of the Timeline at the right end of the control
         /// </summary>
-        private double RightBoundTime
-        {
-            get { return rbTime; }
-        }
+        private double RightBoundTime { get { return rbTime; } }
 
         /// <summary>
-        /// Backing variable for LeftBoundTime
+        /// Backing field for LeftBoundTime
         /// </summary>
         private double lbTime;
         /// <summary>
         /// The time value of the Timeline at the left end of the control
         /// </summary>
-        private double LeftBoundTime
-        {
-            get { return lbTime; }
-        }
+        private double LeftBoundTime { get { return lbTime; } }
 
         /// <summary>
-        /// Backing variable for CenterBoundTime
+        /// Backing field for CenterBoundTime
         /// </summary>
         private double cbTime;
         /// <summary>
         /// The time value of the Timeline that is represented by the Scrollbar.Value
         /// property. It is in-between rightBoundTime and LeftBoundTime
         /// </summary>
-        private double CenterBoundTime
-        {
-            get
-            {
-                return cbTime;
-            }
-        }
+        private double CenterBoundTime { get { return cbTime; } }
 
         /// <summary>
         /// Backing field for PixelsPerSecond
@@ -157,10 +145,7 @@ namespace EnACT
         /// <summary>
         /// The amount of pixels drawn per second of caption time
         /// </summary>
-        private float PixelsPerSecond
-        { 
-            get { return pps; }
-        }
+        private float PixelsPerSecond { get { return pps; } }
 
         /// <summary>
         /// Gets the x origin value based on whether or not labels are drawn
