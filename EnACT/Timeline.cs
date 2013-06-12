@@ -68,7 +68,17 @@ namespace EnACT
         /// </summary>
         private const int PLAYHEAD_BAR_HEIGHT = PLAYHEAD_HALF_WIDTH * 2;
 
+        /// <summary>
+        /// The distance away from the beginning or ending of a caption in pixels that the user
+        /// has to click on to be able to move the caption.
+        /// </summary>
         private const int CAPTION_SELECTION_WIDTH = 3;
+
+        /// <summary>
+        /// The amount of pixels past the boundary of the screen that the timeline 
+        /// will draw a caption of.
+        /// </summary>
+        private const int DRAW_LIMIT = 5;
         #endregion
 
         #region Private fields
@@ -315,6 +325,7 @@ namespace EnACT
             //Draw black outline around control
             g.DrawRectangle(outlinePen, 0, 0, Width-1, availableHeight + PLAYHEAD_BAR_HEIGHT-1);
 
+            //Move the origin down towards the end of the playhead bar.
             g.TranslateTransform(0, PLAYHEAD_BAR_HEIGHT);
             #endregion
 
@@ -384,9 +395,9 @@ namespace EnACT
                             case ScreenLocation.BottomRight: y = 8 * h; break;
                             default: y = 0; break;
                         }
-                        x = (float)(c.Begin - LeftBoundTime) * pixelsPerSecond;
-                        //w = (float)(c.Duration - LeftBoundTime) * pixelsPerSecond;
-                        w = (float)(c.End - LeftBoundTime) * pixelsPerSecond - x;
+                        //Get the x and w fields while putting limits on how large they can be
+                        x = Math.Max((float)(c.Begin - LeftBoundTime) * pixelsPerSecond, -DRAW_LIMIT);
+                        w = Math.Min((float)(c.End - LeftBoundTime) * pixelsPerSecond - x, Width + DRAW_LIMIT);
 
                         //Create a small space between the line dividers and the caption rectangles
                         //y+= 2; h -=4; //Gives one extra pixel of whitespace on top and bottom
