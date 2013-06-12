@@ -135,15 +135,6 @@ namespace EnACT
         /// </summary>
         private double LeftBoundTime
         {
-            set 
-            {
-                //Set the left bound, but don't set it to less than 0
-                lbTime = Math.Max(0,value);
-                cbTime = lbTime + halfTimeWidth;
-                //Set the right bound
-                rbTime = lbTime + TimeWidth;
-                
-            }
             get { return lbTime; }
         }
 
@@ -273,7 +264,7 @@ namespace EnACT
             DrawLocationLabels = true;
 
             //Set leftboundTime
-            LeftBoundTime = 0;
+            SetBoundTimes(0);
 
             //Create an array of 5 timestamps
             playheadBarTimes = new Timestamp[5];
@@ -713,12 +704,12 @@ namespace EnACT
         {
             //If the value is 0, snap the leftBoundTime to 0 to prevent rounding errors.
             if (e.NewValue == 0)
-                LeftBoundTime = 0;
+                SetBoundTimes(0);
             else
             {
                 //Get the percent progress of value
                 double valuePercent = ((double)ScrollBar.Value) / ScrollBar.Maximum;
-                LeftBoundTime = VideoLength * valuePercent;
+                SetBoundTimes(VideoLength * valuePercent);
             }
             
             //Redraw area with captions
@@ -780,7 +771,7 @@ namespace EnACT
                 zoomLevel++; //Increase zoom level
 
                 //Center on playhead
-                LeftBoundTime = PlayHeadTime - halfTimeWidth;
+                SetBoundTimes(PlayHeadTime - halfTimeWidth);
                 SetPlayHeadBarTimes();
                 Redraw();
                 
@@ -801,10 +792,10 @@ namespace EnACT
 
                 //Change values
                 if (VideoLength < TimeWidth)
-                    LeftBoundTime = 0;
+                    SetBoundTimes(0);
                 else
                     //Set LeftboundTime to itself, updating CenterBoundTime and RightBoundTime
-                    LeftBoundTime = LeftBoundTime;
+                    RecalculateBoundTimes();
 
                 SetPlayHeadBarTimes();
                 Redraw();
@@ -822,7 +813,7 @@ namespace EnACT
             TimeWidth = DEFAULT_TIME_WIDTH;
 
             //Center on Playhead
-            LeftBoundTime = PlayHeadTime - halfTimeWidth;
+            SetBoundTimes(PlayHeadTime - halfTimeWidth);
             SetPlayHeadBarTimes();
             Redraw();
             SetScrollBarValues();
@@ -842,7 +833,7 @@ namespace EnACT
             //the scrollbar hasn't reached its maximum scrollable position yet
             if ((LeftBoundTime < currentTime - halfTimeWidth || currentTime + halfTimeWidth < RightBoundTime)
                 && ScrollBar.Value < ScrollBar.Maximum - ScrollBar.LargeChange )
-                LeftBoundTime = currentTime - halfTimeWidth;
+                SetBoundTimes(currentTime - halfTimeWidth);
             //Set scroll value to the value of LeftBoundTime
             ScrollBar.Value = Math.Min((int)(ScrollBar.Maximum * (LeftBoundTime / VideoLength)),
                 ScrollBar.Maximum);
@@ -891,6 +882,31 @@ namespace EnACT
             }
             SetScrollBarValues();
             Redraw();
+        }
+        #endregion
+
+        #region Set Bound Times
+        /// <summary>
+        /// Sets the Boundary Times based on the left boundary time
+        /// </summary>
+        /// <param name="leftBoundTime">The left boundary time to set the boundary
+        /// times with</param>
+        private void SetBoundTimes(double leftBoundTime)
+        {
+            //Set the left bound, but don't set it to less than 0
+            lbTime = Math.Max(0, leftBoundTime);
+            cbTime = lbTime + halfTimeWidth;
+            //Set the right bound
+            rbTime = lbTime + TimeWidth;
+        }
+
+        /// <summary>
+        /// Recalculates the values of right and centerboundtimes based on the current
+        /// LeftBoundTime
+        /// </summary>
+        private void RecalculateBoundTimes()
+        {
+            SetBoundTimes(LeftBoundTime);
         }
         #endregion
 
