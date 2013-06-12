@@ -176,7 +176,8 @@ namespace EnACT
         /// </summary>
         private double tw;
         /// <summary>
-        /// How many seconds of time the Timeline will show
+        /// How many seconds of time the Timeline will show at the minimum possible
+        /// width of the control
         /// </summary>
         public double TimeWidth 
         {
@@ -465,6 +466,7 @@ namespace EnACT
         }
         #endregion
 
+        #region Resize
         /// <summary>
         /// Calls the CalculatePixelsPerSecond when resized
         /// </summary>
@@ -478,6 +480,7 @@ namespace EnACT
             //How many pixels are drawn for each second of time.
             CalculatePixelsPerSecond();
         }
+        #endregion
 
         #region Redraw Method
         /// <summary>
