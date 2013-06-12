@@ -93,11 +93,6 @@ namespace EnACT
         private int zoomLevel;
 
         /// <summary>
-        /// The amount of pixels drawn per second of caption time
-        /// </summary>
-        private float pixelsPerSecond;
-
-        /// <summary>
         /// The width of the component that is available for drawing captions
         /// </summary>
         private float availableWidth;
@@ -152,6 +147,19 @@ namespace EnACT
             {
                 return cbTime;
             }
+        }
+
+        /// <summary>
+        /// Backing field for PixelsPerSecond
+        /// </summary>
+        private float pps;
+
+        /// <summary>
+        /// The amount of pixels drawn per second of caption time
+        /// </summary>
+        private float PixelsPerSecond
+        { 
+            get { return pps; }
         }
 
         /// <summary>
@@ -311,7 +319,7 @@ namespace EnACT
                 availableWidth = Width - 2;
 
             //How many pixels are drawn for each second of time.
-            pixelsPerSecond = (float)(availableWidth / TimeWidth);
+            CalculatePixelsPerSecond();
 
             //Draw black outline around control
             g.DrawRectangle(outlinePen, 0, 0, Width-1, availableHeight + PLAYHEAD_BAR_HEIGHT-1);
@@ -354,7 +362,7 @@ namespace EnACT
             #region Draw End Marker
             if (LeftBoundTime <= VideoLength && VideoLength <= RightBoundTime)
             {
-                x = (float)(VideoLength - LeftBoundTime) * pixelsPerSecond;
+                x = (float)(VideoLength - LeftBoundTime) * PixelsPerSecond;
                 g.DrawLine(new Pen(Color.Red, 2), x, -PLAYHEAD_BAR_HEIGHT, x, availableHeight);
             }
             #endregion
@@ -387,8 +395,8 @@ namespace EnACT
                             default: y = 0; break;
                         }
                         //Get the x and w fields while putting limits on how large they can be
-                        x = Math.Max((float)(c.Begin - LeftBoundTime) * pixelsPerSecond, -DRAW_LIMIT);
-                        w = Math.Min((float)(c.End - LeftBoundTime) * pixelsPerSecond - x, Width + DRAW_LIMIT);
+                        x = Math.Max((float)(c.Begin - LeftBoundTime) * PixelsPerSecond, -DRAW_LIMIT);
+                        w = Math.Min((float)(c.End - LeftBoundTime) * PixelsPerSecond - x, Width + DRAW_LIMIT);
 
                         //Create a small space between the line dividers and the caption rectangles
                         //y+= 2; h -=4; //Gives one extra pixel of whitespace on top and bottom
@@ -410,7 +418,7 @@ namespace EnACT
                 if (t == null)
                     continue;
 
-                x = (float)(t - LeftBoundTime) * pixelsPerSecond;
+                x = (float)(t - LeftBoundTime) * PixelsPerSecond;
                 y = -PLAYHEAD_BAR_HEIGHT;
                 w = 70;
 
@@ -429,7 +437,7 @@ namespace EnACT
             Pen playHeadPen = new Pen(playHeadBrush, 2);
 
             //Get playhead position
-            x =(float)(PlayHeadTime - LeftBoundTime) * pixelsPerSecond;
+            x =(float)(PlayHeadTime - LeftBoundTime) * PixelsPerSecond;
             
             //Make triangle head
             GraphicsPath phPath = new GraphicsPath();
@@ -740,7 +748,7 @@ namespace EnACT
              * draw out the entire video at the current timewidth plus 1 large change value.
              * This is due to a bug with the windows scrollbar.
              */
-            ScrollBar.Maximum = (int)((VideoLength+ENDTIMEBUFFER) * pixelsPerSecond + ScrollBar.LargeChange);
+            ScrollBar.Maximum = (int)((VideoLength+ENDTIMEBUFFER) * PixelsPerSecond + ScrollBar.LargeChange);
 
             //Set scroll value to the value of LeftBoundTime
             if(VideoLength != 0)
@@ -910,6 +918,15 @@ namespace EnACT
         }
         #endregion
 
+        /// <summary>
+        /// Sets the PixelsPerSecond property based on the current TimeWidth and available width
+        /// for drawing captions
+        /// </summary>
+        private void CalculatePixelsPerSecond()
+        {
+            pps = (float)(availableWidth / TimeWidth);
+        }
+
         #region Event Invocation Methods
         /// <summary>
         /// Invokes the PlayheadChanged event, which should happen everytime the playhead
@@ -975,7 +992,7 @@ namespace EnACT
         /// <returns>Time represented by the X Coordinate</returns>
         private double XCoordinateToTime(int x)
         {
-            return (double)((x - XCaptionOrigin) / pixelsPerSecond + LeftBoundTime);
+            return (double)((x - XCaptionOrigin) / PixelsPerSecond + LeftBoundTime);
         }
 
         /// <summary>
@@ -986,7 +1003,7 @@ namespace EnACT
         /// <returns>An X Coordinate represented by the time</returns>
         private float TimeToXCoordinate(double time)
         {
-            return (float)((time - LeftBoundTime) * pixelsPerSecond + XCaptionOrigin);
+            return (float)((time - LeftBoundTime) * PixelsPerSecond + XCaptionOrigin);
         }
         #endregion
     }//Class
