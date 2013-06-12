@@ -30,6 +30,11 @@ namespace EnACT
         };
 
         /// <summary>
+        /// The smallest width that the Timeline control can have.
+        /// </summary>
+        public const int MIN_TIMELINE_WIDTH = 920;
+
+        /// <summary>
         /// How many seconds of time the Timeline will show by default
         /// </summary>
         private const double DEFAULT_TIME_WIDTH = 10;
@@ -468,6 +473,8 @@ namespace EnACT
         {
             base.OnResize(e);
 
+            //Update bounds to new size
+            RecalculateBoundTimes();
             //How many pixels are drawn for each second of time.
             CalculatePixelsPerSecond();
         }
@@ -894,9 +901,12 @@ namespace EnACT
         {
             //Set the left bound, but don't set it to less than 0
             lbTime = Math.Max(0, leftBoundTime);
-            cbTime = lbTime + halfTimeWidth;
+
             //Set the right bound
-            rbTime = lbTime + TimeWidth;
+            rbTime = XCoordinateToTime(Width - 2);
+
+            //Set the center bound to inbetween the other two
+            cbTime = (rbTime - lbTime) / 2;
         }
 
         /// <summary>
@@ -923,7 +933,7 @@ namespace EnACT
                 aw = Width - 2;
 
             //Calculate pps
-            pps = (float)(AvailableWidth / TimeWidth);
+            pps = (float)(MIN_TIMELINE_WIDTH / TimeWidth);
         }
         #endregion
 
