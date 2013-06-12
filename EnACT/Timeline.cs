@@ -93,11 +93,6 @@ namespace EnACT
         private int zoomLevel;
 
         /// <summary>
-        /// The width of the component that is available for drawing captions
-        /// </summary>
-        private float availableWidth;
-
-        /// <summary>
         /// An object containing data about what the mouse currently has selected
         /// </summary>
         private TimelineMouseSelection mouseSelection;
@@ -141,11 +136,19 @@ namespace EnACT
         /// Backing field for PixelsPerSecond
         /// </summary>
         private float pps;
-
         /// <summary>
         /// The amount of pixels drawn per second of caption time
         /// </summary>
         private float PixelsPerSecond { get { return pps; } }
+
+        /// <summary>
+        /// Backing field for AvailableWidth
+        /// </summary>
+        private float aw;
+        /// <summary>
+        /// The width of the component that is available for drawing captions
+        /// </summary>
+        private float AvailableWidth { get { return aw; } }
 
         /// <summary>
         /// Gets the x origin value based on whether or not labels are drawn
@@ -296,12 +299,6 @@ namespace EnACT
             //Subtract the height of the scrollbar if it is visible
             if (ScrollBar.Visible)
                 availableHeight -= SystemInformation.HorizontalScrollBarHeight;
-
-            //Set value based on whether or not labels are visible
-            if (DrawLocationLabels)
-                availableWidth = (float)(Width - LOCATION_LABEL_WIDTH - 3);
-            else
-                availableWidth = Width - 2;
 
             //How many pixels are drawn for each second of time.
             CalculatePixelsPerSecond();
@@ -726,8 +723,8 @@ namespace EnACT
         public void SetScrollBarValues()
         {
             ScrollBar.Minimum = 0; //Min size should always be 0
-            ScrollBar.SmallChange = (int)(availableWidth / 10);
-            ScrollBar.LargeChange = (int)availableWidth;
+            ScrollBar.SmallChange = (int)(AvailableWidth / 10);
+            ScrollBar.LargeChange = (int)AvailableWidth;
 
             /* The ScrollBar.Maximum values is defined as the total amount of pixels to
              * draw out the entire video at the current timewidth plus 1 large change value.
@@ -903,14 +900,23 @@ namespace EnACT
         }
         #endregion
 
+        #region PixelsPerSecond
         /// <summary>
-        /// Sets the PixelsPerSecond property based on the current TimeWidth and available width
-        /// for drawing captions
+        /// Sets the PixelsPerSecond and AvailableWidth properties based on
+        /// Timewidth and Control Width
         /// </summary>
         private void CalculatePixelsPerSecond()
         {
-            pps = (float)(availableWidth / TimeWidth);
+            //Set value based on whether or not labels are visible
+            if (DrawLocationLabels)
+                aw = (float)(Width - LOCATION_LABEL_WIDTH - 3);
+            else
+                aw = Width - 2;
+
+            //Calculate pps
+            pps = (float)(AvailableWidth / TimeWidth);
         }
+        #endregion
 
         #region Event Invocation Methods
         /// <summary>
