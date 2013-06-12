@@ -840,9 +840,9 @@ namespace EnACT
             PlayHeadTime = currentTime;
             //If LeftBoundTime or RightBoundTime are not half of a Timewidth away from the current time and
             //the scrollbar hasn't reached its maximum scrollable position yet
-            if ((LeftBoundTime < currentTime - halfTimeWidth || currentTime + halfTimeWidth < RightBoundTime)
-                && ScrollBar.Value < ScrollBar.Maximum - ScrollBar.LargeChange )
-                SetBoundTimes(currentTime - halfTimeWidth);
+            if ((LeftBoundTime < currentTime - CenterBoundTime || currentTime + CenterBoundTime < RightBoundTime)
+                && ScrollBar.Value < ScrollBar.Maximum - ScrollBar.LargeChange)
+                SetBoundTimes(currentTime - CenterBoundTime);
             //Set scroll value to the value of LeftBoundTime
             ScrollBar.Value = Math.Min((int)(ScrollBar.Maximum * (LeftBoundTime / VideoLength)),
                 ScrollBar.Maximum);
