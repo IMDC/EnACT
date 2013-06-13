@@ -394,9 +394,6 @@ namespace EnACT
             #endregion
 
             #region PlayheadBar Times
-            //Set the times
-            SetPlayHeadBarTimes();
-
             foreach (Timestamp t in playheadBarTimes)
             {
                 //Skip the timestamp if null
@@ -477,6 +474,8 @@ namespace EnACT
 
             //Update bounds to new size
             RecalculateBoundTimes();
+            //Set the times
+            SetPlayHeadBarTimes();
             //How many pixels are drawn for each second of time.
             CalculatePixelsPerSecond();
         }
@@ -720,7 +719,10 @@ namespace EnACT
                 double valuePercent = ((double)ScrollBar.Value) / ScrollBar.Maximum;
                 SetBoundTimes(VideoLength * valuePercent);
             }
-            
+
+            //Set the times
+            SetPlayHeadBarTimes();
+
             //Redraw area with captions
             Redraw();
         }
@@ -842,7 +844,11 @@ namespace EnACT
             //the scrollbar hasn't reached its maximum scrollable position yet
             if ((LeftBoundTime < currentTime - CenterBoundTime || currentTime + CenterBoundTime < RightBoundTime)
                 && ScrollBar.Value < ScrollBar.Maximum - ScrollBar.LargeChange)
+            {
                 SetBoundTimes(currentTime - CenterBoundTime);
+                //Set the times
+                SetPlayHeadBarTimes();
+            }
             //Set scroll value to the value of LeftBoundTime
             ScrollBar.Value = Math.Min((int)(ScrollBar.Maximum * (LeftBoundTime / VideoLength)),
                 ScrollBar.Maximum);
