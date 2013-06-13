@@ -477,7 +477,7 @@ namespace EnACT
             //Set the times
             SetPlayHeadBarTimes();
             //How many pixels are drawn for each second of time.
-            CalculatePixelsPerSecond();
+            SetPixelsPerSecond();
         }
         #endregion
 
@@ -783,10 +783,11 @@ namespace EnACT
 
                 //Center on playhead
                 SetBoundTimes(PlayHeadTime - halfTimeWidth);
+
+                SetPixelsPerSecond();
                 SetPlayHeadBarTimes();
-                Redraw();
-                
                 SetScrollBarValues();
+                Redraw();
             }
         }
 
@@ -808,9 +809,10 @@ namespace EnACT
                     //Set LeftboundTime to itself, updating CenterBoundTime and RightBoundTime
                     RecalculateBoundTimes();
 
+                SetPixelsPerSecond();
                 SetPlayHeadBarTimes();
-                Redraw();
                 SetScrollBarValues();
+                Redraw();
             }
         }
 
@@ -825,9 +827,11 @@ namespace EnACT
 
             //Center on Playhead
             SetBoundTimes(PlayHeadTime - halfTimeWidth);
+
+            SetPixelsPerSecond();
             SetPlayHeadBarTimes();
-            Redraw();
             SetScrollBarValues();
+            Redraw();
         }
         #endregion
 
@@ -927,7 +931,7 @@ namespace EnACT
         /// Sets the PixelsPerSecond and AvailableWidth properties based on
         /// Timewidth and Control Width
         /// </summary>
-        private void CalculatePixelsPerSecond()
+        private void SetPixelsPerSecond()
         {
             //Set value based on whether or not labels are visible
             if (DrawLocationLabels)
