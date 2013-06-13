@@ -743,6 +743,8 @@ namespace EnACT
         /// </summary>
         public void SetScrollBarValues()
         {
+            SetAvailableWidth();
+
             ScrollBar.Minimum = 0; //Min size should always be 0
             ScrollBar.SmallChange = (int)(AvailableWidth / 10);
             ScrollBar.LargeChange = (int)AvailableWidth;
@@ -933,14 +935,19 @@ namespace EnACT
         /// </summary>
         private void SetPixelsPerSecond()
         {
+            //Calculate pps
+            pps = (float)(MIN_TIMELINE_WIDTH / TimeWidth);
+        }
+        #endregion
+
+        #region SetAvailableWidth
+        private void SetAvailableWidth()
+        {
             //Set value based on whether or not labels are visible
             if (DrawLocationLabels)
                 aw = (float)(Width - LOCATION_LABEL_WIDTH - 3);
             else
                 aw = Width - 2;
-
-            //Calculate pps
-            pps = (float)(MIN_TIMELINE_WIDTH / TimeWidth);
         }
         #endregion
 
