@@ -88,9 +88,9 @@ namespace EnACT
 
         #region Private fields
         /// <summary>
-        /// An array of Timestamps used to keep track of position in the Timeline
+        /// A list of Timestamps used to keep track of position in the Timeline
         /// </summary>
-        private Timestamp[] playheadBarTimes;
+        private List<Timestamp> playheadBarTimes;
 
         /// <summary>
         /// The level of Zoom the Timeline is at.
@@ -268,8 +268,8 @@ namespace EnACT
             //Set leftboundTime
             SetBoundTimes(0);
 
-            //Create an array of 5 timestamps
-            playheadBarTimes = new Timestamp[5];
+            //Create the list of timestamps
+            playheadBarTimes = new List<Timestamp>();
             //Set the timestamps
             SetPlayHeadBarTimes();
 
@@ -849,32 +849,26 @@ namespace EnACT
         }
         #endregion
 
-        #region Playhead Bar
+        #region Playhead Bar Times
         /// <summary>
         /// Sets the playHeadBarTimes so that they will be in multiples of halfTimeWidth
         /// </summary>
         public void SetPlayHeadBarTimes()
         {
+            //How many timestamps we need to add
+            int numTimes = (int)Math.Ceiling((RightBoundTime - LeftBoundTime) / halfTimeWidth) + 1;
+
             //How many units of timewidth to multiply playheadBarTimes by
-            int multiplier = (int) Math.Floor(CenterBoundTime / TimeWidth);
+            int baseTime = (int)(Math.Floor(LeftBoundTime / halfTimeWidth)*halfTimeWidth);
+
+            //Remove all old timestamps
+            playheadBarTimes.Clear();
 
             //Set the times in intervals of halfTimeWidth
-            playheadBarTimes[0] = Math.Max(0,TimeWidth * multiplier - TimeWidth);
-            playheadBarTimes[1] = Math.Max(0,TimeWidth * multiplier - halfTimeWidth);
-            playheadBarTimes[2] = Math.Max(0,TimeWidth * multiplier);
-            playheadBarTimes[3] = Math.Max(0,TimeWidth * multiplier + halfTimeWidth);
-            playheadBarTimes[4] = Math.Max(0,TimeWidth * multiplier + TimeWidth);
-
-            /* If the first two times are the same value (ie, both are 0), then set the first value to
-             * null, as setting both to 0 will cause the timeline to draw both times, making the
-             * 00:00:00.0 timestamp look thicker than the others. This will typically happen when the 
-             * CenterBoundTime is less than 1 Timewidth unit.
-             */
-            if (playheadBarTimes[0].Equals(playheadBarTimes[1]))
-                playheadBarTimes[0] = null;
-            //Do the same for the second Time
-            if (playheadBarTimes[1].Equals(playheadBarTimes[2]))
-                playheadBarTimes[1] = null;
+            for (int i = 0; i < numTimes; i++)
+            {
+                playheadBarTimes.Add(Math.Max(0,baseTime + i*halfTimeWidth ));
+            }
         }
         #endregion
 
