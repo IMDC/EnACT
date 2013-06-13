@@ -271,7 +271,7 @@ namespace EnACT
             //Create the list of timestamps
             playheadBarTimes = new List<Timestamp>();
             //Set the timestamps
-            SetPlayHeadBarTimes();
+            SetPlayheadBarTimes();
 
             //Set the zoom level
             zoomLevel = DEFAULT_ZOOM_LEVEL;
@@ -475,7 +475,7 @@ namespace EnACT
             //Update bounds to new size
             RecalculateBoundTimes();
             //Set the times
-            SetPlayHeadBarTimes();
+            SetPlayheadBarTimes();
             //How many pixels are drawn for each second of time.
             SetPixelsPerSecond();
         }
@@ -721,7 +721,7 @@ namespace EnACT
             }
 
             //Set the times
-            SetPlayHeadBarTimes();
+            SetPlayheadBarTimes();
 
             //Redraw area with captions
             Redraw();
@@ -787,7 +787,7 @@ namespace EnACT
                 SetBoundTimes(PlayHeadTime - halfTimeWidth);
 
                 SetPixelsPerSecond();
-                SetPlayHeadBarTimes();
+                SetPlayheadBarTimes();
                 SetScrollBarValues();
                 Redraw();
             }
@@ -812,7 +812,7 @@ namespace EnACT
                     RecalculateBoundTimes();
 
                 SetPixelsPerSecond();
-                SetPlayHeadBarTimes();
+                SetPlayheadBarTimes();
                 SetScrollBarValues();
                 Redraw();
             }
@@ -831,7 +831,7 @@ namespace EnACT
             SetBoundTimes(PlayHeadTime - halfTimeWidth);
 
             SetPixelsPerSecond();
-            SetPlayHeadBarTimes();
+            SetPlayheadBarTimes();
             SetScrollBarValues();
             Redraw();
         }
@@ -853,7 +853,7 @@ namespace EnACT
             {
                 SetBoundTimes(currentTime - CenterBoundTime);
                 //Set the times
-                SetPlayHeadBarTimes();
+                SetPlayheadBarTimes();
             }
             //Set scroll value to the value of LeftBoundTime
             ScrollBar.Value = Math.Min((int)(ScrollBar.Maximum * (LeftBoundTime / VideoLength)),
@@ -865,13 +865,13 @@ namespace EnACT
         /// <summary>
         /// Sets the playHeadBarTimes so that they will be in multiples of halfTimeWidth
         /// </summary>
-        public void SetPlayHeadBarTimes()
+        public void SetPlayheadBarTimes()
         {
             //How many timestamps we need to add
-            int numTimes = (int)Math.Ceiling((RightBoundTime - LeftBoundTime) / halfTimeWidth) + 1;
+            int numTimes = (int)Math.Ceiling((RightBoundTime - LeftBoundTime) / halfTimeWidth) + 2;
 
             //How many units of timewidth to multiply playheadBarTimes by
-            int baseTime = (int)(Math.Floor(LeftBoundTime / halfTimeWidth)*halfTimeWidth);
+            int baseTime = (int)(Math.Floor(LeftBoundTime / halfTimeWidth) * halfTimeWidth);
 
             //Remove all old timestamps
             playheadBarTimes.Clear();
