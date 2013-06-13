@@ -472,12 +472,12 @@ namespace EnACT
         {
             base.OnResize(e);
 
+            //How many pixels are drawn for each second of time.
+            SetPixelsPerSecond();
             //Update bounds to new size
             RecalculateBoundTimes();
             //Set the times
             SetPlayheadBarTimes();
-            //How many pixels are drawn for each second of time.
-            SetPixelsPerSecond();
         }
         #endregion
 
@@ -783,10 +783,11 @@ namespace EnACT
                 TimeWidth /= ZOOM_MULTIPLIER;
                 zoomLevel++; //Increase zoom level
 
+                SetPixelsPerSecond();
                 //Center on playhead
+
                 SetBoundTimes(PlayHeadTime - halfTimeWidth);
 
-                SetPixelsPerSecond();
                 SetPlayheadBarTimes();
                 SetScrollBarValues();
                 Redraw();
@@ -804,6 +805,8 @@ namespace EnACT
                 TimeWidth *= ZOOM_MULTIPLIER;
                 zoomLevel--; //Decrease zoom level
 
+                SetPixelsPerSecond();
+
                 //Change values
                 if (VideoLength < TimeWidth)
                     SetBoundTimes(0);
@@ -811,7 +814,6 @@ namespace EnACT
                     //Set LeftboundTime to itself, updating CenterBoundTime and RightBoundTime
                     RecalculateBoundTimes();
 
-                SetPixelsPerSecond();
                 SetPlayheadBarTimes();
                 SetScrollBarValues();
                 Redraw();
@@ -827,10 +829,11 @@ namespace EnACT
             zoomLevel = DEFAULT_ZOOM_LEVEL;
             TimeWidth = DEFAULT_TIME_WIDTH;
 
+            SetPixelsPerSecond();
+            
             //Center on Playhead
             SetBoundTimes(PlayHeadTime - halfTimeWidth);
 
-            SetPixelsPerSecond();
             SetPlayheadBarTimes();
             SetScrollBarValues();
             Redraw();
