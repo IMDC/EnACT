@@ -43,21 +43,15 @@ namespace EnACT
 
         #region Private Fields
         /// <summary>
-        /// The internal storage of the timestamp. Stored as the number of seconds.
+        /// The internal storage of the timestamp. Stored as the number of seconds. Backing field 
+        /// for AsDouble.
         /// </summary>
         private double time;
 
         /// <summary>
-        /// The string representation of the timestamp. Generated when Timestamp is set or retrieved
-        /// as a String.
+        /// Backing field for AsString
         /// </summary>
         private string timestampString;
-
-        /// <summary>
-        /// Boolean representing if the timestampString has been generated for this timestamp. If it
-        /// is false, then it needs to be generated again.
-        /// </summary>
-        private bool timestampStringGenerated;
         #endregion
 
         #region AsDouble
@@ -84,7 +78,7 @@ namespace EnACT
 
                 time = value;
                 //Need to regenerate the string
-                timestampStringGenerated = false;
+                ResetTimestampString();
             }
         }
         #endregion
@@ -99,21 +93,13 @@ namespace EnACT
         {
             get
             {
-                //If timestampString has already been generated, then return it
-                if (timestampStringGenerated)
-                    return timestampString;
-                
-                //Otherwise generate it
-                double timeDouble = time;
-                string timeString = string.Empty;
+                //If null, generate String
+                if (timestampString == null)
+                {
+                    double timeDouble = time;
+                    string ts;
 
-                if (Double.IsNaN(timeDouble) || timeDouble < 0.0)
-                {
-                    //Should not happen
-                    timeString = "00:00:00.0";
-                }
-                else
-                {
+                    //Get time value without any decimal places
                     int timeInt = (int)time;
 
                     //Subtract everything in the ones column and greater
@@ -127,20 +113,19 @@ namespace EnACT
                     int minutes = timeInt / 60;
                     timeInt %= 60;
 
-                    //Seconds is the remainder of timeInt and the decimal part left in timedouble earlier
+                    //Get Seconds as the remainder of timeInt and the decimal part left in timedouble earlier
                     timeDouble += timeInt;
 
                     //Format string
-                    timeString = hours.ToString("00:") + minutes.ToString("00:") + timeDouble.ToString("00.0") ;
+                    ts = hours.ToString("00:") + minutes.ToString("00:") + timeDouble.ToString("00.0") ;
+
+                    //Check to ensure Timestamp validates, and isn't something like "00:-35791394:NaN"
+                    if (!TimeStampValidates(ts))
+                        throw new InvalidTimestampException("String value is not a valid Timestamp");
+
+                    //Store the generated value for future retrieval
+                    timestampString = ts;
                 }
-
-                //Check to ensure Timestamp validates, and isn't something like "00:-35791394:NaN"
-                if (!TimeStampValidates(timeString))
-                    throw new InvalidTimestampException("String value is not a valid Timestamp");
-
-                //Store the generated value for future retrieval
-                timestampString = timeString;
-                timestampStringGenerated = true;
 
                 return timestampString;
             }
@@ -165,14 +150,8 @@ namespace EnACT
 
                 for (int i = time_array.Length - 1; i >= 0; i--)
                 {
-                    try
-                    {
-                        tvalue = double.Parse(time_array[i]);
-                    }
-                    catch
-                    {
-                        tvalue = 0;
-                    }
+                    try     { tvalue = double.Parse(time_array[i]); }
+                    catch   { tvalue = 0; }
                     finally
                     {
                         seconds += tvalue * weight;
@@ -184,7 +163,6 @@ namespace EnACT
 
                 //Set string value
                 timestampString = value;
-                timestampStringGenerated = true;
             }
         }
         #endregion
@@ -212,6 +190,16 @@ namespace EnACT
         public Timestamp(double time)
         {
             AsDouble = time;
+        }
+        #endregion
+
+        #region ResetTimestampString
+        /// <summary>
+        /// Resets the timestampString so that it will need to be regenerated.
+        /// </summary>
+        private void ResetTimestampString()
+        {
+            timestampString = null;
         }
         #endregion
 
