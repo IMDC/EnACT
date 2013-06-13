@@ -472,12 +472,7 @@ namespace EnACT
         {
             base.OnResize(e);
 
-            //How many pixels are drawn for each second of time.
-            SetPixelsPerSecond();
-            //Update bounds to new size
-            RecalculateBoundTimes();
-            //Set the times
-            SetPlayheadBarTimes();
+            SetTimelineValues();
         }
         #endregion
 
@@ -783,13 +778,7 @@ namespace EnACT
                 TimeWidth /= ZOOM_MULTIPLIER;
                 zoomLevel++; //Increase zoom level
 
-                SetPixelsPerSecond();
-                //Center on playhead
-
-                SetBoundTimes(PlayHeadTime - halfTimeWidth);
-
-                SetPlayheadBarTimes();
-                SetScrollBarValues();
+                SetTimelineValues(PlayHeadTime - halfTimeWidth);
                 Redraw();
             }
         }
@@ -805,17 +794,13 @@ namespace EnACT
                 TimeWidth *= ZOOM_MULTIPLIER;
                 zoomLevel--; //Decrease zoom level
 
-                SetPixelsPerSecond();
-
                 //Change values
                 if (VideoLength < TimeWidth)
-                    SetBoundTimes(0);
+                    SetTimelineValues(0);
                 else
                     //Set LeftboundTime to itself, updating CenterBoundTime and RightBoundTime
-                    RecalculateBoundTimes();
+                    SetTimelineValues();
 
-                SetPlayheadBarTimes();
-                SetScrollBarValues();
                 Redraw();
             }
         }
@@ -829,13 +814,7 @@ namespace EnACT
             zoomLevel = DEFAULT_ZOOM_LEVEL;
             TimeWidth = DEFAULT_TIME_WIDTH;
 
-            SetPixelsPerSecond();
-            
-            //Center on Playhead
-            SetBoundTimes(PlayHeadTime - halfTimeWidth);
-
-            SetPlayheadBarTimes();
-            SetScrollBarValues();
+            SetTimelineValues(PlayHeadTime - halfTimeWidth);
             Redraw();
         }
         #endregion
@@ -925,7 +904,7 @@ namespace EnACT
         /// Recalculates the values of right and centerboundtimes based on the current
         /// LeftBoundTime
         /// </summary>
-        private void RecalculateBoundTimes()
+        private void SetBoundTimes()
         {
             SetBoundTimes(LeftBoundTime);
         }
@@ -951,6 +930,33 @@ namespace EnACT
                 aw = (float)(Width - LOCATION_LABEL_WIDTH - 3);
             else
                 aw = Width - 2;
+        }
+        #endregion
+
+        #region SetTimelineValues
+        /// <summary>
+        /// Calls the Set methods for several Timeline properties
+        /// </summary>
+        private void SetTimelineValues()
+        {
+            SetPixelsPerSecond();
+            SetBoundTimes();
+            SetPlayheadBarTimes();
+            SetScrollBarValues();
+            Redraw();
+        }
+
+        /// <summary>
+        /// Calls the Set methods for several Timeline properties
+        /// </summary>
+        /// <param name="leftBoundTime">The LeftBoundTime to set</param>
+        private void SetTimelineValues(double leftBoundTime)
+        {
+            SetPixelsPerSecond();
+            SetBoundTimes(leftBoundTime);
+            SetPlayheadBarTimes();
+            SetScrollBarValues();
+            Redraw();
         }
         #endregion
 
