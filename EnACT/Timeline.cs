@@ -515,6 +515,8 @@ namespace EnACT
             }
             else
             {
+                Console.WriteLine("{0}", YCoordinateToScreenLocation(e.Y));
+
                 double beginX;  //X-Coord of c.Begin
                 double endX;    //X-Coord of c.End
                 foreach (Caption c in CaptionList)
@@ -1030,13 +1032,51 @@ namespace EnACT
 
         /// <summary>
         /// Converts a time into an X Coordinate on the timeline based on leftbound time and
-        /// whether Location Labels are being drawn
+        /// whether Location Labels are being drawn.
         /// </summary>
         /// <param name="time">Time to convert</param>
         /// <returns>An X Coordinate represented by the time</returns>
         private float TimeToXCoordinate(double time)
         {
             return (float)((time - LeftBoundTime) * PixelsPerSecond + XCaptionOrigin);
+        }
+
+        /// <summary>
+        /// Converts a Y Coordinate into a Caption location based on its position in the Timeline.
+        /// </summary>
+        /// <param name="y">Y coordinate to convert</param>
+        /// <returns>The Caption ScreenLocation represented by the Y Coordinate</returns>
+        private ScreenLocation YCoordinateToScreenLocation(int y)
+        {
+            //The amount of height in the component available to draw captions on
+            float availableHeight = Height - PLAYHEAD_BAR_HEIGHT;
+
+            //Subtract the height of the scrollbar if it is visible
+            if (ScrollBar.Visible)
+                availableHeight -= SystemInformation.HorizontalScrollBarHeight;
+
+            //The height of a single Label row
+            float rowHeight = availableHeight / LocationLabels.Length;
+            float adjustedY = y - PLAYHEAD_BAR_HEIGHT;
+
+            Console.WriteLine((int)Math.Floor(adjustedY / rowHeight));
+
+            //Calculate row number
+            int row = (int)Math.Floor(adjustedY / rowHeight);
+
+            switch (row)
+            {
+                case 0: return ScreenLocation.TopLeft;
+                case 1: return ScreenLocation.TopCentre;
+                case 2: return ScreenLocation.TopRight;
+                case 3: return ScreenLocation.MiddleLeft;
+                case 4: return ScreenLocation.MiddleCenter;
+                case 5: return ScreenLocation.MiddleRight;
+                case 6: return ScreenLocation.BottomLeft;
+                case 7: return ScreenLocation.BottomCentre;
+                case 8: return ScreenLocation.BottomRight;
+                default: throw new Exception("Bad Case:" + row);
+            }
         }
         #endregion
     }//Class
