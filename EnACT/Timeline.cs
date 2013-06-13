@@ -853,7 +853,7 @@ namespace EnACT
             int numTimes = (int)Math.Ceiling((RightBoundTime - LeftBoundTime) / halfTimeWidth) + 2;
 
             //How many units of timewidth to multiply playheadBarTimes by
-            int baseTime = (int)(Math.Floor(LeftBoundTime / halfTimeWidth) * halfTimeWidth);
+            double baseTime = Math.Floor(LeftBoundTime / halfTimeWidth) * halfTimeWidth;
 
             //Remove all old timestamps
             playheadBarTimes.Clear();
