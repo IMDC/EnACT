@@ -84,7 +84,7 @@ namespace EnACT
         private void InitVideoPlayer()
         {
             //This method can not be called in the EngineView constructor, so we have to call it here.
-            EngineView.LoadMovie(0, @"C:\Users\imdc\Documents\enact\EnACT AS3 Engine\EditorEngine.swf");
+            EngineView.LoadMovie(0, Paths.EditorEngine);
         }
         
         /// <summary>
@@ -110,7 +110,7 @@ namespace EnACT
         private void ParseText(object sender, EventArgs e)
         {
             TextParser t = new TextParser(SpeakerSet, CaptionList);
-            t.ParseScriptFile(@"C:\Users\imdc\Documents\enact\Testing\testScript.txt");
+            t.ParseScriptFile(Paths.TestScript);
             CaptionView.UpdateView();
         }
 
@@ -266,7 +266,7 @@ namespace EnACT
         private void Button_ParseESR_Click(object sender, EventArgs e)
         {
             TextParser t = new TextParser(SpeakerSet, CaptionList);
-            t.ParseESRFile(@"C:\Users\imdc\Documents\enact\Testing\testScript_2.esr");
+            t.ParseESRFile(Paths.TestESR);
             CaptionView.UpdateView();
         }
 
