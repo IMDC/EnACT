@@ -10,7 +10,7 @@ namespace EnACT
     /// <summary>
     /// A label that displays the Video progress in the form of currentTime/TotalLength
     /// </summary>
-    class PlayheadLabel : Label
+    public class PlayheadLabel : Label
     {
         /// <summary>
         /// Backing field for PlayheadTime

@@ -24,6 +24,11 @@ namespace EnACT
         public static Speaker DescriptionSpeaker = new Speaker(Speaker.DESCRIPTIONNAME);
 
         /// <summary>
+        /// The controller for enact.
+        /// </summary>
+        public EngineController Controller { set; get; }
+
+        /// <summary>
         /// A set of Speaker objects, each speaker being mapped to by its name
         /// </summary>
         public Dictionary<String, Speaker> SpeakerSet { set; get; }
@@ -58,6 +63,8 @@ namespace EnACT
             CaptionList = new List<Caption>();
             Settings = new SettingsXML();
 
+            //Set up the Controller
+            InitController();
             //Set up the CaptionView
             InitCaptionView();
             //Set up VideoPlayer
@@ -66,6 +73,19 @@ namespace EnACT
             InitTimeline();
 
             PlayheadTimer.Interval = 10;
+        }
+
+        /// <summary>
+        /// Constructs and initializes the controller
+        /// </summary>
+        private void InitController()
+        {
+            Controller = new EngineController();
+
+            Controller.CaptionView   = this.CaptionView;
+            Controller.EngineView    = this.EngineView;
+            Controller.PlayheadLabel = this.PlayheadLabel;
+            Controller.Timeline      = this.Timeline;
         }
 
         /// <summary>

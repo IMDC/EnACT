@@ -10,7 +10,7 @@ using System.Drawing;
 
 namespace EnACT
 {
-    class CaptionView : DataGridView
+    public class CaptionView : DataGridView
     {
         #region Constants
         /// <summary>
