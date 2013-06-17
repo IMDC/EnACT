@@ -9,11 +9,6 @@ namespace EnACT
     {
         #region Fields and Properties
         /// <summary>
-        /// Direction used by MoveRow buttons to determine whether to move the row up or down
-        /// </summary>
-        private enum MoveDirection { Up, Down };
-
-        /// <summary>
         /// The controller for enact.
         /// </summary>
         public EngineController Controller { set; get; }
