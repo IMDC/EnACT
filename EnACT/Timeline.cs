@@ -1065,6 +1065,12 @@ namespace EnACT
             //Calculate row number
             int row = (int)Math.Floor(adjustedY / rowHeight);
 
+            //Check to make sure that row is within bounds
+            if (row < 0)
+                return ScreenLocation.TopLeft;
+            if (8 < row)
+                return ScreenLocation.BottomRight;
+
             switch (row)
             {
                 case 0: return ScreenLocation.TopLeft;
