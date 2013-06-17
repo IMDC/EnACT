@@ -610,6 +610,7 @@ namespace EnACT
 
                 case TimelineMouseAction.moveCaption:
                     mouseSelection.Caption.MoveTo(mouseClickTime - mouseSelection.MouseClickTimeDifference);
+                    mouseSelection.Caption.Location = YCoordinateToScreenLocation(e.Y);
                     OnCaptionMoved(EventArgs.Empty);
                     break;
 
