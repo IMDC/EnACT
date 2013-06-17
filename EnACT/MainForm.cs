@@ -69,11 +69,6 @@ namespace EnACT
         }
         #endregion
 
-        /// <summary>
-        /// Populates the Caption Table with captions read in from a script file.
-        /// </summary>
-        /// <param name="sender">Sender</param>
-        /// <param name="e">Event Args</param>
         private void PopulateButton_Click(object sender, EventArgs e)
         {
             CaptionView.UpdateView();
@@ -97,47 +92,47 @@ namespace EnACT
             w.WriteAll();
         }
 
+        #region CaptionView Buttons
         /// <summary>
-        /// Inserts a new row where the user has selected in the 
-        /// caption View.
+        /// Inserts a new row above the selected caption in CaptionView.
         /// </summary>
-        /// <param name="sender">Object sender</param>
-        /// <param name="e">Event Arguments</param>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
         private void Button_InsertRow_Click(object sender, EventArgs e)
         {
             CaptionView.AddRow();
         }
 
         /// <summary>
-        /// Deletes all rows in the table that contain a cell that is
-        /// currently selected.
+        /// Deletes the currently selected rows.
         /// </summary>
-        /// <param name="sender">The sender object</param>
-        /// <param name="e">The Event Arguments</param>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
         private void Button_DeleteRow_Click(object sender, EventArgs e)
         {
             CaptionView.DeleteSelectedRows();
         }
 
         /// <summary>
-        /// Moves the currently selected row up one position in the Caption Table
+        /// Moves the currently selected caption one row up in CaptionView
         /// </summary>
         /// <param name="sender">Sender</param>
-        /// <param name="e">Event Arguments</param>
+        /// <param name="e">Event Args</param>
         private void Button_MoveRowUp_Click(object sender, EventArgs e)
         {
             CaptionView.MoveRowUp();
         }
 
         /// <summary>
-        /// Moves the currently selected row down one position in the Caption Table
+        /// Moves the currently selected caption one row down in CaptionView
         /// </summary>
         /// <param name="sender">Sender</param>
-        /// <param name="e">Event Arguments</param>
+        /// <param name="e">Event Args</param>
         private void Button_MoveRowDown_Click(object sender, EventArgs e)
         {
             CaptionView.MoveRowDown();
         }
+        #endregion
 
         /// <summary>
         /// Toggles the video playing state between playing and paused
@@ -185,11 +180,7 @@ namespace EnACT
                 CaptionView.UserInputEnabled = true;
         }
 
-        /// <summary>
-        /// Toggles drawing of caption location labels
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        #region Timeline Buttons
         private void Button_ShowLabels_Click(object sender, EventArgs e)
         {
             Timeline.ToggleDrawLocationLabels();
@@ -209,5 +200,6 @@ namespace EnACT
         {
             Timeline.ZoomReset();
         }
+        #endregion
     }//Class
 }//Namespace

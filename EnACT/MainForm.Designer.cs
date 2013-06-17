@@ -377,7 +377,6 @@
             this.CaptionView.SpeakerSet = null;
             this.CaptionView.TabIndex = 1;
             this.CaptionView.UserInputEnabled = true;
-            this.CaptionView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.CaptionView_CellValueChanged);
             // 
             // MainForm
             // 
