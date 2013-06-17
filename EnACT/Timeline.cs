@@ -521,6 +521,11 @@ namespace EnACT
                 double endX;    //X-Coord of c.End
                 foreach (Caption c in CaptionList)
                 {
+                    //If the mouse click is not in the same Y location as c, then none of the following code
+                    //needs to be applied
+                    if (YCoordinateToScreenLocation(e.Y) != c.Location)
+                        continue;
+
                     beginX = TimeToXCoordinate(c.Begin);
 
                     //If selecting the beginning of a caption
