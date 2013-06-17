@@ -150,7 +150,6 @@ namespace EnACT
             CaptionView.MoveRowDown();
         }
 
-        private Boolean isPlaying = false;
         /// <summary>
         /// Toggles the video playing state between playing and paused
         /// </summary>
@@ -158,20 +157,7 @@ namespace EnACT
         /// <param name="e">Event Arguments</param>
         private void TogglePlay(object sender, EventArgs e)
         {
-            if (isPlaying)
-            {
-                EngineView.Pause();
-                PlayheadTimer.Stop();
-                Button_PlayAndPause.Text = "Play";
-                isPlaying = false;
-            }
-            else
-            {
-                EngineView.Play();
-                PlayheadTimer.Start();
-                Button_PlayAndPause.Text = "Pause";
-                isPlaying = true;
-            }
+            Controller.TogglePlay();
         }
 
         #region Jorge

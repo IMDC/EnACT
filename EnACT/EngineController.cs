@@ -14,6 +14,11 @@ namespace EnACT
     {
         #region Fields and Properties
         /// <summary>
+        /// A Boolean that states whether the video is playing or not.
+        /// </summary>
+        public bool IsPlaying { set; get; }
+
+        /// <summary>
         /// The CaptionView used by EnACT to display captions in a table.
         /// </summary>
         public CaptionView CaptionView { set; get; }
@@ -138,6 +143,37 @@ namespace EnACT
         {
             Timeline.SpeakerSet = SpeakerSet;
             Timeline.CaptionList = CaptionList;
+        }
+        #endregion
+
+        #region Play and Pause
+        /// <summary>
+        /// Plays the video
+        /// </summary>
+        public void Play()
+        {
+            EngineView.Play();
+            PlayheadTimer.Start();
+            IsPlaying = true;   
+        }
+
+        /// <summary>
+        /// Pauses the video
+        /// </summary>
+        public void Pause()
+        {
+            EngineView.Pause();
+            PlayheadTimer.Stop();
+            IsPlaying = false;
+        }
+
+        /// <summary>
+        /// Toggles between the play and pause state.
+        /// </summary>
+        public void TogglePlay() 
+        {
+            if (IsPlaying) Pause();
+            else Play();
         }
         #endregion
 
