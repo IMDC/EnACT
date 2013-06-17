@@ -14,16 +14,6 @@ namespace EnACT
         private enum MoveDirection { Up, Down };
 
         /// <summary>
-        /// Default speaker, used when no speaker is currently specified
-        /// </summary>
-        public static Speaker DefaultSpeaker = new Speaker();
-
-        /// <summary>
-        /// Description speaker, used when a caption is a description such as [laughter] or [music]
-        /// </summary>
-        public static Speaker DescriptionSpeaker = new Speaker(Speaker.DESCRIPTIONNAME);
-
-        /// <summary>
         /// The controller for enact.
         /// </summary>
         public EngineController Controller { set; get; }
@@ -56,9 +46,9 @@ namespace EnACT
             SpeakerSet = new Dictionary<String, Speaker>(StringComparer.OrdinalIgnoreCase);
 
             //Add the default speaker to the set of speakers
-            SpeakerSet[DefaultSpeaker.Name] = DefaultSpeaker;
+            SpeakerSet[Speaker.Default.Name] = Speaker.Default;
             //Add the Description Speaker to the set of speakers
-            SpeakerSet[DescriptionSpeaker.Name] = DescriptionSpeaker;
+            SpeakerSet[Speaker.Description.Name] = Speaker.Description;
 
             CaptionList = new List<Caption>();
             Settings = new SettingsXML();

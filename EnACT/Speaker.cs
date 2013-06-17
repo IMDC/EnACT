@@ -18,6 +18,16 @@ namespace EnACT
         public const String DESCRIPTIONNAME = "DESCRIPTION";
 
         /// <summary>
+        /// Default speaker, used when no speaker is currently specified
+        /// </summary>
+        public static readonly Speaker Default = new Speaker();
+
+        /// <summary>
+        /// Description speaker, used when a caption is a description such as [laughter] or [music]
+        /// </summary>
+        public static readonly Speaker Description = new Speaker(Speaker.DESCRIPTIONNAME);
+
+        /// <summary>
         /// The name of this speaker
         /// </summary>
         public String Name { get; set; }

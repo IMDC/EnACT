@@ -207,7 +207,7 @@ namespace EnACT
         /// <summary>
         /// Constructs a Caption object with a blank line and the DefaultSpeaker
         /// </summary>
-        public Caption() : this("", MainForm.DefaultSpeaker) { }
+        public Caption() : this("", Speaker.Default) { }
                              
         /// <summary>
         /// Constructs a Caption object with a line, and uses a reference to the
