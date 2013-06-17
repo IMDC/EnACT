@@ -274,37 +274,5 @@ namespace EnACT
         {
             Timeline.ZoomReset();
         }
-
-        private void Timeline_PlayheadChanged(object sender, TimelinePlayheadChangedEventArgs e)
-        {
-            Console.WriteLine("Playhead Changed!");
-
-            bool wasPlaying = EngineView.IsPlaying();
-
-            //Pause video, change time, and then play to prevent confusing the player
-            EngineView.Pause();
-            EngineView.SetPlayHeadTime(e.PlayheadTime);
-
-            //Update label
-            PlayheadLabel.PlayheadTime = e.PlayheadTime;
-
-            //Only play if Engine was playing previously
-            if(wasPlaying)
-                EngineView.Play();
-        }
-
-        private void Timeline_CaptionTimestampChanged(object sender, TimelineCaptionTimestampChangedEventArgs e)
-        {
-            //Console.WriteLine("Caption Timestamp Changed!");
-
-            //Force Captionview to be repainted
-            CaptionView.Invalidate();
-        }
-
-        private void Timeline_CaptionMoved(object sender, EventArgs e)
-        {
-            //Force Captionview to be repainted
-            CaptionView.Invalidate();
-        }
     }//Class
 }//Namespace
