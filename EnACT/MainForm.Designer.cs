@@ -240,12 +240,7 @@
             this.TrackBar_Timeline.Location = new System.Drawing.Point(338, 222);
             this.TrackBar_Timeline.Name = "TrackBar_Timeline";
             this.TrackBar_Timeline.Size = new System.Drawing.Size(594, 45);
-            this.TrackBar_Timeline.TabIndex = 14;
-            this.TrackBar_Timeline.ValueChanged += new System.EventHandler(this.TimeLine_ValueChanged);
-            // 
-            // PlayheadTimer
-            // 
-            this.PlayheadTimer.Tick += new System.EventHandler(this.PlayheadTimer_Tick);
+            this.TrackBar_Timeline.TabIndex = 14;          
             // 
             // Button_ParseESR
             // 
@@ -355,7 +350,6 @@
             this.EngineView.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("EngineView.OcxState")));
             this.EngineView.Size = new System.Drawing.Size(320, 240);
             this.EngineView.TabIndex = 11;
-            this.EngineView.VideoLoaded += new System.EventHandler(this.FlashVideoPlayer_VideoLoaded);
             // 
             // CaptionView
             // 

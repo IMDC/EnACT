@@ -49,8 +49,6 @@ namespace EnACT
             this.SpeakerSet = Controller.SpeakerSet;
             this.CaptionList = Controller.CaptionList;
             this.Settings = Controller.Settings;
-
-            PlayheadTimer.Interval = 10;
         }
 
         /// <summary>
@@ -60,10 +58,12 @@ namespace EnACT
         {
             Controller = new EngineController();
 
-            Controller.CaptionView   = this.CaptionView;
-            Controller.EngineView    = this.EngineView;
-            Controller.PlayheadLabel = this.PlayheadLabel;
-            Controller.Timeline      = this.Timeline;
+            Controller.CaptionView       = this.CaptionView;
+            Controller.EngineView        = this.EngineView;
+            Controller.PlayheadLabel     = this.PlayheadLabel;
+            Controller.PlayheadTimer     = this.PlayheadTimer;
+            Controller.Timeline          = this.Timeline;
+            Controller.TrackBar_Timeline = this.TrackBar_Timeline;
 
             Controller.InitControls();
         }
@@ -194,46 +194,6 @@ namespace EnACT
             w.WriteAll();
         }
         #endregion
-
-        /// <summary>
-        /// Handles the event fired when FlashVideoPlayer is done loading
-        /// </summary>
-        /// <param name="sender">Sender</param>
-        /// <param name="e">Event Args</param>
-        private void FlashVideoPlayer_VideoLoaded(object sender, EventArgs e)
-        {
-            Double vidLength = EngineView.VideoLength();
-            TrackBar_Timeline.Maximum = (int) vidLength * 10;
-
-            //Set Label
-            PlayheadLabel.VideoLength = vidLength;
-
-            Timeline.VideoLength = vidLength;
-            Timeline.Redraw();
-            Timeline.SetScrollBarValues();
-        }
-
-        private void PlayheadTimer_Tick(object sender, EventArgs e)
-        {
-            double phTime = EngineView.GetPlayheadTime();
-            int vidPos = (int)phTime * 10;
-            if (TrackBar_Timeline.Minimum <= vidPos && vidPos <= TrackBar_Timeline.Maximum)
-                TrackBar_Timeline.Value = vidPos;
-
-            //Set playhead time for label
-            PlayheadLabel.PlayheadTime = phTime;
-
-            Timeline.UpdatePlayheadPosition(phTime);
-            
-            //Redraw Timeline
-            Timeline.Redraw();
-
-            TrackBar_Timeline.Update();
-        }
-
-        private void TimeLine_ValueChanged(object sender, EventArgs e)
-        {
-        }
 
         private void Button_ParseESR_Click(object sender, EventArgs e)
         {

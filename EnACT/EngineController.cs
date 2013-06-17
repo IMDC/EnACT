@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace EnACT
 {
@@ -28,9 +29,19 @@ namespace EnACT
         public PlayheadLabel PlayheadLabel { set; get; }
 
         /// <summary>
+        /// The timer used to update components when the video is playing.
+        /// </summary>
+        public Timer PlayheadTimer { set; get; }
+
+        /// <summary>
         /// The Timeline used by EnACT used to visually display captions in a timeline.
         /// </summary>
         public Timeline Timeline { set; get; }
+
+        /// <summary>
+        /// A Simple Timeline made from a Trackbar.
+        /// </summary>
+        public TrackBar TrackBar_Timeline { set; get; }
 
         /// <summary>
         /// A set of Speaker objects, each speaker being mapped to by its name
@@ -82,10 +93,20 @@ namespace EnACT
             InitVideoPlayer();
             //Set up Timeline
             InitTimeline();
+
+            //Set the timer interval to 10 miliseconds
+            PlayheadTimer.Interval = 10;
         }
 
+        /// <summary>
+        /// Hooks up event handlers from controls.
+        /// </summary>
         public void SubscribeToEvents()
         {
+            this.EngineView.VideoLoaded += new System.EventHandler(this.EngineView_VideoLoaded);
+
+            this.PlayheadTimer.Tick += new System.EventHandler(this.PlayheadTimer_Tick);
+
             this.Timeline.PlayheadChanged += new System.EventHandler<EnACT.TimelinePlayheadChangedEventArgs>(this.Timeline_PlayheadChanged);
             this.Timeline.CaptionTimestampChanged += new System.EventHandler<EnACT.TimelineCaptionTimestampChangedEventArgs>(this.Timeline_CaptionTimestampChanged);
             this.Timeline.CaptionMoved += new System.EventHandler(this.Timeline_CaptionMoved);
@@ -120,7 +141,58 @@ namespace EnACT
         }
         #endregion
 
+        #region EngineView Events
+        /// <summary>
+        /// Handles the event fired when FlashVideoPlayer is done loading
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void EngineView_VideoLoaded(object sender, EventArgs e)
+        {
+            Double vidLength = EngineView.VideoLength();
+            TrackBar_Timeline.Maximum = (int)vidLength * 10;
+
+            //Set Label
+            PlayheadLabel.VideoLength = vidLength;
+
+            Timeline.VideoLength = vidLength;
+            Timeline.Redraw();
+            Timeline.SetScrollBarValues();
+        }
+        #endregion
+
+        #region PlayheadTimer Events
+        /// <summary>
+        /// Handles the Tick event. Updates ui controls with relevant information when the video
+        /// is playing.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void PlayheadTimer_Tick(object sender, EventArgs e)
+        {
+            double phTime = EngineView.GetPlayheadTime();
+            int vidPos = (int)phTime * 10;
+            if (TrackBar_Timeline.Minimum <= vidPos && vidPos <= TrackBar_Timeline.Maximum)
+                TrackBar_Timeline.Value = vidPos;
+
+            //Set playhead time for label
+            PlayheadLabel.PlayheadTime = phTime;
+
+            Timeline.UpdatePlayheadPosition(phTime);
+
+            //Redraw Timeline
+            Timeline.Redraw();
+
+            TrackBar_Timeline.Update();
+        }
+        #endregion
+
         #region Timeline Events
+        /// <summary>
+        /// Handles the PlayheadChanged Event. Updates the playhead in various controls.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
         private void Timeline_PlayheadChanged(object sender, TimelinePlayheadChangedEventArgs e)
         {
             Console.WriteLine("Playhead Changed!");
@@ -139,6 +211,11 @@ namespace EnACT
                 EngineView.Play();
         }
 
+        /// <summary>
+        /// Handles the CaptionTimestampChanged Event. Updates the captions in CaptionView.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
         private void Timeline_CaptionTimestampChanged(object sender, TimelineCaptionTimestampChangedEventArgs e)
         {
             //Console.WriteLine("Caption Timestamp Changed!");
@@ -147,6 +224,11 @@ namespace EnACT
             CaptionView.Invalidate();
         }
 
+        /// <summary>
+        /// Handles the CaptionMoved Event. Updates the captions in CaptionView.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
         private void Timeline_CaptionMoved(object sender, EventArgs e)
         {
             //Force Captionview to be repainted
