@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EnACT
 {
+    #region TimelineMouseAction Enum
     /// <summary>
     /// An enum representing what action is being performed by the mouse.
     /// </summary>
@@ -17,12 +18,15 @@ namespace EnACT
         changeCaptionEnd,
         noAction
     };
+    #endregion
 
+    #region TimelineMouseSelection Class
     /// <summary>
     /// A class containing data relating to what has been clicked on by the mouse in Timeline.
     /// </summary>
     class TimelineMouseSelection
     {
+        #region Fields and Properties
         /// <summary>
         /// An instance of TimelineMouseSelection representing nothing currently being selected.
         /// </summary>
@@ -42,7 +46,9 @@ namespace EnACT
         /// Which action the mouse is currently doing
         /// </summary>
         public TimelineMouseAction Action { set; get; }
+        #endregion
 
+        #region Constructors
         /// <summary>
         /// Constructs a TimelineMouseSelection with only an Action
         /// </summary>
@@ -71,5 +77,19 @@ namespace EnACT
             this.Caption = mouseClickTimeDifference;
             this.MouseClickTimeDifference = selectedCaptionTimeDifference;
         }
-    }
-}
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Moves the selected caption based on the mouseClickTime.
+        /// </summary>
+        /// <param name="mouseClickTime">The time represented by the mouse click location</param>
+        public void MoveSelectedCaption(double mouseClickTime)
+        {
+            //Move caption with a minimum time of 0
+            Caption.MoveTo(Math.Max(0,mouseClickTime - MouseClickTimeDifference));
+        }
+        #endregion
+    }//Class
+    #endregion
+}//Namespace

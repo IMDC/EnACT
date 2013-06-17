@@ -589,16 +589,13 @@ namespace EnACT
                 return;
 
             //The time represented by the mouse click location
-            double mouseClickTime = XCoordinateToTime(e.X);
+            double mouseClickTime = Math.Max(0,XCoordinateToTime(e.X));
 
             switch (mouseSelection.Action)
             {
                 case TimelineMouseAction.movePlayhead:
                     //Set playhead time based on click location
-                    if (mouseClickTime <= 0)
-                        PlayHeadTime = 0;
-                    else
-                        PlayHeadTime = mouseClickTime;
+                    PlayHeadTime = mouseClickTime;
                     //Invoke PlayheadChanged event
                     OnPlayheadChanged(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
                     break;
@@ -614,7 +611,7 @@ namespace EnACT
                     break;
 
                 case TimelineMouseAction.moveCaption:
-                    mouseSelection.Caption.MoveTo(mouseClickTime - mouseSelection.MouseClickTimeDifference);
+                    mouseSelection.MoveSelectedCaption(mouseClickTime);
                     mouseSelection.Caption.Location = YCoordinateToScreenLocation(e.Y);
                     OnCaptionMoved(EventArgs.Empty);
                     break;
