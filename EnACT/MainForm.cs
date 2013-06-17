@@ -42,25 +42,13 @@ namespace EnACT
         {
             InitializeComponent();
 
-            //Construct the speakerset with a comparator that ignores case;
-            SpeakerSet = new Dictionary<String, Speaker>(StringComparer.OrdinalIgnoreCase);
-
-            //Add the default speaker to the set of speakers
-            SpeakerSet[Speaker.Default.Name] = Speaker.Default;
-            //Add the Description Speaker to the set of speakers
-            SpeakerSet[Speaker.Description.Name] = Speaker.Description;
-
-            CaptionList = new List<Caption>();
-            Settings = new SettingsXML();
-
             //Set up the Controller
             InitController();
-            //Set up the CaptionView
-            InitCaptionView();
-            //Set up VideoPlayer
-            InitVideoPlayer();
-            //Set up Timeline
-            InitTimeline();
+
+            //Set references from controller.
+            this.SpeakerSet = Controller.SpeakerSet;
+            this.CaptionList = Controller.CaptionList;
+            this.Settings = Controller.Settings;
 
             PlayheadTimer.Interval = 10;
         }
@@ -76,34 +64,8 @@ namespace EnACT
             Controller.EngineView    = this.EngineView;
             Controller.PlayheadLabel = this.PlayheadLabel;
             Controller.Timeline      = this.Timeline;
-        }
 
-        /// <summary>
-        /// Creates the table used by CaptionView and then sets as CaptionView's DataSource
-        /// </summary>
-        private void InitCaptionView()
-        {
-            CaptionView.InitColumns();  //Set up columns
-            CaptionView.SpeakerSet = SpeakerSet;
-            CaptionView.CaptionSource = CaptionList;
-        }
-
-        /// <summary>
-        /// Initializes the Video Player
-        /// </summary>
-        private void InitVideoPlayer()
-        {
-            //This method can not be called in the EngineView constructor, so we have to call it here.
-            EngineView.LoadMovie(0, Paths.EditorEngine);
-        }
-        
-        /// <summary>
-        /// Initialization for the Timeline
-        /// </summary>
-        private void InitTimeline()
-        {
-            Timeline.SpeakerSet = SpeakerSet;
-            Timeline.CaptionList = CaptionList;
+            Controller.InitControls();
         }
         #endregion
 
