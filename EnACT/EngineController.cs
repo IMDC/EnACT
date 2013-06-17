@@ -64,6 +64,18 @@ namespace EnACT
         public SettingsXML Settings { set; get; }
         #endregion
 
+        #region Events
+        /// <summary>
+        /// An event that is called when the video is played.
+        /// </summary>
+        public event EventHandler VideoPlayed;
+
+        /// <summary>
+        /// An event that is called when the video is paused.
+        /// </summary>
+        public event EventHandler VideoPaused;
+        #endregion
+
         #region Constructor
         /// <summary>
         /// Constructs an EngineController.
@@ -164,7 +176,9 @@ namespace EnACT
         {
             EngineView.Play();
             PlayheadTimer.Start();
-            IsPlaying = true;   
+            IsPlaying = true;
+            //Invoke VideoPlayed Event
+            OnVideoPlayed(EventArgs.Empty);
         }
 
         /// <summary>
@@ -175,6 +189,8 @@ namespace EnACT
             EngineView.Pause();
             PlayheadTimer.Stop();
             IsPlaying = false;
+            //Invoke VideoPaused Event
+            OnVideoPaused(EventArgs.Empty);
         }
 
         /// <summary>
@@ -291,6 +307,42 @@ namespace EnACT
         {
             //Force Captionview to be repainted
             CaptionView.Invalidate();
+        }
+        #endregion
+
+        #region Event Invokation Methods
+        /// <summary>
+        /// Invokes the VideoPlayed event, which happens when the video is played.
+        /// </summary>
+        /// <param name="e">Event Args</param>
+        private void OnVideoPlayed(EventArgs e)
+        {
+            /* Make a local copy of the event to prevent the case where the handler
+             * will be set as null in-between the null check and the handler call.
+             */
+            EventHandler handler = VideoPlayed;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Invokes the VideoPaused event, which happens when the video is paused.
+        /// </summary>
+        /// <param name="e">Event Args</param>
+        private void OnVideoPaused(EventArgs e)
+        {
+            /* Make a local copy of the event to prevent the case where the handler
+             * will be set as null in-between the null check and the handler call.
+             */
+            EventHandler handler = VideoPaused;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
         }
         #endregion
     }

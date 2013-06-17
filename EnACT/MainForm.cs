@@ -37,6 +37,13 @@ namespace EnACT
         {
             InitializeComponent();
 
+            //Construct Controller
+            Controller = new EngineController();
+
+            //Hook Up Controller Events
+            Controller.VideoPlayed += new EventHandler(this.Controller_VideoPlayed);
+            Controller.VideoPaused += new EventHandler(this.Controller_VideoPaused);
+
             //Set up the Controller
             InitController();
 
@@ -51,8 +58,6 @@ namespace EnACT
         /// </summary>
         private void InitController()
         {
-            Controller = new EngineController();
-
             Controller.CaptionView       = this.CaptionView;
             Controller.EngineView        = this.EngineView;
             Controller.PlayheadLabel     = this.PlayheadLabel;
@@ -194,6 +199,28 @@ namespace EnACT
         private void Button_ZoomReset_Click(object sender, EventArgs e)
         {
             Timeline.ZoomReset();
+        }
+        #endregion
+
+        #region EngineController Event Handler Methods
+        /// <summary>
+        /// Handles the VideoPlayed Event. Updates the text of ButtonPlayAndPause
+        /// </summary>
+        /// <param name="Sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void Controller_VideoPlayed(object Sender, EventArgs e)
+        {
+            Button_PlayAndPause.Text = "Pause";
+        }
+
+        /// <summary>
+        /// Handles the VideoPaused Event. Updates the text of ButtonPlayAndPause
+        /// </summary>
+        /// <param name="Sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void Controller_VideoPaused(object Sender, EventArgs e)
+        {
+            Button_PlayAndPause.Text = "Play";
         }
         #endregion
     }//Class
