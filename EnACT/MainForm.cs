@@ -120,17 +120,6 @@ namespace EnACT
         }
 
         /// <summary>
-        /// Event that is triggered when a cell is changed in CaptionView. Calls the
-        /// ModifyCaptionData method of CData with the specified cell co-ordinates.
-        /// </summary>
-        /// <param name="sender">Sender</param>
-        /// <param name="e">Event Arguments</param>
-        private void CaptionView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            Timeline.Redraw();
-        }
-
-        /// <summary>
         /// Moves the currently selected row up one position in the Caption Table
         /// </summary>
         /// <param name="sender">Sender</param>

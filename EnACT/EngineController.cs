@@ -108,12 +108,22 @@ namespace EnACT
         /// </summary>
         public void SubscribeToEvents()
         {
+            //CaptionView Events
+            this.CaptionView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler
+                (this.CaptionView_CellValueChanged);
+
+            //EngineView Events
             this.EngineView.VideoLoaded += new System.EventHandler(this.EngineView_VideoLoaded);
 
+            //PlayheadTimer Events
             this.PlayheadTimer.Tick += new System.EventHandler(this.PlayheadTimer_Tick);
 
-            this.Timeline.PlayheadChanged += new System.EventHandler<EnACT.TimelinePlayheadChangedEventArgs>(this.Timeline_PlayheadChanged);
-            this.Timeline.CaptionTimestampChanged += new System.EventHandler<EnACT.TimelineCaptionTimestampChangedEventArgs>(this.Timeline_CaptionTimestampChanged);
+            //Timeline Events
+            this.Timeline.PlayheadChanged += new System.EventHandler<EnACT.TimelinePlayheadChangedEventArgs>
+                (this.Timeline_PlayheadChanged);
+            this.Timeline.CaptionTimestampChanged += 
+                new System.EventHandler<EnACT.TimelineCaptionTimestampChangedEventArgs>
+                    (this.Timeline_CaptionTimestampChanged);
             this.Timeline.CaptionMoved += new System.EventHandler(this.Timeline_CaptionMoved);
         }
 
@@ -174,6 +184,18 @@ namespace EnACT
         {
             if (IsPlaying) Pause();
             else Play();
+        }
+        #endregion
+
+        #region CaptionView Events
+        /// <summary>
+        /// Handles the CellValueChanged Event. Redraws the timeline.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void CaptionView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            Timeline.Redraw();
         }
         #endregion
 
