@@ -29,9 +29,9 @@ namespace EnACT
         /// <param name="CaptionList">A reference to the CaptionList object that is to be written</param>
         /// <param name="Settings">A reference to the Settings object that is to be written</param>
         public EnactXMLWriter(Dictionary<String, Speaker> SpeakerSet, List<Caption> CaptionList, SettingsXML Settings) :
-            this("C:\\Users\\imdc\\Documents\\enact\\Testing\\speakers.xml", SpeakerSet,
-                "C:\\Users\\imdc\\Documents\\enact\\Testing\\dialogues.xml", CaptionList,
-                "C:\\Users\\imdc\\Documents\\enact\\Testing\\Settings.xml",  Settings) {}
+            this(Paths.DefaultSpeakers, SpeakerSet, 
+                 Paths.DefaultDialogues, CaptionList, 
+                 Paths.DefaultSettings,  Settings) {}
 
         /// <summary>
         /// Constructs an EnactXMLWriter object with object references to the objects that need to be written
