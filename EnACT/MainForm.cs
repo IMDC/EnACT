@@ -103,7 +103,7 @@ namespace EnACT
         /// </summary>
         /// <param name="sender">Object sender</param>
         /// <param name="e">Event Arguments</param>
-        private void InsertRowBut_Click(object sender, EventArgs e)
+        private void Button_InsertRow_Click(object sender, EventArgs e)
         {
             CaptionView.AddRow();
         }
@@ -114,7 +114,7 @@ namespace EnACT
         /// </summary>
         /// <param name="sender">The sender object</param>
         /// <param name="e">The Event Arguments</param>
-        private void DeleteRowBut_Click(object sender, EventArgs e)
+        private void Button_DeleteRow_Click(object sender, EventArgs e)
         {
             CaptionView.DeleteSelectedRows();
         }
@@ -135,7 +135,7 @@ namespace EnACT
         /// </summary>
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Arguments</param>
-        private void MoveRowUpBut_Click(object sender, EventArgs e)
+        private void Button_MoveRowUp_Click(object sender, EventArgs e)
         {
             CaptionView.MoveRowUp();
         }
@@ -145,7 +145,7 @@ namespace EnACT
         /// </summary>
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Arguments</param>
-        private void MoveRowDownBut_Click(object sender, EventArgs e)
+        private void Button_MoveRowDown_Click(object sender, EventArgs e)
         {
             CaptionView.MoveRowDown();
         }

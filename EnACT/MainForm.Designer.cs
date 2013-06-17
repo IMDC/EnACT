@@ -173,7 +173,7 @@
             this.Button_InsertRow.Text = "Insert";
             this.ToolTip.SetToolTip(this.Button_InsertRow, "Insert a new row above the currently selected row");
             this.Button_InsertRow.UseVisualStyleBackColor = true;
-            this.Button_InsertRow.Click += new System.EventHandler(this.InsertRowBut_Click);
+            this.Button_InsertRow.Click += new System.EventHandler(this.Button_InsertRow_Click);
             // 
             // Button_DeleteRow
             // 
@@ -185,7 +185,7 @@
             this.Button_DeleteRow.Text = "Delete";
             this.ToolTip.SetToolTip(this.Button_DeleteRow, "Delete the currently selected row");
             this.Button_DeleteRow.UseVisualStyleBackColor = true;
-            this.Button_DeleteRow.Click += new System.EventHandler(this.DeleteRowBut_Click);
+            this.Button_DeleteRow.Click += new System.EventHandler(this.Button_DeleteRow_Click);
             // 
             // Button_MoveRowUp
             // 
@@ -197,7 +197,7 @@
             this.Button_MoveRowUp.Text = "Up";
             this.ToolTip.SetToolTip(this.Button_MoveRowUp, "Move the currently selected row up");
             this.Button_MoveRowUp.UseVisualStyleBackColor = true;
-            this.Button_MoveRowUp.Click += new System.EventHandler(this.MoveRowUpBut_Click);
+            this.Button_MoveRowUp.Click += new System.EventHandler(this.Button_MoveRowUp_Click);
             // 
             // Button_MoveRowDown
             // 
@@ -209,7 +209,7 @@
             this.Button_MoveRowDown.Text = "Down";
             this.ToolTip.SetToolTip(this.Button_MoveRowDown, "Move the currently selected row down");
             this.Button_MoveRowDown.UseVisualStyleBackColor = true;
-            this.Button_MoveRowDown.Click += new System.EventHandler(this.MoveRowDownBut_Click);
+            this.Button_MoveRowDown.Click += new System.EventHandler(this.Button_MoveRowDown_Click);
             // 
             // Button_PlayAndPause
             // 
