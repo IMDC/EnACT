@@ -508,10 +508,10 @@ namespace EnACT
                 mouseSelection = new TimelineMouseSelection(TimelineMouseAction.movePlayhead);
 
                 //Set playhead time based on click location
-                PlayHeadTime = mouseClickTime;
-                Redraw(); //redraw the playhead
+                //PlayHeadTime = mouseClickTime;
                 //Invoke PlayheadChanged event
-                OnPlayheadChanged(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
+                //OnPlayheadChanged(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
+                Redraw(); //redraw the playhead
             }
             else
             {
@@ -569,6 +569,10 @@ namespace EnACT
             if (e.Button != MouseButtons.Left)
                 return;
 
+            //Notify the playhead is changed on mouse released
+            if (mouseSelection.Action == TimelineMouseAction.movePlayhead)
+                OnPlayheadChanged(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
+
             //Clear mouseSelection
             mouseSelection = TimelineMouseSelection.NoSelection;
             //Console.WriteLine("Mouse Up!"); 
@@ -595,7 +599,7 @@ namespace EnACT
                     //Set playhead time based on click location
                     PlayHeadTime = mouseClickTime;
                     //Invoke PlayheadChanged event
-                    OnPlayheadChanged(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
+                    //OnPlayheadChanged(new TimelinePlayheadChangedEventArgs(PlayHeadTime));
                     break;
 
                 case TimelineMouseAction.changeCaptionBegin:

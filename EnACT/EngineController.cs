@@ -274,7 +274,7 @@ namespace EnACT
             bool wasPlaying = EngineView.IsPlaying();
 
             //Pause video, change time, and then play to prevent confusing the player
-            EngineView.Pause();
+            Pause();
             EngineView.SetPlayHeadTime(e.PlayheadTime);
 
             //Update label
@@ -282,7 +282,7 @@ namespace EnACT
 
             //Only play if Engine was playing previously
             if (wasPlaying)
-                EngineView.Play();
+                Play();
         }
 
         /// <summary>
