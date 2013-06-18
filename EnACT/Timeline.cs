@@ -515,8 +515,6 @@ namespace EnACT
             }
             else
             {
-                Console.WriteLine("{0}", YCoordinateToScreenLocation(e.Y));
-
                 double beginX;  //X-Coord of c.Begin
                 double endX;    //X-Coord of c.End
                 foreach (Caption c in CaptionList)
@@ -1061,8 +1059,6 @@ namespace EnACT
             //The height of a single Label row
             float rowHeight = availableHeight / LocationLabels.Length;
             float adjustedY = y - PLAYHEAD_BAR_HEIGHT;
-
-            Console.WriteLine((int)Math.Floor(adjustedY / rowHeight));
 
             //Calculate row number
             int row = (int)Math.Floor(adjustedY / rowHeight);
