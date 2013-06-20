@@ -42,24 +42,23 @@
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Button_Populate = new System.Windows.Forms.Button();
-            this.Button_WriteXML = new System.Windows.Forms.Button();
-            this.Button_ParseScript = new System.Windows.Forms.Button();
+            this.parseScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.parseesrToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.writeXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.jorgeButtonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.debugMethodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Button_InsertRow = new System.Windows.Forms.Button();
             this.Button_DeleteRow = new System.Windows.Forms.Button();
             this.Button_MoveRowUp = new System.Windows.Forms.Button();
             this.Button_MoveRowDown = new System.Windows.Forms.Button();
             this.Button_PlayAndPause = new System.Windows.Forms.Button();
-            this.Button_JorgeButton = new System.Windows.Forms.Button();
             this.TrackBar_Timeline = new System.Windows.Forms.TrackBar();
             this.PlayheadTimer = new System.Windows.Forms.Timer(this.components);
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.Button_ParseESR = new System.Windows.Forms.Button();
             this.Button_ShowLabels = new System.Windows.Forms.Button();
             this.Button_ZoomTimelineIn = new System.Windows.Forms.Button();
             this.Button_ZoomTimelineOut = new System.Windows.Forms.Button();
             this.Button_ZoomReset = new System.Windows.Forms.Button();
-            this.DebugButton = new System.Windows.Forms.Button();
             this.PlayheadLabel = new EnACT.PlayheadLabel();
             this.Timeline = new EnACT.Timeline();
             this.EngineView = new EnACT.EngineView();
@@ -126,42 +125,50 @@
             // 
             // debugToolStripMenuItem
             // 
+            this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.parseScriptToolStripMenuItem,
+            this.parseesrToolStripMenuItem,
+            this.writeXMLToolStripMenuItem,
+            this.jorgeButtonToolStripMenuItem,
+            this.debugMethodToolStripMenuItem});
             this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
             this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.debugToolStripMenuItem.Text = "Debug";
             // 
-            // Button_Populate
+            // parseScriptToolStripMenuItem
             // 
-            this.Button_Populate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Button_Populate.Location = new System.Drawing.Point(807, 114);
-            this.Button_Populate.Name = "Button_Populate";
-            this.Button_Populate.Size = new System.Drawing.Size(125, 23);
-            this.Button_Populate.TabIndex = 4;
-            this.Button_Populate.Text = "Populate";
-            this.Button_Populate.UseVisualStyleBackColor = true;
-            this.Button_Populate.Click += new System.EventHandler(this.PopulateButton_Click);
+            this.parseScriptToolStripMenuItem.Name = "parseScriptToolStripMenuItem";
+            this.parseScriptToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.parseScriptToolStripMenuItem.Text = "Parse Script";
+            this.parseScriptToolStripMenuItem.Click += new System.EventHandler(this.parseScriptToolStripMenuItem_Click);
             // 
-            // Button_WriteXML
+            // parseesrToolStripMenuItem
             // 
-            this.Button_WriteXML.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Button_WriteXML.Location = new System.Drawing.Point(807, 85);
-            this.Button_WriteXML.Name = "Button_WriteXML";
-            this.Button_WriteXML.Size = new System.Drawing.Size(125, 23);
-            this.Button_WriteXML.TabIndex = 5;
-            this.Button_WriteXML.Text = "Write XML";
-            this.Button_WriteXML.UseVisualStyleBackColor = true;
-            this.Button_WriteXML.Click += new System.EventHandler(this.WriteXML);
+            this.parseesrToolStripMenuItem.Name = "parseesrToolStripMenuItem";
+            this.parseesrToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.parseesrToolStripMenuItem.Text = "Parse .esr";
+            this.parseesrToolStripMenuItem.Click += new System.EventHandler(this.parseesrToolStripMenuItem_Click);
             // 
-            // Button_ParseScript
+            // writeXMLToolStripMenuItem
             // 
-            this.Button_ParseScript.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Button_ParseScript.Location = new System.Drawing.Point(807, 27);
-            this.Button_ParseScript.Name = "Button_ParseScript";
-            this.Button_ParseScript.Size = new System.Drawing.Size(125, 23);
-            this.Button_ParseScript.TabIndex = 6;
-            this.Button_ParseScript.Text = "Parse Script";
-            this.Button_ParseScript.UseVisualStyleBackColor = true;
-            this.Button_ParseScript.Click += new System.EventHandler(this.ParseText);
+            this.writeXMLToolStripMenuItem.Name = "writeXMLToolStripMenuItem";
+            this.writeXMLToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.writeXMLToolStripMenuItem.Text = "Write XML";
+            this.writeXMLToolStripMenuItem.Click += new System.EventHandler(this.writeXMLToolStripMenuItem_Click);
+            // 
+            // jorgeButtonToolStripMenuItem
+            // 
+            this.jorgeButtonToolStripMenuItem.Name = "jorgeButtonToolStripMenuItem";
+            this.jorgeButtonToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.jorgeButtonToolStripMenuItem.Text = "Jorge Button";
+            this.jorgeButtonToolStripMenuItem.Click += new System.EventHandler(this.jorgeButtonToolStripMenuItem_Click);
+            // 
+            // debugMethodToolStripMenuItem
+            // 
+            this.debugMethodToolStripMenuItem.Name = "debugMethodToolStripMenuItem";
+            this.debugMethodToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.debugMethodToolStripMenuItem.Text = "Debug Method";
+            this.debugMethodToolStripMenuItem.Click += new System.EventHandler(this.debugMethodToolStripMenuItem_Click);
             // 
             // Button_InsertRow
             // 
@@ -222,17 +229,6 @@
             this.Button_PlayAndPause.UseVisualStyleBackColor = true;
             this.Button_PlayAndPause.Click += new System.EventHandler(this.TogglePlay);
             // 
-            // Button_JorgeButton
-            // 
-            this.Button_JorgeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Button_JorgeButton.Location = new System.Drawing.Point(807, 143);
-            this.Button_JorgeButton.Name = "Button_JorgeButton";
-            this.Button_JorgeButton.Size = new System.Drawing.Size(125, 23);
-            this.Button_JorgeButton.TabIndex = 13;
-            this.Button_JorgeButton.Text = "Jorge Button";
-            this.Button_JorgeButton.UseVisualStyleBackColor = true;
-            this.Button_JorgeButton.Click += new System.EventHandler(this.JorgeButton_Click);
-            // 
             // TrackBar_Timeline
             // 
             this.TrackBar_Timeline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -240,19 +236,7 @@
             this.TrackBar_Timeline.Location = new System.Drawing.Point(338, 222);
             this.TrackBar_Timeline.Name = "TrackBar_Timeline";
             this.TrackBar_Timeline.Size = new System.Drawing.Size(594, 45);
-            this.TrackBar_Timeline.TabIndex = 14;          
-            // 
-            // Button_ParseESR
-            // 
-            this.Button_ParseESR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Button_ParseESR.Location = new System.Drawing.Point(807, 56);
-            this.Button_ParseESR.Name = "Button_ParseESR";
-            this.Button_ParseESR.Size = new System.Drawing.Size(125, 23);
-            this.Button_ParseESR.TabIndex = 16;
-            this.Button_ParseESR.Text = "Parse .esr";
-            this.ToolTip.SetToolTip(this.Button_ParseESR, "Parse a .esr file");
-            this.Button_ParseESR.UseVisualStyleBackColor = true;
-            this.Button_ParseESR.Click += new System.EventHandler(this.Button_ParseESR_Click);
+            this.TrackBar_Timeline.TabIndex = 14;
             // 
             // Button_ShowLabels
             // 
@@ -297,16 +281,6 @@
             this.ToolTip.SetToolTip(this.Button_ZoomReset, "Reset the zoom level back to the default zoom level");
             this.Button_ZoomReset.UseVisualStyleBackColor = true;
             this.Button_ZoomReset.Click += new System.EventHandler(this.Button_ZoomReset_Click);
-            // 
-            // DebugButton
-            // 
-            this.DebugButton.Location = new System.Drawing.Point(662, 27);
-            this.DebugButton.Name = "DebugButton";
-            this.DebugButton.Size = new System.Drawing.Size(139, 139);
-            this.DebugButton.TabIndex = 17;
-            this.DebugButton.Text = "Random Debug Button";
-            this.DebugButton.UseVisualStyleBackColor = true;
-            this.DebugButton.Click += new System.EventHandler(this.DebugButton_Click);
             // 
             // PlayheadLabel
             // 
@@ -388,20 +362,14 @@
             this.Controls.Add(this.Button_ZoomTimelineOut);
             this.Controls.Add(this.Button_ZoomTimelineIn);
             this.Controls.Add(this.Button_ShowLabels);
-            this.Controls.Add(this.DebugButton);
-            this.Controls.Add(this.Button_ParseESR);
             this.Controls.Add(this.Timeline);
             this.Controls.Add(this.TrackBar_Timeline);
-            this.Controls.Add(this.Button_JorgeButton);
             this.Controls.Add(this.Button_PlayAndPause);
             this.Controls.Add(this.EngineView);
             this.Controls.Add(this.Button_MoveRowDown);
             this.Controls.Add(this.Button_MoveRowUp);
             this.Controls.Add(this.Button_DeleteRow);
             this.Controls.Add(this.Button_InsertRow);
-            this.Controls.Add(this.Button_ParseScript);
-            this.Controls.Add(this.Button_WriteXML);
-            this.Controls.Add(this.Button_Populate);
             this.Controls.Add(this.CaptionView);
             this.Controls.Add(this.MenuStrip_MainForm);
             this.Cursor = System.Windows.Forms.Cursors.Default;
@@ -430,28 +398,27 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private CaptionView CaptionView;
-        private System.Windows.Forms.Button Button_Populate;
-        private System.Windows.Forms.Button Button_WriteXML;
-        private System.Windows.Forms.Button Button_ParseScript;
         private System.Windows.Forms.Button Button_InsertRow;
         private System.Windows.Forms.Button Button_DeleteRow;
         private System.Windows.Forms.Button Button_MoveRowUp;
         private System.Windows.Forms.Button Button_MoveRowDown;
         private EngineView EngineView;
         private System.Windows.Forms.Button Button_PlayAndPause;
-        private System.Windows.Forms.Button Button_JorgeButton;
         private System.Windows.Forms.TrackBar TrackBar_Timeline;
         private System.Windows.Forms.Timer PlayheadTimer;
         private Timeline Timeline;
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
         private System.Windows.Forms.ToolTip ToolTip;
-        private System.Windows.Forms.Button Button_ParseESR;
-        private System.Windows.Forms.Button DebugButton;
         private System.Windows.Forms.Button Button_ShowLabels;
         private System.Windows.Forms.Button Button_ZoomTimelineIn;
         private System.Windows.Forms.Button Button_ZoomTimelineOut;
         private System.Windows.Forms.Button Button_ZoomReset;
         private PlayheadLabel PlayheadLabel;
+        private System.Windows.Forms.ToolStripMenuItem parseScriptToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem parseesrToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem writeXMLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem jorgeButtonToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem debugMethodToolStripMenuItem;
     }
 }
 

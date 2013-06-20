@@ -69,29 +69,6 @@ namespace EnACT
         }
         #endregion
 
-        private void PopulateButton_Click(object sender, EventArgs e)
-        {
-            CaptionView.UpdateView();
-        }
-
-        private void ParseText(object sender, EventArgs e)
-        {
-            TextParser t = new TextParser(SpeakerSet, CaptionList);
-            t.ParseScriptFile(Paths.TestScript);
-            CaptionView.UpdateView();
-        }
-
-        /// <summary>
-        /// Writes the three EnACT xml files.
-        /// </summary>
-        /// <param name="sender">Sender</param>
-        /// <param name="e">EventArgs</param>
-        private void WriteXML(object sender, EventArgs e)
-        {
-            EnactXMLWriter w = new EnactXMLWriter(SpeakerSet,CaptionList,Settings);
-            w.WriteAll();
-        }
-
         #region CaptionView Buttons
         /// <summary>
         /// Inserts a new row above the selected caption in CaptionView.
@@ -134,6 +111,7 @@ namespace EnACT
         }
         #endregion
 
+        #region Controller Buttons
         /// <summary>
         /// Toggles the video playing state between playing and paused
         /// </summary>
@@ -143,19 +121,14 @@ namespace EnACT
         {
             Controller.TogglePlay();
         }
+        #endregion
 
         #region Jorge
-        private void JorgeButton_Click(object sender, EventArgs e)
-        {
-            JorgeForm TheJorgeForm = new JorgeForm(SpeakerSet,CaptionList,Settings, this);
-            TheJorgeForm.Show();
-        }
-
         public void JorgeMethod(String SRTPath, String OutFolderPath)
         {
             TextParser t = new TextParser(SpeakerSet, CaptionList);
             t.ParseSRTFile(@SRTPath);
-            PopulateButton_Click(null, null);
+            CaptionView.UpdateView();
 
             EnactXMLWriter w = new EnactXMLWriter(
                 OutFolderPath + @"\speakers.xml", SpeakerSet,
@@ -164,21 +137,6 @@ namespace EnACT
             w.WriteAll();
         }
         #endregion
-
-        private void Button_ParseESR_Click(object sender, EventArgs e)
-        {
-            TextParser t = new TextParser(SpeakerSet, CaptionList);
-            t.ParseESRFile(Paths.TestESR);
-            CaptionView.UpdateView();
-        }
-
-        private void DebugButton_Click(object sender, EventArgs e)
-        {
-            if (CaptionView.UserInputEnabled)
-                CaptionView.UserInputEnabled = false;
-            else
-                CaptionView.UserInputEnabled = true;
-        }
 
         #region Timeline Buttons
         private void Button_ShowLabels_Click(object sender, EventArgs e)
@@ -221,6 +179,42 @@ namespace EnACT
         private void Controller_VideoPaused(object Sender, EventArgs e)
         {
             Button_PlayAndPause.Text = "Play";
+        }
+        #endregion
+
+        #region Debug Menu Items
+        private void parseScriptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TextParser t = new TextParser(SpeakerSet, CaptionList);
+            t.ParseScriptFile(Paths.TestScript);
+            CaptionView.UpdateView();
+        }
+
+        private void parseesrToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TextParser t = new TextParser(SpeakerSet, CaptionList);
+            t.ParseESRFile(Paths.TestESR);
+            CaptionView.UpdateView();
+        }
+
+        private void writeXMLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EnactXMLWriter w = new EnactXMLWriter(SpeakerSet, CaptionList, Settings);
+            w.WriteAll();
+        }
+
+        private void jorgeButtonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            JorgeForm TheJorgeForm = new JorgeForm(SpeakerSet, CaptionList, Settings, this);
+            TheJorgeForm.Show();
+        }
+
+        private void debugMethodToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (CaptionView.UserInputEnabled)
+                CaptionView.UserInputEnabled = false;
+            else
+                CaptionView.UserInputEnabled = true;
         }
         #endregion
     }//Class
