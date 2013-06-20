@@ -46,5 +46,24 @@ namespace EnACTUnitTestProject
                 Assert.AreEqual(expectedCaptionWords[i].Text, l2[i].Text);
             }
         }
+
+        /// <summary>
+        /// Tests the Text()/ToString() method of CaptionWordList
+        /// </summary>
+        [TestMethod]
+        public void TextOutputTest()
+        {
+            //Arrange
+            CaptionWordList l1;
+
+            string s1 = "Hello World this is a caption line.";
+
+            //Act
+            l1 = new CaptionWordList(s1);
+
+            //Assert
+            Assert.AreEqual(s1, l1.Text());
+            Assert.AreEqual(s1, l1.ToString());
+        }
     }//Class
 }//Namespace
