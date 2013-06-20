@@ -84,6 +84,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CaptionWord.cs" />
+    <Compile Include="CaptionWordList.cs" />
     <Compile Include="EngineController.cs" />
     <Compile Include="EnactXMLWriter.cs" />
     <Compile Include="EngineView.cs">
