@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            EnACT.Timestamp timestamp1 = new EnACT.Timestamp();
-            EnACT.Timestamp timestamp2 = new EnACT.Timestamp();
+            EnACT.Timestamp timestamp3 = new EnACT.Timestamp();
+            EnACT.Timestamp timestamp4 = new EnACT.Timestamp();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MenuStrip_MainForm = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +59,7 @@
             this.Button_ZoomTimelineIn = new System.Windows.Forms.Button();
             this.Button_ZoomTimelineOut = new System.Windows.Forms.Button();
             this.Button_ZoomReset = new System.Windows.Forms.Button();
+            this.CaptionTextBox = new EnACT.CaptionTextBox();
             this.PlayheadLabel = new EnACT.PlayheadLabel();
             this.Timeline = new EnACT.Timeline();
             this.EngineView = new EnACT.EngineView();
@@ -233,16 +234,16 @@
             // 
             this.TrackBar_Timeline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TrackBar_Timeline.Location = new System.Drawing.Point(338, 222);
+            this.TrackBar_Timeline.Location = new System.Drawing.Point(341, 222);
             this.TrackBar_Timeline.Name = "TrackBar_Timeline";
-            this.TrackBar_Timeline.Size = new System.Drawing.Size(594, 45);
+            this.TrackBar_Timeline.Size = new System.Drawing.Size(591, 45);
             this.TrackBar_Timeline.TabIndex = 14;
             // 
             // Button_ShowLabels
             // 
-            this.Button_ShowLabels.Location = new System.Drawing.Point(338, 193);
+            this.Button_ShowLabels.Location = new System.Drawing.Point(341, 193);
             this.Button_ShowLabels.Name = "Button_ShowLabels";
-            this.Button_ShowLabels.Size = new System.Drawing.Size(112, 23);
+            this.Button_ShowLabels.Size = new System.Drawing.Size(109, 23);
             this.Button_ShowLabels.TabIndex = 18;
             this.Button_ShowLabels.Text = "Show/Hide Labels";
             this.ToolTip.SetToolTip(this.Button_ShowLabels, "Show or hide labels on Timeline.");
@@ -282,20 +283,28 @@
             this.Button_ZoomReset.UseVisualStyleBackColor = true;
             this.Button_ZoomReset.Click += new System.EventHandler(this.Button_ZoomReset_Click);
             // 
+            // CaptionTextBox
+            // 
+            this.CaptionTextBox.Location = new System.Drawing.Point(341, 48);
+            this.CaptionTextBox.Name = "CaptionTextBox";
+            this.CaptionTextBox.Size = new System.Drawing.Size(591, 96);
+            this.CaptionTextBox.TabIndex = 24;
+            this.CaptionTextBox.Text = "";
+            // 
             // PlayheadLabel
             // 
             this.PlayheadLabel.AutoSize = true;
             this.PlayheadLabel.Location = new System.Drawing.Point(338, 32);
             this.PlayheadLabel.Name = "PlayheadLabel";
-            timestamp1.AsDouble = 0D;
-            timestamp1.AsString = "00:00:00.0";
-            this.PlayheadLabel.PlayheadTime = timestamp1;
+            timestamp3.AsDouble = 0D;
+            timestamp3.AsString = "00:00:00.0";
+            this.PlayheadLabel.PlayheadTime = timestamp3;
             this.PlayheadLabel.Size = new System.Drawing.Size(120, 13);
             this.PlayheadLabel.TabIndex = 23;
             this.PlayheadLabel.Text = "00:00:00.0 / 00:00:00.0";
-            timestamp2.AsDouble = 0D;
-            timestamp2.AsString = "00:00:00.0";
-            this.PlayheadLabel.VideoLength = timestamp2;
+            timestamp4.AsDouble = 0D;
+            timestamp4.AsString = "00:00:00.0";
+            this.PlayheadLabel.VideoLength = timestamp4;
             // 
             // Timeline
             // 
@@ -333,19 +342,19 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CaptionView.CaptionSource = null;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.CaptionView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.CaptionView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.CaptionView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CaptionView.Location = new System.Drawing.Point(12, 478);
             this.CaptionView.Name = "CaptionView";
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.CaptionView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.CaptionView.Size = new System.Drawing.Size(864, 192);
             this.CaptionView.SpeakerSet = null;
@@ -357,6 +366,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 682);
+            this.Controls.Add(this.CaptionTextBox);
             this.Controls.Add(this.PlayheadLabel);
             this.Controls.Add(this.Button_ZoomReset);
             this.Controls.Add(this.Button_ZoomTimelineOut);
@@ -419,6 +429,7 @@
         private System.Windows.Forms.ToolStripMenuItem writeXMLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem jorgeButtonToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem debugMethodToolStripMenuItem;
+        private CaptionTextBox CaptionTextBox;
     }
 }
 
