@@ -74,9 +74,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Caption.cs" />
-    <Compile Include="CaptionData.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="CaptionTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -112,10 +109,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CaptionData.resx">
-      <DependentUpon>CaptionData.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="CaptionView.resx">
       <DependentUpon>CaptionView.cs</DependentUpon>
       <SubType>Designer</SubType>
