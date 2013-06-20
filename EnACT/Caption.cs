@@ -176,16 +176,16 @@ namespace EnACT
         /// <summary>
         /// The list of words in the caption
         /// </summary>
-        public List<CaptionWord> WordList { set; get; }
+        public CaptionWordList WordList { set; get; }
 
         public String Text
         {
             set
             { 
-                FeedWordList(value);
+                WordList.Feed(value);
                 NotifyPropertyChanged("Text");
             }
-            get{ return WordListText(); }
+            get{ return WordList.Text(); }
         }
         #endregion
 
@@ -234,54 +234,8 @@ namespace EnACT
             this.Location = ScreenLocation.BottomCentre;
             this.Alignment = Alignment.Center;
 
-            this.WordList = new List<CaptionWord>();
-
-            this.FeedWordList(line);
+            this.WordList = new CaptionWordList(line);
         }
-        #endregion
-
-        #region FeedWordList
-        /// <summary>
-        /// Takes in a string and feeds it into the wordlist, splitting it up
-        /// and turning each word in the string into a captionWord
-        /// </summary>
-        /// <param name="line">The String to enter</param>
-        public void FeedWordList(String line)
-        {
-            //Remove the previous line from the WordList
-            WordList.Clear();
-
-            //Split line up and add each word to the wordlist.
-            String[] words = line.Split(); //Separate by spaces
-            foreach (String word in words)
-            {
-                if (word != "")
-                    this.WordList.Add(new CaptionWord(word));
-            }
-        }
-        #endregion
-
-        #region WordListText
-        /// <summary>
-        /// Returns the captions in WordList as a string, with each CaptionWord being
-        /// separated by spaces (' ').
-        /// </summary>
-        /// <returns>A String representation of wordlist</returns>
-        public String WordListText()
-        {
-            //Stringbuilder is faster than String when it comes to appending text.
-            StringBuilder s = new StringBuilder();
-            //For every element but the last
-            for (int i = 0; i < WordList.Count - 1; i++)
-            {
-                s.Append(WordList[i].ToString());
-                s.Append(" ");
-            }
-            //Append the last element without adding a space after it
-            if (0 < WordList.Count)
-                s.Append(WordList[WordList.Count - 1].ToString());
-            return s.ToString();
-        } 
         #endregion
 
         #region ToString
@@ -292,7 +246,7 @@ namespace EnACT
         /// <returns>The text of WordList's words</returns>
         public override string ToString()
         {
-            return this.WordListText();
+            return this.WordList.Text();
         } 
         #endregion
     }
