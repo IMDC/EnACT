@@ -12,6 +12,7 @@ namespace EnACT
     /// </summary>
     class CaptionTextBox : RichTextBox
     {
+        #region Fields and Properties
         /// <summary>
         /// Backing field for Caption Property.
         /// </summary>
@@ -37,7 +38,18 @@ namespace EnACT
             }
             get { return caption; }
         }
+        #endregion
 
+        #region Constructor
         public CaptionTextBox() : base() { }
+        #endregion
+
+        #region Methods
+        protected override void OnSelectionChanged(EventArgs e)
+        {
+            base.OnSelectionChanged(e);
+            Console.WriteLine("Index: {0}, Text: {1}",SelectionStart, SelectedText);
+        }
+        #endregion
     }
 }

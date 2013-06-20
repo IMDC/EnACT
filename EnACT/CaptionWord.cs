@@ -10,6 +10,7 @@ namespace EnACT
     /// </summary>
     public class CaptionWord
     {
+        #region Fields and Properties
         /// <summary>
         /// Represents the type of emotion (Happy, Sad, etc) of this CaptionWord
         /// </summary>
@@ -25,6 +26,13 @@ namespace EnACT
         /// </summary>
         public String Text { set; get; }    //The part wrapped in <emotion> tag
 
+        public int Length
+        {
+            get { return Text.Length; }
+        }
+        #endregion
+
+        #region Constructor
         /// <summary>
         /// Creates an emotionless CaptionWord object with the inputted text
         /// </summary>
@@ -35,7 +43,9 @@ namespace EnACT
             this.Intensity = Intensity.None;
             this.Text = text;
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Returns the text that this word represents
         /// </summary>
@@ -44,5 +54,6 @@ namespace EnACT
         {
             return Text;
         }
+        #endregion
     }
 }
