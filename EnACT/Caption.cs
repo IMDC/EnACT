@@ -185,7 +185,7 @@ namespace EnACT
                 WordList.Feed(value);
                 NotifyPropertyChanged("Text");
             }
-            get{ return WordList.Text(); }
+            get{ return WordList.GetAsString(); }
         }
         #endregion
 
@@ -246,7 +246,7 @@ namespace EnACT
         /// <returns>The text of WordList's words</returns>
         public override string ToString()
         {
-            return this.WordList.Text();
+            return this.WordList.GetAsString();
         } 
         #endregion
     }

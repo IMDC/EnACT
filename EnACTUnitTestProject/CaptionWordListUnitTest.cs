@@ -19,6 +19,7 @@ namespace EnACTUnitTestProject
             //Arrange
             CaptionWordList l1;
             CaptionWordList l2;
+            CaptionWordList l3;
 
             string s1 = "Hello World this is a caption line.";
 
@@ -39,11 +40,15 @@ namespace EnACTUnitTestProject
 
             l2 = new CaptionWordList(s1);
 
+            l3 = new CaptionWordList();
+            l3.AsString = s1;
+
             //Assert
             for (int i = 0; i < expectedCaptionWords.Length; i++)
             {
                 Assert.AreEqual(expectedCaptionWords[i].Text, l1[i].Text);
                 Assert.AreEqual(expectedCaptionWords[i].Text, l2[i].Text);
+                Assert.AreEqual(expectedCaptionWords[i].Text, l3[i].Text);
             }
         }
 
@@ -62,8 +67,9 @@ namespace EnACTUnitTestProject
             l1 = new CaptionWordList(s1);
 
             //Assert
-            Assert.AreEqual(s1, l1.Text());
+            Assert.AreEqual(s1, l1.GetAsString());
             Assert.AreEqual(s1, l1.ToString());
+            Assert.AreEqual(s1, l1.AsString);
         }
     }//Class
 }//Namespace

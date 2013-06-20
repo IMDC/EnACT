@@ -11,10 +11,21 @@ namespace EnACT
     /// </summary>
     public class CaptionWordList : List<CaptionWord>
     {
-        #region Constructors
-        public CaptionWordList() : base() { }
+        #region Fields and Properties
+        /// <summary>
+        /// Gets or sets the CaptionWordList as a String.
+        /// </summary>
+        public String AsString
+        {
+            set { Feed(value); }
+            get { return GetAsString(); }
+        }
+        #endregion
 
-        public CaptionWordList(String line) : base() 
+        #region Constructors
+        public CaptionWordList() : base() {}
+
+        public CaptionWordList(String line) : this()
         {
             Feed(line);
         }
@@ -43,7 +54,7 @@ namespace EnACT
         /// Turns the list into a single String.
         /// </summary>
         /// <returns>A string containing all the CaptionWords in the list.</returns>
-        public String Text()
+        public String GetAsString()
         {
             //Stringbuilder is faster than String when it comes to appending text.
             StringBuilder s = new StringBuilder();
@@ -66,7 +77,7 @@ namespace EnACT
         /// <returns>The CaptionWordList represented as a String.</returns>
         public override string ToString()
         {
-            return Text();
+            return GetAsString();
         }
         #endregion
     }
