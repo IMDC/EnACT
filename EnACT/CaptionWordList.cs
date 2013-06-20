@@ -14,7 +14,10 @@ namespace EnACT
         #region Constructors
         public CaptionWordList() : base() { }
 
-        public CaptionWordList(String line) : base() { }
+        public CaptionWordList(String line) : base() 
+        {
+            Feed(line);
+        }
         #endregion
 
         #region Methods
