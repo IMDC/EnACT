@@ -217,5 +217,29 @@ namespace EnACT
                 CaptionView.UserInputEnabled = true;
         }
         #endregion
+
+        /// <summary>
+        /// Event Handler for CaptionView.SelectionChanged. Will set the caption of CaptionTextBox
+        /// when appropriate.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void CaptionView_SelectionChanged(object sender, EventArgs e)
+        {
+            //Only use a caption if its the only selected row
+            if (CaptionView.SelectedRows.Count == 1)
+            {
+                //Get Index of selected row
+                int i = CaptionView.SelectedRows[0].Index;
+
+                //Assign Caption
+                CaptionTextBox.Caption = CaptionList[i];
+            }
+            //Otherwise clear the textbox
+            else
+            {
+                CaptionTextBox.Caption = null;
+            }
+        }
     }//Class
 }//Namespace
