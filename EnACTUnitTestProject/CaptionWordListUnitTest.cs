@@ -137,5 +137,55 @@ namespace EnACTUnitTestProject
             }
         }
         #endregion
+
+        #region GetStringStartIndexAt Test
+        /// <summary>
+        /// Tests the GetStringStartIndexAt method of CaptionWordList.
+        /// </summary>
+        [TestMethod]
+        public void CaptionWordList_GetStringStartIndexAt_Test()
+        {
+            /* Arrange */
+            CaptionWordList l1;
+            //           0         10        20        30
+            //           01234567890123456789012345678901234
+            string s1 = "Hello World this is a caption line.";
+
+            //Expected values
+            string[] expectedStrings = s1.Split(' ');
+
+            //String indexes that will cause an ArgumentOutOfRangeException
+            int[] errorWordIndexes = 
+            {
+                -1,
+                int.MinValue,
+                100,
+                int.MaxValue,
+                s1.Length,
+                expectedStrings.Length,
+            };
+
+            /* Act and Assert */
+            l1 = new CaptionWordList(s1);
+
+            //Test in-range numbers
+            for (int i = 0; i < l1.Count; i++)
+            {
+                int stringStartIndex = l1.GetStringStartIndexAt(i);
+                Assert.AreEqual(s1[stringStartIndex], l1.AsString[stringStartIndex]);
+            }
+
+            //Test errors
+            foreach (int wordIndex in errorWordIndexes)
+            {
+                try
+                {
+                    int x = l1.GetStringStartIndexAt(wordIndex);
+                    Assert.Fail();  //Should fail if no exception is thrown
+                }
+                catch (ArgumentOutOfRangeException) { }
+            }
+        }
+        #endregion
     }//Class
 }//Namespace

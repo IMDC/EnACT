@@ -104,6 +104,31 @@ namespace EnACT
         }
 
         /// <summary>
+        /// Gets the string index of the first character of the CaptionWord specified by captionWordIndex.
+        /// </summary>
+        /// <param name="captionWordIndex">The index of the CaptionWord to use.</param>
+        /// <returns>The CaptionWord's first character's index in the string of words.</returns>
+        public int GetStringStartIndexAt(int captionWordIndex)
+        {
+            //Ensure string index is not less than 0 or greater than word Count
+            if (captionWordIndex < 0 || this.Count <= captionWordIndex)
+                throw new ArgumentOutOfRangeException("captionWordIndex");
+
+            int stringIndexPos = 0;
+
+            for (int i = 0; i < captionWordIndex; i++)
+            {
+                stringIndexPos += this[i].Length;
+
+                //Add a space if not the last word.
+                if (i < Count - 1)
+                    stringIndexPos += SPACE_WIDTH;
+            }
+
+            return stringIndexPos;
+        }
+
+        /// <summary>
         /// Returns the CaptionWordList represented as a String.
         /// </summary>
         /// <returns>The CaptionWordList represented as a String.</returns>
