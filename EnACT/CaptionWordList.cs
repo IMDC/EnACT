@@ -100,11 +100,7 @@ namespace EnACT
                     cumulativeLength += this[i].Length + SPACE_WIDTH;
             }
 
-            //Ensure that stringIndex is not out of bounds
-            if (cumulativeLength <= stringIndex)
-                throw new ArgumentOutOfRangeException("stringIndex");
-
-            return i;
+            return i-1;
         }
 
         /// <summary>

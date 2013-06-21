@@ -17,7 +17,7 @@ namespace EnACTUnitTestProject
         [TestMethod]
         public void CaptionWordListFeedTest()
         {
-            //Arrange
+            /* Arrange */
             CaptionWordList l1;
             CaptionWordList l2;
             CaptionWordList l3;
@@ -35,7 +35,7 @@ namespace EnACTUnitTestProject
                 new CaptionWord("line."),
             };
 
-            //Act
+            /* Act */
             l1 = new CaptionWordList();
             l1.Feed(s1);
 
@@ -44,7 +44,7 @@ namespace EnACTUnitTestProject
             l3 = new CaptionWordList();
             l3.AsString = s1;
 
-            //Assert
+            /* Assert */
             for (int i = 0; i < expectedCaptionWords.Length; i++)
             {
                 Assert.AreEqual(expectedCaptionWords[i].Text, l1[i].Text);
@@ -61,15 +61,15 @@ namespace EnACTUnitTestProject
         [TestMethod]
         public void CaptionWordListTextOutputTest()
         {
-            //Arrange
+            /* Arrange */
             CaptionWordList l1;
 
             string s1 = "Hello World this is a caption line.";
 
-            //Act
+            /* Act */
             l1 = new CaptionWordList(s1);
 
-            //Assert
+            /* Assert */
             Assert.AreEqual(s1, l1.GetAsString());
             Assert.AreEqual(s1, l1.ToString());
             Assert.AreEqual(s1, l1.AsString);
@@ -83,58 +83,57 @@ namespace EnACTUnitTestProject
         [TestMethod]
         public void CaptionWordListGetCaptionWordIndexTest()
         {
-            //Act
+            /* Arrange */
             CaptionWordList l1;
             //           0         10        20        30
             //           01234567890123456789012345678901234
             string s1 = "Hello World this is a caption line.";
 
-            int[] inputIndexes =
+            //String indexes that will cause an ArgumentOutOfRangeException
+            int [] errorStringIndexes = 
             {
-                0,
-                7,
-                14,
-                18,
-                26,
-                34,
+                -1,
+                int.MinValue,
             };
 
-            int[] captionWordIndexes = new int[inputIndexes.Length];
-
-            int [] errorIndexes = 
+            //String indexes that will be greater than the length of the CaptionWordList text
+            int[] overLimitStringIndexes = 
             {
                 100,
-                -1,
                 int.MaxValue,
-                int.MinValue,
                 s1.Length,
             };
 
+            //Expected values
             string[] expectedStrings = s1.Split(' ');
 
-            //Arrange
+            /* Act and Assert */
             l1 = new CaptionWordList(s1);
 
-            for (int i = 0; i < inputIndexes.Length; i++)
+            //Test in-range numbers
+            for (int i = 0; i < s1.Length; i++)
             {
-                captionWordIndexes[i] = l1.GetCaptionWordIndexAt(inputIndexes[i]);
+                int wordIndex = l1.GetCaptionWordIndexAt(i);
+                Assert.AreEqual(expectedStrings[wordIndex], l1[wordIndex].Text);
             }
 
-            //Assert
-            for (int i = 0; i < inputIndexes.Length; i++)
-            {
-                int index = captionWordIndexes[i];
-                Assert.AreEqual(expectedStrings[i],l1[i].Text);
-            }
-
-            foreach (int index in errorIndexes)
+            //Test errors
+            foreach (int stringIndex in errorStringIndexes)
             {
                 try
                 {
-                    int x = l1.GetCaptionWordIndexAt(index);
+                    int x = l1.GetCaptionWordIndexAt(stringIndex);
                     Assert.Fail();  //Should fail if no exception is thrown
                 }
                 catch (ArgumentOutOfRangeException) { }
+            }
+
+            //Test over range limits
+            foreach (int i in overLimitStringIndexes)
+            {
+                //Anything over the size of the string should select the last word
+                int wordIndex = l1.GetCaptionWordIndexAt(i);
+                Assert.AreEqual(expectedStrings[wordIndex], l1[wordIndex].Text);
             }
         }
         #endregion

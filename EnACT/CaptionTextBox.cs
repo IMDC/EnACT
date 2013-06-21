@@ -48,8 +48,13 @@ namespace EnACT
         protected override void OnSelectionChanged(EventArgs e)
         {
             base.OnSelectionChanged(e);
-            Console.WriteLine("Index: {0}, Text: {1}",SelectionStart, SelectedText);
+            Console.WriteLine("Index: {0}, Length: {1}, Text: {2}",SelectionStart, SelectionLength, SelectedText);
+
+            int index = Caption.WordList.GetCaptionWordIndexAt(SelectionStart);
+            int selectionLength = Caption.WordList[index].Length;
+            Select(SelectionStart, selectionLength);
         }
+
         #endregion
     }
 }
