@@ -81,18 +81,29 @@ namespace EnACT
         /// </summary>
         /// <param name="stringIndex">The index of the total string to look from.</param>
         /// <returns>The index of the CaptionWord that contains the stringIndex.</returns>
-        public int GetCaptionWordIndex(int stringIndex)
+        public int GetCaptionWordIndexAt(int stringIndex)
         {
+            //Ensure string index is not less than 0
+            if (stringIndex < 0)
+                throw new ArgumentOutOfRangeException("stringIndex");
+
             int cumulativeLength = 0;
             int i;
 
-            for(i=0;i<Count;i++)
+            for (i = 0; i < Count; i++)
             {
                 if (stringIndex < cumulativeLength)
                     break;
+                else if (i == Count - 1)
+                    cumulativeLength += this[i].Length;
                 else
                     cumulativeLength += this[i].Length + SPACE_WIDTH;
             }
+
+            //Ensure that stringIndex is not out of bounds
+            if (cumulativeLength <= stringIndex)
+                throw new ArgumentOutOfRangeException("stringIndex");
+
             return i;
         }
 
