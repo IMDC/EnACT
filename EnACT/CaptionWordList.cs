@@ -85,7 +85,8 @@ namespace EnACT
         {
             //Ensure string index is not less than 0
             if (stringIndex < 0)
-                throw new ArgumentOutOfRangeException("stringIndex");
+                throw new ArgumentOutOfRangeException("stringIndex",
+                    "Argument stringIndex out of range: " + stringIndex);
 
             int cumulativeLength = 0;
             int i;
@@ -112,7 +113,8 @@ namespace EnACT
         {
             //Ensure string index is not less than 0 or greater than word Count
             if (captionWordIndex < 0 || this.Count <= captionWordIndex)
-                throw new ArgumentOutOfRangeException("captionWordIndex");
+                throw new ArgumentOutOfRangeException("captionWordIndex", 
+                    "Argument captionWordIndex out of range: " + captionWordIndex);
 
             int stringIndexPos = 0;
 
@@ -126,6 +128,16 @@ namespace EnACT
             }
 
             return stringIndexPos;
+        }
+
+        /// <summary>
+        /// Gets the string index of the last character of the CaptionWord specified by captionWordIndex.
+        /// </summary>
+        /// <param name="captionWordIndex">The index of the CaptionWord to use.</param>
+        /// <returns>The CaptionWord's last character's index in the string of words.</returns>
+        public int GetStringEndIndexAt(int captionWordIndex)
+        {
+            return GetStringStartIndexAt(captionWordIndex + this[captionWordIndex].Length - 1);
         }
 
         /// <summary>
