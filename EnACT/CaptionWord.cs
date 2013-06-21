@@ -11,6 +11,9 @@ namespace EnACT
     public class CaptionWord
     {
         #region Fields and Properties
+        public int BeginIndex { set; get; }
+        public int EndIndex { set; get; }
+
         /// <summary>
         /// Represents the type of emotion (Happy, Sad, etc) of this CaptionWord
         /// </summary>
@@ -37,15 +40,22 @@ namespace EnACT
         /// Creates an emotionless CaptionWord object with the inputted text
         /// </summary>
         /// <param name="text">The text to be emoted</param>
-        public CaptionWord(String text)
+        public CaptionWord(String text, int beginIndex)
         {
             this.Emotion = Emotion.None;
             this.Intensity = Intensity.None;
             this.Text = text;
+            this.BeginIndex = beginIndex;
+            this.EndIndex = beginIndex + Length;
         }
         #endregion
 
         #region Methods
+        public bool Contains(int charIndex)
+        {
+            return (BeginIndex <= charIndex && charIndex <= EndIndex) ? true : false;
+        }
+
         /// <summary>
         /// Returns the text that this word represents
         /// </summary>

@@ -45,10 +45,18 @@ namespace EnACT
 
             //Split line up and add each word to the wordlist.
             String[] words = line.Split(); //Separate by spaces
+
+            int cumulativePosition = 0;
+            CaptionWord cw;
+
             foreach (String word in words)
             {
                 if (word != "")
-                    Add(new CaptionWord(word));
+                {
+                    cw = new CaptionWord(word, cumulativePosition);
+                    Add(cw);
+                    cumulativePosition += cw.Length + SPACE_WIDTH;
+                }
             }
         }
 
@@ -128,16 +136,6 @@ namespace EnACT
             }
 
             return stringIndexPos;
-        }
-
-        /// <summary>
-        /// Gets the string index of the last character of the CaptionWord specified by captionWordIndex.
-        /// </summary>
-        /// <param name="captionWordIndex">The index of the CaptionWord to use.</param>
-        /// <returns>The CaptionWord's last character's index in the string of words.</returns>
-        public int GetStringEndIndexAt(int captionWordIndex)
-        {
-            return GetStringStartIndexAt(captionWordIndex + this[captionWordIndex].Length - 1);
         }
 
         /// <summary>
