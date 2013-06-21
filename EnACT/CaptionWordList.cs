@@ -12,6 +12,8 @@ namespace EnACT
     public class CaptionWordList : List<CaptionWord>
     {
         #region Fields and Properties
+        private const int SPACE_WIDTH = 1;
+
         /// <summary>
         /// Gets or sets the CaptionWordList as a String.
         /// </summary>
@@ -31,7 +33,7 @@ namespace EnACT
         }
         #endregion
 
-        #region Methods
+        #region AsString Setter and Getter
         /// <summary>
         /// Clears the list, then feeds a string into the list and turns it into CaptionWords.
         /// </summary>
@@ -69,6 +71,29 @@ namespace EnACT
                 s.Append(this[Count - 1].ToString());
 
             return s.ToString();
+        }
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Gets the index of the CaptionWord that would contain the specified character
+        /// indexed at stringIndex.
+        /// </summary>
+        /// <param name="stringIndex">The index of the total string to look from.</param>
+        /// <returns>The index of the CaptionWord that contains the stringIndex.</returns>
+        public int GetCaptionWordIndex(int stringIndex)
+        {
+            int cumulativeLength = 0;
+            int i;
+
+            for(i=0;i<Count;i++)
+            {
+                if (stringIndex < cumulativeLength)
+                    break;
+                else
+                    cumulativeLength += this[i].Length + SPACE_WIDTH;
+            }
+            return i;
         }
 
         /// <summary>
