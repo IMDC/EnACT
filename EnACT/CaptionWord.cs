@@ -51,9 +51,16 @@ namespace EnACT
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Checks to see if a charIndex is contained in this CaptionWord
+        /// </summary>
+        /// <param name="charIndex">The index of the character to check</param>
+        /// <returns>True if index is contained in the word, false if otherwise</returns>
         public bool Contains(int charIndex)
         {
-            return (BeginIndex <= charIndex && charIndex <= EndIndex) ? true : false;
+            return (BeginIndex < charIndex && charIndex < EndIndex 
+                || (Length == 1 && BeginIndex == charIndex))
+                ? true : false;
         }
 
         /// <summary>

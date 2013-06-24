@@ -50,20 +50,21 @@ namespace EnACT
             base.OnSelectionChanged(e);
             Console.WriteLine("Index: {0}, Length: {1}, Text: \"{2}\"",SelectionStart, SelectionLength, SelectedText);
 
-            int selectionPoint = SelectionStart;
-
-            int start = selectionPoint;
+            int start = SelectionStart;
             int length = 0;
 
-            foreach (CaptionWord cw in Caption.WordList)
+            //Look to see if a word is to be selected
+            for (int i = 0; i < Caption.WordList.Count; i++)
             {
-                if (cw.Contains(selectionPoint))
+                if (Caption.WordList[i].Contains(SelectionStart))
                 {
-                    start = cw.BeginIndex;
-                    length = cw.Length;
+                    start = Caption.WordList[i].BeginIndex;
+                    length = Caption.WordList[i].Length;
+                    Select(start, length);
+                    break;
                 }
             }
-            Select(start, length);
+            
         }
 
         #endregion
