@@ -83,61 +83,7 @@ namespace EnACT
         #endregion
 
         #region Methods
-        /// <summary>
-        /// Gets the index of the CaptionWord that would contain the specified character
-        /// indexed at stringIndex.
-        /// </summary>
-        /// <param name="stringIndex">The index of the total string to look from.</param>
-        /// <returns>The index of the CaptionWord that contains the stringIndex.</returns>
-        public int GetCaptionWordIndexAt(int stringIndex)
-        {
-            //Ensure string index is not less than 0
-            if (stringIndex < 0)
-                throw new ArgumentOutOfRangeException("stringIndex",
-                    "Argument stringIndex out of range: " + stringIndex);
-
-            int cumulativeLength = 0;
-            int i;
-
-            for (i = 0; i < Count; i++)
-            {
-                if (stringIndex < cumulativeLength)
-                    break;
-                else if (i == Count - 1)
-                    cumulativeLength += this[i].Length;
-                else
-                    cumulativeLength += this[i].Length + SPACE_WIDTH;
-            }
-
-            return i-1;
-        }
-
-        /// <summary>
-        /// Gets the string index of the first character of the CaptionWord specified by captionWordIndex.
-        /// </summary>
-        /// <param name="captionWordIndex">The index of the CaptionWord to use.</param>
-        /// <returns>The CaptionWord's first character's index in the string of words.</returns>
-        public int GetStringStartIndexAt(int captionWordIndex)
-        {
-            //Ensure string index is not less than 0 or greater than word Count
-            if (captionWordIndex < 0 || this.Count <= captionWordIndex)
-                throw new ArgumentOutOfRangeException("captionWordIndex", 
-                    "Argument captionWordIndex out of range: " + captionWordIndex);
-
-            int stringIndexPos = 0;
-
-            for (int i = 0; i < captionWordIndex; i++)
-            {
-                stringIndexPos += this[i].Length;
-
-                //Add a space if not the last word.
-                if (i < Count - 1)
-                    stringIndexPos += SPACE_WIDTH;
-            }
-
-            return stringIndexPos;
-        }
-
+ 
         /// <summary>
         /// Returns the CaptionWordList represented as a String.
         /// </summary>
