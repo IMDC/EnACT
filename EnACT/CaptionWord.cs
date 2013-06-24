@@ -58,8 +58,7 @@ namespace EnACT
         /// <returns>True if index is contained in the word, false if otherwise</returns>
         public bool Contains(int charIndex)
         {
-            return (BeginIndex < charIndex && charIndex < EndIndex 
-                || (Length == 1 && BeginIndex == charIndex))
+            return (BeginIndex < charIndex && charIndex < EndIndex + CaptionWordList.SPACE_WIDTH)
                 ? true : false;
         }
 

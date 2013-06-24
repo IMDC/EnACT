@@ -12,7 +12,7 @@ namespace EnACT
     public class CaptionWordList : List<CaptionWord>
     {
         #region Fields and Properties
-        private const int SPACE_WIDTH = 1;
+        public const int SPACE_WIDTH = 1;
 
         /// <summary>
         /// Gets or sets the CaptionWordList as a String.
@@ -69,14 +69,21 @@ namespace EnACT
             //Stringbuilder is faster than String when it comes to appending text.
             StringBuilder s = new StringBuilder();
             //For every element but the last
-            for (int i = 0; i < Count - 1; i++)
+            //for (int i = 0; i < Count - 1; i++)
+            //{
+            //    s.Append(this[i].ToString());
+            //    s.Append(" ");
+            //}
+            ////Append the last element without adding a space after it
+            //if (0 < Count)
+            //    s.Append(this[Count - 1].ToString());
+
+            //Add each word and a space to the string
+            foreach (CaptionWord cw in this)
             {
-                s.Append(this[i].ToString());
+                s.Append(cw.Text);
                 s.Append(" ");
             }
-            //Append the last element without adding a space after it
-            if (0 < Count)
-                s.Append(this[Count - 1].ToString());
 
             return s.ToString();
         }

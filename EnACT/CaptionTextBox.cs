@@ -59,14 +59,12 @@ namespace EnACT
                 if (Caption.WordList[i].Contains(SelectionStart))
                 {
                     start = Caption.WordList[i].BeginIndex;
-                    length = Caption.WordList[i].Length;
+                    length = Caption.WordList[i].Length + CaptionWordList.SPACE_WIDTH;
                     Select(start, length);
                     break;
                 }
             }
-            
         }
-
         #endregion
     }
 }
