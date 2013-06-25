@@ -42,8 +42,9 @@ namespace EnACT
         {
             InitializeComponent();
 
-            //Set up the Controller
+            //Set up the Controllers
             InitController();
+            InitMarkupController();
 
             //Set references from controller.
             this.SpeakerSet = Controller.SpeakerSet;
@@ -282,12 +283,13 @@ namespace EnACT
                 int i = CaptionView.SelectedRows[0].Index;
 
                 //Assign Caption
-                CaptionTextBox.Caption = CaptionList[i];
+                MarkupController.LoadCaption(CaptionList[i]);
             }
             //Otherwise clear the textbox
             else
             {
-                CaptionTextBox.Caption = null;
+                //CaptionTextBox.Caption = null;
+                MarkupController.ClearCaption();
             }
         }
     }//Class

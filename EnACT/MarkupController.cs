@@ -53,8 +53,85 @@ namespace EnACT
         public CaptionTextBox CaptionTextBox    { set; get; }
         #endregion
 
-        #region Constructor
+        #region Constructor and Init Methods
         public MarkupController() { }
+        #endregion
+
+        #region Load Caption
+        /// <summary>
+        /// Loads a Caption into the controls assosiated with this class.
+        /// </summary>
+        /// <param name="c">The caption to load.</param>
+        public void LoadCaption(Caption c)
+        {
+            //Set Caption
+            this.SelectedCaption = c;
+
+            //Load Textbox
+            CaptionTextBox.Caption = c;
+
+            //Clear Groups
+            ClearGB_EmotionType();
+            ClearGB_Intensity();
+            
+            //Set Location
+            switch (c.Location)
+            {
+                case ScreenLocation.TopLeft:        RB_TopLeft.Checked      = true; break;
+                case ScreenLocation.TopCentre:      RB_TopCenter.Checked    = true; break;
+                case ScreenLocation.TopRight:       RB_TopRight.Checked     = true; break;
+                case ScreenLocation.MiddleLeft:     RB_MiddleLeft.Checked   = true; break;
+                case ScreenLocation.MiddleCenter:   RB_MiddleCenter.Checked = true; break;
+                case ScreenLocation.MiddleRight:    RB_MiddleRight.Checked  = true; break;
+                case ScreenLocation.BottomLeft:     RB_BottomLeft.Checked   = true; break;
+                case ScreenLocation.BottomCentre:   RB_BottomCenter.Checked = true; break;
+                case ScreenLocation.BottomRight:    RB_BottomRight.Checked  = true; break;
+                default: throw new Exception("Invalid Location: " + c.Location.GetHashCode());
+            }
+        }
+        #endregion
+
+        #region Clear Methods
+        /// <summary>
+        /// Unchecks all radioboxes in GB_EmotionType
+        /// </summary>
+        private void ClearGB_EmotionType()
+        {
+            foreach (RadioButton rb in GB_EmotionType.Controls) { rb.Checked = false; }
+        }
+
+        /// <summary>
+        /// Unchecks all radioboxes in GB_Intensity
+        /// </summary>
+        private void ClearGB_Intensity()
+        {
+            foreach (RadioButton rb in GB_Intensity.Controls) { rb.Checked = false; }
+        }
+
+        /// <summary>
+        /// Unchecks all radioboxes in GB_Location
+        /// </summary>
+        private void ClearGB_Location()
+        {
+            foreach (RadioButton rb in GB_Location.Controls) { rb.Checked = false; }
+        }
+
+        /// <summary>
+        /// Clears the Selected caption and its properties from all controls
+        /// </summary>
+        public void ClearCaption()
+        {
+            //Clear SelectedCaption
+            SelectedCaption = null;
+
+            //Clear CaptionTextBox
+            CaptionTextBox.Caption = null;
+
+            //Clear GroupBox radio buttons
+            ClearGB_EmotionType();
+            ClearGB_Intensity();
+            ClearGB_Location();
+        }
         #endregion
     }
 }
