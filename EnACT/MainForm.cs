@@ -211,10 +211,11 @@ namespace EnACT
 
         private void debugMethodToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (CaptionView.UserInputEnabled)
-                CaptionView.UserInputEnabled = false;
-            else
-                CaptionView.UserInputEnabled = true;
+            //if (CaptionView.UserInputEnabled)
+            //    CaptionView.UserInputEnabled = false;
+            //else
+            //    CaptionView.UserInputEnabled = true;
+
         }
         #endregion
 

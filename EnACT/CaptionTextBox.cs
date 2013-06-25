@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace EnACT
 {
@@ -64,6 +65,27 @@ namespace EnACT
                     break;
                 }
             }
+        }
+
+        /// <summary>
+        /// Sets the background colour of the text specified by the arguments. Preserves the previous
+        /// selection, restoring it after highlighting is done.
+        /// </summary>
+        /// <param name="startPos">Start position of text to be set.</param>
+        /// <param name="length">Length of text to be set.</param>
+        /// <param name="highlightColour">The colour to change the background colour to.</param>
+        public void SetTextBackgroundColour(int startPos, int length, Color highlightColour)
+        {
+            //Save old values
+            int oldStart = SelectionStart;
+            int oldLength = SelectionLength;
+
+            //Colour given values
+            Select(startPos, length);
+            SelectionBackColor = System.Drawing.Color.Green;
+
+            //Reselect old values
+            Select(oldStart, oldLength);
         }
         #endregion
     }
