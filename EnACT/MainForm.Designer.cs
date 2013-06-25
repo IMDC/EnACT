@@ -81,7 +81,7 @@
             this.RB_HighIntensity = new System.Windows.Forms.RadioButton();
             this.Button_LeftAlign = new System.Windows.Forms.Button();
             this.Button_CenterAlign = new System.Windows.Forms.Button();
-            this.ButtonRightAlign = new System.Windows.Forms.Button();
+            this.Button_RightAlign = new System.Windows.Forms.Button();
             this.CaptionTextBox = new EnACT.CaptionTextBox();
             this.PlayheadLabel = new EnACT.PlayheadLabel();
             this.Timeline = new EnACT.Timeline();
@@ -551,12 +551,12 @@
             // 
             // ButtonRightAlign
             // 
-            this.ButtonRightAlign.Location = new System.Drawing.Point(497, 142);
-            this.ButtonRightAlign.Name = "ButtonRightAlign";
-            this.ButtonRightAlign.Size = new System.Drawing.Size(30, 30);
-            this.ButtonRightAlign.TabIndex = 30;
-            this.ButtonRightAlign.Text = "R";
-            this.ButtonRightAlign.UseVisualStyleBackColor = true;
+            this.Button_RightAlign.Location = new System.Drawing.Point(497, 142);
+            this.Button_RightAlign.Name = "ButtonRightAlign";
+            this.Button_RightAlign.Size = new System.Drawing.Size(30, 30);
+            this.Button_RightAlign.TabIndex = 30;
+            this.Button_RightAlign.Text = "R";
+            this.Button_RightAlign.UseVisualStyleBackColor = true;
             // 
             // CaptionTextBox
             // 
@@ -643,7 +643,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 682);
-            this.Controls.Add(this.ButtonRightAlign);
+            this.Controls.Add(this.Button_RightAlign);
             this.Controls.Add(this.Button_CenterAlign);
             this.Controls.Add(this.Button_LeftAlign);
             this.Controls.Add(this.GB_Intensity);
@@ -741,7 +741,7 @@
         private System.Windows.Forms.RadioButton RB_LowIntensity;
         private System.Windows.Forms.Button Button_LeftAlign;
         private System.Windows.Forms.Button Button_CenterAlign;
-        private System.Windows.Forms.Button ButtonRightAlign;
+        private System.Windows.Forms.Button Button_RightAlign;
     }
 }
 

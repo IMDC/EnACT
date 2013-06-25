@@ -11,7 +11,7 @@ namespace EnACT
     /// <summary>
     /// A class meant for marking up Captions with emotions.
     /// </summary>
-    class CaptionTextBox : RichTextBox
+    public class CaptionTextBox : RichTextBox
     {
         #region Fields and Properties
         /// <summary>

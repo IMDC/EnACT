@@ -14,6 +14,11 @@ namespace EnACT
         public EngineController Controller { set; get; }
 
         /// <summary>
+        /// The controller for marking up Captions
+        /// </summary>
+        public MarkupController MarkupController { set; get; }
+
+        /// <summary>
         /// A set of Speaker objects, each speaker being mapped to by its name
         /// </summary>
         public Dictionary<String, Speaker> SpeakerSet { set; get; }
@@ -37,13 +42,6 @@ namespace EnACT
         {
             InitializeComponent();
 
-            //Construct Controller
-            Controller = new EngineController();
-
-            //Hook Up Controller Events
-            Controller.VideoPlayed += new EventHandler(this.Controller_VideoPlayed);
-            Controller.VideoPaused += new EventHandler(this.Controller_VideoPaused);
-
             //Set up the Controller
             InitController();
 
@@ -58,6 +56,14 @@ namespace EnACT
         /// </summary>
         private void InitController()
         {
+            //Construct Controller
+            Controller = new EngineController();
+
+            //Hook Up Controller Events
+            Controller.VideoPlayed += new EventHandler(this.Controller_VideoPlayed);
+            Controller.VideoPaused += new EventHandler(this.Controller_VideoPaused);
+
+            //Set references
             Controller.CaptionView       = this.CaptionView;
             Controller.EngineView        = this.EngineView;
             Controller.PlayheadLabel     = this.PlayheadLabel;
@@ -66,6 +72,49 @@ namespace EnACT
             Controller.TrackBar_Timeline = this.TrackBar_Timeline;
 
             Controller.InitControls();
+        }
+
+        /// <summary>
+        /// Constucts and initializes the MarkupController
+        /// </summary>
+        private void InitMarkupController()
+        {
+            //Construct Controller
+            MarkupController = new MarkupController();
+
+            //Location Controls
+            MarkupController.GB_Location        = this.GB_Location;
+            MarkupController.RB_BottomRight     = this.RB_BottomRight;
+            MarkupController.RB_BottomCenter    = this.RB_BottomCenter;
+            MarkupController.RB_BottomLeft      = this.RB_BottomLeft;
+            MarkupController.RB_MiddleRight     = this.RB_MiddleRight;
+            MarkupController.RB_MiddleCenter    = this.RB_MiddleCenter;
+            MarkupController.RB_MiddleLeft      = this.RB_MiddleLeft;
+            MarkupController.RB_TopRight        = this.RB_TopRight;
+            MarkupController.RB_TopCenter       = this.RB_TopCenter;
+            MarkupController.RB_TopLeft         = this.RB_TopLeft;
+
+            //Emotion Type Controls
+            MarkupController.GB_EmotionType     = this.GB_EmotionType;
+            MarkupController.RB_Anger           = this.RB_Anger;
+            MarkupController.RB_Fear            = this.RB_Fear;
+            MarkupController.RB_Sad             = this.RB_Sad;
+            MarkupController.RB_Happy           = this.RB_Happy;
+            MarkupController.RB_None            = this.RB_None;
+
+            //Emotion Intensity Controls
+            MarkupController.GB_Intensity       = this.GB_Intensity;
+            MarkupController.RB_HighIntensity   = this.RB_HighIntensity;
+            MarkupController.RB_MediumIntensity = this.RB_MediumIntensity;
+            MarkupController.RB_LowIntensity    = this.RB_LowIntensity;
+
+            //Caption Text Alignment Controls
+            MarkupController.Button_LeftAlign   = this.Button_LeftAlign;
+            MarkupController.Button_CenterAlign = this.Button_CenterAlign;
+            MarkupController.Button_RightAlign  = this.Button_RightAlign;
+
+            //CaptionTextBox
+            MarkupController.CaptionTextBox     = this.CaptionTextBox;
         }
         #endregion
 

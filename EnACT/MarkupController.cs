@@ -11,7 +11,7 @@ namespace EnACT
     /// The Caption Markup controller for the EnACT Editor. It handles functionality related to
     /// customizing emotions.
     /// </summary>
-    class MarkupController
+    public class MarkupController
     {
         #region Properties
         public Caption SelectedCaption { set; get; }
@@ -47,7 +47,7 @@ namespace EnACT
         //Caption Text Alignment Controls
         public Button Button_LeftAlign          { set; get; }
         public Button Button_CenterAlign        { set; get; }
-        public Button ButtonRightAlign          { set; get; }
+        public Button Button_RightAlign          { set; get; }
 
         //CaptionTextBox
         public CaptionTextBox CaptionTextBox    { set; get; }
