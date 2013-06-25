@@ -69,11 +69,6 @@
             this.RB_TopRight = new System.Windows.Forms.RadioButton();
             this.RB_TopCenter = new System.Windows.Forms.RadioButton();
             this.RB_TopLeft = new System.Windows.Forms.RadioButton();
-            this.CaptionTextBox = new EnACT.CaptionTextBox();
-            this.PlayheadLabel = new EnACT.PlayheadLabel();
-            this.Timeline = new EnACT.Timeline();
-            this.EngineView = new EnACT.EngineView();
-            this.CaptionView = new EnACT.CaptionView();
             this.GB_EmotionType = new System.Windows.Forms.GroupBox();
             this.RB_Anger = new System.Windows.Forms.RadioButton();
             this.RB_Fear = new System.Windows.Forms.RadioButton();
@@ -84,13 +79,21 @@
             this.RB_LowIntensity = new System.Windows.Forms.RadioButton();
             this.RB_MediumIntensity = new System.Windows.Forms.RadioButton();
             this.RB_HighIntensity = new System.Windows.Forms.RadioButton();
+            this.Button_LeftAlign = new System.Windows.Forms.Button();
+            this.Button_CenterAlign = new System.Windows.Forms.Button();
+            this.ButtonRightAlign = new System.Windows.Forms.Button();
+            this.CaptionTextBox = new EnACT.CaptionTextBox();
+            this.PlayheadLabel = new EnACT.PlayheadLabel();
+            this.Timeline = new EnACT.Timeline();
+            this.EngineView = new EnACT.EngineView();
+            this.CaptionView = new EnACT.CaptionView();
             this.MenuStrip_MainForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_Timeline)).BeginInit();
             this.GB_Location.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.EngineView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).BeginInit();
             this.GB_EmotionType.SuspendLayout();
             this.GB_Intensity.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.EngineView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).BeginInit();
             this.SuspendLayout();
             // 
             // MenuStrip_MainForm
@@ -314,12 +317,12 @@
             this.GB_Location.Controls.Add(this.RB_MiddleRight);
             this.GB_Location.Controls.Add(this.RB_MiddleCenter);
             this.GB_Location.Controls.Add(this.RB_MiddleLeft);
-            this.GB_Location.Controls.Add(this.RB_TopRight);
             this.GB_Location.Controls.Add(this.RB_TopCenter);
             this.GB_Location.Controls.Add(this.RB_TopLeft);
-            this.GB_Location.Location = new System.Drawing.Point(341, 48);
+            this.GB_Location.Controls.Add(this.RB_TopRight);
+            this.GB_Location.Location = new System.Drawing.Point(507, 46);
             this.GB_Location.Name = "GB_Location";
-            this.GB_Location.Size = new System.Drawing.Size(90, 96);
+            this.GB_Location.Size = new System.Drawing.Size(89, 90);
             this.GB_Location.TabIndex = 25;
             this.GB_Location.TabStop = false;
             this.GB_Location.Text = "Location";
@@ -327,7 +330,7 @@
             // RB_BottomRight
             // 
             this.RB_BottomRight.AutoSize = true;
-            this.RB_BottomRight.Location = new System.Drawing.Point(70, 77);
+            this.RB_BottomRight.Location = new System.Drawing.Point(70, 63);
             this.RB_BottomRight.Name = "RB_BottomRight";
             this.RB_BottomRight.Size = new System.Drawing.Size(14, 13);
             this.RB_BottomRight.TabIndex = 8;
@@ -337,7 +340,7 @@
             // RB_BottomCenter
             // 
             this.RB_BottomCenter.AutoSize = true;
-            this.RB_BottomCenter.Location = new System.Drawing.Point(38, 77);
+            this.RB_BottomCenter.Location = new System.Drawing.Point(38, 63);
             this.RB_BottomCenter.Name = "RB_BottomCenter";
             this.RB_BottomCenter.Size = new System.Drawing.Size(14, 13);
             this.RB_BottomCenter.TabIndex = 7;
@@ -347,7 +350,7 @@
             // RB_BottomLeft
             // 
             this.RB_BottomLeft.AutoSize = true;
-            this.RB_BottomLeft.Location = new System.Drawing.Point(6, 77);
+            this.RB_BottomLeft.Location = new System.Drawing.Point(6, 63);
             this.RB_BottomLeft.Name = "RB_BottomLeft";
             this.RB_BottomLeft.Size = new System.Drawing.Size(14, 13);
             this.RB_BottomLeft.TabIndex = 6;
@@ -357,7 +360,7 @@
             // RB_MiddleRight
             // 
             this.RB_MiddleRight.AutoSize = true;
-            this.RB_MiddleRight.Location = new System.Drawing.Point(70, 47);
+            this.RB_MiddleRight.Location = new System.Drawing.Point(70, 42);
             this.RB_MiddleRight.Name = "RB_MiddleRight";
             this.RB_MiddleRight.Size = new System.Drawing.Size(14, 13);
             this.RB_MiddleRight.TabIndex = 5;
@@ -367,7 +370,7 @@
             // RB_MiddleCenter
             // 
             this.RB_MiddleCenter.AutoSize = true;
-            this.RB_MiddleCenter.Location = new System.Drawing.Point(38, 47);
+            this.RB_MiddleCenter.Location = new System.Drawing.Point(38, 40);
             this.RB_MiddleCenter.Name = "RB_MiddleCenter";
             this.RB_MiddleCenter.Size = new System.Drawing.Size(14, 13);
             this.RB_MiddleCenter.TabIndex = 4;
@@ -377,7 +380,7 @@
             // RB_MiddleLeft
             // 
             this.RB_MiddleLeft.AutoSize = true;
-            this.RB_MiddleLeft.Location = new System.Drawing.Point(6, 47);
+            this.RB_MiddleLeft.Location = new System.Drawing.Point(6, 40);
             this.RB_MiddleLeft.Name = "RB_MiddleLeft";
             this.RB_MiddleLeft.Size = new System.Drawing.Size(14, 13);
             this.RB_MiddleLeft.TabIndex = 3;
@@ -387,7 +390,7 @@
             // RB_TopRight
             // 
             this.RB_TopRight.AutoSize = true;
-            this.RB_TopRight.Location = new System.Drawing.Point(70, 19);
+            this.RB_TopRight.Location = new System.Drawing.Point(70, 17);
             this.RB_TopRight.Name = "RB_TopRight";
             this.RB_TopRight.Size = new System.Drawing.Size(14, 13);
             this.RB_TopRight.TabIndex = 2;
@@ -397,7 +400,7 @@
             // RB_TopCenter
             // 
             this.RB_TopCenter.AutoSize = true;
-            this.RB_TopCenter.Location = new System.Drawing.Point(38, 19);
+            this.RB_TopCenter.Location = new System.Drawing.Point(38, 17);
             this.RB_TopCenter.Name = "RB_TopCenter";
             this.RB_TopCenter.Size = new System.Drawing.Size(14, 13);
             this.RB_TopCenter.TabIndex = 1;
@@ -407,19 +410,160 @@
             // RB_TopLeft
             // 
             this.RB_TopLeft.AutoSize = true;
-            this.RB_TopLeft.Location = new System.Drawing.Point(6, 19);
+            this.RB_TopLeft.Location = new System.Drawing.Point(6, 17);
             this.RB_TopLeft.Name = "RB_TopLeft";
             this.RB_TopLeft.Size = new System.Drawing.Size(14, 13);
             this.RB_TopLeft.TabIndex = 0;
             this.RB_TopLeft.TabStop = true;
             this.RB_TopLeft.UseVisualStyleBackColor = true;
             // 
+            // GB_EmotionType
+            // 
+            this.GB_EmotionType.Controls.Add(this.RB_Anger);
+            this.GB_EmotionType.Controls.Add(this.RB_Fear);
+            this.GB_EmotionType.Controls.Add(this.RB_Sad);
+            this.GB_EmotionType.Controls.Add(this.RB_Happy);
+            this.GB_EmotionType.Controls.Add(this.RB_None);
+            this.GB_EmotionType.Location = new System.Drawing.Point(341, 46);
+            this.GB_EmotionType.Name = "GB_EmotionType";
+            this.GB_EmotionType.Size = new System.Drawing.Size(78, 139);
+            this.GB_EmotionType.TabIndex = 26;
+            this.GB_EmotionType.TabStop = false;
+            this.GB_EmotionType.Text = "Emotion";
+            // 
+            // RB_Anger
+            // 
+            this.RB_Anger.AutoSize = true;
+            this.RB_Anger.Location = new System.Drawing.Point(9, 109);
+            this.RB_Anger.Name = "RB_Anger";
+            this.RB_Anger.Size = new System.Drawing.Size(53, 17);
+            this.RB_Anger.TabIndex = 4;
+            this.RB_Anger.TabStop = true;
+            this.RB_Anger.Text = "Anger";
+            this.RB_Anger.UseVisualStyleBackColor = true;
+            // 
+            // RB_Fear
+            // 
+            this.RB_Fear.AutoSize = true;
+            this.RB_Fear.Location = new System.Drawing.Point(9, 86);
+            this.RB_Fear.Name = "RB_Fear";
+            this.RB_Fear.Size = new System.Drawing.Size(46, 17);
+            this.RB_Fear.TabIndex = 3;
+            this.RB_Fear.TabStop = true;
+            this.RB_Fear.Text = "Fear";
+            this.RB_Fear.UseVisualStyleBackColor = true;
+            // 
+            // RB_Sad
+            // 
+            this.RB_Sad.AutoSize = true;
+            this.RB_Sad.Location = new System.Drawing.Point(9, 63);
+            this.RB_Sad.Name = "RB_Sad";
+            this.RB_Sad.Size = new System.Drawing.Size(44, 17);
+            this.RB_Sad.TabIndex = 2;
+            this.RB_Sad.TabStop = true;
+            this.RB_Sad.Text = "Sad";
+            this.RB_Sad.UseVisualStyleBackColor = true;
+            // 
+            // RB_Happy
+            // 
+            this.RB_Happy.AutoSize = true;
+            this.RB_Happy.Location = new System.Drawing.Point(9, 40);
+            this.RB_Happy.Name = "RB_Happy";
+            this.RB_Happy.Size = new System.Drawing.Size(56, 17);
+            this.RB_Happy.TabIndex = 1;
+            this.RB_Happy.TabStop = true;
+            this.RB_Happy.Text = "Happy";
+            this.RB_Happy.UseVisualStyleBackColor = true;
+            // 
+            // RB_None
+            // 
+            this.RB_None.AutoSize = true;
+            this.RB_None.Location = new System.Drawing.Point(9, 17);
+            this.RB_None.Name = "RB_None";
+            this.RB_None.Size = new System.Drawing.Size(51, 17);
+            this.RB_None.TabIndex = 0;
+            this.RB_None.TabStop = true;
+            this.RB_None.Text = "None";
+            this.RB_None.UseVisualStyleBackColor = true;
+            // 
+            // GB_Intensity
+            // 
+            this.GB_Intensity.Controls.Add(this.RB_HighIntensity);
+            this.GB_Intensity.Controls.Add(this.RB_MediumIntensity);
+            this.GB_Intensity.Controls.Add(this.RB_LowIntensity);
+            this.GB_Intensity.Location = new System.Drawing.Point(425, 46);
+            this.GB_Intensity.Name = "GB_Intensity";
+            this.GB_Intensity.Size = new System.Drawing.Size(76, 90);
+            this.GB_Intensity.TabIndex = 27;
+            this.GB_Intensity.TabStop = false;
+            this.GB_Intensity.Text = "Intensity";
+            // 
+            // RB_LowIntensity
+            // 
+            this.RB_LowIntensity.AutoSize = true;
+            this.RB_LowIntensity.Location = new System.Drawing.Point(6, 15);
+            this.RB_LowIntensity.Name = "RB_LowIntensity";
+            this.RB_LowIntensity.Size = new System.Drawing.Size(45, 17);
+            this.RB_LowIntensity.TabIndex = 0;
+            this.RB_LowIntensity.TabStop = true;
+            this.RB_LowIntensity.Text = "Low";
+            this.RB_LowIntensity.UseVisualStyleBackColor = true;
+            // 
+            // RB_MediumIntensity
+            // 
+            this.RB_MediumIntensity.AutoSize = true;
+            this.RB_MediumIntensity.Location = new System.Drawing.Point(6, 38);
+            this.RB_MediumIntensity.Name = "RB_MediumIntensity";
+            this.RB_MediumIntensity.Size = new System.Drawing.Size(62, 17);
+            this.RB_MediumIntensity.TabIndex = 1;
+            this.RB_MediumIntensity.TabStop = true;
+            this.RB_MediumIntensity.Text = "Medium";
+            this.RB_MediumIntensity.UseVisualStyleBackColor = true;
+            // 
+            // RB_HighIntensity
+            // 
+            this.RB_HighIntensity.AutoSize = true;
+            this.RB_HighIntensity.Location = new System.Drawing.Point(6, 61);
+            this.RB_HighIntensity.Name = "RB_HighIntensity";
+            this.RB_HighIntensity.Size = new System.Drawing.Size(47, 17);
+            this.RB_HighIntensity.TabIndex = 2;
+            this.RB_HighIntensity.TabStop = true;
+            this.RB_HighIntensity.Text = "High";
+            this.RB_HighIntensity.UseVisualStyleBackColor = true;
+            // 
+            // Button_LeftAlign
+            // 
+            this.Button_LeftAlign.Location = new System.Drawing.Point(425, 142);
+            this.Button_LeftAlign.Name = "Button_LeftAlign";
+            this.Button_LeftAlign.Size = new System.Drawing.Size(30, 30);
+            this.Button_LeftAlign.TabIndex = 28;
+            this.Button_LeftAlign.Text = "L";
+            this.Button_LeftAlign.UseVisualStyleBackColor = true;
+            // 
+            // Button_CenterAlign
+            // 
+            this.Button_CenterAlign.Location = new System.Drawing.Point(461, 142);
+            this.Button_CenterAlign.Name = "Button_CenterAlign";
+            this.Button_CenterAlign.Size = new System.Drawing.Size(30, 30);
+            this.Button_CenterAlign.TabIndex = 29;
+            this.Button_CenterAlign.Text = "C";
+            this.Button_CenterAlign.UseVisualStyleBackColor = true;
+            // 
+            // ButtonRightAlign
+            // 
+            this.ButtonRightAlign.Location = new System.Drawing.Point(497, 142);
+            this.ButtonRightAlign.Name = "ButtonRightAlign";
+            this.ButtonRightAlign.Size = new System.Drawing.Size(30, 30);
+            this.ButtonRightAlign.TabIndex = 30;
+            this.ButtonRightAlign.Text = "R";
+            this.ButtonRightAlign.UseVisualStyleBackColor = true;
+            // 
             // CaptionTextBox
             // 
             this.CaptionTextBox.Caption = null;
-            this.CaptionTextBox.Location = new System.Drawing.Point(696, 48);
+            this.CaptionTextBox.Location = new System.Drawing.Point(602, 50);
             this.CaptionTextBox.Name = "CaptionTextBox";
-            this.CaptionTextBox.Size = new System.Drawing.Size(236, 96);
+            this.CaptionTextBox.Size = new System.Drawing.Size(274, 86);
             this.CaptionTextBox.TabIndex = 24;
             this.CaptionTextBox.Text = "";
             // 
@@ -494,125 +638,14 @@
             this.CaptionView.UserInputEnabled = true;
             this.CaptionView.SelectionChanged += new System.EventHandler(this.CaptionView_SelectionChanged);
             // 
-            // GB_EmotionType
-            // 
-            this.GB_EmotionType.Controls.Add(this.RB_Anger);
-            this.GB_EmotionType.Controls.Add(this.RB_Fear);
-            this.GB_EmotionType.Controls.Add(this.RB_Sad);
-            this.GB_EmotionType.Controls.Add(this.RB_Happy);
-            this.GB_EmotionType.Controls.Add(this.RB_None);
-            this.GB_EmotionType.Location = new System.Drawing.Point(437, 48);
-            this.GB_EmotionType.Name = "GB_EmotionType";
-            this.GB_EmotionType.Size = new System.Drawing.Size(78, 139);
-            this.GB_EmotionType.TabIndex = 26;
-            this.GB_EmotionType.TabStop = false;
-            this.GB_EmotionType.Text = "Emotion";
-            // 
-            // RB_Anger
-            // 
-            this.RB_Anger.AutoSize = true;
-            this.RB_Anger.Location = new System.Drawing.Point(9, 109);
-            this.RB_Anger.Name = "RB_Anger";
-            this.RB_Anger.Size = new System.Drawing.Size(53, 17);
-            this.RB_Anger.TabIndex = 4;
-            this.RB_Anger.TabStop = true;
-            this.RB_Anger.Text = "Anger";
-            this.RB_Anger.UseVisualStyleBackColor = true;
-            // 
-            // RB_Fear
-            // 
-            this.RB_Fear.AutoSize = true;
-            this.RB_Fear.Location = new System.Drawing.Point(9, 86);
-            this.RB_Fear.Name = "RB_Fear";
-            this.RB_Fear.Size = new System.Drawing.Size(46, 17);
-            this.RB_Fear.TabIndex = 3;
-            this.RB_Fear.TabStop = true;
-            this.RB_Fear.Text = "Fear";
-            this.RB_Fear.UseVisualStyleBackColor = true;
-            // 
-            // RB_Sad
-            // 
-            this.RB_Sad.AutoSize = true;
-            this.RB_Sad.Location = new System.Drawing.Point(9, 63);
-            this.RB_Sad.Name = "RB_Sad";
-            this.RB_Sad.Size = new System.Drawing.Size(44, 17);
-            this.RB_Sad.TabIndex = 2;
-            this.RB_Sad.TabStop = true;
-            this.RB_Sad.Text = "Sad";
-            this.RB_Sad.UseVisualStyleBackColor = true;
-            // 
-            // RB_Happy
-            // 
-            this.RB_Happy.AutoSize = true;
-            this.RB_Happy.Location = new System.Drawing.Point(9, 40);
-            this.RB_Happy.Name = "RB_Happy";
-            this.RB_Happy.Size = new System.Drawing.Size(56, 17);
-            this.RB_Happy.TabIndex = 1;
-            this.RB_Happy.TabStop = true;
-            this.RB_Happy.Text = "Happy";
-            this.RB_Happy.UseVisualStyleBackColor = true;
-            // 
-            // RB_None
-            // 
-            this.RB_None.AutoSize = true;
-            this.RB_None.Location = new System.Drawing.Point(9, 17);
-            this.RB_None.Name = "RB_None";
-            this.RB_None.Size = new System.Drawing.Size(51, 17);
-            this.RB_None.TabIndex = 0;
-            this.RB_None.TabStop = true;
-            this.RB_None.Text = "None";
-            this.RB_None.UseVisualStyleBackColor = true;
-            // 
-            // GB_Intensity
-            // 
-            this.GB_Intensity.Controls.Add(this.RB_HighIntensity);
-            this.GB_Intensity.Controls.Add(this.RB_MediumIntensity);
-            this.GB_Intensity.Controls.Add(this.RB_LowIntensity);
-            this.GB_Intensity.Location = new System.Drawing.Point(521, 48);
-            this.GB_Intensity.Name = "GB_Intensity";
-            this.GB_Intensity.Size = new System.Drawing.Size(76, 90);
-            this.GB_Intensity.TabIndex = 27;
-            this.GB_Intensity.TabStop = false;
-            this.GB_Intensity.Text = "Intensity";
-            // 
-            // RB_LowIntensity
-            // 
-            this.RB_LowIntensity.AutoSize = true;
-            this.RB_LowIntensity.Location = new System.Drawing.Point(6, 15);
-            this.RB_LowIntensity.Name = "RB_LowIntensity";
-            this.RB_LowIntensity.Size = new System.Drawing.Size(45, 17);
-            this.RB_LowIntensity.TabIndex = 0;
-            this.RB_LowIntensity.TabStop = true;
-            this.RB_LowIntensity.Text = "Low";
-            this.RB_LowIntensity.UseVisualStyleBackColor = true;
-            // 
-            // RB_MediumIntensity
-            // 
-            this.RB_MediumIntensity.AutoSize = true;
-            this.RB_MediumIntensity.Location = new System.Drawing.Point(6, 38);
-            this.RB_MediumIntensity.Name = "RB_MediumIntensity";
-            this.RB_MediumIntensity.Size = new System.Drawing.Size(62, 17);
-            this.RB_MediumIntensity.TabIndex = 1;
-            this.RB_MediumIntensity.TabStop = true;
-            this.RB_MediumIntensity.Text = "Medium";
-            this.RB_MediumIntensity.UseVisualStyleBackColor = true;
-            // 
-            // RB_HighIntensity
-            // 
-            this.RB_HighIntensity.AutoSize = true;
-            this.RB_HighIntensity.Location = new System.Drawing.Point(6, 61);
-            this.RB_HighIntensity.Name = "RB_HighIntensity";
-            this.RB_HighIntensity.Size = new System.Drawing.Size(47, 17);
-            this.RB_HighIntensity.TabIndex = 2;
-            this.RB_HighIntensity.TabStop = true;
-            this.RB_HighIntensity.Text = "High";
-            this.RB_HighIntensity.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 682);
+            this.Controls.Add(this.ButtonRightAlign);
+            this.Controls.Add(this.Button_CenterAlign);
+            this.Controls.Add(this.Button_LeftAlign);
             this.Controls.Add(this.GB_Intensity);
             this.Controls.Add(this.GB_EmotionType);
             this.Controls.Add(this.GB_Location);
@@ -643,12 +676,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_Timeline)).EndInit();
             this.GB_Location.ResumeLayout(false);
             this.GB_Location.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.EngineView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).EndInit();
             this.GB_EmotionType.ResumeLayout(false);
             this.GB_EmotionType.PerformLayout();
             this.GB_Intensity.ResumeLayout(false);
             this.GB_Intensity.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.EngineView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -706,6 +739,9 @@
         private System.Windows.Forms.RadioButton RB_HighIntensity;
         private System.Windows.Forms.RadioButton RB_MediumIntensity;
         private System.Windows.Forms.RadioButton RB_LowIntensity;
+        private System.Windows.Forms.Button Button_LeftAlign;
+        private System.Windows.Forms.Button Button_CenterAlign;
+        private System.Windows.Forms.Button ButtonRightAlign;
     }
 }
 
