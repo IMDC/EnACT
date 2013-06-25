@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            EnACT.Timestamp timestamp1 = new EnACT.Timestamp();
-            EnACT.Timestamp timestamp2 = new EnACT.Timestamp();
+            EnACT.Timestamp timestamp23 = new EnACT.Timestamp();
+            EnACT.Timestamp timestamp24 = new EnACT.Timestamp();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MenuStrip_MainForm = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,9 +66,9 @@
             this.RB_MiddleRight = new System.Windows.Forms.RadioButton();
             this.RB_MiddleCenter = new System.Windows.Forms.RadioButton();
             this.RB_MiddleLeft = new System.Windows.Forms.RadioButton();
-            this.RB_TopRight = new System.Windows.Forms.RadioButton();
             this.RB_TopCenter = new System.Windows.Forms.RadioButton();
             this.RB_TopLeft = new System.Windows.Forms.RadioButton();
+            this.RB_TopRight = new System.Windows.Forms.RadioButton();
             this.GB_EmotionType = new System.Windows.Forms.GroupBox();
             this.RB_Anger = new System.Windows.Forms.RadioButton();
             this.RB_Fear = new System.Windows.Forms.RadioButton();
@@ -76,9 +76,9 @@
             this.RB_Happy = new System.Windows.Forms.RadioButton();
             this.RB_None = new System.Windows.Forms.RadioButton();
             this.GB_Intensity = new System.Windows.Forms.GroupBox();
-            this.RB_LowIntensity = new System.Windows.Forms.RadioButton();
-            this.RB_MediumIntensity = new System.Windows.Forms.RadioButton();
             this.RB_HighIntensity = new System.Windows.Forms.RadioButton();
+            this.RB_MediumIntensity = new System.Windows.Forms.RadioButton();
+            this.RB_LowIntensity = new System.Windows.Forms.RadioButton();
             this.Button_LeftAlign = new System.Windows.Forms.Button();
             this.Button_CenterAlign = new System.Windows.Forms.Button();
             this.Button_RightAlign = new System.Windows.Forms.Button();
@@ -336,6 +336,7 @@
             this.RB_BottomRight.TabIndex = 8;
             this.RB_BottomRight.TabStop = true;
             this.RB_BottomRight.UseVisualStyleBackColor = true;
+            this.RB_BottomRight.Click += new System.EventHandler(this.RB_BottomRight_Click);
             // 
             // RB_BottomCenter
             // 
@@ -346,6 +347,7 @@
             this.RB_BottomCenter.TabIndex = 7;
             this.RB_BottomCenter.TabStop = true;
             this.RB_BottomCenter.UseVisualStyleBackColor = true;
+            this.RB_BottomCenter.Click += new System.EventHandler(this.RB_BottomCenter_Click);
             // 
             // RB_BottomLeft
             // 
@@ -356,6 +358,7 @@
             this.RB_BottomLeft.TabIndex = 6;
             this.RB_BottomLeft.TabStop = true;
             this.RB_BottomLeft.UseVisualStyleBackColor = true;
+            this.RB_BottomLeft.Click += new System.EventHandler(this.RB_BottomLeft_Click);
             // 
             // RB_MiddleRight
             // 
@@ -366,6 +369,7 @@
             this.RB_MiddleRight.TabIndex = 5;
             this.RB_MiddleRight.TabStop = true;
             this.RB_MiddleRight.UseVisualStyleBackColor = true;
+            this.RB_MiddleRight.Click += new System.EventHandler(this.RB_MiddleRight_Click);
             // 
             // RB_MiddleCenter
             // 
@@ -376,6 +380,7 @@
             this.RB_MiddleCenter.TabIndex = 4;
             this.RB_MiddleCenter.TabStop = true;
             this.RB_MiddleCenter.UseVisualStyleBackColor = true;
+            this.RB_MiddleCenter.Click += new System.EventHandler(this.RB_MiddleCenter_Click);
             // 
             // RB_MiddleLeft
             // 
@@ -386,16 +391,7 @@
             this.RB_MiddleLeft.TabIndex = 3;
             this.RB_MiddleLeft.TabStop = true;
             this.RB_MiddleLeft.UseVisualStyleBackColor = true;
-            // 
-            // RB_TopRight
-            // 
-            this.RB_TopRight.AutoSize = true;
-            this.RB_TopRight.Location = new System.Drawing.Point(70, 17);
-            this.RB_TopRight.Name = "RB_TopRight";
-            this.RB_TopRight.Size = new System.Drawing.Size(14, 13);
-            this.RB_TopRight.TabIndex = 2;
-            this.RB_TopRight.TabStop = true;
-            this.RB_TopRight.UseVisualStyleBackColor = true;
+            this.RB_MiddleLeft.Click += new System.EventHandler(this.RB_MiddleLeft_Click);
             // 
             // RB_TopCenter
             // 
@@ -406,6 +402,7 @@
             this.RB_TopCenter.TabIndex = 1;
             this.RB_TopCenter.TabStop = true;
             this.RB_TopCenter.UseVisualStyleBackColor = true;
+            this.RB_TopCenter.Click += new System.EventHandler(this.RB_TopCenter_Click);
             // 
             // RB_TopLeft
             // 
@@ -416,6 +413,18 @@
             this.RB_TopLeft.TabIndex = 0;
             this.RB_TopLeft.TabStop = true;
             this.RB_TopLeft.UseVisualStyleBackColor = true;
+            this.RB_TopLeft.Click += new System.EventHandler(this.RB_TopLeft_Click);
+            // 
+            // RB_TopRight
+            // 
+            this.RB_TopRight.AutoSize = true;
+            this.RB_TopRight.Location = new System.Drawing.Point(70, 17);
+            this.RB_TopRight.Name = "RB_TopRight";
+            this.RB_TopRight.Size = new System.Drawing.Size(14, 13);
+            this.RB_TopRight.TabIndex = 2;
+            this.RB_TopRight.TabStop = true;
+            this.RB_TopRight.UseVisualStyleBackColor = true;
+            this.RB_TopRight.Click += new System.EventHandler(this.RB_TopRight_Click);
             // 
             // GB_EmotionType
             // 
@@ -441,6 +450,7 @@
             this.RB_Anger.TabStop = true;
             this.RB_Anger.Text = "Anger";
             this.RB_Anger.UseVisualStyleBackColor = true;
+            this.RB_Anger.Click += new System.EventHandler(this.RB_Anger_Click);
             // 
             // RB_Fear
             // 
@@ -452,6 +462,7 @@
             this.RB_Fear.TabStop = true;
             this.RB_Fear.Text = "Fear";
             this.RB_Fear.UseVisualStyleBackColor = true;
+            this.RB_Fear.Click += new System.EventHandler(this.RB_Fear_Click);
             // 
             // RB_Sad
             // 
@@ -463,6 +474,7 @@
             this.RB_Sad.TabStop = true;
             this.RB_Sad.Text = "Sad";
             this.RB_Sad.UseVisualStyleBackColor = true;
+            this.RB_Sad.Click += new System.EventHandler(this.RB_Sad_Click);
             // 
             // RB_Happy
             // 
@@ -474,6 +486,7 @@
             this.RB_Happy.TabStop = true;
             this.RB_Happy.Text = "Happy";
             this.RB_Happy.UseVisualStyleBackColor = true;
+            this.RB_Happy.Click += new System.EventHandler(this.RB_Happy_Click);
             // 
             // RB_None
             // 
@@ -485,6 +498,7 @@
             this.RB_None.TabStop = true;
             this.RB_None.Text = "None";
             this.RB_None.UseVisualStyleBackColor = true;
+            this.RB_None.Click += new System.EventHandler(this.RB_None_Click);
             // 
             // GB_Intensity
             // 
@@ -498,16 +512,17 @@
             this.GB_Intensity.TabStop = false;
             this.GB_Intensity.Text = "Intensity";
             // 
-            // RB_LowIntensity
+            // RB_HighIntensity
             // 
-            this.RB_LowIntensity.AutoSize = true;
-            this.RB_LowIntensity.Location = new System.Drawing.Point(6, 15);
-            this.RB_LowIntensity.Name = "RB_LowIntensity";
-            this.RB_LowIntensity.Size = new System.Drawing.Size(45, 17);
-            this.RB_LowIntensity.TabIndex = 0;
-            this.RB_LowIntensity.TabStop = true;
-            this.RB_LowIntensity.Text = "Low";
-            this.RB_LowIntensity.UseVisualStyleBackColor = true;
+            this.RB_HighIntensity.AutoSize = true;
+            this.RB_HighIntensity.Location = new System.Drawing.Point(6, 61);
+            this.RB_HighIntensity.Name = "RB_HighIntensity";
+            this.RB_HighIntensity.Size = new System.Drawing.Size(47, 17);
+            this.RB_HighIntensity.TabIndex = 2;
+            this.RB_HighIntensity.TabStop = true;
+            this.RB_HighIntensity.Text = "High";
+            this.RB_HighIntensity.UseVisualStyleBackColor = true;
+            this.RB_HighIntensity.Click += new System.EventHandler(this.RB_HighIntensity_Click);
             // 
             // RB_MediumIntensity
             // 
@@ -519,17 +534,19 @@
             this.RB_MediumIntensity.TabStop = true;
             this.RB_MediumIntensity.Text = "Medium";
             this.RB_MediumIntensity.UseVisualStyleBackColor = true;
+            this.RB_MediumIntensity.Click += new System.EventHandler(this.RB_MediumIntensity_Click);
             // 
-            // RB_HighIntensity
+            // RB_LowIntensity
             // 
-            this.RB_HighIntensity.AutoSize = true;
-            this.RB_HighIntensity.Location = new System.Drawing.Point(6, 61);
-            this.RB_HighIntensity.Name = "RB_HighIntensity";
-            this.RB_HighIntensity.Size = new System.Drawing.Size(47, 17);
-            this.RB_HighIntensity.TabIndex = 2;
-            this.RB_HighIntensity.TabStop = true;
-            this.RB_HighIntensity.Text = "High";
-            this.RB_HighIntensity.UseVisualStyleBackColor = true;
+            this.RB_LowIntensity.AutoSize = true;
+            this.RB_LowIntensity.Location = new System.Drawing.Point(6, 15);
+            this.RB_LowIntensity.Name = "RB_LowIntensity";
+            this.RB_LowIntensity.Size = new System.Drawing.Size(45, 17);
+            this.RB_LowIntensity.TabIndex = 0;
+            this.RB_LowIntensity.TabStop = true;
+            this.RB_LowIntensity.Text = "Low";
+            this.RB_LowIntensity.UseVisualStyleBackColor = true;
+            this.RB_LowIntensity.Click += new System.EventHandler(this.RB_LowIntensity_Click);
             // 
             // Button_LeftAlign
             // 
@@ -549,10 +566,10 @@
             this.Button_CenterAlign.Text = "C";
             this.Button_CenterAlign.UseVisualStyleBackColor = true;
             // 
-            // ButtonRightAlign
+            // Button_RightAlign
             // 
             this.Button_RightAlign.Location = new System.Drawing.Point(497, 142);
-            this.Button_RightAlign.Name = "ButtonRightAlign";
+            this.Button_RightAlign.Name = "Button_RightAlign";
             this.Button_RightAlign.Size = new System.Drawing.Size(30, 30);
             this.Button_RightAlign.TabIndex = 30;
             this.Button_RightAlign.Text = "R";
@@ -572,15 +589,15 @@
             this.PlayheadLabel.AutoSize = true;
             this.PlayheadLabel.Location = new System.Drawing.Point(338, 32);
             this.PlayheadLabel.Name = "PlayheadLabel";
-            timestamp1.AsDouble = 0D;
-            timestamp1.AsString = "00:00:00.0";
-            this.PlayheadLabel.PlayheadTime = timestamp1;
+            timestamp23.AsDouble = 0D;
+            timestamp23.AsString = "00:00:00.0";
+            this.PlayheadLabel.PlayheadTime = timestamp23;
             this.PlayheadLabel.Size = new System.Drawing.Size(120, 13);
             this.PlayheadLabel.TabIndex = 23;
             this.PlayheadLabel.Text = "00:00:00.0 / 00:00:00.0";
-            timestamp2.AsDouble = 0D;
-            timestamp2.AsString = "00:00:00.0";
-            this.PlayheadLabel.VideoLength = timestamp2;
+            timestamp24.AsDouble = 0D;
+            timestamp24.AsString = "00:00:00.0";
+            this.PlayheadLabel.VideoLength = timestamp24;
             // 
             // Timeline
             // 
@@ -618,19 +635,19 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CaptionView.CaptionSource = null;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.CaptionView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.CaptionView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
             this.CaptionView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CaptionView.Location = new System.Drawing.Point(12, 478);
             this.CaptionView.Name = "CaptionView";
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle24;
             this.CaptionView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.CaptionView.Size = new System.Drawing.Size(864, 192);
             this.CaptionView.SpeakerSet = null;

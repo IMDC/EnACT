@@ -268,6 +268,7 @@ namespace EnACT
         }
         #endregion
 
+        #region CaptionView SelectionChanged
         /// <summary>
         /// Event Handler for CaptionView.SelectionChanged. Will set the caption of CaptionTextBox
         /// when appropriate.
@@ -292,5 +293,143 @@ namespace EnACT
                 MarkupController.ClearCaption();
             }
         }
+        #endregion
+
+        #region Emotion RadioButton Click Handlers
+        /// <summary>
+        /// Changes the Caption's iemotion to the emotion related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void RB_None_Click(object sender, EventArgs e) { MarkupController.ChangeEmotion(Emotion.None); }
+
+        /// <summary>
+        /// Changes the Caption's iemotion to the emotion related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void RB_Happy_Click(object sender, EventArgs e) { MarkupController.ChangeEmotion(Emotion.Happy); }
+
+        /// <summary>
+        /// Changes the Caption's iemotion to the emotion related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void RB_Sad_Click(object sender, EventArgs e) { MarkupController.ChangeEmotion(Emotion.Sad); }
+
+        /// <summary>
+        /// Changes the Caption's iemotion to the emotion related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void RB_Fear_Click(object sender, EventArgs e) { MarkupController.ChangeEmotion(Emotion.Fear); }
+
+        /// <summary>
+        /// Changes the Caption's iemotion to the emotion related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void RB_Anger_Click(object sender, EventArgs e) { MarkupController.ChangeEmotion(Emotion.Anger); }
+        #endregion
+
+        #region Intensity RadioButton Click Handlers
+        /// <summary>
+        /// Changes the Caption's intensity to the intensity related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void RB_LowIntensity_Click(object sender, EventArgs e)
+        { MarkupController.ChangeIntensity(Intensity.Low); }
+
+        /// <summary>
+        /// Changes the Caption's intensity to the intensity related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void RB_MediumIntensity_Click(object sender, EventArgs e)
+        { MarkupController.ChangeIntensity(Intensity.Medium); }
+
+        /// <summary>
+        /// Changes the Caption's intensity to the intensity related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void RB_HighIntensity_Click(object sender, EventArgs e)
+        { MarkupController.ChangeIntensity(Intensity.High); }
+        #endregion
+
+        #region Location RadioButton Click Handlers
+        /// <summary>
+        /// Changes the Caption's Location to the Location related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void RB_TopLeft_Click(object sender, EventArgs e)
+        { MarkupController.ChangeLocation(ScreenLocation.TopLeft); }
+
+        /// <summary>
+        /// Changes the Caption's Location to the Location related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void RB_TopCenter_Click(object sender, EventArgs e)
+        { MarkupController.ChangeLocation(ScreenLocation.TopCentre); }
+
+        /// <summary>
+        /// Changes the Caption's Location to the Location related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void RB_TopRight_Click(object sender, EventArgs e)
+        { MarkupController.ChangeLocation(ScreenLocation.TopRight); }
+
+        /// <summary>
+        /// Changes the Caption's Location to the Location related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void RB_MiddleLeft_Click(object sender, EventArgs e)
+        { MarkupController.ChangeLocation(ScreenLocation.MiddleLeft); }
+
+        /// <summary>
+        /// Changes the Caption's Location to the Location related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void RB_MiddleCenter_Click(object sender, EventArgs e)
+        { MarkupController.ChangeLocation(ScreenLocation.MiddleCenter); }
+
+        /// <summary>
+        /// Changes the Caption's Location to the Location related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void RB_MiddleRight_Click(object sender, EventArgs e)
+        { MarkupController.ChangeLocation(ScreenLocation.MiddleRight); }
+
+        /// <summary>
+        /// Changes the Caption's Location to the Location related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void RB_BottomLeft_Click(object sender, EventArgs e)
+        { MarkupController.ChangeLocation(ScreenLocation.BottomLeft); }
+
+        /// <summary>
+        /// Changes the Caption's Location to the Location related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void RB_BottomCenter_Click(object sender, EventArgs e)
+        { MarkupController.ChangeLocation(ScreenLocation.BottomCentre); }
+
+        /// <summary>
+        /// Changes the Caption's Location to the Location related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void RB_BottomRight_Click(object sender, EventArgs e)
+        { MarkupController.ChangeLocation(ScreenLocation.BottomRight); }
+        #endregion
     }//Class
 }//Namespace

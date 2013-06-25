@@ -133,5 +133,24 @@ namespace EnACT
             ClearGB_Location();
         }
         #endregion
+
+        /// <summary>
+        /// Changes the emotion of the selected caption.
+        /// </summary>
+        /// <param name="e"></param>
+        public void ChangeEmotion(Emotion e)
+        {
+            //TODO implement this
+        }
+
+        public void ChangeIntensity(Intensity i)
+        {
+            //TODO implement this
+        }
+
+        public void ChangeLocation(ScreenLocation l)
+        {
+            SelectedCaption.Location = l;
+        }
     }
 }
