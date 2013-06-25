@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            EnACT.Timestamp timestamp3 = new EnACT.Timestamp();
-            EnACT.Timestamp timestamp4 = new EnACT.Timestamp();
+            EnACT.Timestamp timestamp1 = new EnACT.Timestamp();
+            EnACT.Timestamp timestamp2 = new EnACT.Timestamp();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MenuStrip_MainForm = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,26 +59,38 @@
             this.Button_ZoomTimelineIn = new System.Windows.Forms.Button();
             this.Button_ZoomTimelineOut = new System.Windows.Forms.Button();
             this.Button_ZoomReset = new System.Windows.Forms.Button();
-            this.LocationGroupBox = new System.Windows.Forms.GroupBox();
-            this.RB_TopLeft = new System.Windows.Forms.RadioButton();
-            this.RB_TopCenter = new System.Windows.Forms.RadioButton();
-            this.RB_TopRight = new System.Windows.Forms.RadioButton();
-            this.RB_MiddleLeft = new System.Windows.Forms.RadioButton();
-            this.RB_MiddleCenter = new System.Windows.Forms.RadioButton();
-            this.RB_MiddleRight = new System.Windows.Forms.RadioButton();
-            this.RB_BottomLeft = new System.Windows.Forms.RadioButton();
-            this.RB_BottomCenter = new System.Windows.Forms.RadioButton();
+            this.GB_Location = new System.Windows.Forms.GroupBox();
             this.RB_BottomRight = new System.Windows.Forms.RadioButton();
+            this.RB_BottomCenter = new System.Windows.Forms.RadioButton();
+            this.RB_BottomLeft = new System.Windows.Forms.RadioButton();
+            this.RB_MiddleRight = new System.Windows.Forms.RadioButton();
+            this.RB_MiddleCenter = new System.Windows.Forms.RadioButton();
+            this.RB_MiddleLeft = new System.Windows.Forms.RadioButton();
+            this.RB_TopRight = new System.Windows.Forms.RadioButton();
+            this.RB_TopCenter = new System.Windows.Forms.RadioButton();
+            this.RB_TopLeft = new System.Windows.Forms.RadioButton();
             this.CaptionTextBox = new EnACT.CaptionTextBox();
             this.PlayheadLabel = new EnACT.PlayheadLabel();
             this.Timeline = new EnACT.Timeline();
             this.EngineView = new EnACT.EngineView();
             this.CaptionView = new EnACT.CaptionView();
+            this.GB_EmotionType = new System.Windows.Forms.GroupBox();
+            this.RB_Anger = new System.Windows.Forms.RadioButton();
+            this.RB_Fear = new System.Windows.Forms.RadioButton();
+            this.RB_Sad = new System.Windows.Forms.RadioButton();
+            this.RB_Happy = new System.Windows.Forms.RadioButton();
+            this.RB_None = new System.Windows.Forms.RadioButton();
+            this.GB_Intensity = new System.Windows.Forms.GroupBox();
+            this.RB_LowIntensity = new System.Windows.Forms.RadioButton();
+            this.RB_MediumIntensity = new System.Windows.Forms.RadioButton();
+            this.RB_HighIntensity = new System.Windows.Forms.RadioButton();
             this.MenuStrip_MainForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_Timeline)).BeginInit();
-            this.LocationGroupBox.SuspendLayout();
+            this.GB_Location.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EngineView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).BeginInit();
+            this.GB_EmotionType.SuspendLayout();
+            this.GB_Intensity.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuStrip_MainForm
@@ -294,93 +306,33 @@
             this.Button_ZoomReset.UseVisualStyleBackColor = true;
             this.Button_ZoomReset.Click += new System.EventHandler(this.Button_ZoomReset_Click);
             // 
-            // LocationGroupBox
+            // GB_Location
             // 
-            this.LocationGroupBox.Controls.Add(this.RB_BottomRight);
-            this.LocationGroupBox.Controls.Add(this.RB_BottomCenter);
-            this.LocationGroupBox.Controls.Add(this.RB_BottomLeft);
-            this.LocationGroupBox.Controls.Add(this.RB_MiddleRight);
-            this.LocationGroupBox.Controls.Add(this.RB_MiddleCenter);
-            this.LocationGroupBox.Controls.Add(this.RB_MiddleLeft);
-            this.LocationGroupBox.Controls.Add(this.RB_TopRight);
-            this.LocationGroupBox.Controls.Add(this.RB_TopCenter);
-            this.LocationGroupBox.Controls.Add(this.RB_TopLeft);
-            this.LocationGroupBox.Location = new System.Drawing.Point(341, 48);
-            this.LocationGroupBox.Name = "LocationGroupBox";
-            this.LocationGroupBox.Size = new System.Drawing.Size(90, 96);
-            this.LocationGroupBox.TabIndex = 25;
-            this.LocationGroupBox.TabStop = false;
-            this.LocationGroupBox.Text = "Location";
+            this.GB_Location.Controls.Add(this.RB_BottomRight);
+            this.GB_Location.Controls.Add(this.RB_BottomCenter);
+            this.GB_Location.Controls.Add(this.RB_BottomLeft);
+            this.GB_Location.Controls.Add(this.RB_MiddleRight);
+            this.GB_Location.Controls.Add(this.RB_MiddleCenter);
+            this.GB_Location.Controls.Add(this.RB_MiddleLeft);
+            this.GB_Location.Controls.Add(this.RB_TopRight);
+            this.GB_Location.Controls.Add(this.RB_TopCenter);
+            this.GB_Location.Controls.Add(this.RB_TopLeft);
+            this.GB_Location.Location = new System.Drawing.Point(341, 48);
+            this.GB_Location.Name = "GB_Location";
+            this.GB_Location.Size = new System.Drawing.Size(90, 96);
+            this.GB_Location.TabIndex = 25;
+            this.GB_Location.TabStop = false;
+            this.GB_Location.Text = "Location";
             // 
-            // RB_TopLeft
+            // RB_BottomRight
             // 
-            this.RB_TopLeft.AutoSize = true;
-            this.RB_TopLeft.Location = new System.Drawing.Point(6, 19);
-            this.RB_TopLeft.Name = "RB_TopLeft";
-            this.RB_TopLeft.Size = new System.Drawing.Size(14, 13);
-            this.RB_TopLeft.TabIndex = 0;
-            this.RB_TopLeft.TabStop = true;
-            this.RB_TopLeft.UseVisualStyleBackColor = true;
-            // 
-            // RB_TopCenter
-            // 
-            this.RB_TopCenter.AutoSize = true;
-            this.RB_TopCenter.Location = new System.Drawing.Point(38, 19);
-            this.RB_TopCenter.Name = "RB_TopCenter";
-            this.RB_TopCenter.Size = new System.Drawing.Size(14, 13);
-            this.RB_TopCenter.TabIndex = 1;
-            this.RB_TopCenter.TabStop = true;
-            this.RB_TopCenter.UseVisualStyleBackColor = true;
-            // 
-            // RB_TopRight
-            // 
-            this.RB_TopRight.AutoSize = true;
-            this.RB_TopRight.Location = new System.Drawing.Point(70, 19);
-            this.RB_TopRight.Name = "RB_TopRight";
-            this.RB_TopRight.Size = new System.Drawing.Size(14, 13);
-            this.RB_TopRight.TabIndex = 2;
-            this.RB_TopRight.TabStop = true;
-            this.RB_TopRight.UseVisualStyleBackColor = true;
-            // 
-            // RB_MiddleLeft
-            // 
-            this.RB_MiddleLeft.AutoSize = true;
-            this.RB_MiddleLeft.Location = new System.Drawing.Point(6, 47);
-            this.RB_MiddleLeft.Name = "RB_MiddleLeft";
-            this.RB_MiddleLeft.Size = new System.Drawing.Size(14, 13);
-            this.RB_MiddleLeft.TabIndex = 3;
-            this.RB_MiddleLeft.TabStop = true;
-            this.RB_MiddleLeft.UseVisualStyleBackColor = true;
-            // 
-            // RB_MiddleCenter
-            // 
-            this.RB_MiddleCenter.AutoSize = true;
-            this.RB_MiddleCenter.Location = new System.Drawing.Point(38, 47);
-            this.RB_MiddleCenter.Name = "RB_MiddleCenter";
-            this.RB_MiddleCenter.Size = new System.Drawing.Size(14, 13);
-            this.RB_MiddleCenter.TabIndex = 4;
-            this.RB_MiddleCenter.TabStop = true;
-            this.RB_MiddleCenter.UseVisualStyleBackColor = true;
-            // 
-            // RB_MiddleRight
-            // 
-            this.RB_MiddleRight.AutoSize = true;
-            this.RB_MiddleRight.Location = new System.Drawing.Point(70, 47);
-            this.RB_MiddleRight.Name = "RB_MiddleRight";
-            this.RB_MiddleRight.Size = new System.Drawing.Size(14, 13);
-            this.RB_MiddleRight.TabIndex = 5;
-            this.RB_MiddleRight.TabStop = true;
-            this.RB_MiddleRight.UseVisualStyleBackColor = true;
-            // 
-            // RB_BottomLeft
-            // 
-            this.RB_BottomLeft.AutoSize = true;
-            this.RB_BottomLeft.Location = new System.Drawing.Point(6, 77);
-            this.RB_BottomLeft.Name = "RB_BottomLeft";
-            this.RB_BottomLeft.Size = new System.Drawing.Size(14, 13);
-            this.RB_BottomLeft.TabIndex = 6;
-            this.RB_BottomLeft.TabStop = true;
-            this.RB_BottomLeft.UseVisualStyleBackColor = true;
+            this.RB_BottomRight.AutoSize = true;
+            this.RB_BottomRight.Location = new System.Drawing.Point(70, 77);
+            this.RB_BottomRight.Name = "RB_BottomRight";
+            this.RB_BottomRight.Size = new System.Drawing.Size(14, 13);
+            this.RB_BottomRight.TabIndex = 8;
+            this.RB_BottomRight.TabStop = true;
+            this.RB_BottomRight.UseVisualStyleBackColor = true;
             // 
             // RB_BottomCenter
             // 
@@ -392,15 +344,75 @@
             this.RB_BottomCenter.TabStop = true;
             this.RB_BottomCenter.UseVisualStyleBackColor = true;
             // 
-            // RB_BottomRight
+            // RB_BottomLeft
             // 
-            this.RB_BottomRight.AutoSize = true;
-            this.RB_BottomRight.Location = new System.Drawing.Point(70, 77);
-            this.RB_BottomRight.Name = "RB_BottomRight";
-            this.RB_BottomRight.Size = new System.Drawing.Size(14, 13);
-            this.RB_BottomRight.TabIndex = 8;
-            this.RB_BottomRight.TabStop = true;
-            this.RB_BottomRight.UseVisualStyleBackColor = true;
+            this.RB_BottomLeft.AutoSize = true;
+            this.RB_BottomLeft.Location = new System.Drawing.Point(6, 77);
+            this.RB_BottomLeft.Name = "RB_BottomLeft";
+            this.RB_BottomLeft.Size = new System.Drawing.Size(14, 13);
+            this.RB_BottomLeft.TabIndex = 6;
+            this.RB_BottomLeft.TabStop = true;
+            this.RB_BottomLeft.UseVisualStyleBackColor = true;
+            // 
+            // RB_MiddleRight
+            // 
+            this.RB_MiddleRight.AutoSize = true;
+            this.RB_MiddleRight.Location = new System.Drawing.Point(70, 47);
+            this.RB_MiddleRight.Name = "RB_MiddleRight";
+            this.RB_MiddleRight.Size = new System.Drawing.Size(14, 13);
+            this.RB_MiddleRight.TabIndex = 5;
+            this.RB_MiddleRight.TabStop = true;
+            this.RB_MiddleRight.UseVisualStyleBackColor = true;
+            // 
+            // RB_MiddleCenter
+            // 
+            this.RB_MiddleCenter.AutoSize = true;
+            this.RB_MiddleCenter.Location = new System.Drawing.Point(38, 47);
+            this.RB_MiddleCenter.Name = "RB_MiddleCenter";
+            this.RB_MiddleCenter.Size = new System.Drawing.Size(14, 13);
+            this.RB_MiddleCenter.TabIndex = 4;
+            this.RB_MiddleCenter.TabStop = true;
+            this.RB_MiddleCenter.UseVisualStyleBackColor = true;
+            // 
+            // RB_MiddleLeft
+            // 
+            this.RB_MiddleLeft.AutoSize = true;
+            this.RB_MiddleLeft.Location = new System.Drawing.Point(6, 47);
+            this.RB_MiddleLeft.Name = "RB_MiddleLeft";
+            this.RB_MiddleLeft.Size = new System.Drawing.Size(14, 13);
+            this.RB_MiddleLeft.TabIndex = 3;
+            this.RB_MiddleLeft.TabStop = true;
+            this.RB_MiddleLeft.UseVisualStyleBackColor = true;
+            // 
+            // RB_TopRight
+            // 
+            this.RB_TopRight.AutoSize = true;
+            this.RB_TopRight.Location = new System.Drawing.Point(70, 19);
+            this.RB_TopRight.Name = "RB_TopRight";
+            this.RB_TopRight.Size = new System.Drawing.Size(14, 13);
+            this.RB_TopRight.TabIndex = 2;
+            this.RB_TopRight.TabStop = true;
+            this.RB_TopRight.UseVisualStyleBackColor = true;
+            // 
+            // RB_TopCenter
+            // 
+            this.RB_TopCenter.AutoSize = true;
+            this.RB_TopCenter.Location = new System.Drawing.Point(38, 19);
+            this.RB_TopCenter.Name = "RB_TopCenter";
+            this.RB_TopCenter.Size = new System.Drawing.Size(14, 13);
+            this.RB_TopCenter.TabIndex = 1;
+            this.RB_TopCenter.TabStop = true;
+            this.RB_TopCenter.UseVisualStyleBackColor = true;
+            // 
+            // RB_TopLeft
+            // 
+            this.RB_TopLeft.AutoSize = true;
+            this.RB_TopLeft.Location = new System.Drawing.Point(6, 19);
+            this.RB_TopLeft.Name = "RB_TopLeft";
+            this.RB_TopLeft.Size = new System.Drawing.Size(14, 13);
+            this.RB_TopLeft.TabIndex = 0;
+            this.RB_TopLeft.TabStop = true;
+            this.RB_TopLeft.UseVisualStyleBackColor = true;
             // 
             // CaptionTextBox
             // 
@@ -416,15 +428,15 @@
             this.PlayheadLabel.AutoSize = true;
             this.PlayheadLabel.Location = new System.Drawing.Point(338, 32);
             this.PlayheadLabel.Name = "PlayheadLabel";
-            timestamp3.AsDouble = 0D;
-            timestamp3.AsString = "00:00:00.0";
-            this.PlayheadLabel.PlayheadTime = timestamp3;
+            timestamp1.AsDouble = 0D;
+            timestamp1.AsString = "00:00:00.0";
+            this.PlayheadLabel.PlayheadTime = timestamp1;
             this.PlayheadLabel.Size = new System.Drawing.Size(120, 13);
             this.PlayheadLabel.TabIndex = 23;
             this.PlayheadLabel.Text = "00:00:00.0 / 00:00:00.0";
-            timestamp4.AsDouble = 0D;
-            timestamp4.AsString = "00:00:00.0";
-            this.PlayheadLabel.VideoLength = timestamp4;
+            timestamp2.AsDouble = 0D;
+            timestamp2.AsString = "00:00:00.0";
+            this.PlayheadLabel.VideoLength = timestamp2;
             // 
             // Timeline
             // 
@@ -462,19 +474,19 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CaptionView.CaptionSource = null;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.CaptionView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.CaptionView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.CaptionView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CaptionView.Location = new System.Drawing.Point(12, 478);
             this.CaptionView.Name = "CaptionView";
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.CaptionView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.CaptionView.Size = new System.Drawing.Size(864, 192);
             this.CaptionView.SpeakerSet = null;
@@ -482,12 +494,128 @@
             this.CaptionView.UserInputEnabled = true;
             this.CaptionView.SelectionChanged += new System.EventHandler(this.CaptionView_SelectionChanged);
             // 
+            // GB_EmotionType
+            // 
+            this.GB_EmotionType.Controls.Add(this.RB_Anger);
+            this.GB_EmotionType.Controls.Add(this.RB_Fear);
+            this.GB_EmotionType.Controls.Add(this.RB_Sad);
+            this.GB_EmotionType.Controls.Add(this.RB_Happy);
+            this.GB_EmotionType.Controls.Add(this.RB_None);
+            this.GB_EmotionType.Location = new System.Drawing.Point(437, 48);
+            this.GB_EmotionType.Name = "GB_EmotionType";
+            this.GB_EmotionType.Size = new System.Drawing.Size(78, 139);
+            this.GB_EmotionType.TabIndex = 26;
+            this.GB_EmotionType.TabStop = false;
+            this.GB_EmotionType.Text = "Emotion";
+            // 
+            // RB_Anger
+            // 
+            this.RB_Anger.AutoSize = true;
+            this.RB_Anger.Location = new System.Drawing.Point(9, 109);
+            this.RB_Anger.Name = "RB_Anger";
+            this.RB_Anger.Size = new System.Drawing.Size(53, 17);
+            this.RB_Anger.TabIndex = 4;
+            this.RB_Anger.TabStop = true;
+            this.RB_Anger.Text = "Anger";
+            this.RB_Anger.UseVisualStyleBackColor = true;
+            // 
+            // RB_Fear
+            // 
+            this.RB_Fear.AutoSize = true;
+            this.RB_Fear.Location = new System.Drawing.Point(9, 86);
+            this.RB_Fear.Name = "RB_Fear";
+            this.RB_Fear.Size = new System.Drawing.Size(46, 17);
+            this.RB_Fear.TabIndex = 3;
+            this.RB_Fear.TabStop = true;
+            this.RB_Fear.Text = "Fear";
+            this.RB_Fear.UseVisualStyleBackColor = true;
+            // 
+            // RB_Sad
+            // 
+            this.RB_Sad.AutoSize = true;
+            this.RB_Sad.Location = new System.Drawing.Point(9, 63);
+            this.RB_Sad.Name = "RB_Sad";
+            this.RB_Sad.Size = new System.Drawing.Size(44, 17);
+            this.RB_Sad.TabIndex = 2;
+            this.RB_Sad.TabStop = true;
+            this.RB_Sad.Text = "Sad";
+            this.RB_Sad.UseVisualStyleBackColor = true;
+            // 
+            // RB_Happy
+            // 
+            this.RB_Happy.AutoSize = true;
+            this.RB_Happy.Location = new System.Drawing.Point(9, 40);
+            this.RB_Happy.Name = "RB_Happy";
+            this.RB_Happy.Size = new System.Drawing.Size(56, 17);
+            this.RB_Happy.TabIndex = 1;
+            this.RB_Happy.TabStop = true;
+            this.RB_Happy.Text = "Happy";
+            this.RB_Happy.UseVisualStyleBackColor = true;
+            // 
+            // RB_None
+            // 
+            this.RB_None.AutoSize = true;
+            this.RB_None.Location = new System.Drawing.Point(9, 17);
+            this.RB_None.Name = "RB_None";
+            this.RB_None.Size = new System.Drawing.Size(51, 17);
+            this.RB_None.TabIndex = 0;
+            this.RB_None.TabStop = true;
+            this.RB_None.Text = "None";
+            this.RB_None.UseVisualStyleBackColor = true;
+            // 
+            // GB_Intensity
+            // 
+            this.GB_Intensity.Controls.Add(this.RB_HighIntensity);
+            this.GB_Intensity.Controls.Add(this.RB_MediumIntensity);
+            this.GB_Intensity.Controls.Add(this.RB_LowIntensity);
+            this.GB_Intensity.Location = new System.Drawing.Point(521, 48);
+            this.GB_Intensity.Name = "GB_Intensity";
+            this.GB_Intensity.Size = new System.Drawing.Size(76, 90);
+            this.GB_Intensity.TabIndex = 27;
+            this.GB_Intensity.TabStop = false;
+            this.GB_Intensity.Text = "Intensity";
+            // 
+            // RB_LowIntensity
+            // 
+            this.RB_LowIntensity.AutoSize = true;
+            this.RB_LowIntensity.Location = new System.Drawing.Point(6, 15);
+            this.RB_LowIntensity.Name = "RB_LowIntensity";
+            this.RB_LowIntensity.Size = new System.Drawing.Size(45, 17);
+            this.RB_LowIntensity.TabIndex = 0;
+            this.RB_LowIntensity.TabStop = true;
+            this.RB_LowIntensity.Text = "Low";
+            this.RB_LowIntensity.UseVisualStyleBackColor = true;
+            // 
+            // RB_MediumIntensity
+            // 
+            this.RB_MediumIntensity.AutoSize = true;
+            this.RB_MediumIntensity.Location = new System.Drawing.Point(6, 38);
+            this.RB_MediumIntensity.Name = "RB_MediumIntensity";
+            this.RB_MediumIntensity.Size = new System.Drawing.Size(62, 17);
+            this.RB_MediumIntensity.TabIndex = 1;
+            this.RB_MediumIntensity.TabStop = true;
+            this.RB_MediumIntensity.Text = "Medium";
+            this.RB_MediumIntensity.UseVisualStyleBackColor = true;
+            // 
+            // RB_HighIntensity
+            // 
+            this.RB_HighIntensity.AutoSize = true;
+            this.RB_HighIntensity.Location = new System.Drawing.Point(6, 61);
+            this.RB_HighIntensity.Name = "RB_HighIntensity";
+            this.RB_HighIntensity.Size = new System.Drawing.Size(47, 17);
+            this.RB_HighIntensity.TabIndex = 2;
+            this.RB_HighIntensity.TabStop = true;
+            this.RB_HighIntensity.Text = "High";
+            this.RB_HighIntensity.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 682);
-            this.Controls.Add(this.LocationGroupBox);
+            this.Controls.Add(this.GB_Intensity);
+            this.Controls.Add(this.GB_EmotionType);
+            this.Controls.Add(this.GB_Location);
             this.Controls.Add(this.CaptionTextBox);
             this.Controls.Add(this.PlayheadLabel);
             this.Controls.Add(this.Button_ZoomReset);
@@ -513,10 +641,14 @@
             this.MenuStrip_MainForm.ResumeLayout(false);
             this.MenuStrip_MainForm.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_Timeline)).EndInit();
-            this.LocationGroupBox.ResumeLayout(false);
-            this.LocationGroupBox.PerformLayout();
+            this.GB_Location.ResumeLayout(false);
+            this.GB_Location.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EngineView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CaptionView)).EndInit();
+            this.GB_EmotionType.ResumeLayout(false);
+            this.GB_EmotionType.PerformLayout();
+            this.GB_Intensity.ResumeLayout(false);
+            this.GB_Intensity.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -554,7 +686,7 @@
         private System.Windows.Forms.ToolStripMenuItem jorgeButtonToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem debugMethodToolStripMenuItem;
         private CaptionTextBox CaptionTextBox;
-        private System.Windows.Forms.GroupBox LocationGroupBox;
+        private System.Windows.Forms.GroupBox GB_Location;
         private System.Windows.Forms.RadioButton RB_BottomRight;
         private System.Windows.Forms.RadioButton RB_BottomCenter;
         private System.Windows.Forms.RadioButton RB_BottomLeft;
@@ -564,6 +696,16 @@
         private System.Windows.Forms.RadioButton RB_TopRight;
         private System.Windows.Forms.RadioButton RB_TopCenter;
         private System.Windows.Forms.RadioButton RB_TopLeft;
+        private System.Windows.Forms.GroupBox GB_EmotionType;
+        private System.Windows.Forms.RadioButton RB_Anger;
+        private System.Windows.Forms.RadioButton RB_Fear;
+        private System.Windows.Forms.RadioButton RB_Sad;
+        private System.Windows.Forms.RadioButton RB_Happy;
+        private System.Windows.Forms.RadioButton RB_None;
+        private System.Windows.Forms.GroupBox GB_Intensity;
+        private System.Windows.Forms.RadioButton RB_HighIntensity;
+        private System.Windows.Forms.RadioButton RB_MediumIntensity;
+        private System.Windows.Forms.RadioButton RB_LowIntensity;
     }
 }
 
