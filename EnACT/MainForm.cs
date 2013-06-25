@@ -215,7 +215,6 @@ namespace EnACT
             //    CaptionView.UserInputEnabled = false;
             //else
             //    CaptionView.UserInputEnabled = true;
-
         }
         #endregion
 
