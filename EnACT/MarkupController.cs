@@ -21,6 +21,11 @@ namespace EnACT
         private bool captionLoaded;
 
         /// <summary>
+        /// The CaptionWord selected by the user if there is only one word selected.
+        /// </summary>
+        public CaptionWord SelectedCaptionWord { set; get; }
+
+        /// <summary>
         /// The caption selected by the user to mark up with emotions.
         /// </summary>
         public Caption SelectedCaption { set; get; }
@@ -62,10 +67,19 @@ namespace EnACT
         public CaptionTextBox CaptionTextBox    { set; get; }
         #endregion
 
-        #region Constructor
+        #region Constructor and Init Methods
         public MarkupController() 
         {
             captionLoaded = false;
+        }
+
+        /// <summary>
+        /// Hooks up events for controls associated with this controller.
+        /// </summary>
+        public void HookUpEvents()
+        {
+            CaptionTextBox.CaptionWordSelected += new EventHandler<CaptionWordSelectedEventArgs>
+                (this.CaptionTextBox_CaptionWordSelected);
         }
         #endregion
 
@@ -116,7 +130,46 @@ namespace EnACT
         }
         #endregion
 
-        #region Clear Methods
+        #region Load Word
+        /// <summary>
+        /// Loads a single CaptionWord into the controls assosiated with this class.
+        /// </summary>
+        /// <param name="cw">The CaptionWord to load.</param>
+        public void LoadWord(CaptionWord cw)
+        {
+            //Set CaptionWord
+            SelectedCaptionWord = cw;
+
+            //Set Emotion
+            switch (cw.Emotion)
+            {
+                case Emotion.None: RB_None.Checked = true; break;
+                case Emotion.Happy: RB_Happy.Checked = true; break;
+                case Emotion.Sad: RB_Sad.Checked = true; break;
+                case Emotion.Fear: RB_Fear.Checked = true; break;
+                case Emotion.Anger: RB_Anger.Checked = true; break;
+                default: break;
+            }
+            
+            //Enable Emotion Radio Buttons
+            GB_EmotionType.Enabled = true;
+
+            //Set Intensity
+            switch (cw.Intensity)
+            {
+                case Intensity.High: RB_HighIntensity.Checked = true; break;
+                case Intensity.Medium: RB_MediumIntensity.Checked = true; break;
+                case Intensity.Low: RB_LowIntensity.Checked = true; break;
+                case Intensity.None: ClearGB_Intensity(); break;
+                default: break;
+            }
+
+            //Enable Intensity Radio Buttons
+            GB_Intensity.Enabled = true;
+        }
+        #endregion
+
+        #region Clear GroupBox Methods
         /// <summary>
         /// Unchecks all radioboxes in GB_EmotionType
         /// </summary>
@@ -140,7 +193,9 @@ namespace EnACT
         {
             foreach (RadioButton rb in GB_Location.Controls) { rb.Checked = false; }
         }
+        #endregion
 
+        #region ClearCaption
         /// <summary>
         /// Clears the Selected caption and its properties from all controls
         /// </summary>
@@ -176,6 +231,21 @@ namespace EnACT
         }
         #endregion
 
+        #region ClearWord
+        /// <summary>
+        /// Clears the current SelectedCaptionWord from this and the controls associated with it.
+        /// </summary>
+        public void ClearWord()
+        {
+            //Clear SelectedCaptionWord
+            SelectedCaptionWord = null;
+
+            //Clear GroupBoxes related to CaptionWord
+            ClearGB_EmotionType();
+            ClearGB_Intensity();
+        }
+        #endregion
+
         #region Change SelectedCaption Properties
         /// <summary>
         /// Changes the emotion of the selected caption.
@@ -183,12 +253,12 @@ namespace EnACT
         /// <param name="e"></param>
         public void ChangeEmotion(Emotion e)
         {
-            //TODO implement this
+            SelectedCaptionWord.Emotion = e;
         }
 
         public void ChangeIntensity(Intensity i)
         {
-            //TODO implement this
+            SelectedCaptionWord.Intensity = i;
         }
 
         /// <summary>
@@ -241,5 +311,20 @@ namespace EnACT
             }
         }
         #endregion
+
+        /// <summary>
+        /// Event Handler for CaptionTextBox.CaptionWordSelected event. Loads the selected 
+        /// CaptionWord into the associated controls.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void CaptionTextBox_CaptionWordSelected(object sender, CaptionWordSelectedEventArgs e)
+        {
+            if (e.SelectedWord != SelectedCaptionWord)
+            {
+                Console.WriteLine("New Word: {0}", e.SelectedWord);
+                LoadWord(e.SelectedWord);
+            }
+        }
     }
 }

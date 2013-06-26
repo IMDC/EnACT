@@ -46,6 +46,10 @@ namespace EnACT
         }
         #endregion
 
+        #region Events
+        public event EventHandler<CaptionWordSelectedEventArgs> CaptionWordSelected;
+        #endregion
+
         #region Constructor
         public CaptionTextBox() : base() { }
         #endregion
@@ -88,6 +92,7 @@ namespace EnACT
                 {
                     SetTextBackgroundColour(cw, SystemColors.Highlight);
                     cw.IsSelected = true;
+                    OnCaptionWordSelected(new CaptionWordSelectedEventArgs(cw));
                 }
                 //If the word doesn't contain the caret but is selected, then unselect it.
                 else if(!cw.Contains(caret) && cw.IsSelected)
@@ -145,5 +150,35 @@ namespace EnACT
             Select(start, length);
         }
         #endregion
+
+        #region Event Invocation Methods
+        /// <summary>
+        /// Invokes the CaptionWordSelected event, which happens when a single Caption Word
+        /// is selected.
+        /// </summary>
+        /// <param name="e">Event Args</param>
+        private void OnCaptionWordSelected(CaptionWordSelectedEventArgs e)
+        {
+            /* Make a local copy of the event to prevent the case where the handler
+             * will be set as null in-between the null check and the handler call.
+             */
+            EventHandler<CaptionWordSelectedEventArgs> handler = CaptionWordSelected;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+        #endregion
+    }//Class
+
+    public class CaptionWordSelectedEventArgs : EventArgs
+    {
+        public CaptionWord SelectedWord { set; get; }
+
+        public CaptionWordSelectedEventArgs(CaptionWord selectedWord)
+        {
+            this.SelectedWord = selectedWord;
+        }
     }
-}
+}//Namespace
