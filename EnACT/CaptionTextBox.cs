@@ -15,6 +15,11 @@ namespace EnACT
     {
         #region Fields and Properties
         /// <summary>
+        /// Set this bool to true to bypass the OnSelectionChanged method.
+        /// </summary>
+        private bool simpleSelectFlag = false;
+
+        /// <summary>
         /// Backing field for Caption Property.
         /// </summary>
         private Caption caption;
@@ -46,26 +51,63 @@ namespace EnACT
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Method that is called when the caret or selection of the textbox is changed.
+        /// </summary>
+        /// <param name="e">Event Args</param>
         protected override void OnSelectionChanged(EventArgs e)
         {
             base.OnSelectionChanged(e);
-            Console.WriteLine("Index: {0}, Length: {1}, Text: \"{2}\"",SelectionStart, SelectionLength, SelectedText);
+            Console.WriteLine("Index: {0}, Length: {1}, Text: \"{2}\"", SelectionStart, SelectionLength, SelectedText);
 
-            int start = SelectionStart;
-            int length = 0;
-
-            //Look to see if a word is to be selected
-            for (int i = 0; i < Caption.WordList.Count; i++)
+            /* In order to avoid a StackOverflow exception, this method will return before calling
+             * HighlightCurrentWord. This is due to the fact that in order to highlight a word, it
+             * needs to be selected, and when it is selected this event gets fired. It is not the
+             * best design, but it currently seems to be the only way to work around this control.
+             */
+            if (simpleSelectFlag)
             {
-                if (Caption.WordList[i].Contains(SelectionStart))
+                simpleSelectFlag = false;
+                return;
+            }
+
+            //Only call the method when just the caret is being displayed.
+            if(SelectionLength == 0)
+                HighlightCurrentWord();
+        }
+
+        private void HighlightCurrentWord()
+        {
+            int caret = SelectionStart;
+
+            foreach (CaptionWord cw in Caption.WordList)
+            {
+                //If the word contains the caret but hasn't been selected yet, highlight and then
+                //select it.
+                if (cw.Contains(caret) && !cw.IsSelected)
                 {
-                    start = Caption.WordList[i].BeginIndex;
-                    length = Caption.WordList[i].Length + CaptionWordList.SPACE_WIDTH;
-                    Select(start, length);
-                    break;
+                    SetTextBackgroundColour(cw, SystemColors.Highlight);
+                    cw.IsSelected = true;
+                }
+                //If the word doesn't contain the caret but is selected, then unselect it.
+                else if(!cw.Contains(caret) && cw.IsSelected)
+                {
+                    SetTextBackgroundColour(cw, Color.White);
+                    cw.IsSelected = false;
                 }
             }
         }
+        #endregion
+
+        #region SetTextBackgroundColour
+        /// <summary>
+        /// Sets the background colour of the text specified by the arguments. Preserves the previous
+        /// selection, restoring it after highlighting is done.
+        /// </summary>
+        /// <param name="word">The CaptionWord to highlight</param>
+        /// <param name="highlightColour">The colour to change the background colour to.</param>
+        public void SetTextBackgroundColour(CaptionWord word, Color highlightColour)
+        { this.SetTextBackgroundColour(word.BeginIndex, word.Length, highlightColour); }
 
         /// <summary>
         /// Sets the background colour of the text specified by the arguments. Preserves the previous
@@ -81,11 +123,26 @@ namespace EnACT
             int oldLength = SelectionLength;
 
             //Colour given values
-            Select(startPos, length);
-            SelectionBackColor = System.Drawing.Color.Green;
+            SimpleSelect(startPos, length);
+            SelectionBackColor = highlightColour;
 
             //Reselect old values
-            Select(oldStart, oldLength);
+            SimpleSelect(oldStart, oldLength);
+        }
+        #endregion
+
+        #region SimpleSelect
+        /// <summary>
+        /// Calls the Select method as well as setting the simpleSelectFlag variable to true,
+        /// making the onSelectionChanged method return immediately.
+        /// </summary>
+        /// <param name="start">The position of the first character in the current text selection 
+        /// within the text box. </param>
+        /// <param name="length">The number of characters to select. </param>
+        private void SimpleSelect(int start, int length)
+        {
+            simpleSelectFlag = true;
+            Select(start, length);
         }
         #endregion
     }

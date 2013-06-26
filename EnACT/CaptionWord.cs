@@ -11,8 +11,20 @@ namespace EnACT
     public class CaptionWord
     {
         #region Fields and Properties
+        /// <summary>
+        /// The index of a caption that this word starts at.
+        /// </summary>
         public int BeginIndex { set; get; }
+
+        /// <summary>
+        /// The index of a caption that this word ends at.
+        /// </summary>
         public int EndIndex { set; get; }
+
+        /// <summary>
+        /// Whether or not this value is currently selected.
+        /// </summary>
+        public bool IsSelected { set; get; }
 
         /// <summary>
         /// Represents the type of emotion (Happy, Sad, etc) of this CaptionWord
@@ -46,7 +58,9 @@ namespace EnACT
             this.Intensity = Intensity.None;
             this.Text = text;
             this.BeginIndex = beginIndex;
+
             this.EndIndex = beginIndex + Length;
+            this.IsSelected = false;
         }
         #endregion
 
@@ -58,7 +72,7 @@ namespace EnACT
         /// <returns>True if index is contained in the word, false if otherwise</returns>
         public bool Contains(int charIndex)
         {
-            return (BeginIndex < charIndex && charIndex < EndIndex + CaptionWordList.SPACE_WIDTH)
+            return (BeginIndex <= charIndex && charIndex <= EndIndex )
                 ? true : false;
         }
 
