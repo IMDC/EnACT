@@ -116,6 +116,9 @@ namespace EnACT
 
             //CaptionTextBox
             MarkupController.CaptionTextBox     = this.CaptionTextBox;
+
+            //Set the controls to a disabled state with no caption
+            MarkupController.ClearCaption();
         }
         #endregion
 

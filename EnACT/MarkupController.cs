@@ -13,7 +13,15 @@ namespace EnACT
     /// </summary>
     public class MarkupController
     {
-        #region Properties
+        #region Fields and Properties
+        /// <summary>
+        /// Boolean that signifies if a caption has been selected by the user to mark-up.
+        /// </summary>
+        private bool captionLoaded;
+
+        /// <summary>
+        /// The caption selected by the user to mark up with emotions.
+        /// </summary>
         public Caption SelectedCaption { set; get; }
         #endregion
 
@@ -53,8 +61,11 @@ namespace EnACT
         public CaptionTextBox CaptionTextBox    { set; get; }
         #endregion
 
-        #region Constructor and Init Methods
-        public MarkupController() { }
+        #region Constructor
+        public MarkupController() 
+        {
+            captionLoaded = false;
+        }
         #endregion
 
         #region Load Caption
@@ -73,7 +84,7 @@ namespace EnACT
             //Clear Groups
             ClearGB_EmotionType();
             ClearGB_Intensity();
-            
+
             //Set Location
             switch (c.Location)
             {
@@ -88,6 +99,11 @@ namespace EnACT
                 case ScreenLocation.BottomRight:    RB_BottomRight.Checked  = true; break;
                 default: throw new Exception("Invalid Location: " + c.Location.GetHashCode());
             }
+
+            //Enable Location Radio Button
+            GB_Location.Enabled = true;
+
+            captionLoaded = true;
         }
         #endregion
 
@@ -131,6 +147,13 @@ namespace EnACT
             ClearGB_EmotionType();
             ClearGB_Intensity();
             ClearGB_Location();
+
+            //Disable Radio buttons when nothing is selected
+            GB_EmotionType.Enabled = false;
+            GB_Intensity.Enabled = false;
+            GB_Location.Enabled = false;
+
+            captionLoaded = false;
         }
         #endregion
 
