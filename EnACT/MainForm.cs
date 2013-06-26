@@ -434,5 +434,31 @@ namespace EnACT
         private void RB_BottomRight_Click(object sender, EventArgs e)
         { MarkupController.ChangeLocation(ScreenLocation.BottomRight); }
         #endregion
+
+        #region Caption Alignment Button Click Handlers
+        /// <summary>
+        /// Changes the Caption's Alignment to the Alignment related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void Button_LeftAlign_Click(object sender, EventArgs e)
+        { MarkupController.ChangeAlignment(Alignment.Left); }
+
+        /// <summary>
+        /// Changes the Caption's Alignment to the Alignment related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void Button_CenterAlign_Click(object sender, EventArgs e)
+        { MarkupController.ChangeAlignment(Alignment.Center); }
+
+        /// <summary>
+        /// Changes the Caption's Alignment to the Alignment related to this button.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void Button_RightAlign_Click(object sender, EventArgs e)
+        { MarkupController.ChangeAlignment(Alignment.Right); }
+        #endregion
     }//Class
 }//Namespace

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            EnACT.Timestamp timestamp23 = new EnACT.Timestamp();
-            EnACT.Timestamp timestamp24 = new EnACT.Timestamp();
+            EnACT.Timestamp timestamp5 = new EnACT.Timestamp();
+            EnACT.Timestamp timestamp6 = new EnACT.Timestamp();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MenuStrip_MainForm = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -556,6 +556,7 @@
             this.Button_LeftAlign.TabIndex = 28;
             this.Button_LeftAlign.Text = "L";
             this.Button_LeftAlign.UseVisualStyleBackColor = true;
+            this.Button_LeftAlign.Click += new System.EventHandler(this.Button_LeftAlign_Click);
             // 
             // Button_CenterAlign
             // 
@@ -565,6 +566,7 @@
             this.Button_CenterAlign.TabIndex = 29;
             this.Button_CenterAlign.Text = "C";
             this.Button_CenterAlign.UseVisualStyleBackColor = true;
+            this.Button_CenterAlign.Click += new System.EventHandler(this.Button_CenterAlign_Click);
             // 
             // Button_RightAlign
             // 
@@ -574,6 +576,7 @@
             this.Button_RightAlign.TabIndex = 30;
             this.Button_RightAlign.Text = "R";
             this.Button_RightAlign.UseVisualStyleBackColor = true;
+            this.Button_RightAlign.Click += new System.EventHandler(this.Button_RightAlign_Click);
             // 
             // CaptionTextBox
             // 
@@ -589,15 +592,15 @@
             this.PlayheadLabel.AutoSize = true;
             this.PlayheadLabel.Location = new System.Drawing.Point(338, 32);
             this.PlayheadLabel.Name = "PlayheadLabel";
-            timestamp23.AsDouble = 0D;
-            timestamp23.AsString = "00:00:00.0";
-            this.PlayheadLabel.PlayheadTime = timestamp23;
+            timestamp5.AsDouble = 0D;
+            timestamp5.AsString = "00:00:00.0";
+            this.PlayheadLabel.PlayheadTime = timestamp5;
             this.PlayheadLabel.Size = new System.Drawing.Size(120, 13);
             this.PlayheadLabel.TabIndex = 23;
             this.PlayheadLabel.Text = "00:00:00.0 / 00:00:00.0";
-            timestamp24.AsDouble = 0D;
-            timestamp24.AsString = "00:00:00.0";
-            this.PlayheadLabel.VideoLength = timestamp24;
+            timestamp6.AsDouble = 0D;
+            timestamp6.AsString = "00:00:00.0";
+            this.PlayheadLabel.VideoLength = timestamp6;
             // 
             // Timeline
             // 
@@ -635,19 +638,19 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CaptionView.CaptionSource = null;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.CaptionView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.CaptionView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.CaptionView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CaptionView.Location = new System.Drawing.Point(12, 478);
             this.CaptionView.Name = "CaptionView";
-            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.CaptionView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.CaptionView.Size = new System.Drawing.Size(864, 192);
             this.CaptionView.SpeakerSet = null;

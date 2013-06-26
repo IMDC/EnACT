@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace EnACT
 {
@@ -103,6 +104,14 @@ namespace EnACT
             //Enable Location Radio Button
             GB_Location.Enabled = true;
 
+            //Select alignment button
+            SelectAlignmentButton(SelectedCaption.Alignment);
+
+            //Enable alignment buttons
+            Button_LeftAlign.Enabled = true;
+            Button_CenterAlign.Enabled = true;
+            Button_RightAlign.Enabled = true;
+
             captionLoaded = true;
         }
         #endregion
@@ -153,10 +162,21 @@ namespace EnACT
             GB_Intensity.Enabled = false;
             GB_Location.Enabled = false;
 
+            //Deselect Alignment buttons
+            Button_LeftAlign.UseVisualStyleBackColor = true;
+            Button_CenterAlign.UseVisualStyleBackColor = true;
+            Button_RightAlign.UseVisualStyleBackColor = true;
+
+            //Disable alignment buttons
+            Button_LeftAlign.Enabled = false;
+            Button_CenterAlign.Enabled = false;
+            Button_RightAlign.Enabled = false;
+
             captionLoaded = false;
         }
         #endregion
 
+        #region Change SelectedCaption Properties
         /// <summary>
         /// Changes the emotion of the selected caption.
         /// </summary>
@@ -171,9 +191,55 @@ namespace EnACT
             //TODO implement this
         }
 
+        /// <summary>
+        /// Changes the Location of the selected Caption.
+        /// </summary>
+        /// <param name="l">The location to set the caption to.</param>
         public void ChangeLocation(ScreenLocation l)
         {
             SelectedCaption.Location = l;
         }
+
+        /// <summary>
+        /// Changes the Alignment of the selected Caption.
+        /// </summary>
+        /// <param name="a">The alignment to set the caption to.</param>
+        public void ChangeAlignment(Alignment a)
+        {
+            SelectedCaption.Alignment = a;
+            SelectAlignmentButton(a);
+        }
+        #endregion
+
+        #region SelectAlignmentButton
+        /// <summary>
+        /// Highlights the selected alignment button with a color to signify that it is the button
+        /// that has been selected.
+        /// </summary>
+        /// <param name="a">The alignment to select</param>
+        private void SelectAlignmentButton(Alignment a)
+        {
+            Color c = Color.BlanchedAlmond;
+
+            switch (a)
+            {
+                case Alignment.Left:
+                    Button_LeftAlign.BackColor = c;
+                    Button_CenterAlign.UseVisualStyleBackColor = true;
+                    Button_RightAlign.UseVisualStyleBackColor = true;
+                    break;
+                case Alignment.Center:
+                    Button_LeftAlign.UseVisualStyleBackColor = true;
+                    Button_CenterAlign.BackColor = c;
+                    Button_RightAlign.UseVisualStyleBackColor = true;
+                    break;
+                case Alignment.Right:
+                    Button_LeftAlign.UseVisualStyleBackColor = true;
+                    Button_CenterAlign.UseVisualStyleBackColor = true;
+                    Button_RightAlign.BackColor = c;
+                    break;
+            }
+        }
+        #endregion
     }
 }
