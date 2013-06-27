@@ -11,6 +11,10 @@ namespace EnACT
     public class CaptionWord
     {
         #region Fields and Properties
+        public const Emotion DEFAULT_EMOTION = Emotion.None;
+
+        public const Intensity DEFAULT_INTENSITY = Intensity.Low;
+
         /// <summary>
         /// The index of a caption that this word starts at.
         /// </summary>
@@ -54,8 +58,8 @@ namespace EnACT
         /// <param name="text">The text to be emoted</param>
         public CaptionWord(String text, int beginIndex)
         {
-            this.Emotion    = Emotion.None;
-            this.Intensity  = Intensity.None;
+            this.Emotion    = DEFAULT_EMOTION;
+            this.Intensity  = DEFAULT_INTENSITY;
             this.Text       = text;
             this.BeginIndex = beginIndex;
 

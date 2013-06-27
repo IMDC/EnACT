@@ -128,7 +128,12 @@ namespace EnACT
             SetGB_EmotionType(cw.Emotion);
 
             //Set Intensity only if there is an emotion set for this word.
-            if (cw.Emotion != Emotion.None && cw.Emotion != Emotion.Unknown)
+            if (cw.Emotion == Emotion.None || cw.Emotion == Emotion.Unknown)
+            {
+                ClearGB_Intensity();
+                GB_Intensity.Enabled = false;
+            }
+            else
             {
                 SetGB_Intensity(cw.Intensity);
             }
@@ -290,6 +295,15 @@ namespace EnACT
         public void ChangeEmotion(Emotion e)
         {
             SelectedCaptionWord.Emotion = e;
+            if (e == Emotion.None || e == Emotion.Unknown)
+            {
+                ClearGB_Intensity();
+                GB_Intensity.Enabled = false;
+            }
+            else
+            {
+                SetGB_Intensity(SelectedCaptionWord.Intensity);
+            }
         }
 
         /// <summary>
