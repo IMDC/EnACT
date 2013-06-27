@@ -80,6 +80,9 @@ namespace EnACT
                 HighlightCurrentWord();
         }
 
+        /// <summary>
+        /// Highlights the word that the caret is in.
+        /// </summary>
         private void HighlightCurrentWord()
         {
             int caret = SelectionStart;
@@ -171,14 +174,4 @@ namespace EnACT
         }
         #endregion
     }//Class
-
-    public class CaptionWordSelectedEventArgs : EventArgs
-    {
-        public CaptionWord SelectedWord { set; get; }
-
-        public CaptionWordSelectedEventArgs(CaptionWord selectedWord)
-        {
-            this.SelectedWord = selectedWord;
-        }
-    }
 }//Namespace
