@@ -32,14 +32,16 @@ namespace EnACT
             {
                 //If null clear the text and Caption
                 if (value == null)
-                {
                     caption = null;
-                    Text = String.Empty;
-                }
                 else
                 {
                     caption = value;
                     Text = caption.ToString();
+                    foreach (CaptionWord cw in Caption.WordList)
+                    {
+                        //Return it to the original Caption colour
+                        SetTextBackgroundColour(cw, CaptionStyle.GetColourOf(cw));
+                    }
                 }
             }
             get { return caption; }
@@ -107,6 +109,24 @@ namespace EnACT
                     cw.IsSelected = false;
                 }
             }
+        }
+
+        /// <summary>
+        /// Clears all text from the CaptionTextBox control. Deselects all CaptionWords and removes
+        /// the current Caption reference.
+        /// </summary>
+        public new void Clear()
+        {
+            base.Clear();
+
+            if (Caption != null)
+            {
+                //Deselect each caption
+                foreach (CaptionWord cw in Caption.WordList) { cw.IsSelected = false; }
+            }
+
+            //Clear Caption
+            Caption = null;
         }
         #endregion
 

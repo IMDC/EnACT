@@ -247,7 +247,7 @@ namespace EnACT
             SelectedCaption = null;
 
             //Clear CaptionTextBox
-            CaptionTextBox.Caption = null;
+            CaptionTextBox.Clear();
 
             //Clear GroupBox radio buttons
             ClearGB_EmotionType();
