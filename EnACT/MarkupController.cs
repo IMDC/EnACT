@@ -61,7 +61,7 @@ namespace EnACT
         //Caption Text Alignment Controls
         public Button Button_LeftAlign          { set; get; }
         public Button Button_CenterAlign        { set; get; }
-        public Button Button_RightAlign          { set; get; }
+        public Button Button_RightAlign         { set; get; }
 
         //CaptionTextBox
         public CaptionTextBox CaptionTextBox    { set; get; }
@@ -106,9 +106,9 @@ namespace EnACT
             SetAlignmentButton(SelectedCaption.Alignment);
 
             //Enable alignment buttons
-            Button_LeftAlign.Enabled = true;
+            Button_LeftAlign.Enabled   = true;
             Button_CenterAlign.Enabled = true;
-            Button_RightAlign.Enabled = true;
+            Button_RightAlign.Enabled  = true;
 
             captionLoaded = true;
         }
@@ -145,11 +145,11 @@ namespace EnACT
         {
             switch (e)
             {
-                case Emotion.None: RB_None.Checked = true; break;
-                case Emotion.Happy: RB_Happy.Checked = true; break;
-                case Emotion.Sad: RB_Sad.Checked = true; break;
-                case Emotion.Fear: RB_Fear.Checked = true; break;
-                case Emotion.Anger: RB_Anger.Checked = true; break;
+                case Emotion.None:  RB_None.Checked    = true; break;
+                case Emotion.Happy: RB_Happy.Checked   = true; break;
+                case Emotion.Sad:   RB_Sad.Checked     = true; break;
+                case Emotion.Fear:  RB_Fear.Checked    = true; break;
+                case Emotion.Anger: RB_Anger.Checked   = true; break;
                 default: throw new ArgumentException("Invalid Emotion: " + e.GetHashCode());
             }
 
@@ -167,10 +167,10 @@ namespace EnACT
             //Set Intensity
             switch (i)
             {
-                case Intensity.High: RB_HighIntensity.Checked = true; break;
-                case Intensity.Medium: RB_MediumIntensity.Checked = true; break;
-                case Intensity.Low: RB_LowIntensity.Checked = true; break;
-                case Intensity.None: ClearGB_Intensity(); break;
+                case Intensity.High:    RB_HighIntensity.Checked   = true; break;
+                case Intensity.Medium:  RB_MediumIntensity.Checked = true; break;
+                case Intensity.Low:     RB_LowIntensity.Checked    = true; break;
+                case Intensity.None:    ClearGB_Intensity();               break;
                 default: throw new ArgumentException("Invalid Intensity: " + i.GetHashCode());
             }
 
@@ -188,15 +188,15 @@ namespace EnACT
             //Set Location
             switch (l)
             {
-                case ScreenLocation.TopLeft: RB_TopLeft.Checked = true; break;
-                case ScreenLocation.TopCentre: RB_TopCenter.Checked = true; break;
-                case ScreenLocation.TopRight: RB_TopRight.Checked = true; break;
-                case ScreenLocation.MiddleLeft: RB_MiddleLeft.Checked = true; break;
-                case ScreenLocation.MiddleCenter: RB_MiddleCenter.Checked = true; break;
-                case ScreenLocation.MiddleRight: RB_MiddleRight.Checked = true; break;
-                case ScreenLocation.BottomLeft: RB_BottomLeft.Checked = true; break;
-                case ScreenLocation.BottomCentre: RB_BottomCenter.Checked = true; break;
-                case ScreenLocation.BottomRight: RB_BottomRight.Checked = true; break;
+                case ScreenLocation.TopLeft:        RB_TopLeft.Checked           = true; break;
+                case ScreenLocation.TopCentre:      RB_TopCenter.Checked         = true; break;
+                case ScreenLocation.TopRight:       RB_TopRight.Checked          = true; break;
+                case ScreenLocation.MiddleLeft:     RB_MiddleLeft.Checked        = true; break;
+                case ScreenLocation.MiddleCenter:   RB_MiddleCenter.Checked      = true; break;
+                case ScreenLocation.MiddleRight:    RB_MiddleRight.Checked       = true; break;
+                case ScreenLocation.BottomLeft:     RB_BottomLeft.Checked        = true; break;
+                case ScreenLocation.BottomCentre:   RB_BottomCenter.Checked      = true; break;
+                case ScreenLocation.BottomRight:    RB_BottomRight.Checked       = true; break;
                 default: throw new ArgumentException("Invalid Location: " + l.GetHashCode());
             }
 

@@ -127,7 +127,7 @@ namespace EnACT
         public void SetTextBackgroundColour(int startPos, int length, Color highlightColour)
         {
             //Save old values
-            int oldStart = SelectionStart;
+            int oldStart  = SelectionStart;
             int oldLength = SelectionLength;
 
             //Colour given values

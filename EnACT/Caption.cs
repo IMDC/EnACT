@@ -14,11 +14,11 @@ namespace EnACT
     public enum Emotion 
     {
 		Unknown = -1,
-		None = 0,
-		Happy = 1,
-		Sad = 2,
-		Fear = 3,
-		Anger = 4,
+		None    = 0,
+		Happy   = 1,
+		Sad     = 2,
+		Fear    = 3,
+		Anger   = 4,
 	};
 
     /// <summary>
@@ -26,10 +26,10 @@ namespace EnACT
     /// </summary>
 	public enum Intensity 
     {
-		None = 0,
-		Low = 1,
+		None   = 0,
+		Low    = 1,
 		Medium = 2,
-		High = 3
+		High   = 3
 	};
 
     /// <summary>
@@ -38,15 +38,15 @@ namespace EnACT
     /// </summary>
 	public enum ScreenLocation 
     {
-		BottomLeft = 1,
+		BottomLeft   = 1,
 		BottomCentre = 2,
-		BottomRight = 3,
-		MiddleLeft = 4,
+		BottomRight  = 3,
+		MiddleLeft   = 4,
 		MiddleCenter = 5,
-		MiddleRight = 6,
-		TopLeft = 7,
-		TopCentre = 8,
-		TopRight = 9
+		MiddleRight  = 6,
+		TopLeft      = 7,
+		TopCentre    = 8,
+		TopRight     = 9
 	};
 
     /// <summary>
@@ -54,9 +54,9 @@ namespace EnACT
     /// </summary>
 	public enum Alignment
     {
-		Left = 0,
+		Left   = 0,
 		Center = 1,
-		Right = 2
+		Right  = 2
 	}
     #endregion
 
@@ -227,11 +227,11 @@ namespace EnACT
         /// <param name="End">The timestamp representing the ending of the caption</param>
         public Caption(String line, Speaker speaker, String Begin, String End)
         {
-            this.Begin = new Timestamp(Begin);
-            this.End = new Timestamp(End);
+            this.Begin     = new Timestamp(Begin);
+            this.End       = new Timestamp(End);
 
-            this.Speaker = speaker;
-            this.Location = ScreenLocation.BottomCentre;
+            this.Speaker   = speaker;
+            this.Location  = ScreenLocation.BottomCentre;
             this.Alignment = Alignment.Center;
 
             this.WordList = new CaptionWordList(line);

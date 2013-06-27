@@ -54,9 +54,9 @@ namespace EnACT
         /// <param name="text">The text to be emoted</param>
         public CaptionWord(String text, int beginIndex)
         {
-            this.Emotion = Emotion.None;
-            this.Intensity = Intensity.None;
-            this.Text = text;
+            this.Emotion    = Emotion.None;
+            this.Intensity  = Intensity.None;
+            this.Text       = text;
             this.BeginIndex = beginIndex;
 
             this.EndIndex = beginIndex + Length;
