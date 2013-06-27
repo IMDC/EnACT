@@ -62,7 +62,8 @@ namespace EnACT
         protected override void OnSelectionChanged(EventArgs e)
         {
             base.OnSelectionChanged(e);
-            Console.WriteLine("Index: {0}, Length: {1}, Text: \"{2}\"", SelectionStart, SelectionLength, SelectedText);
+            //Console.WriteLine("Index: {0}, Length: {1}, Text: \"{2}\"", SelectionStart, 
+            //    SelectionLength, SelectedText);
 
             /* In order to avoid a StackOverflow exception, this method will return before calling
              * HighlightCurrentWord. This is due to the fact that in order to highlight a word, it
@@ -93,14 +94,14 @@ namespace EnACT
                 //select it.
                 if (cw.Contains(caret) && !cw.IsSelected)
                 {
-                    SetTextBackgroundColour(cw, SystemColors.Highlight);
+                    SetTextBackgroundColour(cw, SystemColors.HighlightText, SystemColors.Highlight);
                     cw.IsSelected = true;
                     OnCaptionWordSelected(new CaptionWordSelectedEventArgs(cw));
                 }
                 //If the word doesn't contain the caret but is selected, then unselect it.
                 else if(!cw.Contains(caret) && cw.IsSelected)
                 {
-                    SetTextBackgroundColour(cw, Color.White);
+                    SetTextBackgroundColour(cw, SystemColors.ControlText, Color.White);
                     cw.IsSelected = false;
                 }
             }
@@ -113,9 +114,10 @@ namespace EnACT
         /// selection, restoring it after highlighting is done.
         /// </summary>
         /// <param name="word">The CaptionWord to highlight</param>
+        /// <param name="textColour">The colour to change the text colour to.</param>
         /// <param name="highlightColour">The colour to change the background colour to.</param>
-        public void SetTextBackgroundColour(CaptionWord word, Color highlightColour)
-        { this.SetTextBackgroundColour(word.BeginIndex, word.Length, highlightColour); }
+        public void SetTextBackgroundColour(CaptionWord word, Color textColour, Color highlightColour)
+        { this.SetTextBackgroundColour(word.BeginIndex, word.Length, textColour, highlightColour); }
 
         /// <summary>
         /// Sets the background colour of the text specified by the arguments. Preserves the previous
@@ -123,8 +125,9 @@ namespace EnACT
         /// </summary>
         /// <param name="startPos">Start position of text to be set.</param>
         /// <param name="length">Length of text to be set.</param>
+        /// <param name="textColour">The colour to change the text colour to.</param>
         /// <param name="highlightColour">The colour to change the background colour to.</param>
-        public void SetTextBackgroundColour(int startPos, int length, Color highlightColour)
+        public void SetTextBackgroundColour(int startPos, int length, Color textColour, Color highlightColour)
         {
             //Save old values
             int oldStart  = SelectionStart;
@@ -132,6 +135,7 @@ namespace EnACT
 
             //Colour given values
             SimpleSelect(startPos, length);
+            SelectionColor = textColour;
             SelectionBackColor = highlightColour;
 
             //Reselect old values
