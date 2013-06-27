@@ -94,14 +94,16 @@ namespace EnACT
                 //select it.
                 if (cw.Contains(caret) && !cw.IsSelected)
                 {
-                    SetTextBackgroundColour(cw, SystemColors.HighlightText, SystemColors.Highlight);
+                    //SetTextBackgroundColour(cw, SystemColors.HighlightText, SystemColors.Highlight);
+                    SetTextBackgroundColour(cw, CaptionStyle.Highlighted);
                     cw.IsSelected = true;
                     OnCaptionWordSelected(new CaptionWordSelectedEventArgs(cw));
                 }
                 //If the word doesn't contain the caret but is selected, then unselect it.
                 else if(!cw.Contains(caret) && cw.IsSelected)
                 {
-                    SetTextBackgroundColour(cw, SystemColors.ControlText, Color.White);
+                    //Return it to the original Caption colour
+                    SetTextBackgroundColour(cw, CaptionStyle.GetColourOf(cw));
                     cw.IsSelected = false;
                 }
             }
@@ -113,11 +115,10 @@ namespace EnACT
         /// Sets the background colour of the text specified by the arguments. Preserves the previous
         /// selection, restoring it after highlighting is done.
         /// </summary>
-        /// <param name="word">The CaptionWord to highlight</param>
-        /// <param name="textColour">The colour to change the text colour to.</param>
-        /// <param name="highlightColour">The colour to change the background colour to.</param>
-        public void SetTextBackgroundColour(CaptionWord word, Color textColour, Color highlightColour)
-        { this.SetTextBackgroundColour(word.BeginIndex, word.Length, textColour, highlightColour); }
+        /// <param name="word">The CaptionWord to highlight.</param>
+        /// <param name="style">The CaptionStyle to use.</param>
+        public void SetTextBackgroundColour(CaptionWord word, CaptionStyle style)
+        { this.SetTextBackgroundColour(word.BeginIndex, word.Length, style.TextColour, style.BackColour); }
 
         /// <summary>
         /// Sets the background colour of the text specified by the arguments. Preserves the previous

@@ -94,6 +94,7 @@ namespace EnACT
             this.SelectedCaption = c;
 
             //Load Textbox
+            CaptionTextBox.Clear();
             CaptionTextBox.Caption = c;
 
             //Clear Groups
@@ -366,6 +367,7 @@ namespace EnACT
         }
         #endregion
 
+        #region Event Handlers
         /// <summary>
         /// Event Handler for CaptionTextBox.CaptionWordSelected event. Loads the selected 
         /// CaptionWord into the associated controls.
@@ -380,5 +382,6 @@ namespace EnACT
                 LoadWord(e.SelectedWord);
             }
         }
+        #endregion
     }
 }
