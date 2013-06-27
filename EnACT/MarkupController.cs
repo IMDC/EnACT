@@ -100,26 +100,10 @@ namespace EnACT
             ClearGB_EmotionType();
             ClearGB_Intensity();
 
-            //Set Location
-            switch (c.Location)
-            {
-                case ScreenLocation.TopLeft:        RB_TopLeft.Checked      = true; break;
-                case ScreenLocation.TopCentre:      RB_TopCenter.Checked    = true; break;
-                case ScreenLocation.TopRight:       RB_TopRight.Checked     = true; break;
-                case ScreenLocation.MiddleLeft:     RB_MiddleLeft.Checked   = true; break;
-                case ScreenLocation.MiddleCenter:   RB_MiddleCenter.Checked = true; break;
-                case ScreenLocation.MiddleRight:    RB_MiddleRight.Checked  = true; break;
-                case ScreenLocation.BottomLeft:     RB_BottomLeft.Checked   = true; break;
-                case ScreenLocation.BottomCentre:   RB_BottomCenter.Checked = true; break;
-                case ScreenLocation.BottomRight:    RB_BottomRight.Checked  = true; break;
-                default: throw new Exception("Invalid Location: " + c.Location.GetHashCode());
-            }
-
-            //Enable Location Radio Button
-            GB_Location.Enabled = true;
+            SetGB_Location(c.Location);
 
             //Select alignment button
-            SelectAlignmentButton(SelectedCaption.Alignment);
+            SetAlignmentButton(SelectedCaption.Alignment);
 
             //Enable alignment buttons
             Button_LeftAlign.Enabled = true;
@@ -141,35 +125,83 @@ namespace EnACT
             SelectedCaptionWord = cw;
 
             //Set Emotion
-            switch (cw.Emotion)
+            SetGB_EmotionType(cw.Emotion);
+
+            //Set Intensity only if there is an emotion set for this word.
+            if (cw.Emotion != Emotion.None && cw.Emotion != Emotion.Unknown)
+            {
+                SetGB_Intensity(cw.Intensity);
+            }
+        }
+        #endregion
+
+        #region Set Groupbox Methods
+        /// <summary>
+        /// Sets a radiobutton in GB_Emotiontype to checked based on which Emotion is given and
+        /// enables the GroupBox.
+        /// </summary>
+        /// <param name="e">The Emotion to set.</param>
+        private void SetGB_EmotionType(Emotion e)
+        {
+            switch (e)
             {
                 case Emotion.None: RB_None.Checked = true; break;
                 case Emotion.Happy: RB_Happy.Checked = true; break;
                 case Emotion.Sad: RB_Sad.Checked = true; break;
                 case Emotion.Fear: RB_Fear.Checked = true; break;
                 case Emotion.Anger: RB_Anger.Checked = true; break;
-                default: break;
+                default: throw new ArgumentException("Invalid Emotion: " + e.GetHashCode());
             }
-            
+
             //Enable Emotion Radio Buttons
             GB_EmotionType.Enabled = true;
+        }
 
-            //Set Intensity only if there is an emotion set for this word.
-            if (cw.Emotion != Emotion.None && cw.Emotion != Emotion.Unknown)
+        /// <summary>
+        /// Sets a radiobutton in GB_Intensity to checked based on which Intensity is given and
+        /// enables the GroupBox.
+        /// </summary>
+        /// <param name="i">The Intensity to set.</param>
+        private void SetGB_Intensity(Intensity i)
+        {
+            //Set Intensity
+            switch (i)
             {
-                //Set Intensity
-                switch (cw.Intensity)
-                {
-                    case Intensity.High: RB_HighIntensity.Checked = true; break;
-                    case Intensity.Medium: RB_MediumIntensity.Checked = true; break;
-                    case Intensity.Low: RB_LowIntensity.Checked = true; break;
-                    case Intensity.None: ClearGB_Intensity(); break;
-                    default: break;
-                }
-
-                //Enable Intensity Radio Buttons
-                GB_Intensity.Enabled = true;
+                case Intensity.High: RB_HighIntensity.Checked = true; break;
+                case Intensity.Medium: RB_MediumIntensity.Checked = true; break;
+                case Intensity.Low: RB_LowIntensity.Checked = true; break;
+                case Intensity.None: ClearGB_Intensity(); break;
+                default: throw new ArgumentException("Invalid Intensity: " + i.GetHashCode());
             }
+
+            //Enable Intensity Radio Buttons
+            GB_Intensity.Enabled = true;
+        }
+
+        /// <summary>
+        /// Sets a radiobutton in GB_Location to checked based on which Location is given and
+        /// enables the GroupBox.
+        /// </summary>
+        /// <param name="l">The ScreenLocation to set.</param>
+        private void SetGB_Location(ScreenLocation l)
+        {
+            //Set Location
+            switch (l)
+            {
+                case ScreenLocation.TopLeft: RB_TopLeft.Checked = true; break;
+                case ScreenLocation.TopCentre: RB_TopCenter.Checked = true; break;
+                case ScreenLocation.TopRight: RB_TopRight.Checked = true; break;
+                case ScreenLocation.MiddleLeft: RB_MiddleLeft.Checked = true; break;
+                case ScreenLocation.MiddleCenter: RB_MiddleCenter.Checked = true; break;
+                case ScreenLocation.MiddleRight: RB_MiddleRight.Checked = true; break;
+                case ScreenLocation.BottomLeft: RB_BottomLeft.Checked = true; break;
+                case ScreenLocation.BottomCentre: RB_BottomCenter.Checked = true; break;
+                case ScreenLocation.BottomRight: RB_BottomRight.Checked = true; break;
+                default: throw new ArgumentException("Invalid Location: " + l.GetHashCode());
+            }
+
+            //Enable Location Radio Button
+            GB_Location.Enabled = true;
         }
         #endregion
 
@@ -252,14 +284,18 @@ namespace EnACT
 
         #region Change SelectedCaption Properties
         /// <summary>
-        /// Changes the emotion of the selected caption.
+        /// Changes the emotion of the selected CaptionWord or words.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">The Emotion to set the Caption with.</param>
         public void ChangeEmotion(Emotion e)
         {
             SelectedCaptionWord.Emotion = e;
         }
 
+        /// <summary>
+        /// Changes the Intensity of the selected CaptionWord or words.
+        /// </summary>
+        /// <param name="i">The Intensity to set the Caption with.</param>
         public void ChangeIntensity(Intensity i)
         {
             SelectedCaptionWord.Intensity = i;
@@ -281,17 +317,17 @@ namespace EnACT
         public void ChangeAlignment(Alignment a)
         {
             SelectedCaption.Alignment = a;
-            SelectAlignmentButton(a);
+            SetAlignmentButton(a);
         }
         #endregion
 
-        #region SelectAlignmentButton
+        #region SetAlignmentButton
         /// <summary>
         /// Highlights the selected alignment button with a color to signify that it is the button
         /// that has been selected.
         /// </summary>
         /// <param name="a">The alignment to select</param>
-        private void SelectAlignmentButton(Alignment a)
+        private void SetAlignmentButton(Alignment a)
         {
             Color c = Color.BlanchedAlmond;
 
