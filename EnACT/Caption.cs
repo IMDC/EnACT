@@ -13,51 +13,51 @@ namespace EnACT
     /// </summary>
     public enum Emotion 
     {
-		Unknown = -1,
-		None    = 0,
-		Happy   = 1,
-		Sad     = 2,
-		Fear    = 3,
-		Anger   = 4,
-	};
+        Unknown = -1,
+        None    = 0,
+        Happy   = 1,
+        Sad     = 2,
+        Fear    = 3,
+        Anger   = 4,
+    };
 
     /// <summary>
     /// The Intensity enum represents how intense the emotion in a caption will be.
     /// </summary>
-	public enum Intensity 
+    public enum Intensity 
     {
-		None   = 0,
-		Low    = 1,
-		Medium = 2,
-		High   = 3
-	};
+        None   = 0,
+        Low    = 1,
+        Medium = 2,
+        High   = 3
+    };
 
     /// <summary>
     /// The Location Enum represents in which of the 9 possible areas a caption
     /// will be displayed in.
     /// </summary>
-	public enum ScreenLocation 
+    public enum ScreenLocation 
     {
-		BottomLeft   = 1,
-		BottomCentre = 2,
-		BottomRight  = 3,
-		MiddleLeft   = 4,
-		MiddleCenter = 5,
-		MiddleRight  = 6,
-		TopLeft      = 7,
-		TopCentre    = 8,
-		TopRight     = 9
-	};
+        BottomLeft   = 1,
+        BottomCentre = 2,
+        BottomRight  = 3,
+        MiddleLeft   = 4,
+        MiddleCenter = 5,
+        MiddleRight  = 6,
+        TopLeft      = 7,
+        TopCentre    = 8,
+        TopRight     = 9
+    };
 
     /// <summary>
     /// The Alignment enum represents the text alignment of a caption.
     /// </summary>
-	public enum Alignment
+    public enum Alignment
     {
-		Left   = 0,
-		Center = 1,
-		Right  = 2
-	}
+        Left   = 0,
+        Center = 1,
+        Right  = 2
+    }
     #endregion
 
     #region Caption Class
