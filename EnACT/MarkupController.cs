@@ -154,18 +154,22 @@ namespace EnACT
             //Enable Emotion Radio Buttons
             GB_EmotionType.Enabled = true;
 
-            //Set Intensity
-            switch (cw.Intensity)
+            //Set Intensity only if there is an emotion set for this word.
+            if (cw.Emotion != Emotion.None && cw.Emotion != Emotion.Unknown)
             {
-                case Intensity.High: RB_HighIntensity.Checked = true; break;
-                case Intensity.Medium: RB_MediumIntensity.Checked = true; break;
-                case Intensity.Low: RB_LowIntensity.Checked = true; break;
-                case Intensity.None: ClearGB_Intensity(); break;
-                default: break;
-            }
+                //Set Intensity
+                switch (cw.Intensity)
+                {
+                    case Intensity.High: RB_HighIntensity.Checked = true; break;
+                    case Intensity.Medium: RB_MediumIntensity.Checked = true; break;
+                    case Intensity.Low: RB_LowIntensity.Checked = true; break;
+                    case Intensity.None: ClearGB_Intensity(); break;
+                    default: break;
+                }
 
-            //Enable Intensity Radio Buttons
-            GB_Intensity.Enabled = true;
+                //Enable Intensity Radio Buttons
+                GB_Intensity.Enabled = true;
+            }
         }
         #endregion
 
