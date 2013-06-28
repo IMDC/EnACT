@@ -118,7 +118,7 @@ namespace EnACT
             MarkupController.CaptionTextBox     = this.CaptionTextBox;
 
             //Hook up events
-            MarkupController.HookUpEvents();
+            MarkupController.SubscribeToEvents();
 
             //Set the controls to a disabled state with no caption
             MarkupController.ClearCaption();

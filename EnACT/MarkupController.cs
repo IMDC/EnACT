@@ -16,11 +16,6 @@ namespace EnACT
     {
         #region Fields and Properties
         /// <summary>
-        /// Boolean that signifies if a caption has been selected by the user to mark-up.
-        /// </summary>
-        private bool captionLoaded;
-
-        /// <summary>
         /// The CaptionWord selected by the user if there is only one word selected.
         /// </summary>
         public CaptionWord SelectedCaptionWord { set; get; }
@@ -68,15 +63,12 @@ namespace EnACT
         #endregion
 
         #region Constructor and Init Methods
-        public MarkupController() 
-        {
-            captionLoaded = false;
-        }
+        public MarkupController() { }
 
         /// <summary>
         /// Hooks up events for controls associated with this controller.
         /// </summary>
-        public void HookUpEvents()
+        public void SubscribeToEvents()
         {
             CaptionTextBox.CaptionWordSelected += new EventHandler<CaptionWordSelectedEventArgs>
                 (this.CaptionTextBox_CaptionWordSelected);
@@ -110,8 +102,6 @@ namespace EnACT
             Button_LeftAlign.Enabled   = true;
             Button_CenterAlign.Enabled = true;
             Button_RightAlign.Enabled  = true;
-
-            captionLoaded = true;
         }
         #endregion
 
@@ -268,8 +258,6 @@ namespace EnACT
             Button_LeftAlign.Enabled = false;
             Button_CenterAlign.Enabled = false;
             Button_RightAlign.Enabled = false;
-
-            captionLoaded = false;
         }
         #endregion
 
