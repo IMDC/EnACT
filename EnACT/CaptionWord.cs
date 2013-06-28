@@ -81,6 +81,21 @@ namespace EnACT
         }
 
         /// <summary>
+        /// Checks to see if this CaptionWord is contained in the given selection.
+        /// </summary>
+        /// <param name="selectionStart">The start position of the selection.</param>
+        /// <param name="selectionLength">The length of the selection.</param>
+        /// <returns>True if the selection</returns>
+        public bool ContainedInSelection(int selectionStart, int selectionLength)
+        {
+            int selectionEnd = selectionStart + selectionLength;
+            return ((BeginIndex <= selectionStart && selectionStart <= EndIndex)
+                ||  (BeginIndex <= selectionEnd && selectionEnd <= EndIndex)
+                ||  (selectionStart <= BeginIndex && EndIndex <= selectionEnd))
+                ? true : false;
+        }
+
+        /// <summary>
         /// Returns the text that this word represents
         /// </summary>
         /// <returns>The text value</returns>
