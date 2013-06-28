@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using System.ComponentModel;
 
 namespace EnACT
 {
@@ -146,7 +147,7 @@ namespace EnACT
                 case Emotion.Sad:   RB_Sad.Checked     = true; break;
                 case Emotion.Fear:  RB_Fear.Checked    = true; break;
                 case Emotion.Anger: RB_Anger.Checked   = true; break;
-                default: throw new ArgumentException("Invalid Emotion: " + e.GetHashCode());
+                default: throw new InvalidEnumArgumentException("e", e.GetHashCode(), typeof(Emotion));
             }
 
             //Enable Emotion Radio Buttons
@@ -167,7 +168,7 @@ namespace EnACT
                 case Intensity.Medium:  RB_MediumIntensity.Checked = true; break;
                 case Intensity.Low:     RB_LowIntensity.Checked    = true; break;
                 case Intensity.None:    ClearGB_Intensity();               break;
-                default: throw new ArgumentException("Invalid Intensity: " + i.GetHashCode());
+                default: throw new InvalidEnumArgumentException("i", i.GetHashCode(), typeof(Intensity));
             }
 
             //Enable Intensity Radio Buttons
@@ -193,7 +194,7 @@ namespace EnACT
                 case ScreenLocation.BottomLeft:     RB_BottomLeft.Checked        = true; break;
                 case ScreenLocation.BottomCentre:   RB_BottomCenter.Checked      = true; break;
                 case ScreenLocation.BottomRight:    RB_BottomRight.Checked       = true; break;
-                default: throw new ArgumentException("Invalid Location: " + l.GetHashCode());
+                default: throw new InvalidEnumArgumentException("l", l.GetHashCode(), typeof(ScreenLocation));
             }
 
             //Enable Location Radio Button
@@ -351,6 +352,7 @@ namespace EnACT
                     Button_CenterAlign.UseVisualStyleBackColor = true;
                     Button_RightAlign.BackColor = c;
                     break;
+                default: throw new InvalidEnumArgumentException("a", a.GetHashCode(), typeof(Alignment));
             }
         }
         #endregion

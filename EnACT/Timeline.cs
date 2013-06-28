@@ -622,9 +622,9 @@ namespace EnACT
                     //Nothing to do here
                     return;
 
-                default: //Should not happen, so throw an exception if it does
-                    throw new Exception(String.Format("mouseSelection.Action {0} not in code",
-                        mouseSelection.Action));
+                //Should not happen, so throw an exception if it does
+                default: throw new InvalidEnumArgumentException("mouseSelection.Action", 
+                    mouseSelection.Action.GetHashCode(), typeof(TimelineMouseAction)); ;
             }
 
             Redraw();
@@ -1084,7 +1084,7 @@ namespace EnACT
                 case 6: return ScreenLocation.BottomLeft;
                 case 7: return ScreenLocation.BottomCentre;
                 case 8: return ScreenLocation.BottomRight;
-                default: throw new Exception("Bad Case:" + row);
+                default: throw new ArgumentException("Bad Case:" + row);
             }
         }
         #endregion

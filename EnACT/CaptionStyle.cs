@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.ComponentModel;
 
 namespace EnACT
 {
@@ -104,7 +105,7 @@ namespace EnACT
                         case Intensity.Medium:  return Happy_Medium;
                         case Intensity.High:    return Happy_High;
                         case Intensity.None:    return None_Style;
-                        default: throw new ArgumentException("Invalid Intensity: " + i.GetHashCode());
+                        default: throw new InvalidEnumArgumentException("i", i.GetHashCode(), typeof(Intensity));
                     }
                 case Emotion.Sad:
                     switch (i)
@@ -113,7 +114,7 @@ namespace EnACT
                         case Intensity.Medium:  return Sad_Medium;
                         case Intensity.High:    return Sad_High;
                         case Intensity.None:    return None_Style;
-                        default: throw new ArgumentException("Invalid Intensity: " + i.GetHashCode());
+                        default: throw new InvalidEnumArgumentException("i", i.GetHashCode(), typeof(Intensity));
                     }
                 case Emotion.Fear:
                     switch (i)
@@ -122,7 +123,7 @@ namespace EnACT
                         case Intensity.Medium:  return Fear_Medium;
                         case Intensity.High:    return Fear_High;
                         case Intensity.None:    return None_Style;
-                        default: throw new ArgumentException("Invalid Intensity: " + i.GetHashCode());
+                        default: throw new InvalidEnumArgumentException("i", i.GetHashCode(), typeof(Intensity));
                     }
                 case Emotion.Anger:
                     switch (i)
@@ -131,11 +132,11 @@ namespace EnACT
                         case Intensity.Medium:  return Anger_Medium;
                         case Intensity.High:    return Anger_High;
                         case Intensity.None:    return None_Style;
-                        default: throw new ArgumentException("Invalid Intensity: " + i.GetHashCode());
+                        default: throw new InvalidEnumArgumentException("i", i.GetHashCode(), typeof(Intensity));
                     }
                 case Emotion.None:
                     return None_Style;
-                default: throw new ArgumentException("Invalid Emotion: " + e.GetHashCode());
+                default: throw new InvalidEnumArgumentException("e", e.GetHashCode(), typeof(Emotion));
             }
         }
         #endregion

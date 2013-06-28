@@ -345,6 +345,7 @@ namespace EnACT
             int c = e.ColumnIndex;
             switch (e.ColumnIndex)
             {
+                case NPOS: break;
                 //Set Begin, End, or Duration value
                 case BPOS:
                 case EPOS:
@@ -377,7 +378,8 @@ namespace EnACT
                     }
                     e.ParsingApplied = true;
                     break;
-                default: break;
+                case TPOS: break;
+                default: throw new ArgumentException("Invalid Column " + e.ColumnIndex, "e.ColumnIndex");
             }
             base.OnCellParsing(e);
         }
