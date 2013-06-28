@@ -83,8 +83,11 @@ namespace EnACT
         /// <param name="c">The caption to load.</param>
         public void LoadCaption(Caption c)
         {
+            //Clear Selected Word
+            SelectedCaptionWord = null;
+
             //Set Caption
-            this.SelectedCaption = c;
+            SelectedCaption = c;
 
             //Load Textbox
             CaptionTextBox.Clear();
@@ -93,6 +96,10 @@ namespace EnACT
             //Clear Groups
             ClearGB_EmotionType();
             ClearGB_Intensity();
+
+            //Disable Groups
+            GB_EmotionType.Enabled = false;
+            GB_Intensity.Enabled = false;
 
             SetGB_Location(c.Location);
 
