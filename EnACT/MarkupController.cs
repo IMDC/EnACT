@@ -73,6 +73,8 @@ namespace EnACT
         {
             CaptionTextBox.CaptionWordSelected += new EventHandler<CaptionWordSelectedEventArgs>
                 (this.CaptionTextBox_CaptionWordSelected);
+            CaptionTextBox.MultipleCaptionWordsSelected += new EventHandler
+                (this.CaptionTextBox_MultipleCaptionWordsSelected);
             
         }
         #endregion
@@ -292,7 +294,23 @@ namespace EnACT
         /// <param name="e">The Emotion to set the Caption with.</param>
         public void ChangeEmotion(Emotion e)
         {
-            SelectedCaptionWord.Emotion = e;
+            //Determine MarkupType
+            switch (CaptionTextBox.SelectionMode)
+            {
+                case CaptionTextBoxSelectionMode.NoSelection:
+                    throw new Exception("No selected caption to markup."); //Should not happen.
+                case CaptionTextBoxSelectionMode.SingleWordSelection:
+                    SelectedCaptionWord.Emotion = e;
+                    break;
+                case CaptionTextBoxSelectionMode.MultiWordSelection:
+                    foreach (CaptionWord cw in SelectedCaption.WordList)
+                    {
+                        if (cw.IsSelected) { cw.Emotion = e; }
+                    }
+                    break;
+                default: throw new InvalidEnumArgumentException("e", e.GetHashCode(), typeof(Emotion));
+            }   
+
             if (e == Emotion.None || e == Emotion.Unknown)
             {
                 ClearGB_Intensity();
@@ -310,7 +328,21 @@ namespace EnACT
         /// <param name="i">The Intensity to set the Caption with.</param>
         public void ChangeIntensity(Intensity i)
         {
-            SelectedCaptionWord.Intensity = i;
+            switch (CaptionTextBox.SelectionMode)
+            {
+                case CaptionTextBoxSelectionMode.NoSelection:
+                    throw new Exception("No selected caption to markup."); //Should not happen.
+                case CaptionTextBoxSelectionMode.SingleWordSelection: 
+                    SelectedCaptionWord.Intensity = i; 
+                    break;
+                case CaptionTextBoxSelectionMode.MultiWordSelection:
+                    foreach (CaptionWord cw in SelectedCaption.WordList)
+                    {
+                        if (cw.IsSelected) { cw.Intensity = i; }
+                    }
+                    break;
+                default: throw new InvalidEnumArgumentException("i", i.GetHashCode(), typeof(Intensity));
+            }    
         }
 
         /// <summary>
@@ -389,6 +421,7 @@ namespace EnACT
         /// <param name="e">Event Args</param>
         private void CaptionTextBox_MultipleCaptionWordsSelected(object sender, EventArgs e)
         {
+            Console.WriteLine("Multiple Words Selected!");
             ClearGB_EmotionType();
 
             ClearGB_Intensity();

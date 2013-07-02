@@ -86,7 +86,7 @@ namespace EnACT
         /// <param name="cw">The CaptionWord to get the style of.</param>
         /// <returns></returns>
         public static CaptionStyle GetColourOf(CaptionWord cw)
-        { return GetColourOf(cw.Emotion, cw.Intensity); }
+        { return GetStyleOf(cw.Emotion, cw.Intensity); }
 
         /// <summary>
         /// Gets the Color of a CaptionWord given the specified Emotion type and Intensity.
@@ -94,7 +94,7 @@ namespace EnACT
         /// <param name="e">The emotion of the colour.</param>
         /// <param name="i">The intensity of the colour.</param>
         /// <returns></returns>
-        public static CaptionStyle GetColourOf(Emotion e, Intensity i)
+        public static CaptionStyle GetStyleOf(Emotion e, Intensity i)
         {
             switch (e)
             {
