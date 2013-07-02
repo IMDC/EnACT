@@ -71,11 +71,11 @@ namespace EnACT
         /// </summary>
         public void SubscribeToEvents()
         {
+            CaptionTextBox.NothingSelected += new EventHandler(this.CaptionTextBox_NothingSelected);
             CaptionTextBox.CaptionWordSelected += new EventHandler<CaptionWordSelectedEventArgs>
                 (this.CaptionTextBox_CaptionWordSelected);
             CaptionTextBox.MultipleCaptionWordsSelected += new EventHandler
                 (this.CaptionTextBox_MultipleCaptionWordsSelected);
-            
         }
         #endregion
 
@@ -404,6 +404,23 @@ namespace EnACT
         #endregion
 
         #region Event Handlers
+        /// <summary>
+        /// Event Handler for CaptionTextBox.NothingSelected event. Clears and disables the Emotion
+        /// and Intensity groupboxes.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void CaptionTextBox_NothingSelected(object sender, EventArgs e)
+        {
+            //Clear previous setting and disable GB
+            ClearGB_EmotionType();
+            GB_EmotionType.Enabled = false;
+
+            //Clear previous setting and disable GB
+            ClearGB_Intensity();
+            GB_Intensity.Enabled = false;
+        }
+
         /// <summary>
         /// Event Handler for CaptionTextBox.CaptionWordSelected event. Loads the selected 
         /// CaptionWord into the associated controls.

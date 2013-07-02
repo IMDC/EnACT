@@ -62,6 +62,11 @@ namespace EnACT
 
         #region Events
         /// <summary>
+        /// An event that is fired when no captionword is currently selected by the user.
+        /// </summary>
+        public event EventHandler NothingSelected;
+
+        /// <summary>
         /// An event that is fired when a single CaptionWord is selected by the user.
         /// </summary>
         public event EventHandler<CaptionWordSelectedEventArgs> CaptionWordSelected;
@@ -125,7 +130,10 @@ namespace EnACT
 
                 switch (numSelections)
                 {
-                    case 0: break;
+                    case 0: 
+                        SelectionMode = CaptionTextBoxSelectionMode.NoSelection;
+                        OnNothingSelected(EventArgs.Empty);
+                        break;
                     case 1: HighlightCurrentWord(); break;
                     default:
                         SelectionMode = CaptionTextBoxSelectionMode.MultiWordSelection;
@@ -142,17 +150,18 @@ namespace EnACT
         private void HighlightCurrentWord()
         {
             int caret = SelectionStart;
+            bool wordSelected = false;
 
             foreach (CaptionWord cw in Caption.WordList)
             {
-                //If the word contains the caret but hasn't been selected yet, highlight and then
-                //select it.
+                //If the word contains the caret but hasn't been selected yet, highlight and then select it.
                 if (cw.Contains(caret) && !cw.IsSelected)
                 {
                     SetTextBackgroundColour(cw, CaptionStyle.Highlighted);
                     cw.IsSelected = true;
                     SelectionMode = CaptionTextBoxSelectionMode.SingleWordSelection;
                     OnCaptionWordSelected(new CaptionWordSelectedEventArgs(cw));
+                    wordSelected = true;
                 }
                 //If the word doesn't contain the caret but is selected, then unselect it.
                 else if(!cw.Contains(caret) && cw.IsSelected)
@@ -161,6 +170,12 @@ namespace EnACT
                     SetTextBackgroundColour(cw, CaptionStyle.GetColourOf(cw));
                     cw.IsSelected = false;
                 }
+            }
+
+            if (!wordSelected)
+            {
+                SelectionMode = CaptionTextBoxSelectionMode.NoSelection;
+                OnNothingSelected(EventArgs.Empty);
             }
         }
         #endregion
@@ -252,12 +267,35 @@ namespace EnACT
             }
         }
 
+        /// <summary>
+        /// Invokes the MultipleCaptionWordsSelected event, which happens when multiple 
+        /// CaptionWords are selected by the user.
+        /// </summary>
+        /// <param name="e">Event Args</param>
         private void OnMultipleCaptionWordsSelected(EventArgs e)
         {
             /* Make a local copy of the event to prevent the case where the handler
              * will be set as null in-between the null check and the handler call.
              */
             EventHandler handler = MultipleCaptionWordsSelected;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Invokes the NothingSelected event, which happens when no CaptionWords are selected by
+        /// the user.
+        /// </summary>
+        /// <param name="e">Event Args</param>
+        private void OnNothingSelected(EventArgs e)
+        {
+            /* Make a local copy of the event to prevent the case where the handler
+             * will be set as null in-between the null check and the handler call.
+             */
+            EventHandler handler = NothingSelected;
 
             if (handler != null)
             {
