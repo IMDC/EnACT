@@ -79,6 +79,7 @@ namespace EnACT
         public CaptionTextBox() : base() 
         {
             this.SelectionMode = CaptionTextBoxSelectionMode.NoSelection;
+            this.HideSelection = false;
         }
         #endregion
 

@@ -301,25 +301,31 @@ namespace EnACT
                     throw new Exception("No selected caption to markup."); //Should not happen.
                 case CaptionTextBoxSelectionMode.SingleWordSelection:
                     SelectedCaptionWord.Emotion = e;
+                    if (e == Emotion.None || e == Emotion.Unknown)
+                    {
+                        ClearGB_Intensity();
+                        GB_Intensity.Enabled = false;
+                    }
+                    else
+                    {
+                        SetGB_Intensity(SelectedCaptionWord.Intensity);
+                    }
                     break;
                 case CaptionTextBoxSelectionMode.MultiWordSelection:
                     foreach (CaptionWord cw in SelectedCaption.WordList)
                     {
-                        if (cw.IsSelected) { cw.Emotion = e; }
+                        if (cw.IsSelected) { cw.Emotion = e; }  //Set emotion only if selected
                     }
+
+                    //Clear the Intensity GB and enable/disable it based on emotion
+                    ClearGB_Intensity();
+                    if (e == Emotion.None || e == Emotion.Unknown)
+                        GB_Intensity.Enabled = false; 
+                    else
+                        GB_Intensity.Enabled = true;
                     break;
                 default: throw new InvalidEnumArgumentException("e", e.GetHashCode(), typeof(Emotion));
             }   
-
-            if (e == Emotion.None || e == Emotion.Unknown)
-            {
-                ClearGB_Intensity();
-                GB_Intensity.Enabled = false;
-            }
-            else
-            {
-                SetGB_Intensity(SelectedCaptionWord.Intensity);
-            }
         }
 
         /// <summary>
@@ -338,7 +344,7 @@ namespace EnACT
                 case CaptionTextBoxSelectionMode.MultiWordSelection:
                     foreach (CaptionWord cw in SelectedCaption.WordList)
                     {
-                        if (cw.IsSelected) { cw.Intensity = i; }
+                        if (cw.IsSelected) { cw.Intensity = i; } //Set intensity only if selected.
                     }
                     break;
                 default: throw new InvalidEnumArgumentException("i", i.GetHashCode(), typeof(Intensity));
@@ -422,8 +428,12 @@ namespace EnACT
         private void CaptionTextBox_MultipleCaptionWordsSelected(object sender, EventArgs e)
         {
             Console.WriteLine("Multiple Words Selected!");
+            //Clear previous setting
             ClearGB_EmotionType();
+            //Enable if not enabled already
+            GB_EmotionType.Enabled = true;
 
+            //Clear and disable intensity, as no current emotion is selected.
             ClearGB_Intensity();
             GB_Intensity.Enabled = false;
         }
