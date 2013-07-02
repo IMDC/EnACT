@@ -9,6 +9,9 @@ using System.Drawing;
 namespace EnACT
 {
     #region Enum
+    /// <summary>
+    /// What is currently selected by the CaptionTextBox.
+    /// </summary>
     public enum CaptionTextBoxSelectionMode
     {
         NoSelection,
@@ -88,7 +91,14 @@ namespace EnACT
         }
         #endregion
 
-        #region Methods
+        #region OnTextChanged
+        protected override void OnTextChanged(EventArgs e)
+        {
+            base.OnTextChanged(e);
+        }
+        #endregion
+
+        #region OnSelectionChanged
         /// <summary>
         /// Method that is called when the caret or selection of the textbox is changed.
         /// </summary>

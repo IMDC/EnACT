@@ -403,7 +403,7 @@ namespace EnACT
         }
         #endregion
 
-        #region Event Handlers
+        #region CaptionTextBox Event Handlers
         /// <summary>
         /// Event Handler for CaptionTextBox.NothingSelected event. Clears and disables the Emotion
         /// and Intensity groupboxes.
