@@ -14,6 +14,15 @@ namespace EnACT
     {
         #region Constants
         /// <summary>
+        /// Minimum width of the Number column in pixels.
+        /// </summary>
+        public const int NUMBER_COLUMN_WIDTH = 50;
+        /// <summary>
+        /// Minimum width of a Timestamp column in pixels.
+        /// </summary>
+        public const int TIMESTAMP_COLUMN_WIDTH = 70;
+
+        /// <summary>
         /// Number column name
         /// </summary>
         public const String NNAME = "Number";
@@ -143,6 +152,8 @@ namespace EnACT
             NumberColumn = new DataGridViewTextBoxColumn();
             NumberColumn.Name = NNAME;
             NumberColumn.HeaderText = NNAME;
+            NumberColumn.MinimumWidth = NUMBER_COLUMN_WIDTH;
+            NumberColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
             NumberColumn.ReadOnly = true;   //Set Number column to read only
 
             BeginColumn = new DataGridViewTextBoxColumn();
@@ -150,18 +161,24 @@ namespace EnACT
             BeginColumn.HeaderText = BNAME;
             BeginColumn.ValueType = typeof(Timestamp);
             BeginColumn.DataPropertyName = BNAME;
+            BeginColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            BeginColumn.MinimumWidth = TIMESTAMP_COLUMN_WIDTH;
 
             EndColumn = new DataGridViewTextBoxColumn();
             EndColumn.Name = ENAME;
             EndColumn.HeaderText = ENAME;
             EndColumn.ValueType = typeof(Timestamp);
             EndColumn.DataPropertyName = ENAME;
+            EndColumn.MinimumWidth = TIMESTAMP_COLUMN_WIDTH;
+            EndColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             DurationColumn = new DataGridViewTextBoxColumn();
             DurationColumn.Name = DNAME;
             DurationColumn.HeaderText = DNAME;
             DurationColumn.ValueType = typeof(Timestamp);
             DurationColumn.DataPropertyName = DNAME;
+            DurationColumn.MinimumWidth = TIMESTAMP_COLUMN_WIDTH;
+            DurationColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             SpeakerColumn = new DataGridViewTextBoxColumn();
             SpeakerColumn.Name = SNAME;
