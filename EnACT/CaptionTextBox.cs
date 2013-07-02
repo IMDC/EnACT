@@ -110,6 +110,10 @@ namespace EnACT
                 return;
             }
 
+            //Avoid null exceptions by returning if null
+            if (Caption == null)
+                return;
+
             //Only call the method when just the caret is being displayed.
             if (SelectionLength == 0)
                 HighlightCurrentWord();
