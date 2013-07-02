@@ -8,7 +8,8 @@ namespace EnACT
 {
     public static class Paths
     {
-        public static readonly string EditorEngine = @"C:\Users\imdc\Documents\enact\EnACT AS3 Engine\EditorEngine.swf";
+        public static readonly string EditorEngine 
+            = @"C:\Users\imdc\Documents\enact\EnACT AS3 Engine\EditorEngine.swf";
 
         public static readonly string TestScript = @"C:\Users\imdc\Documents\enact\Testing\testScript.txt";
 

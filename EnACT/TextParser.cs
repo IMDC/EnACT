@@ -69,13 +69,11 @@ namespace EnACT
                     //If surrounded by [ and ], the word is a description
                     else if (lines[i][0] == '[' && lines[i][lastChar] == ']')
                     {
-                        //Console.WriteLine("Line type: Description. Speaker: {0}, Dialogue: {1}", DescriptionSpeaker.Name, lines[i]);
                         CaptionList.Add(new Caption(lines[i], DescriptionSpeaker));
                     }
                     //If anything else then it is a dialogue line
                     else
                     {
-                        //Console.WriteLine("Line type: Dialogue. Speaker: {0}, Dialogue: {1}", Speaker.Name, lines[i]);
                         CaptionList.Add(new Caption(lines[i], CurrentSpeaker));
                     }
                 }

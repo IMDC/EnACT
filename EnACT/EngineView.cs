@@ -101,7 +101,8 @@ namespace EnACT
 
         public double GetPlayheadTime()
         {
-            String returnString = CallFunction("<invoke name=\"" + "getPlayheadTime" + "\" returntype=\"xml\"></invoke>");
+            String returnString = CallFunction("<invoke name=\"" + "getPlayheadTime" 
+                + "\" returntype=\"xml\"></invoke>");
                 
 
             //Turn the string into an xml doc

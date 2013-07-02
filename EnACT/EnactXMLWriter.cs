@@ -28,7 +28,8 @@ namespace EnACT
         /// <param name="SpeakerSet">A reference to the SpeakerSet object that is to be written</param>
         /// <param name="CaptionList">A reference to the CaptionList object that is to be written</param>
         /// <param name="Settings">A reference to the Settings object that is to be written</param>
-        public EnactXMLWriter(Dictionary<String, Speaker> SpeakerSet, List<Caption> CaptionList, SettingsXML Settings) :
+        public EnactXMLWriter(Dictionary<String, Speaker> SpeakerSet, List<Caption> CaptionList, 
+            SettingsXML Settings) :
             this(Paths.DefaultSpeakers, SpeakerSet, 
                  Paths.DefaultDialogues, CaptionList, 
                  Paths.DefaultSettings,  Settings) {}
@@ -236,7 +237,8 @@ namespace EnACT
                         w.WriteAttributeString("autoSize", Convert.ToString(Settings.Playback.AutoSize).ToLower());
                         w.WriteAttributeString("scale", Convert.ToString(Settings.Playback.Scale));
                         w.WriteAttributeString("volume", Convert.ToString(Settings.Playback.Volume));
-                        w.WriteAttributeString("showCaptions", Convert.ToString(Settings.Playback.ShowCaptions).ToLower());
+                        w.WriteAttributeString("showCaptions", Convert.ToString(Settings.Playback.ShowCaptions)
+                            .ToLower());
                     }
                     w.WriteEndElement();
 
