@@ -73,6 +73,7 @@ namespace EnACT
         {
             CaptionTextBox.CaptionWordSelected += new EventHandler<CaptionWordSelectedEventArgs>
                 (this.CaptionTextBox_CaptionWordSelected);
+            
         }
         #endregion
 
@@ -378,6 +379,20 @@ namespace EnACT
                 Console.WriteLine("New Word: {0}", e.SelectedWord);
                 LoadWord(e.SelectedWord);
             }
+        }
+
+        /// <summary>
+        /// Event Handler for CaptionTextBox.MultipleCaptionWordsSelected event. Sets controls up
+        /// for marking up multiple words at the same time.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void CaptionTextBox_MultipleCaptionWordsSelected(object sender, EventArgs e)
+        {
+            ClearGB_EmotionType();
+
+            ClearGB_Intensity();
+            GB_Intensity.Enabled = false;
         }
         #endregion
     }

@@ -16,7 +16,7 @@ namespace EnACT
         /// <summary>
         /// The time the playhead was set to when the event was fired.
         /// </summary>
-        public double PlayheadTime { set; get; }
+        public double PlayheadTime { private set; get; }
 
         /// <summary>
         /// Constructs a PlayheadChangedEventArgs object
@@ -50,7 +50,7 @@ namespace EnACT
         /// <summary>
         /// The word selected by the user in CaptionTextBox.
         /// </summary>
-        public CaptionWord SelectedWord { set; get; }
+        public CaptionWord SelectedWord { private set; get; }
 
         /// <summary>
         /// Constructs a CaptionWordSelectedEventArgs with a specified CaptionWord.

@@ -8,6 +8,16 @@ using System.Drawing;
 
 namespace EnACT
 {
+    #region Enum
+    public enum CaptionTextBoxSelectionMode
+    {
+        NoSelection,
+        SingleWordSelection,
+        MultiWordSelection,
+    }
+    #endregion
+
+    #region CaptionTextBox Class
     /// <summary>
     /// A class meant for marking up Captions with emotions.
     /// </summary>
@@ -18,6 +28,8 @@ namespace EnACT
         /// Set this bool to true to bypass the OnSelectionChanged method.
         /// </summary>
         private bool simpleSelectFlag = false;
+
+        public CaptionTextBoxSelectionMode SelectionMode { set; get; }
 
         /// <summary>
         /// Backing field for Caption Property.
@@ -49,11 +61,25 @@ namespace EnACT
         #endregion
 
         #region Events
+        /// <summary>
+        /// An event that is fired when a single CaptionWord is selected by the user.
+        /// </summary>
         public event EventHandler<CaptionWordSelectedEventArgs> CaptionWordSelected;
+        
+        /// <summary>
+        /// An event that is fired when more than 1 CaptionWord is selected by the user.
+        /// </summary>
+        public event EventHandler MultipleCaptionWordsSelected;
         #endregion
 
         #region Constructor
-        public CaptionTextBox() : base() { }
+        /// <summary>
+        /// Constructs a CaptionTextBox object.
+        /// </summary>
+        public CaptionTextBox() : base() 
+        {
+            this.SelectionMode = CaptionTextBoxSelectionMode.NoSelection;
+        }
         #endregion
 
         #region Methods
@@ -79,10 +105,36 @@ namespace EnACT
             }
 
             //Only call the method when just the caret is being displayed.
-            if(SelectionLength == 0)
+            if (SelectionLength == 0)
                 HighlightCurrentWord();
+            else
+            {
+                int numSelections = 0;
+                CaptionWord cw;
+                //foreach (CaptionWord cw in Caption.WordList)
+                for(int i=0; i< Caption.WordList.Count; i++)
+                {
+                    cw = Caption.WordList[i];
+                    if (cw.ContainedInSelection(SelectionStart, SelectionLength))
+                    {
+                        cw.IsSelected = true;
+                        numSelections++;
+                    }
+                }
+
+                switch (numSelections)
+                {
+                    case 0: break;
+                    case 1: HighlightCurrentWord(); break;
+                    default:
+                        SelectionMode = CaptionTextBoxSelectionMode.MultiWordSelection;
+                        OnMultipleCaptionWordsSelected(EventArgs.Empty);
+                        break;
+                }
+            }
         }
 
+        #region HighlightCurrentWord
         /// <summary>
         /// Highlights the word that the caret is in.
         /// </summary>
@@ -96,9 +148,9 @@ namespace EnACT
                 //select it.
                 if (cw.Contains(caret) && !cw.IsSelected)
                 {
-                    //SetTextBackgroundColour(cw, SystemColors.HighlightText, SystemColors.Highlight);
                     SetTextBackgroundColour(cw, CaptionStyle.Highlighted);
                     cw.IsSelected = true;
+                    SelectionMode = CaptionTextBoxSelectionMode.SingleWordSelection;
                     OnCaptionWordSelected(new CaptionWordSelectedEventArgs(cw));
                 }
                 //If the word doesn't contain the caret but is selected, then unselect it.
@@ -110,6 +162,7 @@ namespace EnACT
                 }
             }
         }
+        #endregion
 
         /// <summary>
         /// Clears all text from the CaptionTextBox control. Deselects all CaptionWords and removes
@@ -197,6 +250,20 @@ namespace EnACT
                 handler(this, e);
             }
         }
+
+        private void OnMultipleCaptionWordsSelected(EventArgs e)
+        {
+            /* Make a local copy of the event to prevent the case where the handler
+             * will be set as null in-between the null check and the handler call.
+             */
+            EventHandler handler = MultipleCaptionWordsSelected;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
         #endregion
     }//Class
+    #endregion
 }//Namespace
