@@ -14,31 +14,6 @@ namespace EnACT
     {
         #region Constants
         /// <summary>
-        /// Number column position (0)
-        /// </summary>
-        public const int NPOS = 0;
-        /// <summary>
-        /// Begin time column position (1)
-        /// </summary>
-        public const int BPOS = 1;
-        /// <summary>
-        /// End time column position (2)
-        /// </summary>
-        public const int EPOS = 2;
-        /// <summary>
-        /// Duration column position (3)
-        /// </summary>
-        public const int DPOS = 3;
-        /// <summary>
-        /// Speaker name column position (4)
-        /// </summary>
-        public const int SPOS = 4;
-        /// <summary>
-        /// Caption text column position (5)
-        /// </summary>
-        public const int TPOS = 5;
-
-        /// <summary>
         /// Number column name
         /// </summary>
         public const String NNAME = "Number";
@@ -343,13 +318,13 @@ namespace EnACT
         {
             int r = e.RowIndex;
             int c = e.ColumnIndex;
-            switch (e.ColumnIndex)
+            switch (Columns[c].Name)
             {
-                case NPOS: break;
+                case NNAME: break;
                 //Set Begin, End, or Duration value
-                case BPOS:
-                case EPOS:
-                case DPOS:
+                case BNAME:
+                case ENAME:
+                case DNAME:
                     try
                     {
                         //Attempt to convert the value
@@ -365,7 +340,7 @@ namespace EnACT
                         e.ParsingApplied = true;
                     }
                     break;
-                case SPOS:
+                case SNAME:
                     String s = (String) e.Value;
                     if (SpeakerSet.ContainsKey(s))
                     {
@@ -378,7 +353,7 @@ namespace EnACT
                     }
                     e.ParsingApplied = true;
                     break;
-                case TPOS: break;
+                case TNAME: break;
                 default: throw new ArgumentException("Invalid Column " + e.ColumnIndex, "e.ColumnIndex");
             }
             base.OnCellParsing(e);
@@ -392,7 +367,7 @@ namespace EnACT
         protected override void OnRowPostPaint(DataGridViewRowPostPaintEventArgs e)
         {
             base.OnRowPostPaint(e);
-            Rows[e.RowIndex].Cells[NPOS].Value = e.RowIndex + 1;
+            Rows[e.RowIndex].Cells[NNAME].Value = e.RowIndex + 1;
         }
 
         /// <summary>
