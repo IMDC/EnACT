@@ -74,8 +74,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\CaptionTextBoxEventArgs.cs" />
+    <Compile Include="Core\Alignment.cs" />
     <Compile Include="Core\Caption.cs" />
-    <Compile Include="CaptionStyle.cs" />
+    <Compile Include="Core\CaptionStyle.cs" />
     <Compile Include="Controls\CaptionTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -84,7 +85,8 @@
     </Compile>
     <Compile Include="Core\CaptionWord.cs" />
     <Compile Include="Core\CaptionWordList.cs" />
-    <Compile Include="EngineController.cs" />
+    <Compile Include="Controllers\EngineController.cs" />
+    <Compile Include="Core\Emotion.cs" />
     <Compile Include="Core\EnactXMLWriter.cs" />
     <Compile Include="Controls\EngineView.cs">
       <SubType>Component</SubType>
@@ -93,6 +95,8 @@
       <DependentUpon>EngineView.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\TimelineEventArgs.cs" />
+    <Compile Include="Core\Intensity.cs" />
+    <Compile Include="Core\ScreenLocation.cs" />
     <Compile Include="Forms\JorgeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,8 +109,8 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MarkupController.cs" />
-    <Compile Include="Paths.cs" />
+    <Compile Include="Controllers\MarkupController.cs" />
+    <Compile Include="Miscellaneous\Paths.cs" />
     <Compile Include="Controls\PlayheadLabel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -161,10 +165,10 @@
     <Compile Include="Controls\Timeline.Designer.cs">
       <DependentUpon>Timeline.cs</DependentUpon>
     </Compile>
-    <Compile Include="TimelineMouseSelection.cs" />
+    <Compile Include="Controls\TimelineMouseSelection.cs" />
     <Compile Include="Core\Timestamp.cs" />
-    <Compile Include="TimestampTypeConverter.cs" />
-    <Compile Include="Utilities.cs" />
+    <Compile Include="Core\TimestampTypeConverter.cs" />
+    <Compile Include="Miscellaneous\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
