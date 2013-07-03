@@ -40,7 +40,7 @@ namespace EnACT
         /// <param name="line">The string to turn into a list of CaptionWords.</param>
         public void Feed(String line)
         {
-            //Remove the previous line from the WordList
+            //Remove the previous line from the Words
             Clear();
 
             //Split line up and add each word to the wordlist.

@@ -312,7 +312,7 @@ namespace EnACT
                     }
                     break;
                 case CaptionTextBoxSelectionMode.MultiWordSelection:
-                    foreach (EditorCaptionWord cw in SelectedCaption.WordList)
+                    foreach (EditorCaptionWord cw in SelectedCaption.Words)
                     {
                         if (cw.IsSelected) { cw.Emotion = e; }  //Set emotion only if selected
                     }
@@ -342,7 +342,7 @@ namespace EnACT
                     SelectedCaptionWord.Intensity = i; 
                     break;
                 case CaptionTextBoxSelectionMode.MultiWordSelection:
-                    foreach (EditorCaptionWord cw in SelectedCaption.WordList)
+                    foreach (EditorCaptionWord cw in SelectedCaption.Words)
                     {
                         if (cw.IsSelected) { cw.Intensity = i; } //Set intensity only if selected.
                     }

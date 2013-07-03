@@ -13,20 +13,38 @@ namespace EnACT
     public class Caption : INotifyPropertyChanged
     {
         #region Private fields
+        /// <summary>
+        /// Backing field for the Begin property.
+        /// </summary>
         private Timestamp begin;
+        /// <summary>
+        /// Backing field for the End property.
+        /// </summary>
         private Timestamp end;
+        /// <summary>
+        /// Backing field for the Duration property.
+        /// </summary>
         private Timestamp duration;
         #endregion
 
         #region PropertyChanged Event
+        /// <summary>
+        /// An event that notifies a subscriber that a property in this Caption has been changed.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Raises the PropertyChanged event.
+        /// </summary>
+        /// <param name="info"></param>
         private void NotifyPropertyChanged(String info)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(info));
-            }
+            /* Make a local copy of the event to prevent the case where the handler
+             * will be set as null in-between the null check and the handler call.
+             */
+            PropertyChangedEventHandler handler = PropertyChanged;
+
+            if (handler != null) { handler(this, new PropertyChangedEventArgs(info)); }
         }
         #endregion
 
@@ -95,6 +113,9 @@ namespace EnACT
         #endregion
 
         #region Public Properties
+        /// <summary>
+        /// Backing field for the Speaker property.
+        /// </summary>
         private Speaker speaker;
         /// <summary>
         /// A reference to a speaker in the program's speaker list.
@@ -122,16 +143,19 @@ namespace EnACT
         /// <summary>
         /// The list of words in the caption
         /// </summary>
-        public CaptionWordList WordList { set; get; }
+        public CaptionWordList Words { set; get; }
 
+        /// <summary>
+        /// Wrapper property for CaptionView. Gets and Sets the Words of this Caption.
+        /// </summary>
         public String Text
         {
             set
             { 
-                WordList.Feed(value);
+                Words.Feed(value);
                 NotifyPropertyChanged("Text");
             }
-            get{ return WordList.GetAsString(); }
+            get{ return Words.GetAsString(); }
         }
         #endregion
 
@@ -180,7 +204,7 @@ namespace EnACT
             this.Location  = ScreenLocation.BottomCentre;
             this.Alignment = Alignment.Center;
 
-            this.WordList = new CaptionWordList(line);
+            this.Words = new CaptionWordList(line);
         }
         #endregion
 
@@ -189,11 +213,8 @@ namespace EnACT
         /// Returns the text sentence that this caption represents.
         /// Calls the WordListText method, and returns its value.
         /// </summary>
-        /// <returns>The text of WordList's words</returns>
-        public override string ToString()
-        {
-            return this.WordList.GetAsString();
-        } 
+        /// <returns>The text of Words's words</returns>
+        public override string ToString() { return this.Words.GetAsString(); } 
         #endregion
     }
     #endregion

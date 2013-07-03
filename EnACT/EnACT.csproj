@@ -83,7 +83,7 @@
     <Compile Include="Controls\CaptionView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Core\CaptionWord.cs" />
+    <Compile Include="Core\EditorCaptionWord.cs" />
     <Compile Include="Core\CaptionWordList.cs" />
     <Compile Include="Controllers\EngineController.cs" />
     <Compile Include="Core\Emotion.cs" />
@@ -97,7 +97,7 @@
     <Compile Include="Controls\TimelineEventArgs.cs" />
     <Compile Include="Core\Intensity.cs" />
     <Compile Include="Core\ScreenLocation.cs" />
-    <Compile Include="Core\Word.cs" />
+    <Compile Include="Core\CaptionWord.cs" />
     <Compile Include="Forms\JorgeForm.cs">
       <SubType>Form</SubType>
     </Compile>

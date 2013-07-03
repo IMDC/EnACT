@@ -52,7 +52,7 @@ namespace EnACT
                 {
                     caption = value;
                     Text = caption.ToString();
-                    foreach (EditorCaptionWord cw in Caption.WordList)
+                    foreach (EditorCaptionWord cw in Caption.Words)
                     {
                         //Return it to the original Caption colour
                         SetTextBackgroundColour(cw, CaptionStyle.GetColourOf(cw));
@@ -131,10 +131,10 @@ namespace EnACT
             {
                 int numSelections = 0;
                 EditorCaptionWord cw;
-                //foreach (EditorCaptionWord cw in Caption.WordList)
-                for(int i=0; i< Caption.WordList.Count; i++)
+                //foreach (EditorCaptionWord cw in Caption.Words)
+                for(int i=0; i< Caption.Words.Count; i++)
                 {
-                    cw = Caption.WordList[i];
+                    cw = Caption.Words[i];
                     if (cw.ContainedInSelection(SelectionStart, SelectionLength))
                     {
                         cw.IsSelected = true;
@@ -166,7 +166,7 @@ namespace EnACT
             int caret = SelectionStart;
             bool wordSelected = false;
 
-            foreach (EditorCaptionWord cw in Caption.WordList)
+            foreach (EditorCaptionWord cw in Caption.Words)
             {
                 //If the word contains the caret but hasn't been selected yet, highlight and then select it.
                 if (cw.Contains(caret) && !cw.IsSelected)
@@ -205,7 +205,7 @@ namespace EnACT
             if (Caption != null)
             {
                 //Deselect each caption
-                foreach (EditorCaptionWord cw in Caption.WordList) { cw.IsSelected = false; }
+                foreach (EditorCaptionWord cw in Caption.Words) { cw.IsSelected = false; }
             }
 
             //Clear Caption

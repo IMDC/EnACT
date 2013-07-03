@@ -168,7 +168,7 @@ namespace EnACT
                             w.WriteAttributeString("location", Convert.ToString(c.Location.GetHashCode()));
                             w.WriteAttributeString("align", Convert.ToString(c.Alignment.GetHashCode()));
 
-                            foreach (EditorCaptionWord cw in c.WordList)
+                            foreach (EditorCaptionWord cw in c.Words)
                             {
                                 w.WriteStartElement("emotion");
                                 {
