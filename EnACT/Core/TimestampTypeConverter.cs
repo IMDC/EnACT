@@ -8,6 +8,9 @@ using System.Reflection;
 
 namespace EnACT
 {
+    /// <summary>
+    /// This class is currently not used for anything, but it is kept handy just in case.
+    /// </summary>
     class TimestampTypeConverter : TypeConverter
     {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
