@@ -73,57 +73,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Caption.cs" />
+    <Compile Include="Core\Caption.cs" />
     <Compile Include="CaptionStyle.cs" />
-    <Compile Include="CaptionTextBox.cs">
+    <Compile Include="Controls\CaptionTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CaptionView.cs">
+    <Compile Include="Controls\CaptionView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CaptionWord.cs" />
-    <Compile Include="CaptionWordList.cs" />
+    <Compile Include="Core\CaptionWord.cs" />
+    <Compile Include="Core\CaptionWordList.cs" />
     <Compile Include="EngineController.cs" />
-    <Compile Include="EnactXMLWriter.cs" />
-    <Compile Include="EngineView.cs">
+    <Compile Include="Core\EnactXMLWriter.cs" />
+    <Compile Include="Controls\EngineView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="EngineView.Designer.cs">
+    <Compile Include="Controls\EngineView.Designer.cs">
       <DependentUpon>EngineView.cs</DependentUpon>
     </Compile>
     <Compile Include="EventArguments.cs" />
-    <Compile Include="JorgeForm.cs">
+    <Compile Include="Forms\JorgeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="JorgeForm.Designer.cs">
+    <Compile Include="Forms\JorgeForm.Designer.cs">
       <DependentUpon>JorgeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MarkupController.cs" />
     <Compile Include="Paths.cs" />
-    <Compile Include="PlayheadLabel.cs">
+    <Compile Include="Controls\PlayheadLabel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CaptionView.resx">
+    <EmbeddedResource Include="Controls\CaptionView.resx">
       <DependentUpon>CaptionView.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="EngineView.resx">
+    <EmbeddedResource Include="Controls\EngineView.resx">
       <DependentUpon>EngineView.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="JorgeForm.resx">
+    <EmbeddedResource Include="Forms\JorgeForm.resx">
       <DependentUpon>JorgeForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -132,7 +132,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Timeline.resx">
+    <EmbeddedResource Include="Controls\Timeline.resx">
       <DependentUpon>Timeline.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -151,17 +151,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="SettingsXML.cs" />
-    <Compile Include="Speaker.cs" />
-    <Compile Include="TextParser.cs" />
-    <Compile Include="Timeline.cs">
+    <Compile Include="Core\SettingsXML.cs" />
+    <Compile Include="Core\Speaker.cs" />
+    <Compile Include="Core\TextParser.cs" />
+    <Compile Include="Controls\Timeline.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Timeline.Designer.cs">
+    <Compile Include="Controls\Timeline.Designer.cs">
       <DependentUpon>Timeline.cs</DependentUpon>
     </Compile>
     <Compile Include="TimelineMouseSelection.cs" />
-    <Compile Include="Timestamp.cs" />
+    <Compile Include="Core\Timestamp.cs" />
     <Compile Include="TimestampTypeConverter.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
