@@ -2,89 +2,81 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EnACT
 {
     /// <summary>
-    /// Represents an emotive word used by the Editor. Contains indexes and a selection flag for
-    /// use in marking it up.
+    /// Represents an emotive word used by EnACT.
     /// </summary>
-    public class EditorCaptionWord : CaptionWord
+    public class CaptionWord
     {
-        #region Fields and Properties
+        #region Constants, Fields and Properties
         /// <summary>
-        /// The index of a caption that this word starts at.
+        /// The default emotion used when constructing a new CaptionWord.
         /// </summary>
-        public int BeginIndex { set; get; }
+        public const Emotion DEFAULT_EMOTION = Emotion.None;
 
         /// <summary>
-        /// The index of a caption that this word ends at.
+        /// The default intensity used when constructing a new CaptionWord.
         /// </summary>
-        public int EndIndex { set; get; }
+        public const Intensity DEFAULT_INTENSITY = Intensity.Low;
 
         /// <summary>
-        /// Whether or not this value is currently selected.
+        /// Represents the type of emotion (Happy, Sad, etc) of this CaptionWord
         /// </summary>
-        public bool IsSelected { set; get; }
+        public Emotion Emotion { set; get; }
+
+        /// <summary>
+        /// The level of intensity of the emotion
+        /// </summary>
+        public Intensity Intensity { set; get; }
+
+        /// <summary>
+        /// The text of the CaptionWord.
+        /// </summary>
+        public String Text { set; get; }    //The part wrapped in <emotion> tag
+
+        /// <summary>
+        /// Returns the length of the Text string. It is the same value as Text.Length
+        /// </summary>
+        public int Length { get { return Text.Length; } }
         #endregion
 
         #region Constructor
         /// <summary>
-        /// Constructs an EditorCaptionWord with the specified parameters, as well as default 
-        /// emotion and intensity.
+        /// Constructs a Caption word with an empty text string, and default Emotion and Intensity
+        /// values.
         /// </summary>
-        /// <param name="text">The word string to make this EditorCaptionWord represent.</param>
-        /// <param name="beginIndex">The index of this EditorCaptionWord in a string of 
-        /// words.</param>
-        public EditorCaptionWord(String text, int beginIndex) : 
-            this(DEFAULT_EMOTION, DEFAULT_INTENSITY, text, beginIndex) { }
+        public CaptionWord() : this(String.Empty) { }
 
         /// <summary>
-        /// Constructs an EditorCaptionWord with the specified parameters.
+        /// Constructs a CaptionWord with the specified text string and default Emotion and 
+        /// Intensity values.
         /// </summary>
-        /// <param name="e">The emotion of this word.</param>
-        /// <param name="i">The intensity of the emotion of this word.</param>
         /// <param name="text">The word string to make this EditorCaptionWord represent.</param>
-        /// <param name="beginIndex">The index of this EditorCaptionWord in a string of 
-        /// words.</param>
-        public EditorCaptionWord(Emotion e, Intensity i, String text, int beginIndex)
-            : base(e, i, text)
-        {
-            //Set index positions
-            this.BeginIndex = beginIndex;
-            this.EndIndex = beginIndex + Length;
+        public CaptionWord(String text) : this(DEFAULT_EMOTION, DEFAULT_INTENSITY, text) { }
 
-            //Set word to unselected
-            this.IsSelected = false;
+        /// <summary>
+        /// Constructs a CaptionWord with the specified parameters.
+        /// </summary>
+        /// <param name="e">The emotion of this CaptionWord.</param>
+        /// <param name="i">The intensity of the emotion of this word.</param>
+        /// <param name="text">The word string to make this CaptionWord represent.</param>
+        public CaptionWord(Emotion e, Intensity i, String text)
+        {
+            this.Emotion = e;
+            this.Intensity = i;
+            this.Text = text;
         }
         #endregion
 
         #region Methods
         /// <summary>
-        /// Checks to see if a charIndex is contained in this EditorCaptionWord
+        /// Returns the text that this word represents
         /// </summary>
-        /// <param name="charIndex">The index of the character to check</param>
-        /// <returns>True if index is contained in the word, false if otherwise</returns>
-        public bool Contains(int charIndex)
-        {
-            return (BeginIndex <= charIndex && charIndex <= EndIndex )
-                ? true : false;
-        }
-
-        /// <summary>
-        /// Checks to see if this EditorCaptionWord is contained in the given selection.
-        /// </summary>
-        /// <param name="selectionStart">The start position of the selection.</param>
-        /// <param name="selectionLength">The length of the selection.</param>
-        /// <returns>True if the selection</returns>
-        public bool ContainedInSelection(int selectionStart, int selectionLength)
-        {
-            int selectionEnd = selectionStart + selectionLength;
-            return ((BeginIndex <= selectionStart && selectionStart <= EndIndex)
-                ||  (BeginIndex <= selectionEnd && selectionEnd <= EndIndex)
-                ||  (selectionStart <= BeginIndex && EndIndex <= selectionEnd))
-                ? true : false;
-        }
+        /// <returns>The text value</returns>
+        public override string ToString() { return Text; }
         #endregion
     } //Class
 } //Namespace
