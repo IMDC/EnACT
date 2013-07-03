@@ -97,6 +97,7 @@
     <Compile Include="Controls\TimelineEventArgs.cs" />
     <Compile Include="Core\Intensity.cs" />
     <Compile Include="Core\ScreenLocation.cs" />
+    <Compile Include="Core\Word.cs" />
     <Compile Include="Forms\JorgeForm.cs">
       <SubType>Form</SubType>
     </Compile>

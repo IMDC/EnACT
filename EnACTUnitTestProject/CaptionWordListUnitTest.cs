@@ -26,15 +26,15 @@ namespace EnACTUnitTestProject
             //           01234567890123456789012345678901234
             string s1 = "Hello World this is a caption line.";
 
-            CaptionWord[] expectedCaptionWords =
+            EditorCaptionWord[] expectedCaptionWords =
             {
-                new CaptionWord("Hello",    0),
-                new CaptionWord("World",    6),
-                new CaptionWord("this",     12),
-                new CaptionWord("is",       17),
-                new CaptionWord("a",        20),
-                new CaptionWord("caption",  22),
-                new CaptionWord("line.",    30),
+                new EditorCaptionWord("Hello",    0),
+                new EditorCaptionWord("World",    6),
+                new EditorCaptionWord("this",     12),
+                new EditorCaptionWord("is",       17),
+                new EditorCaptionWord("a",        20),
+                new EditorCaptionWord("caption",  22),
+                new EditorCaptionWord("line.",    30),
             };
 
             /* Act */

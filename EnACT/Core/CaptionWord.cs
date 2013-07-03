@@ -6,15 +6,12 @@ using System.Text;
 namespace EnACT
 {
     /// <summary>
-    /// Represents an emotive word in a caption.
+    /// Represents an emotive word used by the Editor. Contains indexes and a selection flag for
+    /// use in marking it up.
     /// </summary>
-    public class CaptionWord
+    public class EditorCaptionWord : CaptionWord
     {
         #region Fields and Properties
-        public const Emotion DEFAULT_EMOTION = Emotion.None;
-
-        public const Intensity DEFAULT_INTENSITY = Intensity.Low;
-
         /// <summary>
         /// The index of a caption that this word starts at.
         /// </summary>
@@ -29,48 +26,42 @@ namespace EnACT
         /// Whether or not this value is currently selected.
         /// </summary>
         public bool IsSelected { set; get; }
-
-        /// <summary>
-        /// Represents the type of emotion (Happy, Sad, etc) of this CaptionWord
-        /// </summary>
-        public Emotion Emotion { set; get; }
-
-        /// <summary>
-        /// The level of intensity of the emotion
-        /// </summary>
-        public Intensity Intensity { set; get; }
-
-        /// <summary>
-        /// The text of the CaptionWord.
-        /// </summary>
-        public String Text { set; get; }    //The part wrapped in <emotion> tag
-
-        public int Length
-        {
-            get { return Text.Length; }
-        }
         #endregion
 
         #region Constructor
         /// <summary>
-        /// Creates an emotionless CaptionWord object with the inputted text
+        /// Constructs an EditorCaptionWord with the specified parameters, as well as default 
+        /// emotion and intensity.
         /// </summary>
-        /// <param name="text">The text to be emoted</param>
-        public CaptionWord(String text, int beginIndex)
-        {
-            this.Emotion    = DEFAULT_EMOTION;
-            this.Intensity  = DEFAULT_INTENSITY;
-            this.Text       = text;
-            this.BeginIndex = beginIndex;
+        /// <param name="text">The word string to make this EditorCaptionWord represent.</param>
+        /// <param name="beginIndex">The index of this EditorCaptionWord in a string of 
+        /// words.</param>
+        public EditorCaptionWord(String text, int beginIndex) : 
+            this(DEFAULT_EMOTION, DEFAULT_INTENSITY, text, beginIndex) { }
 
+        /// <summary>
+        /// Constructs an EditorCaptionWord with the specified parameters.
+        /// </summary>
+        /// <param name="e">The emotion of this word.</param>
+        /// <param name="i">The intensity of the emotion of this word.</param>
+        /// <param name="text">The word string to make this EditorCaptionWord represent.</param>
+        /// <param name="beginIndex">The index of this EditorCaptionWord in a string of 
+        /// words.</param>
+        public EditorCaptionWord(Emotion e, Intensity i, String text, int beginIndex)
+            : base(e, i, text)
+        {
+            //Set index positions
+            this.BeginIndex = beginIndex;
             this.EndIndex = beginIndex + Length;
+
+            //Set word to unselected
             this.IsSelected = false;
         }
         #endregion
 
         #region Methods
         /// <summary>
-        /// Checks to see if a charIndex is contained in this CaptionWord
+        /// Checks to see if a charIndex is contained in this EditorCaptionWord
         /// </summary>
         /// <param name="charIndex">The index of the character to check</param>
         /// <returns>True if index is contained in the word, false if otherwise</returns>
@@ -81,7 +72,7 @@ namespace EnACT
         }
 
         /// <summary>
-        /// Checks to see if this CaptionWord is contained in the given selection.
+        /// Checks to see if this EditorCaptionWord is contained in the given selection.
         /// </summary>
         /// <param name="selectionStart">The start position of the selection.</param>
         /// <param name="selectionLength">The length of the selection.</param>
@@ -94,15 +85,6 @@ namespace EnACT
                 ||  (selectionStart <= BeginIndex && EndIndex <= selectionEnd))
                 ? true : false;
         }
-
-        /// <summary>
-        /// Returns the text that this word represents
-        /// </summary>
-        /// <returns>The text value</returns>
-        public override string ToString()
-        {
-            return Text;
-        }
         #endregion
-    }
-}
+    } //Class
+} //Namespace

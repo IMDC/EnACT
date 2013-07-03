@@ -9,7 +9,7 @@ namespace EnACT
     /// <summary>
     /// A List for Containing CaptionWords
     /// </summary>
-    public class CaptionWordList : List<CaptionWord>
+    public class CaptionWordList : List<EditorCaptionWord>
     {
         #region Fields and Properties
         public const int SPACE_WIDTH = 1;
@@ -47,13 +47,13 @@ namespace EnACT
             String[] words = line.Split(); //Separate by spaces
 
             int cumulativePosition = 0;
-            CaptionWord cw;
+            EditorCaptionWord cw;
 
             foreach (String word in words)
             {
                 if (word != "")
                 {
-                    cw = new CaptionWord(word, cumulativePosition);
+                    cw = new EditorCaptionWord(word, cumulativePosition);
                     Add(cw);
                     cumulativePosition += cw.Length + SPACE_WIDTH;
                 }

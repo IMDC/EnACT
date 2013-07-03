@@ -15,13 +15,13 @@ namespace EnACT
         /// <summary>
         /// The word selected by the user in CaptionTextBox.
         /// </summary>
-        public CaptionWord SelectedWord { private set; get; }
+        public EditorCaptionWord SelectedWord { private set; get; }
 
         /// <summary>
-        /// Constructs a CaptionWordSelectedEventArgs with a specified CaptionWord.
+        /// Constructs a CaptionWordSelectedEventArgs with a specified EditorCaptionWord.
         /// </summary>
-        /// <param name="selectedWord">The selected CaptionWord.</param>
-        public CaptionWordSelectedEventArgs(CaptionWord selectedWord)
+        /// <param name="selectedWord">The selected EditorCaptionWord.</param>
+        public CaptionWordSelectedEventArgs(EditorCaptionWord selectedWord)
         {
             this.SelectedWord = selectedWord;
         }
