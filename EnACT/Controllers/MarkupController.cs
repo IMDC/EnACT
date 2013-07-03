@@ -24,7 +24,7 @@ namespace EnACT
         /// <summary>
         /// The caption selected by the user to mark up with emotions.
         /// </summary>
-        public Caption SelectedCaption { set; get; }
+        public EditorCaption SelectedCaption { set; get; }
         #endregion
 
         #region Control Properties
@@ -84,7 +84,7 @@ namespace EnACT
         /// Loads a Caption into the controls assosiated with this class.
         /// </summary>
         /// <param name="c">The caption to load.</param>
-        public void LoadCaption(Caption c)
+        public void LoadCaption(EditorCaption c)
         {
             //Clear Selected CaptionWord
             SelectedCaptionWord = null;

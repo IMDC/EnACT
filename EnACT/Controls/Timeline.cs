@@ -221,7 +221,7 @@ namespace EnACT
         /// <summary>
         /// A list of captions retrieved from a transcript file.
         /// </summary>
-        public List<Caption> CaptionList { set; get; }
+        public List<EditorCaption> CaptionList { set; get; }
         #endregion
 
         #region Events
@@ -355,7 +355,7 @@ namespace EnACT
             #region Draw Captions
             if (CaptionList != null)
             {
-                foreach (Caption c in CaptionList)
+                foreach (EditorCaption c in CaptionList)
                 {
                     if (((LeftBoundTime <= c.Begin && c.Begin <= RightBoundTime)//Begin is in drawing area
                     || (LeftBoundTime <= c.End && c.End <= RightBoundTime)      //End is in drawing area
@@ -517,7 +517,7 @@ namespace EnACT
             {
                 double beginX;  //X-Coord of c.Begin
                 double endX;    //X-Coord of c.End
-                foreach (Caption c in CaptionList)
+                foreach (EditorCaption c in CaptionList)
                 {
                     //If the mouse click is not in the same Y location as c, then none of the following code
                     //needs to be applied

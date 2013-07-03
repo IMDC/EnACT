@@ -35,7 +35,7 @@ namespace EnACT
         /// <summary>
         /// The selected caption, if any
         /// </summary>
-        public Caption Caption { set; get; }
+        public EditorCaption Caption { set; get; }
 
         /// <summary>
         /// The difference between the selected Caption.Begin and the mouseClickTime
@@ -60,7 +60,7 @@ namespace EnACT
         /// </summary>
         /// <param name="action">The TimelineMouseAction that is being performed</param>
         /// <param name="selectedCaption">The caption selected for this TimelineMouseAction</param>
-        public TimelineMouseSelection(TimelineMouseAction action, Caption selectedCaption)
+        public TimelineMouseSelection(TimelineMouseAction action, EditorCaption selectedCaption)
             : this(action, selectedCaption, 0) { }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace EnACT
         /// <param name="selectedCaption">The caption selected for this TimelineMouseAction</param>
         /// <param name="mouseClickTimeDifference">The difference between the selected Caption.Begin 
         /// and the mouseClickTime</param>
-        public TimelineMouseSelection(TimelineMouseAction action, Caption mouseClickTimeDifference, 
+        public TimelineMouseSelection(TimelineMouseAction action, EditorCaption mouseClickTimeDifference, 
             double selectedCaptionTimeDifference)
         {
             this.Action = action;

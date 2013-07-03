@@ -24,10 +24,10 @@ namespace EnACTUnitTestProject
 
             Speaker s = new Speaker("Guy");
 
-            Caption c;
+            EditorCaption c;
 
             //Act
-            c = new Caption("Line,", s, begin1, end1);
+            c = new EditorCaption("Line,", s, begin1, end1);
 
             //Assert
             Assert.AreEqual(expectedDuration, c.Duration.AsDouble);
@@ -49,10 +49,10 @@ namespace EnACTUnitTestProject
             double expectedEnd = 20;
             double expectedDuration = 5;
 
-            Caption c;
+            EditorCaption c;
 
             //Act
-            c = new Caption("", new Speaker(), new Timestamp(beginTime), new Timestamp(endTime));
+            c = new EditorCaption("", new Speaker(), new Timestamp(beginTime), new Timestamp(endTime));
 
             c.Begin = newBeginTime;
 
@@ -78,10 +78,10 @@ namespace EnACTUnitTestProject
             double expectedEnd = 25;
             double expectedDuration = 20;
 
-            Caption c;
+            EditorCaption c;
 
             //Act
-            c = new Caption("", new Speaker(), new Timestamp(beginTime), new Timestamp(endTime));
+            c = new EditorCaption("", new Speaker(), new Timestamp(beginTime), new Timestamp(endTime));
 
             c.End = newEndTime;
 
@@ -107,10 +107,10 @@ namespace EnACTUnitTestProject
             double expectedEnd = 35;
             double expectedDuration = 30;
 
-            Caption c;
+            EditorCaption c;
 
             //Act
-            c = new Caption("", new Speaker(), new Timestamp(beginTime), new Timestamp(endTime));
+            c = new EditorCaption("", new Speaker(), new Timestamp(beginTime), new Timestamp(endTime));
 
             c.Duration = newDurationTime;
 

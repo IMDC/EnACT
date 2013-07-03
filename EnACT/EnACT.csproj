@@ -76,6 +76,7 @@
     <Compile Include="Controls\CaptionTextBoxEventArgs.cs" />
     <Compile Include="Core\Alignment.cs" />
     <Compile Include="Core\Caption.cs" />
+    <Compile Include="Core\EditorCaption.cs" />
     <Compile Include="Core\CaptionStyle.cs" />
     <Compile Include="Controls\CaptionTextBox.cs">
       <SubType>Component</SubType>

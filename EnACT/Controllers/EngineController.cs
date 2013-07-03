@@ -56,7 +56,7 @@ namespace EnACT
         /// <summary>
         /// A list of captions retrieved from a transcript file.
         /// </summary>
-        public List<Caption> CaptionList { set; get; }
+        public List<EditorCaption> CaptionList { set; get; }
 
         /// <summary>
         /// The object that represents the EnACT engine xml settings file
@@ -90,7 +90,7 @@ namespace EnACT
             //Add the Description Speaker to the set of speakers
             SpeakerSet[Speaker.Description.Name] = Speaker.Description;
 
-            CaptionList = new List<Caption>();
+            CaptionList = new List<EditorCaption>();
             Settings = new SettingsXML();
         }
         #endregion

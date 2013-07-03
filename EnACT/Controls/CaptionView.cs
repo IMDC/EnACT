@@ -57,13 +57,13 @@ namespace EnACT
         /// <summary>
         /// A list of captions retrieved from a transcript file.
         /// </summary>
-        public List<Caption> CaptionList { private set; get; }
+        public List<EditorCaption> CaptionList { private set; get; }
 
         /// <summary>
         /// A caption list that can automatically update the CaptionView. Use this object
         /// instead of CaptionList when coding in CaptionView
         /// </summary>
-        private BindingList<Caption> BindingList { set; get; }
+        private BindingList<EditorCaption> BindingList { set; get; }
 
         private DataGridViewColumn NumberColumn;
         private DataGridViewColumn BeginColumn;
@@ -76,7 +76,7 @@ namespace EnACT
         /// Sets the CaptionView's CaptionList and initializes it for Caption View.
         /// Gets the Captionlist.
         /// </summary>
-        public List<Caption> CaptionSource
+        public List<EditorCaption> CaptionSource
         {
             set
             {
@@ -85,7 +85,7 @@ namespace EnACT
                     return;
 
                 CaptionList = value;
-                BindingList = new BindingList<Caption>(value);
+                BindingList = new BindingList<EditorCaption>(value);
 
                 DataSource = BindingList;   //Bind list to view
                 BindingList.ListChanged += new ListChangedEventHandler(BindingList_ListChanged);
@@ -212,12 +212,12 @@ namespace EnACT
             //If the user has a row selected
             if (CurrentRow != null)
             {
-                BindingList.Insert(CurrentRow.Index, new Caption());
+                BindingList.Insert(CurrentRow.Index, new EditorCaption());
             }
             //Else there is no current selection or the table is empty
             else
             {
-                BindingList.Insert(0, new Caption());
+                BindingList.Insert(0, new EditorCaption());
             }
         }
 
@@ -230,7 +230,7 @@ namespace EnACT
             * use that instead of a list. Unfortunately it is not available
             * in .NET 3.5 or older.
             */
-            List<Caption> cList = new List<Caption>();
+            List<EditorCaption> cList = new List<EditorCaption>();
 
             //Add the index of each selected row to a list and remove them
             foreach (DataGridViewRow r in SelectedRows)
@@ -242,7 +242,7 @@ namespace EnACT
             cList.Reverse();
 
             //Remove each caption
-            foreach (Caption c in cList)
+            foreach (EditorCaption c in cList)
             {
                 BindingList.Remove(c);
             }
@@ -294,7 +294,7 @@ namespace EnACT
         /// <param name="index2">The second index to swap</param>
         private void SwapRows(int index1, int index2)
         {
-            Caption temp = BindingList[index1];
+            EditorCaption temp = BindingList[index1];
             BindingList[index1] = BindingList[index2];
             BindingList[index2] = temp;
         }

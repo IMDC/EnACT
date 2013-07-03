@@ -26,7 +26,7 @@ namespace EnACT
         /// <summary>
         /// A list of captions retrieved from a transcript file.
         /// </summary>
-        public List<Caption> CaptionList { set; get; }
+        public List<EditorCaption> CaptionList { set; get; }
 
         /// <summary>
         /// The object that represents the EnACT engine xml settings file

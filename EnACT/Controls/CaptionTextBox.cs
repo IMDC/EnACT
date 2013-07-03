@@ -37,11 +37,11 @@ namespace EnACT
         /// <summary>
         /// Backing field for Caption Property.
         /// </summary>
-        private Caption caption;
+        private EditorCaption caption;
         /// <summary>
         /// The Caption currently displayed in the Text Box
         /// </summary>
-        public Caption Caption 
+        public EditorCaption Caption 
         {
             set
             {

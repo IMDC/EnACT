@@ -11,14 +11,14 @@ namespace EnACT
     {
         //Object reference variables
         public Dictionary<String, Speaker> SpeakerSet { set; get; }
-        public List<Caption> CaptionList { set; get; }
+        public List<EditorCaption> CaptionList { set; get; }
 
         /// <summary>
         /// Constucts a new text parser with the specified parameters
         /// </summary>
         /// <param name="SpeakerSet">The Set of Speakers for the current project</param>
         /// <param name="CaptionList">A list of Captions contained in the current project</param>
-        public TextParser(Dictionary<String, Speaker> SpeakerSet, List<Caption> CaptionList)
+        public TextParser(Dictionary<String, Speaker> SpeakerSet, List<EditorCaption> CaptionList)
         {
             this.SpeakerSet = SpeakerSet;
             this.CaptionList = CaptionList;
@@ -69,12 +69,12 @@ namespace EnACT
                     //If surrounded by [ and ], the word is a description
                     else if (lines[i][0] == '[' && lines[i][lastChar] == ']')
                     {
-                        CaptionList.Add(new Caption(lines[i], DescriptionSpeaker));
+                        CaptionList.Add(new EditorCaption(lines[i], DescriptionSpeaker));
                     }
                     //If anything else then it is a dialogue line
                     else
                     {
-                        CaptionList.Add(new Caption(lines[i], CurrentSpeaker));
+                        CaptionList.Add(new EditorCaption(lines[i], CurrentSpeaker));
                     }
                 }
             }//for
@@ -120,7 +120,7 @@ namespace EnACT
                     //If the flag is true, then we have already read in a caption
                     if (fullCaptionParsedFlag)
                     {
-                        CaptionList.Add(new Caption(captionLine,CurrentSpeaker,beginTime, endTime));
+                        CaptionList.Add(new EditorCaption(captionLine,CurrentSpeaker,beginTime, endTime));
                         //Reset the captionFlag
                         fullCaptionParsedFlag = false;
                     }
@@ -191,7 +191,7 @@ namespace EnACT
                     //If it's the last line and we have a full caption
                     if (i == lines.Length - 1 && fullCaptionParsedFlag)
                     {
-                        CaptionList.Add(new Caption(captionLine, CurrentSpeaker, beginTime, endTime));
+                        CaptionList.Add(new EditorCaption(captionLine, CurrentSpeaker, beginTime, endTime));
                     }
                 }//else
             }//for
@@ -238,7 +238,7 @@ namespace EnACT
                     //If the flag is true, then we have already read in a caption
                     if (continueCaptionFlag)
                     {
-                        CaptionList.Add(new Caption(captionLine, CurrentSpeaker, beginTime, endTime));
+                        CaptionList.Add(new EditorCaption(captionLine, CurrentSpeaker, beginTime, endTime));
                         //Reset the captionFlag
                         continueCaptionFlag = false;
                     }

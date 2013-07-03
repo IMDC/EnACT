@@ -18,7 +18,7 @@ namespace EnACT
 
         //Object reference variables
         public Dictionary<String, Speaker> SpeakerSet { set; get; }
-        public List<Caption> CaptionList { set; get; }
+        public List<EditorCaption> CaptionList { set; get; }
         public SettingsXML Settings { set; get; }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace EnACT
         /// <param name="SpeakerSet">A reference to the SpeakerSet object that is to be written</param>
         /// <param name="CaptionList">A reference to the CaptionList object that is to be written</param>
         /// <param name="Settings">A reference to the Settings object that is to be written</param>
-        public EnactXMLWriter(Dictionary<String, Speaker> SpeakerSet, List<Caption> CaptionList, 
+        public EnactXMLWriter(Dictionary<String, Speaker> SpeakerSet, List<EditorCaption> CaptionList, 
             SettingsXML Settings) :
             this(Paths.DefaultSpeakers, SpeakerSet, 
                  Paths.DefaultDialogues, CaptionList, 
@@ -45,7 +45,7 @@ namespace EnACT
         /// <param name="SettingsPath">The path that Settings.xml is to be written to</param>
         /// <param name="Settings">A reference to the Settings object that is to be written</param>
         public EnactXMLWriter(String SpeakersPath, Dictionary<String, Speaker> SpeakerSet, String CaptionsPath, 
-            List<Caption> CaptionList, String SettingsPath, SettingsXML Settings)
+            List<EditorCaption> CaptionList, String SettingsPath, SettingsXML Settings)
         {
             this.SpeakersPath = SpeakersPath;
             this.SpeakerSet = SpeakerSet;
@@ -157,7 +157,7 @@ namespace EnACT
                 w.WriteDocType("captions", null, "../captions.dtd", null);
                 w.WriteStartElement("captions");
                 {
-                    foreach (Caption c in CaptionList)
+                    foreach (EditorCaption c in CaptionList)
                     {
                         w.WriteStartElement("caption");
                         {
