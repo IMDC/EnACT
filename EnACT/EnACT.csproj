@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\CaptionTextBoxEventArgs.cs" />
     <Compile Include="Core\Caption.cs" />
     <Compile Include="CaptionStyle.cs" />
     <Compile Include="Controls\CaptionTextBox.cs">
@@ -91,7 +92,7 @@
     <Compile Include="Controls\EngineView.Designer.cs">
       <DependentUpon>EngineView.cs</DependentUpon>
     </Compile>
-    <Compile Include="EventArguments.cs" />
+    <Compile Include="Controls\TimelineEventArgs.cs" />
     <Compile Include="Forms\JorgeForm.cs">
       <SubType>Form</SubType>
     </Compile>
