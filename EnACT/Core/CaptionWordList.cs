@@ -12,6 +12,9 @@ namespace EnACT
     public class CaptionWordList : List<EditorCaptionWord>
     {
         #region Fields and Properties
+        /// <summary>
+        /// The width of spacing between words.
+        /// </summary>
         public const int SPACE_WIDTH = 1;
 
         /// <summary>
@@ -25,8 +28,15 @@ namespace EnACT
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Constructs a CaptionWordList with a default capacity.
+        /// </summary>
         public CaptionWordList() : base() {}
 
+        /// <summary>
+        /// Constructs a CaptionWordList and feeds in a line of text.
+        /// </summary>
+        /// <param name="line">The line of Text to feed in.</param>
         public CaptionWordList(String line) : this()
         {
             Feed(line);
