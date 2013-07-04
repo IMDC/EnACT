@@ -9,9 +9,13 @@ namespace EnACT
     /// <summary>
     /// Represents a Caption used by EnACT.
     /// </summary>
-    public class BaseCaption
+    public class Caption
     {
         #region Properties and Fields
+        /// <summary>
+        /// The width of spacing between words.
+        /// </summary>
+        public const int SPACE_WIDTH = 1;
 
         /// <summary>
         /// A reference to a speaker in the program's speaker list.
@@ -31,7 +35,7 @@ namespace EnACT
         /// <summary>
         /// The list of words in the caption
         /// </summary>
-        public virtual CaptionWordList Words { set; get; }
+        public virtual List<CaptionWord> Words { set; get; }
         #endregion //#region Properties and Fields
 
         #region Timestamp Properties
@@ -112,7 +116,7 @@ namespace EnACT
         /// <summary>
         /// Constructs a Caption object with a blank line and the DefaultSpeaker
         /// </summary>
-        public BaseCaption() : this("", Speaker.Default) { }
+        public Caption() : this("", Speaker.Default) { }
 
         /// <summary>
         /// Constructs a Caption object with a line, and uses a reference to the
@@ -120,7 +124,7 @@ namespace EnACT
         /// </summary>
         /// <param name="line">Text to be displayed as a caption</param>
         /// <param name="speaker">The speaker of the caption</param>
-        public BaseCaption(String line, Speaker speaker) : this(line, speaker, "00:00:00.0", "00:00:00.0") { }
+        public Caption(String line, Speaker speaker) : this(line, speaker, "00:00:00.0", "00:00:00.0") { }
 
         /// <summary>
         /// Constructs a Caption object with a given line, speaker, and begining 
@@ -130,16 +134,20 @@ namespace EnACT
         /// <param name="speaker">The speaker of the caption</param>
         /// <param name="Begin">The timestamp representing the beginning of the caption</param>
         /// <param name="End">The timestamp representing the ending of the caption</param>
-        public BaseCaption(String line, Speaker speaker, String Begin, String End)
+        public Caption(String line, Speaker speaker, String Begin, String End)
         {
+            //Set Timestamps. Duration is implicity set.
             this.Begin = new Timestamp(Begin);
             this.End = new Timestamp(End);
 
+            //Set other Caption properties
             this.Speaker = speaker;
             this.Location = ScreenLocation.BottomCentre;
             this.Alignment = Alignment.Center;
 
-            this.Words = new CaptionWordList(line);
+            //Set up word list and feed it words
+            this.Words = new List<CaptionWord>();
+            this.Feed(line);
         }
         #endregion
 
@@ -155,13 +163,54 @@ namespace EnACT
         }
         #endregion
 
+        #region AsString Setter and Getter
+        /// <summary>
+        /// Clears the list, then feeds a string into the list and turns it into CaptionWords.
+        /// </summary>
+        /// <param name="line">The string to turn into a list of CaptionWords.</param>
+        public virtual void Feed(String line)
+        {
+            //Remove the previous line from the Words
+            Words.Clear();
+
+            //Split line up and add each word to the wordlist.
+            String[] words = line.Split(); //Separate by spaces
+
+            foreach (String word in words)
+            {
+                if (word != "") { Words.Add(new CaptionWord(word)); }
+            }
+        }
+
+        /// <summary>
+        /// Turns the list into a single String.
+        /// </summary>
+        /// <returns>A string containing all the CaptionWords in the list.</returns>
+        public virtual String GetAsString()
+        {
+            //Stringbuilder is faster than String when it comes to appending text.
+            StringBuilder s = new StringBuilder();
+            //For every element but the last
+            for (int i = 0; i < Words.Count - 1; i++)
+            {
+                s.Append(Words[i].ToString());
+                s.Append(" ");
+            }
+            //Append the last element without adding a space after it
+            if (0 < Words.Count)
+                s.Append(Words[Words.Count - 1].ToString());
+
+            return s.ToString();
+        }
+        #endregion
+
         #region ToString
         /// <summary>
         /// Returns the text sentence that this caption represents.
         /// Calls the WordListText method, and returns its value.
         /// </summary>
         /// <returns>The text of Words's words</returns>
-        public override string ToString() { return this.Words.GetAsString(); }
+        public override string ToString() { return this.GetAsString(); }
         #endregion
     }
 }

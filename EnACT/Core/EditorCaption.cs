@@ -11,7 +11,7 @@ namespace EnACT
     /// A caption that is used by the Editor. Implements INotifyPropertyChanged in order to update
     /// CaptionView when properties are changed.
     /// </summary>
-    public class EditorCaption : BaseCaption, INotifyPropertyChanged
+    public class EditorCaption : Caption, INotifyPropertyChanged
     {
         #region Properties and Fields
         /// <summary>
@@ -54,16 +54,20 @@ namespace EnACT
         }
 
         /// <summary>
+        /// Backing field for the Words property.
+        /// </summary>
+        private List<EditorCaptionWord> wordlist;
+        /// <summary>
         /// The list of words in the caption
         /// </summary>
-        public override CaptionWordList Words
+        public new List<EditorCaptionWord> Words
         {
-            get { return base.Words; }
             set
             {
-                base.Words = value;
+                wordlist = value;
                 NotifyPropertyChanged("Words");
             }
+            get { return wordlist; }
         }
 
         /// <summary>
@@ -116,10 +120,10 @@ namespace EnACT
         {
             set
             { 
-                Words.Feed(value);
+                this.Feed(value);
                 NotifyPropertyChanged("Text");
             }
-            get{ return Words.GetAsString(); }
+            get{ return this.GetAsString(); }
         }
         #endregion
 
@@ -166,10 +170,24 @@ namespace EnACT
         /// <param name="speaker">The speaker of the caption</param>
         /// <param name="Begin">The timestamp representing the beginning of the caption</param>
         /// <param name="End">The timestamp representing the ending of the caption</param>
-        public EditorCaption(String line, Speaker speaker, String Begin, String End) : base(line, speaker, Begin, End) { }
+        public EditorCaption(String line, Speaker speaker, String Begin, String End)
+        {
+            //Set Timestamps. Duration is implicity set.
+            this.Begin = new Timestamp(Begin);
+            this.End = new Timestamp(End);
+
+            //Set other Caption properties
+            this.Speaker = speaker;
+            this.Location = ScreenLocation.BottomCentre;
+            this.Alignment = Alignment.Center;
+
+            //Set up word list and feed it words
+            this.Words = new List<EditorCaptionWord>();
+            this.Feed(line);
+        }
         #endregion
 
-        #region Methods
+        #region MoveTo
         /// <summary>
         /// Returns the text sentence that this caption represents.
         /// Calls the WordListText method, and returns its value.
@@ -179,6 +197,58 @@ namespace EnACT
         {
             base.MoveTo(beginTime);
             NotifyPropertyChanged("BeginTime");
+        }
+        #endregion
+
+        #region AsString Setter and Getter
+        /// <summary>
+        /// Clears the list, then feeds a string into the list and turns it into CaptionWords.
+        /// This method is hidden from the parent class Caption as it modifies a different property
+        /// with the same name (the Words property).
+        /// </summary>
+        /// <param name="line">The string to turn into a list of CaptionWords.</param>
+        public new void Feed(String line)
+        {
+            //Remove the previous line from the Words
+            this.Words.Clear();
+
+            //Split line up and add each word to the wordlist.
+            String[] words = line.Split(); //Separate by spaces
+
+            int cumulativePosition = 0;
+            EditorCaptionWord cw;
+
+            foreach (String word in words)
+            {
+                if (word != "")
+                {
+                    cw = new EditorCaptionWord(word, cumulativePosition);
+                    this.Words.Add(cw);
+                    cumulativePosition += cw.Length + SPACE_WIDTH;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Turns the list into a single String. This method is overriden from the Parent class 
+        /// Caption as it modifies a different property with the same name (The Words property).
+        /// </summary>
+        /// <returns>A string containing all the CaptionWords in the list.</returns>
+        public override String GetAsString()
+        {
+            //Stringbuilder is faster than String when it comes to appending text.
+            StringBuilder s = new StringBuilder();
+            //For every element but the last
+            for (int i = 0; i < Words.Count - 1; i++)
+            {
+                s.Append(Words[i].ToString());
+                s.Append(" ");
+            }
+            //Append the last element without adding a space after it
+            if (0 < Words.Count)
+                s.Append(Words[Words.Count - 1].ToString());
+
+            return s.ToString();
         }
         #endregion
     }
