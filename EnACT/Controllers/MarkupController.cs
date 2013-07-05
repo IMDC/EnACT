@@ -477,14 +477,14 @@ namespace EnACT
             //Switch based on property name
             switch (e.PropertyName)
             {
-                case "Alignment":   break;
-                case "Begin":       break;
-                case "End":         break;
-                case "Location":    SetGB_Location(SelectedCaption.Location); break;
-                case "Duration":    break;
-                case "Speaker":     break;
-                case "Text":        CaptionTextBox.Text = SelectedCaption.GetAsString(); break;
-                case "Words":       break;
+                case EditorCaption.PropertyNames.Alignment: break;
+                case EditorCaption.PropertyNames.Begin:     break;
+                case EditorCaption.PropertyNames.End:       break;
+                case EditorCaption.PropertyNames.Location:  SetGB_Location(SelectedCaption.Location); break;
+                case EditorCaption.PropertyNames.Duration:  break;
+                case EditorCaption.PropertyNames.Speaker:   break;
+                case EditorCaption.PropertyNames.Text:      CaptionTextBox.Text = SelectedCaption.GetAsString(); break;
+                case EditorCaption.PropertyNames.Words:     break;
                 default: throw new ArgumentException(String.Format("Property Name '{0}' isn't a valid property", 
                         e.PropertyName),"PropertyName");
             }

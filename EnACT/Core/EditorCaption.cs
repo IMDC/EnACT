@@ -19,14 +19,14 @@ namespace EnACT
         /// </summary>
         public static class PropertyNames
         {
-            public static readonly string Alignment="Alignment";
-            public static readonly string Begin="Begin";
-            public static readonly string End="End";
-            public static readonly string Location="Location";
-            public static readonly string Duration="Duration";
-            public static readonly string Speaker="Speaker";
-            public static readonly string Text="Text";
-            public static readonly string Words="Words";
+            public const string Alignment="Alignment";
+            public const string Begin    ="Begin";
+            public const string End      ="End";
+            public const string Location ="Location";
+            public const string Duration ="Duration";
+            public const string Speaker  ="Speaker";
+            public const string Text     ="Text";
+            public const string Words    ="Words";
         }
         #endregion
 
