@@ -173,16 +173,22 @@ namespace EnACT
                 {
                     SetTextBackgroundColour(cw, CaptionStyle.Highlighted);
                     cw.IsSelected = true;
-                    SelectionMode = CaptionTextBoxSelectionMode.SingleWordSelection;
-                    OnCaptionWordSelected(new CaptionWordSelectedEventArgs(cw));
-                    wordSelected = true;
+
                 }
                 //If the word doesn't contain the caret but is selected, then unselect it.
-                else if(!cw.Contains(caret) && cw.IsSelected)
+                else if (!cw.Contains(caret) && cw.IsSelected)
                 {
                     //Return it to the original Caption colour
                     SetTextBackgroundColour(cw, CaptionStyle.GetColourOf(cw));
                     cw.IsSelected = false;
+                }
+
+                //If cw is still selected after check
+                if (cw.IsSelected)
+                {
+                    SelectionMode = CaptionTextBoxSelectionMode.SingleWordSelection;
+                    OnCaptionWordSelected(new CaptionWordSelectedEventArgs(cw));
+                    wordSelected = true;
                 }
             }
 
