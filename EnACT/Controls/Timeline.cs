@@ -14,20 +14,36 @@ namespace EnACT
     {
         #region Constants
         /// <summary>
-        /// A readonly string array of Labels for Marking locations for captions.
+        /// Contains the Location Labels and info associated with them.
         /// </summary>
-        public readonly string [] LocationLabels = 
+        public static class LocationLabels
         {
-            "Top Left",
-            "Top Center",
-            "Top Right",
-            "Middle Left",
-            "Middle Center",
-            "Middle Right",
-            "Bottom Left",
-            "Bottom Center",
-            "BottomRight"
-        };
+            /// <summary>
+            /// The names of the location labels.
+            /// </summary>
+            public static readonly string [] Names = 
+            {
+                "Top Left",
+                "Top Center",
+                "Top Right",
+                "Middle Left",
+                "Middle Center",
+                "Middle Right",
+                "Bottom Left",
+                "Bottom Center",
+                "BottomRight"
+            };
+            
+            /// <summary>
+            /// The amount of names in this class. Returns the same as LocationLabels.Names.Length.
+            /// </summary>
+            public static int Length { get { return Names.Length; } }
+
+            /// <summary>
+            /// The width of the location label boxes in pixels.
+            /// </summary>
+            public const int PixelWidth = 95;
+        }
 
         /// <summary>
         /// The smallest width that the Timeline control can have.
@@ -67,30 +83,26 @@ namespace EnACT
         }
 
         /// <summary>
-        /// How wide the label boxes are
-        /// </summary>
-        private const int LOCATION_LABEL_WIDTH = 95;
-        /// <summary>
         /// Half the width of the playhead's triangle in pixels
         /// </summary>
-        private const int PLAYHEAD_HALF_WIDTH = 10;
+        private const int PlayheadHalfWidth = 10;
 
         /// <summary>
         /// The draw height in pixels of the playhead bar
         /// </summary>
-        private const int PLAYHEAD_BAR_HEIGHT = PLAYHEAD_HALF_WIDTH * 2;
+        private const int PlayheadBarHeight = PlayheadHalfWidth * 2;
 
         /// <summary>
         /// The distance away from the beginning or ending of a caption in pixels that the user
         /// has to click on to be able to move the caption.
         /// </summary>
-        private const int CAPTION_SELECTION_WIDTH = 3;
+        private const int CaptionSelectionPixelWidth = 3;
 
         /// <summary>
         /// The amount of pixels past the boundary of the screen that the timeline 
         /// will draw a caption of.
         /// </summary>
-        private const int DRAW_LIMIT = 5;
+        private const int OutOfBoundsDrawLimit = 5;
         #endregion
 
         #region Private fields
@@ -170,7 +182,7 @@ namespace EnACT
             get
             {
                 if (DrawLocationLabels)
-                    return LOCATION_LABEL_WIDTH;
+                    return LocationLabels.PixelWidth;
                 else
                     return 0;
             }
@@ -307,17 +319,17 @@ namespace EnACT
             Font f = new Font(this.Font.FontFamily, 10); //Caption font
 
             //The amount of height in the component available to draw on
-            float availableHeight = Height - PLAYHEAD_BAR_HEIGHT; 
+            float availableHeight = Height - PlayheadBarHeight; 
 
             //Subtract the height of the scrollbar if it is visible
             if (ScrollBar.Visible)
                 availableHeight -= SystemInformation.HorizontalScrollBarHeight;
 
             //Draw black outline around control
-            g.DrawRectangle(outlinePen, 0, 0, Width-1, availableHeight + PLAYHEAD_BAR_HEIGHT-1);
+            g.DrawRectangle(outlinePen, 0, 0, Width-1, availableHeight + PlayheadBarHeight-1);
 
             //Move the origin down towards the end of the playhead bar.
-            g.TranslateTransform(0, PLAYHEAD_BAR_HEIGHT);
+            g.TranslateTransform(0, PlayheadBarHeight);
             #endregion
 
             #region Draw Dash Lines
@@ -348,14 +360,14 @@ namespace EnACT
                 //Set drawing origin to the point where Location labels end.
                 //Anything drawn after this will have a location relative to
                 //(LOCATION_LABEL_WIDTH + 1, 0)
-                g.TranslateTransform(LOCATION_LABEL_WIDTH + 1, 0);
+                g.TranslateTransform(LocationLabels.PixelWidth + 1, 0);
             #endregion
 
             #region Draw End Marker
             if (LeftBoundTime <= VideoLength && VideoLength <= RightBoundTime)
             {
                 x = (float)(VideoLength - LeftBoundTime) * PixelsPerSecond;
-                g.DrawLine(new Pen(Color.Red, 2), x, -PLAYHEAD_BAR_HEIGHT, x, availableHeight);
+                g.DrawLine(new Pen(Color.Red, 2), x, -PlayheadBarHeight, x, availableHeight);
             }
             #endregion
 
@@ -387,8 +399,8 @@ namespace EnACT
                             default: y = 0; break;
                         }
                         //Get the x and w fields while putting limits on how large they can be
-                        x = Math.Max((float)(c.Begin - LeftBoundTime) * PixelsPerSecond, -DRAW_LIMIT);
-                        w = Math.Min((float)(c.End - LeftBoundTime) * PixelsPerSecond - x, Width + DRAW_LIMIT);
+                        x = Math.Max((float)(c.Begin - LeftBoundTime) * PixelsPerSecond, -OutOfBoundsDrawLimit);
+                        w = Math.Min((float)(c.End - LeftBoundTime) * PixelsPerSecond - x, Width + OutOfBoundsDrawLimit);
 
                         //Create a small space between the line dividers and the caption rectangles
                         //y+= 2; h -=4; //Gives one extra pixel of whitespace on top and bottom
@@ -408,16 +420,16 @@ namespace EnACT
                     continue;
 
                 x = (float)(t - LeftBoundTime) * PixelsPerSecond;
-                y = -PLAYHEAD_BAR_HEIGHT;
+                y = -PlayheadBarHeight;
                 w = 70;
 
                 //Make a rectangle centered at x
-                RectangleF timeRect = new RectangleF(x-w/2, y, w, PLAYHEAD_BAR_HEIGHT);
+                RectangleF timeRect = new RectangleF(x-w/2, y, w, PlayheadBarHeight);
                 //Draw string in centered rectangle
                 g.DrawString(t.AsString, f, textBrush, timeRect);
 
                 //Draw a little line marking the actual position of the timestamp
-                g.DrawLine(outlinePen, x, -PLAYHEAD_HALF_WIDTH/2, x, 0);
+                g.DrawLine(outlinePen, x, -PlayheadHalfWidth/2, x, 0);
             }
             #endregion
 
@@ -430,26 +442,26 @@ namespace EnACT
             
             //Make triangle head
             GraphicsPath phPath = new GraphicsPath();
-            phPath.AddLine(x - PLAYHEAD_HALF_WIDTH, 0, x, PLAYHEAD_HALF_WIDTH);
-            phPath.AddLine(x, PLAYHEAD_HALF_WIDTH, x + PLAYHEAD_HALF_WIDTH, 0);
-            phPath.AddLine(x + PLAYHEAD_HALF_WIDTH, 0, x - PLAYHEAD_HALF_WIDTH, 0);
+            phPath.AddLine(x - PlayheadHalfWidth, 0, x, PlayheadHalfWidth);
+            phPath.AddLine(x, PlayheadHalfWidth, x + PlayheadHalfWidth, 0);
+            phPath.AddLine(x + PlayheadHalfWidth, 0, x - PlayheadHalfWidth, 0);
             
             Region phRegion = new Region(phPath);
-            phRegion.Translate(0, -PLAYHEAD_BAR_HEIGHT);
+            phRegion.Translate(0, -PlayheadBarHeight);
             //Draw
             g.FillRegion(playHeadBrush, phRegion);
-            g.DrawLine(playHeadPen, x, -PLAYHEAD_BAR_HEIGHT, x, availableHeight);
+            g.DrawLine(playHeadPen, x, -PlayheadBarHeight, x, availableHeight);
             #endregion
 
             #region Draw Location Labels
             if (DrawLocationLabels)
             {
                 //Move origin back to actual origin
-                g.TranslateTransform(-LOCATION_LABEL_WIDTH -1, 0);
+                g.TranslateTransform(-LocationLabels.PixelWidth-1, 0);
 
                 x = 0;
                 h = availableHeight / LocationLabels.Length;
-                w = LOCATION_LABEL_WIDTH;
+                w = LocationLabels.PixelWidth;
 
                 for (int i = 0; i < LocationLabels.Length; i++)
                 {
@@ -462,7 +474,7 @@ namespace EnACT
                     RectangleF r = new RectangleF(x, y, w, h);
                     g.FillRectangle(new SolidBrush(Color.White), r.X, r.Y, r.Width, r.Height);
                     g.DrawRectangle(outlinePen, r.X, r.Y, r.Width, r.Height);
-                    g.DrawString(LocationLabels[i], f, textBrush, r);
+                    g.DrawString(LocationLabels.Names[i], f, textBrush, r);
                     
                 }
             }
@@ -506,8 +518,8 @@ namespace EnACT
 
             double mouseClickTime = XCoordinateToTime(e.X);
 
-            RectangleF playheadBarRect = new RectangleF(XCaptionOrigin, 0, 
-                Width - LOCATION_LABEL_WIDTH, PLAYHEAD_BAR_HEIGHT);
+            RectangleF playheadBarRect = new RectangleF(XCaptionOrigin, 0,
+                Width - LocationLabels.PixelWidth, PlayheadBarHeight);
 
             if (playheadBarRect.Contains(e.Location))
             {
@@ -534,7 +546,7 @@ namespace EnACT
                     beginX = TimeToXCoordinate(c.Begin);
 
                     //If selecting the beginning of a caption
-                    if (e.X - CAPTION_SELECTION_WIDTH <= beginX && beginX <= e.X + CAPTION_SELECTION_WIDTH)
+                    if (e.X - CaptionSelectionPixelWidth <= beginX && beginX <= e.X + CaptionSelectionPixelWidth)
                     {
                         mouseSelection = new TimelineMouseSelection(TimelineMouseAction.changeCaptionBegin, c);
                         Console.WriteLine("C.Begin");
@@ -544,7 +556,7 @@ namespace EnACT
                     endX = TimeToXCoordinate(c.End);
 
                     //If selecting the end of the Caption
-                    if (e.X - CAPTION_SELECTION_WIDTH <= endX && endX <= e.X + CAPTION_SELECTION_WIDTH)
+                    if (e.X - CaptionSelectionPixelWidth <= endX && endX <= e.X + CaptionSelectionPixelWidth)
                     {
                         mouseSelection = new TimelineMouseSelection(TimelineMouseAction.changeCaptionEnd, c);
                         Console.WriteLine("C.End");
@@ -653,7 +665,7 @@ namespace EnACT
             double mouseClickTime = XCoordinateToTime(e.X);
 
             RectangleF playheadBarRect = new RectangleF(0, 0,
-                Width - LOCATION_LABEL_WIDTH, PLAYHEAD_BAR_HEIGHT);
+                Width - LocationLabels.PixelWidth, PlayheadBarHeight);
 
             if (playheadBarRect.Contains(e.Location) && 0 <= mouseClickTime)
             {
@@ -927,7 +939,7 @@ namespace EnACT
         #region PixelsPerSecond
         /// <summary>
         /// Sets the PixelsPerSecond and AvailableWidth properties based on
-        /// Timewidth and Control Width
+        /// Timewidth and Control PixelWidth
         /// </summary>
         private void SetPixelsPerSecond()
         {
@@ -941,7 +953,7 @@ namespace EnACT
         {
             //Set value based on whether or not labels are visible
             if (DrawLocationLabels)
-                aw = (float)(Width - LOCATION_LABEL_WIDTH - 3);
+                aw = (float)(Width - LocationLabels.PixelWidth - 3);
             else
                 aw = Width - 2;
         }
@@ -1061,7 +1073,7 @@ namespace EnACT
         private ScreenLocation YCoordinateToScreenLocation(int y)
         {
             //The amount of height in the component available to draw captions on
-            float availableHeight = Height - PLAYHEAD_BAR_HEIGHT;
+            float availableHeight = Height - PlayheadBarHeight;
 
             //Subtract the height of the scrollbar if it is visible
             if (ScrollBar.Visible)
@@ -1069,7 +1081,7 @@ namespace EnACT
 
             //The height of a single Label row
             float rowHeight = availableHeight / LocationLabels.Length;
-            float adjustedY = y - PLAYHEAD_BAR_HEIGHT;
+            float adjustedY = y - PlayheadBarHeight;
 
             //Calculate row number
             int row = (int)Math.Floor(adjustedY / rowHeight);
