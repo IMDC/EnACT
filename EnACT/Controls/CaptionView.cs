@@ -14,13 +14,15 @@ namespace EnACT
     {
         #region Constants
         /// <summary>
-        /// Minimum width of the Number column in pixels.
+        /// Contains the minimum width of CaptionView Columns in Pixels
         /// </summary>
-        public const int NUMBER_COLUMN_WIDTH = 50;
-        /// <summary>
-        /// Minimum width of a Timestamp column in pixels.
-        /// </summary>
-        public const int TIMESTAMP_COLUMN_WIDTH = 70;
+        public static class MinimumColumnWidths
+        {
+            public const int NumberColumn    = 50;
+            public const int TimestampColumn = 70;
+            public const int SpeakerColumn   = 100;
+            public const int TextColum       = 100;
+        }
 
         /// <summary>
         /// Contains names of the Columns in CaptionView
@@ -140,7 +142,7 @@ namespace EnACT
             NumberColumn = new DataGridViewTextBoxColumn();
             NumberColumn.Name = ColumnNames.Number;
             NumberColumn.HeaderText = ColumnNames.Number;
-            NumberColumn.MinimumWidth = NUMBER_COLUMN_WIDTH;
+            NumberColumn.MinimumWidth = MinimumColumnWidths.NumberColumn;
             NumberColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
             NumberColumn.ReadOnly = true;   //Set Number column to read only
 
@@ -150,14 +152,14 @@ namespace EnACT
             BeginColumn.ValueType = typeof(Timestamp);
             BeginColumn.DataPropertyName = ColumnNames.Begin;
             BeginColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            BeginColumn.MinimumWidth = TIMESTAMP_COLUMN_WIDTH;
+            BeginColumn.MinimumWidth = MinimumColumnWidths.TimestampColumn;
 
             EndColumn = new DataGridViewTextBoxColumn();
             EndColumn.Name = ColumnNames.End;
             EndColumn.HeaderText = ColumnNames.End;
             EndColumn.ValueType = typeof(Timestamp);
             EndColumn.DataPropertyName = ColumnNames.End;
-            EndColumn.MinimumWidth = TIMESTAMP_COLUMN_WIDTH;
+            EndColumn.MinimumWidth = MinimumColumnWidths.TimestampColumn;
             EndColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             DurationColumn = new DataGridViewTextBoxColumn();
@@ -165,13 +167,15 @@ namespace EnACT
             DurationColumn.HeaderText = ColumnNames.Duration;
             DurationColumn.ValueType = typeof(Timestamp);
             DurationColumn.DataPropertyName = ColumnNames.Duration;
-            DurationColumn.MinimumWidth = TIMESTAMP_COLUMN_WIDTH;
+            DurationColumn.MinimumWidth = MinimumColumnWidths.TimestampColumn;
             DurationColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             SpeakerColumn = new DataGridViewTextBoxColumn();
             SpeakerColumn.Name = ColumnNames.Speaker;
             SpeakerColumn.HeaderText = ColumnNames.Speaker;
             SpeakerColumn.DataPropertyName = ColumnNames.Speaker;
+            SpeakerColumn.MinimumWidth = MinimumColumnWidths.SpeakerColumn;
+            SpeakerColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             TextColumn = new DataGridViewTextBoxColumn();
             TextColumn.Name = ColumnNames.Text;
