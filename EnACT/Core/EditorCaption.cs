@@ -13,6 +13,23 @@ namespace EnACT
     /// </summary>
     public class EditorCaption : Caption, INotifyPropertyChanged
     {
+        #region Constants
+        /// <summary>
+        /// Contains names of the properties of this class as Strings.
+        /// </summary>
+        public static class PropertyNames
+        {
+            public static readonly string Alignment="Alignment";
+            public static readonly string Begin="Begin";
+            public static readonly string End="End";
+            public static readonly string Location="Location";
+            public static readonly string Duration="Duration";
+            public static readonly string Speaker="Speaker";
+            public static readonly string Text="Text";
+            public static readonly string Words="Words";
+        }
+        #endregion
+
         #region Properties and Fields
         /// <summary>
         /// A reference to a speaker in the program's speaker list.
@@ -23,7 +40,7 @@ namespace EnACT
             set
             {
                 base.Speaker = value;
-                NotifyPropertyChanged("Speaker");
+                NotifyPropertyChanged(PropertyNames.Speaker);
             }
         }
 
@@ -36,7 +53,7 @@ namespace EnACT
             set
             {
                 base.Location = value;
-                NotifyPropertyChanged("Location");
+                NotifyPropertyChanged(PropertyNames.Location);
             }
         }
 
@@ -49,7 +66,7 @@ namespace EnACT
             set
             {
                 base.Alignment = value;
-                NotifyPropertyChanged("Alignment");
+                NotifyPropertyChanged(PropertyNames.Alignment);
             }
         }
 
@@ -65,7 +82,7 @@ namespace EnACT
             set
             {
                 wordlist = value;
-                NotifyPropertyChanged("Words");
+                NotifyPropertyChanged(PropertyNames.Words);
             }
             get { return wordlist; }
         }
@@ -80,7 +97,7 @@ namespace EnACT
             set
             {
                 base.Begin = value;
-                NotifyPropertyChanged("Begin");
+                NotifyPropertyChanged(PropertyNames.Words);
             }
         }
 
@@ -94,7 +111,7 @@ namespace EnACT
             set
             {
                 base.End = value;
-                NotifyPropertyChanged("End");
+                NotifyPropertyChanged(PropertyNames.Words);
             }
         }
 
@@ -109,7 +126,7 @@ namespace EnACT
             set
             {
                 base.Duration = value;
-                NotifyPropertyChanged("Duration");
+                NotifyPropertyChanged(PropertyNames.Duration);
             }
         }
 
@@ -121,7 +138,7 @@ namespace EnACT
             set
             { 
                 this.Feed(value);
-                NotifyPropertyChanged("Text");
+                NotifyPropertyChanged(PropertyNames.Text);
             }
             get{ return this.GetAsString(); }
         }
@@ -196,7 +213,7 @@ namespace EnACT
         public override void MoveTo(double beginTime)
         {
             base.MoveTo(beginTime);
-            NotifyPropertyChanged("BeginTime");
+            NotifyPropertyChanged(PropertyNames.Begin);
         }
         #endregion
 
@@ -227,6 +244,7 @@ namespace EnACT
                     cumulativePosition += cw.Length + SPACE_WIDTH;
                 }
             }
+            NotifyPropertyChanged(PropertyNames.Words);
         }
 
         /// <summary>

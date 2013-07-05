@@ -474,9 +474,19 @@ namespace EnACT
         /// <param name="e">Event Args</param>
         private void SelectedCaption_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            //Switch based on property name
             switch (e.PropertyName)
             {
+                case "Alignment": break;
+                case "Begin": break;
+                case "End": break;
                 case "Location": SetGB_Location(SelectedCaption.Location); break;
+                case "Duration": break;
+                case "Speaker": break;
+                case "Text": break;
+                case "Words": break;
+                default: throw new ArgumentException(String.Format("Property Name '{0}' isn't a valid property", 
+                        e.PropertyName),"PropertyName");
             }
         }
         #endregion
