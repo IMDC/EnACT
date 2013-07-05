@@ -32,32 +32,39 @@ namespace EnACT
         /// <summary>
         /// The smallest width that the Timeline control can have.
         /// </summary>
-        public const int MIN_TIMELINE_WIDTH = 920;
+        public const int MinimumTimelineWidth = 920;
 
         /// <summary>
         /// How many seconds of time the Timeline will show by default
         /// </summary>
-        private const double DEFAULT_TIME_WIDTH = 10;
+        private const double DefaultTimeWidth = 10;
         /// <summary>
         /// How many seconds of time are shown after the video end
         /// </summary>
-        private const double ENDTIMEBUFFER = 5;
+        private const double EndTimeBuffer = 5;
+
         /// <summary>
-        /// The number TimeWidth is multiplied/divided by when it is changed
+        /// Contains constants related to zooming the timeline in and out.
         /// </summary>
-        private const int ZOOM_MULTIPLIER = 2;
-        /// <summary>
-        /// The Default zoom level
-        /// </summary>
-        private const int DEFAULT_ZOOM_LEVEL = 10;
-        /// <summary>
-        /// The highest level of zoom (zooming in) the timeline will allow
-        /// </summary>
-        private const int MAX_ZOOM_LEVEL = 13;
-        /// <summary>
-        /// The lowest level of zoom the Timeline will allow
-        /// </summary>
-        private const int MIN_ZOOM_LEVEL = 0;
+        private static class Zoom
+        {
+            /// <summary>
+            /// The number TimeWidth is multiplied/divided by when it is changed
+            /// </summary>
+            public const int Multiplier   = 2;
+            /// <summary>
+            /// The Default zoom level
+            /// </summary>
+            public const int DefaultLevel = 10;
+            /// <summary>
+            /// The highest level of zoom (zooming in) the timeline will allow
+            /// </summary>
+            public const int MaxLevel     = 13;
+            /// <summary>
+            /// The lowest level of zoom the Timeline will allow
+            /// </summary>
+            public const int MinLevel     = 0;
+        }
 
         /// <summary>
         /// How wide the label boxes are
@@ -258,7 +265,7 @@ namespace EnACT
             ResizeRedraw = true; //Redraw the component everytime the form gets resized
 
             //Set timewidth to default
-            TimeWidth = DEFAULT_TIME_WIDTH;
+            TimeWidth = DefaultTimeWidth;
 
             //Set scrollbar to the beginning
             ScrollBar.Value = 0;
@@ -274,7 +281,7 @@ namespace EnACT
             SetPlayheadBarTimes();
 
             //Set the zoom level
-            zoomLevel = DEFAULT_ZOOM_LEVEL;
+            zoomLevel = Zoom.DefaultLevel;
 
             //Set the mouseSelection to no selection
             mouseSelection = TimelineMouseSelection.NoSelection;
@@ -755,7 +762,7 @@ namespace EnACT
              * draw out the entire video at the current timewidth plus 1 large change value.
              * This is due to a bug with the windows scrollbar.
              */
-            ScrollBar.Maximum = (int)((VideoLength+ENDTIMEBUFFER) * PixelsPerSecond + ScrollBar.LargeChange);
+            ScrollBar.Maximum = (int)((VideoLength+EndTimeBuffer) * PixelsPerSecond + ScrollBar.LargeChange);
 
             //Set scroll value to the value of LeftBoundTime
             if(VideoLength != 0)
@@ -779,10 +786,10 @@ namespace EnACT
         /// </summary>
         public void ZoomIn()
         {
-            if(zoomLevel < MAX_ZOOM_LEVEL)
+            if(zoomLevel < Zoom.MaxLevel)
             {
                 //Change zoom level
-                TimeWidth /= ZOOM_MULTIPLIER;
+                TimeWidth /= Zoom.Multiplier;
                 zoomLevel++; //Increase zoom level
 
                 SetTimelineValues(PlayHeadTime - halfTimeWidth);
@@ -795,10 +802,10 @@ namespace EnACT
         /// </summary>
         public void ZoomOut()
         {
-            if(MIN_ZOOM_LEVEL < zoomLevel)
+            if(Zoom.MinLevel < zoomLevel)
             {
                 //Change zoom level
-                TimeWidth *= ZOOM_MULTIPLIER;
+                TimeWidth *= Zoom.Multiplier;
                 zoomLevel--; //Decrease zoom level
 
                 //Change values
@@ -813,13 +820,13 @@ namespace EnACT
         }
 
         /// <summary>
-        /// Resets the zoom level back to DEFAULT_TIME_WIDTH
+        /// Resets the zoom level back to DefaultTimeWidth
         /// </summary>
         public void ZoomReset()
         {
             //Reset Zoom level
-            zoomLevel = DEFAULT_ZOOM_LEVEL;
-            TimeWidth = DEFAULT_TIME_WIDTH;
+            zoomLevel = Zoom.DefaultLevel;
+            TimeWidth = DefaultTimeWidth;
 
             SetTimelineValues(PlayHeadTime - halfTimeWidth);
             Redraw();
@@ -925,7 +932,7 @@ namespace EnACT
         private void SetPixelsPerSecond()
         {
             //Calculate pps
-            pps = (float)(MIN_TIMELINE_WIDTH / TimeWidth);
+            pps = (float)(MinimumTimelineWidth / TimeWidth);
         }
         #endregion
 
