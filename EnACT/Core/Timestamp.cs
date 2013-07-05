@@ -21,17 +21,17 @@ namespace EnACT
         /// <summary>
         /// The highest time value that can be assigned to a Timestamp as a double
         /// </summary>
-        public const double MAX_TIME_DOUBLE = 359999.9;
+        public const double MaximumDoubleValue = 359999.9;
 
         /// <summary>
         /// The highest time value that can be assigned to a Timestamp as a string
         /// </summary>
-        public const string MAX_TIME_STRING = "99:59:59.9";
+        public const string MaximumTimeValue = "99:59:59.9";
 
         /// <summary>
         /// The smallest amount of time that will differentiate one caption from another.
         /// </summary>
-        public const double MIN_TIME_DIFFERENCE = 0.1;
+        public const double MinimumTimeDifference = 0.1;
         #endregion
 
         #region Regex
@@ -73,7 +73,7 @@ namespace EnACT
                     throw new InvalidTimestampException("Timestamp.AsDouble value can not be Positive Infinity");
                 else if (Double.IsNegativeInfinity(value))
                     throw new InvalidTimestampException("Timestamp.AsDouble value can not be Negative Infinity");
-                else if (MAX_TIME_DOUBLE < value)
+                else if (MaximumDoubleValue < value)
                     throw new InvalidTimestampException("Timestamp.AsDouble is too large");
 
                 time = value;
@@ -137,8 +137,8 @@ namespace EnACT
                 if (value == null || value == String.Empty)
                     time = 0;
 
-                //If value is lexicographically greater than MAX_TIME_STRING
-                if(0 < String.Compare(value, MAX_TIME_STRING))
+                //If value is lexicographically greater than MaximumTimeValue
+                if(0 < String.Compare(value, MaximumTimeValue))
                     throw new InvalidTimestampException("Timestamp.AsString is too large");
 
                 double seconds = 0;

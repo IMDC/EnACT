@@ -15,12 +15,12 @@ namespace EnACT
         /// <summary>
         /// The default emotion used when constructing a new CaptionWord.
         /// </summary>
-        public const Emotion DEFAULT_EMOTION = Emotion.None;
+        public const Emotion DefaultEmotion = Emotion.None;
 
         /// <summary>
         /// The default intensity used when constructing a new CaptionWord.
         /// </summary>
-        public const Intensity DEFAULT_INTENSITY = Intensity.Low;
+        public const Intensity DefaultIntensity = Intensity.Low;
 
         /// <summary>
         /// Represents the type of emotion (Happy, Sad, etc) of this CaptionWord
@@ -55,7 +55,7 @@ namespace EnACT
         /// Intensity values.
         /// </summary>
         /// <param name="text">The word string to make this EditorCaptionWord represent.</param>
-        public CaptionWord(String text) : this(DEFAULT_EMOTION, DEFAULT_INTENSITY, text) { }
+        public CaptionWord(String text) : this(DefaultEmotion, DefaultIntensity, text) { }
 
         /// <summary>
         /// Constructs a CaptionWord with the specified parameters.

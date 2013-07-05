@@ -241,7 +241,7 @@ namespace EnACT
                 {
                     cw = new EditorCaptionWord(word, cumulativePosition);
                     this.Words.Add(cw);
-                    cumulativePosition += cw.Length + SPACE_WIDTH;
+                    cumulativePosition += cw.Length + SpaceWidth;
                 }
             }
             NotifyPropertyChanged(PropertyNames.Words);

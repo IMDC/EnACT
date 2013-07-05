@@ -15,7 +15,7 @@ namespace EnACT
         /// <summary>
         /// The width of spacing between words.
         /// </summary>
-        public const int SPACE_WIDTH = 1;
+        public const int SpaceWidth = 1;
 
         /// <summary>
         /// A reference to a speaker in the program's speaker list.

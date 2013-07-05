@@ -37,7 +37,7 @@ namespace EnACT
         /// <param name="beginIndex">The index of this EditorCaptionWord in a string of 
         /// words.</param>
         public EditorCaptionWord(String text, int beginIndex) : 
-            this(DEFAULT_EMOTION, DEFAULT_INTENSITY, text, beginIndex) { }
+            this(DefaultEmotion, DefaultIntensity, text, beginIndex) { }
 
         /// <summary>
         /// Constructs an EditorCaptionWord with the specified parameters.

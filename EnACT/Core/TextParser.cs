@@ -37,9 +37,9 @@ namespace EnACT
             String speakerName = "";
 
             //Start off with the Default speaker
-            Speaker CurrentSpeaker = SpeakerSet[Speaker.DEFAULTNAME];
+            Speaker CurrentSpeaker = SpeakerSet[Speaker.DefaultName];
             //Set the Description Speaker to the description speaker contained in the set.
-            Speaker DescriptionSpeaker = SpeakerSet[Speaker.DESCRIPTIONNAME];
+            Speaker DescriptionSpeaker = SpeakerSet[Speaker.DescriptionName];
 
             for (int i = 0; i < lines.Length; i++)
             {
@@ -91,7 +91,7 @@ namespace EnACT
             String[] lines = System.IO.File.ReadAllLines(@scriptPath); //Read in file
 
             //Start off with the Default speaker
-            Speaker CurrentSpeaker = SpeakerSet[Speaker.DEFAULTNAME] ;
+            Speaker CurrentSpeaker = SpeakerSet[Speaker.DefaultName] ;
 
             Regex numberLineRegex = new Regex(@"^\d+$");    //Line number
             //Time stamp regex, ex "00:00:35,895 --> 00:00:37,790" will match
@@ -170,7 +170,7 @@ namespace EnACT
                         else if(lines[i][0] == '[' && lines[i][lines[i].Length - 1] == ']')
                         {
                             captionLine = lines[i].Substring(1, lines[i].Length - 2);
-                            CurrentSpeaker = SpeakerSet[Speaker.DESCRIPTIONNAME];
+                            CurrentSpeaker = SpeakerSet[Speaker.DescriptionName];
                             fullCaptionParsedFlag = true;
                         }
                         //Else the line is a caption
@@ -213,7 +213,7 @@ namespace EnACT
             //Start off with the Default speaker
             Speaker CurrentSpeaker = new Speaker("CARLO");
             //Set the Description Speaker to the description speaker contained in the set.
-            Speaker DescriptionSpeaker = SpeakerSet[Speaker.DESCRIPTIONNAME];
+            Speaker DescriptionSpeaker = SpeakerSet[Speaker.DescriptionName];
 
             Regex numberLineRegex = new Regex(@"^\d+$");    //Line number
             //Time stamp regex, ex "00:00:35,895 --> 00:00:37,790" will match

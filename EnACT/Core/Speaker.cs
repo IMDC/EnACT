@@ -11,11 +11,11 @@ namespace EnACT
         /// <summary>
         /// The name of the default speaker.
         /// </summary>
-        public const String DEFAULTNAME = "NOSPEAKER";
+        public const String DefaultName = "No Speaker";
         /// <summary>
         /// The name of the description speaker
         /// </summary>
-        public const String DESCRIPTIONNAME = "DESCRIPTION";
+        public const String DescriptionName = "Description";
 
         /// <summary>
         /// Default speaker, used when no speaker is currently specified
@@ -25,7 +25,7 @@ namespace EnACT
         /// <summary>
         /// Description speaker, used when a caption is a description such as [laughter] or [music]
         /// </summary>
-        public static readonly Speaker Description = new Speaker(Speaker.DESCRIPTIONNAME);
+        public static readonly Speaker Description = new Speaker(Speaker.DescriptionName);
 
         /// <summary>
         /// The name of this speaker
@@ -47,7 +47,7 @@ namespace EnACT
         /// <summary>
         /// Constructs a Speaker object with a name of DEFAULT
         /// </summary>
-        public Speaker():this(DEFAULTNAME){}
+        public Speaker():this(DefaultName){}
 
         /// <summary>
         /// Constructs a speaker object with a given name.

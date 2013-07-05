@@ -147,13 +147,13 @@ namespace EnACTUnitTestProject
             //If the above throws an exception, then the test fails
             catch (InvalidTimestampException) { Assert.Fail(); }
 
-            try { t7 = new Timestamp(Timestamp.MAX_TIME_DOUBLE); }
+            try { t7 = new Timestamp(Timestamp.MaximumDoubleValue); }
             //If the above throws an exception, then the test fails
             catch (InvalidTimestampException) { Assert.Fail(); }
 
             try
             {
-                t8 = new Timestamp(Timestamp.MAX_TIME_DOUBLE + Timestamp.MIN_TIME_DIFFERENCE);
+                t8 = new Timestamp(Timestamp.MaximumDoubleValue + Timestamp.MinimumTimeDifference);
                 //If the line above doesn't throw an exception then the test fails
                 Assert.Fail();
             }
@@ -304,15 +304,15 @@ namespace EnACTUnitTestProject
         public void TimestampMaxValueEqualityTest()
         {
             //Arrange
-            double expectedDouble = Timestamp.MAX_TIME_DOUBLE;
-            string expectedString = Timestamp.MAX_TIME_STRING;
+            double expectedDouble = Timestamp.MaximumDoubleValue;
+            string expectedString = Timestamp.MaximumTimeValue;
 
             Timestamp t1;
             Timestamp t2;
 
             //Act
-            t1 = new Timestamp(Timestamp.MAX_TIME_DOUBLE);
-            t2 = new Timestamp(Timestamp.MAX_TIME_STRING);
+            t1 = new Timestamp(Timestamp.MaximumDoubleValue);
+            t2 = new Timestamp(Timestamp.MaximumTimeValue);
 
             //Assert
             Assert.AreEqual(expectedDouble, t1.AsDouble);
