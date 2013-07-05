@@ -23,29 +23,17 @@ namespace EnACT
         public const int TIMESTAMP_COLUMN_WIDTH = 70;
 
         /// <summary>
-        /// Number column name
+        /// Contains names of the Columns in CaptionView
         /// </summary>
-        public const String NNAME = "Number";
-        /// <summary>
-        /// Begin time column name
-        /// </summary>
-        public const String BNAME = "Begin";
-        /// <summary>
-        /// End time column name
-        /// </summary>
-        public const String ENAME = "End";
-        /// <summary>
-        /// Duration column name
-        /// </summary>
-        public const String DNAME = "Duration";
-        /// <summary>
-        /// Speaker-name column name
-        /// </summary>
-        public const String SNAME = "Speaker";
-        /// <summary>
-        /// Caption text column name
-        /// </summary>
-        public const String TNAME = "Text";
+        public static class ColumnNames
+        {
+            public const String Number   = "Number";
+            public const String Begin    = "Begin";
+            public const String End      = "End";
+            public const String Duration = "Duration";
+            public const String Speaker  = "Speaker";
+            public const String Text     = "Text";
+        }
         #endregion
 
         #region Fields and Properties
@@ -150,45 +138,45 @@ namespace EnACT
              * component that implements Caption view.
              */
             NumberColumn = new DataGridViewTextBoxColumn();
-            NumberColumn.Name = NNAME;
-            NumberColumn.HeaderText = NNAME;
+            NumberColumn.Name = ColumnNames.Number;
+            NumberColumn.HeaderText = ColumnNames.Number;
             NumberColumn.MinimumWidth = NUMBER_COLUMN_WIDTH;
             NumberColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
             NumberColumn.ReadOnly = true;   //Set Number column to read only
 
             BeginColumn = new DataGridViewTextBoxColumn();
-            BeginColumn.Name = BNAME;
-            BeginColumn.HeaderText = BNAME;
+            BeginColumn.Name = ColumnNames.Begin;
+            BeginColumn.HeaderText = ColumnNames.Begin;
             BeginColumn.ValueType = typeof(Timestamp);
-            BeginColumn.DataPropertyName = BNAME;
+            BeginColumn.DataPropertyName = ColumnNames.Begin;
             BeginColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             BeginColumn.MinimumWidth = TIMESTAMP_COLUMN_WIDTH;
 
             EndColumn = new DataGridViewTextBoxColumn();
-            EndColumn.Name = ENAME;
-            EndColumn.HeaderText = ENAME;
+            EndColumn.Name = ColumnNames.End;
+            EndColumn.HeaderText = ColumnNames.End;
             EndColumn.ValueType = typeof(Timestamp);
-            EndColumn.DataPropertyName = ENAME;
+            EndColumn.DataPropertyName = ColumnNames.End;
             EndColumn.MinimumWidth = TIMESTAMP_COLUMN_WIDTH;
             EndColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             DurationColumn = new DataGridViewTextBoxColumn();
-            DurationColumn.Name = DNAME;
-            DurationColumn.HeaderText = DNAME;
+            DurationColumn.Name = ColumnNames.Duration;
+            DurationColumn.HeaderText = ColumnNames.Duration;
             DurationColumn.ValueType = typeof(Timestamp);
-            DurationColumn.DataPropertyName = DNAME;
+            DurationColumn.DataPropertyName = ColumnNames.Duration;
             DurationColumn.MinimumWidth = TIMESTAMP_COLUMN_WIDTH;
             DurationColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             SpeakerColumn = new DataGridViewTextBoxColumn();
-            SpeakerColumn.Name = SNAME;
-            SpeakerColumn.HeaderText = SNAME;
-            SpeakerColumn.DataPropertyName = SNAME;
+            SpeakerColumn.Name = ColumnNames.Speaker;
+            SpeakerColumn.HeaderText = ColumnNames.Speaker;
+            SpeakerColumn.DataPropertyName = ColumnNames.Speaker;
 
             TextColumn = new DataGridViewTextBoxColumn();
-            TextColumn.Name = TNAME;
-            TextColumn.HeaderText = TNAME;
-            TextColumn.DataPropertyName = TNAME;
+            TextColumn.Name = ColumnNames.Text;
+            TextColumn.HeaderText = ColumnNames.Text;
+            TextColumn.DataPropertyName = ColumnNames.Text;
 
             //Add Columns to View
             Columns.Add(NumberColumn);
@@ -337,11 +325,11 @@ namespace EnACT
             int c = e.ColumnIndex;
             switch (Columns[c].Name)
             {
-                case NNAME: break;
+                case ColumnNames.Number: break;
                 //Set Begin, End, or Duration value
-                case BNAME:
-                case ENAME:
-                case DNAME:
+                case ColumnNames.Begin:
+                case ColumnNames.End:
+                case ColumnNames.Duration:
                     try
                     {
                         //Attempt to convert the value
@@ -357,7 +345,7 @@ namespace EnACT
                         e.ParsingApplied = true;
                     }
                     break;
-                case SNAME:
+                case ColumnNames.Speaker:
                     String s = (String) e.Value;
                     if (SpeakerSet.ContainsKey(s))
                     {
@@ -370,7 +358,7 @@ namespace EnACT
                     }
                     e.ParsingApplied = true;
                     break;
-                case TNAME: break;
+                case ColumnNames.Text: break;
                 default: throw new ArgumentException("Invalid Column " + e.ColumnIndex, "e.ColumnIndex");
             }
             base.OnCellParsing(e);
@@ -384,7 +372,7 @@ namespace EnACT
         protected override void OnRowPostPaint(DataGridViewRowPostPaintEventArgs e)
         {
             base.OnRowPostPaint(e);
-            Rows[e.RowIndex].Cells[NNAME].Value = e.RowIndex + 1;
+            Rows[e.RowIndex].Cells[ColumnNames.Number].Value = e.RowIndex + 1;
         }
 
         /// <summary>
