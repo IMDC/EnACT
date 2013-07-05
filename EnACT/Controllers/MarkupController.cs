@@ -87,10 +87,15 @@ namespace EnACT
         public void LoadCaption(EditorCaption c)
         {
             //Clear Selected CaptionWord
-            SelectedCaptionWord = null;
+            if (SelectedCaption != null)
+            {
+                SelectedCaption.PropertyChanged -= SelectedCaption_PropertyChanged;
+                SelectedCaption = null;
+            }
 
             //Set Caption
             SelectedCaption = c;
+            SelectedCaption.PropertyChanged += SelectedCaption_PropertyChanged;
 
             //Load Textbox
             CaptionTextBox.Clear();
@@ -245,7 +250,11 @@ namespace EnACT
         public void ClearCaption()
         {
             //Clear SelectedCaption
-            SelectedCaption = null;
+            if (SelectedCaption != null)
+            {
+                SelectedCaption.PropertyChanged -= SelectedCaption_PropertyChanged;
+                SelectedCaption = null;
+            }
 
             //Clear CaptionTextBox
             CaptionTextBox.Clear();
@@ -453,6 +462,22 @@ namespace EnACT
             //Clear and disable intensity, as no current emotion is selected.
             ClearGB_Intensity();
             GB_Intensity.Enabled = false;
+        }
+        #endregion
+
+        #region SelectedCaption_PropertyChanged
+        /// <summary>
+        /// Event Handler for SelectedCaption.PropertyChanged. Updates controls when the selected
+        /// Caption is changed from other parts of the program.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void SelectedCaption_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "Location": SetGB_Location(SelectedCaption.Location); break;
+            }
         }
         #endregion
     }
