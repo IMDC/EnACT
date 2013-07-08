@@ -384,6 +384,21 @@ namespace EnACT
                     }
                     e.ParsingApplied = true;
                     break;
+                case ColumnNames.Alignment:
+                    String a = (String) e.Value;
+                    //Check to see if value is equal to the alignment text name
+                    if (a.Equals("Left", StringComparison.OrdinalIgnoreCase))
+                        e.Value = Alignment.Left;
+                    else if (a.Equals("Center", StringComparison.OrdinalIgnoreCase))
+                        e.Value = Alignment.Center;
+                    else if (a.Equals("Right", StringComparison.OrdinalIgnoreCase))
+                        e.Value = Alignment.Right;
+                    else
+                        e.Value = Rows[r].Cells[c].Value; //If no match reset value
+                    e.ParsingApplied = true;
+                    break;
+                case ColumnNames.Location:
+                    break;
                 case ColumnNames.Text: break;
                 default: throw new ArgumentException("Invalid Column " + e.ColumnIndex, "e.ColumnIndex");
             }
