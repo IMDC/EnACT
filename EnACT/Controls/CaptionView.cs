@@ -21,6 +21,8 @@ namespace EnACT
             public const int NumberColumn    = 50;
             public const int TimestampColumn = 70;
             public const int SpeakerColumn   = 100;
+            public const int AlignmentColumn = 70;
+            public const int LocationColumn  = 80;
             public const int TextColum       = 100;
         }
 
@@ -29,12 +31,14 @@ namespace EnACT
         /// </summary>
         public static class ColumnNames
         {
-            public const String Number   = "Number";
-            public const String Begin    = "Begin";
-            public const String End      = "End";
-            public const String Duration = "Duration";
-            public const String Speaker  = "Speaker";
-            public const String Text     = "Text";
+            public const String Number    = "Number";
+            public const String Begin     = "Begin";
+            public const String End       = "End";
+            public const String Duration  = "Duration";
+            public const String Speaker   = "Speaker";
+            public const String Alignment = "Alignment";
+            public const String Location  = "Location";
+            public const String Text      = "Text";
         }
         #endregion
 
@@ -60,6 +64,8 @@ namespace EnACT
         private DataGridViewColumn EndColumn;
         private DataGridViewColumn DurationColumn;
         private DataGridViewColumn SpeakerColumn;
+        private DataGridViewColumn AlignmentColumn;
+        private DataGridViewColumn LocationColumn;
         private DataGridViewColumn TextColumn;
 
         /// <summary>
@@ -150,7 +156,7 @@ namespace EnACT
             BeginColumn.Name = ColumnNames.Begin;
             BeginColumn.HeaderText = ColumnNames.Begin;
             BeginColumn.ValueType = typeof(Timestamp);
-            BeginColumn.DataPropertyName = ColumnNames.Begin;
+            BeginColumn.DataPropertyName = EditorCaption.PropertyNames.Begin;
             BeginColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             BeginColumn.MinimumWidth = MinimumColumnWidths.TimestampColumn;
 
@@ -158,7 +164,7 @@ namespace EnACT
             EndColumn.Name = ColumnNames.End;
             EndColumn.HeaderText = ColumnNames.End;
             EndColumn.ValueType = typeof(Timestamp);
-            EndColumn.DataPropertyName = ColumnNames.End;
+            EndColumn.DataPropertyName = EditorCaption.PropertyNames.End;
             EndColumn.MinimumWidth = MinimumColumnWidths.TimestampColumn;
             EndColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
@@ -166,16 +172,30 @@ namespace EnACT
             DurationColumn.Name = ColumnNames.Duration;
             DurationColumn.HeaderText = ColumnNames.Duration;
             DurationColumn.ValueType = typeof(Timestamp);
-            DurationColumn.DataPropertyName = ColumnNames.Duration;
+            DurationColumn.DataPropertyName = EditorCaption.PropertyNames.Duration;
             DurationColumn.MinimumWidth = MinimumColumnWidths.TimestampColumn;
             DurationColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             SpeakerColumn = new DataGridViewTextBoxColumn();
             SpeakerColumn.Name = ColumnNames.Speaker;
             SpeakerColumn.HeaderText = ColumnNames.Speaker;
-            SpeakerColumn.DataPropertyName = ColumnNames.Speaker;
+            SpeakerColumn.DataPropertyName = EditorCaption.PropertyNames.Speaker;
             SpeakerColumn.MinimumWidth = MinimumColumnWidths.SpeakerColumn;
             SpeakerColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+            AlignmentColumn = new DataGridViewTextBoxColumn();
+            AlignmentColumn.Name = ColumnNames.Alignment;
+            AlignmentColumn.HeaderText = ColumnNames.Alignment;
+            AlignmentColumn.DataPropertyName = EditorCaption.PropertyNames.Alignment;
+            AlignmentColumn.MinimumWidth = MinimumColumnWidths.AlignmentColumn;
+            AlignmentColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+            LocationColumn = new DataGridViewTextBoxColumn();
+            LocationColumn.Name = ColumnNames.Location;
+            LocationColumn.HeaderText = ColumnNames.Location;
+            LocationColumn.DataPropertyName = EditorCaption.PropertyNames.Location;
+            LocationColumn.MinimumWidth = MinimumColumnWidths.LocationColumn;
+            LocationColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             TextColumn = new DataGridViewTextBoxColumn();
             TextColumn.Name = ColumnNames.Text;
@@ -188,6 +208,8 @@ namespace EnACT
             Columns.Add(EndColumn);
             Columns.Add(DurationColumn);
             Columns.Add(SpeakerColumn);
+            Columns.Add(AlignmentColumn);
+            Columns.Add(LocationColumn);
             Columns.Add(TextColumn);
 
             //Set the last column to fill up remaining space
