@@ -440,7 +440,7 @@ namespace EnACT
         {
             if (e.SelectedWord != SelectedCaptionWord)
             {
-                Console.WriteLine("New Word: {0}", e.SelectedWord);
+                Console.WriteLine("New Word Selection: {0}", e.SelectedWord);
                 LoadWord(e.SelectedWord);
             }
         }

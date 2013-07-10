@@ -32,6 +32,11 @@ namespace EnACT
         /// </summary>
         private bool simpleSelectFlag = false;
 
+        /// <summary>
+        /// The text contained by this CaptionTextBox before the previous selection change.
+        /// </summary>
+        private string previousTextString = null;
+
         public CaptionTextBoxSelectionMode SelectionMode { set; get; }
 
         /// <summary>
@@ -120,6 +125,17 @@ namespace EnACT
                 return;
             }
 
+            /* The program checks to see if the text has changed in here and not in TextChanged
+             * because the TextChanged event gets called everytime the text gets highlighted. At
+             * this point in the code, the if statement will be checked only if the selection event
+             * is not simple, so it should only happen when the selection is changed by the user.
+             */
+            if (!Text.Equals(previousTextString))
+            {
+                ModifyCaptionWords();
+                previousTextString = Text;
+            }
+
             //Avoid null exceptions by returning if null
             if (Caption == null)
                 return;
@@ -156,6 +172,33 @@ namespace EnACT
                 }
             }
         }
+        #endregion
+
+        #region ModifyCaptionWords
+        private void ModifyCaptionWords()
+        {
+            int caret = SelectionStart;
+            //Console.WriteLine("Caret is at {0}", Text[caret]);
+            Console.WriteLine("TextChanged");
+
+            if (TextLength == 0)
+                Console.WriteLine("Nothing in box");
+            else if (caret == TextLength)
+            {
+                if (char.IsWhiteSpace(Text[caret - 1]))
+                    Console.WriteLine("New Word at end");
+                else
+                    Console.WriteLine("Continue Word at end");
+            }
+            //If in the middle of a word (if chars surrounding the caret are not whitespace)
+            else if (!char.IsWhiteSpace(Text[caret]) && (caret - 1 < 0 || !char.IsWhiteSpace(Text[caret - 1])))
+                Console.WriteLine("Middle of Word");
+            else if (!char.IsWhiteSpace(Text[caret]) && (caret - 1 < 0 || char.IsWhiteSpace(Text[caret - 1])))
+                Console.WriteLine("Modify end of word.");
+            else if (char.IsWhiteSpace(Text[caret]) && (caret - 1 < 0 || char.IsWhiteSpace(Text[caret - 1])))
+                Console.WriteLine("New Word");
+        }
+        #endregion
 
         #region HighlightCurrentWord
         /// <summary>
@@ -200,6 +243,7 @@ namespace EnACT
         }
         #endregion
 
+        #region Clear
         /// <summary>
         /// Clears all text from the CaptionTextBox control. Deselects all CaptionWords and removes
         /// the current Caption reference.
