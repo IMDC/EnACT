@@ -96,13 +96,6 @@ namespace EnACT
         }
         #endregion
 
-        #region OnTextChanged
-        protected override void OnTextChanged(EventArgs e)
-        {
-            base.OnTextChanged(e);
-        }
-        #endregion
-
         #region OnSelectionChanged
         /// <summary>
         /// Method that is called when the caret or selection of the textbox is changed.
