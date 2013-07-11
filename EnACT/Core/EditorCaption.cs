@@ -243,6 +243,9 @@ namespace EnACT
                     this.Words.Add(cw);
                     cumulativePosition += cw.Length + SpaceWidth;
                 }
+                else
+                    //Add a space to represent the empty word
+                    cumulativePosition += SpaceWidth;
             }
             NotifyPropertyChanged(PropertyNames.Words);
         }
