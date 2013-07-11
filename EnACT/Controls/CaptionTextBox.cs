@@ -132,7 +132,7 @@ namespace EnACT
              */
             if (!Text.Equals(previousTextString))
             {
-                ModifyCaptionWords();
+                UpdateCaptionWords();
                 previousTextString = Text;
             }
 
@@ -174,29 +174,18 @@ namespace EnACT
         }
         #endregion
 
-        #region ModifyCaptionWords
-        private void ModifyCaptionWords()
+        #region UpdateCaptionWords
+        /// <summary>
+        /// Updates the Caption.Words collection to match the CaptionTextBox's text.
+        /// </summary>
+        private void UpdateCaptionWords()
         {
-            int caret = SelectionStart;
-            //Console.WriteLine("Caret is at {0}", Text[caret]);
-            Console.WriteLine("TextChanged");
+            //Unhighlight everything
+            SetTextBackgroundColour(0, Text.Length - 1, CaptionStyle.None_Style.TextColour, 
+                CaptionStyle.None_Style.BackColour);
 
-            if (TextLength == 0)
-                Console.WriteLine("Nothing in box");
-            else if (caret == TextLength)
-            {
-                if (char.IsWhiteSpace(Text[caret - 1]))
-                    Console.WriteLine("New Word at end");
-                else
-                    Console.WriteLine("Continue Word at end");
-            }
-            //If in the middle of a word (if chars surrounding the caret are not whitespace)
-            else if (!char.IsWhiteSpace(Text[caret]) && (caret - 1 < 0 || !char.IsWhiteSpace(Text[caret - 1])))
-                Console.WriteLine("Middle of Word");
-            else if (!char.IsWhiteSpace(Text[caret]) && (caret - 1 < 0 || char.IsWhiteSpace(Text[caret - 1])))
-                Console.WriteLine("Modify end of word.");
-            else if (char.IsWhiteSpace(Text[caret]) && (caret - 1 < 0 || char.IsWhiteSpace(Text[caret - 1])))
-                Console.WriteLine("New Word");
+            //Re-feed the words into the Caption
+            Caption.Feed(this.Text);
         }
         #endregion
 
