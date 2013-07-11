@@ -432,28 +432,6 @@ namespace EnACT
         }
         #endregion
 
-        #region Mouse Events
-        /// <summary>
-        /// Raises the MouseEnter event
-        /// </summary>
-        /// <param name="e"></param>
-        protected override void OnMouseEnter(EventArgs e)
-        {
-            base.OnMouseEnter(e);
-            this.Focus();
-        }
-
-        /// <summary>
-        /// Raises the MouseLeave event
-        /// </summary>
-        /// <param name="e"></param>
-        protected override void OnMouseLeave(EventArgs e)
-        {
-            base.OnMouseLeave(e);
-            this.InvokeLostFocus(this, new EventArgs());
-        }
-        #endregion
-
         #region Enable/Disable User Input
         /// <summary>
         /// Called from the setter of the UserInputEnabled property. Enables the

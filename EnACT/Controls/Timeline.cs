@@ -700,28 +700,6 @@ namespace EnACT
         }
         #endregion
 
-        #region Mouse Focus Events
-        /// <summary>
-        /// Raises the MouseEnter event. Gives focus to the control.
-        /// </summary>
-        /// <param name="e">Event Args</param>
-        protected override void OnMouseEnter(EventArgs e)
-        {
-            base.OnMouseEnter(e);
-            this.Focus();
-        }
-
-        /// <summary>
-        /// Raises the MouseLeave event.
-        /// </summary>
-        /// <param name="e">Event Args</param>
-        protected override void OnMouseLeave(EventArgs e)
-        {
-            base.OnMouseLeave(e);
-            InvokeLostFocus(this, new EventArgs());
-        }
-        #endregion
-
         #region ScrollBar
         /// <summary>
         /// Occurs when the scroll box has been moved by either a mouse or 
