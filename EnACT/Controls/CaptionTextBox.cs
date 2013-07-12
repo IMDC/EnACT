@@ -173,12 +173,7 @@ namespace EnACT
         /// </summary>
         private void UpdateCaptionWords()
         {
-            //Unhighlight everything
-            SetTextBackgroundColour(0, Text.Length - 1, CaptionStyle.None_Style.TextColour, 
-                CaptionStyle.None_Style.BackColour);
-
-            //Re-feed the words into the Caption
-            Caption.Feed(this.Text);
+            //TODO: Implement this
         }
         #endregion
 

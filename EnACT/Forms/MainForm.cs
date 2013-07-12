@@ -50,6 +50,9 @@ namespace EnACT
             this.SpeakerSet = Controller.SpeakerSet;
             this.CaptionList = Controller.CaptionList;
             this.Settings = Controller.Settings;
+
+            //Make CaptionTextBox read only
+            this.CaptionTextBox.ReadOnly = true;
         }
 
         /// <summary>
