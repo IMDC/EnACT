@@ -49,9 +49,10 @@ namespace EnACT
         private double time;
 
         /// <summary>
-        /// Backing field for AsString
+        /// Internal storage of the timestamp. Stored as a timestamp string. Backing field for 
+        /// AsString.
         /// </summary>
-        private string timestampString;
+        private string timeString;
         #endregion
 
         #region AsDouble
@@ -94,7 +95,7 @@ namespace EnACT
             get
             {
                 //If null, generate String
-                if (timestampString == null)
+                if (timeString == null)
                 {
                     double timeDouble = time;
                     string ts;
@@ -124,10 +125,10 @@ namespace EnACT
                         throw new InvalidTimestampException("String value is not a valid Timestamp");
 
                     //Store the generated value for future retrieval
-                    timestampString = ts;
+                    timeString = ts;
                 }
 
-                return timestampString;
+                return timeString;
             }
             set
             {
@@ -162,7 +163,7 @@ namespace EnACT
                 time = seconds;
 
                 //Set string value
-                timestampString = value;
+                timeString = value;
             }
         }
         #endregion
@@ -199,7 +200,7 @@ namespace EnACT
         /// </summary>
         private void ResetTimestampString()
         {
-            timestampString = null;
+            timeString = null;
         }
         #endregion
 

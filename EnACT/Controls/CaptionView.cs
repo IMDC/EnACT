@@ -92,7 +92,7 @@ namespace EnACT
         /// <summary>
         /// Backing field for UserInputEnabled
         /// </summary>
-        private bool uInEn;
+        private bool bkUserInputEnabled;
 
         /// <summary>
         /// Property that represents whether user input is allowed or not. When set, it will
@@ -102,13 +102,13 @@ namespace EnACT
         {
             set
             {
-                uInEn = value;
-                if (uInEn)  //Value == true
+                bkUserInputEnabled = value;
+                if (bkUserInputEnabled)  //Value == true
                     EnableUserInput();
                 else
                     DisableUserInput();
             }
-            get { return uInEn; }  
+            get { return bkUserInputEnabled; }  
         }
         #endregion
 

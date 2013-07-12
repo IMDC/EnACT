@@ -42,7 +42,7 @@ namespace EnACT
         /// <summary>
         /// Backing field for Caption Property.
         /// </summary>
-        private EditorCaption caption;
+        private EditorCaption bkCaption;
         /// <summary>
         /// The Caption currently displayed in the Text Box
         /// </summary>
@@ -52,11 +52,11 @@ namespace EnACT
             {
                 //If null clear the text and Caption
                 if (value == null)
-                    caption = null;
+                    bkCaption = null;
                 else
                 {
-                    caption = value;
-                    Text = caption.ToString();
+                    bkCaption = value;
+                    Text = bkCaption.ToString();
                     foreach (EditorCaptionWord cw in Caption.Words)
                     {
                         //Return it to the original Caption colour
@@ -64,7 +64,7 @@ namespace EnACT
                     }
                 }
             }
-            get { return caption; }
+            get { return bkCaption; }
         }
         #endregion
 

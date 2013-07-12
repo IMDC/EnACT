@@ -15,16 +15,16 @@ namespace EnACT
         /// <summary>
         /// Backing field for PlayheadTime
         /// </summary>
-        private Timestamp phTime;
+        private Timestamp bkPlayheadTime;
         /// <summary>
         /// The Timestamp that displays the playhead's time in the label
         /// </summary>
         public Timestamp PlayheadTime
         {
-            get { return phTime; }
+            get { return bkPlayheadTime; }
             set
             {
-                phTime = value;
+                bkPlayheadTime = value;
                 UpdateText();
             }
         }
@@ -32,16 +32,16 @@ namespace EnACT
         /// <summary>
         /// Backing field for VideoLength
         /// </summary>
-        private Timestamp vidLen;
+        private Timestamp bkVideoLength;
         /// <summary>
         /// The Timestamp that displays the total length of the video
         /// </summary>
         public Timestamp VideoLength
         {
-            get { return vidLen; }
+            get { return bkVideoLength; }
             set
             {
-                vidLen = value;
+                bkVideoLength = value;
                 UpdateText();
             }
         }
@@ -51,8 +51,8 @@ namespace EnACT
         /// </summary>
         public PlayheadLabel()
         {
-            phTime = new Timestamp();
-            vidLen = new Timestamp();
+            bkPlayheadTime = new Timestamp();
+            bkVideoLength = new Timestamp();
             UpdateText();
         }
 

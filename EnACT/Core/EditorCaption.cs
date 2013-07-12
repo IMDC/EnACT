@@ -73,7 +73,7 @@ namespace EnACT
         /// <summary>
         /// Backing field for the Words property.
         /// </summary>
-        private List<EditorCaptionWord> wordlist;
+        private List<EditorCaptionWord> bkWords;
         /// <summary>
         /// The list of words in the caption
         /// </summary>
@@ -81,10 +81,10 @@ namespace EnACT
         {
             set
             {
-                wordlist = value;
+                bkWords = value;
                 NotifyPropertyChanged(PropertyNames.Words);
             }
-            get { return wordlist; }
+            get { return bkWords; }
         }
 
         /// <summary>

@@ -42,15 +42,15 @@ namespace EnACT
         /// <summary>
         /// Backing field for the Begin property.
         /// </summary>
-        private Timestamp begin;
+        private Timestamp bkBegin;
         /// <summary>
         /// Backing field for the End property.
         /// </summary>
-        private Timestamp end;
+        private Timestamp bkEnd;
         /// <summary>
         /// Backing field for the Duration property.
         /// </summary>
-        private Timestamp duration;
+        private Timestamp bkDuration;
 
         /// <summary>
         /// A timestamp representing the begin time of a caption. Set in the 
@@ -60,20 +60,20 @@ namespace EnACT
         {
             set
             {
-                begin = value;
-                if (end != null)
+                bkBegin = value;
+                if (bkEnd != null)
                 {
-                    if (begin < end)
-                        duration = end - begin;
+                    if (bkBegin < bkEnd)
+                        bkDuration = bkEnd - bkBegin;
                     else
                     {
                         //Make end time the same as begin time
-                        end = new Timestamp(begin.AsDouble);
-                        duration = 0;
+                        bkEnd = new Timestamp(bkBegin.AsDouble);
+                        bkDuration = 0;
                     }
                 }
             }
-            get { return begin; }
+            get { return bkBegin; }
         }
 
         /// <summary>
@@ -84,11 +84,11 @@ namespace EnACT
         {
             set
             {
-                end = value;
-                if (begin != null)
-                    duration = end - begin;
+                bkEnd = value;
+                if (bkBegin != null)
+                    bkDuration = bkEnd - bkBegin;
             }
-            get { return end; }
+            get { return bkEnd; }
         }
 
         /// <summary>
@@ -100,15 +100,15 @@ namespace EnACT
         {
             set
             {
-                duration = value;
-                if (begin != null)
-                    end = begin + duration;
+                bkDuration = value;
+                if (bkBegin != null)
+                    bkEnd = bkBegin + bkDuration;
                 //Assume a null value would be 0.0 seconds
                 else
                     //Create a new object instead of copying refrences.
-                    end = new Timestamp(duration.AsDouble);
+                    bkEnd = new Timestamp(bkDuration.AsDouble);
             }
-            get { return duration; }
+            get { return bkDuration; }
         }
         #endregion //#region Timestamp Properties
 
@@ -158,8 +158,8 @@ namespace EnACT
         /// <param name="beginTime">The time this Caption will begin at</param>
         public virtual void MoveTo(double beginTime)
         {
-            this.begin = beginTime;
-            this.end = begin + duration;
+            this.bkBegin = beginTime;
+            this.bkEnd = bkBegin + bkDuration;
         }
         #endregion
 

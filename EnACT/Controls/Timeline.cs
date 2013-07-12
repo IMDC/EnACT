@@ -131,48 +131,48 @@ namespace EnACT
         /// <summary>
         /// Backing field for rightBoundTime
         /// </summary>
-        private double rbTime;
+        private double bkRightBoundTime;
         /// <summary>
         /// The time value of the Timeline at the right end of the control
         /// </summary>
-        private double RightBoundTime { get { return rbTime; } }
+        private double RightBoundTime { get { return bkRightBoundTime; } }
 
         /// <summary>
         /// Backing field for LeftBoundTime
         /// </summary>
-        private double lbTime;
+        private double bkLeftBoundTime;
         /// <summary>
         /// The time value of the Timeline at the left end of the control
         /// </summary>
-        private double LeftBoundTime { get { return lbTime; } }
+        private double LeftBoundTime { get { return bkLeftBoundTime; } }
 
         /// <summary>
         /// Backing field for CenterBoundTime
         /// </summary>
-        private double cbTime;
+        private double bkCenterBoundTime;
         /// <summary>
         /// The time value of the Timeline that is represented by the Scrollbar.Value
         /// property. It is in-between rightBoundTime and LeftBoundTime
         /// </summary>
-        private double CenterBoundTime { get { return cbTime; } }
+        private double CenterBoundTime { get { return bkCenterBoundTime; } }
 
         /// <summary>
         /// Backing field for PixelsPerSecond
         /// </summary>
-        private float pps;
+        private float bkPixelsPerSecond;
         /// <summary>
         /// The amount of pixels drawn per second of caption time
         /// </summary>
-        private float PixelsPerSecond { get { return pps; } }
+        private float PixelsPerSecond { get { return bkPixelsPerSecond; } }
 
         /// <summary>
         /// Backing field for AvailableWidth
         /// </summary>
-        private float aw;
+        private float bkAvailableWidth;
         /// <summary>
         /// The width of the component that is available for drawing captions
         /// </summary>
-        private float AvailableWidth { get { return aw; } }
+        private float AvailableWidth { get { return bkAvailableWidth; } }
 
         /// <summary>
         /// Gets the x origin value based on whether or not labels are drawn
@@ -193,7 +193,7 @@ namespace EnACT
         /// <summary>
         /// Backing field for TimeWidth property
         /// </summary>
-        private double tw;
+        private double bkTimeWidth;
         /// <summary>
         /// How many seconds of time the Timeline will show at the minimum possible
         /// width of the control
@@ -202,17 +202,17 @@ namespace EnACT
         {
             set
             {
-                tw = value;
-                halfTimeWidth = tw / 2;
+                bkTimeWidth = value;
+                halfTimeWidth = bkTimeWidth / 2;
             }
-            get { return tw; }
+            get { return bkTimeWidth; }
         }
        
         /// <summary>
         /// Backing variable for the VideoLength property. Use the VideoLength property to 
         /// set this variable
         /// </summary>
-        private double vidLen;
+        private double bkVideoLength;
         /// <summary>
         /// Represents the length of the flash video, in seconds. Also sets the CaptionDrawingWidth
         /// </summary>
@@ -220,9 +220,9 @@ namespace EnACT
         {
             set 
             {
-                vidLen = value;
+                bkVideoLength = value;
             }
-            get { return vidLen; }
+            get { return bkVideoLength; }
         }
         /// <summary>
         /// The position of the Video's playhead in seconds.
@@ -895,13 +895,13 @@ namespace EnACT
         private void SetBoundTimes(double leftBoundTime)
         {
             //Set the left bound, but don't set it to less than 0
-            lbTime = Math.Max(0, leftBoundTime);
+            bkLeftBoundTime = Math.Max(0, leftBoundTime);
 
             //Set the right bound
-            rbTime = XCoordinateToTime(Width - 2);
+            bkRightBoundTime = XCoordinateToTime(Width - 2);
 
             //Set the center bound to inbetween the other two
-            cbTime = (rbTime - lbTime) / 2;
+            bkCenterBoundTime = (bkRightBoundTime - bkLeftBoundTime) / 2;
         }
 
         /// <summary>
@@ -922,7 +922,7 @@ namespace EnACT
         private void SetPixelsPerSecond()
         {
             //Calculate pps
-            pps = (float)(MinimumTimelineWidth / TimeWidth);
+            bkPixelsPerSecond = (float)(MinimumTimelineWidth / TimeWidth);
         }
         #endregion
 
@@ -931,9 +931,9 @@ namespace EnACT
         {
             //Set value based on whether or not labels are visible
             if (DrawLocationLabels)
-                aw = (float)(Width - LocationLabels.PixelWidth - 3);
+                bkAvailableWidth = (float)(Width - LocationLabels.PixelWidth - 3);
             else
-                aw = Width - 2;
+                bkAvailableWidth = Width - 2;
         }
         #endregion
 
