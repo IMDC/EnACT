@@ -13,14 +13,26 @@ namespace EnACT
     {
         #region Fields and Properties
         /// <summary>
+        /// Backing field for BeginIndex
+        /// </summary>
+        private int beginIndex;
+        /// <summary>
         /// The index of a caption that this word starts at.
         /// </summary>
-        public int BeginIndex { set; get; }
+        public int BeginIndex
+        {
+            set
+            {
+                beginIndex = value;
+                EndIndex = value + Length;
+            }
+            get { return beginIndex; }
+        }
 
         /// <summary>
         /// The index of a caption that this word ends at.
         /// </summary>
-        public int EndIndex { set; get; }
+        public int EndIndex { private set; get; }
 
         /// <summary>
         /// Whether or not this value is currently selected.
@@ -52,7 +64,6 @@ namespace EnACT
         {
             //Set index positions
             this.BeginIndex = beginIndex;
-            this.EndIndex = beginIndex + Length;
 
             //Set word to unselected
             this.IsSelected = false;
