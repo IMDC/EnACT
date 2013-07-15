@@ -485,6 +485,13 @@ namespace EnACT
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) { Application.Exit(); }
+
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox about = new AboutBox();
+            about.Show();
+        }
         #endregion
     }//Class
 }//Namespace
