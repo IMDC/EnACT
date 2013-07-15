@@ -466,5 +466,25 @@ namespace EnACT
         private void Button_RightAlign_Click(object sender, EventArgs e)
         { MarkupController.ChangeAlignment(Alignment.Right); }
         #endregion
+
+        #region Menu Item Click Handlers
+        /// <summary>
+        /// Opens up the NewProjectForm for creating a new project.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewProjectForm newProjectForm = new NewProjectForm();
+            newProjectForm.Show();
+        }
+
+        /// <summary>
+        /// Exits EnACT and closes all applications.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e) { Application.Exit(); }
+        #endregion
     }//Class
 }//Namespace

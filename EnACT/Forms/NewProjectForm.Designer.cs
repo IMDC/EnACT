@@ -1,4 +1,4 @@
-﻿namespace EnACT.Forms
+﻿namespace EnACT
 {
     partial class NewProjectForm
     {

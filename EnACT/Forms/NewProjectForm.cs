@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace EnACT.Forms
+namespace EnACT
 {
     public partial class NewProjectForm : Form
     {
