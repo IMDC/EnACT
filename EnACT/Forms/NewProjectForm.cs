@@ -15,10 +15,21 @@ namespace EnACT
     /// </summary>
     public partial class NewProjectForm : Form
     {
+        #region Fields and Properties
+        /// <summary>
+        /// Contains Information about the current EnACT Project.
+        /// </summary>
+        public Project ProjectInfo { get; set; }
+        #endregion
+
         #region Constructor
+        /// <summary>
+        /// Constructs a NewProjectForm.
+        /// </summary>
         public NewProjectForm()
         {
             InitializeComponent();
+            ProjectInfo = null;
         }
         #endregion
 
@@ -83,6 +94,13 @@ namespace EnACT
         /// <param name="e">Event Args</param>
         private void Button_CreateProject_Click(object sender, EventArgs e)
         {
+            //Generate P based on checkbox state
+            if (CheckBox_GenerateScript.Checked)
+                ProjectInfo = new Project(Textbox_ProjectName.Text,TextBox_VideoPath.Text, Textbox_ProjectPath.Text);
+            else
+                ProjectInfo = new Project(Textbox_ProjectName.Text, TextBox_ScriptPath.Text, TextBox_VideoPath.Text,
+                    Textbox_ProjectPath.Text);
+
             this.Close();
         }
 

@@ -9,6 +9,11 @@ namespace EnACT
     {
         #region Fields and Properties
         /// <summary>
+        /// Contains Information about the current EnACT Project
+        /// </summary>
+        Project ProjectInfo { set; get; }
+
+        /// <summary>
         /// The controller for enact.
         /// </summary>
         public EngineController Controller { set; get; }
@@ -475,8 +480,12 @@ namespace EnACT
         /// <param name="e">Event Args</param>
         private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //Open Form
             NewProjectForm newProjectForm = new NewProjectForm();
-            newProjectForm.Show();
+            newProjectForm.ShowDialog();
+
+            //Retrieve project info from form
+            ProjectInfo = newProjectForm.ProjectInfo;
         }
 
         /// <summary>
@@ -486,11 +495,15 @@ namespace EnACT
         /// <param name="e">Event Args</param>
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) { Application.Exit(); }
 
-
+        /// <summary>
+        /// Opens the about box.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutBox about = new AboutBox();
-            about.Show();
+            about.ShowDialog();
         }
         #endregion
     }//Class
