@@ -24,12 +24,12 @@ namespace EnACT
         public CaptionView CaptionView { set; get; }
         
         /// <summary>
-        /// The video player used by EnACT to play the video
+        /// The video player used by EnACT to play the video.
         /// </summary>
         public EngineView EngineView { set; get; }
 
         /// <summary>
-        /// The label used by EnACT to show playhead position and video length
+        /// The label used by EnACT to show playhead position and video length.
         /// </summary>
         public PlayheadLabel PlayheadLabel { set; get; }
 
@@ -49,7 +49,7 @@ namespace EnACT
         public TrackBar TrackBar_Timeline { set; get; }
 
         /// <summary>
-        /// A set of Speaker objects, each speaker being mapped to by its name
+        /// A set of Speaker objects, each speaker being mapped to by its name.
         /// </summary>
         public Dictionary<String, Speaker> SpeakerSet { set; get; }
 
@@ -59,7 +59,7 @@ namespace EnACT
         public List<EditorCaption> CaptionList { set; get; }
 
         /// <summary>
-        /// The object that represents the EnACT engine xml settings file
+        /// The object that represents the EnACT engine xml settings file.
         /// </summary>
         public SettingsXML Settings { set; get; }
         #endregion
@@ -78,11 +78,11 @@ namespace EnACT
 
         #region Constructor
         /// <summary>
-        /// Constructs an EngineController.
+        /// Initializes a new instance of the <see cref="EngineController" /> class.
         /// </summary>
         public EngineController() 
         {
-            //Construct the speakerset with a comparator that ignores case;
+            //Construct the speakerset with a comparator that ignores case
             SpeakerSet = new Dictionary<String, Speaker>(StringComparer.OrdinalIgnoreCase);
 
             //Add the default speaker to the set of speakers
