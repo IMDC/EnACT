@@ -51,7 +51,7 @@ namespace EnACT
         /// <summary>
         /// A set of Speaker objects, each speaker being mapped to by its name.
         /// </summary>
-        public Dictionary<String, Speaker> SpeakerSet { set; get; }
+        public Dictionary<string, Speaker> SpeakerSet { set; get; }
 
         /// <summary>
         /// A list of captions retrieved from a transcript file.
@@ -83,15 +83,15 @@ namespace EnACT
         public EngineController() 
         {
             //Construct the speakerset with a comparator that ignores case
-            SpeakerSet = new Dictionary<String, Speaker>(StringComparer.OrdinalIgnoreCase);
+            this.SpeakerSet = new Dictionary<string, Speaker>(StringComparer.OrdinalIgnoreCase);
 
             //Add the default speaker to the set of speakers
-            SpeakerSet[Speaker.Default.Name] = Speaker.Default;
+            this.SpeakerSet[Speaker.Default.Name] = Speaker.Default;
             //Add the Description Speaker to the set of speakers
-            SpeakerSet[Speaker.Description.Name] = Speaker.Description;
+            this.SpeakerSet[Speaker.Description.Name] = Speaker.Description;
 
-            CaptionList = new List<EditorCaption>();
-            Settings = new SettingsXML();
+            this.CaptionList = new List<EditorCaption>();
+            this.Settings = new SettingsXML();
         }
         #endregion
 
@@ -223,7 +223,7 @@ namespace EnACT
         /// <param name="e">Event Args</param>
         private void EngineView_VideoLoaded(object sender, EventArgs e)
         {
-            Double vidLength = EngineView.VideoLength();
+            double vidLength = EngineView.VideoLength();
             TrackBar_Timeline.Maximum = (int)vidLength * 10;
 
             //Set Label
@@ -244,15 +244,15 @@ namespace EnACT
         /// <param name="e">Event Args</param>
         private void PlayheadTimer_Tick(object sender, EventArgs e)
         {
-            double phTime = EngineView.GetPlayheadTime();
-            int vidPos = (int)phTime * 10;
+            double playheadTime = EngineView.GetPlayheadTime();
+            int vidPos = (int)playheadTime * 10;
             if (TrackBar_Timeline.Minimum <= vidPos && vidPos <= TrackBar_Timeline.Maximum)
                 TrackBar_Timeline.Value = vidPos;
 
             //Set playhead time for label
-            PlayheadLabel.PlayheadTime = phTime;
+            PlayheadLabel.PlayheadTime = playheadTime;
 
-            Timeline.UpdatePlayheadPosition(phTime);
+            Timeline.UpdatePlayheadPosition(playheadTime);
 
             //Redraw Timeline
             Timeline.Redraw();
