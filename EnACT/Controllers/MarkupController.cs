@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Drawing;
 using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace EnACT
 {
@@ -25,7 +21,7 @@ namespace EnACT
         /// The caption selected by the user to mark up with emotions.
         /// </summary>
         public EditorCaption SelectedCaption { set; get; }
-        #endregion
+        #endregion Fields and Properties
 
         #region Control Properties
         //Location Controls
@@ -61,7 +57,7 @@ namespace EnACT
 
         //CaptionTextBox
         public CaptionTextBox CaptionTextBox    { set; get; }
-        #endregion
+        #endregion Control Properties
 
         #region Constructor and Init Methods
         public MarkupController() { }
@@ -77,7 +73,7 @@ namespace EnACT
             CaptionTextBox.MultipleCaptionWordsSelected += new EventHandler
                 (this.CaptionTextBox_MultipleCaptionWordsSelected);
         }
-        #endregion
+        #endregion Constructor and Init Methods
 
         #region Load Caption
         /// <summary>
@@ -107,7 +103,7 @@ namespace EnACT
 
             //Disable Groups
             GB_EmotionType.Enabled = false;
-            GB_Intensity.Enabled = false;
+            GB_Intensity.Enabled   = false;
 
             SetGB_Location(c.Location);
 
@@ -119,7 +115,7 @@ namespace EnACT
             Button_CenterAlign.Enabled = true;
             Button_RightAlign.Enabled  = true;
         }
-        #endregion
+        #endregion Load Caption
 
         #region Load CaptionWord
         /// <summary>
@@ -145,7 +141,7 @@ namespace EnACT
                 SetGB_Intensity(cw.Intensity);
             }
         }
-        #endregion
+        #endregion Load CaptionWord
 
         #region Set Groupbox Methods
         /// <summary>
@@ -157,11 +153,11 @@ namespace EnACT
         {
             switch (e)
             {
-                case Emotion.None:  RB_None.Checked    = true; break;
-                case Emotion.Happy: RB_Happy.Checked   = true; break;
-                case Emotion.Sad:   RB_Sad.Checked     = true; break;
-                case Emotion.Fear:  RB_Fear.Checked    = true; break;
-                case Emotion.Anger: RB_Anger.Checked   = true; break;
+                case Emotion.None:  RB_None.Checked  = true; break;
+                case Emotion.Happy: RB_Happy.Checked = true; break;
+                case Emotion.Sad:   RB_Sad.Checked   = true; break;
+                case Emotion.Fear:  RB_Fear.Checked  = true; break;
+                case Emotion.Anger: RB_Anger.Checked = true; break;
                 default: throw new InvalidEnumArgumentException("e", e.GetHashCode(), typeof(Emotion));
             }
 
@@ -182,7 +178,7 @@ namespace EnACT
                 case Intensity.High:    RB_HighIntensity.Checked   = true; break;
                 case Intensity.Medium:  RB_MediumIntensity.Checked = true; break;
                 case Intensity.Low:     RB_LowIntensity.Checked    = true; break;
-                case Intensity.None:    ClearGB_Intensity();               break;
+                case Intensity.None:    ClearGB_Intensity(); break;
                 default: throw new InvalidEnumArgumentException("i", i.GetHashCode(), typeof(Intensity));
             }
 
@@ -200,22 +196,22 @@ namespace EnACT
             //Set Location
             switch (l)
             {
-                case ScreenLocation.TopLeft:        RB_TopLeft.Checked           = true; break;
-                case ScreenLocation.TopCentre:      RB_TopCenter.Checked         = true; break;
-                case ScreenLocation.TopRight:       RB_TopRight.Checked          = true; break;
-                case ScreenLocation.MiddleLeft:     RB_MiddleLeft.Checked        = true; break;
-                case ScreenLocation.MiddleCenter:   RB_MiddleCenter.Checked      = true; break;
-                case ScreenLocation.MiddleRight:    RB_MiddleRight.Checked       = true; break;
-                case ScreenLocation.BottomLeft:     RB_BottomLeft.Checked        = true; break;
-                case ScreenLocation.BottomCentre:   RB_BottomCenter.Checked      = true; break;
-                case ScreenLocation.BottomRight:    RB_BottomRight.Checked       = true; break;
+                case ScreenLocation.TopLeft:        RB_TopLeft.Checked      = true; break;
+                case ScreenLocation.TopCentre:      RB_TopCenter.Checked    = true; break;
+                case ScreenLocation.TopRight:       RB_TopRight.Checked     = true; break;
+                case ScreenLocation.MiddleLeft:     RB_MiddleLeft.Checked   = true; break;
+                case ScreenLocation.MiddleCenter:   RB_MiddleCenter.Checked = true; break;
+                case ScreenLocation.MiddleRight:    RB_MiddleRight.Checked  = true; break;
+                case ScreenLocation.BottomLeft:     RB_BottomLeft.Checked   = true; break;
+                case ScreenLocation.BottomCentre:   RB_BottomCenter.Checked = true; break;
+                case ScreenLocation.BottomRight:    RB_BottomRight.Checked  = true; break;
                 default: throw new InvalidEnumArgumentException("l", l.GetHashCode(), typeof(ScreenLocation));
             }
 
             //Enable Location Radio Button
             GB_Location.Enabled = true;
         }
-        #endregion
+        #endregion Set Groupbox Methods
 
         #region Clear GroupBox Methods
         /// <summary>
@@ -241,7 +237,7 @@ namespace EnACT
         {
             foreach (RadioButton rb in GB_Location.Controls) { rb.Checked = false; }
         }
-        #endregion
+        #endregion Clear GroupBox Methods
 
         #region ClearCaption
         /// <summary>
@@ -266,20 +262,20 @@ namespace EnACT
 
             //Disable Radio buttons when nothing is selected
             GB_EmotionType.Enabled = false;
-            GB_Intensity.Enabled = false;
-            GB_Location.Enabled = false;
+            GB_Intensity.Enabled   = false;
+            GB_Location.Enabled    = false;
 
             //Deselect Alignment buttons
-            Button_LeftAlign.UseVisualStyleBackColor = true;
+            Button_LeftAlign.UseVisualStyleBackColor   = true;
             Button_CenterAlign.UseVisualStyleBackColor = true;
-            Button_RightAlign.UseVisualStyleBackColor = true;
+            Button_RightAlign.UseVisualStyleBackColor  = true;
 
             //Disable alignment buttons
-            Button_LeftAlign.Enabled = false;
+            Button_LeftAlign.Enabled   = false;
             Button_CenterAlign.Enabled = false;
-            Button_RightAlign.Enabled = false;
+            Button_RightAlign.Enabled  = false;
         }
-        #endregion
+        #endregion ClearCaption
 
         #region ClearWord
         /// <summary>
@@ -294,7 +290,7 @@ namespace EnACT
             ClearGB_EmotionType();
             ClearGB_Intensity();
         }
-        #endregion
+        #endregion ClearWord
 
         #region Change SelectedCaption Properties
         /// <summary>
@@ -329,12 +325,12 @@ namespace EnACT
                     //Clear the Intensity GB and enable/disable it based on emotion
                     ClearGB_Intensity();
                     if (e == Emotion.None || e == Emotion.Unknown)
-                        GB_Intensity.Enabled = false; 
+                        GB_Intensity.Enabled = false;
                     else
                         GB_Intensity.Enabled = true;
                     break;
                 default: throw new InvalidEnumArgumentException("e", e.GetHashCode(), typeof(Emotion));
-            }   
+            }
         }
 
         /// <summary>
@@ -347,8 +343,8 @@ namespace EnACT
             {
                 case CaptionTextBoxSelectionMode.NoSelection:
                     throw new Exception("No selected caption to markup."); //Should not happen.
-                case CaptionTextBoxSelectionMode.SingleWordSelection: 
-                    SelectedCaptionWord.Intensity = i; 
+                case CaptionTextBoxSelectionMode.SingleWordSelection:
+                    SelectedCaptionWord.Intensity = i;
                     break;
                 case CaptionTextBoxSelectionMode.MultiWordSelection:
                     foreach (EditorCaptionWord cw in SelectedCaption.Words)
@@ -357,7 +353,7 @@ namespace EnACT
                     }
                     break;
                 default: throw new InvalidEnumArgumentException("i", i.GetHashCode(), typeof(Intensity));
-            }    
+            }
         }
 
         /// <summary>
@@ -378,7 +374,7 @@ namespace EnACT
             SelectedCaption.Alignment = a;
             SetAlignmentButton(a);
         }
-        #endregion
+        #endregion Change SelectedCaption Properties
 
         #region SetAlignmentButton
         /// <summary>
@@ -395,22 +391,22 @@ namespace EnACT
                 case Alignment.Left:
                     Button_LeftAlign.BackColor = c;
                     Button_CenterAlign.UseVisualStyleBackColor = true;
-                    Button_RightAlign.UseVisualStyleBackColor = true;
+                    Button_RightAlign.UseVisualStyleBackColor  = true;
                     break;
                 case Alignment.Center:
-                    Button_LeftAlign.UseVisualStyleBackColor = true;
+                    Button_LeftAlign.UseVisualStyleBackColor  = true;
                     Button_CenterAlign.BackColor = c;
                     Button_RightAlign.UseVisualStyleBackColor = true;
                     break;
                 case Alignment.Right:
-                    Button_LeftAlign.UseVisualStyleBackColor = true;
+                    Button_LeftAlign.UseVisualStyleBackColor   = true;
                     Button_CenterAlign.UseVisualStyleBackColor = true;
                     Button_RightAlign.BackColor = c;
                     break;
                 default: throw new InvalidEnumArgumentException("a", a.GetHashCode(), typeof(Alignment));
             }
         }
-        #endregion
+        #endregion SetAlignmentButton
 
         #region CaptionTextBox Event Handlers
         /// <summary>
@@ -431,7 +427,7 @@ namespace EnACT
         }
 
         /// <summary>
-        /// Event Handler for CaptionTextBox.CaptionWordSelected event. Loads the selected 
+        /// Event Handler for CaptionTextBox.CaptionWordSelected event. Loads the selected
         /// EditorCaptionWord into the associated controls.
         /// </summary>
         /// <param name="sender">Sender</param>
@@ -463,7 +459,7 @@ namespace EnACT
             ClearGB_Intensity();
             GB_Intensity.Enabled = false;
         }
-        #endregion
+        #endregion CaptionTextBox Event Handlers
 
         #region SelectedCaption_PropertyChanged
         /// <summary>
@@ -477,18 +473,18 @@ namespace EnACT
             //Switch based on property name
             switch (e.PropertyName)
             {
-                case EditorCaption.PropertyNames.Alignment: break;
-                case EditorCaption.PropertyNames.Begin:     break;
-                case EditorCaption.PropertyNames.End:       break;
-                case EditorCaption.PropertyNames.Location:  SetGB_Location(SelectedCaption.Location); break;
-                case EditorCaption.PropertyNames.Duration:  break;
-                case EditorCaption.PropertyNames.Speaker:   break;
-                case EditorCaption.PropertyNames.Text:      CaptionTextBox.Text = SelectedCaption.GetAsString(); break;
-                case EditorCaption.PropertyNames.Words:     break;
-                default: throw new ArgumentException(String.Format("Property Name '{0}' isn't a valid property", 
-                        e.PropertyName),"PropertyName");
+                case EditorCaption.PropertyNames.Alignment:     break;
+                case EditorCaption.PropertyNames.Begin:         break;
+                case EditorCaption.PropertyNames.End:           break;
+                case EditorCaption.PropertyNames.Location: SetGB_Location(SelectedCaption.Location); break;
+                case EditorCaption.PropertyNames.Duration:      break;
+                case EditorCaption.PropertyNames.Speaker:       break;
+                case EditorCaption.PropertyNames.Text: CaptionTextBox.Text = SelectedCaption.GetAsString(); break;
+                case EditorCaption.PropertyNames.Words:         break;
+                default: throw new ArgumentException(String.Format("Property Name '{0}' isn't a valid property",
+                        e.PropertyName), "PropertyName");
             }
         }
-        #endregion
+        #endregion SelectedCaption_PropertyChanged
     }
 }
