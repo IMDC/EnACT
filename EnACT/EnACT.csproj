@@ -123,7 +123,7 @@
     <Compile Include="Forms\NewProjectForm.Designer.cs">
       <DependentUpon>NewProjectForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Project.cs" />
+    <Compile Include="Core\ProjectInfo.cs" />
     <Compile Include="Miscellaneous\Paths.cs" />
     <Compile Include="Controls\PlayheadLabel.cs">
       <SubType>Component</SubType>

@@ -9,7 +9,7 @@ namespace EnACT
     /// <summary>
     /// Contains all the settings, values and options related to an EnACT editor proejct
     /// </summary>
-    public class Project
+    public class ProjectInfo
     {
         #region Fields and Properties
         /// <summary>
@@ -46,7 +46,7 @@ namespace EnACT
         /// <param name="name">Name of the project.</param>
         /// <param name="videoPath">The path of the video supplied by the user.</param>
         /// <param name="projectPath">The path of this project on the computer.</param>
-        public Project(string name, string videoPath, string projectPath)
+        public ProjectInfo(string name, string videoPath, string projectPath)
             : this(name: name, scriptPath: null, useExistingScript: false, videoPath: videoPath,
             projectPath: projectPath) { }
 
@@ -57,7 +57,7 @@ namespace EnACT
         /// <param name="scriptPath">Path of the script to use.</param>
         /// <param name="videoPath">The path of the video supplied by the user.</param>
         /// <param name="projectPath">The path of this project on the computer.</param>
-        public Project(string name, string scriptPath, string videoPath, string projectPath)
+        public ProjectInfo(string name, string scriptPath, string videoPath, string projectPath)
             : this(name: name, scriptPath: scriptPath, useExistingScript: true, videoPath: videoPath,
             projectPath: projectPath) { }
 
@@ -69,7 +69,7 @@ namespace EnACT
         /// <param name="useExistingScript">Whether or not a script has been supplied</param>
         /// <param name="videoPath">The path of the video supplied by the user.</param>
         /// <param name="projectPath">The path of this project on the computer.</param>
-        private Project(string name, string scriptPath, bool useExistingScript, string videoPath, string projectPath)
+        private ProjectInfo(string name, string scriptPath, bool useExistingScript, string videoPath, string projectPath)
         {
             this.Name = name;
             this.ScriptPath = scriptPath;

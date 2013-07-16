@@ -11,7 +11,7 @@ namespace EnACT
         /// <summary>
         /// Contains Information about the current EnACT Project
         /// </summary>
-        Project ProjectInfo { set; get; }
+        ProjectInfo ProjectInfo { set; get; }
 
         /// <summary>
         /// The controller for enact.

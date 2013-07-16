@@ -19,7 +19,7 @@ namespace EnACT
         /// <summary>
         /// Contains Information about the current EnACT Project.
         /// </summary>
-        public Project ProjectInfo { get; set; }
+        public ProjectInfo ProjectInfo { get; set; }
         #endregion
 
         #region Constructor
@@ -96,9 +96,9 @@ namespace EnACT
         {
             //Generate P based on checkbox state
             if (CheckBox_GenerateScript.Checked)
-                ProjectInfo = new Project(Textbox_ProjectName.Text,TextBox_VideoPath.Text, Textbox_ProjectPath.Text);
+                ProjectInfo = new ProjectInfo(Textbox_ProjectName.Text,TextBox_VideoPath.Text, Textbox_ProjectPath.Text);
             else
-                ProjectInfo = new Project(Textbox_ProjectName.Text, TextBox_ScriptPath.Text, TextBox_VideoPath.Text,
+                ProjectInfo = new ProjectInfo(Textbox_ProjectName.Text, TextBox_ScriptPath.Text, TextBox_VideoPath.Text,
                     Textbox_ProjectPath.Text);
 
             this.Close();
