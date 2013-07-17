@@ -83,7 +83,7 @@ namespace EnACT
             else
             {
                 TextBox_ScriptPath.Enabled = true;
-                Button_ScriptPath.Enabled = true; ;
+                Button_ScriptPath.Enabled = true;
             }
         }
 
@@ -94,12 +94,39 @@ namespace EnACT
         /// <param name="e">Event Args</param>
         private void Button_CreateProject_Click(object sender, EventArgs e)
         {
+            //Check to see if Text boxes are empty when they should not be.
+            if (String.IsNullOrWhiteSpace(TextBox_ScriptPath.Text) && !CheckBox_GenerateScript.Checked)
+            {
+                MessageBox.Show("You must either enter a path to a Script, or check the Check Box next to it.", 
+                    "Error!");
+                return;
+            }
+
+            if (String.IsNullOrWhiteSpace(TextBox_VideoPath.Text))
+            {
+                MessageBox.Show("You must enter a valid path to a Video file.", "Error!");
+                return;
+            }
+
+            if (String.IsNullOrWhiteSpace(Textbox_ProjectName.Text))
+            {
+                MessageBox.Show("You must enter a project name.", "Error!");
+                return;
+            }
+
+            if (String.IsNullOrWhiteSpace(Textbox_ProjectPath.Text))
+            {
+                MessageBox.Show("You must enter a valid path for the project folder.", "Error!");
+                return;
+            }
+
             //Generate P based on checkbox state
             if (CheckBox_GenerateScript.Checked)
-                ProjectInfo = new ProjectInfo(Textbox_ProjectName.Text,TextBox_VideoPath.Text, Textbox_ProjectPath.Text);
-            else
-                ProjectInfo = new ProjectInfo(Textbox_ProjectName.Text, TextBox_ScriptPath.Text, TextBox_VideoPath.Text,
+                ProjectInfo = new ProjectInfo(Textbox_ProjectName.Text,TextBox_VideoPath.Text, 
                     Textbox_ProjectPath.Text);
+            else
+                ProjectInfo = new ProjectInfo(Textbox_ProjectName.Text, TextBox_ScriptPath.Text, 
+                    TextBox_VideoPath.Text,Textbox_ProjectPath.Text);
 
             this.Close();
         }
