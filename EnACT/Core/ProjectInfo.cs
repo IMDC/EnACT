@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EnACT
+﻿namespace EnACT
 {
     /// <summary>
     /// Contains all the settings, values and options related to an EnACT editor proejct
@@ -37,7 +31,7 @@ namespace EnACT
         /// The path of this project on the computer.
         /// </summary>
         public string ProjectPath { set; get; }
-        #endregion
+        #endregion Fields and Properties
 
         #region Constructor
         /// <summary>
@@ -77,6 +71,6 @@ namespace EnACT
             this.VideoPath = videoPath;
             this.ProjectPath = projectPath;
         }
-        #endregion
+        #endregion Constructor
     }
 }

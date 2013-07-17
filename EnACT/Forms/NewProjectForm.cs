@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EnACT
@@ -20,7 +13,7 @@ namespace EnACT
         /// Contains Information about the current EnACT Project.
         /// </summary>
         public ProjectInfo ProjectInfo { get; set; }
-        #endregion
+        #endregion Fields and Properties
 
         #region Events
         /// <summary>
@@ -38,7 +31,7 @@ namespace EnACT
             InitializeComponent();
             ProjectInfo = null;
         }
-        #endregion
+        #endregion Constructor
 
         #region Click Handlers
         /// <summary>
@@ -149,7 +142,7 @@ namespace EnACT
         {
             this.Close();
         }
-        #endregion
+        #endregion Click Handlers
 
         #region Event Invokations
         /// <summary>
@@ -165,6 +158,6 @@ namespace EnACT
 
             if (handler != null) { handler(this, e); }
         }
-        #endregion
+        #endregion Event Invokations
     }
 }

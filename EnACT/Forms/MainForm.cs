@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Drawing;
 
 namespace EnACT
 {
@@ -11,12 +10,12 @@ namespace EnACT
         /// <summary>
         /// Contains Information about the current EnACT Project
         /// </summary>
-        ProjectInfo ProjectInfo { set; get; }
+        private ProjectInfo ProjectInfo { set; get; }
 
         /// <summary>
         /// The controller for enact.
         /// </summary>
-        public EngineController Controller { set; get; }
+        public EngineController EngineController { set; get; }
 
         /// <summary>
         /// The controller for marking up Captions
@@ -37,7 +36,7 @@ namespace EnACT
         /// The object that represents the EnACT engine xml settings file
         /// </summary>
         public SettingsXML Settings { set; get; }
-        #endregion
+        #endregion Fields and Properties
 
         #region Constructor and Init Methods
         /// <summary>
@@ -52,9 +51,9 @@ namespace EnACT
             InitMarkupController();
 
             //Set references from controller.
-            this.SpeakerSet = Controller.SpeakerSet;
-            this.CaptionList = Controller.CaptionList;
-            this.Settings = Controller.Settings;
+            this.SpeakerSet = EngineController.SpeakerSet;
+            this.CaptionList = EngineController.CaptionList;
+            this.Settings = EngineController.Settings;
 
             //Make CaptionTextBox read only
             this.CaptionTextBox.ReadOnly = true;
@@ -66,21 +65,21 @@ namespace EnACT
         private void InitController()
         {
             //Construct Controller
-            Controller = new EngineController();
+            EngineController = new EngineController();
 
             //Hook Up Controller Events
-            Controller.VideoPlayed += new EventHandler(this.Controller_VideoPlayed);
-            Controller.VideoPaused += new EventHandler(this.Controller_VideoPaused);
+            EngineController.VideoPlayed += new EventHandler(this.Controller_VideoPlayed);
+            EngineController.VideoPaused += new EventHandler(this.Controller_VideoPaused);
 
             //Set references
-            Controller.CaptionView       = this.CaptionView;
-            Controller.EngineView        = this.EngineView;
-            Controller.PlayheadLabel     = this.PlayheadLabel;
-            Controller.PlayheadTimer     = this.PlayheadTimer;
-            Controller.Timeline          = this.Timeline;
-            Controller.TrackBar_Timeline = this.TrackBar_Timeline;
+            EngineController.CaptionView = this.CaptionView;
+            EngineController.EngineView = this.EngineView;
+            EngineController.PlayheadLabel = this.PlayheadLabel;
+            EngineController.PlayheadTimer = this.PlayheadTimer;
+            EngineController.Timeline = this.Timeline;
+            EngineController.TrackBar_Timeline = this.TrackBar_Timeline;
 
-            Controller.InitControls();
+            EngineController.InitControls();
         }
 
         /// <summary>
@@ -92,38 +91,38 @@ namespace EnACT
             MarkupController = new MarkupController();
 
             //Location Controls
-            MarkupController.GB_Location        = this.GB_Location;
-            MarkupController.RB_BottomRight     = this.RB_BottomRight;
-            MarkupController.RB_BottomCenter    = this.RB_BottomCenter;
-            MarkupController.RB_BottomLeft      = this.RB_BottomLeft;
-            MarkupController.RB_MiddleRight     = this.RB_MiddleRight;
-            MarkupController.RB_MiddleCenter    = this.RB_MiddleCenter;
-            MarkupController.RB_MiddleLeft      = this.RB_MiddleLeft;
-            MarkupController.RB_TopRight        = this.RB_TopRight;
-            MarkupController.RB_TopCenter       = this.RB_TopCenter;
-            MarkupController.RB_TopLeft         = this.RB_TopLeft;
+            MarkupController.GB_Location = this.GB_Location;
+            MarkupController.RB_BottomRight = this.RB_BottomRight;
+            MarkupController.RB_BottomCenter = this.RB_BottomCenter;
+            MarkupController.RB_BottomLeft = this.RB_BottomLeft;
+            MarkupController.RB_MiddleRight = this.RB_MiddleRight;
+            MarkupController.RB_MiddleCenter = this.RB_MiddleCenter;
+            MarkupController.RB_MiddleLeft = this.RB_MiddleLeft;
+            MarkupController.RB_TopRight = this.RB_TopRight;
+            MarkupController.RB_TopCenter = this.RB_TopCenter;
+            MarkupController.RB_TopLeft = this.RB_TopLeft;
 
             //Emotion Type Controls
-            MarkupController.GB_EmotionType     = this.GB_EmotionType;
-            MarkupController.RB_Anger           = this.RB_Anger;
-            MarkupController.RB_Fear            = this.RB_Fear;
-            MarkupController.RB_Sad             = this.RB_Sad;
-            MarkupController.RB_Happy           = this.RB_Happy;
-            MarkupController.RB_None            = this.RB_None;
+            MarkupController.GB_EmotionType = this.GB_EmotionType;
+            MarkupController.RB_Anger = this.RB_Anger;
+            MarkupController.RB_Fear = this.RB_Fear;
+            MarkupController.RB_Sad = this.RB_Sad;
+            MarkupController.RB_Happy = this.RB_Happy;
+            MarkupController.RB_None = this.RB_None;
 
             //Emotion Intensity Controls
-            MarkupController.GB_Intensity       = this.GB_Intensity;
-            MarkupController.RB_HighIntensity   = this.RB_HighIntensity;
+            MarkupController.GB_Intensity = this.GB_Intensity;
+            MarkupController.RB_HighIntensity = this.RB_HighIntensity;
             MarkupController.RB_MediumIntensity = this.RB_MediumIntensity;
-            MarkupController.RB_LowIntensity    = this.RB_LowIntensity;
+            MarkupController.RB_LowIntensity = this.RB_LowIntensity;
 
             //Caption Text Alignment Controls
-            MarkupController.Button_LeftAlign   = this.Button_LeftAlign;
+            MarkupController.Button_LeftAlign = this.Button_LeftAlign;
             MarkupController.Button_CenterAlign = this.Button_CenterAlign;
-            MarkupController.Button_RightAlign  = this.Button_RightAlign;
+            MarkupController.Button_RightAlign = this.Button_RightAlign;
 
             //CaptionTextBox
-            MarkupController.CaptionTextBox     = this.CaptionTextBox;
+            MarkupController.CaptionTextBox = this.CaptionTextBox;
 
             //Hook up events
             MarkupController.SubscribeToEvents();
@@ -131,7 +130,7 @@ namespace EnACT
             //Set the controls to a disabled state with no caption
             MarkupController.ClearCaption();
         }
-        #endregion
+        #endregion Constructor and Init Methods
 
         #region CaptionView Buttons
         /// <summary>
@@ -173,7 +172,7 @@ namespace EnACT
         {
             CaptionView.MoveRowDown();
         }
-        #endregion
+        #endregion CaptionView Buttons
 
         #region Controller Buttons
         /// <summary>
@@ -183,9 +182,9 @@ namespace EnACT
         /// <param name="e">Event Arguments</param>
         private void TogglePlay(object sender, EventArgs e)
         {
-            Controller.TogglePlay();
+            EngineController.TogglePlay();
         }
-        #endregion
+        #endregion Controller Buttons
 
         #region Jorge
         public void JorgeMethod(String SRTPath, String OutFolderPath)
@@ -200,7 +199,7 @@ namespace EnACT
                 OutFolderPath + @"\Settings.xml", Settings);
             w.WriteAll();
         }
-        #endregion
+        #endregion Jorge
 
         #region Timeline Buttons
         private void Button_ShowLabels_Click(object sender, EventArgs e)
@@ -222,7 +221,7 @@ namespace EnACT
         {
             Timeline.ZoomReset();
         }
-        #endregion
+        #endregion Timeline Buttons
 
         #region EngineController Event Handler Methods
         /// <summary>
@@ -244,7 +243,7 @@ namespace EnACT
         {
             Button_PlayAndPause.Text = "Play";
         }
-        #endregion
+        #endregion EngineController Event Handler Methods
 
         #region Debug Menu Items
         private void parseScriptToolStripMenuItem_Click(object sender, EventArgs e)
@@ -280,7 +279,7 @@ namespace EnACT
             //else
             //    CaptionView.UserInputEnabled = true;
         }
-        #endregion
+        #endregion Debug Menu Items
 
         #region CaptionView SelectionChanged
         /// <summary>
@@ -307,7 +306,7 @@ namespace EnACT
                 MarkupController.ClearCaption();
             }
         }
-        #endregion
+        #endregion CaptionView SelectionChanged
 
         #region Emotion RadioButton Click Handlers
         /// <summary>
@@ -344,7 +343,7 @@ namespace EnACT
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void RB_Anger_Click(object sender, EventArgs e) { MarkupController.ChangeEmotion(Emotion.Anger); }
-        #endregion
+        #endregion Emotion RadioButton Click Handlers
 
         #region Intensity RadioButton Click Handlers
         /// <summary>
@@ -370,7 +369,7 @@ namespace EnACT
         /// <param name="e">Event Args</param>
         private void RB_HighIntensity_Click(object sender, EventArgs e)
         { MarkupController.ChangeIntensity(Intensity.High); }
-        #endregion
+        #endregion Intensity RadioButton Click Handlers
 
         #region Location RadioButton Click Handlers
         /// <summary>
@@ -444,7 +443,7 @@ namespace EnACT
         /// <param name="e">Event Args</param>
         private void RB_BottomRight_Click(object sender, EventArgs e)
         { MarkupController.ChangeLocation(ScreenLocation.BottomRight); }
-        #endregion
+        #endregion Location RadioButton Click Handlers
 
         #region Caption Alignment Button Click Handlers
         /// <summary>
@@ -470,7 +469,7 @@ namespace EnACT
         /// <param name="e">Event Args</param>
         private void Button_RightAlign_Click(object sender, EventArgs e)
         { MarkupController.ChangeAlignment(Alignment.Right); }
-        #endregion
+        #endregion Caption Alignment Button Click Handlers
 
         #region Menu Item Click Handlers
         /// <summary>
@@ -506,7 +505,7 @@ namespace EnACT
             AboutBox about = new AboutBox();
             about.ShowDialog();
         }
-        #endregion
+        #endregion Menu Item Click Handlers
 
         private void NewProjectForm_ProjectCreated(object sender, ProjectCreatedEventArgs e)
         {
