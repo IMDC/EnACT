@@ -22,6 +22,13 @@ namespace EnACT
         public ProjectInfo ProjectInfo { get; set; }
         #endregion
 
+        #region Events
+        /// <summary>
+        /// An event that is fired when the project is created.
+        /// </summary>
+        public EventHandler<ProjectCreatedEventArgs> ProjectCreated;
+        #endregion Events
+
         #region Constructor
         /// <summary>
         /// Constructs a NewProjectForm.
@@ -97,7 +104,7 @@ namespace EnACT
             //Check to see if Text boxes are empty when they should not be.
             if (String.IsNullOrWhiteSpace(TextBox_ScriptPath.Text) && !CheckBox_GenerateScript.Checked)
             {
-                MessageBox.Show("You must either enter a path to a Script, or check the Check Box next to it.", 
+                MessageBox.Show("You must either enter a path to a Script, or check the Check Box next to it.",
                     "Error!");
                 return;
             }
@@ -122,11 +129,13 @@ namespace EnACT
 
             //Generate P based on checkbox state
             if (CheckBox_GenerateScript.Checked)
-                ProjectInfo = new ProjectInfo(Textbox_ProjectName.Text,TextBox_VideoPath.Text, 
+                ProjectInfo = new ProjectInfo(Textbox_ProjectName.Text, TextBox_VideoPath.Text,
                     Textbox_ProjectPath.Text);
             else
-                ProjectInfo = new ProjectInfo(Textbox_ProjectName.Text, TextBox_ScriptPath.Text, 
-                    TextBox_VideoPath.Text,Textbox_ProjectPath.Text);
+                ProjectInfo = new ProjectInfo(Textbox_ProjectName.Text, TextBox_ScriptPath.Text,
+                    TextBox_VideoPath.Text, Textbox_ProjectPath.Text);
+
+            OnProjectCreated(new ProjectCreatedEventArgs(ProjectInfo));
 
             this.Close();
         }
@@ -139,6 +148,22 @@ namespace EnACT
         private void Button_Cancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        #endregion
+
+        #region Event Invokations
+        /// <summary>
+        /// Raises the ProjectCreated event.
+        /// </summary>
+        /// <param name="e">The event arguments needed for the event</param>
+        private void OnProjectCreated(ProjectCreatedEventArgs e)
+        {
+            /* Make a local copy of the event to prevent the case where the handler
+             * will be set as null in-between the null check and the handler call.
+             */
+            EventHandler<ProjectCreatedEventArgs> handler = ProjectCreated;
+
+            if (handler != null) { handler(this, e); }
         }
         #endregion
     }

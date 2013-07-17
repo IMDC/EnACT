@@ -482,6 +482,7 @@ namespace EnACT
         {
             //Open Form
             NewProjectForm newProjectForm = new NewProjectForm();
+            newProjectForm.ProjectCreated += this.NewProjectForm_ProjectCreated;
             newProjectForm.ShowDialog();
 
             //Retrieve project info from form
@@ -506,5 +507,10 @@ namespace EnACT
             about.ShowDialog();
         }
         #endregion
+
+        private void NewProjectForm_ProjectCreated(object sender, ProjectCreatedEventArgs e)
+        {
+            Console.WriteLine("Project Made");
+        }
     }//Class
 }//Namespace
