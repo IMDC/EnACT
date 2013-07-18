@@ -9,6 +9,7 @@ namespace EnACT
     /// </summary>
     public class TextParser
     {
+        #region Constants
         /// <summary>
         /// Contains the known file extensions for script files.
         /// </summary>
@@ -18,11 +19,20 @@ namespace EnACT
             public const string Srt = "srt";
             public const string Txt = "txt";
         }
+        #endregion Constants
 
-        //Object reference variables
+        #region Fields and Properties
+        /// <summary>
+        /// A set of Speaker objects, each speaker being mapped to by its name.
+        /// </summary>
         public Dictionary<String, Speaker> SpeakerSet { set; get; }
+        /// <summary>
+        /// A list of captions retrieved from a transcript file.
+        /// </summary>
         public List<EditorCaption> CaptionList { set; get; }
+        #endregion Fields and Properties
 
+        #region Constructor
         /// <summary>
         /// Constucts a new text parser with the specified parameters
         /// </summary>
@@ -33,7 +43,9 @@ namespace EnACT
             this.SpeakerSet = SpeakerSet;
             this.CaptionList = CaptionList;
         }
+        #endregion Constructor
 
+        #region Parse
         /// <summary>
         /// Parses a script file when given a path to the script to it.
         /// </summary>
@@ -49,7 +61,7 @@ namespace EnACT
                 case FileExtensions.Esr: ParseESRFile(path);    break;
                 case FileExtensions.Srt: ParseSRTFile(path);    break;
                 case FileExtensions.Txt: ParseScriptFile(path); break;
-                default: throw new FormatException(String.Format("Extension \"{}\" is not a valid extension.", 
+                default: throw new FormatException(String.Format("Extension \"{}\" is not a valid extension.",
                     extension));
             }
         }
@@ -67,11 +79,12 @@ namespace EnACT
             //Return the last part, which should be the extension of the file.
             return parts[parts.Length - 1];
         }
+        #endregion Parse
 
         #region ParseScriptFile
         /// <summary>
-        /// Reads in the Script file located at scriptPath and parses it into
-        /// CaptionList and SpeakerSet
+        /// Reads in the Script file located at scriptPath and parses it into CaptionList and
+        /// SpeakerSet
         /// </summary>
         /// <param name="scriptPath">The path of the script file</param>
         public void ParseScriptFile(String scriptPath)
@@ -123,7 +136,7 @@ namespace EnACT
                 }
             }//for
         }//ParseScriptFile
-        #endregion
+        #endregion ParseScriptFile
 
         #region ParseESRFile
         /// <summary>
@@ -135,7 +148,7 @@ namespace EnACT
             String[] lines = System.IO.File.ReadAllLines(@scriptPath); //Read in file
 
             //Start off with the Default speaker
-            Speaker CurrentSpeaker = SpeakerSet[Speaker.DefaultName] ;
+            Speaker CurrentSpeaker = SpeakerSet[Speaker.DefaultName];
 
             Regex numberLineRegex = new Regex(@"^\d+$");    //Line number
             //Time stamp regex, ex "00:00:35,895 --> 00:00:37,790" will match
@@ -164,7 +177,7 @@ namespace EnACT
                     //If the flag is true, then we have already read in a caption
                     if (fullCaptionParsedFlag)
                     {
-                        CaptionList.Add(new EditorCaption(captionLine,CurrentSpeaker,beginTime, endTime));
+                        CaptionList.Add(new EditorCaption(captionLine, CurrentSpeaker, beginTime, endTime));
                         //Reset the captionFlag
                         fullCaptionParsedFlag = false;
                     }
@@ -211,7 +224,7 @@ namespace EnACT
                             }
                         }
                         //If the line is surrounded with square brackets it is a description
-                        else if(lines[i][0] == '[' && lines[i][lines[i].Length - 1] == ']')
+                        else if (lines[i][0] == '[' && lines[i][lines[i].Length - 1] == ']')
                         {
                             captionLine = lines[i].Substring(1, lines[i].Length - 2);
                             CurrentSpeaker = SpeakerSet[Speaker.DescriptionName];
@@ -241,13 +254,12 @@ namespace EnACT
             }//for
             SpeakerSet[CurrentSpeaker.Name] = CurrentSpeaker;
         }//ParseSRTFile
-        #endregion
+        #endregion ParseESRFile
 
         #region ParseSRTFile
         /// <summary>
-        /// Parses an srt file into caption and speaker data useable by enact.
-        /// NOTE. Will not look for speakers, and every caption will be attributed to
-        /// the default speaker.
+        /// Parses an srt file into caption and speaker data useable by enact. NOTE. Will not look
+        /// for speakers, and every caption will be attributed to the default speaker.
         /// </summary>
         /// <param name="scriptPath">The full path of the SRT file to be parsed</param>
         public void ParseSRTFile(String scriptPath)
@@ -294,7 +306,7 @@ namespace EnACT
                     //If the line is a number line
                     if (numberLineRegex.IsMatch(lines[i]))
                     {
-                        //We don't really have any purpose for this line, 
+                        //We don't really have any purpose for this line,
                         //but we want to be able to identify it
                         //Console.WriteLine("Number Line: {0}", lines[i]);
                     }
@@ -334,6 +346,6 @@ namespace EnACT
             }//for
             SpeakerSet[CurrentSpeaker.Name] = CurrentSpeaker;
         }//ParseESRFile
-        #endregion
+        #endregion ParseSRTFile
     }//Class
 }//Namespace
