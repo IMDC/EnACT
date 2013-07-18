@@ -513,9 +513,22 @@ namespace EnACT
 
             if (ProjectInfo.UseExistingScript)
             {
-                TextParser t = new TextParser(SpeakerSet, CaptionList);
-                t.Parse(ProjectInfo.ScriptPath);
-                CaptionView.UpdateView();
+                try
+                {
+                    TextParser t = new TextParser(SpeakerSet, CaptionList);
+                    t.Parse(ProjectInfo.ScriptPath);
+                    CaptionView.UpdateView();
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Error trying to read in script file. " + ProjectInfo.ProjectPath + 
+                        " has an invalid file extension.", "Error: " + ProjectInfo.ScriptPath);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error trying to read in script file. File is either corrupted or not named with" +
+                        "the correct file extension.", "Error: " + ProjectInfo.ScriptPath);
+                }
             }
         }
     }//Class
