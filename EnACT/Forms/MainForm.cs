@@ -509,7 +509,14 @@ namespace EnACT
 
         private void NewProjectForm_ProjectCreated(object sender, ProjectCreatedEventArgs e)
         {
-            Console.WriteLine("Project Made");
+            ProjectInfo = e.ProjectInfo;
+
+            if (ProjectInfo.UseExistingScript)
+            {
+                TextParser t = new TextParser(SpeakerSet, CaptionList);
+                t.Parse(ProjectInfo.ScriptPath);
+                CaptionView.UpdateView();
+            }
         }
     }//Class
 }//Namespace

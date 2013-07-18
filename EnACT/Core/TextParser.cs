@@ -9,6 +9,16 @@ namespace EnACT
     /// </summary>
     public class TextParser
     {
+        /// <summary>
+        /// Contains the known file extensions for script files.
+        /// </summary>
+        public static class FileExtensions
+        {
+            public const string Esr = "esr";
+            public const string Srt = "srt";
+            public const string Txt = "txt";
+        }
+
         //Object reference variables
         public Dictionary<String, Speaker> SpeakerSet { set; get; }
         public List<EditorCaption> CaptionList { set; get; }
@@ -22,6 +32,40 @@ namespace EnACT
         {
             this.SpeakerSet = SpeakerSet;
             this.CaptionList = CaptionList;
+        }
+
+        /// <summary>
+        /// Parses a script file when given a path to the script to it.
+        /// </summary>
+        /// <param name="path">The absolute path to the script file.</param>
+        public void Parse(string path)
+        {
+            string extension = GetFileExtension(path);
+
+            //Console.WriteLine("Extension: {0}", extension);
+
+            switch (extension)
+            {
+                case FileExtensions.Esr: ParseESRFile(path);    break;
+                case FileExtensions.Srt: ParseSRTFile(path);    break;
+                case FileExtensions.Txt: ParseScriptFile(path); break;
+                default: throw new FormatException(String.Format("Extension \"{}\" is not a valid extension.", 
+                    extension));
+            }
+        }
+
+        /// <summary>
+        /// Gets the file extension of a file given a path or filename.
+        /// </summary>
+        /// <param name="file">An absolute or relative path to a filename.</param>
+        /// <returns>The extenstion of the given file.</returns>
+        public static string GetFileExtension(string file)
+        {
+            //Separate path into parts
+            string [] parts = file.Split('.');
+
+            //Return the last part, which should be the extension of the file.
+            return parts[parts.Length - 1];
         }
 
         #region ParseScriptFile
