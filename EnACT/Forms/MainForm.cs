@@ -4,6 +4,8 @@ using System.Windows.Forms;
 
 namespace EnACT
 {
+    /* This part of MainForm controls interaction between markup of emotions.
+     */
     public partial class MainForm : Form
     {
         #region Fields and Properties
@@ -16,11 +18,6 @@ namespace EnACT
         /// The controller for enact.
         /// </summary>
         public EngineController EngineController { set; get; }
-
-        /// <summary>
-        /// The controller for marking up Captions
-        /// </summary>
-        public MarkupController MarkupController { set; get; }
 
         /// <summary>
         /// A set of Speaker objects, each speaker being mapped to by its name
@@ -87,48 +84,11 @@ namespace EnACT
         /// </summary>
         private void InitMarkupController()
         {
-            //Construct Controller
-            MarkupController = new MarkupController();
-
-            //Location Controls
-            MarkupController.GB_Location = this.GB_Location;
-            MarkupController.RB_BottomRight = this.RB_BottomRight;
-            MarkupController.RB_BottomCenter = this.RB_BottomCenter;
-            MarkupController.RB_BottomLeft = this.RB_BottomLeft;
-            MarkupController.RB_MiddleRight = this.RB_MiddleRight;
-            MarkupController.RB_MiddleCenter = this.RB_MiddleCenter;
-            MarkupController.RB_MiddleLeft = this.RB_MiddleLeft;
-            MarkupController.RB_TopRight = this.RB_TopRight;
-            MarkupController.RB_TopCenter = this.RB_TopCenter;
-            MarkupController.RB_TopLeft = this.RB_TopLeft;
-
-            //Emotion Type Controls
-            MarkupController.GB_EmotionType = this.GB_EmotionType;
-            MarkupController.RB_Anger = this.RB_Anger;
-            MarkupController.RB_Fear = this.RB_Fear;
-            MarkupController.RB_Sad = this.RB_Sad;
-            MarkupController.RB_Happy = this.RB_Happy;
-            MarkupController.RB_None = this.RB_None;
-
-            //Emotion Intensity Controls
-            MarkupController.GB_Intensity = this.GB_Intensity;
-            MarkupController.RB_HighIntensity = this.RB_HighIntensity;
-            MarkupController.RB_MediumIntensity = this.RB_MediumIntensity;
-            MarkupController.RB_LowIntensity = this.RB_LowIntensity;
-
-            //Caption Text Alignment Controls
-            MarkupController.Button_LeftAlign = this.Button_LeftAlign;
-            MarkupController.Button_CenterAlign = this.Button_CenterAlign;
-            MarkupController.Button_RightAlign = this.Button_RightAlign;
-
-            //CaptionTextBox
-            MarkupController.CaptionTextBox = this.CaptionTextBox;
-
             //Hook up events
-            MarkupController.SubscribeToEvents();
+            SubscribeToEvents();
 
             //Set the controls to a disabled state with no caption
-            MarkupController.ClearCaption();
+            ClearCaption();
         }
         #endregion Constructor and Init Methods
 
@@ -297,13 +257,13 @@ namespace EnACT
                 int i = CaptionView.SelectedRows[0].Index;
 
                 //Assign Caption
-                MarkupController.LoadCaption(CaptionList[i]);
+                LoadCaption(CaptionList[i]);
             }
             //Otherwise clear the textbox
             else
             {
                 //CaptionTextBox.Caption = null;
-                MarkupController.ClearCaption();
+                ClearCaption();
             }
         }
         #endregion CaptionView SelectionChanged
@@ -314,35 +274,35 @@ namespace EnACT
         /// </summary>
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
-        private void RB_None_Click(object sender, EventArgs e) { MarkupController.ChangeEmotion(Emotion.None); }
+        private void RB_None_Click(object sender, EventArgs e) { ChangeEmotion(Emotion.None); }
 
         /// <summary>
         /// Changes the Caption's iemotion to the emotion related to this button.
         /// </summary>
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
-        private void RB_Happy_Click(object sender, EventArgs e) { MarkupController.ChangeEmotion(Emotion.Happy); }
+        private void RB_Happy_Click(object sender, EventArgs e) { ChangeEmotion(Emotion.Happy); }
 
         /// <summary>
         /// Changes the Caption's iemotion to the emotion related to this button.
         /// </summary>
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
-        private void RB_Sad_Click(object sender, EventArgs e) { MarkupController.ChangeEmotion(Emotion.Sad); }
+        private void RB_Sad_Click(object sender, EventArgs e) { ChangeEmotion(Emotion.Sad); }
 
         /// <summary>
         /// Changes the Caption's iemotion to the emotion related to this button.
         /// </summary>
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
-        private void RB_Fear_Click(object sender, EventArgs e) { MarkupController.ChangeEmotion(Emotion.Fear); }
+        private void RB_Fear_Click(object sender, EventArgs e) { ChangeEmotion(Emotion.Fear); }
 
         /// <summary>
         /// Changes the Caption's iemotion to the emotion related to this button.
         /// </summary>
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
-        private void RB_Anger_Click(object sender, EventArgs e) { MarkupController.ChangeEmotion(Emotion.Anger); }
+        private void RB_Anger_Click(object sender, EventArgs e) { ChangeEmotion(Emotion.Anger); }
         #endregion Emotion RadioButton Click Handlers
 
         #region Intensity RadioButton Click Handlers
@@ -352,7 +312,7 @@ namespace EnACT
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void RB_LowIntensity_Click(object sender, EventArgs e)
-        { MarkupController.ChangeIntensity(Intensity.Low); }
+        { ChangeIntensity(Intensity.Low); }
 
         /// <summary>
         /// Changes the Caption's intensity to the intensity related to this button.
@@ -360,7 +320,7 @@ namespace EnACT
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void RB_MediumIntensity_Click(object sender, EventArgs e)
-        { MarkupController.ChangeIntensity(Intensity.Medium); }
+        { ChangeIntensity(Intensity.Medium); }
 
         /// <summary>
         /// Changes the Caption's intensity to the intensity related to this button.
@@ -368,7 +328,7 @@ namespace EnACT
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void RB_HighIntensity_Click(object sender, EventArgs e)
-        { MarkupController.ChangeIntensity(Intensity.High); }
+        { ChangeIntensity(Intensity.High); }
         #endregion Intensity RadioButton Click Handlers
 
         #region Location RadioButton Click Handlers
@@ -378,7 +338,7 @@ namespace EnACT
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void RB_TopLeft_Click(object sender, EventArgs e)
-        { MarkupController.ChangeLocation(ScreenLocation.TopLeft); }
+        { ChangeLocation(ScreenLocation.TopLeft); }
 
         /// <summary>
         /// Changes the Caption's Location to the Location related to this button.
@@ -386,7 +346,7 @@ namespace EnACT
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void RB_TopCenter_Click(object sender, EventArgs e)
-        { MarkupController.ChangeLocation(ScreenLocation.TopCentre); }
+        { ChangeLocation(ScreenLocation.TopCentre); }
 
         /// <summary>
         /// Changes the Caption's Location to the Location related to this button.
@@ -394,7 +354,7 @@ namespace EnACT
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void RB_TopRight_Click(object sender, EventArgs e)
-        { MarkupController.ChangeLocation(ScreenLocation.TopRight); }
+        { ChangeLocation(ScreenLocation.TopRight); }
 
         /// <summary>
         /// Changes the Caption's Location to the Location related to this button.
@@ -402,7 +362,7 @@ namespace EnACT
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void RB_MiddleLeft_Click(object sender, EventArgs e)
-        { MarkupController.ChangeLocation(ScreenLocation.MiddleLeft); }
+        { ChangeLocation(ScreenLocation.MiddleLeft); }
 
         /// <summary>
         /// Changes the Caption's Location to the Location related to this button.
@@ -410,7 +370,7 @@ namespace EnACT
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void RB_MiddleCenter_Click(object sender, EventArgs e)
-        { MarkupController.ChangeLocation(ScreenLocation.MiddleCenter); }
+        { ChangeLocation(ScreenLocation.MiddleCenter); }
 
         /// <summary>
         /// Changes the Caption's Location to the Location related to this button.
@@ -418,7 +378,7 @@ namespace EnACT
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void RB_MiddleRight_Click(object sender, EventArgs e)
-        { MarkupController.ChangeLocation(ScreenLocation.MiddleRight); }
+        { ChangeLocation(ScreenLocation.MiddleRight); }
 
         /// <summary>
         /// Changes the Caption's Location to the Location related to this button.
@@ -426,7 +386,7 @@ namespace EnACT
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void RB_BottomLeft_Click(object sender, EventArgs e)
-        { MarkupController.ChangeLocation(ScreenLocation.BottomLeft); }
+        { ChangeLocation(ScreenLocation.BottomLeft); }
 
         /// <summary>
         /// Changes the Caption's Location to the Location related to this button.
@@ -434,7 +394,7 @@ namespace EnACT
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void RB_BottomCenter_Click(object sender, EventArgs e)
-        { MarkupController.ChangeLocation(ScreenLocation.BottomCentre); }
+        { ChangeLocation(ScreenLocation.BottomCentre); }
 
         /// <summary>
         /// Changes the Caption's Location to the Location related to this button.
@@ -442,7 +402,7 @@ namespace EnACT
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void RB_BottomRight_Click(object sender, EventArgs e)
-        { MarkupController.ChangeLocation(ScreenLocation.BottomRight); }
+        { ChangeLocation(ScreenLocation.BottomRight); }
         #endregion Location RadioButton Click Handlers
 
         #region Caption Alignment Button Click Handlers
@@ -452,7 +412,7 @@ namespace EnACT
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void Button_LeftAlign_Click(object sender, EventArgs e)
-        { MarkupController.ChangeAlignment(Alignment.Left); }
+        { ChangeAlignment(Alignment.Left); }
 
         /// <summary>
         /// Changes the Caption's Alignment to the Alignment related to this button.
@@ -460,7 +420,7 @@ namespace EnACT
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void Button_CenterAlign_Click(object sender, EventArgs e)
-        { MarkupController.ChangeAlignment(Alignment.Center); }
+        { ChangeAlignment(Alignment.Center); }
 
         /// <summary>
         /// Changes the Caption's Alignment to the Alignment related to this button.
@@ -468,7 +428,7 @@ namespace EnACT
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void Button_RightAlign_Click(object sender, EventArgs e)
-        { MarkupController.ChangeAlignment(Alignment.Right); }
+        { ChangeAlignment(Alignment.Right); }
         #endregion Caption Alignment Button Click Handlers
 
         #region File Menu Item Click Handlers
