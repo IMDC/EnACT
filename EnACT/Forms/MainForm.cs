@@ -471,7 +471,7 @@ namespace EnACT
         { MarkupController.ChangeAlignment(Alignment.Right); }
         #endregion Caption Alignment Button Click Handlers
 
-        #region Menu Item Click Handlers
+        #region File Menu Item Click Handlers
         /// <summary>
         /// Opens up the NewProjectForm for creating a new project.
         /// </summary>
@@ -505,15 +505,43 @@ namespace EnACT
             AboutBox about = new AboutBox();
             about.ShowDialog();
         }
-        #endregion Menu Item Click Handlers
+        #endregion File Menu Item Click Handlers
 
+        #region Project Menu Item Click Handlers
+        /// <summary>
+        /// Adds a speaker to the project.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void addSpeakerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Adds a row to the CaptionView.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void addCaptionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CaptionView.AddRow();
+        }
+        #endregion
+
+        #region NewProjectForm Event Handlers
+        /// <summary>
+        /// Handles the loading of the new project for the different controlls on the form.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
         private void NewProjectForm_ProjectCreated(object sender, ProjectCreatedEventArgs e)
         {
             ProjectInfo = e.ProjectInfo;
 
             if (ProjectInfo.UseExistingScript)
             {
-                try
+                try //Attempt to parse file.
                 {
                     TextParser t = new TextParser(SpeakerSet, CaptionList);
                     t.Parse(ProjectInfo.ScriptPath);
@@ -531,5 +559,6 @@ namespace EnACT
                 }
             }
         }
+        #endregion
     }//Class
 }//Namespace
