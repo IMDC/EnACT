@@ -10,58 +10,13 @@ namespace EnACT
     /// <summary>
     /// The video controller for enact. Controls interaction between user controls.
     /// </summary>
-    public class EngineController
+    public partial class MainForm
     {
         #region Fields and Properties
         /// <summary>
         /// A Boolean that states whether the video is playing or not.
         /// </summary>
         public bool IsPlaying { set; get; }
-
-        /// <summary>
-        /// The CaptionView used by EnACT to display captions in a table.
-        /// </summary>
-        public CaptionView CaptionView { set; get; }
-        
-        /// <summary>
-        /// The video player used by EnACT to play the video.
-        /// </summary>
-        public EngineView EngineView { set; get; }
-
-        /// <summary>
-        /// The label used by EnACT to show playhead position and video length.
-        /// </summary>
-        public PlayheadLabel PlayheadLabel { set; get; }
-
-        /// <summary>
-        /// The timer used to update components when the video is playing.
-        /// </summary>
-        public Timer PlayheadTimer { set; get; }
-
-        /// <summary>
-        /// The Timeline used by EnACT used to visually display captions in a timeline.
-        /// </summary>
-        public Timeline Timeline { set; get; }
-
-        /// <summary>
-        /// A Simple Timeline made from a Trackbar.
-        /// </summary>
-        public TrackBar TrackBar_Timeline { set; get; }
-
-        /// <summary>
-        /// A set of Speaker objects, each speaker being mapped to by its name.
-        /// </summary>
-        public Dictionary<string, Speaker> SpeakerSet { set; get; }
-
-        /// <summary>
-        /// A list of captions retrieved from a transcript file.
-        /// </summary>
-        public List<EditorCaption> CaptionList { set; get; }
-
-        /// <summary>
-        /// The object that represents the EnACT engine xml settings file.
-        /// </summary>
-        public SettingsXML Settings { set; get; }
         #endregion
 
         #region Events
@@ -80,7 +35,7 @@ namespace EnACT
         /// <summary>
         /// Initializes a new instance of the <see cref="EngineController" /> class.
         /// </summary>
-        public EngineController() 
+        public void EngineController() 
         {
             //Construct the speakerset with a comparator that ignores case
             this.SpeakerSet = new Dictionary<string, Speaker>(StringComparer.OrdinalIgnoreCase);
@@ -102,7 +57,7 @@ namespace EnACT
         public void InitControls()
         {
             //Hook up event handlers to methods in this controller.
-            SubscribeToEvents();
+            SubscribeToEngineEvents();
 
             //Set up the CaptionView
             InitCaptionView();
@@ -118,7 +73,7 @@ namespace EnACT
         /// <summary>
         /// Hooks up event handlers from controls.
         /// </summary>
-        public void SubscribeToEvents()
+        public void SubscribeToEngineEvents()
         {
             //CaptionView Events
             this.CaptionView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler
@@ -196,7 +151,7 @@ namespace EnACT
         /// <summary>
         /// Toggles between the play and pause state.
         /// </summary>
-        public void TogglePlay() 
+        public void TogglePlayer() 
         {
             if (IsPlaying) Pause();
             else Play();

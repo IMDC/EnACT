@@ -15,11 +15,6 @@ namespace EnACT
         private ProjectInfo ProjectInfo { set; get; }
 
         /// <summary>
-        /// The controller for enact.
-        /// </summary>
-        public EngineController EngineController { set; get; }
-
-        /// <summary>
         /// A set of Speaker objects, each speaker being mapped to by its name
         /// </summary>
         public Dictionary<String, Speaker> SpeakerSet { set; get; }
@@ -48,9 +43,9 @@ namespace EnACT
             InitMarkupController();
 
             //Set references from controller.
-            this.SpeakerSet = EngineController.SpeakerSet;
-            this.CaptionList = EngineController.CaptionList;
-            this.Settings = EngineController.Settings;
+            this.SpeakerSet = SpeakerSet;
+            this.CaptionList = CaptionList;
+            this.Settings = Settings;
 
             //Make CaptionTextBox read only
             this.CaptionTextBox.ReadOnly = true;
@@ -62,21 +57,13 @@ namespace EnACT
         private void InitController()
         {
             //Construct Controller
-            EngineController = new EngineController();
+            EngineController();
 
             //Hook Up Controller Events
-            EngineController.VideoPlayed += new EventHandler(this.Controller_VideoPlayed);
-            EngineController.VideoPaused += new EventHandler(this.Controller_VideoPaused);
+            VideoPlayed += new EventHandler(this.Controller_VideoPlayed);
+            VideoPaused += new EventHandler(this.Controller_VideoPaused);
 
-            //Set references
-            EngineController.CaptionView = this.CaptionView;
-            EngineController.EngineView = this.EngineView;
-            EngineController.PlayheadLabel = this.PlayheadLabel;
-            EngineController.PlayheadTimer = this.PlayheadTimer;
-            EngineController.Timeline = this.Timeline;
-            EngineController.TrackBar_Timeline = this.TrackBar_Timeline;
-
-            EngineController.InitControls();
+            InitControls();
         }
 
         /// <summary>
@@ -142,7 +129,7 @@ namespace EnACT
         /// <param name="e">Event Arguments</param>
         private void TogglePlay(object sender, EventArgs e)
         {
-            EngineController.TogglePlay();
+            TogglePlayer();
         }
         #endregion Controller Buttons
 

@@ -85,7 +85,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Core\EditorCaptionWord.cs" />
-    <Compile Include="Controllers\EngineController.cs" />
+    <Compile Include="Controllers\EngineController.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Core\Emotion.cs" />
     <Compile Include="Core\EnactXMLWriter.cs" />
     <Compile Include="Controls\EngineView.cs">
@@ -116,7 +118,9 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MainFormMarkupInteraction.cs" />
+    <Compile Include="Forms\MainFormMarkupInteraction.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\NewProjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
