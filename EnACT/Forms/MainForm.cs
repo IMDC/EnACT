@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.IO;
 
 namespace EnACT
 {
@@ -534,6 +535,24 @@ namespace EnACT
                         "the correct file extension.", "Error: " + ProjectInfo.ScriptPath);
                 }
             }
+
+            //Check to make sure Path is absolute
+            if (!Path.IsPathRooted(ProjectInfo.ProjectPath))
+            {
+                MessageBox.Show("Error: Path to Directory must be absolute.", "Error");
+                return;
+            }
+            //Check that Project Path already exists
+            if (!Directory.Exists(ProjectInfo.ProjectPath))
+            {
+                MessageBox.Show("Error: Path to Directory is not valid.", "Error!");
+                return;
+            }
+
+            //Get full absolute directory
+            string fullpath = Path.Combine(ProjectInfo.ProjectPath, ProjectInfo.Name);
+            //Create Directory
+            Directory.CreateDirectory(fullpath);
         }
         #endregion
     }//Class
