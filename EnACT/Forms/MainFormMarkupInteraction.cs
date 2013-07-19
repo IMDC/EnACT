@@ -446,6 +446,9 @@ namespace EnACT
                 default: throw new ArgumentException(String.Format("Property Name '{0}' isn't a valid property",
                         e.PropertyName), "PropertyName");
             }
+
+            //Update Caption in CaptionView
+            CaptionView.Invalidate();
         }
         #endregion SelectedCaption_PropertyChanged
     }
