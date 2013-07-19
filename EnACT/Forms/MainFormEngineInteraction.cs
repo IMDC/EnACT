@@ -31,45 +31,7 @@ namespace EnACT
         public event EventHandler VideoPaused;
         #endregion
 
-        #region Constructor
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EngineController" /> class.
-        /// </summary>
-        public void EngineController() 
-        {
-            //Construct the speakerset with a comparator that ignores case
-            this.SpeakerSet = new Dictionary<string, Speaker>(StringComparer.OrdinalIgnoreCase);
-
-            //Add the default speaker to the set of speakers
-            this.SpeakerSet[Speaker.Default.Name] = Speaker.Default;
-            //Add the Description Speaker to the set of speakers
-            this.SpeakerSet[Speaker.Description.Name] = Speaker.Description;
-
-            this.CaptionList = new List<EditorCaption>();
-            this.Settings = new SettingsXML();
-        }
-        #endregion
-
-        #region Init
-        /// <summary>
-        /// Initializes the controls that are controlled by this controller.
-        /// </summary>
-        public void InitControls()
-        {
-            //Hook up event handlers to methods in this controller.
-            SubscribeToEngineEvents();
-
-            //Set up the CaptionView
-            InitCaptionView();
-            //Set up VideoPlayer
-            InitVideoPlayer();
-            //Set up Timeline
-            InitTimeline();
-
-            //Set the timer interval to 10 miliseconds
-            PlayheadTimer.Interval = 10;
-        }
-
+        #region SubscribeToEngineEvents
         /// <summary>
         /// Hooks up event handlers from controls.
         /// </summary>
@@ -93,35 +55,7 @@ namespace EnACT
                     (this.Timeline_CaptionTimestampChanged);
             this.Timeline.CaptionMoved += new System.EventHandler(this.Timeline_CaptionMoved);
         }
-
-        /// <summary>
-        /// Creates the table used by CaptionView and then sets as CaptionView's DataSource
-        /// </summary>
-        private void InitCaptionView()
-        {
-            CaptionView.InitColumns();  //Set up columns
-            CaptionView.SpeakerSet = SpeakerSet;
-            CaptionView.CaptionSource = CaptionList;
-        }
-
-        /// <summary>
-        /// Initializes the Video Player
-        /// </summary>
-        private void InitVideoPlayer()
-        {
-            //This method can not be called in the EngineView constructor, so we have to call it here.
-            EngineView.LoadMovie(0, Paths.EditorEngine);
-        }
-
-        /// <summary>
-        /// Initialization for the Timeline
-        /// </summary>
-        private void InitTimeline()
-        {
-            Timeline.SpeakerSet = SpeakerSet;
-            Timeline.CaptionList = CaptionList;
-        }
-        #endregion
+        #endregion SubscribeToEngineEvents
 
         #region Play and Pause
         /// <summary>

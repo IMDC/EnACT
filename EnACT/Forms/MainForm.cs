@@ -38,44 +38,73 @@ namespace EnACT
         {
             InitializeComponent();
 
-            //Set up the Controllers
-            InitController();
-            InitMarkupController();
+            //Construct the speakerset with a comparator that ignores case
+            this.SpeakerSet = new Dictionary<string, Speaker>(StringComparer.OrdinalIgnoreCase);
 
-            //Set references from controller.
-            this.SpeakerSet = SpeakerSet;
-            this.CaptionList = CaptionList;
-            this.Settings = Settings;
+            //Add the default speaker to the set of speakers
+            this.SpeakerSet[Speaker.Default.Name] = Speaker.Default;
+            //Add the Description Speaker to the set of speakers
+            this.SpeakerSet[Speaker.Description.Name] = Speaker.Description;
+
+            this.CaptionList = new List<EditorCaption>();
+            this.Settings = new SettingsXML();
+
+            //Hook Up Controller Events
+            VideoPlayed += new EventHandler(this.Controller_VideoPlayed);
+            VideoPaused += new EventHandler(this.Controller_VideoPaused);
+
+            //Hook up event handlers to methods in this controller.
+            SubscribeToEngineEvents();
+
+            //Set up the CaptionView
+            InitCaptionView();
+            //Set up VideoPlayer
+            InitVideoPlayer();
+            //Set up Timeline
+            InitTimeline();
+
+            //Set the timer interval to 10 miliseconds
+            PlayheadTimer.Interval = 10;
+
+            //Hook up events
+            SubscribeToMarkupEvents();
+
+            //Set the controls to a disabled state with no caption
+            ClearCaption();
 
             //Make CaptionTextBox read only
             this.CaptionTextBox.ReadOnly = true;
         }
 
         /// <summary>
-        /// Constructs and initializes the controller
+        /// Initializes the CaptionView. Everything related to CaptionView initialization should
+        /// go in this method.
         /// </summary>
-        private void InitController()
+        private void InitCaptionView()
         {
-            //Construct Controller
-            EngineController();
-
-            //Hook Up Controller Events
-            VideoPlayed += new EventHandler(this.Controller_VideoPlayed);
-            VideoPaused += new EventHandler(this.Controller_VideoPaused);
-
-            InitControls();
+            CaptionView.InitColumns();  //Set up columns
+            CaptionView.SpeakerSet = SpeakerSet;
+            CaptionView.CaptionSource = CaptionList;
         }
 
         /// <summary>
-        /// Constucts and initializes the MarkupController
+        /// Initializes the VideoPlayer. Everything related to VideoPlayer initialization should
+        /// go in this method.
         /// </summary>
-        private void InitMarkupController()
+        private void InitVideoPlayer()
         {
-            //Hook up events
-            SubscribeToEvents();
+            //This method can not be called in the EngineView constructor, so we will call it here.
+            EngineView.LoadMovie(0, Paths.EditorEngine);
+        }
 
-            //Set the controls to a disabled state with no caption
-            ClearCaption();
+        /// <summary>
+        /// Initializes the Timeline. Everything related to Timeline initialization should
+        /// go in this method.
+        /// </summary>
+        private void InitTimeline()
+        {
+            Timeline.SpeakerSet = SpeakerSet;
+            Timeline.CaptionList = CaptionList;
         }
         #endregion Constructor and Init Methods
 

@@ -23,11 +23,11 @@ namespace EnACT
         public EditorCaption SelectedCaption { set; get; }
         #endregion Fields and Properties
 
-        #region Constructor and Init Methods
+        #region SubScribeToMarkupEvents
         /// <summary>
         /// Hooks up events for controls associated with this controller.
         /// </summary>
-        public void SubscribeToEvents()
+        public void SubscribeToMarkupEvents()
         {
             CaptionTextBox.NothingSelected += new EventHandler(this.CaptionTextBox_NothingSelected);
             CaptionTextBox.CaptionWordSelected += new EventHandler<CaptionWordSelectedEventArgs>
@@ -35,7 +35,7 @@ namespace EnACT
             CaptionTextBox.MultipleCaptionWordsSelected += new EventHandler
                 (this.CaptionTextBox_MultipleCaptionWordsSelected);
         }
-        #endregion Constructor and Init Methods
+        #endregion SubScribeToMarkupEvents
 
         #region Load Caption
         /// <summary>

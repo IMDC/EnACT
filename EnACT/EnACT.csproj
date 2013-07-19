@@ -85,7 +85,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Core\EditorCaptionWord.cs" />
-    <Compile Include="Controllers\EngineController.cs">
+    <Compile Include="Forms\MainFormEngineInteraction.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Core\Emotion.cs" />
@@ -244,6 +244,9 @@
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
