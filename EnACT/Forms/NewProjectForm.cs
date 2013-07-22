@@ -105,7 +105,7 @@ namespace EnACT
 
             if (String.IsNullOrWhiteSpace(TextBox_VideoPath.Text))
             {
-                MessageBox.Show("You must enter a valid path to a Video file.", "Error!");
+                MessageBox.Show("You must enter a path to a Video file.", "Error!");
                 return;
             }
 
@@ -117,7 +117,7 @@ namespace EnACT
 
             if (String.IsNullOrWhiteSpace(Textbox_ProjectPath.Text))
             {
-                MessageBox.Show("You must enter a valid path for the project folder.", "Error!");
+                MessageBox.Show("You must enter a path for the project folder.", "Error!");
                 return;
             }
 
@@ -140,18 +140,47 @@ namespace EnACT
                 {
                     MessageBox.Show("Error trying to read in script file. " + ProjectInfo.ProjectPath +
                         " has an invalid file extension.", "Error: " + ProjectInfo.ScriptPath);
+                    return;
                 }
                 catch (Exception)
                 {
                     MessageBox.Show("Error trying to read in script file. File is either corrupted or not named with" +
                         "the correct file extension.", "Error: " + ProjectInfo.ScriptPath);
+                    return;
                 }
             }
 
-            //Get full absolute directory
-            string fullpath = Path.Combine(ProjectInfo.ProjectPath, ProjectInfo.Name);
-            //Create Directory
-            Directory.CreateDirectory(fullpath);
+            //Attempt to create project directory
+            try
+            {
+                //Get full absolute directory
+                string fullpath = Path.Combine(ProjectInfo.ProjectPath, ProjectInfo.Name);
+                //Create Directory
+                Directory.CreateDirectory(fullpath);
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Error: IOException encountered while attempting to create project directory.",
+                    "Error Creating Directory");
+                return;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("Error: Program does not have required permissions to create project directory.",
+                    "Error Creating Directory");
+                return;
+            }
+            catch (ArgumentException)
+            {
+                MessageBox.Show("Error: Project path is not a valid path.", "Error Creating Directory");
+                return;
+            }
+            catch (NotSupportedException)
+            {
+                MessageBox.Show("Error: Path contains a colon character (:) that is not part of a drive label "
+                    + "('C:\\').", "Error Creating Directory");
+                return;
+            }
 
             //Fire event and close form
             OnProjectCreated(new ProjectCreatedEventArgs(ProjectInfo));
