@@ -1,4 +1,6 @@
-﻿namespace EnACT
+﻿using System;
+using System.Collections.Generic;
+namespace EnACT
 {
     /// <summary>
     /// Contains all the settings, values and options related to an EnACT editor proejct
@@ -6,6 +8,21 @@
     public class ProjectInfo
     {
         #region Fields and Properties
+        /// <summary>
+        /// A set of Speaker objects, each speaker being mapped to by its name
+        /// </summary>
+        public Dictionary<String, Speaker> SpeakerSet { set; get; }
+
+        /// <summary>
+        /// A list of captions retrieved from a transcript file.
+        /// </summary>
+        public List<EditorCaption> CaptionList { set; get; }
+
+        /// <summary>
+        /// The object that represents the EnACT engine xml settings file
+        /// </summary>
+        public SettingsXML Settings { set; get; }
+
         /// <summary>
         /// A bool that represents whether or not the user has supplied an existing script to base
         /// the captions off of.
@@ -70,6 +87,11 @@
             this.UseExistingScript = useExistingScript;
             this.VideoPath = videoPath;
             this.ProjectPath = projectPath;
+
+            //Construct Core data structures
+            this.SpeakerSet  = Utilities.ConstructSpeakerSet();
+            this.CaptionList = Utilities.ConstructCaptionList();
+            this.Settings    = Utilities.ConstructSettingsXML();
         }
         #endregion Constructor
     }
