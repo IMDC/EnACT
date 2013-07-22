@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace EnACT
 {
@@ -15,9 +16,9 @@ namespace EnACT
         /// </summary>
         public static class FileExtensions
         {
-            public const string Esr = "esr";
-            public const string Srt = "srt";
-            public const string Txt = "txt";
+            public const string Esr = ".esr";
+            public const string Srt = ".srt";
+            public const string Txt = ".txt";
         }
         #endregion Constants
 
@@ -52,9 +53,8 @@ namespace EnACT
         /// <param name="path">The absolute path to the script file.</param>
         public void Parse(string path)
         {
-            string extension = GetFileExtension(path);
-
-            //Console.WriteLine("Extension: {0}", extension);
+            //Get lowercase version of the extention
+            string extension = Path.GetExtension(path).ToLower();
 
             switch (extension)
             {
@@ -64,20 +64,6 @@ namespace EnACT
                 default: throw new FormatException(String.Format("Extension \"{}\" is not a valid extension.",
                     extension));
             }
-        }
-
-        /// <summary>
-        /// Gets the file extension of a file given a path or filename.
-        /// </summary>
-        /// <param name="file">An absolute or relative path to a filename.</param>
-        /// <returns>The extenstion of the given file.</returns>
-        public static string GetFileExtension(string file)
-        {
-            //Separate path into parts
-            string [] parts = file.Split('.');
-
-            //Return the last part, which should be the extension of the file.
-            return parts[parts.Length - 1];
         }
         #endregion Parse
 
