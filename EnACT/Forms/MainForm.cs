@@ -39,16 +39,9 @@ namespace EnACT
         {
             InitializeComponent();
 
-            //Construct the speakerset with a comparator that ignores case
-            this.SpeakerSet = new Dictionary<string, Speaker>(StringComparer.OrdinalIgnoreCase);
-
-            //Add the default speaker to the set of speakers
-            this.SpeakerSet[Speaker.Default.Name] = Speaker.Default;
-            //Add the Description Speaker to the set of speakers
-            this.SpeakerSet[Speaker.Description.Name] = Speaker.Description;
-
-            this.CaptionList = new List<EditorCaption>();
-            this.Settings = new SettingsXML();
+            this.SpeakerSet = Utilities.ConstructSpeakerSet();
+            this.CaptionList = Utilities.ConstructCaptionList();
+            this.Settings = Utilities.ConstructSettingsXML();
 
             //Hook Up Controller Events
             VideoPlayed += new EventHandler(this.Controller_VideoPlayed);

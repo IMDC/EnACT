@@ -65,5 +65,45 @@ namespace EnACT
             g.DrawPath(outLinePen, gp);
         }
         #endregion
+
+        #region Construct Methods
+        /// <summary>
+        /// Constructs a SpeakerSet with customized paramaters. Use this instead of a regular constructor to construct
+        /// speaker sets.
+        /// </summary>
+        /// <returns>A Dictionary meant to be used as a SpeakerSet.</returns>
+        public static Dictionary<string, Speaker> ConstructSpeakerSet()
+        {
+            //Construct the speakerset with a comparator that ignores case
+            Dictionary<string, Speaker> speakerSet = new Dictionary<string, Speaker>(StringComparer.OrdinalIgnoreCase);
+
+            //Add the default speaker to the set of speakers
+            speakerSet[Speaker.Default.Name] = Speaker.Default;
+            //Add the Description Speaker to the set of speakers
+            speakerSet[Speaker.Description.Name] = Speaker.Description;
+
+            return speakerSet;
+        }
+
+        /// <summary>
+        /// Constructs a CaptionList with customized parameters. Use this instead of a regular constructor to construct
+        /// CaptionLists.
+        /// </summary>
+        /// <returns>A List meant to be used as a CaptionList</returns>
+        public static List<EditorCaption> ConstructCaptionList()
+        {
+            return new List<EditorCaption>();
+        }
+
+        /// <summary>
+        /// Constructs a SettingsXML with customized parameters. Use this instead of a regular constructor to construct
+        /// SettingsXMLs.
+        /// </summary>
+        /// <returns>A XML settings file.</returns>
+        public static SettingsXML ConstructSettingsXML()
+        {
+            return new SettingsXML();
+        }
+        #endregion
     }
 }
