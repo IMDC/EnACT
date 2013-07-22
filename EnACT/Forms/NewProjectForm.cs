@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace EnACT
@@ -128,8 +129,32 @@ namespace EnACT
                 ProjectInfo = new ProjectInfo(Textbox_ProjectName.Text, TextBox_ScriptPath.Text,
                     TextBox_VideoPath.Text, Textbox_ProjectPath.Text);
 
-            OnProjectCreated(new ProjectCreatedEventArgs(ProjectInfo));
+            if (ProjectInfo.UseExistingScript)
+            {
+                try //Attempt to parse file.
+                {
+                    TextParser t = new TextParser(ProjectInfo.SpeakerSet, ProjectInfo.CaptionList);
+                    t.Parse(ProjectInfo.ScriptPath);
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Error trying to read in script file. " + ProjectInfo.ProjectPath +
+                        " has an invalid file extension.", "Error: " + ProjectInfo.ScriptPath);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error trying to read in script file. File is either corrupted or not named with" +
+                        "the correct file extension.", "Error: " + ProjectInfo.ScriptPath);
+                }
+            }
 
+            //Get full absolute directory
+            string fullpath = Path.Combine(ProjectInfo.ProjectPath, ProjectInfo.Name);
+            //Create Directory
+            Directory.CreateDirectory(fullpath);
+
+            //Fire event and close form
+            OnProjectCreated(new ProjectCreatedEventArgs(ProjectInfo));
             this.Close();
         }
 

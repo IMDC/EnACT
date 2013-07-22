@@ -508,44 +508,6 @@ namespace EnACT
         private void NewProjectForm_ProjectCreated(object sender, ProjectCreatedEventArgs e)
         {
             ProjectInfo = e.ProjectInfo;
-
-            if (ProjectInfo.UseExistingScript)
-            {
-                try //Attempt to parse file.
-                {
-                    TextParser t = new TextParser(SpeakerSet, CaptionList);
-                    t.Parse(ProjectInfo.ScriptPath);
-                    CaptionView.UpdateView();
-                }
-                catch (FormatException)
-                {
-                    MessageBox.Show("Error trying to read in script file. " + ProjectInfo.ProjectPath + 
-                        " has an invalid file extension.", "Error: " + ProjectInfo.ScriptPath);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Error trying to read in script file. File is either corrupted or not named with" +
-                        "the correct file extension.", "Error: " + ProjectInfo.ScriptPath);
-                }
-            }
-
-            //Check to make sure Path is absolute
-            if (!Path.IsPathRooted(ProjectInfo.ProjectPath))
-            {
-                MessageBox.Show("Error: Path to Directory must be absolute.", "Error");
-                return;
-            }
-            //Check that Project Path already exists
-            if (!Directory.Exists(ProjectInfo.ProjectPath))
-            {
-                MessageBox.Show("Error: Path to Directory is not valid.", "Error!");
-                return;
-            }
-
-            //Get full absolute directory
-            string fullpath = Path.Combine(ProjectInfo.ProjectPath, ProjectInfo.Name);
-            //Create Directory
-            Directory.CreateDirectory(fullpath);
         }
         #endregion
     }//Class
