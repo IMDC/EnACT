@@ -11,20 +11,59 @@ namespace EnACT
     {
         #region Fields and Properties
         /// <summary>
+        /// Backing field for ProjectInfo.
+        /// </summary>
+        private ProjectInfo bkProjectInfo;
+        /// <summary>
         /// Contains Information about the current EnACT Project
         /// </summary>
-        private ProjectInfo ProjectInfo { set; get; }
+        private ProjectInfo ProjectInfo 
+        {
+            get { return bkProjectInfo; }
+            set
+            {
+                this.bkProjectInfo = value;
+                this.SpeakerSet = value.SpeakerSet;
+                this.CaptionList = value.CaptionList;
+                this.Settings = value.Settings;
+            }
+        }
 
+        /// <summary>
+        /// Backing field for SpeakerSet.
+        /// </summary>
+        private Dictionary<String, Speaker> bkSpeakerSet;
         /// <summary>
         /// A set of Speaker objects, each speaker being mapped to by its name
         /// </summary>
-        public Dictionary<String, Speaker> SpeakerSet { set; get; }
+        public Dictionary<String, Speaker> SpeakerSet
+        {
+            get { return bkSpeakerSet; }
+            set
+            {
+                this.bkSpeakerSet = value;
+                Timeline.SpeakerSet = value;
+                CaptionView.SpeakerSet = value;
+            }
+        }
 
+        /// <summary>
+        /// Backing field for CaptionList.
+        /// </summary>
+        private List<EditorCaption> bkCaptionList;
         /// <summary>
         /// A list of captions retrieved from a transcript file.
         /// </summary>
-        public List<EditorCaption> CaptionList { set; get; }
-
+        public List<EditorCaption> CaptionList
+        {
+            get { return bkCaptionList; }
+            set
+            {
+                this.bkCaptionList = value;
+                Timeline.CaptionList = value;
+                CaptionView.CaptionSource = value;
+            }
+        }
         /// <summary>
         /// The object that represents the EnACT engine xml settings file
         /// </summary>
@@ -507,6 +546,7 @@ namespace EnACT
         /// <param name="e">Event Args</param>
         private void NewProjectForm_ProjectCreated(object sender, ProjectCreatedEventArgs e)
         {
+            //Set ProjectInfo and core data references to the new project's data.
             ProjectInfo = e.ProjectInfo;
         }
         #endregion
