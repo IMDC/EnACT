@@ -153,10 +153,7 @@ namespace EnACT
             //Attempt to create project directory
             try
             {
-                //Get full absolute directory
-                string fullpath = Path.Combine(ProjectInfo.DirectoryPath, ProjectInfo.Name);
-                //Create Directory
-                Directory.CreateDirectory(fullpath);
+                Directory.CreateDirectory(ProjectInfo.DirectoryPath);
             }
             catch (IOException)
             {
