@@ -138,7 +138,7 @@ namespace EnACT
                 }
                 catch (FormatException)
                 {
-                    MessageBox.Show("Error trying to read in script file. " + ProjectInfo.ProjectPath +
+                    MessageBox.Show("Error trying to read in script file. " + ProjectInfo.DirectoryPath +
                         " has an invalid file extension.", "Error: " + ProjectInfo.ScriptPath);
                     return;
                 }
@@ -154,7 +154,7 @@ namespace EnACT
             try
             {
                 //Get full absolute directory
-                string fullpath = Path.Combine(ProjectInfo.ProjectPath, ProjectInfo.Name);
+                string fullpath = Path.Combine(ProjectInfo.DirectoryPath, ProjectInfo.Name);
                 //Create Directory
                 Directory.CreateDirectory(fullpath);
             }

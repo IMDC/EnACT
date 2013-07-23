@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 namespace EnACT
 {
     /// <summary>
@@ -45,18 +46,18 @@ namespace EnACT
         public string VideoPath { set; get; }
 
         /// <summary>
-        /// The path of this project on the computer.
+        /// The path of this project directory on the computer.
         /// </summary>
-        public string ProjectPath { set; get; }
+        public string DirectoryPath { set; get; }
         #endregion Fields and Properties
 
         #region Constructor
         /// <summary>
         /// Constructs a Project WITHOUT a given script path.
         /// </summary>
-        /// <param name="name">Name of the project.</param>
+        /// <param name="name">Name of the project and directory.</param>
         /// <param name="videoPath">The path of the video supplied by the user.</param>
-        /// <param name="projectPath">The path of this project on the computer.</param>
+        /// <param name="projectPath">The path that the project directory will be placed in.</param>
         public ProjectInfo(string name, string videoPath, string projectPath)
             : this(name: name, scriptPath: null, useExistingScript: false, videoPath: videoPath,
             projectPath: projectPath) { }
@@ -64,10 +65,10 @@ namespace EnACT
         /// <summary>
         /// Constructs a Project WITH a given script path.
         /// </summary>
-        /// <param name="name">Name of the project.</param>
+        /// <param name="name">Name of the project and directory.</param>
         /// <param name="scriptPath">Path of the script to use.</param>
         /// <param name="videoPath">The path of the video supplied by the user.</param>
-        /// <param name="projectPath">The path of this project on the computer.</param>
+        /// <param name="projectPath">The path that the project directory will be placed in.</param>
         public ProjectInfo(string name, string scriptPath, string videoPath, string projectPath)
             : this(name: name, scriptPath: scriptPath, useExistingScript: true, videoPath: videoPath,
             projectPath: projectPath) { }
@@ -75,18 +76,18 @@ namespace EnACT
         /// <summary>
         /// Constructs a Project with the specified parameters.
         /// </summary>
-        /// <param name="name">Name of the project.</param>
+        /// <param name="name">Name of the project and directory.</param>
         /// <param name="scriptPath">Path of the script to use.</param>
         /// <param name="useExistingScript">Whether or not a script has been supplied</param>
         /// <param name="videoPath">The path of the video supplied by the user.</param>
-        /// <param name="projectPath">The path of this project on the computer.</param>
+        /// <param name="projectPath">The path that the project directory will be placed in.</param>
         private ProjectInfo(string name, string scriptPath, bool useExistingScript, string videoPath, string projectPath)
         {
             this.Name = name;
             this.ScriptPath = scriptPath;
             this.UseExistingScript = useExistingScript;
             this.VideoPath = videoPath;
-            this.ProjectPath = projectPath;
+            this.DirectoryPath = Path.Combine(projectPath, name);
 
             //Construct Core data structures
             this.SpeakerSet  = Utilities.ConstructSpeakerSet();
