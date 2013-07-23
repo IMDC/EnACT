@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Xml;
 
@@ -11,6 +12,7 @@ namespace EnACT
     /// </summary>
     public class EnactXMLWriter
     {
+        #region Fields, Properties and Constructors
         //Path Variables
         public String SpeakersPath { set; get; }
         public String CaptionsPath { set; get; }
@@ -54,7 +56,9 @@ namespace EnACT
             this.SettingsPath = SettingsPath;
             this.Settings = Settings;
         }
+        #endregion
 
+        #region WriteAll
         /// <summary>
         /// Calls the WriteSpeakers, WriteCaptions, and WriteSettings methods in that specific order
         /// </summary>
@@ -65,7 +69,9 @@ namespace EnACT
             WriteSettings();
             Console.WriteLine("XML Files written");
         }
+        #endregion
 
+        #region WriteSpeakers
         /// <summary>
         /// Writes the object referenced by SpeakerSet to an XML file at the path given by Speakerspath
         /// </summary>
@@ -127,7 +133,9 @@ namespace EnACT
                 w.WriteEndDocument();
             }
         }
+        #endregion
 
+        #region WriteCaptions
         /// <summary>
         /// Writes the object referenced by CaptionsList to an XML file at the path given by Captionspath
         /// </summary>
@@ -187,7 +195,9 @@ namespace EnACT
                 w.WriteEndDocument();
             }
         }
+        #endregion
 
+        #region WriteSettings
         /// <summary>
         /// Writes the object referenced by Settings to an XML file at the path given by Settingsspath
         /// </summary>
@@ -481,5 +491,55 @@ namespace EnACT
                 w.WriteEndDocument();
             }
         }
-    }
-}
+        #endregion
+
+        public static void WriteProject(ProjectInfo project)
+        {
+            using (XmlTextWriter w = new XmlTextWriter(Path.Combine(project.DirectoryPath, project.Name + ".xml"), 
+                Encoding.UTF8))
+            {
+                //Set formatting so that the file will use newlines and 4-spaced indents
+                w.Formatting = Formatting.Indented;
+                w.IndentChar = '\t';
+                w.Indentation = 1;
+
+                w.WriteStartDocument();
+                w.WriteStartElement("project");
+                {
+                    w.WriteStartElement("name");
+                    {
+                        w.WriteString(project.Name);
+                    }
+                    w.WriteEndElement();
+
+                    w.WriteStartElement("video");
+                    {
+                        w.WriteString(project.VideoPath);
+                    }
+                    w.WriteEndElement();
+
+                    w.WriteStartElement("settings");
+                    {
+                        w.WriteString("settings.xml");
+                    }
+                    w.WriteEndElement();
+
+                    w.WriteStartElement("speakers");
+                    {
+                        w.WriteString("speakers.xml");
+                    }
+                    w.WriteEndElement();
+
+                    w.WriteStartElement("dialogues");
+                    {
+                        w.WriteString("dialogues.xml");
+                    }
+                    w.WriteEndElement();
+                }
+                w.WriteEndElement();
+
+                w.WriteEndDocument();
+            }
+        }
+    }//Class
+}//Namespace

@@ -550,5 +550,10 @@ namespace EnACT
             ProjectInfo = e.ProjectInfo;
         }
         #endregion
+
+        private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EnactXMLWriter.WriteProject(ProjectInfo);
+        }
     }//Class
 }//Namespace
