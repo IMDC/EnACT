@@ -183,7 +183,7 @@
             // 
             // ScriptFileDialog
             // 
-            this.ScriptFileDialog.Filter = "Script Files| *.esr;*.srt;*.txt |All Files|*.*";
+            this.ScriptFileDialog.Filter = "Script Files| *.esr;*.srt;*.txt; |All Files|*.*";
             // 
             // VideoFileDialog
             // 
