@@ -10,78 +10,22 @@ namespace EnACT
     /// Contains all the methods required for writing an EnACT project to
     /// XML files.
     /// </summary>
-    public class EnactXMLWriter
+    public static class EnactXMLWriter
     {
-        #region Fields, Properties and Constructors
-        //Path Variables
-        public String SpeakersPath { set; get; }
-        public String CaptionsPath { set; get; }
-        public String SettingsPath { set; get; }
-
-        //Object reference variables
-        public Dictionary<String, Speaker> SpeakerSet { set; get; }
-        public List<EditorCaption> CaptionList { set; get; }
-        public SettingsXML Settings { set; get; }
-
-        /// <summary>
-        /// Constructs an EnactXMLWriter object with references to the objects that need to be written.
-        /// The paths to write to are set to a default value.
-        /// </summary>
-        /// <param name="SpeakerSet">A reference to the SpeakerSet object that is to be written</param>
-        /// <param name="CaptionList">A reference to the CaptionList object that is to be written</param>
-        /// <param name="Settings">A reference to the Settings object that is to be written</param>
-        public EnactXMLWriter(Dictionary<String, Speaker> SpeakerSet, List<EditorCaption> CaptionList, 
-            SettingsXML Settings) :
-            this(Paths.DefaultSpeakers, SpeakerSet, 
-                 Paths.DefaultDialogues, CaptionList, 
-                 Paths.DefaultSettings,  Settings) {}
-
-        /// <summary>
-        /// Constructs an EnactXMLWriter object with object references to the objects that need to be written
-        /// as well as the paths that need to be written to.
-        /// </summary>
-        /// <param name="SpeakersPath">The path that speakers.xml is to be written to</param>
-        /// <param name="SpeakerSet">A reference to the SpeakerSet object that is to be written</param>
-        /// <param name="CaptionsPath">The path that dialogues.xml is to be written to</param>
-        /// <param name="CaptionList">A reference to the CaptionList object that is to be written</param>
-        /// <param name="SettingsPath">The path that Settings.xml is to be written to</param>
-        /// <param name="Settings">A reference to the Settings object that is to be written</param>
-        public EnactXMLWriter(String SpeakersPath, Dictionary<String, Speaker> SpeakerSet, String CaptionsPath, 
-            List<EditorCaption> CaptionList, String SettingsPath, SettingsXML Settings)
-        {
-            this.SpeakersPath = SpeakersPath;
-            this.SpeakerSet = SpeakerSet;
-            this.CaptionsPath = CaptionsPath;
-            this.CaptionList = CaptionList;
-            this.SettingsPath = SettingsPath;
-            this.Settings = Settings;
-        }
-        #endregion
-
-        #region WriteAll
-        /// <summary>
-        /// Calls the WriteSpeakers, WriteCaptions, and WriteSettings methods in that specific order
-        /// </summary>
-        public void WriteAll()
-        {
-            WriteSpeakers();
-            WriteCaptions();
-            WriteSettings();
-            Console.WriteLine("XML Files written");
-        }
-        #endregion
-
         #region WriteSpeakers
         /// <summary>
         /// Writes the object referenced by SpeakerSet to an XML file at the path given by Speakerspath
         /// </summary>
-        public void WriteSpeakers()
+        /// <param name="speakerSet">The SpeakersSet object to write to a file.</param>
+        /// <param name="speakersPath">The full path (file name and extension included) to write 
+        /// the SpeakersSet object to.</param>
+        public static void WriteSpeakers(Dictionary<String, Speaker> speakerSet, string speakersPath)
         {
             //NOTE: XmlTextWriter does not require curly braces between writeStartElement and 
             //writeCloseElement. It is put there to easily see what belongs to what node.
 
             //Return if nothing to write
-            if (SpeakerSet.Count == 0)
+            if (speakerSet.Count == 0)
             {
                 //TODO throw error?
                 Console.WriteLine("Error: SpeakersList is empty");
@@ -89,7 +33,7 @@ namespace EnACT
             }
 
             //speakers.xml
-            using (XmlTextWriter w = new XmlTextWriter(SpeakersPath, Encoding.UTF8))
+            using (XmlTextWriter w = new XmlTextWriter(speakersPath, Encoding.UTF8))
             {
                 //Set formatting so that the file will use newlines and 4-spaced indents
                 w.Formatting = Formatting.Indented;
@@ -101,7 +45,7 @@ namespace EnACT
                 w.WriteDocType("speakers", null, "../speakers.dtd", null);
                 w.WriteStartElement("speakers");
                 {
-                    foreach (Speaker s in SpeakerSet.Values)
+                    foreach (Speaker s in speakerSet.Values)
                     {
                         w.WriteStartElement("speaker");
                         {
@@ -139,13 +83,16 @@ namespace EnACT
         /// <summary>
         /// Writes the object referenced by CaptionsList to an XML file at the path given by Captionspath
         /// </summary>
-        public void WriteCaptions()
+        /// <param name="captionList">The List of Caption objects to write to a file.</param>
+        /// <param name="captionsPath">The full path (file name and extension included) to write 
+        /// the CaptionList to.</param>
+        public static void WriteCaptions(List<EditorCaption> captionList, string captionsPath)
         {
             //NOTE: XmlTextWriter does not require curly braces between writeStartElement and 
             //writeCloseElement. It is put there to easily see what belongs to what node.
 
             //Return if nothing to write
-            if (CaptionList.Count == 0)
+            if (captionList.Count == 0)
             {
                 //TODO throw error?
                 Console.WriteLine("Error: CaptionList is empty");
@@ -153,7 +100,7 @@ namespace EnACT
             }
 
             //dialogues.xml
-            using (XmlTextWriter w = new XmlTextWriter(CaptionsPath, Encoding.UTF8))
+            using (XmlTextWriter w = new XmlTextWriter(captionsPath, Encoding.UTF8))
             {
                 //Set formatting so that the file will use newlines and 4-spaced indents
                 w.Formatting = Formatting.Indented;
@@ -165,7 +112,7 @@ namespace EnACT
                 w.WriteDocType("captions", null, "../captions.dtd", null);
                 w.WriteStartElement("captions");
                 {
-                    foreach (EditorCaption c in CaptionList)
+                    foreach (EditorCaption c in captionList)
                     {
                         w.WriteStartElement("caption");
                         {
@@ -201,13 +148,16 @@ namespace EnACT
         /// <summary>
         /// Writes the object referenced by Settings to an XML file at the path given by Settingsspath
         /// </summary>
-        public void WriteSettings()
+        /// <param name="settings">The Settings object to write to a Text File.</param>
+        /// <param name="settingsPath">The full path (file name and extension included) to write 
+        /// the Settings object to.</param>
+        public static void WriteSettings(SettingsXML settings, string settingsPath)
         {
             //NOTE: XmlTextWriter does not require curly braces between writeStartElement and 
             //writeCloseElement. It is put there to easily see what belongs to what node.
 
             //Settings.xml
-            using (XmlTextWriter w = new XmlTextWriter(SettingsPath, Encoding.UTF8))
+            using (XmlTextWriter w = new XmlTextWriter(settingsPath, Encoding.UTF8))
             {
                 //Set formatting so that the file will use newlines and 4-spaced indents
                 w.Formatting = Formatting.Indented;
@@ -228,37 +178,37 @@ namespace EnACT
                     w.WriteStartElement("meta");
                     {
                         w.WriteAttributeString("name", "word-spacing");
-                        w.WriteAttributeString("content", Settings.Spacing);
+                        w.WriteAttributeString("content", settings.Spacing);
                     }
                     w.WriteEndElement();
 
                     w.WriteStartElement("meta");
                     {
                         w.WriteAttributeString("name", "separate-emotion-words");
-                        w.WriteAttributeString("content", Settings.SeparateEmotionWords);
+                        w.WriteAttributeString("content", settings.SeparateEmotionWords);
                     }
                     w.WriteEndElement();
 
                     w.WriteStartElement("playback");
                     {
-                        w.WriteAttributeString("autoPlay", Convert.ToString(Settings.Playback.AutoPlay).ToLower());
-                        w.WriteAttributeString("autoRewind", Convert.ToString(Settings.Playback.AutoRewind).ToLower());
-                        w.WriteAttributeString("seek", Settings.Playback.Seek);
-                        w.WriteAttributeString("autoSize", Convert.ToString(Settings.Playback.AutoSize).ToLower());
-                        w.WriteAttributeString("scale", Convert.ToString(Settings.Playback.Scale));
-                        w.WriteAttributeString("volume", Convert.ToString(Settings.Playback.Volume));
-                        w.WriteAttributeString("showCaptions", Convert.ToString(Settings.Playback.ShowCaptions)
+                        w.WriteAttributeString("autoPlay", Convert.ToString(settings.Playback.AutoPlay).ToLower());
+                        w.WriteAttributeString("autoRewind", Convert.ToString(settings.Playback.AutoRewind).ToLower());
+                        w.WriteAttributeString("seek", settings.Playback.Seek);
+                        w.WriteAttributeString("autoSize", Convert.ToString(settings.Playback.AutoSize).ToLower());
+                        w.WriteAttributeString("scale", Convert.ToString(settings.Playback.Scale));
+                        w.WriteAttributeString("volume", Convert.ToString(settings.Playback.Volume));
+                        w.WriteAttributeString("showCaptions", Convert.ToString(settings.Playback.ShowCaptions)
                             .ToLower());
                     }
                     w.WriteEndElement();
 
                     w.WriteStartElement("skin");
                     {
-                        w.WriteAttributeString("src", Settings.Skin.Source);
-                        w.WriteAttributeString("skinAutoHide", Convert.ToString(Settings.Skin.AutoHide).ToLower());
-                        w.WriteAttributeString("skinFadeTime", Convert.ToString(Settings.Skin.FadeTime));
-                        w.WriteAttributeString("skinBackgroundAlpha", Convert.ToString(Settings.Skin.BackGroundAlpha));
-                        w.WriteAttributeString("skinBackgroundColour", Settings.Skin.BackgroundColour);
+                        w.WriteAttributeString("src", settings.Skin.Source);
+                        w.WriteAttributeString("skinAutoHide", Convert.ToString(settings.Skin.AutoHide).ToLower());
+                        w.WriteAttributeString("skinFadeTime", Convert.ToString(settings.Skin.FadeTime));
+                        w.WriteAttributeString("skinBackgroundAlpha", Convert.ToString(settings.Skin.BackGroundAlpha));
+                        w.WriteAttributeString("skinBackgroundColour", settings.Skin.BackgroundColour);
                     }
                     w.WriteEndElement();
 
@@ -266,19 +216,19 @@ namespace EnACT
                     {
                         w.WriteStartElement("speakers");
                         {
-                            w.WriteAttributeString("src", Settings.SpeakersSource);
+                            w.WriteAttributeString("src", settings.SpeakersSource);
                         }
                         w.WriteEndElement();
 
                         w.WriteStartElement("captions");
                         {
-                            w.WriteAttributeString("src", Settings.CaptionsSource);
+                            w.WriteAttributeString("src", settings.CaptionsSource);
                         }
                         w.WriteEndElement();
 
                         w.WriteStartElement("video");
                         {
-                            w.WriteAttributeString("src", Settings.VideoSource);
+                            w.WriteAttributeString("src", settings.VideoSource);
                         }
                         w.WriteEndElement();
                     }
@@ -291,49 +241,49 @@ namespace EnACT
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "fps");
-                                w.WriteAttributeString("value", Settings.Happy.Fps);
+                                w.WriteAttributeString("value", settings.Happy.Fps);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "dur");
-                                w.WriteAttributeString("value", Settings.Happy.Duration);
+                                w.WriteAttributeString("value", settings.Happy.Duration);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "alphaBegin");
-                                w.WriteAttributeString("value", Settings.Happy.AlphaBegin);
+                                w.WriteAttributeString("value", settings.Happy.AlphaBegin);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "alphaFinish");
-                                w.WriteAttributeString("value", Settings.Happy.AlphaFinish);
+                                w.WriteAttributeString("value", settings.Happy.AlphaFinish);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "scaleBegin");
-                                w.WriteAttributeString("value", Settings.Happy.ScaleBegin);
+                                w.WriteAttributeString("value", settings.Happy.ScaleBegin);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "scaleFinish");
-                                w.WriteAttributeString("value", Settings.Happy.ScaleFinish);
+                                w.WriteAttributeString("value", settings.Happy.ScaleFinish);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "yFinish");
-                                w.WriteAttributeString("value", Settings.Happy.YFinish);
+                                w.WriteAttributeString("value", settings.Happy.YFinish);
                             }
                             w.WriteEndElement();
                         }
@@ -344,49 +294,49 @@ namespace EnACT
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "fps");
-                                w.WriteAttributeString("value", Settings.Sad.Fps);
+                                w.WriteAttributeString("value", settings.Sad.Fps);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "dur");
-                                w.WriteAttributeString("value", Settings.Sad.Duration);
+                                w.WriteAttributeString("value", settings.Sad.Duration);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "alphaBegin");
-                                w.WriteAttributeString("value", Settings.Sad.AlphaBegin);
+                                w.WriteAttributeString("value", settings.Sad.AlphaBegin);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "alphaFinish");
-                                w.WriteAttributeString("value", Settings.Sad.AlphaFinish);
+                                w.WriteAttributeString("value", settings.Sad.AlphaFinish);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "scaleBegin");
-                                w.WriteAttributeString("value", Settings.Sad.ScaleBegin);
+                                w.WriteAttributeString("value", settings.Sad.ScaleBegin);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "scaleFinish");
-                                w.WriteAttributeString("value", Settings.Sad.ScaleFinish);
+                                w.WriteAttributeString("value", settings.Sad.ScaleFinish);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "yFinish");
-                                w.WriteAttributeString("value", Settings.Sad.YFinish);
+                                w.WriteAttributeString("value", settings.Sad.YFinish);
                             }
                             w.WriteEndElement();
                         }
@@ -397,42 +347,42 @@ namespace EnACT
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "fps");
-                                w.WriteAttributeString("value", Settings.Fear.Fps);
+                                w.WriteAttributeString("value", settings.Fear.Fps);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "dur");
-                                w.WriteAttributeString("value", Settings.Fear.Duration);
+                                w.WriteAttributeString("value", settings.Fear.Duration);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "scaleBegin");
-                                w.WriteAttributeString("value", Settings.Fear.ScaleBegin);
+                                w.WriteAttributeString("value", settings.Fear.ScaleBegin);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "scaleFinish");
-                                w.WriteAttributeString("value", Settings.Fear.ScaleFinish);
+                                w.WriteAttributeString("value", settings.Fear.ScaleFinish);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "vibrateX");
-                                w.WriteAttributeString("value", Settings.Fear.VibrateX);
+                                w.WriteAttributeString("value", settings.Fear.VibrateX);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "vibrateY");
-                                w.WriteAttributeString("value", Settings.Fear.VibrateY);
+                                w.WriteAttributeString("value", settings.Fear.VibrateY);
                             }
                             w.WriteEndElement();
                         }
@@ -443,42 +393,42 @@ namespace EnACT
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "fps");
-                                w.WriteAttributeString("value", Settings.Anger.Fps);
+                                w.WriteAttributeString("value", settings.Anger.Fps);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "dur");
-                                w.WriteAttributeString("value", Settings.Anger.Duration);
+                                w.WriteAttributeString("value", settings.Anger.Duration);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "scaleBegin");
-                                w.WriteAttributeString("value", Settings.Anger.ScaleBegin);
+                                w.WriteAttributeString("value", settings.Anger.ScaleBegin);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "scaleFinish");
-                                w.WriteAttributeString("value", Settings.Anger.ScaleFinish);
+                                w.WriteAttributeString("value", settings.Anger.ScaleFinish);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "vibrateX");
-                                w.WriteAttributeString("value", Settings.Anger.VibrateX);
+                                w.WriteAttributeString("value", settings.Anger.VibrateX);
                             }
                             w.WriteEndElement();
 
                             w.WriteStartElement("param");
                             {
                                 w.WriteAttributeString("name", "vibrateY");
-                                w.WriteAttributeString("value", Settings.Anger.VibrateY);
+                                w.WriteAttributeString("value", settings.Anger.VibrateY);
                             }
                             w.WriteEndElement();
                         }
@@ -493,6 +443,12 @@ namespace EnACT
         }
         #endregion
 
+        #region WriteProject
+        /// <summary>
+        /// Writes a Project object to a file. The location and name of the file is set as 
+        /// DirectoryPath/Name.xml
+        /// </summary>
+        /// <param name="project">The Project object to write.</param>
         public static void WriteProject(ProjectInfo project)
         {
             using (XmlTextWriter w = new XmlTextWriter(Path.Combine(project.DirectoryPath, project.Name + ".xml"), 
@@ -541,5 +497,6 @@ namespace EnACT
                 w.WriteEndDocument();
             }
         }
+        #endregion
     }//Class
 }//Namespace

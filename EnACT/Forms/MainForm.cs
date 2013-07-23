@@ -202,11 +202,9 @@ namespace EnACT
             t.ParseSRTFile(@SRTPath);
             CaptionView.UpdateView();
 
-            EnactXMLWriter w = new EnactXMLWriter(
-                OutFolderPath + @"\speakers.xml", SpeakerSet,
-                OutFolderPath + @"\dialogues.xml", CaptionList,
-                OutFolderPath + @"\Settings.xml", Settings);
-            w.WriteAll();
+            EnactXMLWriter.WriteCaptions(CaptionList, OutFolderPath + @"\dialogues.xml");
+            EnactXMLWriter.WriteSpeakers(SpeakerSet, OutFolderPath + @"\speakers.xml");
+            EnactXMLWriter.WriteSettings(Settings, OutFolderPath + @"\Settings.xml");
         }
         #endregion Jorge
 
@@ -271,8 +269,9 @@ namespace EnACT
 
         private void writeXMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EnactXMLWriter w = new EnactXMLWriter(SpeakerSet, CaptionList, Settings);
-            w.WriteAll();
+            EnactXMLWriter.WriteCaptions(CaptionList, Path.Combine(ProjectInfo.DirectoryPath, "dialogues.xml"));
+            EnactXMLWriter.WriteSpeakers(SpeakerSet, Path.Combine(ProjectInfo.DirectoryPath, "speakers.xml"));
+            EnactXMLWriter.WriteSettings(Settings, Path.Combine(ProjectInfo.DirectoryPath, "Settings.xml"));
         }
 
         private void jorgeButtonToolStripMenuItem_Click(object sender, EventArgs e)
@@ -551,6 +550,9 @@ namespace EnACT
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EnactXMLWriter.WriteProject(ProjectInfo);
+            EnactXMLWriter.WriteCaptions(CaptionList, Path.Combine(ProjectInfo.DirectoryPath, "dialogues.xml"));
+            EnactXMLWriter.WriteSpeakers(SpeakerSet, Path.Combine(ProjectInfo.DirectoryPath, "speakers.xml"));
+            EnactXMLWriter.WriteSettings(Settings, Path.Combine(ProjectInfo.DirectoryPath, "Settings.xml"));
         }
     }//Class
 }//Namespace
