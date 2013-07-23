@@ -492,9 +492,6 @@ namespace EnACT
             NewProjectForm newProjectForm = new NewProjectForm();
             newProjectForm.ProjectCreated += this.NewProjectForm_ProjectCreated;
             newProjectForm.ShowDialog();
-
-            //Retrieve project info from form
-            ProjectInfo = newProjectForm.ProjectInfo;
         }
 
         /// <summary>
