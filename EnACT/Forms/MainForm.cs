@@ -198,9 +198,13 @@ namespace EnACT
         #region Jorge
         public void JorgeMethod(String SRTPath, String OutFolderPath)
         {
-            TextParser t = new TextParser(SpeakerSet, CaptionList);
-            t.ParseSRTFile(@SRTPath);
-            CaptionView.UpdateView();
+            var tuple = TextParser.ParseSRTFile(@SRTPath);
+
+            ProjectInfo.CaptionList = tuple.Item1;
+            CaptionList = tuple.Item1;
+
+            ProjectInfo.SpeakerSet = tuple.Item2;
+            SpeakerSet = tuple.Item2;
 
             EnactXMLWriter.WriteCaptions(CaptionList, OutFolderPath + @"\dialogues.xml");
             EnactXMLWriter.WriteSpeakers(SpeakerSet, OutFolderPath + @"\speakers.xml");
@@ -255,16 +259,24 @@ namespace EnACT
         #region Debug Menu Items
         private void parseScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TextParser t = new TextParser(SpeakerSet, CaptionList);
-            t.ParseScriptFile(Paths.TestScript);
-            CaptionView.UpdateView();
+            var tuple = TextParser.ParseScriptFile(Paths.TestScript);
+
+            ProjectInfo.CaptionList = tuple.Item1;
+            CaptionList = tuple.Item1;
+
+            ProjectInfo.SpeakerSet = tuple.Item2;
+            SpeakerSet = tuple.Item2;
         }
 
         private void parseesrToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TextParser t = new TextParser(SpeakerSet, CaptionList);
-            t.ParseESRFile(Paths.TestESR);
-            CaptionView.UpdateView();
+            var tuple = TextParser.ParseESRFile(Paths.TestESR);
+
+            ProjectInfo.CaptionList = tuple.Item1;
+            CaptionList = tuple.Item1;
+
+            ProjectInfo.SpeakerSet = tuple.Item2;
+            SpeakerSet = tuple.Item2;
         }
 
         private void writeXMLToolStripMenuItem_Click(object sender, EventArgs e)
