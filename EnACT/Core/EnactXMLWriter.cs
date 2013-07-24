@@ -476,7 +476,7 @@ namespace EnACT
 
                     w.WriteStartElement("settings");
                     {
-                        w.WriteString("settings.xml");
+                        w.WriteString("Settings.xml");
                     }
                     w.WriteEndElement();
 
