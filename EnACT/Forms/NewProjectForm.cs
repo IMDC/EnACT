@@ -133,7 +133,7 @@ namespace EnACT
             {
                 try //Attempt to parse file.
                 {
-                    var tuple = TextParser.Parse(ProjectInfo.ScriptPath);
+                    var tuple = ScriptParser.Parse(ProjectInfo.ScriptPath);
                     ProjectInfo.CaptionList = tuple.Item1;
                     ProjectInfo.SpeakerSet = tuple.Item2;
                 }

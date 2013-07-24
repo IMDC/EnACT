@@ -198,7 +198,7 @@ namespace EnACT
         #region Jorge
         public void JorgeMethod(String SRTPath, String OutFolderPath)
         {
-            var tuple = TextParser.ParseSRTFile(@SRTPath);
+            var tuple = ScriptParser.ParseSRTFile(@SRTPath);
 
             ProjectInfo.CaptionList = tuple.Item1;
             CaptionList = tuple.Item1;
@@ -259,7 +259,7 @@ namespace EnACT
         #region Debug Menu Items
         private void parseScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var tuple = TextParser.ParseScriptFile(Paths.TestScript);
+            var tuple = ScriptParser.ParseScriptFile(Paths.TestScript);
 
             ProjectInfo.CaptionList = tuple.Item1;
             CaptionList = tuple.Item1;
@@ -270,7 +270,7 @@ namespace EnACT
 
         private void parseesrToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var tuple = TextParser.ParseESRFile(Paths.TestESR);
+            var tuple = ScriptParser.ParseESRFile(Paths.TestESR);
 
             ProjectInfo.CaptionList = tuple.Item1;
             CaptionList = tuple.Item1;

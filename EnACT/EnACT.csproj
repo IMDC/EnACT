@@ -183,7 +183,7 @@
     </Compile>
     <Compile Include="Core\SettingsXML.cs" />
     <Compile Include="Core\Speaker.cs" />
-    <Compile Include="Core\TextParser.cs" />
+    <Compile Include="Core\ScriptParser.cs" />
     <Compile Include="Controls\Timeline.cs">
       <SubType>UserControl</SubType>
     </Compile>

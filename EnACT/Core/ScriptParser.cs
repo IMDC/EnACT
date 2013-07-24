@@ -8,7 +8,7 @@ namespace EnACT
     /// <summary>
     /// Contains all methods and fields related to reading in and parsing text.
     /// </summary>
-    public static class TextParser
+    public static class ScriptParser
     {
         #region Constants
         /// <summary>
