@@ -13,7 +13,7 @@ namespace EnACT
     /// </summary>
     public static class XMLReader
     {
-        #region
+        #region ParseProject
         /// <summary>
         /// Reads in and parses an enact Project file.
         /// </summary>
@@ -66,6 +66,12 @@ namespace EnACT
         }
         #endregion
 
+        #region ParseSettings
+        /// <summary>
+        /// Reads in a settings xml file and creates a SettingsXML object out of it.
+        /// </summary>
+        /// <param name="path">The full path to the xml file.</param>
+        /// <returns>The SettingsXML object contained in the file.</returns>
         public static SettingsXML ParseSettings(string path)
         {
             SettingsXML settings = Utilities.ConstructSettingsXML();
@@ -80,17 +86,14 @@ namespace EnACT
                     r.ReadStartElement("meta");
                     r.GetAttribute("name");
                     settings.Base = r.GetAttribute("content");
-                    //r.ReadEndElement();
 
                     r.ReadStartElement("meta");
                     r.GetAttribute("name");
                     settings.Spacing = r.GetAttribute("content");
-                    //r.ReadEndElement();
 
                     r.ReadStartElement("meta");
                     r.GetAttribute("name");
                     settings.SeparateEmotionWords = r.GetAttribute("content");
-                    //r.ReadEndElement();
 
                     r.ReadStartElement("playback");
                     settings.Playback.AutoPlay = Convert.ToBoolean(r.GetAttribute("autoPlay"));
@@ -100,7 +103,6 @@ namespace EnACT
                     settings.Playback.Scale = Convert.ToInt32(r.GetAttribute("scale"));
                     settings.Playback.Volume = Convert.ToInt32(r.GetAttribute("volume"));
                     settings.Playback.ShowCaptions = Convert.ToBoolean(r.GetAttribute("showCaptions"));
-                    //r.ReadEndElement();
 
                     r.ReadStartElement("skin");
                     settings.Skin.Source = r.GetAttribute("src");
@@ -108,25 +110,21 @@ namespace EnACT
                     settings.Skin.FadeTime = Convert.ToInt32(r.GetAttribute("skinFadeTime"));
                     settings.Skin.BackGroundAlpha = Convert.ToInt32(r.GetAttribute("skinBackgroundAlpha"));
                     settings.Skin.BackgroundColour = r.GetAttribute("skinBackgroundColor");
-                    //r.ReadEndElement();
 
                     r.ReadStartElement("content");
                     {
                         r.ReadStartElement("speakers");
                         settings.SpeakersSource = r.GetAttribute("src");
-                        //r.ReadEndElement();
 
                         r.ReadStartElement("captions");
                         settings.CaptionsSource = r.GetAttribute("src");
-                        //r.ReadEndElement();
 
                         r.ReadStartElement("video");
                         settings.VideoSource = r.GetAttribute("src");
-                        //r.ReadEndElement();
                     }
                     r.ReadEndElement();
 
-                    //These can be left alone for now as the values should stay as the default.
+                    //These can be left alone for now as the values should stay as the default for now.
                     r.ReadStartElement("emotions");
                     {
                         r.ReadStartElement("happy");
@@ -174,5 +172,6 @@ namespace EnACT
 
             return settings;
         }
+        #endregion
     }//Class
 }//Namepace
