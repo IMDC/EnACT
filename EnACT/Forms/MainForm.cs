@@ -505,12 +505,27 @@ namespace EnACT
             newProjectForm.ShowDialog();
         }
 
+        private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenProjectDialog.ShowDialog();
+            ProjectInfo = XMLReader.ParseProject(OpenProjectDialog.FileName);
+        }
+
+        private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EnactXMLWriter.WriteProject(ProjectInfo);
+            EnactXMLWriter.WriteCaptions(CaptionList, Path.Combine(ProjectInfo.DirectoryPath, "dialogues.xml"));
+            EnactXMLWriter.WriteSpeakers(SpeakerSet, Path.Combine(ProjectInfo.DirectoryPath, "speakers.xml"));
+            EnactXMLWriter.WriteSettings(Settings, Path.Combine(ProjectInfo.DirectoryPath, "Settings.xml"));
+        }
+
         /// <summary>
         /// Exits EnACT and closes all applications.
         /// </summary>
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) { Application.Exit(); }
+        #endregion
 
         /// <summary>
         /// Opens the about box.
@@ -522,7 +537,6 @@ namespace EnACT
             AboutBox about = new AboutBox();
             about.ShowDialog();
         }
-        #endregion File Menu Item Click Handlers
 
         #region Project Menu Item Click Handlers
         /// <summary>
@@ -558,13 +572,5 @@ namespace EnACT
             ProjectInfo = e.ProjectInfo;
         }
         #endregion
-
-        private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            EnactXMLWriter.WriteProject(ProjectInfo);
-            EnactXMLWriter.WriteCaptions(CaptionList, Path.Combine(ProjectInfo.DirectoryPath, "dialogues.xml"));
-            EnactXMLWriter.WriteSpeakers(SpeakerSet, Path.Combine(ProjectInfo.DirectoryPath, "speakers.xml"));
-            EnactXMLWriter.WriteSettings(Settings, Path.Combine(ProjectInfo.DirectoryPath, "Settings.xml"));
-        }
     }//Class
 }//Namespace
