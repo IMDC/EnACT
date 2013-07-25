@@ -498,5 +498,171 @@ namespace EnACT
             }
         }
         #endregion
+
+        #region WriteUnified
+        /// <summary>
+        /// Writes a unified engine XML file containing the settings, speakers and captions for the
+        /// engine.
+        /// </summary>
+        /// <param name="project">The project that contains the information to write.</param>
+        /// <param name="path">The path (including name and extension) to write the file to.</param>
+        public static void WriteEngineXML(ProjectInfo project, string path)
+        { WriteEngineXML(project.SpeakerSet, project.CaptionList, project.Settings, path); }
+
+        /// <summary>
+        /// Writes a unified engine XML file containing the settings, speakers and captions for the
+        /// engine.
+        /// </summary>
+        /// <param name="speakerSet">The speakers to write to file.</param>
+        /// <param name="captionList">The Caption list to write to file.</param>
+        /// <param name="settings">The SettingsXML object to write to file.</param>
+        /// <param name="path">The path (including name and extension) to write the file to.</param>
+        public static void WriteEngineXML(Dictionary<String, Speaker> speakerSet, 
+            List<EditorCaption> captionList, SettingsXML settings, string path)
+        {
+            using (XmlTextWriter w = new XmlTextWriter(path, Encoding.UTF8))
+            {
+                //Set formatting so that the file will use newlines and 4-spaced indents
+                w.Formatting = Formatting.Indented;
+                w.IndentChar = ' ';
+                w.Indentation = 4;
+
+                //Start Document
+                w.WriteStartDocument();
+
+                w.WriteStartElement(XMLElements.Enact);
+                {
+                    w.WriteStartElement(XMLElements.Settings);
+                    {
+                        w.WriteStartElement(XMLElements.Meta);
+                        w.WriteAttributeString(XMLAttributes.Base, settings.Base);
+                        w.WriteAttributeString(XMLAttributes.WordSpacing, settings.Spacing);
+                        w.WriteAttributeString(XMLAttributes.SeparateEmotionWords, settings.SeparateEmotionWords);
+                        w.WriteEndElement();
+
+                        w.WriteStartElement(XMLElements.Playback);
+                        w.WriteAttributeString(XMLAttributes.AutoPlay, settings.Playback.AutoPlay.ToLowerString());
+                        w.WriteAttributeString(XMLAttributes.AutoRewind, settings.Playback.AutoRewind.ToLowerString());
+                        w.WriteAttributeString(XMLAttributes.Seek, settings.Playback.Seek);
+                        w.WriteAttributeString(XMLAttributes.AutoSize, settings.Playback.AutoSize.ToLowerString());
+                        w.WriteAttributeString(XMLAttributes.Scale, settings.Playback.Scale.ToString());
+                        w.WriteAttributeString(XMLAttributes.Volume, settings.Playback.Volume.ToString());
+                        w.WriteAttributeString(XMLAttributes.ShowCaptions, 
+                            settings.Playback.ShowCaptions.ToLowerString());
+                        w.WriteEndElement();
+
+                        w.WriteStartElement(XMLElements.Skin);
+                        w.WriteAttributeString(XMLAttributes.Source, settings.Skin.Source);
+                        w.WriteAttributeString(XMLAttributes.AutoHide, settings.Skin.AutoHide.ToLowerString());
+                        w.WriteAttributeString(XMLAttributes.FadeTime, settings.Skin.FadeTime.ToString());
+                        w.WriteAttributeString(XMLAttributes.BackgroundAlpha, settings.Skin.BackGroundAlpha.ToString());
+                        w.WriteAttributeString(XMLAttributes.BackgroundColour, settings.Skin.BackgroundColour);
+                        w.WriteEndElement();
+
+                        w.WriteStartElement(XMLElements.Video);
+                        w.WriteAttributeString(XMLAttributes.Source, settings.VideoSource);
+                        w.WriteEndElement();
+
+                        w.WriteStartElement(XMLElements.Emotions);
+                        {
+                            w.WriteStartElement(XMLElements.Happy);
+                            w.WriteAttributeString(XMLAttributes.FPS, settings.Happy.Fps);
+                            w.WriteAttributeString(XMLAttributes.Duration, settings.Happy.Duration);
+                            w.WriteAttributeString(XMLAttributes.AlphaBegin, settings.Happy.AlphaBegin);
+                            w.WriteAttributeString(XMLAttributes.AlphaFinish, settings.Happy.AlphaFinish);
+                            w.WriteAttributeString(XMLAttributes.ScaleBegin, settings.Happy.ScaleFinish);
+                            w.WriteAttributeString(XMLAttributes.YFinish, settings.Happy.YFinish);
+                            w.WriteEndElement();
+
+                            w.WriteStartElement(XMLElements.Sad);
+                            w.WriteAttributeString(XMLAttributes.FPS, settings.Sad.Fps);
+                            w.WriteAttributeString(XMLAttributes.Duration, settings.Sad.Duration);
+                            w.WriteAttributeString(XMLAttributes.AlphaBegin, settings.Sad.AlphaBegin);
+                            w.WriteAttributeString(XMLAttributes.AlphaFinish, settings.Sad.AlphaFinish);
+                            w.WriteAttributeString(XMLAttributes.ScaleBegin, settings.Sad.ScaleFinish);
+                            w.WriteAttributeString(XMLAttributes.YFinish, settings.Sad.YFinish);
+                            w.WriteEndElement();
+
+                            w.WriteStartElement(XMLElements.Fear);
+                            w.WriteAttributeString(XMLAttributes.FPS, settings.Fear.Fps);
+                            w.WriteAttributeString(XMLAttributes.Duration, settings.Fear.Duration);
+                            w.WriteAttributeString(XMLAttributes.ScaleBegin, settings.Fear.ScaleBegin);
+                            w.WriteAttributeString(XMLAttributes.ScaleFinish, settings.Fear.ScaleFinish);
+                            w.WriteAttributeString(XMLAttributes.VibrateX, settings.Fear.VibrateX);
+                            w.WriteAttributeString(XMLAttributes.VibrateY, settings.Fear.VibrateY);
+                            w.WriteEndElement();
+
+                            w.WriteStartElement(XMLElements.Anger);
+                            w.WriteAttributeString(XMLAttributes.FPS, settings.Anger.Fps);
+                            w.WriteAttributeString(XMLAttributes.Duration, settings.Anger.Duration);
+                            w.WriteAttributeString(XMLAttributes.ScaleBegin, settings.Anger.ScaleBegin);
+                            w.WriteAttributeString(XMLAttributes.ScaleFinish, settings.Anger.ScaleFinish);
+                            w.WriteAttributeString(XMLAttributes.VibrateX, settings.Anger.VibrateX);
+                            w.WriteAttributeString(XMLAttributes.VibrateY, settings.Anger.VibrateY);
+                            w.WriteEndElement();
+                        }
+                        w.WriteEndElement();//Emotions
+                    }
+                    w.WriteEndElement();//Settings
+
+                    w.WriteStartElement(XMLElements.Speakers);
+                    {
+                        foreach (Speaker s in speakerSet.Values)
+                        {
+                            w.WriteStartElement(XMLElements.Speaker);
+                            {
+                                w.WriteAttributeString(XMLAttributes.Name, s.Name);
+
+                                w.WriteStartElement(XMLElements.Background);
+                                w.WriteAttributeString(XMLAttributes.Visible, s.BG.Visible.ToLowerString());
+                                w.WriteAttributeString(XMLAttributes.Alpha, s.BG.Alpha.ToString());
+                                w.WriteAttributeString(XMLAttributes.Colour, s.BG.Colour.ToString());
+                                w.WriteEndElement();
+
+                                w.WriteStartElement(XMLElements.Font);
+                                w.WriteAttributeString(XMLAttributes.Name, s.Font.Family);
+                                w.WriteAttributeString(XMLAttributes.Size, s.Font.Size.ToString());
+                                w.WriteAttributeString(XMLAttributes.Colour, s.Font.Colour);
+                                w.WriteAttributeString(XMLAttributes.Bold, s.Font.Bold.ToString());
+                                w.WriteEndElement();
+                            }
+                            w.WriteEndElement();//Speaker
+                        }
+                    }
+                    w.WriteEndElement();//Speakers
+
+                    w.WriteStartElement(XMLElements.Captions);
+                    {
+                        foreach (EditorCaption c in captionList)
+                        {
+                            w.WriteStartElement(XMLElements.Caption);
+                            {
+                                w.WriteAttributeString(XMLAttributes.Begin, c.Begin);
+                                w.WriteAttributeString(XMLAttributes.End, c.End);
+                                w.WriteAttributeString(XMLAttributes.Speaker, c.Speaker.Name);
+                                w.WriteAttributeString(XMLAttributes.Location, c.Location.GetHashCode().ToString());
+                                w.WriteAttributeString(XMLAttributes.Align, c.Alignment.GetHashCode().ToString());
+
+                                foreach (EditorCaptionWord cw in c.Words)
+                                {
+                                    w.WriteStartElement(XMLElements.Word);
+                                    w.WriteAttributeString(XMLAttributes.Emotion, cw.Emotion.GetHashCode().ToString());
+                                    w.WriteAttributeString(XMLAttributes.Intensity, 
+                                        cw.Intensity.GetHashCode().ToString());
+                                    w.WriteString(cw.Text);
+                                    w.WriteEndElement();
+                                }
+                            }
+                            w.WriteEndElement();//Caption
+                        }
+                    }
+                    w.WriteEndElement();//Captions
+                }
+                w.WriteEndElement();//Enact
+
+                w.WriteEndDocument();
+            }
+        }
+        #endregion
     }//Class
 }//Namespace

@@ -517,6 +517,7 @@ namespace EnACT
             EnactXMLWriter.WriteCaptions(CaptionList, Path.Combine(ProjectInfo.DirectoryPath, "dialogues.xml"));
             EnactXMLWriter.WriteSpeakers(SpeakerSet, Path.Combine(ProjectInfo.DirectoryPath, "speakers.xml"));
             EnactXMLWriter.WriteSettings(Settings, Path.Combine(ProjectInfo.DirectoryPath, "Settings.xml"));
+            EnactXMLWriter.WriteEngineXML(ProjectInfo, Path.Combine(ProjectInfo.DirectoryPath, "Engine.xml"));
         }
 
         /// <summary>

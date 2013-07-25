@@ -134,6 +134,7 @@
     <Compile Include="Controls\PlayheadLabel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Core\XMLStrings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\CaptionView.resx">

@@ -105,5 +105,18 @@ namespace EnACT
             return new SettingsXML();
         }
         #endregion
+
+        #region Bool ToLowerString
+        /// <summary>
+        /// Converts a boolean value to the lower-case string version of itself - either "true" or
+        /// "false".
+        /// </summary>
+        /// <param name="b">The boolean to convert to string.</param>
+        /// <returns>Either "true" or "false".</returns>
+        public static string ToLowerString(this bool b)
+        {
+            return b.ToString().ToLower();
+        }
+        #endregion
     }
 }

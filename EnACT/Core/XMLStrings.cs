@@ -27,7 +27,7 @@ namespace EnACT
         public const string Background = "background";
         public const string Font       = "font";
         public const string Captions   = "captions";
-        public const string Caption    = "capttion";
+        public const string Caption    = "caption";
         public const string Word       = "word";
     }
 
