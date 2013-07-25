@@ -463,27 +463,19 @@ namespace EnACT
                 w.WriteStartElement("project");
                 {
                     w.WriteStartElement("name");
-                    {
-                        w.WriteString(project.Name);
-                    }
+                    w.WriteString(project.Name); 
                     w.WriteEndElement();
 
                     w.WriteStartElement("video");
-                    {
-                        w.WriteString(project.VideoPath);
-                    }
+                    w.WriteString(project.VideoPath);
                     w.WriteEndElement();
 
                     w.WriteStartElement("settings");
-                    {
-                        w.WriteString("Settings.xml");
-                    }
+                    w.WriteString("Settings.xml");
                     w.WriteEndElement();
 
                     w.WriteStartElement("speakers");
-                    {
-                        w.WriteString("speakers.xml");
-                    }
+                    w.WriteString("speakers.xml");
                     w.WriteEndElement();
 
                     w.WriteStartElement("dialogues");
