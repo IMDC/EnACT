@@ -451,8 +451,8 @@ namespace EnACT
         /// <param name="project">The Project object to write.</param>
         public static void WriteProject(ProjectInfo project)
         {
-            using (XmlTextWriter w = new XmlTextWriter(Path.Combine(project.DirectoryPath, project.Name + ".xml"), 
-                Encoding.UTF8))
+            using (XmlTextWriter w = new XmlTextWriter(Path.Combine(project.DirectoryPath, 
+                project.Name + ProjectInfo.ProjectExtension), Encoding.UTF8))
             {
                 //Set formatting so that the file will use newlines and 4-spaced indents
                 w.Formatting = Formatting.Indented;
@@ -487,9 +487,7 @@ namespace EnACT
                     w.WriteEndElement();
 
                     w.WriteStartElement("dialogues");
-                    {
-                        w.WriteString("dialogues.xml");
-                    }
+                    w.WriteString("dialogues.xml");
                     w.WriteEndElement();
                 }
                 w.WriteEndElement();

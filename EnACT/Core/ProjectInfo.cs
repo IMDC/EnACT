@@ -8,6 +8,18 @@ namespace EnACT
     /// </summary>
     public class ProjectInfo
     {
+        #region Constants
+        /// <summary>
+        /// The extension for project files.
+        /// </summary>
+        public const string ProjectExtension = ".enproj";
+
+        /// <summary>
+        /// The extension for Engine XML files.
+        /// </summary>
+        public const string EngineXMLExtension = ".enact";
+        #endregion
+
         #region Fields and Properties
         /// <summary>
         /// A set of Speaker objects, each speaker being mapped to by its name

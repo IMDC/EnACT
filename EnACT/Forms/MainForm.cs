@@ -514,10 +514,8 @@ namespace EnACT
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EnactXMLWriter.WriteProject(ProjectInfo);
-            EnactXMLWriter.WriteCaptions(CaptionList, Path.Combine(ProjectInfo.DirectoryPath, "dialogues.xml"));
-            EnactXMLWriter.WriteSpeakers(SpeakerSet, Path.Combine(ProjectInfo.DirectoryPath, "speakers.xml"));
-            EnactXMLWriter.WriteSettings(Settings, Path.Combine(ProjectInfo.DirectoryPath, "Settings.xml"));
-            EnactXMLWriter.WriteEngineXML(ProjectInfo, Path.Combine(ProjectInfo.DirectoryPath, "Engine.xml"));
+            EnactXMLWriter.WriteEngineXML(ProjectInfo, Path.Combine(ProjectInfo.DirectoryPath, 
+                "engine" + ProjectInfo.EngineXMLExtension));
         }
 
         /// <summary>
