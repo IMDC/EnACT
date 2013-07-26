@@ -195,134 +195,128 @@ namespace EnACT
                 //Ignore dtd as there is no need to validate it.
                 r.DtdProcessing = DtdProcessing.Ignore;
 
-                r.ReadStartElement(XMLElements.Enact);
+                while(r.Read())
                 {
-                    r.ReadStartElement(XMLElements.Settings);
+                    //Look for start elements only.
+                    if (!r.IsStartElement())
+                        continue;
+                        
+                    // Get element name and switch on it.
+                    switch (r.Name)
                     {
-                        r.ReadStartElement(XMLElements.Meta);
-                        settings.Base = r[XMLAttributes.Base];
-                        settings.Spacing = r[XMLAttributes.WordSpacing];
-                        settings.SeparateEmotionWords = r[XMLAttributes.SeparateEmotionWords];
+                        case XMLElements.Enact: break;
+                        case XMLElements.Settings:
+                            r.Read(); //Go to next node
+                            r.ReadStartElement(XMLElements.Meta);
+                            settings.Base = r[XMLAttributes.Base];
+                            settings.Spacing = r[XMLAttributes.WordSpacing];
+                            settings.SeparateEmotionWords = r[XMLAttributes.SeparateEmotionWords];
 
-                        r.ReadStartElement(XMLElements.Playback);
-                        settings.Playback.AutoPlay = Convert.ToBoolean(r[XMLAttributes.AutoPlay]);
-                        settings.Playback.AutoRewind = Convert.ToBoolean(r[XMLAttributes.AutoRewind]);
-                        settings.Playback.Seek = r[XMLAttributes.Seek];
-                        settings.Playback.AutoSize = Convert.ToBoolean(r[XMLAttributes.AutoSize]);
-                        settings.Playback.Scale = Convert.ToInt32(r[XMLAttributes.Scale]);
-                        settings.Playback.Volume = Convert.ToInt32(r[XMLAttributes.Volume]);
-                        settings.Playback.ShowCaptions = Convert.ToBoolean(r[XMLAttributes.ShowCaptions]);
+                            r.ReadStartElement(XMLElements.Playback);
+                            settings.Playback.AutoPlay = Convert.ToBoolean(r[XMLAttributes.AutoPlay]);
+                            settings.Playback.AutoRewind = Convert.ToBoolean(r[XMLAttributes.AutoRewind]);
+                            settings.Playback.Seek = r[XMLAttributes.Seek];
+                            settings.Playback.AutoSize = Convert.ToBoolean(r[XMLAttributes.AutoSize]);
+                            settings.Playback.Scale = Convert.ToInt32(r[XMLAttributes.Scale]);
+                            settings.Playback.Volume = Convert.ToInt32(r[XMLAttributes.Volume]);
+                            settings.Playback.ShowCaptions = Convert.ToBoolean(r[XMLAttributes.ShowCaptions]);
 
-                        r.ReadStartElement(XMLElements.Skin);
-                        settings.Skin.Source = r[XMLAttributes.Source];
-                        settings.Skin.AutoHide = Convert.ToBoolean(r[XMLAttributes.AutoHide]);
-                        settings.Skin.FadeTime = Convert.ToInt32(r[XMLAttributes.FadeTime]);
-                        settings.Skin.BackGroundAlpha = Convert.ToInt32(r[XMLAttributes.BackgroundAlpha]);
-                        settings.Skin.BackgroundColour = r[XMLAttributes.BackgroundColour];
+                            r.ReadStartElement(XMLElements.Skin);
+                            settings.Skin.Source = r[XMLAttributes.Source];
+                            settings.Skin.AutoHide = Convert.ToBoolean(r[XMLAttributes.AutoHide]);
+                            settings.Skin.FadeTime = Convert.ToInt32(r[XMLAttributes.FadeTime]);
+                            settings.Skin.BackGroundAlpha = Convert.ToInt32(r[XMLAttributes.BackgroundAlpha]);
+                            settings.Skin.BackgroundColour = r[XMLAttributes.BackgroundColour];
 
-                        r.ReadStartElement(XMLElements.Video);
-                        settings.VideoSource = r[XMLAttributes.Source];
+                            r.ReadStartElement(XMLElements.Video);
+                            settings.VideoSource = r[XMLAttributes.Source];
 
-                        r.ReadStartElement(XMLElements.Emotions);
-                        {
-                            r.ReadStartElement(XMLElements.Happy);
-                            settings.Happy.Fps = r[XMLAttributes.FPS];
-                            settings.Happy.Duration = r[XMLAttributes.Duration];
-                            settings.Happy.AlphaBegin = r[XMLAttributes.AlphaBegin];
-                            settings.Happy.AlphaFinish = r[XMLAttributes.AlphaFinish];
-                            settings.Happy.ScaleBegin = r[XMLAttributes.ScaleBegin];
-                            settings.Happy.ScaleFinish = r[XMLAttributes.ScaleFinish];
-                            settings.Happy.YFinish = r[XMLAttributes.YFinish];
+                            r.ReadStartElement(XMLElements.Emotions);
+                                r.ReadStartElement(XMLElements.Happy);
+                                settings.Happy.Fps = r[XMLAttributes.FPS];
+                                settings.Happy.Duration = r[XMLAttributes.Duration];
+                                settings.Happy.AlphaBegin = r[XMLAttributes.AlphaBegin];
+                                settings.Happy.AlphaFinish = r[XMLAttributes.AlphaFinish];
+                                settings.Happy.ScaleBegin = r[XMLAttributes.ScaleBegin];
+                                settings.Happy.ScaleFinish = r[XMLAttributes.ScaleFinish];
+                                settings.Happy.YFinish = r[XMLAttributes.YFinish];
 
-                            r.ReadStartElement(XMLElements.Sad);
-                            settings.Sad.Fps = r[XMLAttributes.FPS];
-                            settings.Sad.Duration = r[XMLAttributes.Duration];
-                            settings.Sad.AlphaBegin = r[XMLAttributes.AlphaBegin];
-                            settings.Sad.AlphaFinish = r[XMLAttributes.AlphaFinish];
-                            settings.Sad.ScaleBegin = r[XMLAttributes.ScaleBegin];
-                            settings.Sad.ScaleFinish = r[XMLAttributes.ScaleFinish];
-                            settings.Sad.YFinish = r[XMLAttributes.YFinish];
+                                r.ReadStartElement(XMLElements.Sad);
+                                settings.Sad.Fps = r[XMLAttributes.FPS];
+                                settings.Sad.Duration = r[XMLAttributes.Duration];
+                                settings.Sad.AlphaBegin = r[XMLAttributes.AlphaBegin];
+                                settings.Sad.AlphaFinish = r[XMLAttributes.AlphaFinish];
+                                settings.Sad.ScaleBegin = r[XMLAttributes.ScaleBegin];
+                                settings.Sad.ScaleFinish = r[XMLAttributes.ScaleFinish];
+                                settings.Sad.YFinish = r[XMLAttributes.YFinish];
 
-                            r.ReadStartElement(XMLElements.Fear);
-                            settings.Fear.Fps = r[XMLAttributes.FPS];
-                            settings.Fear.Duration = r[XMLAttributes.Duration];
-                            settings.Fear.ScaleBegin = r[XMLAttributes.ScaleBegin];
-                            settings.Fear.ScaleFinish = r[XMLAttributes.ScaleFinish];
-                            settings.Fear.VibrateX = r[XMLAttributes.VibrateX];
-                            settings.Fear.VibrateY = r[XMLAttributes.VibrateY];
+                                r.ReadStartElement(XMLElements.Fear);
+                                settings.Fear.Fps = r[XMLAttributes.FPS];
+                                settings.Fear.Duration = r[XMLAttributes.Duration];
+                                settings.Fear.ScaleBegin = r[XMLAttributes.ScaleBegin];
+                                settings.Fear.ScaleFinish = r[XMLAttributes.ScaleFinish];
+                                settings.Fear.VibrateX = r[XMLAttributes.VibrateX];
+                                settings.Fear.VibrateY = r[XMLAttributes.VibrateY];
 
-                            r.ReadStartElement(XMLElements.Anger);
-                            settings.Anger.Fps = r[XMLAttributes.FPS];
-                            settings.Anger.Duration = r[XMLAttributes.Duration];
-                            settings.Anger.ScaleBegin = r[XMLAttributes.ScaleBegin];
-                            settings.Anger.ScaleFinish = r[XMLAttributes.ScaleFinish];
-                            settings.Anger.VibrateX = r[XMLAttributes.VibrateX];
-                            settings.Anger.VibrateY = r[XMLAttributes.VibrateY];
-                        }
-                        r.ReadEndElement();//Emotion
-                    }
-                    r.ReadEndElement();//Settings
+                                r.ReadStartElement(XMLElements.Anger);
+                                settings.Anger.Fps = r[XMLAttributes.FPS];
+                                settings.Anger.Duration = r[XMLAttributes.Duration];
+                                settings.Anger.ScaleBegin = r[XMLAttributes.ScaleBegin];
+                                settings.Anger.ScaleFinish = r[XMLAttributes.ScaleFinish];
+                                settings.Anger.VibrateX = r[XMLAttributes.VibrateX];
+                                settings.Anger.VibrateY = r[XMLAttributes.VibrateY];
+                            r.ReadEndElement();//Emotion
+                        r.ReadEndElement();//Settings
+                            break;
+                        case XMLElements.Speakers: break; //Do Nothing
+                        case XMLElements.Speaker:
+                            string name = r[XMLAttributes.Name];
+                            Speaker s = new Speaker(name);
 
+                            r.Read();//Go to next node
 
-                    while(r.Read())
-                    {
-                        //Look for start elements only.
-                        if (r.IsStartElement())
-                        {
-                            // Get element name and switch on it.
-                            switch (r.Name)
-                            {
-                                case XMLElements.Speakers: break; //Do Nothing
-                                case XMLElements.Speaker:
-                                    string name = r[XMLAttributes.Name];
-                                    Speaker s = new Speaker(name);
+                            r.ReadStartElement(XMLElements.Background);
+                            s.BG.Visible = Convert.ToBoolean(r[XMLAttributes.Visible]);
+                            s.BG.Alpha = Convert.ToDouble(r[XMLAttributes.Alpha]);
+                            s.BG.Colour = r[XMLAttributes.Colour];
 
-                                    r.Read();
-
-                                    r.ReadStartElement(XMLElements.Background);
-                                    s.BG.Visible = Convert.ToBoolean(r[XMLAttributes.Visible]);
-                                    s.BG.Alpha = Convert.ToDouble(r[XMLAttributes.Alpha]);
-                                    s.BG.Colour = r[XMLAttributes.Colour];
-
-                                    r.ReadStartElement(XMLElements.Font);
-                                    s.Font.Family = r[XMLAttributes.Name];
-                                    s.Font.Size = Convert.ToInt32(r[XMLAttributes.Size]);
-                                    s.Font.Colour = r[XMLAttributes.Colour];
-                                    s.Font.Bold = Convert.ToInt32(r[XMLAttributes.Bold]);
+                            r.ReadStartElement(XMLElements.Font);
+                            s.Font.Family = r[XMLAttributes.Name];
+                            s.Font.Size = Convert.ToInt32(r[XMLAttributes.Size]);
+                            s.Font.Colour = r[XMLAttributes.Colour];
+                            s.Font.Bold = Convert.ToInt32(r[XMLAttributes.Bold]);
                                     
-                                    //Add to speakerSet
-                                    speakerSet[s.Name] = s;
+                            //Add to speakerSet
+                            speakerSet[s.Name] = s;
+                            break;
+                        case XMLElements.Captions: break; //Do Nothing
+                        case XMLElements.Caption:
+                            EditorCaption c = new EditorCaption();
+                            c.Begin = r[XMLAttributes.Begin];
+                            c.End = r[XMLAttributes.End];
+                            c.Speaker = speakerSet[r[XMLAttributes.Speaker]];
+                            c.Location = (ScreenLocation) Convert.ToInt32(r[XMLAttributes.Location]);
+                            c.Alignment = (Alignment) Convert.ToInt32(r[XMLAttributes.Align]);
+
+                            List<EditorCaptionWord> wordList = new List<EditorCaptionWord>();
+
+                            while (r.Read())
+                            {
+                                //If the Node is an end element, then the reader has parsed
+                                //through all of this caption's words.
+                                if (r.NodeType == XmlNodeType.EndElement)
                                     break;
-                                case XMLElements.Captions: break;
-                                case XMLElements.Caption:
-                                    EditorCaption c = new EditorCaption();
-                                    c.Begin = r[XMLAttributes.Begin];
-                                    c.End = r[XMLAttributes.End];
-                                    c.Speaker = speakerSet[r[XMLAttributes.Speaker]];
-                                    c.Location = (ScreenLocation) Convert.ToInt32(r[XMLAttributes.Location]);
-                                    c.Alignment = (Alignment) Convert.ToInt32(r[XMLAttributes.Align]);
+                                else if (r.IsStartElement())
+                                {
+                                    EditorCaptionWord word = new EditorCaptionWord(text: r.ReadString());
+                                    word.Emotion = (Emotion)Convert.ToInt32(r[XMLAttributes.Emotion]);
+                                    word.Intensity = (Intensity)Convert.ToInt32(r[XMLAttributes.Intensity]);
 
-                                    List<EditorCaptionWord> wordList = new List<EditorCaptionWord>();
-
-                                    while (r.Read())
-                                    {
-                                        //If the Node is an end element, then the reader has parsed
-                                        //through all of this caption's words.
-                                        if (r.NodeType == XmlNodeType.EndElement)
-                                            break;
-                                        else if (r.IsStartElement())
-                                        {
-                                            EditorCaptionWord word = new EditorCaptionWord(text: r.ReadString());
-                                            word.Emotion = (Emotion)Convert.ToInt32(r[XMLAttributes.Emotion]);
-                                            word.Intensity = (Intensity)Convert.ToInt32(r[XMLAttributes.Intensity]);
-
-                                            c.Words.Add(word);
-                                        }
-                                    }
-                                    captionList.Add(c);
-                                    break;
+                                    c.Words.Add(word);
+                                }
                             }
-                        }
+                            captionList.Add(c);
+                            break;
                     }
                 }//Enact
             }
