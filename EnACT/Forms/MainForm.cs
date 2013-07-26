@@ -526,6 +526,7 @@ namespace EnACT
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) { Application.Exit(); }
         #endregion
 
+        #region Help Menu Item Click Handlers
         /// <summary>
         /// Opens the about box.
         /// </summary>
@@ -536,6 +537,7 @@ namespace EnACT
             AboutBox about = new AboutBox();
             about.ShowDialog();
         }
+        #endregion
 
         #region Project Menu Item Click Handlers
         /// <summary>
