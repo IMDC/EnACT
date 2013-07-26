@@ -177,6 +177,13 @@ namespace EnACT
         }
         #endregion
 
+        /// <summary>
+        /// Reads in an engine.xml file and turns it into a CaptionList, SpeakerSet and engine 
+        /// Settings.
+        /// </summary>
+        /// <param name="path">The Path to the engine.xml file.</param>
+        /// <returns>A 3-Tuple containing a CaptionList, a SpeakerSet, and a Settings 
+        /// object in that specific order.</returns>
         public static Tuple<List<EditorCaption>, Dictionary<String, Speaker>, SettingsXML> ParseEngineXML(string path)
         {
             var captionList = new List<EditorCaption>();
@@ -259,7 +266,7 @@ namespace EnACT
 
                     while(r.Read())
                     {
-                        // Only detect start elements.
+                        //Look for start elements only.
                         if (r.IsStartElement())
                         {
                             // Get element name and switch on it.
@@ -287,8 +294,32 @@ namespace EnACT
                                     speakerSet[s.Name] = s;
                                     break;
                                 case XMLElements.Captions: break;
-                                case XMLElements.Caption: 
-                                    //TODO
+                                case XMLElements.Caption:
+                                    EditorCaption c = new EditorCaption();
+                                    c.Begin = r[XMLAttributes.Begin];
+                                    c.End = r[XMLAttributes.End];
+                                    c.Speaker = speakerSet[r[XMLAttributes.Speaker]];
+                                    c.Location = (ScreenLocation) Convert.ToInt32(r[XMLAttributes.Location]);
+                                    c.Alignment = (Alignment) Convert.ToInt32(r[XMLAttributes.Align]);
+
+                                    List<EditorCaptionWord> wordList = new List<EditorCaptionWord>();
+
+                                    while (r.Read())
+                                    {
+                                        //If the Node is an end element, then the reader has parsed
+                                        //through all of this caption's words.
+                                        if (r.NodeType == XmlNodeType.EndElement)
+                                            break;
+                                        else if (r.IsStartElement())
+                                        {
+                                            EditorCaptionWord word = new EditorCaptionWord(text: r.ReadString());
+                                            word.Emotion = (Emotion)Convert.ToInt32(r[XMLAttributes.Emotion]);
+                                            word.Intensity = (Intensity)Convert.ToInt32(r[XMLAttributes.Intensity]);
+
+                                            c.Words.Add(word);
+                                        }
+                                    }
+                                    captionList.Add(c);
                                     break;
                             }
                         }

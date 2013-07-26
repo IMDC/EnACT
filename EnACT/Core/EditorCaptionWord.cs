@@ -42,6 +42,13 @@ namespace EnACT
 
         #region Constructor
         /// <summary>
+        /// Constructs an EditorCaptionWord with a line of text and a begin index of 0. 
+        /// NOTE: BeginIndex should be set after construction.
+        /// </summary>
+        /// <param name="text">The word string to make this EditorCaptionWord represent.</param>
+        public EditorCaptionWord(string text) : this(text, beginIndex: 0) { }
+
+        /// <summary>
         /// Constructs an EditorCaptionWord with the specified parameters, as well as default 
         /// emotion and intensity.
         /// </summary>

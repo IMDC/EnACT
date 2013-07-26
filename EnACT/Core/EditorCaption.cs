@@ -272,10 +272,6 @@ namespace EnACT
             return s.ToString();
         }
         #endregion
-
-        public void AddWord(EditorCaptionWord word)
-        {
-        }
     }
     #endregion
 }
