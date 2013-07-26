@@ -521,9 +521,7 @@ namespace EnACT
                 w.WriteStartDocument();
 
                 w.WriteStartElement(XMLElements.Enact);
-                {
                     w.WriteStartElement(XMLElements.Settings);
-                    {
                         w.WriteStartElement(XMLElements.Meta);
                         w.WriteAttributeString(XMLAttributes.Base, settings.Base);
                         w.WriteAttributeString(XMLAttributes.WordSpacing, settings.Spacing);
@@ -554,7 +552,6 @@ namespace EnACT
                         w.WriteEndElement();
 
                         w.WriteStartElement(XMLElements.Emotions);
-                        {
                             w.WriteStartElement(XMLElements.Happy);
                             w.WriteAttributeString(XMLAttributes.FPS, settings.Happy.Fps);
                             w.WriteAttributeString(XMLAttributes.Duration, settings.Happy.Duration);
@@ -590,13 +587,10 @@ namespace EnACT
                             w.WriteAttributeString(XMLAttributes.VibrateX, settings.Anger.VibrateX);
                             w.WriteAttributeString(XMLAttributes.VibrateY, settings.Anger.VibrateY);
                             w.WriteEndElement();
-                        }
                         w.WriteEndElement();//Emotions
-                    }
                     w.WriteEndElement();//Settings
 
                     w.WriteStartElement(XMLElements.Speakers);
-                    {
                         foreach (Speaker s in speakerSet.Values)
                         {
                             w.WriteStartElement(XMLElements.Speaker);
@@ -618,11 +612,9 @@ namespace EnACT
                             }
                             w.WriteEndElement();//Speaker
                         }
-                    }
                     w.WriteEndElement();//Speakers
 
                     w.WriteStartElement(XMLElements.Captions);
-                    {
                         foreach (EditorCaption c in captionList)
                         {
                             w.WriteStartElement(XMLElements.Caption);
@@ -645,9 +637,7 @@ namespace EnACT
                             }
                             w.WriteEndElement();//Caption
                         }
-                    }
                     w.WriteEndElement();//Captions
-                }
                 w.WriteEndElement();//Enact
 
                 w.WriteEndDocument();
