@@ -809,7 +809,7 @@
             // 
             // OpenProjectDialog
             // 
-            this.OpenProjectDialog.Filter = "XML Files| *.xml; |All Files|*.*";
+            this.OpenProjectDialog.Filter = "EnACT Project Files| *.enproj; |All Files|*.*";
             // 
             // CaptionTextBox
             // 
