@@ -306,18 +306,21 @@ namespace EnACT
                                 //through all of this caption's words.
                                 if (r.NodeType == XmlNodeType.EndElement)
                                     break;
-                                else if (r.IsStartElement())
-                                {
-                                    EditorCaptionWord word = new EditorCaptionWord(text: r.ReadString());
-                                    word.Emotion = (Emotion)Convert.ToInt32(r[XMLAttributes.Emotion]);
-                                    word.Intensity = (Intensity)Convert.ToInt32(r[XMLAttributes.Intensity]);
+                                
+                                r.ReadStartElement(XMLElements.Word);
 
-                                    c.Words.Add(word);
-                                }
+                                //Get word from node and add it to the list
+                                EditorCaptionWord word = new EditorCaptionWord(text: r.ReadString());
+                                word.Emotion = (Emotion)Convert.ToInt32(r[XMLAttributes.Emotion]);
+                                word.Intensity = (Intensity)Convert.ToInt32(r[XMLAttributes.Intensity]);
+                                c.Words.Add(word);
+
+                                r.ReadEndElement(); //Read the end of the word node
                             }
                             c.ReindexWords(); //Set up proper indexes
                             captionList.Add(c);
                             break;
+                        default: throw new ArgumentException("Value '" + r.Name + "' is not a valid node", r.Name);
                     }
                 }//Enact
             }
