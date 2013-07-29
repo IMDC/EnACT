@@ -99,7 +99,7 @@ namespace EnACT
             this.ScriptPath = scriptPath;
             this.UseExistingScript = useExistingScript;
             this.VideoPath = videoPath;
-            this.DirectoryPath = Path.Combine(projectPath, name);
+            this.DirectoryPath = projectPath;
 
             //Construct Core data structures
             this.SpeakerSet  = Utilities.ConstructSpeakerSet();

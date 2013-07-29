@@ -121,13 +121,15 @@ namespace EnACT
                 return;
             }
 
+            string projectPath = Path.Combine(Textbox_ProjectPath.Text, Textbox_ProjectName.Text);
+
             //Generate P based on checkbox state
             if (CheckBox_GenerateScript.Checked)
                 ProjectInfo = new ProjectInfo(Textbox_ProjectName.Text, TextBox_VideoPath.Text,
-                    Textbox_ProjectPath.Text);
+                    projectPath);
             else
                 ProjectInfo = new ProjectInfo(Textbox_ProjectName.Text, TextBox_ScriptPath.Text,
-                    TextBox_VideoPath.Text, Textbox_ProjectPath.Text);
+                    TextBox_VideoPath.Text, projectPath);
 
             if (ProjectInfo.UseExistingScript)
             {
