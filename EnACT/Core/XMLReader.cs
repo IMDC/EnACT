@@ -315,6 +315,7 @@ namespace EnACT
                                     c.Words.Add(word);
                                 }
                             }
+                            c.ReindexWords(); //Set up proper indexes
                             captionList.Add(c);
                             break;
                     }

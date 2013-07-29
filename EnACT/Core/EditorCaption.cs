@@ -272,6 +272,22 @@ namespace EnACT
             return s.ToString();
         }
         #endregion
+
+        #region ReindexWords
+        /// <summary>
+        /// Resets the indexes to what their proper position would be in a sentence.
+        /// </summary>
+        public void ReindexWords()
+        {
+            int currentIndex = 0;
+
+            foreach (EditorCaptionWord cw in Words)
+            {
+                cw.BeginIndex = currentIndex;
+                currentIndex += cw.Length + SpaceWidth;
+            }
+        }
+        #endregion
     }
     #endregion
 }
