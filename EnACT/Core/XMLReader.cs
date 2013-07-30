@@ -190,10 +190,12 @@ namespace EnACT
             var speakerSet = new Dictionary<String, Speaker>();
             var settings = new SettingsXML();
 
-            using (XmlTextReader r = new XmlTextReader(path))
+            XmlReaderSettings readerSettings = new XmlReaderSettings();
+            readerSettings.IgnoreWhitespace = true;
+            readerSettings.IgnoreComments = true;
+
+            using (XmlReader r = XmlReader.Create(path, readerSettings))
             {
-                //Ignore dtd as there is no need to validate it.
-                r.DtdProcessing = DtdProcessing.Ignore;
 
                 while(r.Read())
                 {
@@ -206,13 +208,15 @@ namespace EnACT
                     {
                         case XMLElements.Enact: break;
                         case XMLElements.Settings:
-                            r.Read(); //Go to next node
-                            r.ReadStartElement(XMLElements.Meta);
+
+                            r.Read(); 
+                            AssertNode(r, XMLElements.Meta);
                             settings.Base = r[XMLAttributes.Base];
                             settings.Spacing = r[XMLAttributes.WordSpacing];
                             settings.SeparateEmotionWords = r[XMLAttributes.SeparateEmotionWords];
 
-                            r.ReadStartElement(XMLElements.Playback);
+                            r.Read();
+                            AssertNode(r, XMLElements.Playback);
                             settings.Playback.AutoPlay = Convert.ToBoolean(r[XMLAttributes.AutoPlay]);
                             settings.Playback.AutoRewind = Convert.ToBoolean(r[XMLAttributes.AutoRewind]);
                             settings.Playback.Seek = r[XMLAttributes.Seek];
@@ -221,18 +225,22 @@ namespace EnACT
                             settings.Playback.Volume = Convert.ToInt32(r[XMLAttributes.Volume]);
                             settings.Playback.ShowCaptions = Convert.ToBoolean(r[XMLAttributes.ShowCaptions]);
 
-                            r.ReadStartElement(XMLElements.Skin);
+                            r.Read();
+                            AssertNode(r, XMLElements.Skin);
                             settings.Skin.Source = r[XMLAttributes.Source];
                             settings.Skin.AutoHide = Convert.ToBoolean(r[XMLAttributes.AutoHide]);
                             settings.Skin.FadeTime = Convert.ToInt32(r[XMLAttributes.FadeTime]);
                             settings.Skin.BackGroundAlpha = Convert.ToInt32(r[XMLAttributes.BackgroundAlpha]);
                             settings.Skin.BackgroundColour = r[XMLAttributes.BackgroundColour];
-
-                            r.ReadStartElement(XMLElements.Video);
+                            
+                            r.Read();
+                            AssertNode(r, XMLElements.Video);
                             settings.VideoSource = r[XMLAttributes.Source];
-
-                            r.ReadStartElement(XMLElements.Emotions);
-                                r.ReadStartElement(XMLElements.Happy);
+                           
+                            r.Read();
+                            AssertNode(r, XMLElements.Emotions);
+                                r.Read();
+                                AssertNode(r, XMLElements.Happy);
                                 settings.Happy.Fps = r[XMLAttributes.FPS];
                                 settings.Happy.Duration = r[XMLAttributes.Duration];
                                 settings.Happy.AlphaBegin = r[XMLAttributes.AlphaBegin];
@@ -240,8 +248,9 @@ namespace EnACT
                                 settings.Happy.ScaleBegin = r[XMLAttributes.ScaleBegin];
                                 settings.Happy.ScaleFinish = r[XMLAttributes.ScaleFinish];
                                 settings.Happy.YFinish = r[XMLAttributes.YFinish];
-
-                                r.ReadStartElement(XMLElements.Sad);
+                                
+                                r.Read();
+                                AssertNode(r, XMLElements.Sad);
                                 settings.Sad.Fps = r[XMLAttributes.FPS];
                                 settings.Sad.Duration = r[XMLAttributes.Duration];
                                 settings.Sad.AlphaBegin = r[XMLAttributes.AlphaBegin];
@@ -249,48 +258,51 @@ namespace EnACT
                                 settings.Sad.ScaleBegin = r[XMLAttributes.ScaleBegin];
                                 settings.Sad.ScaleFinish = r[XMLAttributes.ScaleFinish];
                                 settings.Sad.YFinish = r[XMLAttributes.YFinish];
-
-                                r.ReadStartElement(XMLElements.Fear);
+                                
+                                r.Read();
+                                AssertNode(r, XMLElements.Fear);
                                 settings.Fear.Fps = r[XMLAttributes.FPS];
                                 settings.Fear.Duration = r[XMLAttributes.Duration];
                                 settings.Fear.ScaleBegin = r[XMLAttributes.ScaleBegin];
                                 settings.Fear.ScaleFinish = r[XMLAttributes.ScaleFinish];
                                 settings.Fear.VibrateX = r[XMLAttributes.VibrateX];
                                 settings.Fear.VibrateY = r[XMLAttributes.VibrateY];
-
-                                r.ReadStartElement(XMLElements.Anger);
+                                
+                                r.Read();
+                                AssertNode(r, XMLElements.Anger);
                                 settings.Anger.Fps = r[XMLAttributes.FPS];
                                 settings.Anger.Duration = r[XMLAttributes.Duration];
                                 settings.Anger.ScaleBegin = r[XMLAttributes.ScaleBegin];
                                 settings.Anger.ScaleFinish = r[XMLAttributes.ScaleFinish];
                                 settings.Anger.VibrateX = r[XMLAttributes.VibrateX];
                                 settings.Anger.VibrateY = r[XMLAttributes.VibrateY];
-                            r.ReadEndElement();//Emotion
-                        r.ReadEndElement();//Settings
                             break;
                         case XMLElements.Speakers: break; //Do Nothing
                         case XMLElements.Speaker:
+                            AssertNode(r, XMLElements.Speaker);
                             string name = r[XMLAttributes.Name];
                             Speaker s = new Speaker(name);
-
-                            r.Read();//Go to next node
-
-                            r.ReadStartElement(XMLElements.Background);
+                            
+                            r.Read();
+                            AssertNode(r, XMLElements.Background);
                             s.BG.Visible = Convert.ToBoolean(r[XMLAttributes.Visible]);
                             s.BG.Alpha = Convert.ToDouble(r[XMLAttributes.Alpha]);
                             s.BG.Colour = r[XMLAttributes.Colour];
-
-                            r.ReadStartElement(XMLElements.Font);
+                           
+                            r.Read();
+                            AssertNode(r, XMLElements.Font);
                             s.Font.Family = r[XMLAttributes.Name];
                             s.Font.Size = Convert.ToInt32(r[XMLAttributes.Size]);
                             s.Font.Colour = r[XMLAttributes.Colour];
                             s.Font.Bold = Convert.ToInt32(r[XMLAttributes.Bold]);
+                            r.ReadStartElement(XMLElements.Font);
                                     
                             //Add to speakerSet
                             speakerSet[s.Name] = s;
                             break;
                         case XMLElements.Captions: break; //Do Nothing
                         case XMLElements.Caption:
+                            AssertNode(r, XMLElements.Caption);
                             EditorCaption c = new EditorCaption();
                             c.Begin = r[XMLAttributes.Begin];
                             c.End = r[XMLAttributes.End];
@@ -304,18 +316,21 @@ namespace EnACT
                             {
                                 //If the Node is an end element, then the reader has parsed
                                 //through all of this caption's words.
-                                if (r.NodeType == XmlNodeType.EndElement)
+                                if (r.NodeType == XmlNodeType.EndElement && r.Name.Equals(XMLElements.Caption))
                                     break;
-                                
-                                r.ReadStartElement(XMLElements.Word);
 
-                                //Get word from node and add it to the list
-                                EditorCaptionWord word = new EditorCaptionWord(text: r.ReadString());
-                                word.Emotion = (Emotion)Convert.ToInt32(r[XMLAttributes.Emotion]);
-                                word.Intensity = (Intensity)Convert.ToInt32(r[XMLAttributes.Intensity]);
-                                c.Words.Add(word);
+                                else if (r.NodeType == XmlNodeType.Element && r.Name.Equals(XMLElements.Word))
+                                {
+                                    AssertNode(r, XMLElements.Word); //Doublecheck, it's the only way to be sure.
 
-                                r.ReadEndElement(); //Read the end of the word node
+                                    //Get word from node and add it to the list
+                                    EditorCaptionWord word = new EditorCaptionWord(text: r.ReadString());
+                                    word.Emotion = (Emotion)Convert.ToInt32(r[XMLAttributes.Emotion]);
+                                    word.Intensity = (Intensity)Convert.ToInt32(r[XMLAttributes.Intensity]);
+                                    c.Words.Add(word);
+
+                                    r.ReadEndElement(); //Read the end of the word node
+                                }
                             }
                             c.ReindexWords(); //Set up proper indexes
                             captionList.Add(c);
@@ -326,6 +341,23 @@ namespace EnACT
             }
 
             return Tuple.Create(captionList,speakerSet,settings);
+        }
+
+        /// <summary>
+        /// Asserts that the current node name in the XmlReader is the same as the expected node 
+        /// name. If the two do not match, an ArgumentException is thrown.
+        /// </summary>
+        /// <param name="r">The XmlReader to with the current node to compare.</param>
+        /// <param name="expectedNodeName">The name that the current node is expected to have.</param>
+        private static void AssertNode(XmlReader r, string expectedNodeName)
+        {
+            /* When using XmlReader, trying to access attributes that it can't find will return 
+             * null, which can be confusing if you don't realize the current node is not the 
+             * correct node.
+             */
+            if (!r.IsStartElement(expectedNodeName))
+                throw new ArgumentException(String.Format("Xml node '{0}' is not the current node.", 
+                    expectedNodeName));
         }
     }//Class
 }//Namepace
