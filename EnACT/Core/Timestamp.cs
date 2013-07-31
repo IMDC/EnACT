@@ -10,7 +10,7 @@ namespace EnACT
     #region Timestamp Class
     /// <summary>
     /// Represents a timestamp in the form XX:XX:XX.X where X is a digit from 0-9.
-    /// It can be set or retrieved as either a string or a Double, but is internally 
+    /// It can be set or retrieved as either a string or a double, but is internally 
     /// represented as a double in the form of seconds. A Timestamp can not be negative.
     /// If a negative value is assigned to a timestamp, then an InvalidException will 
     /// be thrown.
@@ -68,11 +68,11 @@ namespace EnACT
                 //Check for a valid time
                 if (value < 0.0)
                     throw new InvalidTimestampException("Timestamp.AsDouble value can not be negative: " + value);
-                else if (Double.IsNaN(value))
+                else if (double.IsNaN(value))
                     throw new InvalidTimestampException("Timestamp.AsDouble value can not be NaN");
-                else if (Double.IsPositiveInfinity(value))
+                else if (double.IsPositiveInfinity(value))
                     throw new InvalidTimestampException("Timestamp.AsDouble value can not be Positive Infinity");
-                else if (Double.IsNegativeInfinity(value))
+                else if (double.IsNegativeInfinity(value))
                     throw new InvalidTimestampException("Timestamp.AsDouble value can not be Negative Infinity");
                 else if (MaximumDoubleValue < value)
                     throw new InvalidTimestampException("Timestamp.AsDouble is too large");
@@ -284,10 +284,10 @@ namespace EnACT
 
         #region Equality
         /// <summary>
-        /// Determines whether the specified Object is equal to the current Timestamp. 
+        /// Determines whether the specified object is equal to the current Timestamp. 
         /// </summary>
-        /// <param name="obj">The Object to compare with the current Timestamp</param>
-        /// <returns>true if the specified Object is equal to the current Timestamp; 
+        /// <param name="obj">The object to compare with the current Timestamp</param>
+        /// <returns>true if the specified object is equal to the current Timestamp; 
         /// otherwise, false</returns>
         public override bool Equals(object obj)
         {
@@ -299,9 +299,9 @@ namespace EnACT
                 Timestamp t = (Timestamp)obj;
                 return time.Equals(t.AsDouble);
             }
-            else if (obj is Double)
+            else if (obj is double)
             {
-                Double d = (Double) obj;
+                double d = (double) obj;
                 return time.Equals(d);
             }
             else if (obj is string)
@@ -330,7 +330,7 @@ namespace EnACT
         }
 
         /// <summary>
-        /// Determines whether a Timestamp and a Double are equal
+        /// Determines whether a Timestamp and a double are equal
         /// </summary>
         /// <param name="t">The double to compare with the current Timestamp.</param>
         /// <returns> true if the specified double is equal to the current Timestamp; 
@@ -364,7 +364,7 @@ namespace EnACT
         }
 
         /// <summary>
-        /// Gets the Hash of the timestamp. Returns the Double value's hash value
+        /// Gets the Hash of the timestamp. Returns the double value's hash value
         /// </summary>
         /// <returns>The hash code of the double representation of this timestamp</returns>
         public override int GetHashCode()

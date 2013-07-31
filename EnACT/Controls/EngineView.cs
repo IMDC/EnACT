@@ -114,7 +114,7 @@ namespace EnACT
             return length;
         }
 
-        public void SetPlayHeadTime(Double time)
+        public void SetPlayHeadTime(double time)
         {
             CallFunction("<invoke name=\"" + "setPlayheadTime" + "\" returntype=\"xml\">"
                 + "<arguments><number>" + time + "</number></arguments></invoke>");
