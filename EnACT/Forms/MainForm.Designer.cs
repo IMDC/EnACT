@@ -180,6 +180,7 @@
             this.closeProjectToolStripMenuItem.Name = "closeProjectToolStripMenuItem";
             this.closeProjectToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.closeProjectToolStripMenuItem.Text = "Close Project";
+            this.closeProjectToolStripMenuItem.Click += new System.EventHandler(this.closeProjectToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 

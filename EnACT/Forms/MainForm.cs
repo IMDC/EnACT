@@ -76,9 +76,7 @@ namespace EnACT
         {
             InitializeComponent();
 
-            this.SpeakerSet = Utilities.ConstructSpeakerSet();
-            this.CaptionList = Utilities.ConstructCaptionList();
-            this.Settings = Utilities.ConstructSettingsXML();
+            ProjectInfo = ProjectInfo.NoProject;
 
             //Hook Up Controller Events
             VideoPlayed += new EventHandler(this.Controller_VideoPlayed);
@@ -519,6 +517,11 @@ namespace EnACT
                 "engine" + ProjectInfo.EngineXMLExtension));
         }
 
+        private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProjectInfo = ProjectInfo.NoProject;
+        }
+
         /// <summary>
         /// Exits EnACT and closes all applications.
         /// </summary>
@@ -574,5 +577,6 @@ namespace EnACT
             ProjectInfo = e.ProjectInfo;
         }
         #endregion
+
     }//Class
 }//Namespace

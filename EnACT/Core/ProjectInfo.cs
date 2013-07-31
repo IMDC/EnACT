@@ -10,6 +10,11 @@ namespace EnACT
     {
         #region Constants
         /// <summary>
+        /// An empty ProjectInfo object that is meant to represent no current project.
+        /// </summary>
+        public static readonly ProjectInfo NoProject = new ProjectInfo(string.Empty, string.Empty, string.Empty);
+
+        /// <summary>
         /// The extension for project files.
         /// </summary>
         public const string ProjectExtension = ".enproj";
