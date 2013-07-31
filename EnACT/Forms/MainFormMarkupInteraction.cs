@@ -443,7 +443,7 @@ namespace EnACT
                 case EditorCaption.PropertyNames.Speaker:       break;
                 case EditorCaption.PropertyNames.Text: CaptionTextBox.Text = SelectedCaption.GetAsString(); break;
                 case EditorCaption.PropertyNames.Words:         break;
-                default: throw new ArgumentException(String.Format("Property Name '{0}' isn't a valid property",
+                default: throw new ArgumentException(string.Format("Property Name '{0}' isn't a valid property",
                         e.PropertyName), "PropertyName");
             }
 

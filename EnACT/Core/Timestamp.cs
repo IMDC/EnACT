@@ -10,7 +10,7 @@ namespace EnACT
     #region Timestamp Class
     /// <summary>
     /// Represents a timestamp in the form XX:XX:XX.X where X is a digit from 0-9.
-    /// It can be set or retrieved as either a String or a Double, but is internally 
+    /// It can be set or retrieved as either a string or a Double, but is internally 
     /// represented as a double in the form of seconds. A Timestamp can not be negative.
     /// If a negative value is assigned to a timestamp, then an InvalidException will 
     /// be thrown.
@@ -88,13 +88,13 @@ namespace EnACT
         /// <summary>
         /// A property representing the timestamp in string form. Will produce
         /// a string in the form XX:XX:XX.X where X is a digit from 0-9. Get this
-        /// property when the Timestamp has to expiclitly be represented as a String.
+        /// property when the Timestamp has to expiclitly be represented as a string.
         /// </summary>
-        public String AsString
+        public string AsString
         {
             get
             {
-                //If null, generate String
+                //If null, generate string
                 if (timeString == null)
                 {
                     double timeDouble = time;
@@ -135,11 +135,11 @@ namespace EnACT
                 if (!TimeStampValidates(value))
                     throw new InvalidTimestampException("String value is not a valid Timestamp");
 
-                if (value == null || value == String.Empty)
+                if (value == null || value == string.Empty)
                     time = 0;
 
                 //If value is lexicographically greater than MaximumTimeValue
-                if(0 < String.Compare(value, MaximumTimeValue))
+                if(0 < string.Compare(value, MaximumTimeValue))
                     throw new InvalidTimestampException("Timestamp.AsString is too large");
 
                 double seconds = 0;
@@ -179,7 +179,7 @@ namespace EnACT
         /// Constructs a timestamp using a string
         /// </summary>
         /// <param name="timestamp">The value to set this timestamp to</param>
-        public Timestamp(String timestamp)
+        public Timestamp(string timestamp)
         {
             AsString = timestamp;
         }
@@ -225,7 +225,7 @@ namespace EnACT
         /// </summary>
         /// <param name="ts">The timestamp to validate</param>
         /// <returns>true if valid, false if not valid</returns>
-        public static bool TimeStampValidates(String ts)
+        public static bool TimeStampValidates(string ts)
         {
             if (validTimestamp.IsMatch(ts))
             {
@@ -304,9 +304,9 @@ namespace EnACT
                 Double d = (Double) obj;
                 return time.Equals(d);
             }
-            else if (obj is String)
+            else if (obj is string)
             {
-                String s = (String)obj;
+                string s = (string)obj;
                 return AsString.Equals(s);
             }
             else
@@ -341,12 +341,12 @@ namespace EnACT
         }
 
         /// <summary>
-        /// Determines whether a Timestamp and a String are equal
+        /// Determines whether a Timestamp and a string are equal
         /// </summary>
-        /// <param name="t">The String to compare with the current Timestamp.</param>
-        /// <returns> true if the specified String is equal to the current Timestamp; 
+        /// <param name="t">The string to compare with the current Timestamp.</param>
+        /// <returns> true if the specified string is equal to the current Timestamp; 
         /// otherwise, false. </returns>
-        public bool Equals(String s)
+        public bool Equals(string s)
         {
             return AsString.Equals(s);
         }
@@ -357,7 +357,7 @@ namespace EnACT
         /// Returns the string value of this TimeStamp. Returns the same as
         /// the AsString property
         /// </summary>
-        /// <returns>This timestamp as a String</returns>
+        /// <returns>This timestamp as a string</returns>
         public override string ToString()
         {
             return AsString;

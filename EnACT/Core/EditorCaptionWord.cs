@@ -55,7 +55,7 @@ namespace EnACT
         /// <param name="text">The word string to make this EditorCaptionWord represent.</param>
         /// <param name="beginIndex">The index of this EditorCaptionWord in a string of 
         /// words.</param>
-        public EditorCaptionWord(String text, int beginIndex) : 
+        public EditorCaptionWord(string text, int beginIndex) : 
             this(DefaultEmotion, DefaultIntensity, text, beginIndex) { }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace EnACT
         /// <param name="text">The word string to make this EditorCaptionWord represent.</param>
         /// <param name="beginIndex">The index of this EditorCaptionWord in a string of 
         /// words.</param>
-        public EditorCaptionWord(Emotion e, Intensity i, String text, int beginIndex)
+        public EditorCaptionWord(Emotion e, Intensity i, string text, int beginIndex)
             : base(e, i, text)
         {
             //Set index positions

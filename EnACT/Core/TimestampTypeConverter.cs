@@ -15,7 +15,7 @@ namespace EnACT
     {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            if (sourceType == typeof(String))
+            if (sourceType == typeof(string))
                 return true;
             else
                 return base.CanConvertFrom(context, sourceType);
@@ -27,9 +27,9 @@ namespace EnACT
             if (value == null)
                 return new Timestamp();
 
-            if (value is String)
+            if (value is string)
             {
-                String vstring = value as String;
+                string vstring = value as string;
                 return new Timestamp(vstring);
             }
             else
@@ -51,7 +51,7 @@ namespace EnACT
             if (value != null && !(value is Timestamp))
                 throw new Exception("Value is of wrong type");
 
-            if (destinationType == typeof(String))
+            if (destinationType == typeof(string))
             {
                 Timestamp t = value as Timestamp;
                 return t.AsString;
@@ -64,7 +64,7 @@ namespace EnACT
 
                 Timestamp t = value as Timestamp;
 
-                MemberInfo memberInfo = typeof(Timestamp).GetConstructor(new Type[] { typeof(String) });
+                MemberInfo memberInfo = typeof(Timestamp).GetConstructor(new Type[] { typeof(string) });
                 object[] args = new object[] { t.AsString };
 
                 if (memberInfo != null)

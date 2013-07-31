@@ -27,7 +27,7 @@ namespace EnACT
         /// Parses a script file when given a path to the script to it.
         /// </summary>
         /// <param name="path">The absolute path to the script file.</param>
-        public static Tuple<List<EditorCaption>, Dictionary<String, Speaker>> Parse(string path)
+        public static Tuple<List<EditorCaption>, Dictionary<string, Speaker>> Parse(string path)
         {
             //Get lowercase version of the extention
             string extension = Path.GetExtension(path).ToLower();
@@ -37,7 +37,7 @@ namespace EnACT
                 case FileExtensions.Esr: return ParseESRFile(path);
                 case FileExtensions.Srt: return ParseSRTFile(path);
                 case FileExtensions.Txt: return ParseScriptFile(path);
-                default: throw new FormatException(String.Format("Extension \"{}\" is not a valid extension.",
+                default: throw new FormatException(string.Format("Extension \"{}\" is not a valid extension.",
                     extension));
             }
         }
@@ -49,14 +49,14 @@ namespace EnACT
         /// SpeakerSet
         /// </summary>
         /// <param name="scriptPath">The path of the script file</param>
-        public static Tuple<List<EditorCaption>,Dictionary<String, Speaker>> ParseScriptFile(String scriptPath)
+        public static Tuple<List<EditorCaption>,Dictionary<string, Speaker>> ParseScriptFile(string scriptPath)
         {
             List<EditorCaption> captionList = Utilities.ConstructCaptionList();
-            Dictionary<String, Speaker> speakerSet = Utilities.ConstructSpeakerSet();
+            Dictionary<string, Speaker> speakerSet = Utilities.ConstructSpeakerSet();
 
-            String path = scriptPath; //Get path
-            String[] lines = System.IO.File.ReadAllLines(@path); //Read in file
-            String speakerName = "";
+            string path = scriptPath; //Get path
+            string[] lines = System.IO.File.ReadAllLines(@path); //Read in file
+            string speakerName = "";
 
             //Start off with the Default speaker
             Speaker CurrentSpeaker = speakerSet[Speaker.DefaultName];
@@ -69,7 +69,7 @@ namespace EnACT
                 lines[i] = lines[i].Trim();
 
                 //Ignore empty lines
-                if (!String.IsNullOrEmpty(lines[i]))
+                if (!string.IsNullOrEmpty(lines[i]))
                 {
                     //If the last character in the string is a ':', then this line is a speaker.
                     int lastChar = lines[i].Length - 1;
@@ -109,12 +109,12 @@ namespace EnACT
         /// Parses an ESR File
         /// </summary>
         /// <param name="scriptPath">The path of the script file</param>
-        public static Tuple<List<EditorCaption>, Dictionary<String, Speaker>> ParseESRFile(String scriptPath)
+        public static Tuple<List<EditorCaption>, Dictionary<string, Speaker>> ParseESRFile(string scriptPath)
         {
             List<EditorCaption> captionList = Utilities.ConstructCaptionList();
-            Dictionary<String, Speaker> speakerSet = Utilities.ConstructSpeakerSet();
+            Dictionary<string, Speaker> speakerSet = Utilities.ConstructSpeakerSet();
 
-            String[] lines = System.IO.File.ReadAllLines(@scriptPath); //Read in file
+            string[] lines = System.IO.File.ReadAllLines(@scriptPath); //Read in file
 
             //Start off with the Default speaker
             Speaker CurrentSpeaker = speakerSet[Speaker.DefaultName];
@@ -127,10 +127,10 @@ namespace EnACT
 
             Boolean lastLineWasTimeStamp = false;
 
-            String beginTime = "";
-            String endTime = "";
-            String captionLine = "";
-            String speakerName = "";
+            string beginTime = "";
+            string endTime = "";
+            string captionLine = "";
+            string speakerName = "";
 
             //Will continue a caption if set to true
             bool fullCaptionParsedFlag = false;
@@ -141,7 +141,7 @@ namespace EnACT
                 lines[i] = lines[i].Trim();
 
                 //Empty or iteration after last line
-                if (String.IsNullOrEmpty(lines[i]))
+                if (string.IsNullOrEmpty(lines[i]))
                 {
                     //If the flag is true, then we have already read in a caption
                     if (fullCaptionParsedFlag)
@@ -234,12 +234,12 @@ namespace EnACT
         /// for speakers, and every caption will be attributed to the default speaker.
         /// </summary>
         /// <param name="scriptPath">The full path of the SRT file to be parsed</param>
-        public static Tuple<List<EditorCaption>, Dictionary<String, Speaker>> ParseSRTFile(String scriptPath)
+        public static Tuple<List<EditorCaption>, Dictionary<string, Speaker>> ParseSRTFile(string scriptPath)
         {
             List<EditorCaption> captionList = Utilities.ConstructCaptionList();
-            Dictionary<String, Speaker> speakerSet = Utilities.ConstructSpeakerSet();
+            Dictionary<string, Speaker> speakerSet = Utilities.ConstructSpeakerSet();
 
-            String[] lines = System.IO.File.ReadAllLines(@scriptPath); //Read in file
+            string[] lines = System.IO.File.ReadAllLines(@scriptPath); //Read in file
 
             //Start off with the Default speaker
             Speaker CurrentSpeaker = new Speaker("CARLO");
@@ -252,9 +252,9 @@ namespace EnACT
 
             Regex timeStampRegex = new Regex(@"\d\d:\d\d:\d\d,\d\d\d");
 
-            String beginTime = "";
-            String endTime = "";
-            String captionLine = "";
+            string beginTime = "";
+            string endTime = "";
+            string captionLine = "";
 
             //Will continue a caption if set to true
             bool continueCaptionFlag = false;
@@ -264,7 +264,7 @@ namespace EnACT
                 //Remove unecessary whitespace from beginning and end of line
                 lines[i] = lines[i].Trim();
 
-                if (String.IsNullOrEmpty(lines[i]))
+                if (string.IsNullOrEmpty(lines[i]))
                 {
                     //If the flag is true, then we have already read in a caption
                     if (continueCaptionFlag)

@@ -133,7 +133,7 @@ namespace EnACT
         /// <summary>
         /// Wrapper property for CaptionView. Gets and Sets the Words of this EditorCaption.
         /// </summary>
-        public String Text
+        public string Text
         {
             set
             { 
@@ -154,7 +154,7 @@ namespace EnACT
         /// Raises the PropertyChanged event.
         /// </summary>
         /// <param name="info"></param>
-        private void NotifyPropertyChanged(String info)
+        private void NotifyPropertyChanged(string info)
         {
             /* Make a local copy of the event to prevent the case where the handler
              * will be set as null in-between the null check and the handler call.
@@ -177,7 +177,7 @@ namespace EnACT
         /// </summary>
         /// <param name="line">Text to be displayed as a caption</param>
         /// <param name="speaker">The speaker of the caption</param>
-        public EditorCaption(String line, Speaker speaker) : this(line, speaker, "00:00:00.0", "00:00:00.0") { }
+        public EditorCaption(string line, Speaker speaker) : this(line, speaker, "00:00:00.0", "00:00:00.0") { }
 
         /// <summary>
         /// Constructs a EditorCaption object with a given line, speaker, and begining 
@@ -187,7 +187,7 @@ namespace EnACT
         /// <param name="speaker">The speaker of the caption</param>
         /// <param name="Begin">The timestamp representing the beginning of the caption</param>
         /// <param name="End">The timestamp representing the ending of the caption</param>
-        public EditorCaption(String line, Speaker speaker, String Begin, String End)
+        public EditorCaption(string line, Speaker speaker, string Begin, string End)
         {
             //Set Timestamps. Duration is implicity set.
             this.Begin = new Timestamp(Begin);
@@ -224,18 +224,18 @@ namespace EnACT
         /// with the same name (the Words property).
         /// </summary>
         /// <param name="line">The string to turn into a list of CaptionWords.</param>
-        public new void Feed(String line)
+        public new void Feed(string line)
         {
             //Remove the previous line from the Words
             this.Words.Clear();
 
             //Split line up and add each word to the wordlist.
-            String[] words = line.Split(); //Separate by spaces
+            string[] words = line.Split(); //Separate by spaces
 
             int cumulativePosition = 0;
             EditorCaptionWord cw;
 
-            foreach (String word in words)
+            foreach (string word in words)
             {
                 if (word != "")
                 {
@@ -251,13 +251,13 @@ namespace EnACT
         }
 
         /// <summary>
-        /// Turns the list into a single String. This method is overriden from the Parent class 
+        /// Turns the list into a single string. This method is overriden from the Parent class 
         /// Caption as it modifies a different property with the same name (The Words property).
         /// </summary>
         /// <returns>A string containing all the CaptionWords in the list.</returns>
-        public override String GetAsString()
+        public override string GetAsString()
         {
-            //Stringbuilder is faster than String when it comes to appending text.
+            //Stringbuilder is faster than string when it comes to appending text.
             StringBuilder s = new StringBuilder();
             //For every element but the last
             for (int i = 0; i < Words.Count - 1; i++)

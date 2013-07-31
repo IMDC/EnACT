@@ -61,7 +61,7 @@ namespace EnACT
         /// </summary>
         public void UpdateText()
         {
-            this.Text = String.Format("{0} / {1}", PlayheadTime, VideoLength);
+            this.Text = string.Format("{0} / {1}", PlayheadTime, VideoLength);
         }
     }
 }

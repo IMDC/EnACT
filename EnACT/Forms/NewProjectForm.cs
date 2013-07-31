@@ -96,26 +96,26 @@ namespace EnACT
         private void Button_CreateProject_Click(object sender, EventArgs e)
         {
             //Check to see if Text boxes are empty when they should not be.
-            if (String.IsNullOrWhiteSpace(TextBox_ScriptPath.Text) && !CheckBox_GenerateScript.Checked)
+            if (string.IsNullOrWhiteSpace(TextBox_ScriptPath.Text) && !CheckBox_GenerateScript.Checked)
             {
                 MessageBox.Show("You must either enter a path to a Script, or check the Check Box next to it.",
                     "Error!");
                 return;
             }
 
-            if (String.IsNullOrWhiteSpace(TextBox_VideoPath.Text))
+            if (string.IsNullOrWhiteSpace(TextBox_VideoPath.Text))
             {
                 MessageBox.Show("You must enter a path to a Video file.", "Error!");
                 return;
             }
 
-            if (String.IsNullOrWhiteSpace(Textbox_ProjectName.Text))
+            if (string.IsNullOrWhiteSpace(Textbox_ProjectName.Text))
             {
                 MessageBox.Show("You must enter a project name.", "Error!");
                 return;
             }
 
-            if (String.IsNullOrWhiteSpace(Textbox_ProjectPath.Text))
+            if (string.IsNullOrWhiteSpace(Textbox_ProjectPath.Text))
             {
                 MessageBox.Show("You must enter a path for the project folder.", "Error!");
                 return;

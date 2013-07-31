@@ -124,7 +124,7 @@ namespace EnACT
         /// </summary>
         /// <param name="line">Text to be displayed as a caption</param>
         /// <param name="speaker">The speaker of the caption</param>
-        public Caption(String line, Speaker speaker) : this(line, speaker, "00:00:00.0", "00:00:00.0") { }
+        public Caption(string line, Speaker speaker) : this(line, speaker, "00:00:00.0", "00:00:00.0") { }
 
         /// <summary>
         /// Constructs a Caption object with a given line, speaker, and begining 
@@ -134,7 +134,7 @@ namespace EnACT
         /// <param name="speaker">The speaker of the caption</param>
         /// <param name="Begin">The timestamp representing the beginning of the caption</param>
         /// <param name="End">The timestamp representing the ending of the caption</param>
-        public Caption(String line, Speaker speaker, String Begin, String End)
+        public Caption(string line, Speaker speaker, string Begin, string End)
         {
             //Set Timestamps. Duration is implicity set.
             this.Begin = new Timestamp(Begin);
@@ -168,27 +168,27 @@ namespace EnACT
         /// Clears the list, then feeds a string into the list and turns it into CaptionWords.
         /// </summary>
         /// <param name="line">The string to turn into a list of CaptionWords.</param>
-        public virtual void Feed(String line)
+        public virtual void Feed(string line)
         {
             //Remove the previous line from the Words
             Words.Clear();
 
             //Split line up and add each word to the wordlist.
-            String[] words = line.Split(); //Separate by spaces
+            string[] words = line.Split(); //Separate by spaces
 
-            foreach (String word in words)
+            foreach (string word in words)
             {
                 if (word != "") { Words.Add(new CaptionWord(word)); }
             }
         }
 
         /// <summary>
-        /// Turns the list into a single String.
+        /// Turns the list into a single string.
         /// </summary>
         /// <returns>A string containing all the CaptionWords in the list.</returns>
-        public virtual String GetAsString()
+        public virtual string GetAsString()
         {
-            //Stringbuilder is faster than String when it comes to appending text.
+            //Stringbuilder is faster than string when it comes to appending text.
             StringBuilder s = new StringBuilder();
             //For every element but the last
             for (int i = 0; i < Words.Count - 1; i++)

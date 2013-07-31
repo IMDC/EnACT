@@ -30,11 +30,11 @@ namespace EnACT
         /// <summary>
         /// Backing field for SpeakerSet.
         /// </summary>
-        private Dictionary<String, Speaker> bkSpeakerSet;
+        private Dictionary<string, Speaker> bkSpeakerSet;
         /// <summary>
         /// A set of Speaker objects, each speaker being mapped to by its name
         /// </summary>
-        public Dictionary<String, Speaker> SpeakerSet
+        public Dictionary<string, Speaker> SpeakerSet
         {
             get { return bkSpeakerSet; }
             set
@@ -192,7 +192,7 @@ namespace EnACT
         #endregion Controller Buttons
 
         #region Jorge
-        public void JorgeMethod(String SRTPath, String OutFolderPath)
+        public void JorgeMethod(string SRTPath, string OutFolderPath)
         {
             var tuple = ScriptParser.ParseSRTFile(@SRTPath);
 

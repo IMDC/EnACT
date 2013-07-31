@@ -74,7 +74,7 @@ namespace EnACT
         /// <returns>true or false</returns>
         public override Boolean IsPlaying()
         {
-            String returnXML = CallFunction("<invoke name=\"" + "isPlaying" + "\" returntype=\"xml\"></invoke>");
+            string returnXML = CallFunction("<invoke name=\"" + "isPlaying" + "\" returntype=\"xml\"></invoke>");
             switch (returnXML)
             {
                 case @"<true/>": return true;
@@ -88,7 +88,7 @@ namespace EnACT
         /// <returns>A double</returns>
         public double VideoLength()
         {
-            String returnString = CallFunction("<invoke name=\"" + "videoLength" + "\" returntype=\"xml\"></invoke>");
+            string returnString = CallFunction("<invoke name=\"" + "videoLength" + "\" returntype=\"xml\"></invoke>");
 
             //Turn the string into an xml doc
             XmlDocument xmlRequest = new XmlDocument();
@@ -101,7 +101,7 @@ namespace EnACT
 
         public double GetPlayheadTime()
         {
-            String returnString = CallFunction("<invoke name=\"" + "getPlayheadTime" 
+            string returnString = CallFunction("<invoke name=\"" + "getPlayheadTime" 
                 + "\" returntype=\"xml\"></invoke>");
                 
 
@@ -134,7 +134,7 @@ namespace EnACT
             xmlRequest.LoadXml(e.request);
 
             //Get the name of the message
-            String messageName = xmlRequest.FirstChild.Attributes[0].InnerText;
+            string messageName = xmlRequest.FirstChild.Attributes[0].InnerText;
 
             switch (messageName)
             {

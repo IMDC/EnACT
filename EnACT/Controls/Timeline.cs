@@ -236,7 +236,7 @@ namespace EnACT
         /// <summary>
         /// A set of Speaker objects, each speaker being mapped to by its name
         /// </summary>
-        public Dictionary<String, Speaker> SpeakerSet { set; get; }
+        public Dictionary<string, Speaker> SpeakerSet { set; get; }
         /// <summary>
         /// A list of captions retrieved from a transcript file.
         /// </summary>

@@ -8,14 +8,14 @@ namespace EnACT
     /// </summary>
     public class SettingsXML
     {
-        public String Base { set; get; }
-        public String Spacing { set; get; }
-        public String SeparateEmotionWords { set; get; }
+        public string Base { set; get; }
+        public string Spacing { set; get; }
+        public string SeparateEmotionWords { set; get; }
         public Playback Playback { set; get; }
         public Skin Skin { set; get; }
-        public String SpeakersSource { set; get; }
-        public String CaptionsSource { set; get; }
-        public String VideoSource { set; get; }
+        public string SpeakersSource { set; get; }
+        public string CaptionsSource { set; get; }
+        public string VideoSource { set; get; }
 
         public AlphaEmotionXML Happy { set; get; }
         public AlphaEmotionXML Sad { set; get; }
@@ -31,7 +31,7 @@ namespace EnACT
         /// Constructs a SettingsXML object with a given name for the video source.
         /// </summary>
         /// <param name="vidsrc">The file name of the video source file</param>
-        public SettingsXML(String vidsrc)
+        public SettingsXML(string vidsrc)
         {
             this.Base = "";
             this.Spacing = "1.5";
@@ -87,7 +87,7 @@ namespace EnACT
     {
         public bool AutoPlay { set; get; }
         public bool AutoRewind { set; get; }
-        public String Seek { set; get; }
+        public string Seek { set; get; }
         public bool AutoSize { set; get; }
         public int Scale { set; get; }
         public int Volume { set; get; }
@@ -113,11 +113,11 @@ namespace EnACT
     /// </summary>
     public class Skin
     {
-        public String Source { set; get; }
+        public string Source { set; get; }
         public bool AutoHide { set; get; }
         public int FadeTime { set; get; }
         public int BackGroundAlpha { set; get; }
-        public String BackgroundColour { set; get; }  //RGB in the form 0x008040
+        public string BackgroundColour { set; get; }  //RGB in the form 0x008040
 
         /// <summary>
         /// Constructs a Skin object with a default src of "SkinOverPlayMute.swf".
@@ -128,7 +128,7 @@ namespace EnACT
         /// Constructs a Skin object with a given name for the file of the skin.
         /// </summary>
         /// <param name="src"></param>
-        public Skin(String src)
+        public Skin(string src)
         {
             this.Source = src;
             this.AutoHide = true;
@@ -144,10 +144,10 @@ namespace EnACT
     /// </summary>
     public abstract class EmotionXML
     {
-        public String Fps { set; get; }
-        public String Duration { set; get; }
-        public String ScaleBegin { set; get; }
-        public String ScaleFinish { set; get; }
+        public string Fps { set; get; }
+        public string Duration { set; get; }
+        public string ScaleBegin { set; get; }
+        public string ScaleFinish { set; get; }
 
         /// <summary>
         /// Constructor for abstract EmotionXML. Fills in the intance variables 
@@ -157,7 +157,7 @@ namespace EnACT
         /// <param name="dur">The Duration of the emotion</param>
         /// <param name="sb">The ScaleBegin value of the emotion</param>
         /// <param name="sf">The ScaleFinish value of the emotion</param>
-        public EmotionXML(String fps, String dur, String sb, String sf)
+        public EmotionXML(string fps, string dur, string sb, string sf)
         {
             this.Fps = fps;
             this.Duration = dur;
@@ -172,9 +172,9 @@ namespace EnACT
     /// </summary>
     public class AlphaEmotionXML : EmotionXML
     {
-        public String AlphaBegin { set; get; }
-        public String AlphaFinish { set; get; }
-        public String YFinish { set; get; }
+        public string AlphaBegin { set; get; }
+        public string AlphaFinish { set; get; }
+        public string YFinish { set; get; }
 
         /// <summary>
         /// Constructs an AlphaEmotion with the specified parameters.
@@ -186,8 +186,8 @@ namespace EnACT
         /// <param name="ab">The AlphaBegin value of the emotion</param>
         /// <param name="af">The AlphaFinish value of the emotion</param>
         /// <param name="yf">The YFinish value of the emotion</param>
-        public AlphaEmotionXML(String fps, String dur, String sb, String sf, 
-            String ab, String af, String yf)
+        public AlphaEmotionXML(string fps, string dur, string sb, string sf, 
+            string ab, string af, string yf)
             : base(fps, dur, sb, sf)
         {
             this.AlphaBegin = ab;
@@ -202,8 +202,8 @@ namespace EnACT
     /// </summary>
     public class VibrateEmotionXML : EmotionXML
     {
-        public String VibrateX { set; get; }
-        public String VibrateY { set; get; }
+        public string VibrateX { set; get; }
+        public string VibrateY { set; get; }
 
         /// <summary>
         /// Constructs a VibrateEmotionXML with the specified parameters.
@@ -214,8 +214,8 @@ namespace EnACT
         /// <param name="sf">The ScaleFinish value of the emotion</param>
         /// <param name="vx">The VibrateX value of the emotion</param>
         /// <param name="vy">The VibrateY value of the emotion</param>
-        public VibrateEmotionXML(String fps, String dur, String sb, String sf,
-            String vx, String vy)
+        public VibrateEmotionXML(string fps, string dur, string sb, string sf,
+            string vx, string vy)
             : base(fps, dur, sb, sf)
         {
             this.VibrateX = vx;

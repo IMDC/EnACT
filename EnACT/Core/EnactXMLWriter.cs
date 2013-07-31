@@ -19,7 +19,7 @@ namespace EnACT
         /// <param name="speakerSet">The SpeakersSet object to write to a file.</param>
         /// <param name="speakersPath">The full path (file name and extension included) to write 
         /// the SpeakersSet object to.</param>
-        public static void WriteSpeakers(Dictionary<String, Speaker> speakerSet, string speakersPath)
+        public static void WriteSpeakers(Dictionary<string, Speaker> speakerSet, string speakersPath)
         {
             //NOTE: XmlTextWriter does not require curly braces between writeStartElement and 
             //writeCloseElement. It is put there to easily see what belongs to what node.
@@ -507,7 +507,7 @@ namespace EnACT
         /// <param name="captionList">The Caption list to write to file.</param>
         /// <param name="settings">The SettingsXML object to write to file.</param>
         /// <param name="path">The path (including name and extension) to write the file to.</param>
-        public static void WriteEngineXML(Dictionary<String, Speaker> speakerSet, 
+        public static void WriteEngineXML(Dictionary<string, Speaker> speakerSet, 
             List<EditorCaption> captionList, SettingsXML settings, string path)
         {
             using (XmlTextWriter w = new XmlTextWriter(path, Encoding.UTF8))

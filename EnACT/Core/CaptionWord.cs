@@ -35,7 +35,7 @@ namespace EnACT
         /// <summary>
         /// The text of the CaptionWord.
         /// </summary>
-        public String Text { set; get; }    //The part wrapped in <emotion> tag
+        public string Text { set; get; }    //The part wrapped in <emotion> tag
 
         /// <summary>
         /// Returns the length of the Text string. It is the same value as Text.Length
@@ -48,14 +48,14 @@ namespace EnACT
         /// Constructs a Caption word with an empty text string, and default Emotion and Intensity
         /// values.
         /// </summary>
-        public CaptionWord() : this(String.Empty) { }
+        public CaptionWord() : this(string.Empty) { }
 
         /// <summary>
         /// Constructs a CaptionWord with the specified text string and default Emotion and 
         /// Intensity values.
         /// </summary>
         /// <param name="text">The word string to make this EditorCaptionWord represent.</param>
-        public CaptionWord(String text) : this(DefaultEmotion, DefaultIntensity, text) { }
+        public CaptionWord(string text) : this(DefaultEmotion, DefaultIntensity, text) { }
 
         /// <summary>
         /// Constructs a CaptionWord with the specified parameters.
@@ -63,7 +63,7 @@ namespace EnACT
         /// <param name="e">The emotion of this CaptionWord.</param>
         /// <param name="i">The intensity of the emotion of this word.</param>
         /// <param name="text">The word string to make this CaptionWord represent.</param>
-        public CaptionWord(Emotion e, Intensity i, String text)
+        public CaptionWord(Emotion e, Intensity i, string text)
         {
             this.Emotion = e;
             this.Intensity = i;

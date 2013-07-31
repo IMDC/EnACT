@@ -31,14 +31,14 @@ namespace EnACT
         /// </summary>
         public static class ColumnNames
         {
-            public const String Number    = "Number";
-            public const String Begin     = "Begin";
-            public const String End       = "End";
-            public const String Duration  = "Duration";
-            public const String Speaker   = "Speaker";
-            public const String Alignment = "Alignment";
-            public const String Location  = "Location";
-            public const String Text      = "Text";
+            public const string Number    = "Number";
+            public const string Begin     = "Begin";
+            public const string End       = "End";
+            public const string Duration  = "Duration";
+            public const string Speaker   = "Speaker";
+            public const string Alignment = "Alignment";
+            public const string Location  = "Location";
+            public const string Text      = "Text";
         }
         #endregion
 
@@ -46,7 +46,7 @@ namespace EnACT
         /// <summary>
         /// A set of Speaker objects, each speaker being mapped to by its name
         /// </summary>
-        public Dictionary<String, Speaker> SpeakerSet { set; get; }
+        public Dictionary<string, Speaker> SpeakerSet { set; get; }
 
         /// <summary>
         /// A list of captions retrieved from a transcript file.
@@ -372,7 +372,7 @@ namespace EnACT
                     }
                     break;
                 case ColumnNames.Speaker:
-                    String s = (String) e.Value;
+                    string s = (string) e.Value;
                     if (SpeakerSet.ContainsKey(s))
                     {
                         e.Value = SpeakerSet[s];
@@ -385,7 +385,7 @@ namespace EnACT
                     e.ParsingApplied = true;
                     break;
                 case ColumnNames.Alignment:
-                    String a = (String) e.Value;
+                    string a = (string) e.Value;
                     //Check to see if value is equal to the alignment text name
                     if (a.Equals("Left", StringComparison.OrdinalIgnoreCase))
                         e.Value = Alignment.Left;

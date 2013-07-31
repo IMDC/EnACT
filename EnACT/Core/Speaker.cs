@@ -11,11 +11,11 @@ namespace EnACT
         /// <summary>
         /// The name of the default speaker.
         /// </summary>
-        public const String DefaultName = "No Speaker";
+        public const string DefaultName = "No Speaker";
         /// <summary>
         /// The name of the description speaker
         /// </summary>
-        public const String DescriptionName = "Description";
+        public const string DescriptionName = "Description";
 
         /// <summary>
         /// Default speaker, used when no speaker is currently specified
@@ -30,7 +30,7 @@ namespace EnACT
         /// <summary>
         /// The name of this speaker
         /// </summary>
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// The background settings (color, transparency, etc) associated with captions 
@@ -53,7 +53,7 @@ namespace EnACT
         /// Constructs a speaker object with a given name.
         /// </summary>
         /// <param name="name">The name of the speaker</param>
-        public Speaker(String name)
+        public Speaker(string name)
         {
             this.Name = name;
             BG = new SpeakerBG();
@@ -88,7 +88,7 @@ namespace EnACT
         /// <summary>
         /// The colour of the background.
         /// </summary>
-        public String Colour { set; get; } //Colour is represented as hex eg 0x008040
+        public string Colour { set; get; } //Colour is represented as hex eg 0x008040
 
         /// <summary>
         /// Constucts a SpeakerBG object with visibility set to true, alpha set
@@ -110,7 +110,7 @@ namespace EnACT
         /// <summary>
         /// The font family/type of this font
         /// </summary>
-        public String Family { set; get; }
+        public string Family { set; get; }
 
         /// <summary>
         /// The size of this font
@@ -120,7 +120,7 @@ namespace EnACT
         /// <summary>
         /// The colour of the text displayed in this font
         /// </summary>
-        public String Colour { set; get; }
+        public string Colour { set; get; }
 
         /// <summary>
         /// The boldness value of this font

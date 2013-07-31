@@ -184,10 +184,10 @@ namespace EnACT
         /// <param name="path">The Path to the engine.xml file.</param>
         /// <returns>A 3-Tuple containing a CaptionList, a SpeakerSet, and a Settings 
         /// object in that specific order.</returns>
-        public static Tuple<List<EditorCaption>, Dictionary<String, Speaker>, SettingsXML> ParseEngineXML(string path)
+        public static Tuple<List<EditorCaption>, Dictionary<string, Speaker>, SettingsXML> ParseEngineXML(string path)
         {
             var captionList = new List<EditorCaption>();
-            var speakerSet = new Dictionary<String, Speaker>();
+            var speakerSet = new Dictionary<string, Speaker>();
             var settings = new SettingsXML();
 
             XmlReaderSettings readerSettings = new XmlReaderSettings();
@@ -354,7 +354,7 @@ namespace EnACT
              * correct node.
              */
             if (!r.IsStartElement(expectedNodeName))
-                throw new ArgumentException(String.Format("Xml node '{0}' is not the current node.", 
+                throw new ArgumentException(string.Format("Xml node '{0}' is not the current node.", 
                     expectedNodeName));
         }
     }//Class
