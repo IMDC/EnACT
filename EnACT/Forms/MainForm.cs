@@ -507,8 +507,11 @@ namespace EnACT
 
         private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenProjectDialog.ShowDialog();
-            ProjectInfo = XMLReader.ParseProject(OpenProjectDialog.FileName);
+            DialogResult result = OpenProjectDialog.ShowDialog();
+
+            //Only read in file of OK button was pressed
+            if (result == DialogResult.OK)
+                ProjectInfo = XMLReader.ParseProject(OpenProjectDialog.FileName);
         }
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
