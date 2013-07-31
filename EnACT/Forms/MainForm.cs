@@ -5,8 +5,6 @@ using System.IO;
 
 namespace EnACT
 {
-    /* This part of MainForm controls interaction between markup of emotions.
-     */
     public partial class MainForm : Form
     {
         #region Fields and Properties
