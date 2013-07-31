@@ -322,10 +322,11 @@ namespace EnACT
                                 {
                                     AssertNode(r, XMLElements.Word); //Doublecheck, it's the only way to be sure.
 
+                                    Emotion e = (Emotion)Convert.ToInt32(r[XMLAttributes.Emotion]);
+                                    Intensity i = (Intensity)Convert.ToInt32(r[XMLAttributes.Intensity]);
+
                                     //Get word from node and add it to the list
-                                    EditorCaptionWord word = new EditorCaptionWord(text: r.ReadString());
-                                    word.Emotion = (Emotion)Convert.ToInt32(r[XMLAttributes.Emotion]);
-                                    word.Intensity = (Intensity)Convert.ToInt32(r[XMLAttributes.Intensity]);
+                                    EditorCaptionWord word = new EditorCaptionWord(e, i, r.ReadString(), 0);
                                     c.Words.Add(word);
                                 }
                             }
