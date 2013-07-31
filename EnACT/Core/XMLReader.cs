@@ -318,7 +318,6 @@ namespace EnACT
                                 //through all of this caption's words.
                                 if (r.NodeType == XmlNodeType.EndElement && r.Name.Equals(XMLElements.Caption))
                                     break;
-
                                 else if (r.NodeType == XmlNodeType.Element && r.Name.Equals(XMLElements.Word))
                                 {
                                     AssertNode(r, XMLElements.Word); //Doublecheck, it's the only way to be sure.
@@ -328,8 +327,6 @@ namespace EnACT
                                     word.Emotion = (Emotion)Convert.ToInt32(r[XMLAttributes.Emotion]);
                                     word.Intensity = (Intensity)Convert.ToInt32(r[XMLAttributes.Intensity]);
                                     c.Words.Add(word);
-
-                                    r.ReadEndElement(); //Read the end of the word node
                                 }
                             }
                             c.ReindexWords(); //Set up proper indexes
