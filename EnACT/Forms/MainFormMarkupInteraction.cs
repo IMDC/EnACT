@@ -449,6 +449,8 @@ namespace EnACT
 
             //Update Caption in CaptionView
             CaptionView.Invalidate();
+            //Update Timeline
+            Timeline.Redraw();
         }
         #endregion SelectedCaption_PropertyChanged
     }
