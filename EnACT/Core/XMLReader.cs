@@ -211,13 +211,13 @@ namespace EnACT
                         case XMLElements.Settings:
 
                             r.Read(); 
-                            AssertNode(r, XMLElements.Meta);
+                            r.AssertNode(XMLElements.Meta);
                             settings.Base = r.GetNonNullAttribute(XMLAttributes.Base);
                             settings.Spacing = r.GetNonNullAttribute(XMLAttributes.WordSpacing);
                             settings.SeparateEmotionWords = r.GetNonNullAttribute(XMLAttributes.SeparateEmotionWords);
 
                             r.Read();
-                            AssertNode(r, XMLElements.Playback);
+                            r.AssertNode(XMLElements.Playback);
                             settings.Playback.AutoPlay = r.GetBoolAttribute(XMLAttributes.AutoPlay);
                             settings.Playback.AutoRewind = r.GetBoolAttribute(XMLAttributes.AutoRewind);
                             settings.Playback.Seek = r.GetNonNullAttribute(XMLAttributes.Seek);
@@ -227,7 +227,7 @@ namespace EnACT
                             settings.Playback.ShowCaptions = r.GetBoolAttribute(XMLAttributes.ShowCaptions);
 
                             r.Read();
-                            AssertNode(r, XMLElements.Skin);
+                            r.AssertNode(XMLElements.Skin);
                             settings.Skin.Source = r.GetNonNullAttribute(XMLAttributes.Source);
                             settings.Skin.AutoHide = r.GetBoolAttribute(XMLAttributes.AutoHide);
                             settings.Skin.FadeTime = r.GetIntAttribute(XMLAttributes.FadeTime);
@@ -235,13 +235,13 @@ namespace EnACT
                             settings.Skin.BackgroundColour = r.GetNonNullAttribute(XMLAttributes.BackgroundColour);
                             
                             r.Read();
-                            AssertNode(r, XMLElements.Video);
+                            r.AssertNode(XMLElements.Video);
                             settings.VideoSource = r.GetNonNullAttribute(XMLAttributes.Source);
                            
                             r.Read();
-                            AssertNode(r, XMLElements.Emotions);
+                            r.AssertNode(XMLElements.Emotions);
                                 r.Read();
-                                AssertNode(r, XMLElements.Happy);
+                                r.AssertNode(XMLElements.Happy);
                                 settings.Happy.Fps = r.GetNonNullAttribute(XMLAttributes.FPS);
                                 settings.Happy.Duration = r.GetNonNullAttribute(XMLAttributes.Duration);
                                 settings.Happy.AlphaBegin = r.GetNonNullAttribute(XMLAttributes.AlphaBegin);
@@ -251,7 +251,7 @@ namespace EnACT
                                 settings.Happy.YFinish = r.GetNonNullAttribute(XMLAttributes.YFinish);
                                 
                                 r.Read();
-                                AssertNode(r, XMLElements.Sad);
+                                r.AssertNode(XMLElements.Sad);
                                 settings.Sad.Fps = r.GetNonNullAttribute(XMLAttributes.FPS);
                                 settings.Sad.Duration = r.GetNonNullAttribute(XMLAttributes.Duration);
                                 settings.Sad.AlphaBegin = r.GetNonNullAttribute(XMLAttributes.AlphaBegin);
@@ -261,7 +261,7 @@ namespace EnACT
                                 settings.Sad.YFinish = r.GetNonNullAttribute(XMLAttributes.YFinish);
                                 
                                 r.Read();
-                                AssertNode(r, XMLElements.Fear);
+                                r.AssertNode(XMLElements.Fear);
                                 settings.Fear.Fps = r.GetNonNullAttribute(XMLAttributes.FPS);
                                 settings.Fear.Duration = r.GetNonNullAttribute(XMLAttributes.Duration);
                                 settings.Fear.ScaleBegin = r.GetNonNullAttribute(XMLAttributes.ScaleBegin);
@@ -270,7 +270,7 @@ namespace EnACT
                                 settings.Fear.VibrateY = r.GetNonNullAttribute(XMLAttributes.VibrateY);
                                 
                                 r.Read();
-                                AssertNode(r, XMLElements.Anger);
+                                r.AssertNode(XMLElements.Anger);
                                 settings.Anger.Fps = r.GetNonNullAttribute(XMLAttributes.FPS);
                                 settings.Anger.Duration = r.GetNonNullAttribute(XMLAttributes.Duration);
                                 settings.Anger.ScaleBegin = r.GetNonNullAttribute(XMLAttributes.ScaleBegin);
@@ -280,18 +280,18 @@ namespace EnACT
                             break;
                         case XMLElements.Speakers: break; //Do Nothing
                         case XMLElements.Speaker:
-                            AssertNode(r, XMLElements.Speaker);
+                            r.AssertNode(XMLElements.Speaker);
                             string name = r.GetNonNullAttribute(XMLAttributes.Name);
                             Speaker s = new Speaker(name);
                             
                             r.Read();
-                            AssertNode(r, XMLElements.Background);
+                            r.AssertNode(XMLElements.Background);
                             s.BG.Visible = Convert.ToBoolean(r.GetNonNullAttribute(XMLAttributes.Visible));
                             s.BG.Alpha = r.GetDoubleAttribute(XMLAttributes.Alpha);
                             s.BG.Colour = r.GetNonNullAttribute(XMLAttributes.Colour);
                            
                             r.Read();
-                            AssertNode(r, XMLElements.Font);
+                            r.AssertNode(XMLElements.Font);
                             s.Font.Family = r.GetNonNullAttribute(XMLAttributes.Name);
                             s.Font.Size = r.GetIntAttribute(XMLAttributes.Size);
                             s.Font.Colour = r.GetNonNullAttribute(XMLAttributes.Colour);
@@ -303,7 +303,7 @@ namespace EnACT
                             break;
                         case XMLElements.Captions: break; //Do Nothing
                         case XMLElements.Caption:
-                            AssertNode(r, XMLElements.Caption);
+                            r.AssertNode(XMLElements.Caption);
                             EditorCaption c = new EditorCaption();
                             c.Begin = r.GetNonNullAttribute(XMLAttributes.Begin);
                             c.End = r.GetNonNullAttribute(XMLAttributes.End);
@@ -321,7 +321,7 @@ namespace EnACT
                                     break;
                                 else if (r.NodeType == XmlNodeType.Element && r.Name.Equals(XMLElements.Word))
                                 {
-                                    AssertNode(r, XMLElements.Word); //Doublecheck, it's the only way to be sure.
+                                    r.AssertNode(XMLElements.Word); //Doublecheck, it's the only way to be sure.
 
                                     Emotion e = (Emotion)r.GetIntAttribute(XMLAttributes.Emotion);
                                     Intensity i = (Intensity)r.GetIntAttribute(XMLAttributes.Intensity);
@@ -340,25 +340,6 @@ namespace EnACT
             }
 
             return Tuple.Create(captionList,speakerSet,settings);
-        }
-        #endregion
-
-        #region AssertNode
-        /// <summary>
-        /// Asserts that the current node name in the XmlReader is the same as the expected node 
-        /// name. If the two do not match, an ArgumentException is thrown.
-        /// </summary>
-        /// <param name="r">The XmlReader to with the current node to compare.</param>
-        /// <param name="expectedNodeName">The name that the current node is expected to have.</param>
-        private static void AssertNode(XmlReader r, string expectedNodeName)
-        {
-            /* When using XmlReader, trying to access attributes that it can't find will return 
-             * null, which can be confusing if you don't realize the current node is not the 
-             * correct node.
-             */
-            if (!r.IsStartElement(expectedNodeName))
-                throw new ArgumentException(string.Format("Xml node '{0}' is not the current node.", 
-                    expectedNodeName));
         }
         #endregion
     }//Class

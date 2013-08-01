@@ -122,6 +122,23 @@ namespace EnACT
 
         #region XmlReader Extention Methods
         /// <summary>
+        /// Asserts that the current node name in the XmlReader is the same as the expected node 
+        /// name. If the two do not match, an ArgumentException is thrown.
+        /// </summary>
+        /// <param name="r">The XmlReader to with the current node to compare.</param>
+        /// <param name="expectedNodeName">The name that the current node is expected to have.</param>
+        public static void AssertNode(this XmlReader r, string expectedNodeName)
+        {
+            /* When using XmlReader, trying to access attributes that it can't find will return 
+             * null, which can be confusing if you don't realize the current node is not the 
+             * correct node.
+             */
+            if (!r.IsStartElement(expectedNodeName))
+                throw new ArgumentException(string.Format("Xml node '{0}' is not the current node.",
+                    expectedNodeName));
+        }
+
+        /// <summary>
         /// Reads in an attribute from the current node and checks to make sure that the returned
         /// string is not null. If the string is null, an ArgumentException is thrown, signifying
         /// that the attribute was not found.
