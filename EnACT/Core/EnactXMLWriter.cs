@@ -557,7 +557,8 @@ namespace EnACT
                             w.WriteAttributeString(XMLAttributes.Duration, settings.Happy.Duration);
                             w.WriteAttributeString(XMLAttributes.AlphaBegin, settings.Happy.AlphaBegin);
                             w.WriteAttributeString(XMLAttributes.AlphaFinish, settings.Happy.AlphaFinish);
-                            w.WriteAttributeString(XMLAttributes.ScaleBegin, settings.Happy.ScaleFinish);
+                            w.WriteAttributeString(XMLAttributes.ScaleBegin, settings.Happy.ScaleBegin);
+                            w.WriteAttributeString(XMLAttributes.ScaleFinish, settings.Happy.ScaleFinish);
                             w.WriteAttributeString(XMLAttributes.YFinish, settings.Happy.YFinish);
                             w.WriteEndElement();
 
@@ -566,7 +567,8 @@ namespace EnACT
                             w.WriteAttributeString(XMLAttributes.Duration, settings.Sad.Duration);
                             w.WriteAttributeString(XMLAttributes.AlphaBegin, settings.Sad.AlphaBegin);
                             w.WriteAttributeString(XMLAttributes.AlphaFinish, settings.Sad.AlphaFinish);
-                            w.WriteAttributeString(XMLAttributes.ScaleBegin, settings.Sad.ScaleFinish);
+                            w.WriteAttributeString(XMLAttributes.ScaleBegin, settings.Sad.ScaleBegin);
+                            w.WriteAttributeString(XMLAttributes.ScaleFinish, settings.Sad.ScaleFinish);
                             w.WriteAttributeString(XMLAttributes.YFinish, settings.Sad.YFinish);
                             w.WriteEndElement();
 

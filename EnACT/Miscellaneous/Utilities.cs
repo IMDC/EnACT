@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Xml;
 
 namespace EnACT
 {
@@ -116,6 +117,63 @@ namespace EnACT
         public static string ToLowerString(this bool b)
         {
             return b.ToString().ToLower();
+        }
+        #endregion
+
+        #region XmlReader Extention Methods
+        /// <summary>
+        /// Reads in an attribute from the current node and checks to make sure that the returned
+        /// string is not null. If the string is null, an ArgumentException is thrown, signifying
+        /// that the attribute was not found.
+        /// </summary>
+        /// <param name="r">The XmlReader being used to read xml.</param>
+        /// <param name="attributeName">The name of the attribute to read.</param>
+        /// <returns>The attribute string.</returns>
+        public static string GetNonNullAttribute(this XmlReader r, string attributeName)
+        {
+            string attributeString = r[attributeName];
+            if (attributeString == null)
+                throw new ArgumentException("Attribute " + attributeName + " not found.");
+            return attributeString;
+        }
+
+        /// <summary>
+        /// Reads in an attribute from the current node and checks to make sure that the returned
+        /// value is not null. If the value is null, an ArgumentException is thrown, signifying
+        /// that the attribute was not found. Returns the attribute as a boolean.
+        /// </summary>
+        /// <param name="r">The XmlReader being used to read xml.</param>
+        /// <param name="attributeName">The name of the attribute to read.</param>
+        /// <returns>The attribute as a boolean.</returns>
+        public static bool GetBoolAttribute(this XmlReader r, string attributeName)
+        {
+            return Convert.ToBoolean(r.GetNonNullAttribute(attributeName));
+        }
+
+        /// <summary>
+        /// Reads in an attribute from the current node and checks to make sure that the returned
+        /// value is not null. If the value is null, an ArgumentException is thrown, signifying
+        /// that the attribute was not found. Returns the attribute as an integer.
+        /// </summary>
+        /// <param name="r">The XmlReader being used to read xml.</param>
+        /// <param name="attributeName">The name of the attribute to read.</param>
+        /// <returns>The attribute as an integer.</returns>
+        public static int GetIntAttribute(this XmlReader r, string attributeName)
+        {
+            return Convert.ToInt32(r.GetNonNullAttribute(attributeName));
+        }
+
+        /// <summary>
+        /// Reads in an attribute from the current node and checks to make sure that the returned
+        /// value is not null. If the value is null, an ArgumentException is thrown, signifying
+        /// that the attribute was not found. Returns the attribute as a double.
+        /// </summary>
+        /// <param name="r">The XmlReader being used to read xml.</param>
+        /// <param name="attributeName">The name of the attribute to read.</param>
+        /// <returns>The attribute as a double.</returns>
+        public static double GetDoubleAttribute(this XmlReader r, string attributeName)
+        {
+            return Convert.ToDouble(r.GetNonNullAttribute(attributeName));
         }
         #endregion
     }

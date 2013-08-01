@@ -177,6 +177,7 @@ namespace EnACT
         }
         #endregion
 
+        #region ParseEngineXML
         /// <summary>
         /// Reads in an engine.xml file and turns it into a CaptionList, SpeakerSet and engine 
         /// Settings.
@@ -211,90 +212,90 @@ namespace EnACT
 
                             r.Read(); 
                             AssertNode(r, XMLElements.Meta);
-                            settings.Base = r[XMLAttributes.Base];
-                            settings.Spacing = r[XMLAttributes.WordSpacing];
-                            settings.SeparateEmotionWords = r[XMLAttributes.SeparateEmotionWords];
+                            settings.Base = r.GetNonNullAttribute(XMLAttributes.Base);
+                            settings.Spacing = r.GetNonNullAttribute(XMLAttributes.WordSpacing);
+                            settings.SeparateEmotionWords = r.GetNonNullAttribute(XMLAttributes.SeparateEmotionWords);
 
                             r.Read();
                             AssertNode(r, XMLElements.Playback);
-                            settings.Playback.AutoPlay = Convert.ToBoolean(r[XMLAttributes.AutoPlay]);
-                            settings.Playback.AutoRewind = Convert.ToBoolean(r[XMLAttributes.AutoRewind]);
-                            settings.Playback.Seek = r[XMLAttributes.Seek];
-                            settings.Playback.AutoSize = Convert.ToBoolean(r[XMLAttributes.AutoSize]);
-                            settings.Playback.Scale = Convert.ToInt32(r[XMLAttributes.Scale]);
-                            settings.Playback.Volume = Convert.ToInt32(r[XMLAttributes.Volume]);
-                            settings.Playback.ShowCaptions = Convert.ToBoolean(r[XMLAttributes.ShowCaptions]);
+                            settings.Playback.AutoPlay = r.GetBoolAttribute(XMLAttributes.AutoPlay);
+                            settings.Playback.AutoRewind = r.GetBoolAttribute(XMLAttributes.AutoRewind);
+                            settings.Playback.Seek = r.GetNonNullAttribute(XMLAttributes.Seek);
+                            settings.Playback.AutoSize = r.GetBoolAttribute(XMLAttributes.AutoSize);
+                            settings.Playback.Scale = r.GetIntAttribute(XMLAttributes.Scale);
+                            settings.Playback.Volume = r.GetIntAttribute(XMLAttributes.Volume);
+                            settings.Playback.ShowCaptions = r.GetBoolAttribute(XMLAttributes.ShowCaptions);
 
                             r.Read();
                             AssertNode(r, XMLElements.Skin);
-                            settings.Skin.Source = r[XMLAttributes.Source];
-                            settings.Skin.AutoHide = Convert.ToBoolean(r[XMLAttributes.AutoHide]);
-                            settings.Skin.FadeTime = Convert.ToInt32(r[XMLAttributes.FadeTime]);
-                            settings.Skin.BackGroundAlpha = Convert.ToInt32(r[XMLAttributes.BackgroundAlpha]);
-                            settings.Skin.BackgroundColour = r[XMLAttributes.BackgroundColour];
+                            settings.Skin.Source = r.GetNonNullAttribute(XMLAttributes.Source);
+                            settings.Skin.AutoHide = r.GetBoolAttribute(XMLAttributes.AutoHide);
+                            settings.Skin.FadeTime = r.GetIntAttribute(XMLAttributes.FadeTime);
+                            settings.Skin.BackGroundAlpha = r.GetIntAttribute(XMLAttributes.BackgroundAlpha);
+                            settings.Skin.BackgroundColour = r.GetNonNullAttribute(XMLAttributes.BackgroundColour);
                             
                             r.Read();
                             AssertNode(r, XMLElements.Video);
-                            settings.VideoSource = r[XMLAttributes.Source];
+                            settings.VideoSource = r.GetNonNullAttribute(XMLAttributes.Source);
                            
                             r.Read();
                             AssertNode(r, XMLElements.Emotions);
                                 r.Read();
                                 AssertNode(r, XMLElements.Happy);
-                                settings.Happy.Fps = r[XMLAttributes.FPS];
-                                settings.Happy.Duration = r[XMLAttributes.Duration];
-                                settings.Happy.AlphaBegin = r[XMLAttributes.AlphaBegin];
-                                settings.Happy.AlphaFinish = r[XMLAttributes.AlphaFinish];
-                                settings.Happy.ScaleBegin = r[XMLAttributes.ScaleBegin];
-                                settings.Happy.ScaleFinish = r[XMLAttributes.ScaleFinish];
-                                settings.Happy.YFinish = r[XMLAttributes.YFinish];
+                                settings.Happy.Fps = r.GetNonNullAttribute(XMLAttributes.FPS);
+                                settings.Happy.Duration = r.GetNonNullAttribute(XMLAttributes.Duration);
+                                settings.Happy.AlphaBegin = r.GetNonNullAttribute(XMLAttributes.AlphaBegin);
+                                settings.Happy.AlphaFinish = r.GetNonNullAttribute(XMLAttributes.AlphaFinish);
+                                settings.Happy.ScaleBegin = r.GetNonNullAttribute(XMLAttributes.ScaleBegin);
+                                settings.Happy.ScaleFinish = r.GetNonNullAttribute(XMLAttributes.ScaleFinish);
+                                settings.Happy.YFinish = r.GetNonNullAttribute(XMLAttributes.YFinish);
                                 
                                 r.Read();
                                 AssertNode(r, XMLElements.Sad);
-                                settings.Sad.Fps = r[XMLAttributes.FPS];
-                                settings.Sad.Duration = r[XMLAttributes.Duration];
-                                settings.Sad.AlphaBegin = r[XMLAttributes.AlphaBegin];
-                                settings.Sad.AlphaFinish = r[XMLAttributes.AlphaFinish];
-                                settings.Sad.ScaleBegin = r[XMLAttributes.ScaleBegin];
-                                settings.Sad.ScaleFinish = r[XMLAttributes.ScaleFinish];
-                                settings.Sad.YFinish = r[XMLAttributes.YFinish];
+                                settings.Sad.Fps = r.GetNonNullAttribute(XMLAttributes.FPS);
+                                settings.Sad.Duration = r.GetNonNullAttribute(XMLAttributes.Duration);
+                                settings.Sad.AlphaBegin = r.GetNonNullAttribute(XMLAttributes.AlphaBegin);
+                                settings.Sad.AlphaFinish = r.GetNonNullAttribute(XMLAttributes.AlphaFinish);
+                                settings.Sad.ScaleBegin = r.GetNonNullAttribute(XMLAttributes.ScaleBegin);
+                                settings.Sad.ScaleFinish = r.GetNonNullAttribute(XMLAttributes.ScaleFinish);
+                                settings.Sad.YFinish = r.GetNonNullAttribute(XMLAttributes.YFinish);
                                 
                                 r.Read();
                                 AssertNode(r, XMLElements.Fear);
-                                settings.Fear.Fps = r[XMLAttributes.FPS];
-                                settings.Fear.Duration = r[XMLAttributes.Duration];
-                                settings.Fear.ScaleBegin = r[XMLAttributes.ScaleBegin];
-                                settings.Fear.ScaleFinish = r[XMLAttributes.ScaleFinish];
-                                settings.Fear.VibrateX = r[XMLAttributes.VibrateX];
-                                settings.Fear.VibrateY = r[XMLAttributes.VibrateY];
+                                settings.Fear.Fps = r.GetNonNullAttribute(XMLAttributes.FPS);
+                                settings.Fear.Duration = r.GetNonNullAttribute(XMLAttributes.Duration);
+                                settings.Fear.ScaleBegin = r.GetNonNullAttribute(XMLAttributes.ScaleBegin);
+                                settings.Fear.ScaleFinish = r.GetNonNullAttribute(XMLAttributes.ScaleFinish);
+                                settings.Fear.VibrateX = r.GetNonNullAttribute(XMLAttributes.VibrateX);
+                                settings.Fear.VibrateY = r.GetNonNullAttribute(XMLAttributes.VibrateY);
                                 
                                 r.Read();
                                 AssertNode(r, XMLElements.Anger);
-                                settings.Anger.Fps = r[XMLAttributes.FPS];
-                                settings.Anger.Duration = r[XMLAttributes.Duration];
-                                settings.Anger.ScaleBegin = r[XMLAttributes.ScaleBegin];
-                                settings.Anger.ScaleFinish = r[XMLAttributes.ScaleFinish];
-                                settings.Anger.VibrateX = r[XMLAttributes.VibrateX];
-                                settings.Anger.VibrateY = r[XMLAttributes.VibrateY];
+                                settings.Anger.Fps = r.GetNonNullAttribute(XMLAttributes.FPS);
+                                settings.Anger.Duration = r.GetNonNullAttribute(XMLAttributes.Duration);
+                                settings.Anger.ScaleBegin = r.GetNonNullAttribute(XMLAttributes.ScaleBegin);
+                                settings.Anger.ScaleFinish = r.GetNonNullAttribute(XMLAttributes.ScaleFinish);
+                                settings.Anger.VibrateX = r.GetNonNullAttribute(XMLAttributes.VibrateX);
+                                settings.Anger.VibrateY = r.GetNonNullAttribute(XMLAttributes.VibrateY);
                             break;
                         case XMLElements.Speakers: break; //Do Nothing
                         case XMLElements.Speaker:
                             AssertNode(r, XMLElements.Speaker);
-                            string name = r[XMLAttributes.Name];
+                            string name = r.GetNonNullAttribute(XMLAttributes.Name);
                             Speaker s = new Speaker(name);
                             
                             r.Read();
                             AssertNode(r, XMLElements.Background);
-                            s.BG.Visible = Convert.ToBoolean(r[XMLAttributes.Visible]);
-                            s.BG.Alpha = Convert.ToDouble(r[XMLAttributes.Alpha]);
-                            s.BG.Colour = r[XMLAttributes.Colour];
+                            s.BG.Visible = Convert.ToBoolean(r.GetNonNullAttribute(XMLAttributes.Visible));
+                            s.BG.Alpha = r.GetDoubleAttribute(XMLAttributes.Alpha);
+                            s.BG.Colour = r.GetNonNullAttribute(XMLAttributes.Colour);
                            
                             r.Read();
                             AssertNode(r, XMLElements.Font);
-                            s.Font.Family = r[XMLAttributes.Name];
-                            s.Font.Size = Convert.ToInt32(r[XMLAttributes.Size]);
-                            s.Font.Colour = r[XMLAttributes.Colour];
-                            s.Font.Bold = Convert.ToInt32(r[XMLAttributes.Bold]);
+                            s.Font.Family = r.GetNonNullAttribute(XMLAttributes.Name);
+                            s.Font.Size = r.GetIntAttribute(XMLAttributes.Size);
+                            s.Font.Colour = r.GetNonNullAttribute(XMLAttributes.Colour);
+                            s.Font.Bold = r.GetIntAttribute(XMLAttributes.Bold);
                             r.ReadStartElement(XMLElements.Font);
                                     
                             //Add to speakerSet
@@ -304,11 +305,11 @@ namespace EnACT
                         case XMLElements.Caption:
                             AssertNode(r, XMLElements.Caption);
                             EditorCaption c = new EditorCaption();
-                            c.Begin = r[XMLAttributes.Begin];
-                            c.End = r[XMLAttributes.End];
-                            c.Speaker = speakerSet[r[XMLAttributes.Speaker]];
-                            c.Location = (ScreenLocation) Convert.ToInt32(r[XMLAttributes.Location]);
-                            c.Alignment = (Alignment) Convert.ToInt32(r[XMLAttributes.Align]);
+                            c.Begin = r.GetNonNullAttribute(XMLAttributes.Begin);
+                            c.End = r.GetNonNullAttribute(XMLAttributes.End);
+                            c.Speaker = speakerSet[r.GetNonNullAttribute(XMLAttributes.Speaker)];
+                            c.Location = (ScreenLocation) r.GetIntAttribute(XMLAttributes.Location);
+                            c.Alignment = (Alignment) r.GetIntAttribute(XMLAttributes.Align);
 
                             List<EditorCaptionWord> wordList = new List<EditorCaptionWord>();
 
@@ -322,8 +323,8 @@ namespace EnACT
                                 {
                                     AssertNode(r, XMLElements.Word); //Doublecheck, it's the only way to be sure.
 
-                                    Emotion e = (Emotion)Convert.ToInt32(r[XMLAttributes.Emotion]);
-                                    Intensity i = (Intensity)Convert.ToInt32(r[XMLAttributes.Intensity]);
+                                    Emotion e = (Emotion)r.GetIntAttribute(XMLAttributes.Emotion);
+                                    Intensity i = (Intensity)r.GetIntAttribute(XMLAttributes.Intensity);
 
                                     //Get word from node and add it to the list
                                     EditorCaptionWord word = new EditorCaptionWord(e, i, r.ReadString(), 0);
@@ -340,7 +341,9 @@ namespace EnACT
 
             return Tuple.Create(captionList,speakerSet,settings);
         }
+        #endregion
 
+        #region AssertNode
         /// <summary>
         /// Asserts that the current node name in the XmlReader is the same as the expected node 
         /// name. If the two do not match, an ArgumentException is thrown.
@@ -357,5 +360,6 @@ namespace EnACT
                 throw new ArgumentException(string.Format("Xml node '{0}' is not the current node.", 
                     expectedNodeName));
         }
+        #endregion
     }//Class
 }//Namepace
