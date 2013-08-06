@@ -23,7 +23,7 @@ namespace EnACT
             public const int SpeakerColumn   = 100;
             public const int AlignmentColumn = 70;
             public const int LocationColumn  = 80;
-            public const int TextColum       = 100;
+            public const int TextColumn      = 100;
         }
 
         /// <summary>
