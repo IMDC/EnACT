@@ -139,7 +139,7 @@ namespace EnACT
 
         #region CaptionView Buttons
         /// <summary>
-        /// Inserts a new row above the selected caption in CaptionView.
+        /// Inserts a new row below the selected caption in CaptionView.
         /// </summary>
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>

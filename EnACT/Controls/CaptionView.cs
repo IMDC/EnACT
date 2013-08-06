@@ -219,20 +219,17 @@ namespace EnACT
 
         #region Row Manipulation
         /// <summary>
-        /// Adds a row to the CaptionsList at the index of the currently selected row
+        /// Adds a row to the CaptionsList below the index of the currently selected row
         /// </summary>
         public void AddRow()
         {
-            //If the user has a row selected
-            if (CurrentRow != null)
-            {
-                BindingList.Insert(CurrentRow.Index, new EditorCaption());
-            }
-            //Else there is no current selection or the table is empty
+            //If there are no rows in the list, add a new row
+            if(BindingList.Count == 0)
+                BindingList.Add(new EditorCaption());
+            //Else insert new row under the currently selected row.
             else
-            {
-                BindingList.Insert(0, new EditorCaption());
-            }
+                BindingList.Insert(CurrentRow.Index + 1, new EditorCaption());
+                
         }
 
         /// <summary>
