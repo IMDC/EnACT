@@ -575,6 +575,9 @@ namespace EnACT
         {
             //Set ProjectInfo and core data references to the new project's data.
             ProjectInfo = e.ProjectInfo;
+
+            //Save project by calling the SaveProject menu item click handler.
+            saveProjectToolStripMenuItem.PerformClick();
         }
         #endregion
 
