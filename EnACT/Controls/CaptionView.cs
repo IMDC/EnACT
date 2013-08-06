@@ -224,14 +224,17 @@ namespace EnACT
         public void AddRow()
         {
             //If there are no rows in the list, add a new row
-            if(BindingList.Count == 0)
+            if (BindingList.Count == 0)
+            {
                 BindingList.Add(new EditorCaption());
+                SetCurrentRow(0, ColumnNames.Text);
+            }
             //Else insert new row under the currently selected row.
             else
+            {
                 BindingList.Insert(CurrentRow.Index + 1, new EditorCaption());
-
-            //Change selected row the new position
-            CurrentCell = this[0, CurrentRow.Index + 1];
+                SetCurrentRow(CurrentRow.Index + 1, ColumnNames.Text);
+            }
         }
 
         /// <summary>
@@ -277,7 +280,7 @@ namespace EnACT
                 SwapRows(index, index - 1);
 
                 //Change selected row the new position
-                CurrentCell = this[0, index - 1];
+                SetCurrentRow(index - 1);
             }
         }
 
@@ -295,7 +298,7 @@ namespace EnACT
                 SwapRows(index, index + 1);
 
                 //Change selected row the new position
-                CurrentCell = this[0, index + 1];
+                SetCurrentRow(index + 1);
             }
         }
 
@@ -310,6 +313,26 @@ namespace EnACT
             EditorCaption temp = BindingList[index1];
             BindingList[index1] = BindingList[index2];
             BindingList[index2] = temp;
+        }
+
+        /// <summary>
+        /// Sets the current row to the specified row index. 
+        /// </summary>
+        /// <param name="rowIndex">The row index to change the CurrentRow to.</param>
+        private void SetCurrentRow(int rowIndex)
+        {
+            CurrentCell = this[0, rowIndex];
+        }
+
+        /// <summary>
+        /// Sets the current row to the specified row index.
+        /// </summary>
+        /// <param name="rowIndex">The row index to change the CurrentRow to.</param>
+        /// <param name="columnName">The name of a column to select in the new CurrentRow as the 
+        /// new currently active cell.</param>
+        private void SetCurrentRow(int rowIndex, string columnName)
+        {
+            CurrentCell = this[columnName, rowIndex];
         }
         #endregion
 
