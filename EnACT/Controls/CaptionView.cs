@@ -229,7 +229,9 @@ namespace EnACT
             //Else insert new row under the currently selected row.
             else
                 BindingList.Insert(CurrentRow.Index + 1, new EditorCaption());
-                
+
+            //Change selected row the new position
+            CurrentCell = this[0, CurrentRow.Index + 1];
         }
 
         /// <summary>
