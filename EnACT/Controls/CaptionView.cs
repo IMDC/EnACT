@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
 using System.Reflection;
 using System.Drawing;
+using System.Collections;
 
 namespace EnACT
 {
@@ -242,26 +243,15 @@ namespace EnACT
         /// </summary>
         public void DeleteSelectedRows()
         {
-            /* TODO: .NET 4.5 has a SortedSet<T> object. If we upgrade to 4.5, 
-            * use that instead of a list. Unfortunately it is not available
-            * in .NET 3.5 or older.
-            */
-            List<EditorCaption> cList = new List<EditorCaption>();
+            //Create a sorted set that contains ints from largest to smallest
+            SortedSet<int> indexSet = new SortedSet<int>(Comparer<int>.Create((x,y) => y.CompareTo(x)));
 
-            //Add the index of each selected row to a list and remove them
-            foreach (DataGridViewRow r in SelectedRows)
-            {
-                cList.Add(BindingList[r.Index]);
-            }
+            //Insert selected row indexes into set
+            foreach (DataGridViewRow r in SelectedRows){ indexSet.Add(r.Index); }
 
-            //Start from the bottom of the list
-            cList.Reverse();
+            //Delete rows from largest index to smallest
+            foreach (int i in indexSet) { BindingList.RemoveAt(i); }
 
-            //Remove each caption
-            foreach (EditorCaption c in cList)
-            {
-                BindingList.Remove(c);
-            }
             //Deselect everything
             //CaptionView.ClearSelection();
         }
