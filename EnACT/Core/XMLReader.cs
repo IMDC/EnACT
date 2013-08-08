@@ -28,8 +28,6 @@ namespace EnACT
             string dialogues;
             string projectPath = Path.GetDirectoryName(path);
 
-            ProjectInfo project;
-
             using (XmlTextReader r = new XmlTextReader(path))
             {
                 r.ReadStartElement("project");
@@ -58,7 +56,7 @@ namespace EnACT
             }
 
             //Construct the project
-            project = new ProjectInfo(name, videoPath, projectPath);
+            ProjectInfo project = new ProjectInfo(name, videoPath, projectPath);
 
             var tuple = ParseEngineXML(Path.Combine(projectPath, "engine" + ProjectInfo.EngineXMLExtension));
 

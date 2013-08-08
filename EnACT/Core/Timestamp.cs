@@ -38,7 +38,7 @@ namespace EnACT
         /// <summary>
         /// A regular expression that will validate a correct timestamp
         /// </summary>
-        private static Regex validTimestamp = new Regex(@"^[0-9][0-9]:[0-5][0-9]:[0-5][0-9]\.[0-9]$");
+        private static readonly Regex validTimestamp = new Regex(@"^[0-9][0-9]:[0-5][0-9]:[0-5][0-9]\.[0-9]$");
         #endregion
 
         #region Private Fields
@@ -98,7 +98,6 @@ namespace EnACT
                 if (timeString == null)
                 {
                     double timeDouble = time;
-                    string ts;
 
                     //Get time value without any decimal places
                     int timeInt = (int)time;
@@ -118,7 +117,7 @@ namespace EnACT
                     timeDouble += timeInt;
 
                     //Format string
-                    ts = hours.ToString("00:") + minutes.ToString("00:") + timeDouble.ToString("00.0") ;
+                    string ts = hours.ToString("00:") + minutes.ToString("00:") + timeDouble.ToString("00.0");
 
                     //Check to ensure Timestamp validates, and isn't something like "00:-35791394:NaN"
                     if (!TimeStampValidates(ts))
@@ -135,7 +134,7 @@ namespace EnACT
                 if (!TimeStampValidates(value))
                     throw new InvalidTimestampException("String value is not a valid Timestamp");
 
-                if (value == null || value == string.Empty)
+                if (string.IsNullOrEmpty(value))
                     time = 0;
 
                 //If value is lexicographically greater than MaximumTimeValue

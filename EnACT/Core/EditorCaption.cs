@@ -233,13 +233,12 @@ namespace EnACT
             string[] words = line.Split(); //Separate by spaces
 
             int cumulativePosition = 0;
-            EditorCaptionWord cw;
 
             foreach (string word in words)
             {
                 if (word != "")
                 {
-                    cw = new EditorCaptionWord(word, cumulativePosition);
+                    EditorCaptionWord cw = new EditorCaptionWord(word, cumulativePosition);
                     this.Words.Add(cw);
                     cumulativePosition += cw.Length + SpaceWidth;
                 }

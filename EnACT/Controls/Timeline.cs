@@ -109,7 +109,7 @@ namespace EnACT
         /// <summary>
         /// A list of Timestamps used to keep track of position in the Timeline
         /// </summary>
-        private List<Timestamp> playheadBarTimes;
+        private readonly List<Timestamp> playheadBarTimes;
 
         /// <summary>
         /// The level of Zoom the Timeline is at.
@@ -534,8 +534,6 @@ namespace EnACT
             }
             else
             {
-                double beginX;  //X-Coord of c.Begin
-                double endX;    //X-Coord of c.End
                 foreach (EditorCaption c in CaptionList)
                 {
                     //If the mouse click is not in the same Y location as c, then none of the following code
@@ -543,23 +541,21 @@ namespace EnACT
                     if (YCoordinateToScreenLocation(e.Y) != c.Location)
                         continue;
 
-                    beginX = TimeToXCoordinate(c.Begin);
+                    double beginX = TimeToXCoordinate(c.Begin);  //X-Coord of c.Begin
 
                     //If selecting the beginning of a caption
                     if (e.X - CaptionSelectionPixelWidth <= beginX && beginX <= e.X + CaptionSelectionPixelWidth)
                     {
                         mouseSelection = new TimelineMouseSelection(TimelineMouseAction.changeCaptionBegin, c);
-                        Console.WriteLine("C.Begin");
                         break;
                     }
 
-                    endX = TimeToXCoordinate(c.End);
+                    double endX = TimeToXCoordinate(c.End);    //X-Coord of c.End
 
                     //If selecting the end of the Caption
                     if (e.X - CaptionSelectionPixelWidth <= endX && endX <= e.X + CaptionSelectionPixelWidth)
                     {
                         mouseSelection = new TimelineMouseSelection(TimelineMouseAction.changeCaptionEnd, c);
-                        Console.WriteLine("C.End");
                         break;
                     }
 
@@ -568,7 +564,6 @@ namespace EnACT
                     {
                         mouseSelection = new TimelineMouseSelection(TimelineMouseAction.moveCaption, c,
                             mouseClickTime - c.Begin);
-                        Console.WriteLine("MoveCaption");
                         break;
                     }
                 }//foreach
@@ -643,7 +638,7 @@ namespace EnACT
 
                 //Should not happen, so throw an exception if it does
                 default: throw new InvalidEnumArgumentException("mouseSelection.Action", 
-                    mouseSelection.Action.GetHashCode(), typeof(TimelineMouseAction)); ;
+                    mouseSelection.Action.GetHashCode(), typeof(TimelineMouseAction));
             }
 
             Redraw();

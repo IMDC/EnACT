@@ -56,7 +56,6 @@ namespace EnACT
 
             string path = scriptPath; //Get path
             string[] lines = System.IO.File.ReadAllLines(@path); //Read in file
-            string speakerName = "";
 
             //Start off with the Default speaker
             Speaker CurrentSpeaker = speakerSet[Speaker.DefaultName];
@@ -75,8 +74,7 @@ namespace EnACT
                     int lastChar = lines[i].Length - 1;
                     if (lines[i][lastChar] == ':')
                     {
-                        //Console.WriteLine("New Speaker: {0}", lines[i]);
-                        speakerName = lines[i].Substring(0, lines[i].Length - 1);
+                        string speakerName = lines[i].Substring(0, lines[i].Length - 1);
 
                         if (speakerSet.ContainsKey(speakerName))
                         {
@@ -88,7 +86,7 @@ namespace EnACT
                             speakerSet.Add(CurrentSpeaker.Name, CurrentSpeaker);
                         }
                     }
-                    //If surrounded by [ and ], the word is a description
+                        //If surrounded by [ and ], the word is a description
                     else if (lines[i][0] == '[' && lines[i][lastChar] == ']')
                     {
                         captionList.Add(new EditorCaption(lines[i], DescriptionSpeaker));
@@ -130,7 +128,6 @@ namespace EnACT
             string beginTime = "";
             string endTime = "";
             string captionLine = "";
-            string speakerName = "";
 
             //Will continue a caption if set to true
             bool fullCaptionParsedFlag = false;
@@ -180,7 +177,7 @@ namespace EnACT
                         //If it ends with a colon the line is a speaker line
                         else if (lines[i].EndsWith(":") && lastLineWasTimeStamp)
                         {
-                            speakerName = lines[i].Substring(0, lines[i].Length - 1);
+                            string speakerName = lines[i].Substring(0, lines[i].Length - 1);
                             lastLineWasTimeStamp = false;
                             if (speakerSet.ContainsKey(speakerName))
                             {

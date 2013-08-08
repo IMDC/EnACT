@@ -139,11 +139,10 @@ namespace EnACT
             else
             {
                 int numSelections = 0;
-                EditorCaptionWord cw;
                 //foreach (EditorCaptionWord cw in Caption.Words)
                 for(int i=0; i< Caption.Words.Count; i++)
                 {
-                    cw = Caption.Words[i];
+                    EditorCaptionWord cw = Caption.Words[i];
                     if (cw.ContainedInSelection(SelectionStart, SelectionLength))
                     {
                         cw.IsSelected = true;
