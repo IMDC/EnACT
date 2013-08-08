@@ -56,20 +56,21 @@ namespace EnACT
         public TimelineMouseSelection(TimelineMouseAction action) : this(action, null) { }
 
         /// <summary>
-        /// Constructs a TImelineMouseSelection with an Action and selected Caption
+        /// Constructs a TImelineMouseSelection with an Action and selected Caption.
         /// </summary>
-        /// <param name="action">The TimelineMouseAction that is being performed</param>
-        /// <param name="selectedCaption">The caption selected for this TimelineMouseAction</param>
+        /// <param name="action">The TimelineMouseAction that is being performed.</param>
+        /// <param name="selectedCaption">The caption selected for this TimelineMouseAction.</param>
         public TimelineMouseSelection(TimelineMouseAction action, EditorCaption selectedCaption)
             : this(action, selectedCaption, 0) { }
 
         /// <summary>
-        /// Constructs a TimelineMouseSelection with an Action, selected caption and time difference.
+        /// Constructs a TImelineMouseSelection with an Action, a selected Caption and a 
+        /// time difference.
         /// </summary>
-        //// <param name="action">The TimelineMouseAction that is being performed</param>
-        /// <param name="selectedCaption">The caption selected for this TimelineMouseAction</param>
-        /// <param name="mouseClickTimeDifference">The difference between the selected Caption.Begin 
-        /// and the mouseClickTime</param>
+        /// <param name="action">The TimelineMouseAction that is being performed.</param>
+        /// <param name="mouseClickTimeDifference">The caption selected for this 
+        /// TimelineMouseAction.</param>
+        /// <param name="selectedCaptionTimeDifference">The time difference.</param>
         public TimelineMouseSelection(TimelineMouseAction action, EditorCaption mouseClickTimeDifference, 
             double selectedCaptionTimeDifference)
         {
@@ -83,7 +84,7 @@ namespace EnACT
         /// <summary>
         /// Moves the selected caption based on the mouseClickTime.
         /// </summary>
-        /// <param name="mouseClickTime">The time represented by the mouse click location</param>
+        /// <param name="mouseClickTime">The time represented by the mouse click location.</param>
         public void MoveSelectedCaption(double mouseClickTime)
         {
             //Move caption with a minimum time of 0
