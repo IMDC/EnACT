@@ -1,4 +1,4 @@
-EnACT-Editor
+EnACT
 =====
 
-Emotive Caption Editor 
+Emotive Captioning Tool
