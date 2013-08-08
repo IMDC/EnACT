@@ -22,7 +22,7 @@ namespace EnACT.Core
         /// <summary>
         /// The extension for Engine XML files.
         /// </summary>
-        public const string EngineXMLExtension = ".enact";
+        public const string EngineXmlExtension = ".enact";
         #endregion
 
         #region Fields and Properties
@@ -39,7 +39,7 @@ namespace EnACT.Core
         /// <summary>
         /// The object that represents the EnACT engine xml settings file
         /// </summary>
-        public SettingsXML Settings { set; get; }
+        public SettingsXml Settings { set; get; }
 
         /// <summary>
         /// A bool that represents whether or not the user has supplied an existing script to base
@@ -109,7 +109,7 @@ namespace EnACT.Core
             //Construct Core data structures
             this.SpeakerSet  = Utilities.ConstructSpeakerSet();
             this.CaptionList = Utilities.ConstructCaptionList();
-            this.Settings    = Utilities.ConstructSettingsXML();
+            this.Settings    = Utilities.ConstructSettingsXml();
         }
         #endregion Constructor
     }

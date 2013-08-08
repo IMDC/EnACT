@@ -9,17 +9,17 @@ namespace EnACT.Forms
     {
         public Dictionary<string, Speaker> SpeakerSet { set; get; }
         public List<EditorCaption> CaptionList { set; get; }
-        public SettingsXML Settings { set; get; }
+        public SettingsXml Settings { set; get; }
 
-        public MainForm m { set; get; }
+        public MainForm M { set; get; }
 
-        public JorgeForm(Dictionary<string,Speaker> SpeakerSet, List<EditorCaption> CaptionList,SettingsXML Settings, MainForm m)
+        public JorgeForm(Dictionary<string,Speaker> speakerSet, List<EditorCaption> captionList,SettingsXml settings, MainForm m)
         {
             InitializeComponent();
-            this.SpeakerSet = SpeakerSet;
-            this.CaptionList = CaptionList;
-            this.Settings = Settings;
-            this.m = m;
+            this.SpeakerSet = speakerSet;
+            this.CaptionList = captionList;
+            this.Settings = settings;
+            this.M = m;
 
             JorgeOutputFolderDialog.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
         }
@@ -38,7 +38,7 @@ namespace EnACT.Forms
 
         private void JorgeButton_Click(object sender, EventArgs e)
         {
-            m.JorgeMethod(JorgeSRTPathBox.Text, JorgeOutputPathBox.Text);
+            M.JorgeMethod(JorgeSRTPathBox.Text, JorgeOutputPathBox.Text);
         }
     }
 }

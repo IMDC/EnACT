@@ -100,9 +100,9 @@ namespace EnACT.Miscellaneous
         /// SettingsXMLs.
         /// </summary>
         /// <returns>A XML settings file.</returns>
-        public static SettingsXML ConstructSettingsXML()
+        public static SettingsXml ConstructSettingsXml()
         {
-            return new SettingsXML();
+            return new SettingsXml();
         }
         #endregion
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using EnACT.Miscellaneous;
@@ -56,7 +57,7 @@ namespace EnACT.Core
             //Construct the project
             ProjectInfo project = new ProjectInfo(name, videoPath, projectPath);
 
-            var tuple = ParseEngineXML(Path.Combine(projectPath, "engine" + ProjectInfo.EngineXMLExtension));
+            var tuple = ParseEngineXml(Path.Combine(projectPath, "engine" + ProjectInfo.EngineXmlExtension));
 
             project.CaptionList = tuple.Item1;
             project.SpeakerSet = tuple.Item2;
@@ -71,9 +72,9 @@ namespace EnACT.Core
         /// </summary>
         /// <param name="path">The full path to the xml file.</param>
         /// <returns>The SettingsXML object contained in the file.</returns>
-        public static SettingsXML ParseSettings(string path)
+        public static SettingsXml ParseSettings(string path)
         {
-            SettingsXML settings = Utilities.ConstructSettingsXML();
+            SettingsXml settings = Utilities.ConstructSettingsXml();
 
             using (XmlTextReader r = new XmlTextReader(path))
             {
@@ -181,11 +182,11 @@ namespace EnACT.Core
         /// <param name="path">The Path to the engine.xml file.</param>
         /// <returns>A 3-Tuple containing a CaptionList, a SpeakerSet, and a Settings 
         /// object in that specific order.</returns>
-        public static Tuple<List<EditorCaption>, Dictionary<string, Speaker>, SettingsXML> ParseEngineXML(string path)
+        public static Tuple<List<EditorCaption>, Dictionary<string, Speaker>, SettingsXml> ParseEngineXml(string path)
         {
             var captionList = new List<EditorCaption>();
             var speakerSet = new Dictionary<string, Speaker>();
-            var settings = new SettingsXML();
+            var settings = new SettingsXml();
 
             XmlReaderSettings readerSettings = new XmlReaderSettings();
             readerSettings.IgnoreWhitespace = true;
@@ -203,109 +204,109 @@ namespace EnACT.Core
                     // Get element name and switch on it.
                     switch (r.Name)
                     {
-                        case XMLElements.Enact: break;
-                        case XMLElements.Settings:
+                        case XmlElements.Enact: break;
+                        case XmlElements.Settings:
 
                             r.Read(); 
-                            r.AssertNode(XMLElements.Meta);
-                            settings.Base = r.GetNonNullAttribute(XMLAttributes.Base);
-                            settings.Spacing = r.GetNonNullAttribute(XMLAttributes.WordSpacing);
-                            settings.SeparateEmotionWords = r.GetNonNullAttribute(XMLAttributes.SeparateEmotionWords);
+                            r.AssertNode(XmlElements.Meta);
+                            settings.Base = r.GetNonNullAttribute(XmlAttributes.Base);
+                            settings.Spacing = r.GetNonNullAttribute(XmlAttributes.WordSpacing);
+                            settings.SeparateEmotionWords = r.GetNonNullAttribute(XmlAttributes.SeparateEmotionWords);
 
                             r.Read();
-                            r.AssertNode(XMLElements.Playback);
-                            settings.Playback.AutoPlay = r.GetBoolAttribute(XMLAttributes.AutoPlay);
-                            settings.Playback.AutoRewind = r.GetBoolAttribute(XMLAttributes.AutoRewind);
-                            settings.Playback.Seek = r.GetNonNullAttribute(XMLAttributes.Seek);
-                            settings.Playback.AutoSize = r.GetBoolAttribute(XMLAttributes.AutoSize);
-                            settings.Playback.Scale = r.GetIntAttribute(XMLAttributes.Scale);
-                            settings.Playback.Volume = r.GetIntAttribute(XMLAttributes.Volume);
-                            settings.Playback.ShowCaptions = r.GetBoolAttribute(XMLAttributes.ShowCaptions);
+                            r.AssertNode(XmlElements.Playback);
+                            settings.Playback.AutoPlay = r.GetBoolAttribute(XmlAttributes.AutoPlay);
+                            settings.Playback.AutoRewind = r.GetBoolAttribute(XmlAttributes.AutoRewind);
+                            settings.Playback.Seek = r.GetNonNullAttribute(XmlAttributes.Seek);
+                            settings.Playback.AutoSize = r.GetBoolAttribute(XmlAttributes.AutoSize);
+                            settings.Playback.Scale = r.GetIntAttribute(XmlAttributes.Scale);
+                            settings.Playback.Volume = r.GetIntAttribute(XmlAttributes.Volume);
+                            settings.Playback.ShowCaptions = r.GetBoolAttribute(XmlAttributes.ShowCaptions);
 
                             r.Read();
-                            r.AssertNode(XMLElements.Skin);
-                            settings.Skin.Source = r.GetNonNullAttribute(XMLAttributes.Source);
-                            settings.Skin.AutoHide = r.GetBoolAttribute(XMLAttributes.AutoHide);
-                            settings.Skin.FadeTime = r.GetIntAttribute(XMLAttributes.FadeTime);
-                            settings.Skin.BackGroundAlpha = r.GetIntAttribute(XMLAttributes.BackgroundAlpha);
-                            settings.Skin.BackgroundColour = r.GetNonNullAttribute(XMLAttributes.BackgroundColour);
+                            r.AssertNode(XmlElements.Skin);
+                            settings.Skin.Source = r.GetNonNullAttribute(XmlAttributes.Source);
+                            settings.Skin.AutoHide = r.GetBoolAttribute(XmlAttributes.AutoHide);
+                            settings.Skin.FadeTime = r.GetIntAttribute(XmlAttributes.FadeTime);
+                            settings.Skin.BackGroundAlpha = r.GetIntAttribute(XmlAttributes.BackgroundAlpha);
+                            settings.Skin.BackgroundColour = r.GetNonNullAttribute(XmlAttributes.BackgroundColour);
                             
                             r.Read();
-                            r.AssertNode(XMLElements.Video);
-                            settings.VideoSource = r.GetNonNullAttribute(XMLAttributes.Source);
+                            r.AssertNode(XmlElements.Video);
+                            settings.VideoSource = r.GetNonNullAttribute(XmlAttributes.Source);
                            
                             r.Read();
-                            r.AssertNode(XMLElements.Emotions);
+                            r.AssertNode(XmlElements.Emotions);
                                 r.Read();
-                                r.AssertNode(XMLElements.Happy);
-                                settings.Happy.Fps = r.GetNonNullAttribute(XMLAttributes.FPS);
-                                settings.Happy.Duration = r.GetNonNullAttribute(XMLAttributes.Duration);
-                                settings.Happy.AlphaBegin = r.GetNonNullAttribute(XMLAttributes.AlphaBegin);
-                                settings.Happy.AlphaFinish = r.GetNonNullAttribute(XMLAttributes.AlphaFinish);
-                                settings.Happy.ScaleBegin = r.GetNonNullAttribute(XMLAttributes.ScaleBegin);
-                                settings.Happy.ScaleFinish = r.GetNonNullAttribute(XMLAttributes.ScaleFinish);
-                                settings.Happy.YFinish = r.GetNonNullAttribute(XMLAttributes.YFinish);
+                                r.AssertNode(XmlElements.Happy);
+                                settings.Happy.Fps = r.GetNonNullAttribute(XmlAttributes.FPS);
+                                settings.Happy.Duration = r.GetNonNullAttribute(XmlAttributes.Duration);
+                                settings.Happy.AlphaBegin = r.GetNonNullAttribute(XmlAttributes.AlphaBegin);
+                                settings.Happy.AlphaFinish = r.GetNonNullAttribute(XmlAttributes.AlphaFinish);
+                                settings.Happy.ScaleBegin = r.GetNonNullAttribute(XmlAttributes.ScaleBegin);
+                                settings.Happy.ScaleFinish = r.GetNonNullAttribute(XmlAttributes.ScaleFinish);
+                                settings.Happy.YFinish = r.GetNonNullAttribute(XmlAttributes.YFinish);
                                 
                                 r.Read();
-                                r.AssertNode(XMLElements.Sad);
-                                settings.Sad.Fps = r.GetNonNullAttribute(XMLAttributes.FPS);
-                                settings.Sad.Duration = r.GetNonNullAttribute(XMLAttributes.Duration);
-                                settings.Sad.AlphaBegin = r.GetNonNullAttribute(XMLAttributes.AlphaBegin);
-                                settings.Sad.AlphaFinish = r.GetNonNullAttribute(XMLAttributes.AlphaFinish);
-                                settings.Sad.ScaleBegin = r.GetNonNullAttribute(XMLAttributes.ScaleBegin);
-                                settings.Sad.ScaleFinish = r.GetNonNullAttribute(XMLAttributes.ScaleFinish);
-                                settings.Sad.YFinish = r.GetNonNullAttribute(XMLAttributes.YFinish);
+                                r.AssertNode(XmlElements.Sad);
+                                settings.Sad.Fps = r.GetNonNullAttribute(XmlAttributes.FPS);
+                                settings.Sad.Duration = r.GetNonNullAttribute(XmlAttributes.Duration);
+                                settings.Sad.AlphaBegin = r.GetNonNullAttribute(XmlAttributes.AlphaBegin);
+                                settings.Sad.AlphaFinish = r.GetNonNullAttribute(XmlAttributes.AlphaFinish);
+                                settings.Sad.ScaleBegin = r.GetNonNullAttribute(XmlAttributes.ScaleBegin);
+                                settings.Sad.ScaleFinish = r.GetNonNullAttribute(XmlAttributes.ScaleFinish);
+                                settings.Sad.YFinish = r.GetNonNullAttribute(XmlAttributes.YFinish);
                                 
                                 r.Read();
-                                r.AssertNode(XMLElements.Fear);
-                                settings.Fear.Fps = r.GetNonNullAttribute(XMLAttributes.FPS);
-                                settings.Fear.Duration = r.GetNonNullAttribute(XMLAttributes.Duration);
-                                settings.Fear.ScaleBegin = r.GetNonNullAttribute(XMLAttributes.ScaleBegin);
-                                settings.Fear.ScaleFinish = r.GetNonNullAttribute(XMLAttributes.ScaleFinish);
-                                settings.Fear.VibrateX = r.GetNonNullAttribute(XMLAttributes.VibrateX);
-                                settings.Fear.VibrateY = r.GetNonNullAttribute(XMLAttributes.VibrateY);
+                                r.AssertNode(XmlElements.Fear);
+                                settings.Fear.Fps = r.GetNonNullAttribute(XmlAttributes.FPS);
+                                settings.Fear.Duration = r.GetNonNullAttribute(XmlAttributes.Duration);
+                                settings.Fear.ScaleBegin = r.GetNonNullAttribute(XmlAttributes.ScaleBegin);
+                                settings.Fear.ScaleFinish = r.GetNonNullAttribute(XmlAttributes.ScaleFinish);
+                                settings.Fear.VibrateX = r.GetNonNullAttribute(XmlAttributes.VibrateX);
+                                settings.Fear.VibrateY = r.GetNonNullAttribute(XmlAttributes.VibrateY);
                                 
                                 r.Read();
-                                r.AssertNode(XMLElements.Anger);
-                                settings.Anger.Fps = r.GetNonNullAttribute(XMLAttributes.FPS);
-                                settings.Anger.Duration = r.GetNonNullAttribute(XMLAttributes.Duration);
-                                settings.Anger.ScaleBegin = r.GetNonNullAttribute(XMLAttributes.ScaleBegin);
-                                settings.Anger.ScaleFinish = r.GetNonNullAttribute(XMLAttributes.ScaleFinish);
-                                settings.Anger.VibrateX = r.GetNonNullAttribute(XMLAttributes.VibrateX);
-                                settings.Anger.VibrateY = r.GetNonNullAttribute(XMLAttributes.VibrateY);
+                                r.AssertNode(XmlElements.Anger);
+                                settings.Anger.Fps = r.GetNonNullAttribute(XmlAttributes.FPS);
+                                settings.Anger.Duration = r.GetNonNullAttribute(XmlAttributes.Duration);
+                                settings.Anger.ScaleBegin = r.GetNonNullAttribute(XmlAttributes.ScaleBegin);
+                                settings.Anger.ScaleFinish = r.GetNonNullAttribute(XmlAttributes.ScaleFinish);
+                                settings.Anger.VibrateX = r.GetNonNullAttribute(XmlAttributes.VibrateX);
+                                settings.Anger.VibrateY = r.GetNonNullAttribute(XmlAttributes.VibrateY);
                             break;
-                        case XMLElements.Speakers: break; //Do Nothing
-                        case XMLElements.Speaker:
-                            r.AssertNode(XMLElements.Speaker);
-                            string name = r.GetNonNullAttribute(XMLAttributes.Name);
+                        case XmlElements.Speakers: break; //Do Nothing
+                        case XmlElements.Speaker:
+                            r.AssertNode(XmlElements.Speaker);
+                            string name = r.GetNonNullAttribute(XmlAttributes.Name);
                             Speaker s = new Speaker(name);
                             
                             r.Read();
-                            r.AssertNode(XMLElements.Background);
-                            s.BG.Visible = Convert.ToBoolean(r.GetNonNullAttribute(XMLAttributes.Visible));
-                            s.BG.Alpha = r.GetDoubleAttribute(XMLAttributes.Alpha);
-                            s.BG.Colour = r.GetNonNullAttribute(XMLAttributes.Colour);
+                            r.AssertNode(XmlElements.Background);
+                            s.Bg.Visible = Convert.ToBoolean(r.GetNonNullAttribute(XmlAttributes.Visible));
+                            s.Bg.Alpha = r.GetDoubleAttribute(XmlAttributes.Alpha);
+                            s.Bg.Colour = r.GetNonNullAttribute(XmlAttributes.Colour);
                            
                             r.Read();
-                            r.AssertNode(XMLElements.Font);
-                            s.Font.Family = r.GetNonNullAttribute(XMLAttributes.Name);
-                            s.Font.Size = r.GetIntAttribute(XMLAttributes.Size);
-                            s.Font.Colour = r.GetNonNullAttribute(XMLAttributes.Colour);
-                            s.Font.Bold = r.GetIntAttribute(XMLAttributes.Bold);
-                            r.ReadStartElement(XMLElements.Font);
+                            r.AssertNode(XmlElements.Font);
+                            s.Font.Family = r.GetNonNullAttribute(XmlAttributes.Name);
+                            s.Font.Size = r.GetIntAttribute(XmlAttributes.Size);
+                            s.Font.Colour = r.GetNonNullAttribute(XmlAttributes.Colour);
+                            s.Font.Bold = r.GetIntAttribute(XmlAttributes.Bold);
+                            r.ReadStartElement(XmlElements.Font);
                                     
                             //Add to speakerSet
                             speakerSet[s.Name] = s;
                             break;
-                        case XMLElements.Captions: break; //Do Nothing
-                        case XMLElements.Caption:
-                            r.AssertNode(XMLElements.Caption);
+                        case XmlElements.Captions: break; //Do Nothing
+                        case XmlElements.Caption:
+                            r.AssertNode(XmlElements.Caption);
                             EditorCaption c = new EditorCaption();
-                            c.Begin = r.GetNonNullAttribute(XMLAttributes.Begin);
-                            c.End = r.GetNonNullAttribute(XMLAttributes.End);
-                            c.Speaker = speakerSet[r.GetNonNullAttribute(XMLAttributes.Speaker)];
-                            c.Location = (ScreenLocation) r.GetIntAttribute(XMLAttributes.Location);
-                            c.Alignment = (Alignment) r.GetIntAttribute(XMLAttributes.Align);
+                            c.Begin = r.GetNonNullAttribute(XmlAttributes.Begin);
+                            c.End = r.GetNonNullAttribute(XmlAttributes.End);
+                            c.Speaker = speakerSet[r.GetNonNullAttribute(XmlAttributes.Speaker)];
+                            c.Location = (ScreenLocation) r.GetIntAttribute(XmlAttributes.Location);
+                            c.Alignment = (Alignment) r.GetIntAttribute(XmlAttributes.Align);
 
                             List<EditorCaptionWord> wordList = new List<EditorCaptionWord>();
 
@@ -313,14 +314,14 @@ namespace EnACT.Core
                             {
                                 //If the Node is an end element, then the reader has parsed
                                 //through all of this caption's words.
-                                if (r.NodeType == XmlNodeType.EndElement && r.Name.Equals(XMLElements.Caption))
+                                if (r.NodeType == XmlNodeType.EndElement && r.Name.Equals(XmlElements.Caption))
                                     break;
-                                else if (r.NodeType == XmlNodeType.Element && r.Name.Equals(XMLElements.Word))
+                                else if (r.NodeType == XmlNodeType.Element && r.Name.Equals(XmlElements.Word))
                                 {
-                                    r.AssertNode(XMLElements.Word); //Doublecheck, it's the only way to be sure.
+                                    r.AssertNode(XmlElements.Word); //Doublecheck, it's the only way to be sure.
 
-                                    Emotion e = (Emotion)r.GetIntAttribute(XMLAttributes.Emotion);
-                                    Intensity i = (Intensity)r.GetIntAttribute(XMLAttributes.Intensity);
+                                    Emotion e = (Emotion)r.GetIntAttribute(XmlAttributes.Emotion);
+                                    Intensity i = (Intensity)r.GetIntAttribute(XmlAttributes.Intensity);
 
                                     //Get word from node and add it to the list
                                     EditorCaptionWord word = new EditorCaptionWord(e, i, r.ReadString(), 0);

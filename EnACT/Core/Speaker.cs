@@ -34,7 +34,7 @@
         /// The background settings (color, transparency, etc) associated with captions 
         /// spoken by this speaker
         /// </summary>
-        public SpeakerBG BG { get; set; }
+        public SpeakerBg Bg { get; set; }
 
         /// <summary>
         /// The font settings (type, size, etc) associated with captions spoken by 
@@ -54,7 +54,7 @@
         public Speaker(string name)
         {
             this.Name = name;
-            BG = new SpeakerBG();
+            Bg = new SpeakerBg();
             Font = new SpeakerFont();
         }
 
@@ -71,7 +71,7 @@
     /// <summary>
     /// Represents the background highlighting of a caption.
     /// </summary>
-    public class SpeakerBG
+    public class SpeakerBg
     {
         /// <summary>
         /// Whether or not the background is visible or not
@@ -92,7 +92,7 @@
         /// Constucts a SpeakerBG object with visibility set to true, alpha set
         /// to 0.5 and Colour set to white.
         /// </summary>
-        public SpeakerBG()
+        public SpeakerBg()
         {
             this.Visible = true;
             this.Alpha = 0.5;

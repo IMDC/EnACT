@@ -4,7 +4,7 @@ namespace EnACT.Core
     /// <summary>
     /// Represents the settings.xml file.
     /// </summary>
-    public class SettingsXML
+    public class SettingsXml
     {
         public string Base { set; get; }
         public string Spacing { set; get; }
@@ -15,21 +15,21 @@ namespace EnACT.Core
         public string CaptionsSource { set; get; }
         public string VideoSource { set; get; }
 
-        public AlphaEmotionXML Happy { set; get; }
-        public AlphaEmotionXML Sad { set; get; }
-        public VibrateEmotionXML Fear { set; get; }
-        public VibrateEmotionXML Anger { set; get; }
+        public AlphaEmotionXml Happy { set; get; }
+        public AlphaEmotionXml Sad { set; get; }
+        public VibrateEmotionXml Fear { set; get; }
+        public VibrateEmotionXml Anger { set; get; }
 
         /// <summary>
         /// Constructs a SettingsXML object with a video name "video.flv"
         /// </summary>
-        public SettingsXML() : this("video.flv") { }
+        public SettingsXml() : this("video.flv") { }
 
         /// <summary>
         /// Constructs a SettingsXML object with a given name for the video source.
         /// </summary>
         /// <param name="vidsrc">The file name of the video source file</param>
-        public SettingsXML(string vidsrc)
+        public SettingsXml(string vidsrc)
         {
             this.Base = "";
             this.Spacing = "1.5";
@@ -42,7 +42,7 @@ namespace EnACT.Core
 
             //Default values for each Emotion class. Values should
             //most likely not be changed.
-            this.Happy = new AlphaEmotionXML(
+            this.Happy = new AlphaEmotionXml(
                 "48,48,48",         //FPS
                 "0.75,0.65,0.60",   //Duration
                 "0.5,0.5,0.5",      //ScaleBegin
@@ -51,7 +51,7 @@ namespace EnACT.Core
                 "1,1,1",            //AlphaFinish
                 "20,40,60");        //YFinish
 
-            this.Sad = new AlphaEmotionXML(
+            this.Sad = new AlphaEmotionXml(
                 "48,48,48",         //FPS
                 "0.75,1.00,1.25",   //Duration
                 "1,1,1",            //ScaleBegin
@@ -60,7 +60,7 @@ namespace EnACT.Core
                 "0.60,0.50,0.40",   //AlphaFinish
                 "10,15,20");        //YFinish
 
-            this.Fear = new VibrateEmotionXML(
+            this.Fear = new VibrateEmotionXml(
                 "72,96,120",        //FPS
                 "5.00,5.00,5.00",   //Duration
                 "1.04,1.06,1.08",   //ScaleBegin
@@ -68,7 +68,7 @@ namespace EnACT.Core
                 "0.25,0.375,0.75",  //VibrateX
                 "0.50,0.75,1.00");  //VibrateY
 
-            this.Anger = new VibrateEmotionXML(
+            this.Anger = new VibrateEmotionXml(
                 "84,132,180",       //FPS
                 "0.625,0.625,0.625",//Duration
                 "1,1,1",            //ScaleBegin
@@ -140,7 +140,7 @@ namespace EnACT.Core
     /// Represents an abstract base class with attributes that all 4 emotions 
     /// share in common
     /// </summary>
-    public abstract class EmotionXML
+    public abstract class EmotionXml
     {
         public string Fps { set; get; }
         public string Duration { set; get; }
@@ -155,7 +155,7 @@ namespace EnACT.Core
         /// <param name="dur">The Duration of the emotion</param>
         /// <param name="sb">The ScaleBegin value of the emotion</param>
         /// <param name="sf">The ScaleFinish value of the emotion</param>
-        public EmotionXML(string fps, string dur, string sb, string sf)
+        public EmotionXml(string fps, string dur, string sb, string sf)
         {
             this.Fps = fps;
             this.Duration = dur;
@@ -168,7 +168,7 @@ namespace EnACT.Core
     /// Represents an emotion that uses Alpha begin and end values as well as a 
     /// Y finish value. Examples: Happy or Sad.
     /// </summary>
-    public class AlphaEmotionXML : EmotionXML
+    public class AlphaEmotionXml : EmotionXml
     {
         public string AlphaBegin { set; get; }
         public string AlphaFinish { set; get; }
@@ -184,7 +184,7 @@ namespace EnACT.Core
         /// <param name="ab">The AlphaBegin value of the emotion</param>
         /// <param name="af">The AlphaFinish value of the emotion</param>
         /// <param name="yf">The YFinish value of the emotion</param>
-        public AlphaEmotionXML(string fps, string dur, string sb, string sf, 
+        public AlphaEmotionXml(string fps, string dur, string sb, string sf, 
             string ab, string af, string yf)
             : base(fps, dur, sb, sf)
         {
@@ -198,7 +198,7 @@ namespace EnACT.Core
     /// Represents an emotion that uses Vibrate X and Y values. 
     /// Examples: Fear and Anger
     /// </summary>
-    public class VibrateEmotionXML : EmotionXML
+    public class VibrateEmotionXml : EmotionXml
     {
         public string VibrateX { set; get; }
         public string VibrateY { set; get; }
@@ -212,7 +212,7 @@ namespace EnACT.Core
         /// <param name="sf">The ScaleFinish value of the emotion</param>
         /// <param name="vx">The VibrateX value of the emotion</param>
         /// <param name="vy">The VibrateY value of the emotion</param>
-        public VibrateEmotionXML(string fps, string dur, string sb, string sf,
+        public VibrateEmotionXml(string fps, string dur, string sb, string sf,
             string vx, string vy)
             : base(fps, dur, sb, sf)
         {

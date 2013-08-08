@@ -34,7 +34,7 @@ namespace EnACT.Core
         /// <summary>
         /// A regular expression that will validate a correct timestamp
         /// </summary>
-        private static readonly Regex validTimestamp = new Regex(@"^[0-9][0-9]:[0-5][0-9]:[0-5][0-9]\.[0-9]$");
+        private static readonly Regex ValidTimestamp = new Regex(@"^[0-9][0-9]:[0-5][0-9]:[0-5][0-9]\.[0-9]$");
         #endregion
 
         #region Private Fields
@@ -139,14 +139,14 @@ namespace EnACT.Core
 
                 double seconds = 0;
 
-                string[] time_array = value.Split(':');
+                string[] timeArray = value.Split(':');
 
                 double tvalue = 0;
                 double weight = 1;
 
-                for (int i = time_array.Length - 1; i >= 0; i--)
+                for (int i = timeArray.Length - 1; i >= 0; i--)
                 {
-                    try     { tvalue = double.Parse(time_array[i]); }
+                    try     { tvalue = double.Parse(timeArray[i]); }
                     catch   { tvalue = 0; }
                     finally
                     {
@@ -222,7 +222,7 @@ namespace EnACT.Core
         /// <returns>true if valid, false if not valid</returns>
         public static bool TimeStampValidates(string ts)
         {
-            if (validTimestamp.IsMatch(ts))
+            if (ValidTimestamp.IsMatch(ts))
             {
                 //Console.WriteLine("Timestamp {0} Validated!", ts);
                 return true;

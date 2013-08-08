@@ -183,13 +183,13 @@ namespace EnACT.Core
         /// </summary>
         /// <param name="line">Text to be displayed as a caption</param>
         /// <param name="speaker">The speaker of the caption</param>
-        /// <param name="Begin">The timestamp representing the beginning of the caption</param>
-        /// <param name="End">The timestamp representing the ending of the caption</param>
-        public EditorCaption(string line, Speaker speaker, string Begin, string End)
+        /// <param name="begin">The timestamp representing the beginning of the caption</param>
+        /// <param name="end">The timestamp representing the ending of the caption</param>
+        public EditorCaption(string line, Speaker speaker, string begin, string end)
         {
             //Set Timestamps. Duration is implicity set.
-            this.Begin = new Timestamp(Begin);
-            this.End = new Timestamp(End);
+            this.Begin = new Timestamp(begin);
+            this.End = new Timestamp(end);
 
             //Set other Caption properties
             this.Speaker = speaker;

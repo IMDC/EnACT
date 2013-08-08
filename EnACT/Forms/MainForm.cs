@@ -67,7 +67,7 @@ namespace EnACT.Forms
         /// <summary>
         /// The object that represents the EnACT engine xml settings file
         /// </summary>
-        public SettingsXML Settings { set; get; }
+        public SettingsXml Settings { set; get; }
         #endregion Fields and Properties
 
         #region Constructor and Init Methods
@@ -194,9 +194,9 @@ namespace EnACT.Forms
         #endregion Controller Buttons
 
         #region Jorge
-        public void JorgeMethod(string SRTPath, string OutFolderPath)
+        public void JorgeMethod(string srtPath, string outFolderPath)
         {
-            var tuple = ScriptParser.ParseSRTFile(@SRTPath);
+            var tuple = ScriptParser.ParseSrtFile(srtPath);
 
             ProjectInfo.CaptionList = tuple.Item1;
             CaptionList = tuple.Item1;
@@ -204,9 +204,9 @@ namespace EnACT.Forms
             ProjectInfo.SpeakerSet = tuple.Item2;
             SpeakerSet = tuple.Item2;
 
-            EnactXMLWriter.WriteCaptions(CaptionList, OutFolderPath + @"\dialogues.xml");
-            EnactXMLWriter.WriteSpeakers(SpeakerSet, OutFolderPath + @"\speakers.xml");
-            EnactXMLWriter.WriteSettings(Settings, OutFolderPath + @"\Settings.xml");
+            EnactXMLWriter.WriteCaptions(CaptionList, outFolderPath + @"\dialogues.xml");
+            EnactXMLWriter.WriteSpeakers(SpeakerSet, outFolderPath + @"\speakers.xml");
+            EnactXMLWriter.WriteSettings(Settings, outFolderPath + @"\Settings.xml");
         }
         #endregion Jorge
 
@@ -236,9 +236,9 @@ namespace EnACT.Forms
         /// <summary>
         /// Handles the VideoPlayed Event. Updates the text of ButtonPlayAndPause
         /// </summary>
-        /// <param name="Sender">Sender</param>
+        /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
-        private void Controller_VideoPlayed(object Sender, EventArgs e)
+        private void Controller_VideoPlayed(object sender, EventArgs e)
         {
             Button_PlayAndPause.Text = "Pause";
         }
@@ -246,9 +246,9 @@ namespace EnACT.Forms
         /// <summary>
         /// Handles the VideoPaused Event. Updates the text of ButtonPlayAndPause
         /// </summary>
-        /// <param name="Sender">Sender</param>
+        /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
-        private void Controller_VideoPaused(object Sender, EventArgs e)
+        private void Controller_VideoPaused(object sender, EventArgs e)
         {
             Button_PlayAndPause.Text = "Play";
         }
@@ -268,7 +268,7 @@ namespace EnACT.Forms
 
         private void parseesrToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var tuple = ScriptParser.ParseESRFile(Paths.TestESR);
+            var tuple = ScriptParser.ParseEsrFile(Paths.TestEsr);
 
             ProjectInfo.CaptionList = tuple.Item1;
             CaptionList = tuple.Item1;
@@ -286,8 +286,8 @@ namespace EnACT.Forms
 
         private void jorgeButtonToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            JorgeForm TheJorgeForm = new JorgeForm(SpeakerSet, CaptionList, Settings, this);
-            TheJorgeForm.Show();
+            JorgeForm theJorgeForm = new JorgeForm(SpeakerSet, CaptionList, Settings, this);
+            theJorgeForm.Show();
         }
 
         private void debugMethodToolStripMenuItem_Click(object sender, EventArgs e)
@@ -515,8 +515,8 @@ namespace EnACT.Forms
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EnactXMLWriter.WriteProject(ProjectInfo);
-            EnactXMLWriter.WriteEngineXML(ProjectInfo, Path.Combine(ProjectInfo.DirectoryPath, 
-                "engine" + ProjectInfo.EngineXMLExtension));
+            EnactXMLWriter.WriteEngineXml(ProjectInfo, Path.Combine(ProjectInfo.DirectoryPath, 
+                "engine" + ProjectInfo.EngineXmlExtension));
         }
 
         private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e)

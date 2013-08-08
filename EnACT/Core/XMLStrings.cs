@@ -3,7 +3,7 @@
     /// <summary>
     /// A static class that contains XML element names.
     /// </summary>
-    public static class XMLElements
+    public static class XmlElements
     {
         public const string Enact      = "enact";
         public const string Settings   = "settings";
@@ -28,7 +28,7 @@
     /// <summary>
     /// A static class that contains XML attribute names.
     /// </summary>
-    public static class XMLAttributes
+    public static class XmlAttributes
     {
         public const string Base                 = "base";
         public const string WordSpacing          = "wordSpacing";

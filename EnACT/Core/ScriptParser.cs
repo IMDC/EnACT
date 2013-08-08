@@ -35,8 +35,8 @@ namespace EnACT.Core
 
             switch (extension)
             {
-                case FileExtensions.Esr: return ParseESRFile(path);
-                case FileExtensions.Srt: return ParseSRTFile(path);
+                case FileExtensions.Esr: return ParseEsrFile(path);
+                case FileExtensions.Srt: return ParseSrtFile(path);
                 case FileExtensions.Txt: return ParseScriptFile(path);
                 default: throw new FormatException(string.Format("Extension \"{}\" is not a valid extension.",
                     extension));
@@ -59,9 +59,9 @@ namespace EnACT.Core
             string[] lines = System.IO.File.ReadAllLines(@path); //Read in file
 
             //Start off with the Default speaker
-            Speaker CurrentSpeaker = speakerSet[Speaker.DefaultName];
+            Speaker currentSpeaker = speakerSet[Speaker.DefaultName];
             //Set the Description Speaker to the description speaker contained in the set.
-            Speaker DescriptionSpeaker = speakerSet[Speaker.DescriptionName];
+            Speaker descriptionSpeaker = speakerSet[Speaker.DescriptionName];
 
             for (int i = 0; i < lines.Length; i++)
             {
@@ -79,23 +79,23 @@ namespace EnACT.Core
 
                         if (speakerSet.ContainsKey(speakerName))
                         {
-                            CurrentSpeaker = speakerSet[speakerName];
+                            currentSpeaker = speakerSet[speakerName];
                         }
                         else
                         {
-                            CurrentSpeaker = new Speaker(speakerName);
-                            speakerSet.Add(CurrentSpeaker.Name, CurrentSpeaker);
+                            currentSpeaker = new Speaker(speakerName);
+                            speakerSet.Add(currentSpeaker.Name, currentSpeaker);
                         }
                     }
                         //If surrounded by [ and ], the word is a description
                     else if (lines[i][0] == '[' && lines[i][lastChar] == ']')
                     {
-                        captionList.Add(new EditorCaption(lines[i], DescriptionSpeaker));
+                        captionList.Add(new EditorCaption(lines[i], descriptionSpeaker));
                     }
                     //If anything else then it is a dialogue line
                     else
                     {
-                        captionList.Add(new EditorCaption(lines[i], CurrentSpeaker));
+                        captionList.Add(new EditorCaption(lines[i], currentSpeaker));
                     }
                 }
             }//for
@@ -108,7 +108,7 @@ namespace EnACT.Core
         /// Parses an ESR File
         /// </summary>
         /// <param name="scriptPath">The path of the script file</param>
-        public static Tuple<List<EditorCaption>, Dictionary<string, Speaker>> ParseESRFile(string scriptPath)
+        public static Tuple<List<EditorCaption>, Dictionary<string, Speaker>> ParseEsrFile(string scriptPath)
         {
             List<EditorCaption> captionList = Utilities.ConstructCaptionList();
             Dictionary<string, Speaker> speakerSet = Utilities.ConstructSpeakerSet();
@@ -116,7 +116,7 @@ namespace EnACT.Core
             string[] lines = System.IO.File.ReadAllLines(@scriptPath); //Read in file
 
             //Start off with the Default speaker
-            Speaker CurrentSpeaker = speakerSet[Speaker.DefaultName];
+            Speaker currentSpeaker = speakerSet[Speaker.DefaultName];
 
             Regex numberLineRegex = new Regex(@"^\d+$");    //Line number
             //Time stamp regex, ex "00:00:35,895 --> 00:00:37,790" will match
@@ -144,7 +144,7 @@ namespace EnACT.Core
                     //If the flag is true, then we have already read in a caption
                     if (fullCaptionParsedFlag)
                     {
-                        captionList.Add(new EditorCaption(captionLine, CurrentSpeaker, beginTime, endTime));
+                        captionList.Add(new EditorCaption(captionLine, currentSpeaker, beginTime, endTime));
                         //Reset the captionFlag
                         fullCaptionParsedFlag = false;
                     }
@@ -182,19 +182,19 @@ namespace EnACT.Core
                             lastLineWasTimeStamp = false;
                             if (speakerSet.ContainsKey(speakerName))
                             {
-                                CurrentSpeaker = speakerSet[speakerName];
+                                currentSpeaker = speakerSet[speakerName];
                             }
                             else
                             {
                                 speakerSet[speakerName] = new Speaker(speakerName);
-                                CurrentSpeaker = speakerSet[speakerName];
+                                currentSpeaker = speakerSet[speakerName];
                             }
                         }
                         //If the line is surrounded with square brackets it is a description
                         else if (lines[i][0] == '[' && lines[i][lines[i].Length - 1] == ']')
                         {
                             captionLine = lines[i].Substring(1, lines[i].Length - 2);
-                            CurrentSpeaker = speakerSet[Speaker.DescriptionName];
+                            currentSpeaker = speakerSet[Speaker.DescriptionName];
                             fullCaptionParsedFlag = true;
                         }
                         //Else the line is a caption
@@ -215,11 +215,11 @@ namespace EnACT.Core
                     //If it's the last line and we have a full caption
                     if (i == lines.Length - 1 && fullCaptionParsedFlag)
                     {
-                        captionList.Add(new EditorCaption(captionLine, CurrentSpeaker, beginTime, endTime));
+                        captionList.Add(new EditorCaption(captionLine, currentSpeaker, beginTime, endTime));
                     }
                 }//else
             }//for
-            speakerSet[CurrentSpeaker.Name] = CurrentSpeaker;
+            speakerSet[currentSpeaker.Name] = currentSpeaker;
 
             var t = Tuple.Create(captionList, speakerSet);
             return t; 
@@ -232,7 +232,7 @@ namespace EnACT.Core
         /// for speakers, and every caption will be attributed to the default speaker.
         /// </summary>
         /// <param name="scriptPath">The full path of the SRT file to be parsed</param>
-        public static Tuple<List<EditorCaption>, Dictionary<string, Speaker>> ParseSRTFile(string scriptPath)
+        public static Tuple<List<EditorCaption>, Dictionary<string, Speaker>> ParseSrtFile(string scriptPath)
         {
             List<EditorCaption> captionList = Utilities.ConstructCaptionList();
             Dictionary<string, Speaker> speakerSet = Utilities.ConstructSpeakerSet();
@@ -240,9 +240,9 @@ namespace EnACT.Core
             string[] lines = System.IO.File.ReadAllLines(@scriptPath); //Read in file
 
             //Start off with the Default speaker
-            Speaker CurrentSpeaker = new Speaker("CARLO");
+            Speaker currentSpeaker = new Speaker("CARLO");
             //Set the Description Speaker to the description speaker contained in the set.
-            Speaker DescriptionSpeaker = speakerSet[Speaker.DescriptionName];
+            Speaker descriptionSpeaker = speakerSet[Speaker.DescriptionName];
 
             Regex numberLineRegex = new Regex(@"^\d+$");    //Line number
             //Time stamp regex, ex "00:00:35,895 --> 00:00:37,790" will match
@@ -267,7 +267,7 @@ namespace EnACT.Core
                     //If the flag is true, then we have already read in a caption
                     if (continueCaptionFlag)
                     {
-                        captionList.Add(new EditorCaption(captionLine, CurrentSpeaker, beginTime, endTime));
+                        captionList.Add(new EditorCaption(captionLine, currentSpeaker, beginTime, endTime));
                         //Reset the captionFlag
                         continueCaptionFlag = false;
                     }
@@ -317,7 +317,7 @@ namespace EnACT.Core
                     }
                 }
             }//for
-            speakerSet[CurrentSpeaker.Name] = CurrentSpeaker;
+            speakerSet[currentSpeaker.Name] = currentSpeaker;
 
             return Tuple.Create(captionList, speakerSet);
         }//ParseESRFile

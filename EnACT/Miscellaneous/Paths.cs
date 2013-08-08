@@ -7,7 +7,7 @@
 
         public static readonly string TestScript = @"C:\Users\imdc\Documents\enact\Testing\testScript.txt";
 
-        public static readonly string TestESR = @"C:\Users\imdc\Documents\enact\Testing\testScript_2.esr";
+        public static readonly string TestEsr = @"C:\Users\imdc\Documents\enact\Testing\testScript_2.esr";
 
         public static readonly string DefaultSpeakers = @"C:\Users\imdc\Documents\enact\Testing\speakers.xml";
 
