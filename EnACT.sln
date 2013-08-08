@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Editor", "EnACT\Editor.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnACTUnitTestProject", "EnACTUnitTestProject\EnACTUnitTestProject.csproj", "{EB7C304F-574F-4AB1-867F-8C44742788B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Player", "Player\Player.csproj", "{69B4926C-4550-43B1-83D3-682231D4C8D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{EB7C304F-574F-4AB1-867F-8C44742788B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB7C304F-574F-4AB1-867F-8C44742788B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB7C304F-574F-4AB1-867F-8C44742788B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69B4926C-4550-43B1-83D3-682231D4C8D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69B4926C-4550-43B1-83D3-682231D4C8D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69B4926C-4550-43B1-83D3-682231D4C8D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69B4926C-4550-43B1-83D3-682231D4C8D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
