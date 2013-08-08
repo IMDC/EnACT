@@ -64,13 +64,13 @@ namespace EnACT.Core
                 //Check for a valid time
                 if (value < 0.0)
                     throw new InvalidTimestampException("Timestamp.AsDouble value can not be negative: " + value);
-                else if (double.IsNaN(value))
+                if (double.IsNaN(value))
                     throw new InvalidTimestampException("Timestamp.AsDouble value can not be NaN");
-                else if (double.IsPositiveInfinity(value))
+                if (double.IsPositiveInfinity(value))
                     throw new InvalidTimestampException("Timestamp.AsDouble value can not be Positive Infinity");
-                else if (double.IsNegativeInfinity(value))
+                if (double.IsNegativeInfinity(value))
                     throw new InvalidTimestampException("Timestamp.AsDouble value can not be Negative Infinity");
-                else if (MaximumDoubleValue < value)
+                if (MaximumDoubleValue < value)
                     throw new InvalidTimestampException("Timestamp.AsDouble is too large");
 
                 time = value;
@@ -389,7 +389,7 @@ namespace EnACT.Core
         /// </summary>
         /// <param name="message"></param>
         /// <param name="innerException"></param>
-        public InvalidTimestampException(string message, System.Exception innerException)
+        public InvalidTimestampException(string message, Exception innerException)
             : base(message, innerException) { }
     }
     #endregion

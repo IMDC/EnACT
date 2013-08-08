@@ -35,22 +35,18 @@ namespace EnACT.Forms
         public void SubscribeToEngineEvents()
         {
             //CaptionView Events
-            this.CaptionView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler
-                (this.CaptionView_CellValueChanged);
+            this.CaptionView.CellValueChanged += CaptionView_CellValueChanged;
 
             //EngineView Events
-            this.EngineView.VideoLoaded += new System.EventHandler(this.EngineView_VideoLoaded);
+            this.EngineView.VideoLoaded += EngineView_VideoLoaded;
 
             //PlayheadTimer Events
-            this.PlayheadTimer.Tick += new System.EventHandler(this.PlayheadTimer_Tick);
+            this.PlayheadTimer.Tick += PlayheadTimer_Tick;
 
             //Timeline Events
-            this.Timeline.PlayheadChanged += new System.EventHandler<TimelinePlayheadChangedEventArgs>
-                (this.Timeline_PlayheadChanged);
-            this.Timeline.CaptionTimestampChanged += 
-                new System.EventHandler<TimelineCaptionTimestampChangedEventArgs>
-                    (this.Timeline_CaptionTimestampChanged);
-            this.Timeline.CaptionMoved += new System.EventHandler(this.Timeline_CaptionMoved);
+            this.Timeline.PlayheadChanged += Timeline_PlayheadChanged;
+            this.Timeline.CaptionTimestampChanged += Timeline_CaptionTimestampChanged;
+            this.Timeline.CaptionMoved += Timeline_CaptionMoved;
         }
         #endregion SubscribeToEngineEvents
 

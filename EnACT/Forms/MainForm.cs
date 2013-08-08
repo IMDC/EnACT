@@ -81,8 +81,8 @@ namespace EnACT.Forms
             ProjectInfo = ProjectInfo.NoProject;
 
             //Hook Up Controller Events
-            VideoPlayed += new EventHandler(this.Controller_VideoPlayed);
-            VideoPaused += new EventHandler(this.Controller_VideoPaused);
+            VideoPlayed += Controller_VideoPlayed;
+            VideoPaused += Controller_VideoPaused;
 
             //Hook up event handlers to methods in this controller.
             SubscribeToEngineEvents();

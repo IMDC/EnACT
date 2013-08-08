@@ -178,13 +178,7 @@ namespace EnACT.Controls
         /// </summary>
         private int XCaptionOrigin
         {
-            get
-            {
-                if (DrawLocationLabels)
-                    return LocationLabels.PixelWidth;
-                else
-                    return 0;
-            }
+            get { return DrawLocationLabels ? LocationLabels.PixelWidth : 0; }
         }
         #endregion
 
@@ -323,8 +317,8 @@ namespace EnACT.Controls
             #region Draw Dash Lines
             Pen dashLinePen = new Pen(Color.Black)
             {
-                DashStyle = System.Drawing.Drawing2D.DashStyle.Dash,
-                DashCap = System.Drawing.Drawing2D.DashCap.Flat
+                DashStyle = DashStyle.Dash,
+                DashCap = DashCap.Flat
             }; //Pen for drawing dotted lines
 
             float[] labelYs = new float[LocationLabels.Length];
@@ -373,7 +367,6 @@ namespace EnACT.Controls
                     && 0.1 <= c.Duration)                           //Duration of caption is less than 0.1
                     {
                         //Console.WriteLine("Caption: #{0} is within bounds", r[CaptionData.NPOS]);
-                        y = 0;
                         h = availableHeight / LocationLabels.Length;
                         switch (c.Location)
                         {

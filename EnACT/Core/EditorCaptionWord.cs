@@ -80,8 +80,7 @@
         /// <returns>True if index is contained in the word, false if otherwise</returns>
         public bool Contains(int charIndex)
         {
-            return (BeginIndex <= charIndex && charIndex <= EndIndex )
-                ? true : false;
+            return (BeginIndex <= charIndex && charIndex <= EndIndex );
         }
 
         /// <summary>
@@ -94,9 +93,8 @@
         {
             int selectionEnd = selectionStart + selectionLength;
             return ((BeginIndex <= selectionStart && selectionStart <= EndIndex)
-                ||  (BeginIndex <= selectionEnd && selectionEnd <= EndIndex)
-                ||  (selectionStart <= BeginIndex && EndIndex <= selectionEnd))
-                ? true : false;
+                    ||  (BeginIndex <= selectionEnd && selectionEnd <= EndIndex)
+                    ||  (selectionStart <= BeginIndex && EndIndex <= selectionEnd));
         }
         #endregion
     } //Class

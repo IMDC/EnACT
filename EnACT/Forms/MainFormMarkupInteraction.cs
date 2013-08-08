@@ -31,11 +31,9 @@ namespace EnACT.Forms
         /// </summary>
         public void SubscribeToMarkupEvents()
         {
-            CaptionTextBox.NothingSelected += new EventHandler(this.CaptionTextBox_NothingSelected);
-            CaptionTextBox.CaptionWordSelected += new EventHandler<CaptionWordSelectedEventArgs>
-                (this.CaptionTextBox_CaptionWordSelected);
-            CaptionTextBox.MultipleCaptionWordsSelected += new EventHandler
-                (this.CaptionTextBox_MultipleCaptionWordsSelected);
+            CaptionTextBox.NothingSelected += CaptionTextBox_NothingSelected;
+            CaptionTextBox.CaptionWordSelected += CaptionTextBox_CaptionWordSelected;
+            CaptionTextBox.MultipleCaptionWordsSelected += CaptionTextBox_MultipleCaptionWordsSelected;
         }
         #endregion SubScribeToMarkupEvents
 

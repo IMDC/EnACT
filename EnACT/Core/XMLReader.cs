@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using EnACT.Miscellaneous;
@@ -320,7 +319,7 @@ namespace EnACT.Core
                                 //through all of this caption's words.
                                 if (r.NodeType == XmlNodeType.EndElement && r.Name.Equals(XmlElements.Caption))
                                     break;
-                                else if (r.NodeType == XmlNodeType.Element && r.Name.Equals(XmlElements.Word))
+                                if (r.NodeType == XmlNodeType.Element && r.Name.Equals(XmlElements.Word))
                                 {
                                     r.AssertNode(XmlElements.Word); //Doublecheck, it's the only way to be sure.
 

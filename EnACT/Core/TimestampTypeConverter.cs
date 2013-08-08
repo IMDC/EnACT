@@ -12,10 +12,7 @@ namespace EnACT.Core
     {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            if (sourceType == typeof(string))
-                return true;
-            else
-                return base.CanConvertFrom(context, sourceType);
+            return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext context,
@@ -29,17 +26,15 @@ namespace EnACT.Core
                 string vstring = value as string;
                 return new Timestamp(vstring);
             }
-            else
-                return base.ConvertFrom(context, culture, value);
+
+            //else
+            return base.ConvertFrom(context, culture, value);
         }
 
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
-            if ((destinationType == typeof(string)) |
-                (destinationType == typeof(InstanceDescriptor)))
-                return true;
-            else
-                return base.CanConvertTo(context, destinationType);
+            return (destinationType == typeof (string)) |
+                   (destinationType == typeof (InstanceDescriptor)) || base.CanConvertTo(context, destinationType);
         }
 
         public override object ConvertTo(ITypeDescriptorContext context,

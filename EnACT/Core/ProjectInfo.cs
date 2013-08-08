@@ -76,8 +76,7 @@ namespace EnACT.Core
         /// <param name="videoPath">The path of the video supplied by the user.</param>
         /// <param name="projectPath">The path that the project directory will be placed in.</param>
         public ProjectInfo(string name, string videoPath, string projectPath)
-            : this(name: name, scriptPath: null, useExistingScript: false, videoPath: videoPath,
-            projectPath: projectPath) { }
+            : this(name, null, false, videoPath, projectPath) { }
 
         /// <summary>
         /// Constructs a Project WITH a given script path.
@@ -87,8 +86,7 @@ namespace EnACT.Core
         /// <param name="videoPath">The path of the video supplied by the user.</param>
         /// <param name="projectPath">The path that the project directory will be placed in.</param>
         public ProjectInfo(string name, string scriptPath, string videoPath, string projectPath)
-            : this(name: name, scriptPath: scriptPath, useExistingScript: true, videoPath: videoPath,
-            projectPath: projectPath) { }
+            : this(name, scriptPath, true, videoPath, projectPath) { }
 
         /// <summary>
         /// Constructs a Project with the specified parameters.

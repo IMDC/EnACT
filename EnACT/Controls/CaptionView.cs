@@ -81,7 +81,7 @@ namespace EnACT.Controls
                 BindingList = new BindingList<EditorCaption>(value);
 
                 DataSource = BindingList;   //Bind list to view
-                BindingList.ListChanged += new ListChangedEventHandler(BindingList_ListChanged);
+                BindingList.ListChanged += BindingList_ListChanged;
             }
             get { return CaptionList; }
         }
@@ -352,13 +352,13 @@ namespace EnACT.Controls
         #region Initialize
         private void InitializeComponent()
         {
-            ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
+            ((ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
             // CaptionView
             // 
             this.AutoGenerateColumns = false;
-            ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
+            ((ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
         }

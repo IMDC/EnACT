@@ -603,7 +603,7 @@ namespace EnACT.Core
                                 w.WriteStartElement(XmlElements.Background);
                                 w.WriteAttributeString(XmlAttributes.Visible, s.Bg.Visible.ToLowerString());
                                 w.WriteAttributeString(XmlAttributes.Alpha, s.Bg.Alpha.ToString());
-                                w.WriteAttributeString(XmlAttributes.Colour, s.Bg.Colour.ToString());
+                                w.WriteAttributeString(XmlAttributes.Colour, s.Bg.Colour);
                                 w.WriteEndElement();
 
                                 w.WriteStartElement(XmlElements.Font);

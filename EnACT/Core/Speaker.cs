@@ -23,7 +23,7 @@
         /// <summary>
         /// Description speaker, used when a caption is a description such as [laughter] or [music]
         /// </summary>
-        public static readonly Speaker Description = new Speaker(Speaker.DescriptionName);
+        public static readonly Speaker Description = new Speaker(DescriptionName);
 
         /// <summary>
         /// The name of this speaker
