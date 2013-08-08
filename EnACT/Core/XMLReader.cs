@@ -188,9 +188,11 @@ namespace EnACT.Core
             var speakerSet = new Dictionary<string, Speaker>();
             var settings = new SettingsXml();
 
-            XmlReaderSettings readerSettings = new XmlReaderSettings();
-            readerSettings.IgnoreWhitespace = true;
-            readerSettings.IgnoreComments = true;
+            XmlReaderSettings readerSettings = new XmlReaderSettings
+            {
+                IgnoreWhitespace = true, 
+                IgnoreComments = true
+            };
 
             using (XmlReader r = XmlReader.Create(path, readerSettings))
             {
@@ -301,12 +303,14 @@ namespace EnACT.Core
                         case XmlElements.Captions: break; //Do Nothing
                         case XmlElements.Caption:
                             r.AssertNode(XmlElements.Caption);
-                            EditorCaption c = new EditorCaption();
-                            c.Begin = r.GetNonNullAttribute(XmlAttributes.Begin);
-                            c.End = r.GetNonNullAttribute(XmlAttributes.End);
-                            c.Speaker = speakerSet[r.GetNonNullAttribute(XmlAttributes.Speaker)];
-                            c.Location = (ScreenLocation) r.GetIntAttribute(XmlAttributes.Location);
-                            c.Alignment = (Alignment) r.GetIntAttribute(XmlAttributes.Align);
+                            EditorCaption c = new EditorCaption
+                            {
+                                Begin = r.GetNonNullAttribute(XmlAttributes.Begin),
+                                End = r.GetNonNullAttribute(XmlAttributes.End),
+                                Speaker = speakerSet[r.GetNonNullAttribute(XmlAttributes.Speaker)],
+                                Location = (ScreenLocation) r.GetIntAttribute(XmlAttributes.Location),
+                                Alignment = (Alignment) r.GetIntAttribute(XmlAttributes.Align)
+                            };
 
                             List<EditorCaptionWord> wordList = new List<EditorCaptionWord>();
 

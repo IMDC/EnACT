@@ -142,62 +142,78 @@ namespace EnACT.Controls
              * columns. Instead, it is better to call this method from the form or
              * component that implements Caption view.
              */
-            numberColumn = new DataGridViewTextBoxColumn();
-            numberColumn.Name = ColumnNames.Number;
-            numberColumn.HeaderText = ColumnNames.Number;
-            numberColumn.MinimumWidth = MinimumColumnWidths.NumberColumn;
-            numberColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            numberColumn.ReadOnly = true;   //Set Number column to read only
+            numberColumn = new DataGridViewTextBoxColumn
+            {
+                Name = ColumnNames.Number,
+                HeaderText = ColumnNames.Number,
+                MinimumWidth = MinimumColumnWidths.NumberColumn,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader,
+                ReadOnly = true
+            };
 
-            beginColumn = new DataGridViewTextBoxColumn();
-            beginColumn.Name = ColumnNames.Begin;
-            beginColumn.HeaderText = ColumnNames.Begin;
-            beginColumn.ValueType = typeof(Timestamp);
-            beginColumn.DataPropertyName = EditorCaption.PropertyNames.Begin;
-            beginColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            beginColumn.MinimumWidth = MinimumColumnWidths.TimestampColumn;
+            beginColumn = new DataGridViewTextBoxColumn
+            {
+                Name = ColumnNames.Begin,
+                HeaderText = ColumnNames.Begin,
+                ValueType = typeof (Timestamp),
+                DataPropertyName = EditorCaption.PropertyNames.Begin,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
+                MinimumWidth = MinimumColumnWidths.TimestampColumn
+            };
 
-            endColumn = new DataGridViewTextBoxColumn();
-            endColumn.Name = ColumnNames.End;
-            endColumn.HeaderText = ColumnNames.End;
-            endColumn.ValueType = typeof(Timestamp);
-            endColumn.DataPropertyName = EditorCaption.PropertyNames.End;
-            endColumn.MinimumWidth = MinimumColumnWidths.TimestampColumn;
-            endColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            endColumn = new DataGridViewTextBoxColumn
+            {
+                Name = ColumnNames.End,
+                HeaderText = ColumnNames.End,
+                ValueType = typeof (Timestamp),
+                DataPropertyName = EditorCaption.PropertyNames.End,
+                MinimumWidth = MinimumColumnWidths.TimestampColumn,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            };
 
-            durationColumn = new DataGridViewTextBoxColumn();
-            durationColumn.Name = ColumnNames.Duration;
-            durationColumn.HeaderText = ColumnNames.Duration;
-            durationColumn.ValueType = typeof(Timestamp);
-            durationColumn.DataPropertyName = EditorCaption.PropertyNames.Duration;
-            durationColumn.MinimumWidth = MinimumColumnWidths.TimestampColumn;
-            durationColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            durationColumn = new DataGridViewTextBoxColumn
+            {
+                Name = ColumnNames.Duration,
+                HeaderText = ColumnNames.Duration,
+                ValueType = typeof (Timestamp),
+                DataPropertyName = EditorCaption.PropertyNames.Duration,
+                MinimumWidth = MinimumColumnWidths.TimestampColumn,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            };
 
-            speakerColumn = new DataGridViewTextBoxColumn();
-            speakerColumn.Name = ColumnNames.Speaker;
-            speakerColumn.HeaderText = ColumnNames.Speaker;
-            speakerColumn.DataPropertyName = EditorCaption.PropertyNames.Speaker;
-            speakerColumn.MinimumWidth = MinimumColumnWidths.SpeakerColumn;
-            speakerColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            speakerColumn = new DataGridViewTextBoxColumn
+            {
+                Name = ColumnNames.Speaker,
+                HeaderText = ColumnNames.Speaker,
+                DataPropertyName = EditorCaption.PropertyNames.Speaker,
+                MinimumWidth = MinimumColumnWidths.SpeakerColumn,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            };
 
-            alignmentColumn = new DataGridViewTextBoxColumn();
-            alignmentColumn.Name = ColumnNames.Alignment;
-            alignmentColumn.HeaderText = ColumnNames.Alignment;
-            alignmentColumn.DataPropertyName = EditorCaption.PropertyNames.Alignment;
-            alignmentColumn.MinimumWidth = MinimumColumnWidths.AlignmentColumn;
-            alignmentColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            alignmentColumn = new DataGridViewTextBoxColumn
+            {
+                Name = ColumnNames.Alignment,
+                HeaderText = ColumnNames.Alignment,
+                DataPropertyName = EditorCaption.PropertyNames.Alignment,
+                MinimumWidth = MinimumColumnWidths.AlignmentColumn,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            };
 
-            locationColumn = new DataGridViewTextBoxColumn();
-            locationColumn.Name = ColumnNames.Location;
-            locationColumn.HeaderText = ColumnNames.Location;
-            locationColumn.DataPropertyName = EditorCaption.PropertyNames.Location;
-            locationColumn.MinimumWidth = MinimumColumnWidths.LocationColumn;
-            locationColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            locationColumn = new DataGridViewTextBoxColumn
+            {
+                Name = ColumnNames.Location,
+                HeaderText = ColumnNames.Location,
+                DataPropertyName = EditorCaption.PropertyNames.Location,
+                MinimumWidth = MinimumColumnWidths.LocationColumn,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            };
 
-            textColumn = new DataGridViewTextBoxColumn();
-            textColumn.Name = ColumnNames.Text;
-            textColumn.HeaderText = ColumnNames.Text;
-            textColumn.DataPropertyName = ColumnNames.Text;
+            textColumn = new DataGridViewTextBoxColumn
+            {
+                Name = ColumnNames.Text,
+                HeaderText = ColumnNames.Text,
+                DataPropertyName = ColumnNames.Text
+            };
 
             //Add Columns to View
             Columns.Add(numberColumn);
@@ -240,7 +256,7 @@ namespace EnACT.Controls
         public void DeleteSelectedRows()
         {
             //Create a sorted set that contains ints from largest to smallest
-            SortedSet<int> indexSet = new SortedSet<int>(Comparer<int>.Create((x,y) => y.CompareTo(x)));
+            var indexSet = new SortedSet<int>(Comparer<int>.Create((x,y) => y.CompareTo(x)));
 
             //Insert selected row indexes into set
             foreach (DataGridViewRow r in SelectedRows){ indexSet.Add(r.Index); }

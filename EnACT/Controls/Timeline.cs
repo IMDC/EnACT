@@ -206,23 +206,12 @@ namespace EnACT.Controls
             }
             get { return bkTimeWidth; }
         }
-       
-        /// <summary>
-        /// Backing variable for the VideoLength property. Use the VideoLength property to 
-        /// set this variable
-        /// </summary>
-        private double bkVideoLength;
+
         /// <summary>
         /// Represents the length of the flash video, in seconds. Also sets the CaptionDrawingWidth
         /// </summary>
-        public double VideoLength
-        {
-            set 
-            {
-                bkVideoLength = value;
-            }
-            get { return bkVideoLength; }
-        }
+        public double VideoLength { get; set; }
+
         /// <summary>
         /// The position of the Video's playhead in seconds.
         /// </summary>
@@ -332,9 +321,11 @@ namespace EnACT.Controls
             #endregion
 
             #region Draw Dash Lines
-            Pen dashLinePen = new Pen(Color.Black); //Pen for drawing dotted lines
-            dashLinePen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            dashLinePen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
+            Pen dashLinePen = new Pen(Color.Black)
+            {
+                DashStyle = System.Drawing.Drawing2D.DashStyle.Dash,
+                DashCap = System.Drawing.Drawing2D.DashCap.Flat
+            }; //Pen for drawing dotted lines
 
             float[] labelYs = new float[LocationLabels.Length];
 
@@ -867,14 +858,7 @@ namespace EnACT.Controls
         #region ToggleDrawLocationLabels
         public void ToggleDrawLocationLabels()
         {
-            if (DrawLocationLabels)
-            {
-                DrawLocationLabels = false;
-            }
-            else
-            {
-                DrawLocationLabels = true;
-            }
+            DrawLocationLabels = !DrawLocationLabels;
             SetScrollBarValues();
             Redraw();
         }
