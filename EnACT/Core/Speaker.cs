@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EnACT
+﻿namespace EnACT.Core
 {
     /// <summary>
     /// Represents the speaker of a line of dialogue. Speakers can be customized

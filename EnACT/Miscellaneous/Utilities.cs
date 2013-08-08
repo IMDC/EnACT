@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Xml;
+using EnACT.Core;
 
-namespace EnACT
+namespace EnACT.Miscellaneous
 {
     /// <summary>
     /// A utilities class meant for extending classes

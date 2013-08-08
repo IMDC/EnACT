@@ -67,8 +67,8 @@ namespace EnACT.Controls
         /// <returns>true or false</returns>
         public override Boolean IsPlaying()
         {
-            string returnXML = CallFunction("<invoke name=\"" + "isPlaying" + "\" returntype=\"xml\"></invoke>");
-            switch (returnXML)
+            string returnXml = CallFunction("<invoke name=\"" + "isPlaying" + "\" returntype=\"xml\"></invoke>");
+            switch (returnXml)
             {
                 case @"<true/>": return true;
                 default: return false;

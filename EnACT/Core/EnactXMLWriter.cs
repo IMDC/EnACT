@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
+using EnACT.Miscellaneous;
 
-namespace EnACT
+namespace EnACT.Core
 {
     /// <summary>
     /// Contains all the methods required for writing an EnACT project to

@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
+using EnACT.Core;
+using EnACT.Miscellaneous;
 
-namespace EnACT
+namespace EnACT.Controls
 {
     public partial class Timeline : UserControl
     {

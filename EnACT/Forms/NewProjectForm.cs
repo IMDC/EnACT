@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using EnACT.Core;
 
-namespace EnACT
+namespace EnACT.Forms
 {
     /// <summary>
     /// The form that is used for creating new projects.

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
 using System.Reflection;
 
-namespace EnACT
+namespace EnACT.Core
 {
     /// <summary>
     /// This class is currently not used for anything, but it is kept handy just in case.

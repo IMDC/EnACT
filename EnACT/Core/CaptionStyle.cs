@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Drawing;
-using System.ComponentModel;
 
-namespace EnACT
+namespace EnACT.Core
 {
     /// <summary>
     /// Represents the style used to mark up and display captions in the EnACT editor.

@@ -3,8 +3,9 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using EnACT.Controls;
+using EnACT.Core;
 
-namespace EnACT
+namespace EnACT.Forms
 {
     /// <summary>
     /// The Caption Markup controller for the EnACT Editor. It handles functionality related to

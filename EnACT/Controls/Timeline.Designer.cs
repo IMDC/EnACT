@@ -1,4 +1,4 @@
-﻿namespace EnACT
+﻿namespace EnACT.Controls
 {
     partial class Timeline
     {

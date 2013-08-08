@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.IO;
+using System.Windows.Forms;
+using EnACT.Core;
+using EnACT.Miscellaneous;
 
-namespace EnACT
+namespace EnACT.Forms
 {
     public partial class MainForm : Form
     {

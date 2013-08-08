@@ -1,6 +1,7 @@
 ﻿using EnACT.Controls;
+using EnACT.Core;
 
-namespace EnACT
+namespace EnACT.Forms
 {
     partial class MainForm
     {
@@ -31,8 +32,8 @@ namespace EnACT
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            EnACT.Timestamp timestamp1 = new EnACT.Timestamp();
-            EnACT.Timestamp timestamp2 = new EnACT.Timestamp();
+            Timestamp timestamp1 = new Timestamp();
+            Timestamp timestamp2 = new Timestamp();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -115,7 +116,7 @@ namespace EnACT
             this.OpenProjectDialog = new System.Windows.Forms.OpenFileDialog();
             this.CaptionTextBox = new CaptionTextBox();
             this.PlayheadLabel = new PlayheadLabel();
-            this.Timeline = new EnACT.Timeline();
+            this.Timeline = new Timeline();
             this.EngineView = new EngineView();
             this.CaptionView = new CaptionView();
             this.MenuStrip_MainForm.SuspendLayout();

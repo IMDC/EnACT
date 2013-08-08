@@ -1,4 +1,4 @@
-﻿namespace EnACT
+﻿namespace EnACT.Forms
 {
     partial class JorgeForm
     {

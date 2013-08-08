@@ -1,4 +1,5 @@
 ﻿using System;
+using EnACT.Core;
 
 namespace EnACT.Controls
 {

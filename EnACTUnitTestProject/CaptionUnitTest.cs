@@ -1,4 +1,5 @@
 ﻿using System;
+using EnACT.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EnACT;
 

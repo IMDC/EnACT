@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 //This file is for Custom EventArgs classes
-namespace EnACT
+namespace EnACT.Controls
 {
     #region TimelinePlayheadChangedEventArgs
     /// <summary>

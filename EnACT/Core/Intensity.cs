@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EnACT
+﻿namespace EnACT.Core
 {
     /// <summary>
     /// The Intensity enum represents how intense the emotion in a caption will be.

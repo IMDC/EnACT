@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
 
-namespace EnACT
+namespace EnACT.Core
 {
     #region EditorCaption Class
     /// <summary>

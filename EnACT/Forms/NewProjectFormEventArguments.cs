@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EnACT.Core;
 
-namespace EnACT
+namespace EnACT.Forms
 {
     /// <summary>
     /// Provides data for the ProjectCreated Event.

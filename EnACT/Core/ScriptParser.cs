@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.IO;
+using System.Text.RegularExpressions;
+using EnACT.Miscellaneous;
 
-namespace EnACT
+namespace EnACT.Core
 {
     /// <summary>
     /// Contains all methods and fields related to reading in and parsing text.

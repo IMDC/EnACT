@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-namespace EnACT
+﻿using System.Collections.Generic;
+using EnACT.Miscellaneous;
+
+namespace EnACT.Core
 {
     /// <summary>
     /// Contains all the settings, values and options related to an EnACT editor proejct

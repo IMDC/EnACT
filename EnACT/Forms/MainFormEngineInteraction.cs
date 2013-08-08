@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using EnACT.Controls;
 
-namespace EnACT
+namespace EnACT.Forms
 {
     /// <summary>
     /// The video controller for enact. Controls interaction between user controls.
@@ -48,10 +45,10 @@ namespace EnACT
             this.PlayheadTimer.Tick += new System.EventHandler(this.PlayheadTimer_Tick);
 
             //Timeline Events
-            this.Timeline.PlayheadChanged += new System.EventHandler<EnACT.TimelinePlayheadChangedEventArgs>
+            this.Timeline.PlayheadChanged += new System.EventHandler<TimelinePlayheadChangedEventArgs>
                 (this.Timeline_PlayheadChanged);
             this.Timeline.CaptionTimestampChanged += 
-                new System.EventHandler<EnACT.TimelineCaptionTimestampChangedEventArgs>
+                new System.EventHandler<TimelineCaptionTimestampChangedEventArgs>
                     (this.Timeline_CaptionTimestampChanged);
             this.Timeline.CaptionMoved += new System.EventHandler(this.Timeline_CaptionMoved);
         }

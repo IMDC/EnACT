@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EnACT
+﻿namespace EnACT.Core
 {
     /// <summary>
     /// The Location Enum represents in which of the 9 possible areas a caption
