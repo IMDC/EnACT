@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace EnACT
+namespace EnACT.Controls
 {
     /// <summary>
     /// A label that displays the Video progress in the form of currentTime/TotalLength

@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.ComponentModel;
-using System.ComponentModel.Design.Serialization;
-using System.Reflection;
 using System.Drawing;
-using System.Collections;
+using System.Windows.Forms;
 
-namespace EnACT
+namespace EnACT.Controls
 {
     public class CaptionView : DataGridView
     {

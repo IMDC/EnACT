@@ -331,7 +331,7 @@ namespace EnACT
         /// <summary>
         /// Determines whether a Timestamp and a double are equal
         /// </summary>
-        /// <param name="t">The double to compare with the current Timestamp.</param>
+        /// <param name="d">The double to compare with the current Timestamp.</param>
         /// <returns> true if the specified double is equal to the current Timestamp; 
         /// otherwise, false. </returns>
         public bool Equals(double d)
@@ -342,7 +342,7 @@ namespace EnACT
         /// <summary>
         /// Determines whether a Timestamp and a string are equal
         /// </summary>
-        /// <param name="t">The string to compare with the current Timestamp.</param>
+        /// <param name="s">The string to compare with the current Timestamp.</param>
         /// <returns> true if the specified string is equal to the current Timestamp; 
         /// otherwise, false. </returns>
         public bool Equals(string s)

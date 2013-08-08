@@ -1,4 +1,6 @@
-﻿namespace EnACT
+﻿using EnACT.Controls;
+
+namespace EnACT
 {
     partial class MainForm
     {
@@ -111,11 +113,11 @@
             this.Button_CenterAlign = new System.Windows.Forms.Button();
             this.Button_RightAlign = new System.Windows.Forms.Button();
             this.OpenProjectDialog = new System.Windows.Forms.OpenFileDialog();
-            this.CaptionTextBox = new EnACT.CaptionTextBox();
-            this.PlayheadLabel = new EnACT.PlayheadLabel();
+            this.CaptionTextBox = new CaptionTextBox();
+            this.PlayheadLabel = new PlayheadLabel();
             this.Timeline = new EnACT.Timeline();
-            this.EngineView = new EnACT.EngineView();
-            this.CaptionView = new EnACT.CaptionView();
+            this.EngineView = new EngineView();
+            this.CaptionView = new CaptionView();
             this.MenuStrip_MainForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_Timeline)).BeginInit();
             this.GB_Location.SuspendLayout();
@@ -818,7 +820,7 @@
             this.CaptionTextBox.HideSelection = false;
             this.CaptionTextBox.Location = new System.Drawing.Point(602, 50);
             this.CaptionTextBox.Name = "CaptionTextBox";
-            this.CaptionTextBox.SelectionMode = EnACT.CaptionTextBoxSelectionMode.NoSelection;
+            this.CaptionTextBox.SelectionMode = CaptionTextBoxSelectionMode.NoSelection;
             this.CaptionTextBox.Size = new System.Drawing.Size(274, 86);
             this.CaptionTextBox.TabIndex = 24;
             this.CaptionTextBox.Text = "";

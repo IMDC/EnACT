@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using AxShockwaveFlashObjects;
 using System.Xml;
+using AxShockwaveFlashObjects;
 
-namespace EnACT
+namespace EnACT.Controls
 {
     /// <summary>
     /// A Flashplayer control designed to communicate with the swf that it has loaded.
