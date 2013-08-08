@@ -1,8 +1,12 @@
 ﻿<Window x:Class="Player.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="EnACT Caption Player" Height="600" Width="800">
+    <Menu HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="792">
+        <MenuItem Header="File">
+            <MenuItem Header="Open Video"/>
+            <MenuItem Header="Close Video"/>
+            <MenuItem Header="Exit EnACT Player"/>
+        </MenuItem>
+    </Menu>
 </Window>
