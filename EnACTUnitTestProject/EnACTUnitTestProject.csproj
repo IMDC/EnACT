@@ -56,9 +56,9 @@
     <Compile Include="CaptionWordListUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EnACT\EnACT.csproj">
+    <ProjectReference Include="..\EnACT\Editor.csproj">
       <Project>{d7effe02-1630-4897-aedb-0ceff5b257a3}</Project>
-      <Name>EnACT</Name>
+      <Name>Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
