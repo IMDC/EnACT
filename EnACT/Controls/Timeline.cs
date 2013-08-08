@@ -627,7 +627,7 @@ namespace EnACT.Controls
                     return;
 
                 //Should not happen, so throw an exception if it does
-                default: throw new InvalidEnumArgumentException("mouseSelection.Action", 
+                default: throw new InvalidEnumArgumentException("e", 
                     mouseSelection.Action.GetHashCode(), typeof(TimelineMouseAction));
             }
 

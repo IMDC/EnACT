@@ -38,7 +38,7 @@ namespace EnACT.Core
                 case FileExtensions.Esr: return ParseEsrFile(path);
                 case FileExtensions.Srt: return ParseSrtFile(path);
                 case FileExtensions.Txt: return ParseScriptFile(path);
-                default: throw new FormatException(string.Format("Extension \"{}\" is not a valid extension.",
+                default: throw new FormatException(string.Format("Extension \"{0}\" is not a valid extension.",
                     extension));
             }
         }

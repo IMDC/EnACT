@@ -424,7 +424,7 @@ namespace EnACT.Controls
                 case ColumnNames.Location:
                     break;
                 case ColumnNames.Text: break;
-                default: throw new ArgumentException("Invalid Column " + e.ColumnIndex, "e.ColumnIndex");
+                default: throw new ArgumentException("Invalid Column " + e.ColumnIndex, "e");
             }
             base.OnCellParsing(e);
         }
@@ -476,7 +476,7 @@ namespace EnACT.Controls
         /// </summary>
         private void DisableUserInput()
         {
-            Console.WriteLine("Forcolor: {0}", ForeColor.ToString());
+            Console.WriteLine("Forecolor: {0}", ForeColor.ToString());
             ReadOnly = true;
             ForeColor = SystemColors.GrayText;
             ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.GrayText;

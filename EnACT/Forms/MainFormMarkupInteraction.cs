@@ -446,7 +446,7 @@ namespace EnACT.Forms
                 case EditorCaption.PropertyNames.Text: CaptionTextBox.Text = SelectedCaption.GetAsString(); break;
                 case EditorCaption.PropertyNames.Words:         break;
                 default: throw new ArgumentException(string.Format("Property Name '{0}' isn't a valid property",
-                        e.PropertyName), "PropertyName");
+                        e.PropertyName), "e");
             }
 
             //Update Caption in CaptionView
