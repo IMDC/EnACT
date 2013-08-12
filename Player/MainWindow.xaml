@@ -6,27 +6,28 @@
     <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
         <Menu HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top" DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="Open Video"/>
-                <MenuItem Header="Close Video"/>
-                <MenuItem Header="Exit EnACT Player"/>
+                <MenuItem x:Name="MenuItemOpenVideo" Header="Open Video" />
+                <MenuItem x:Name="MenuItemCloseVideo" Header="Close Video"/>
+                <MenuItem x:Name="MenuItemExit" Header="Exit EnACT Player"/>
             </MenuItem>
             <MenuItem Header="Help">
-                <MenuItem Header="Help"/>
-                <MenuItem Header="About"/>
+                <MenuItem x:Name="MenuItemHelp" Header="Help"/>
+                <MenuItem x:Name="MenuItemAbout" Header="About"/>
             </MenuItem>
         </Menu>
-        <DockPanel  LastChildFill="False" DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
+        <DockPanel x:Name="ControlPanel" LastChildFill="False" DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
             <Slider VerticalAlignment="Top" DockPanel.Dock="Top" Width="700"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Bottom">
-                <Button Content="Rewind" VerticalAlignment="Top" Width="75"/>
-                <Button Content="Pause" VerticalAlignment="Top" Width="75"/>
-                <Button Content="Play" VerticalAlignment="Top" Width="75"/>
-                <Button Content="Stop" VerticalAlignment="Top" Width="75"/>
-                <Button Content="Forward" VerticalAlignment="Top" Width="75"/>
-                <CheckBox Content="Show Captions" IsChecked="True"/>
-                <CheckBox Content="Hide Controls"/>
+                <Button x:Name="ButtonRewind" Content="Rewind" VerticalAlignment="Top" Width="75"/>
+                <Button x:Name="ButtonPause" Content="Pause" VerticalAlignment="Top" Width="75"/>
+                <Button x:Name="ButtonPlay" Content="Play" VerticalAlignment="Top" Width="75"/>
+                <Button x:Name="ButtonStop" Content="Stop" VerticalAlignment="Top" Width="75"/>
+                <Button x:Name="ButtonForward" Content="Forward" VerticalAlignment="Top" Width="75"/>
+                <CheckBox x:Name="CheckBoxShowCaptions" Content="Show Captions" IsChecked="True"/>
+                <CheckBox x:Name="CheckBoxHideControls" Content="Hide Controls" />
             </StackPanel>
         </DockPanel>
+        <!--Make Media Player the last Element so that it fills the remaining space-->
         <local:MediaPlayer DockPanel.Dock="Top" Background="Black"/>
     </DockPanel>
 </Window>
