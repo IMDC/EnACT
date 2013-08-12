@@ -6,6 +6,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="300">
-        <MediaElement HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <MediaElement x:Name="Media" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
     </Grid>
 </UserControl>

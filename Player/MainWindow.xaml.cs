@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace Player
 {
@@ -23,6 +24,26 @@ namespace Player
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Opens a dialog to select a video to play.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void MenuItemOpenVideo_OnClick(object sender, RoutedEventArgs e)
+        {
+            var fileBrowserDialog = new OpenFileDialog
+            {
+                Filter = "Video Files|*.avi;*.mpg;*.mov;*.wmv|All Files|*.*"
+            };
+
+            var result = fileBrowserDialog.ShowDialog();
+
+            if (result == true)
+            {
+                MediaPlayer.Media.Source = new Uri(fileBrowserDialog.FileName);
+            }
         }
     }
 }
