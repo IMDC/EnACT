@@ -76,17 +76,17 @@ namespace Player
 
         private void ButtonPause_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            MediaPlayer.Media.Pause();
         }
 
         private void ButtonPlay_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            MediaPlayer.Media.Play();
         }
 
         private void ButtonStop_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            MediaPlayer.Media.Stop();
         }
 
         private void ButtonForward_OnClick(object sender, RoutedEventArgs e)
