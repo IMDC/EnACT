@@ -26,6 +26,7 @@ namespace Player
             InitializeComponent();
         }
 
+        #region File MenuItem Click Handlers
         /// <summary>
         /// Opens a dialog to select a video to play.
         /// </summary>
@@ -45,5 +46,53 @@ namespace Player
                 MediaPlayer.Media.Source = new Uri(fileBrowserDialog.FileName);
             }
         }
+
+        /// <summary>
+        /// Closes the video but does not close the player.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void MenuItemCloseVideo_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Closes the player.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void MenuItemExit_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        #endregion
+
+        #region Media Button Click Handlers
+        private void ButtonRewind_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ButtonPause_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ButtonPlay_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ButtonStop_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ButtonForward_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }

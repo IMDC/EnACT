@@ -23,6 +23,7 @@ namespace Player
         public MediaPlayer()
         {
             InitializeComponent();
+            Media.LoadedBehavior = MediaState.Manual;
         }
     }
 }

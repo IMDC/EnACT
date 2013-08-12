@@ -7,8 +7,8 @@
         <Menu HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top" DockPanel.Dock="Top">
             <MenuItem Header="File">
                 <MenuItem x:Name="MenuItemOpenVideo" Header="Open Video" Click="MenuItemOpenVideo_OnClick" />
-                <MenuItem x:Name="MenuItemCloseVideo" Header="Close Video"/>
-                <MenuItem x:Name="MenuItemExit" Header="Exit EnACT Player"/>
+                <MenuItem x:Name="MenuItemCloseVideo" Header="Close Video" Click="MenuItemCloseVideo_OnClick"/>
+                <MenuItem x:Name="MenuItemExit" Header="Exit EnACT Player" Click="MenuItemExit_OnClick"/>
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem x:Name="MenuItemHelp" Header="Help"/>
@@ -18,11 +18,16 @@
         <DockPanel x:Name="ControlPanel" LastChildFill="False" DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
             <Slider VerticalAlignment="Top" DockPanel.Dock="Top" Width="700"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Bottom">
-                <Button x:Name="ButtonRewind" Content="Rewind" VerticalAlignment="Top" Width="75"/>
-                <Button x:Name="ButtonPause" Content="Pause" VerticalAlignment="Top" Width="75"/>
-                <Button x:Name="ButtonPlay" Content="Play" VerticalAlignment="Top" Width="75"/>
-                <Button x:Name="ButtonStop" Content="Stop" VerticalAlignment="Top" Width="75"/>
-                <Button x:Name="ButtonForward" Content="Forward" VerticalAlignment="Top" Width="75"/>
+                <Button x:Name="ButtonRewind" Content="Rewind" VerticalAlignment="Top" Width="75"
+                        Click="ButtonRewind_OnClick"/>
+                <Button x:Name="ButtonPause" Content="Pause" VerticalAlignment="Top" Width="75"
+                        Click="ButtonPause_OnClick"/>
+                <Button x:Name="ButtonPlay" Content="Play" VerticalAlignment="Top" Width="75"
+                        Click="ButtonPlay_OnClick"/>
+                <Button x:Name="ButtonStop" Content="Stop" VerticalAlignment="Top" Width="75"
+                        Click="ButtonStop_OnClick"/>
+                <Button x:Name="ButtonForward" Content="Forward" VerticalAlignment="Top" Width="75"
+                        Click="ButtonForward_OnClick"/>
                 <CheckBox x:Name="CheckBoxShowCaptions" Content="Show Captions" IsChecked="True"/>
                 <CheckBox x:Name="CheckBoxHideControls" Content="Hide Controls" />
             </StackPanel>
