@@ -11,15 +11,6 @@ namespace Player
 {
     internal class Model : INotifyPropertyChanged
     {
-        #region Fields and Properties
-        public ICommand PlayCommand { get; set; }
-        public ICommand PauseCommand { get; set; }
-        public ICommand StopCommand { get; set; }
-        public ICommand MediaOpenedCommand { get; set; }
-        public ICommand SetVideoSourceCommand { get; set; }
-        #endregion
-
-        //public Model()
 
         #region PropertyChanged
         /// <summary>
@@ -43,16 +34,5 @@ namespace Player
             }
         }
         #endregion
-
-        private bool CanPlay(object parameter)
-        {
-            return true;
-        }
-
-        private void ExecutePlay(object parameter)
-        {
-
-        }
-        
     }
 }
