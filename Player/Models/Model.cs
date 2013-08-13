@@ -2,8 +2,37 @@
 
 namespace Player.Models
 {
-    internal class Model : INotifyPropertyChanged
+    public class Model : INotifyPropertyChanged
     {
+        #region Constants and Enum Definition
+        public enum PlayerPlayState
+        {
+            Playing,
+            Paused,
+            Stopped
+        }
+        #endregion
+
+        #region Fields and Properties
+        private PlayerPlayState bkPlayState;
+
+        public PlayerPlayState PlayState
+        {
+            get { return bkPlayState; }
+            set
+            {
+                bkPlayState = value;
+                NotifyPropertyChanged("PlayState");
+            }
+        } 
+        #endregion
+
+        #region Constructor
+        public Model()
+        {
+            PlayState = PlayerPlayState.Stopped;
+        }
+        #endregion
 
         #region PropertyChanged
         /// <summary>
