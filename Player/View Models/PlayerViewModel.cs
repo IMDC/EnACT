@@ -11,16 +11,29 @@ namespace Player.View_Models
     class PlayerViewModel
     {
         #region Fields and Properties
-        //RequestEvents
-        public event EventHandler PlayRequested;
-        public event EventHandler PauseRequested;
-        public event EventHandler StopRequested;
-
+        //Commands
         public ICommand PlayCommand { get; set; }
         public ICommand PauseCommand { get; set; }
         public ICommand StopCommand { get; set; }
         public ICommand MediaOpenedCommand { get; set; }
         public ICommand SetVideoSourceCommand { get; set; }
+        #endregion
+
+        #region Events
+        /// <summary>
+        /// An event that is fired when a play command is executed.
+        /// </summary>
+        public event EventHandler PlayRequested;
+
+        /// <summary>
+        /// An event that is fired when a pause command is executed.
+        /// </summary>
+        public event EventHandler PauseRequested;
+
+        /// <summary>
+        /// An event that is fired when a stop command is executed.
+        /// </summary>
+        public event EventHandler StopRequested;
         #endregion
 
         #region Constructor
