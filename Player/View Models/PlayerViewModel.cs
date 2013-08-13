@@ -8,7 +8,7 @@ using Microsoft.TeamFoundation.MVVM;
 
 namespace Player.View_Models
 {
-    class PlayerViewModel
+    public class PlayerViewModel
     {
         #region Fields and Properties
         //Commands

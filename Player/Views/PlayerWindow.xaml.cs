@@ -13,7 +13,25 @@ namespace Player.Views
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new PlayerViewModel();
+
+            var playerViewModel = new PlayerViewModel();
+            DataContext = playerViewModel;
+
+            //Set up ViewModel Event handlers
+            playerViewModel.PlayRequested += (sender, args) =>
+            {
+                Player.Media.Play();
+            };
+
+            playerViewModel.PauseRequested += (sender, args) =>
+            {
+                Player.Media.Pause();
+            };
+
+            playerViewModel.StopRequested += (sender, args) =>
+            {
+                Player.Media.Stop();
+            };
         }
 
         #region File MenuItem Click Handlers
@@ -33,7 +51,7 @@ namespace Player.Views
 
             if (result == true)
             {
-                MediaPlayer.Media.Source = new Uri(fileBrowserDialog.FileName);
+                Player.Media.Source = new Uri(fileBrowserDialog.FileName);
             }
         }
         #endregion
