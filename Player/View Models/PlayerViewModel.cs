@@ -8,7 +8,7 @@ using Microsoft.TeamFoundation.MVVM;
 
 namespace Player.View_Models
 {
-    class ViewModel
+    class PlayerViewModel
     {
         #region Fields and Properties
         //RequestEvents
@@ -21,7 +21,7 @@ namespace Player.View_Models
         public ICommand SetVideoSourceCommand { get; set; }
         #endregion
 
-        public ViewModel()
+        public PlayerViewModel()
         {
             PlayCommand = new RelayCommand(Play, CanPlay);
             PauseCommand = new RelayCommand(Pause, (object parameter) => true);

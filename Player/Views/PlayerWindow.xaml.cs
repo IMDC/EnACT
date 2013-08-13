@@ -13,7 +13,7 @@ namespace Player.Views
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModel();
+            DataContext = new PlayerViewModel();
         }
 
         #region File MenuItem Click Handlers
