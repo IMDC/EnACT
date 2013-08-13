@@ -13,6 +13,8 @@ namespace Player.View_Models
         #region Fields and Properties
         //RequestEvents
         public event EventHandler PlayRequested;
+        public event EventHandler PauseRequested;
+        public event EventHandler StopRequested;
 
         public ICommand PlayCommand { get; set; }
         public ICommand PauseCommand { get; set; }
@@ -21,30 +23,83 @@ namespace Player.View_Models
         public ICommand SetVideoSourceCommand { get; set; }
         #endregion
 
+        #region Constructor
         public PlayerViewModel()
         {
             PlayCommand = new RelayCommand(Play, CanPlay);
-            PauseCommand = new RelayCommand(Pause, (object parameter) => true);
-            StopCommand = new RelayCommand(Stop, (object parameter) => true);
+            PauseCommand = new RelayCommand(Pause, CanPause);
+            StopCommand = new RelayCommand(Stop, CanStop);
             MediaOpenedCommand = new RelayCommand(MediaOpened, (object parameter) => true);
             SetVideoSourceCommand = new RelayCommand(SetVideoSource, (object parameter) => true);
         }
+        #endregion
 
+        #region Command Methods
+        /// <summary>
+        /// Determines whether or not the ViewModel can play the video.
+        /// </summary>
+        /// <param name="parameter">Parameter</param>
+        /// <returns>Whether or not the video can be played.</returns>
         private bool CanPlay(object parameter)
         {
             return true;
         }
 
+        /// <summary>
+        /// Plays the video.
+        /// </summary>
+        /// <param name="parameter">Parameter</param>
         private void Play(object parameter)
         {
+            //Invoke request so that the UI can play the video.
             OnPlayRequested();
         }
 
-        private void Pause(object parameter) { }
-        private void Stop(object parameter) { }
+        /// <summary>
+        /// Determines whether or not the ViewModel can pause the video.
+        /// </summary>
+        /// <param name="parameter">Parameter</param>
+        /// <returns>Whether or not the video can be paused.</returns>
+        private bool CanPause(object parameter)
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Pauses the video.
+        /// </summary>
+        /// <param name="parameter">Parameter</param>
+        private void Pause(object parameter)
+        {
+            //Invoke request so that the UI can pause the video.
+            OnPauseRequested();
+        }
+
+        /// <summary>
+        /// Determines whether or not the ViewModel can stopped the video.
+        /// </summary>
+        /// <param name="parameter">Parameter</param>
+        /// <returns>Whether or not the video can be stopped.</returns>
+        private bool CanStop(object parameter)
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Stops the video.
+        /// </summary>
+        /// <param name="parameter">Parameter</param>
+        private void Stop(object parameter)
+        {
+            //Invoke request so that the UI can stop the video.
+            OnStopRequested();
+        }
+
         private void MediaOpened(object parameter) { }
         private void SetVideoSource(object parameter) { }
+        #endregion
 
+        #region Event Invocation Methods
         /// <summary>
         /// Raises the PlayRequested Event.
         /// </summary>
@@ -56,5 +111,30 @@ namespace Player.View_Models
             EventHandler handler = PlayRequested;
             if (handler != null) { handler(this, EventArgs.Empty); }
         }
+
+        /// <summary>
+        /// Raises the PauseRequested Event.
+        /// </summary>
+        private void OnPauseRequested()
+        {
+            /* Make a local copy of the event to prevent the case where the handler
+             * will be set as null in-between the null check and the handler call.
+             */
+            EventHandler handler = PauseRequested;
+            if (handler != null) { handler(this, EventArgs.Empty); }
+        }
+
+        /// <summary>
+        /// Raises the StopRequested Event.
+        /// </summary>
+        private void OnStopRequested()
+        {
+            /* Make a local copy of the event to prevent the case where the handler
+             * will be set as null in-between the null check and the handler call.
+             */
+            EventHandler handler = StopRequested;
+            if (handler != null) { handler(this, EventArgs.Empty); }
+        }
+        #endregion
     }
 }
