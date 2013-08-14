@@ -12,7 +12,7 @@ namespace Player.View_Models
     public class PlayerViewModel
     {
         #region Fields and Properties
-        public Model Model { get; set; }
+        public PlayerModel PlayerModel { get; set; }
 
         //Commands
         public ICommand PlayCommand { get; set; }
@@ -42,8 +42,8 @@ namespace Player.View_Models
         #region Constructor
         public PlayerViewModel()
         {
-            //Construct Model
-            Model = new Model();
+            //Construct PlayerModel
+            PlayerModel = new PlayerModel();
 
             //Construct Commands
             PlayCommand = new RelayCommand(Play, CanPlay);
@@ -62,8 +62,8 @@ namespace Player.View_Models
         /// <returns>Whether or not the video can be played.</returns>
         private bool CanPlay(object parameter)
         {
-            return Model.PlayState == Model.PlayerPlayState.Paused 
-                || Model.PlayState == Model.PlayerPlayState.Stopped;
+            return PlayerModel.PlayState == PlayerModel.PlayerPlayState.Paused 
+                || PlayerModel.PlayState == PlayerModel.PlayerPlayState.Stopped;
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Player.View_Models
         /// <returns>Whether or not the video can be paused.</returns>
         private bool CanPause(object parameter)
         {
-            return Model.PlayState == Model.PlayerPlayState.Playing;
+            return PlayerModel.PlayState == PlayerModel.PlayerPlayState.Playing;
         }
 
         /// <summary>
@@ -103,8 +103,8 @@ namespace Player.View_Models
         /// <returns>Whether or not the video can be stopped.</returns>
         private bool CanStop(object parameter)
         {
-            return Model.PlayState == Model.PlayerPlayState.Paused
-                || Model.PlayState == Model.PlayerPlayState.Playing;
+            return PlayerModel.PlayState == PlayerModel.PlayerPlayState.Paused
+                || PlayerModel.PlayState == PlayerModel.PlayerPlayState.Playing;
         }
 
         /// <summary>

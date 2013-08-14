@@ -2,7 +2,7 @@
 
 namespace Player.Models
 {
-    public class Model : INotifyPropertyChanged
+    public class PlayerModel : INotifyPropertyChanged
     {
         #region Constants and Enum Definition
         public enum PlayerPlayState
@@ -28,7 +28,7 @@ namespace Player.Models
         #endregion
 
         #region Constructor
-        public Model()
+        public PlayerModel()
         {
             PlayState = PlayerPlayState.Stopped;
         }
