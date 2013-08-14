@@ -5,24 +5,19 @@ namespace Player.Models
     public class PlayerModel : INotifyPropertyChanged
     {
         #region Constants and Enum Definition
-        public enum PlayerPlayState
-        {
-            Playing,
-            Paused,
-            Stopped
-        }
+
         #endregion
 
         #region Fields and Properties
-        private PlayerPlayState bkPlayState;
+        private PlayerState bkCurrentState;
 
-        public PlayerPlayState PlayState
+        public PlayerState CurrentState
         {
-            get { return bkPlayState; }
+            get { return bkCurrentState; }
             set
             {
-                bkPlayState = value;
-                NotifyPropertyChanged("PlayState");
+                bkCurrentState = value;
+                NotifyPropertyChanged("CurrentState");
             }
         } 
         #endregion
@@ -30,7 +25,7 @@ namespace Player.Models
         #region Constructor
         public PlayerModel()
         {
-            PlayState = PlayerPlayState.Stopped;
+            CurrentState = PlayerState.Closed;
         }
         #endregion
 

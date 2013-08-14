@@ -62,8 +62,8 @@ namespace Player.View_Models
         /// <returns>Whether or not the video can be played.</returns>
         private bool CanPlay(object parameter)
         {
-            return PlayerModel.PlayState == PlayerModel.PlayerPlayState.Paused 
-                || PlayerModel.PlayState == PlayerModel.PlayerPlayState.Stopped;
+            return PlayerModel.CurrentState == PlayerState.Paused 
+                || PlayerModel.CurrentState == PlayerState.Stopped;
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Player.View_Models
         /// <returns>Whether or not the video can be paused.</returns>
         private bool CanPause(object parameter)
         {
-            return PlayerModel.PlayState == PlayerModel.PlayerPlayState.Playing;
+            return PlayerModel.CurrentState == PlayerState.Playing;
         }
 
         /// <summary>
@@ -103,8 +103,8 @@ namespace Player.View_Models
         /// <returns>Whether or not the video can be stopped.</returns>
         private bool CanStop(object parameter)
         {
-            return PlayerModel.PlayState == PlayerModel.PlayerPlayState.Paused
-                || PlayerModel.PlayState == PlayerModel.PlayerPlayState.Playing;
+            return PlayerModel.CurrentState == PlayerState.Paused
+                || PlayerModel.CurrentState == PlayerState.Playing;
         }
 
         /// <summary>
