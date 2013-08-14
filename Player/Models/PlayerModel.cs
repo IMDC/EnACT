@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace Player.Models
 {
@@ -9,7 +10,6 @@ namespace Player.Models
         /// Backing field for VideoPath.
         /// </summary>
         private string bkVideoPath;
-
         /// <summary>
         /// A string that holds the Path to the video
         /// </summary>

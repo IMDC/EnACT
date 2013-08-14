@@ -35,6 +35,23 @@ namespace Player.View_Models
         public ICommand SetVideoSourceCommand { get; private set; }
         #endregion
 
+        /// <summary>
+        /// Backing Field for VideoURI
+        /// </summary>
+        private Uri bkVideoURI;
+        /// <summary>
+        /// The source of the video as a Uri.
+        /// </summary>
+        public Uri VideoUri
+        {
+            get { return bkVideoURI; }
+            set
+            {
+                bkVideoURI = value;
+                RaisePropertyChanged("VideoUri");
+            }
+        }
+
         #region Events
         /// <summary>
         /// An event that is fired when a play command is executed.
@@ -154,6 +171,7 @@ namespace Player.View_Models
             if (result == true)
             {
                 PlayerModel.VideoPath = fileBrowserDialog.FileName;
+                VideoUri = new Uri(PlayerModel.VideoPath);
             }
         }
         #endregion
