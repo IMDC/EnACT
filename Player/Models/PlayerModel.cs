@@ -6,9 +6,22 @@ namespace Player.Models
     {
         #region Fields and Properties
         /// <summary>
+        /// Backing field for VideoPath.
+        /// </summary>
+        private string bkVideoPath;
+
+        /// <summary>
         /// A string that holds the Path to the video
         /// </summary>
-        public string VideoPath { set; get; }
+        public string VideoPath 
+        {
+            get { return bkVideoPath; } 
+            set
+            {
+                bkVideoPath = value;
+                NotifyPropertyChanged("VideoPath");
+            }
+        }
 
         /// <summary>
         /// Backing field for the CurrentState property.
