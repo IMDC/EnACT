@@ -9,8 +9,14 @@ namespace Player.Models
         #endregion
 
         #region Fields and Properties
+        /// <summary>
+        /// Backing field for the CurrentState property.
+        /// </summary>
         private PlayerState bkCurrentState;
 
+        /// <summary>
+        /// Represents the CurrentState of the player.
+        /// </summary>
         public PlayerState CurrentState
         {
             get { return bkCurrentState; }
@@ -23,6 +29,9 @@ namespace Player.Models
         #endregion
 
         #region Constructor
+        /// <summary>
+        /// Initializes an instance of the PlayerModel Class.
+        /// </summary>
         public PlayerModel()
         {
             CurrentState = PlayerState.Closed;

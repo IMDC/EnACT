@@ -14,12 +14,20 @@ namespace Player.View_Models
         #region Fields and Properties
         public PlayerModel PlayerModel { get; set; }
 
-        //Commands
-        public ICommand PlayCommand { get; set; }
-        public ICommand PauseCommand { get; set; }
-        public ICommand StopCommand { get; set; }
-        public ICommand MediaOpenedCommand { get; set; }
-        public ICommand SetVideoSourceCommand { get; set; }
+        /// <summary>
+        /// A command that plays the video.
+        /// </summary>
+        public ICommand PlayCommand { get; private set; }
+        /// <summary>
+        /// A command that pauses the video.
+        /// </summary>
+        public ICommand PauseCommand { get; private set; }
+        /// <summary>
+        /// A command that stops the video.
+        /// </summary>
+        public ICommand StopCommand { get; private set; }
+        public ICommand MediaOpenedCommand { get; private set; }
+        public ICommand SetVideoSourceCommand { get; private set; }
         #endregion
 
         #region Events

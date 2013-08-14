@@ -23,6 +23,7 @@ namespace Player
         public MediaPlayer()
         {
             InitializeComponent();
+            //Make Media controllable by external commands like play, pause, etc.
             Media.LoadedBehavior = MediaState.Manual;
         }
     }
