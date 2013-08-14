@@ -6,7 +6,7 @@
     <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
         <Menu HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top" DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem x:Name="MenuItemOpenVideo" Header="Open Video" Click="MenuItemOpenVideo_OnClick" />
+                <MenuItem x:Name="MenuItemOpenVideo" Header="Open Video" Command="{Binding OpenVideoCommand}" />
                 <MenuItem x:Name="MenuItemCloseVideo" Header="Close Video" />
                 <MenuItem x:Name="MenuItemExit" Header="Exit EnACT Player" />
             </MenuItem>

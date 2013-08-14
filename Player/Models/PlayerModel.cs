@@ -4,16 +4,16 @@ namespace Player.Models
 {
     public class PlayerModel : INotifyPropertyChanged
     {
-        #region Constants and Enum Definition
-
-        #endregion
-
         #region Fields and Properties
+        /// <summary>
+        /// A string that holds the Path to the video
+        /// </summary>
+        public string VideoPath { set; get; }
+
         /// <summary>
         /// Backing field for the CurrentState property.
         /// </summary>
         private PlayerState bkCurrentState;
-
         /// <summary>
         /// Represents the CurrentState of the player.
         /// </summary>

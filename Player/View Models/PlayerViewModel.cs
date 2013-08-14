@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.TeamFoundation.MVVM;
 using Player.Models;
+using Microsoft.Win32;
 
 namespace Player.View_Models
 {
-    public class PlayerViewModel
+    public class PlayerViewModel : ViewModelBase
     {
         #region Fields and Properties
         public PlayerModel PlayerModel { get; set; }
@@ -26,6 +27,10 @@ namespace Player.View_Models
         /// A command that stops the video.
         /// </summary>
         public ICommand StopCommand { get; private set; }
+        /// <summary>
+        /// A command that opens up a file browser.
+        /// </summary>
+        public ICommand OpenVideoCommand { get; private set; }
         public ICommand MediaOpenedCommand { get; private set; }
         public ICommand SetVideoSourceCommand { get; private set; }
         #endregion
@@ -53,16 +58,19 @@ namespace Player.View_Models
             //Construct PlayerModel
             PlayerModel = new PlayerModel();
 
-            //Construct Commands
+            //Media Construct Commands
             PlayCommand = new RelayCommand(Play, CanPlay);
             PauseCommand = new RelayCommand(Pause, CanPause);
             StopCommand = new RelayCommand(Stop, CanStop);
             MediaOpenedCommand = new RelayCommand(MediaOpened, (object parameter) => true);
             SetVideoSourceCommand = new RelayCommand(SetVideoSource, (object parameter) => true);
+
+            //Construct File Menu Commands
+            OpenVideoCommand = new RelayCommand(OpenVideo);
         }
         #endregion
 
-        #region Command Methods
+        #region Media Command Methods
         /// <summary>
         /// Determines whether or not the ViewModel can play the video.
         /// </summary>
@@ -127,6 +135,27 @@ namespace Player.View_Models
 
         private void MediaOpened(object parameter) { }
         private void SetVideoSource(object parameter) { }
+        #endregion
+
+        #region File Menu Command Methods
+        /// <summary>
+        /// Opens a video file.
+        /// </summary>
+        /// <param name="parameter">Parameter.</param>
+        public void OpenVideo(object parameter)
+        {
+            var fileBrowserDialog = new OpenFileDialog
+            {
+                Filter = "Video Files|*.avi;*.mpg;*.mov;*.wmv|All Files|*.*"
+            };
+
+            var result = fileBrowserDialog.ShowDialog();
+
+            if (result == true)
+            {
+                PlayerModel.VideoPath = fileBrowserDialog.FileName;
+            }
+        }
         #endregion
 
         #region Event Invocation Methods

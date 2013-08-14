@@ -42,17 +42,7 @@ namespace Player.Views
         /// <param name="e">Event Args</param>
         private void MenuItemOpenVideo_OnClick(object sender, RoutedEventArgs e)
         {
-            var fileBrowserDialog = new OpenFileDialog
-            {
-                Filter = "Video Files|*.avi;*.mpg;*.mov;*.wmv|All Files|*.*"
-            };
 
-            var result = fileBrowserDialog.ShowDialog();
-
-            if (result == true)
-            {
-                Player.Media.Source = new Uri(fileBrowserDialog.FileName);
-            }
         }
         #endregion
     }
