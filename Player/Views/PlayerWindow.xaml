@@ -33,6 +33,6 @@
             </StackPanel>
         </DockPanel>
         <!--Make Media Player the last Element so that it fills the remaining space-->
-        <local:MediaPlayer x:Name="Player" DockPanel.Dock="Top" Background="Black"/>
+        <MediaElement x:Name="Player" DockPanel.Dock="Top" />
     </DockPanel>
 </Window>

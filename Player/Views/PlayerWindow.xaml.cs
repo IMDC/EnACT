@@ -18,32 +18,9 @@ namespace Player.Views
             DataContext = playerViewModel;
 
             //Set up ViewModel Event handlers
-            playerViewModel.PlayRequested += (sender, args) =>
-            {
-                Player.Media.Play();
-            };
-
-            playerViewModel.PauseRequested += (sender, args) =>
-            {
-                Player.Media.Pause();
-            };
-
-            playerViewModel.StopRequested += (sender, args) =>
-            {
-                Player.Media.Stop();
-            };
+            playerViewModel.PlayRequested  += (sender, args) => Player.Play();
+            playerViewModel.PauseRequested += (sender, args) => Player.Pause();
+            playerViewModel.StopRequested  += (sender, args) => Player.Stop();
         }
-
-        #region File MenuItem Click Handlers
-        /// <summary>
-        /// Opens a dialog to select a video to play.
-        /// </summary>
-        /// <param name="sender">Sender</param>
-        /// <param name="e">Event Args</param>
-        private void MenuItemOpenVideo_OnClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-        #endregion
     }
 }
