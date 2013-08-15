@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using Microsoft.TeamFoundation.MVVM;
 using Microsoft.Win32;
 using Player.View_Models;
 
@@ -23,8 +24,7 @@ namespace Player.Views
             playerViewModel.StopRequested  += (sender, args) => Player.Stop();
             playerViewModel.SpeedRatioChangeRequested += (sender, args) =>
             {
-//                Player.SpeedRatio = args.SpeedRatio;
-//                Player.Play();
+                Player.SpeedRatio = args.Value;
             };
         }
     }

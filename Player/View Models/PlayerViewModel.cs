@@ -100,7 +100,7 @@ namespace Player.View_Models
         /// </summary>
         public event EventHandler StopRequested;
 
-        public event EventHandler<SpeedRatioChangeRequestedEventArgs> SpeedRatioChangeRequested;
+        public event EventHandler<EventArgs<double>> SpeedRatioChangeRequested;
         #endregion
 
         #region Constructor
@@ -118,6 +118,8 @@ namespace Player.View_Models
 
             //Construct File Menu Commands
             OpenVideoCommand = new RelayCommand(OpenVideo);
+
+            SpeedRatio = DefaultSpeedRatio;
         }
         #endregion
 
@@ -196,7 +198,7 @@ namespace Player.View_Models
         private void Rewind(object parameter)
         {
             SpeedRatio /= SpeedRatioChangeFactor;
-            OnSpeedRatioChangeRequested(new SpeedRatioChangeRequestedEventArgs(SpeedRatio));
+            OnSpeedRatioChangeRequested(SpeedRatio);
             PlayerModel.CurrentState = PlayerState.Playing;
         }
 
@@ -210,7 +212,7 @@ namespace Player.View_Models
         private void FastForward(object parameter)
         {
             SpeedRatio *= SpeedRatioChangeFactor;
-            OnSpeedRatioChangeRequested(new SpeedRatioChangeRequestedEventArgs(SpeedRatio));
+            OnSpeedRatioChangeRequested(SpeedRatio);
             PlayerModel.CurrentState = PlayerState.Playing;
         }
         #endregion
@@ -275,13 +277,13 @@ namespace Player.View_Models
             if (handler != null) { handler(this, EventArgs.Empty); }
         }
 
-        private void OnSpeedRatioChangeRequested(SpeedRatioChangeRequestedEventArgs e)
+        private void OnSpeedRatioChangeRequested(double speedRatio)
         {
             /* Make a local copy of the event to prevent the case where the handler
              * will be set as null in-between the null check and the handler call.
              */
-            EventHandler<SpeedRatioChangeRequestedEventArgs> handler = SpeedRatioChangeRequested;
-            if (handler != null) { handler(this, e); }
+            EventHandler<EventArgs<double>> handler = SpeedRatioChangeRequested;
+            if (handler != null) { handler(this, new EventArgs<double>(speedRatio)); }
         }
         #endregion
     }
