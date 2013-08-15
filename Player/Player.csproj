@@ -70,6 +70,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="EventArgsT.cs" />
+    <Compile Include="IMediaPlayer.cs" />
     <Compile Include="PlayerState.cs" />
     <Compile Include="View Models\PlayerViewModel.cs" />
     <Compile Include="Views\PlayerWindow.xaml.cs">

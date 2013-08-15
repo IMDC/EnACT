@@ -15,6 +15,8 @@ namespace Player.View_Models
         #region Fields and Properties
         public PlayerModel PlayerModel { get; set; }
 
+        public IMediaPlayer MediaPlayer { get; private set; }
+
         /// <summary>
         /// A command that plays the video.
         /// </summary>
@@ -96,8 +98,11 @@ namespace Player.View_Models
         #endregion
 
         #region Constructor
-        public PlayerViewModel()
+        public PlayerViewModel(IMediaPlayer mediaPlayer)
         {
+            //Set MediaPlayer
+            MediaPlayer = mediaPlayer;
+
             //Construct PlayerModel
             PlayerModel = new PlayerModel();
 
