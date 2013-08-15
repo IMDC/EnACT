@@ -12,12 +12,6 @@ namespace Player.View_Models
 {
     public class PlayerViewModel : ViewModelBase
     {
-        #region Constants
-        public const double DefaultSpeedRatio = 1;
-
-        public const double SpeedRatioChangeFactor = 2;
-        #endregion
-
         #region Fields and Properties
         public PlayerModel PlayerModel { get; set; }
 
@@ -99,8 +93,6 @@ namespace Player.View_Models
         /// An event that is fired when a stop command is executed.
         /// </summary>
         public event EventHandler StopRequested;
-
-        public event EventHandler<EventArgs<double>> SpeedRatioChangeRequested;
         #endregion
 
         #region Constructor
@@ -118,8 +110,6 @@ namespace Player.View_Models
 
             //Construct File Menu Commands
             OpenVideoCommand = new RelayCommand(OpenVideo);
-
-            SpeedRatio = DefaultSpeedRatio;
         }
         #endregion
 
@@ -189,19 +179,31 @@ namespace Player.View_Models
             PlayerModel.CurrentState = PlayerState.Stopped;
         }
 
+        /// <summary>
+        /// Determines whether or not the can be rewound.
+        /// </summary>
+        /// <param name="parameter">Paramater</param>
+        /// <returns>Whether or not the video can be rewound</returns>
         private bool CanRewind(object parameter)
         {
             return PlayerModel.CurrentState == PlayerState.Paused
                    || PlayerModel.CurrentState == PlayerState.Playing;
         }
 
+        /// <summary>
+        /// Rewinds the video.
+        /// </summary>
+        /// <param name="parameter">Parameter</param>
         private void Rewind(object parameter)
         {
-            SpeedRatio /= SpeedRatioChangeFactor;
-            OnSpeedRatioChangeRequested(SpeedRatio);
-            PlayerModel.CurrentState = PlayerState.Playing;
+            //TODO Implement this
         }
 
+        /// <summary>
+        /// Determines whether or not the can be fast forwarded.
+        /// </summary>
+        /// <param name="parameter">Paramater</param>
+        /// <returns>Whether or not the video can be fast forwarded.</returns>
         private bool CanFastForward(object parameter)
         {
             return PlayerModel.CurrentState == PlayerState.Paused
@@ -209,11 +211,13 @@ namespace Player.View_Models
                 || PlayerModel.CurrentState == PlayerState.Stopped;
         }
 
+        /// <summary>
+        /// Fast Forwards the video.
+        /// </summary>
+        /// <param name="parameter"></param>
         private void FastForward(object parameter)
         {
-            SpeedRatio *= SpeedRatioChangeFactor;
-            OnSpeedRatioChangeRequested(SpeedRatio);
-            PlayerModel.CurrentState = PlayerState.Playing;
+            //TODO Implement this
         }
         #endregion
 
@@ -275,15 +279,6 @@ namespace Player.View_Models
              */
             EventHandler handler = StopRequested;
             if (handler != null) { handler(this, EventArgs.Empty); }
-        }
-
-        private void OnSpeedRatioChangeRequested(double speedRatio)
-        {
-            /* Make a local copy of the event to prevent the case where the handler
-             * will be set as null in-between the null check and the handler call.
-             */
-            EventHandler<EventArgs<double>> handler = SpeedRatioChangeRequested;
-            if (handler != null) { handler(this, new EventArgs<double>(speedRatio)); }
         }
         #endregion
     }

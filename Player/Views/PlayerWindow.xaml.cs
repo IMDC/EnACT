@@ -22,10 +22,6 @@ namespace Player.Views
             playerViewModel.PlayRequested  += (sender, args) => Player.Play();
             playerViewModel.PauseRequested += (sender, args) => Player.Pause();
             playerViewModel.StopRequested  += (sender, args) => Player.Stop();
-            playerViewModel.SpeedRatioChangeRequested += (sender, args) =>
-            {
-                Player.SpeedRatio = args.Value;
-            };
         }
     }
 }
