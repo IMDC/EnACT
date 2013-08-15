@@ -12,6 +12,12 @@ namespace Player.View_Models
 {
     public class PlayerViewModel : ViewModelBase
     {
+        #region Constants
+        public const double DefaultSpeedRatio = 1;
+
+        public const double SpeedRatioChangeFactor = 2;
+        #endregion
+
         #region Fields and Properties
         public PlayerModel PlayerModel { get; set; }
 
@@ -28,10 +34,19 @@ namespace Player.View_Models
         /// </summary>
         public ICommand StopCommand { get; private set; }
         /// <summary>
+        /// A command that rewinds the video.
+        /// </summary>
+        public ICommand RewindCommand { get; private set; }
+        /// <summary>
+        /// A command that fast forwards the video.
+        /// </summary>
+        public ICommand FastForwardCommand { get; private set; }
+
+        /// <summary>
         /// A command that opens up a file browser.
         /// </summary>
         public ICommand OpenVideoCommand { get; private set; }
-        #endregion
+        
 
         /// <summary>
         /// Backing Field for VideoURI
@@ -50,6 +65,25 @@ namespace Player.View_Models
             }
         }
 
+        /// <summary>
+        /// Backing field for SpeedRatio.
+        /// </summary>
+        private double bkSpeedRatio;
+        /// <summary>
+        /// The speed that the media plays at. 1 is regular speed, greater than 1 plays faster, and
+        /// less than 1 plays slower.
+        /// </summary>
+        public double SpeedRatio
+        {
+            get { return bkSpeedRatio; }
+            set
+            {
+                bkSpeedRatio = value; 
+                RaisePropertyChanged("SpeedRatio");
+            }
+        }
+        #endregion
+
         #region Events
         /// <summary>
         /// An event that is fired when a play command is executed.
@@ -65,6 +99,8 @@ namespace Player.View_Models
         /// An event that is fired when a stop command is executed.
         /// </summary>
         public event EventHandler StopRequested;
+
+        public event EventHandler<SpeedRatioChangeRequestedEventArgs> SpeedRatioChangeRequested;
         #endregion
 
         #region Constructor
@@ -77,6 +113,8 @@ namespace Player.View_Models
             PlayCommand = new RelayCommand(Play, CanPlay);
             PauseCommand = new RelayCommand(Pause, CanPause);
             StopCommand = new RelayCommand(Stop, CanStop);
+            RewindCommand = new RelayCommand(Rewind, CanRewind);
+            FastForwardCommand = new RelayCommand(FastForward, CanFastForward);
 
             //Construct File Menu Commands
             OpenVideoCommand = new RelayCommand(OpenVideo);
@@ -103,6 +141,7 @@ namespace Player.View_Models
         {
             //Invoke request so that the UI can play the video.
             OnPlayRequested();
+            PlayerModel.CurrentState = PlayerState.Playing;
         }
 
         /// <summary>
@@ -123,6 +162,7 @@ namespace Player.View_Models
         {
             //Invoke request so that the UI can pause the video.
             OnPauseRequested();
+            PlayerModel.CurrentState = PlayerState.Stopped;
         }
 
         /// <summary>
@@ -144,6 +184,34 @@ namespace Player.View_Models
         {
             //Invoke request so that the UI can stop the video.
             OnStopRequested();
+            PlayerModel.CurrentState = PlayerState.Stopped;
+        }
+
+        private bool CanRewind(object parameter)
+        {
+            return PlayerModel.CurrentState == PlayerState.Paused
+                   || PlayerModel.CurrentState == PlayerState.Playing;
+        }
+
+        private void Rewind(object parameter)
+        {
+            SpeedRatio /= SpeedRatioChangeFactor;
+            OnSpeedRatioChangeRequested(new SpeedRatioChangeRequestedEventArgs(SpeedRatio));
+            PlayerModel.CurrentState = PlayerState.Playing;
+        }
+
+        private bool CanFastForward(object parameter)
+        {
+            return PlayerModel.CurrentState == PlayerState.Paused
+                || PlayerModel.CurrentState == PlayerState.Playing
+                || PlayerModel.CurrentState == PlayerState.Stopped;
+        }
+
+        private void FastForward(object parameter)
+        {
+            SpeedRatio *= SpeedRatioChangeFactor;
+            OnSpeedRatioChangeRequested(new SpeedRatioChangeRequestedEventArgs(SpeedRatio));
+            PlayerModel.CurrentState = PlayerState.Playing;
         }
         #endregion
 
@@ -165,6 +233,7 @@ namespace Player.View_Models
             {
                 PlayerModel.VideoPath = fileBrowserDialog.FileName;
                 VideoUri = new Uri(PlayerModel.VideoPath);
+                PlayerModel.CurrentState = PlayerState.Stopped;
             }
         }
         #endregion
@@ -204,6 +273,15 @@ namespace Player.View_Models
              */
             EventHandler handler = StopRequested;
             if (handler != null) { handler(this, EventArgs.Empty); }
+        }
+
+        private void OnSpeedRatioChangeRequested(SpeedRatioChangeRequestedEventArgs e)
+        {
+            /* Make a local copy of the event to prevent the case where the handler
+             * will be set as null in-between the null check and the handler call.
+             */
+            EventHandler<SpeedRatioChangeRequestedEventArgs> handler = SpeedRatioChangeRequested;
+            if (handler != null) { handler(this, e); }
         }
         #endregion
     }

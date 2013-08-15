@@ -21,7 +21,7 @@
             <Slider VerticalAlignment="Top" DockPanel.Dock="Top" Width="700"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Bottom">
                 <Button x:Name="ButtonRewind" Content="Rewind" VerticalAlignment="Top" Width="75"
-                    />
+                    Command="{Binding RewindCommand}" />
                 <Button x:Name="ButtonPause" Content="Pause" VerticalAlignment="Top" Width="75"
                     Command="{Binding PauseCommand}" />
                 <Button x:Name="ButtonPlay" Content="Play" VerticalAlignment="Top" Width="75"
@@ -29,12 +29,12 @@
                 <Button x:Name="ButtonStop" Content="Stop" VerticalAlignment="Top" Width="75"
                     Command="{Binding StopCommand}" />
                 <Button x:Name="ButtonForward" Content="Forward" VerticalAlignment="Top" Width="75"
-                        />
+                    Command="{Binding FastForwardCommand}" />
                 <CheckBox x:Name="CheckBoxShowCaptions" Content="Show Captions" IsChecked="True"/>
                 <CheckBox x:Name="CheckBoxHideControls" Content="Hide Controls" />
             </StackPanel>
         </DockPanel>
         <!--Make Media Player the last Element so that it fills the remaining space-->
-        <MediaElement x:Name="Player" DockPanel.Dock="Top" Source="{Binding VideoUri}" />
+        <MediaElement x:Name="Player" DockPanel.Dock="Top" Source="{Binding VideoUri}" LoadedBehavior="Manual" />
     </DockPanel>
 </Window>

@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="PlayerState.cs" />
     <Compile Include="View Models\PlayerViewModel.cs" />
+    <Compile Include="View Models\SpeedRatioChangeRequestedEventArgs.cs" />
     <Compile Include="Views\PlayerWindow.xaml.cs">
       <DependentUpon>PlayerWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
