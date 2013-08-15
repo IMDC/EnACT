@@ -13,8 +13,19 @@ namespace Player
     /// </summary>
     public interface IMediaPlayer
     {
+        /// <summary>
+        /// Represents the current position of the video in the Media Player.
+        /// </summary>
         TimeSpan Position { get; set; }
 
+        /// <summary>
+        /// Represents the current state of the media player.
+        /// </summary>
         PlayerState CurrentState { get; }
+
+        /// <summary>
+        /// Represents the length of the video in the media player if one is loaded.
+        /// </summary>
+        Duration VideoLength { get; }
     }
 }

@@ -69,6 +69,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\StatefulMediaElement.cs" />
     <Compile Include="EventArgsT.cs" />
     <Compile Include="IMediaPlayer.cs" />
     <Compile Include="PlayerState.cs" />

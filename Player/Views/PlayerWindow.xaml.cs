@@ -15,7 +15,7 @@ namespace Player.Views
         {
             InitializeComponent();
 
-            var playerViewModel = new PlayerViewModel(null);
+            var playerViewModel = new PlayerViewModel(Player);
             DataContext = playerViewModel;
 
             //Set up ViewModel Event handlers

@@ -1,7 +1,9 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:Player" x:Class="Player.Views.MainWindow"
+        xmlns:local="clr-namespace:Player"
+        xmlns:controls="clr-namespace:Player.Controls"
+        x:Class="Player.Views.MainWindow"
         Title="EnACT Caption Player" Height="600" Width="800" MinWidth="800" MinHeight="600">
     <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
         <Menu HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top" DockPanel.Dock="Top">
@@ -35,6 +37,7 @@
             </StackPanel>
         </DockPanel>
         <!--Make Media Player the last Element so that it fills the remaining space-->
-        <MediaElement x:Name="Player" DockPanel.Dock="Top" Source="{Binding VideoUri}" LoadedBehavior="Manual" />
+        <controls:StatefulMediaElement x:Name="Player" DockPanel.Dock="Top" Source="{Binding VideoUri}" 
+            LoadedBehavior="Manual" />
     </DockPanel>
 </Window>
