@@ -15,7 +15,9 @@
                 <MenuItem x:Name="MenuItemAbout" Header="About"/>
             </MenuItem>
         </Menu>
+        <!--Holds Controls for the player-->
         <DockPanel x:Name="ControlPanel" LastChildFill="False" DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
+            <!--Timeline Control-->
             <Slider VerticalAlignment="Top" DockPanel.Dock="Top" Width="700"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Bottom">
                 <Button x:Name="ButtonRewind" Content="Rewind" VerticalAlignment="Top" Width="75"

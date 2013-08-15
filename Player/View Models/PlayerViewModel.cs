@@ -31,8 +31,6 @@ namespace Player.View_Models
         /// A command that opens up a file browser.
         /// </summary>
         public ICommand OpenVideoCommand { get; private set; }
-        public ICommand MediaOpenedCommand { get; private set; }
-        public ICommand SetVideoSourceCommand { get; private set; }
         #endregion
 
         /// <summary>
@@ -79,8 +77,6 @@ namespace Player.View_Models
             PlayCommand = new RelayCommand(Play, CanPlay);
             PauseCommand = new RelayCommand(Pause, CanPause);
             StopCommand = new RelayCommand(Stop, CanStop);
-            MediaOpenedCommand = new RelayCommand(MediaOpened, (object parameter) => true);
-            SetVideoSourceCommand = new RelayCommand(SetVideoSource, (object parameter) => true);
 
             //Construct File Menu Commands
             OpenVideoCommand = new RelayCommand(OpenVideo);
@@ -149,9 +145,6 @@ namespace Player.View_Models
             //Invoke request so that the UI can stop the video.
             OnStopRequested();
         }
-
-        private void MediaOpened(object parameter) { }
-        private void SetVideoSource(object parameter) { }
         #endregion
 
         #region File Menu Command Methods
