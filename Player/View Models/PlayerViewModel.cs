@@ -58,6 +58,11 @@ namespace Player.View_Models
             {
                 bkVideoURI = value;
                 RaisePropertyChanged("VideoUri");
+                /* The following methods are a little bit of a dirty hack to get MediaElement to
+                 * load the video right after the video uri is set.
+                 */
+                Play(null);
+                Stop(null);
             }
         }
 
@@ -126,8 +131,8 @@ namespace Player.View_Models
         /// <returns>Whether or not the video can be played.</returns>
         private bool CanPlay(object parameter)
         {
-            return PlayerModel.CurrentState == PlayerState.Paused 
-                || PlayerModel.CurrentState == PlayerState.Stopped;
+            return MediaPlayer.CurrentState == PlayerState.Paused 
+                || MediaPlayer.CurrentState == PlayerState.Stopped;
         }
 
         /// <summary>
@@ -138,7 +143,6 @@ namespace Player.View_Models
         {
             //Invoke request so that the UI can play the video.
             OnPlayRequested();
-            PlayerModel.CurrentState = PlayerState.Playing;
         }
 
         /// <summary>
@@ -148,7 +152,7 @@ namespace Player.View_Models
         /// <returns>Whether or not the video can be paused.</returns>
         private bool CanPause(object parameter)
         {
-            return PlayerModel.CurrentState == PlayerState.Playing;
+            return MediaPlayer.CurrentState == PlayerState.Playing;
         }
 
         /// <summary>
@@ -159,7 +163,6 @@ namespace Player.View_Models
         {
             //Invoke request so that the UI can pause the video.
             OnPauseRequested();
-            PlayerModel.CurrentState = PlayerState.Stopped;
         }
 
         /// <summary>
@@ -169,8 +172,8 @@ namespace Player.View_Models
         /// <returns>Whether or not the video can be stopped.</returns>
         private bool CanStop(object parameter)
         {
-            return PlayerModel.CurrentState == PlayerState.Paused
-                || PlayerModel.CurrentState == PlayerState.Playing;
+            return MediaPlayer.CurrentState == PlayerState.Paused
+                || MediaPlayer.CurrentState == PlayerState.Playing;
         }
 
         /// <summary>
@@ -181,7 +184,6 @@ namespace Player.View_Models
         {
             //Invoke request so that the UI can stop the video.
             OnStopRequested();
-            PlayerModel.CurrentState = PlayerState.Stopped;
         }
 
         /// <summary>
@@ -191,8 +193,8 @@ namespace Player.View_Models
         /// <returns>Whether or not the video can be rewound</returns>
         private bool CanRewind(object parameter)
         {
-            return PlayerModel.CurrentState == PlayerState.Paused
-                   || PlayerModel.CurrentState == PlayerState.Playing;
+            return MediaPlayer.CurrentState == PlayerState.Paused
+                   || MediaPlayer.CurrentState == PlayerState.Playing;
         }
 
         /// <summary>
@@ -211,9 +213,9 @@ namespace Player.View_Models
         /// <returns>Whether or not the video can be fast forwarded.</returns>
         private bool CanFastForward(object parameter)
         {
-            return PlayerModel.CurrentState == PlayerState.Paused
-                || PlayerModel.CurrentState == PlayerState.Playing
-                || PlayerModel.CurrentState == PlayerState.Stopped;
+            return MediaPlayer.CurrentState == PlayerState.Paused
+                || MediaPlayer.CurrentState == PlayerState.Playing
+                || MediaPlayer.CurrentState == PlayerState.Stopped;
         }
 
         /// <summary>
@@ -244,7 +246,6 @@ namespace Player.View_Models
             {
                 PlayerModel.VideoPath = fileBrowserDialog.FileName;
                 VideoUri = new Uri(PlayerModel.VideoPath);
-                PlayerModel.CurrentState = PlayerState.Stopped;
             }
         }
         #endregion

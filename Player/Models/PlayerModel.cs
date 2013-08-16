@@ -22,23 +22,6 @@ namespace Player.Models
                 NotifyPropertyChanged("VideoPath");
             }
         }
-
-        /// <summary>
-        /// Backing field for the CurrentState property.
-        /// </summary>
-        private PlayerState bkCurrentState;
-        /// <summary>
-        /// Represents the CurrentState of the player.
-        /// </summary>
-        public PlayerState CurrentState
-        {
-            get { return bkCurrentState; }
-            set
-            {
-                bkCurrentState = value;
-                NotifyPropertyChanged("CurrentState");
-            }
-        } 
         #endregion
 
         #region Constructor
@@ -47,7 +30,6 @@ namespace Player.Models
         /// </summary>
         public PlayerModel()
         {
-            CurrentState = PlayerState.Closed;
         }
         #endregion
 

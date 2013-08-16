@@ -31,5 +31,23 @@ namespace Player.Controls
             CurrentState = PlayerState.Closed;
         }
         #endregion
+
+        public new void Play()
+        {
+                base.Play();
+                CurrentState = PlayerState.Playing;
+        }
+
+        public new void Pause()
+        {
+            base.Pause();
+            CurrentState = PlayerState.Paused;
+        }
+
+        public new void Stop()
+        {
+            base.Stop();
+            CurrentState = PlayerState.Stopped;
+        }
     }
 }
