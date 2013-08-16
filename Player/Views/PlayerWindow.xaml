@@ -1,7 +1,6 @@
 ﻿<Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Player"
     xmlns:controls="clr-namespace:Player.Controls"
     x:Class="Player.Views.MainWindow"
     Title="EnACT Caption Player"
@@ -58,11 +57,14 @@
             HorizontalAlignment="Stretch">
             <!--Timeline Control-->
             <Slider
+                x:Name="Timeline"
                 VerticalAlignment="Top"
                 DockPanel.Dock="Top"
-                Width="700"
-                Style="{StaticResource ControlPanelStyle}" />
-            <StackPanel
+                Margin="50,5"
+                Minimum="0"
+                PreviewMouseDown="Timeline_OnPreviewMouseDown"
+                PreviewMouseUp="Timeline_OnPreviewMouseUp" />
+                <StackPanel
                 Orientation="Horizontal"
                 HorizontalAlignment="Center"
                 DockPanel.Dock="Bottom">
@@ -117,6 +119,7 @@
             x:Name="Player"
             DockPanel.Dock="Top"
             Source="{Binding VideoUri}"
-            LoadedBehavior="Manual" />
+            LoadedBehavior="Manual" 
+            MediaOpened="Player_OnMediaOpened"/>
     </DockPanel>
 </Window>

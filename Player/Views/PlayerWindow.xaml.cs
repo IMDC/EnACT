@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
-using Microsoft.TeamFoundation.MVVM;
-using Microsoft.Win32;
+using System.Windows.Input;
+using System.Windows.Threading;
 using Player.View_Models;
 
 namespace Player.Views
@@ -11,6 +11,8 @@ namespace Player.Views
     /// </summary>
     public partial class MainWindow : Window
     {
+        public DispatcherTimer TimelineTimer { get; private set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -22,6 +24,39 @@ namespace Player.Views
             playerViewModel.PlayRequested  += (sender, args) => Player.Play();
             playerViewModel.PauseRequested += (sender, args) => Player.Pause();
             playerViewModel.StopRequested  += (sender, args) => Player.Stop();
+
+            //Set up timer
+            TimelineTimer = new DispatcherTimer();
+            TimelineTimer.Tick += TimelineTimer_Tick;
+            TimelineTimer.Interval = new TimeSpan(0,0,0,0,50);
+        }
+
+        void TimelineTimer_Tick(object sender, EventArgs e)
+        {
+            //Update the Timeline position to the player's position
+            Timeline.Value = Player.Position.TotalMilliseconds;
+        }
+
+        private void Player_OnMediaOpened(object sender, RoutedEventArgs e)
+        {
+            //Update Max value to the length of the video
+            Timeline.Maximum = Player.NaturalDuration.TimeSpan.TotalMilliseconds;
+
+            TimelineTimer.Start();
+        }
+
+        private void Timeline_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //Stop Timer while clicking on timeline so that slider does not skip.
+            TimelineTimer.Stop();
+        }
+
+        private void Timeline_OnPreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            //Set Player position and restart timer
+            int pos = (int)Timeline.Value;
+            Player.Position = new TimeSpan(0, 0, 0, 0, pos);
+            TimelineTimer.Start();
         }
     }
 }
