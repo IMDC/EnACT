@@ -5,6 +5,11 @@
         xmlns:controls="clr-namespace:Player.Controls"
         x:Class="Player.Views.MainWindow"
         Title="EnACT Caption Player" Height="600" Width="800" MinWidth="800" MinHeight="600">
+    <Window.Resources>
+        <Style x:Key="ControlPanelStyle" TargetType="Control">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Window.Resources>
     <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="True">
         <Menu HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top" DockPanel.Dock="Top">
             <MenuItem Header="File">
@@ -20,20 +25,20 @@
         <!--Holds Controls for the player-->
         <DockPanel x:Name="ControlPanel" LastChildFill="False" DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
             <!--Timeline Control-->
-            <Slider VerticalAlignment="Top" DockPanel.Dock="Top" Width="700"/>
+            <Slider VerticalAlignment="Top" DockPanel.Dock="Top" Width="700" Style="{StaticResource ControlPanelStyle}" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Bottom">
                 <Button x:Name="ButtonRewind" Content="Rewind" VerticalAlignment="Top" Width="75"
-                    Command="{Binding RewindCommand}" />
+                    Command="{Binding RewindCommand}" Style="{StaticResource ControlPanelStyle}" />
                 <Button x:Name="ButtonPause" Content="Pause" VerticalAlignment="Top" Width="75"
-                    Command="{Binding PauseCommand}" />
+                    Command="{Binding PauseCommand}" Style="{StaticResource ControlPanelStyle}" />
                 <Button x:Name="ButtonPlay" Content="Play" VerticalAlignment="Top" Width="75"
-                    Command="{Binding PlayCommand}" />
+                    Command="{Binding PlayCommand}" Style="{StaticResource ControlPanelStyle}" />
                 <Button x:Name="ButtonStop" Content="Stop" VerticalAlignment="Top" Width="75"
-                    Command="{Binding StopCommand}" />
+                    Command="{Binding StopCommand}" Style="{StaticResource ControlPanelStyle}" />
                 <Button x:Name="ButtonForward" Content="Forward" VerticalAlignment="Top" Width="75"
-                    Command="{Binding FastForwardCommand}" />
-                <CheckBox x:Name="CheckBoxShowCaptions" Content="Show Captions" IsChecked="True"/>
-                <CheckBox x:Name="CheckBoxHideControls" Content="Hide Controls" />
+                    Command="{Binding FastForwardCommand}" Style="{StaticResource ControlPanelStyle}" />
+                <CheckBox x:Name="CheckBoxShowCaptions" Content="Show Captions" IsChecked="True" Style="{StaticResource ControlPanelStyle}" />
+                <CheckBox x:Name="CheckBoxHideControls" Content="Hide Controls" Style="{StaticResource ControlPanelStyle}" />
             </StackPanel>
         </DockPanel>
         <!--Make Media Player the last Element so that it fills the remaining space-->
