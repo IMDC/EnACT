@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Player
+namespace LibEnACT
 {
     /// <summary>
     /// A Generic EventArgs object that is meant to hold a single value used in events.

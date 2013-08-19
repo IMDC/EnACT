@@ -70,21 +70,20 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controls\StatefulMediaElement.cs" />
-    <Compile Include="EventArgsT.cs" />
-    <Compile Include="IMediaPlayer.cs" />
-    <Compile Include="PlayerState.cs" />
+    <Compile Include="Controls\IMediaPlayer.cs" />
+    <Compile Include="Models\PlayerState.cs" />
     <Compile Include="View Models\PlayerViewModel.cs" />
     <Compile Include="Views\PlayerWindow.xaml.cs">
       <DependentUpon>PlayerWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MediaPlayer.xaml">
+    <Page Include="Controls\MediaPlayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MediaPlayer.xaml.cs">
+    <Compile Include="Controls\MediaPlayer.xaml.cs">
       <DependentUpon>MediaPlayer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\PlayerModel.cs" />
