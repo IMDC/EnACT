@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using EnACT.Controls;
 using EnACT.Core;
+using LibEnACT;
 
 namespace EnACT.Forms
 {

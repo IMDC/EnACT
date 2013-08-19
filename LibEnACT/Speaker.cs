@@ -1,4 +1,4 @@
-﻿namespace EnACT.Core
+﻿namespace LibEnACT
 {
     /// <summary>
     /// Represents the speaker of a line of dialogue. Speakers can be customized

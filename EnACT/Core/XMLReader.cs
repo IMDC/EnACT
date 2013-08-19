@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using EnACT.Miscellaneous;
+using LibEnACT;
 
 namespace EnACT.Core
 {

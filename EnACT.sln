@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnACTUnitTestProject", "EnA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Player", "Player\Player.csproj", "{69B4926C-4550-43B1-83D3-682231D4C8D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibEnACT", "LibEnACT\LibEnACT.csproj", "{02D65FB3-F8D7-4F50-AABA-C7DFB814B97E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{69B4926C-4550-43B1-83D3-682231D4C8D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69B4926C-4550-43B1-83D3-682231D4C8D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69B4926C-4550-43B1-83D3-682231D4C8D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02D65FB3-F8D7-4F50-AABA-C7DFB814B97E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02D65FB3-F8D7-4F50-AABA-C7DFB814B97E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02D65FB3-F8D7-4F50-AABA-C7DFB814B97E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02D65FB3-F8D7-4F50-AABA-C7DFB814B97E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

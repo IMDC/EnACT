@@ -55,9 +55,9 @@
     <Compile Include="CaptionUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EnACT\Editor.csproj">
-      <Project>{d7effe02-1630-4897-aedb-0ceff5b257a3}</Project>
-      <Name>Editor</Name>
+    <ProjectReference Include="..\LibEnACT\LibEnACT.csproj">
+      <Project>{02d65fb3-f8d7-4f50-aaba-c7dfb814b97e}</Project>
+      <Name>LibEnACT</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

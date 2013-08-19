@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace EnACT.Core
+namespace LibEnACT
 {
     #region Timestamp Class
     /// <summary>

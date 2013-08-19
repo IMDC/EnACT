@@ -6,6 +6,7 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using EnACT.Core;
 using EnACT.Miscellaneous;
+using LibEnACT;
 
 namespace EnACT.Controls
 {

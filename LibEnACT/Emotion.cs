@@ -1,4 +1,4 @@
-﻿namespace EnACT.Core
+﻿namespace LibEnACT
 {
     /// <summary>
     /// The Emotion enum represents which type of emotion the caption will

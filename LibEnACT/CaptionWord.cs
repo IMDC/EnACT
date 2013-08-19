@@ -1,4 +1,4 @@
-﻿namespace EnACT.Core
+﻿namespace LibEnACT
 {
     /// <summary>
     /// Represents an emotive word used by EnACT.

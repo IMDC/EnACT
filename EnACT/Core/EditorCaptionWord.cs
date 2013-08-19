@@ -1,4 +1,6 @@
-﻿namespace EnACT.Core
+﻿using LibEnACT;
+
+namespace EnACT.Core
 {
     /// <summary>
     /// Represents an emotive word used by the Editor. Contains indexes and a selection flag for

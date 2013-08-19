@@ -74,8 +74,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\CaptionTextBoxEventArgs.cs" />
-    <Compile Include="Core\Alignment.cs" />
-    <Compile Include="Core\Caption.cs" />
     <Compile Include="Core\EditorCaption.cs" />
     <Compile Include="Core\CaptionStyle.cs" />
     <Compile Include="Controls\CaptionTextBox.cs">
@@ -88,7 +86,6 @@
     <Compile Include="Forms\MainFormEngineInteraction.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Core\Emotion.cs" />
     <Compile Include="Core\EnactXMLWriter.cs" />
     <Compile Include="Controls\EngineView.cs">
       <SubType>Component</SubType>
@@ -97,9 +94,6 @@
       <DependentUpon>EngineView.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\TimelineEventArgs.cs" />
-    <Compile Include="Core\Intensity.cs" />
-    <Compile Include="Core\ScreenLocation.cs" />
-    <Compile Include="Core\CaptionWord.cs" />
     <Compile Include="Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,7 +128,6 @@
     <Compile Include="Controls\PlayheadLabel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Core\XMLStrings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\CaptionView.resx">
@@ -183,8 +176,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Core\SettingsXML.cs" />
-    <Compile Include="Core\Speaker.cs" />
     <Compile Include="Core\ScriptParser.cs" />
     <Compile Include="Controls\Timeline.cs">
       <SubType>UserControl</SubType>
@@ -193,8 +184,6 @@
       <DependentUpon>Timeline.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\TimelineMouseSelection.cs" />
-    <Compile Include="Core\Timestamp.cs" />
-    <Compile Include="Core\TimestampTypeConverter.cs" />
     <Compile Include="Miscellaneous\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -247,7 +236,12 @@
       <Isolated>False</Isolated>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\LibEnACT\LibEnACT.csproj">
+      <Project>{02d65fb3-f8d7-4f50-aaba-c7dfb814b97e}</Project>
+      <Name>LibEnACT</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

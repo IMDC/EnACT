@@ -1,4 +1,4 @@
-﻿namespace EnACT.Core
+﻿namespace LibEnACT
 {
     /// <summary>
     /// The Intensity enum represents how intense the emotion in a caption will be.

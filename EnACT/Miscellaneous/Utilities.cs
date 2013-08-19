@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Xml;
 using EnACT.Core;
+using LibEnACT;
 
 namespace EnACT.Miscellaneous
 {

@@ -1,4 +1,4 @@
-﻿namespace EnACT.Core
+﻿namespace LibEnACT
 {
     /// <summary>
     /// A static class that contains XML element names.

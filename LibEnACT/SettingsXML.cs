@@ -1,5 +1,5 @@
 ﻿//This File contains all classes related to the contents of the Settings.xml file.
-namespace EnACT.Core
+namespace LibEnACT
 {
     /// <summary>
     /// Represents the settings.xml file.

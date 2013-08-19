@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
 using System.Reflection;
 
-namespace EnACT.Core
+namespace LibEnACT
 {
     /// <summary>
     /// This class is currently not used for anything, but it is kept handy just in case.

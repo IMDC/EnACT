@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using EnACT.Miscellaneous;
+using LibEnACT;
 
 namespace EnACT.Core
 {

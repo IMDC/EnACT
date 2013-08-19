@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using EnACT.Miscellaneous;
+using LibEnACT;
 
 namespace EnACT.Core
 {

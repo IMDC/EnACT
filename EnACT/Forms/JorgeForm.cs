@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using EnACT.Core;
+using LibEnACT;
 
 namespace EnACT.Forms
 {

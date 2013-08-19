@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Drawing;
+using LibEnACT;
 
 namespace EnACT.Core
 {

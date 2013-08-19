@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using EnACT.Core;
+using LibEnACT;
 
 namespace EnACT.Controls
 {

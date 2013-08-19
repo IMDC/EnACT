@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace EnACT.Core
+namespace LibEnACT
 {
     /// <summary>
     /// Represents a Caption used by EnACT.
