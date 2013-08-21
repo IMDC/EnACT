@@ -55,9 +55,6 @@ namespace Player.View_Models
             {
                 bkVideoURI = value;
                 RaisePropertyChanged("VideoUri");
-                /* The following methods are a little bit of a dirty hack to get MediaElement to
-                 * load the video right after the video uri is set.
-                 */
             }
         }
 

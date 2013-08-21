@@ -16,6 +16,8 @@ namespace Player.Views
 
         public Storyboard CaptionStoryboard { get; private set; }
 
+        public TimeSpan PauseTime { get; private set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -25,12 +27,25 @@ namespace Player.Views
 
             CaptionStoryboard = Resources["CaptionStoryboard"] as Storyboard;
 
+            PauseTime = new TimeSpan(0,0,0,0,0);
+
             //Set up ViewModel Event handlers
             playerViewModel.PlayRequested += (sender, args) =>
             {
-                CaptionStoryboard.Begin();
+                //If the video is right at the beginning
+                if (PauseTime.TotalMilliseconds == 0)
+                    CaptionStoryboard.Begin();
+                else
+                {
+                    CaptionStoryboard.Resume();
+                    PauseTime = new TimeSpan(0,0,0,0,0);
+                }
             };
-            playerViewModel.PauseRequested += (sender, args) => CaptionStoryboard.Pause();
+            playerViewModel.PauseRequested += (sender, args) =>
+            {
+                CaptionStoryboard.Pause();
+                PauseTime = CaptionStoryboard.GetCurrentTime();
+            };
             playerViewModel.StopRequested  += (sender, args) => CaptionStoryboard.Stop();
             playerViewModel.LoadRequested += (sender, args) =>
             {
