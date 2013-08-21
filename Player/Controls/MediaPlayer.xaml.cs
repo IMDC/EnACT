@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using LibEnACT;
 
 namespace Player.Controls
 {
@@ -10,6 +11,15 @@ namespace Player.Controls
         public MediaPlayer()
         {
             InitializeComponent();
+        }
+
+        public void AddCaption(string s)
+        {
+            TextBlock t = new TextBlock
+            {
+                Text = s
+            };
+            CaptionGrid.Children.Add(t);
         }
     }
 }

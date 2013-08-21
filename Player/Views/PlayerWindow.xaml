@@ -111,7 +111,8 @@
                 <CheckBox
                     x:Name="CheckBoxHideControls"
                     Content="Hide Controls"
-                    Style="{StaticResource ControlPanelStyle}" />
+                    Style="{StaticResource ControlPanelStyle}"
+                    Checked="CheckBoxHideControls_Checked" />
             </StackPanel>
         </DockPanel>
         <!--Make Media Player the last Element so that it fills the remaining space-->

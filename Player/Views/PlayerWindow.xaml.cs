@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using Player.Controls;
 using Player.View_Models;
 
 namespace Player.Views
@@ -88,6 +89,11 @@ namespace Player.Views
             int pos = (int)Timeline.Value;
             CaptionStoryboard.Seek(new TimeSpan(0, 0, 0, 0, pos));
             TimelineTimer.Start();
+        }
+
+        private void CheckBoxHideControls_Checked(object sender, RoutedEventArgs e)
+        {   
+            Player.AddCaption("Helloooo");
         }
     }
 }

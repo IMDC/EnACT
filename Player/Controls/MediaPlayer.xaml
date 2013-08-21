@@ -18,6 +18,7 @@
         </Storyboard>
     </UserControl.Resources>
     <Grid
+        x:Name="CaptionGrid"
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch">
         <Controls:StatefulMediaElement
