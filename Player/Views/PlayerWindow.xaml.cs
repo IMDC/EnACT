@@ -12,11 +12,11 @@ namespace Player.Views
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool isPaused = false;
+
         public DispatcherTimer TimelineTimer { get; private set; }
 
         public Storyboard CaptionStoryboard { get; private set; }
-
-        public TimeSpan PauseTime { get; private set; }
 
         public MainWindow()
         {
@@ -27,26 +27,28 @@ namespace Player.Views
 
             CaptionStoryboard = (Storyboard) Player.Resources["CaptionStoryboard"];
 
-            PauseTime = new TimeSpan(0,0,0,0,0);
-
             //Set up ViewModel Event handlers
             playerViewModel.PlayRequested += (sender, args) =>
             {
-                //If the video is right at the beginning
-                if (PauseTime.TotalMilliseconds == 0)
-                    CaptionStoryboard.Begin();
-                else
+                if(isPaused)
                 {
                     CaptionStoryboard.Resume();
-                    PauseTime = new TimeSpan(0,0,0,0,0);
+                    isPaused = false;
                 }
+                else //The video is right at the beginning
+                    CaptionStoryboard.Begin();
             };
+
+            //Pause the video and remember that it was paused.
             playerViewModel.PauseRequested += (sender, args) =>
             {
                 CaptionStoryboard.Pause();
-                PauseTime = CaptionStoryboard.GetCurrentTime();
+                isPaused = true;
             };
+
             playerViewModel.StopRequested  += (sender, args) => CaptionStoryboard.Stop();
+
+            //Quickly Play and Stop the video so that it gets loaded into the media element.
             playerViewModel.LoadRequested += (sender, args) =>
             {
                 Player.Media.Play();
@@ -71,7 +73,6 @@ namespace Player.Views
         {
             //Update Max value to the length of the video
             Timeline.Maximum = Player.Media.NaturalDuration.TimeSpan.TotalMilliseconds;
-
             TimelineTimer.Start();
         }
 
@@ -85,7 +86,6 @@ namespace Player.Views
         {
             //Set Player position and restart timer
             int pos = (int)Timeline.Value;
-            //Player.Position = new TimeSpan(0, 0, 0, 0, pos);
             CaptionStoryboard.Seek(new TimeSpan(0, 0, 0, 0, pos));
             TimelineTimer.Start();
         }
