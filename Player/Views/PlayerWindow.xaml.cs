@@ -14,6 +14,8 @@ namespace Player.Views
     {
         public DispatcherTimer TimelineTimer { get; private set; }
 
+        public Storyboard CaptionStoryboard { get; private set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -21,12 +23,15 @@ namespace Player.Views
             var playerViewModel = new PlayerViewModel(Player);
             DataContext = playerViewModel;
 
-            var sb = Resources["CaptionStoryboard"] as Storyboard;
+            CaptionStoryboard = Resources["CaptionStoryboard"] as Storyboard;
 
             //Set up ViewModel Event handlers
-            playerViewModel.PlayRequested += (sender, args) => sb.Begin();
-            playerViewModel.PauseRequested += (sender, args) => sb.Pause();
-            playerViewModel.StopRequested  += (sender, args) => sb.Stop();
+            playerViewModel.PlayRequested += (sender, args) =>
+            {
+                CaptionStoryboard.Begin();
+            };
+            playerViewModel.PauseRequested += (sender, args) => CaptionStoryboard.Pause();
+            playerViewModel.StopRequested  += (sender, args) => CaptionStoryboard.Stop();
             playerViewModel.LoadRequested += (sender, args) =>
             {
                 Player.Play();
@@ -63,7 +68,8 @@ namespace Player.Views
         {
             //Set Player position and restart timer
             int pos = (int)Timeline.Value;
-            Player.Position = new TimeSpan(0, 0, 0, 0, pos);
+            //Player.Position = new TimeSpan(0, 0, 0, 0, pos);
+            CaptionStoryboard.Seek(new TimeSpan(0, 0, 0, 0, pos));
             TimelineTimer.Start();
         }
     }
