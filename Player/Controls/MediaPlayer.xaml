@@ -22,6 +22,7 @@
         VerticalAlignment="Stretch">
         <Controls:StatefulMediaElement
             x:Name="Media"
+            LoadedBehavior="Manual"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch" />
     </Grid>
