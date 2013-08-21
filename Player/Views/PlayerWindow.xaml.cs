@@ -22,10 +22,10 @@ namespace Player.Views
         {
             InitializeComponent();
 
-            var playerViewModel = new PlayerViewModel(Player);
+            var playerViewModel = new PlayerViewModel(Player.Media);
             DataContext = playerViewModel;
 
-            CaptionStoryboard = Resources["CaptionStoryboard"] as Storyboard;
+            CaptionStoryboard = (Storyboard) Player.Resources["CaptionStoryboard"];
 
             PauseTime = new TimeSpan(0,0,0,0,0);
 
@@ -49,9 +49,11 @@ namespace Player.Views
             playerViewModel.StopRequested  += (sender, args) => CaptionStoryboard.Stop();
             playerViewModel.LoadRequested += (sender, args) =>
             {
-                Player.Play();
-                Player.Stop();
+                Player.Media.Play();
+                Player.Media.Stop();
             };
+
+            Player.Media.MediaOpened += Player_OnMediaOpened;
 
             //Set up timer
             TimelineTimer = new DispatcherTimer();
@@ -62,13 +64,13 @@ namespace Player.Views
         void TimelineTimer_Tick(object sender, EventArgs e)
         {
             //Update the Timeline position to the player's position
-            Timeline.Value = Player.Position.TotalMilliseconds;
+            Timeline.Value = Player.Media.Position.TotalMilliseconds;
         }
 
         private void Player_OnMediaOpened(object sender, RoutedEventArgs e)
         {
             //Update Max value to the length of the video
-            Timeline.Maximum = Player.NaturalDuration.TimeSpan.TotalMilliseconds;
+            Timeline.Maximum = Player.Media.NaturalDuration.TimeSpan.TotalMilliseconds;
 
             TimelineTimer.Start();
         }

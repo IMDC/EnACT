@@ -1,4 +1,4 @@
-﻿<Window
+﻿<Window xmlns:Player="clr-namespace:Player" 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Player.Controls"
@@ -16,13 +16,6 @@
                 Property="Margin"
                 Value="5" />
         </Style>
-        <Storyboard 
-            x:Key="CaptionStoryboard"
-            x:Name="CaptionStoryboard">
-            <MediaTimeline 
-                Source="{Binding VideoUri}"
-                Storyboard.TargetName="Player"/>
-        </Storyboard>
     </Window.Resources>
     <DockPanel
         HorizontalAlignment="Stretch"
@@ -122,10 +115,16 @@
             </StackPanel>
         </DockPanel>
         <!--Make Media Player the last Element so that it fills the remaining space-->
-        <controls:StatefulMediaElement
+        <!--<controls:StatefulMediaElement
             x:Name="Player"
             DockPanel.Dock="Top"
             LoadedBehavior="Manual" 
-            MediaOpened="Player_OnMediaOpened"/>
+            MediaOpened="Player_OnMediaOpened"/>-->
+        <controls:MediaPlayer
+            x:Name="Player"
+            DockPanel.Dock="Top" 
+            />
+            <!--LoadedBehavior="Manual"
+            MediaOpened="Player_OnMediaOpened" />-->
     </DockPanel>
 </Window>
