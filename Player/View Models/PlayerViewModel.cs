@@ -3,6 +3,7 @@ using System.Windows.Input;
 using Microsoft.TeamFoundation.MVVM;
 using Player.Models;
 using Microsoft.Win32;
+using LibEnACT;
 
 namespace Player.View_Models
 {
@@ -57,8 +58,6 @@ namespace Player.View_Models
                 /* The following methods are a little bit of a dirty hack to get MediaElement to
                  * load the video right after the video uri is set.
                  */
-                Play(null);
-                Stop(null);
             }
         }
 
@@ -96,6 +95,8 @@ namespace Player.View_Models
         /// An event that is fired when a stop command is executed.
         /// </summary>
         public event EventHandler StopRequested;
+
+        public event EventHandler LoadRequested;
         #endregion
 
         #region Constructor
@@ -127,8 +128,9 @@ namespace Player.View_Models
         /// <returns>Whether or not the video can be played.</returns>
         private bool CanPlay(object parameter)
         {
-            return MediaPlayer.CurrentState == PlayerState.Paused 
-                || MediaPlayer.CurrentState == PlayerState.Stopped;
+            return true;
+//            return MediaPlayer.CurrentState == PlayerState.Paused 
+//                || MediaPlayer.CurrentState == PlayerState.Stopped;
         }
 
         /// <summary>
@@ -148,7 +150,8 @@ namespace Player.View_Models
         /// <returns>Whether or not the video can be paused.</returns>
         private bool CanPause(object parameter)
         {
-            return MediaPlayer.CurrentState == PlayerState.Playing;
+            return true;
+//            return MediaPlayer.CurrentState == PlayerState.Playing;
         }
 
         /// <summary>
@@ -168,8 +171,9 @@ namespace Player.View_Models
         /// <returns>Whether or not the video can be stopped.</returns>
         private bool CanStop(object parameter)
         {
-            return MediaPlayer.CurrentState == PlayerState.Paused
-                || MediaPlayer.CurrentState == PlayerState.Playing;
+            return true;
+//            return MediaPlayer.CurrentState == PlayerState.Paused
+//                || MediaPlayer.CurrentState == PlayerState.Playing;
         }
 
         /// <summary>
@@ -242,6 +246,7 @@ namespace Player.View_Models
             {
                 PlayerModel.VideoPath = fileBrowserDialog.FileName;
                 VideoUri = new Uri(PlayerModel.VideoPath);
+                OnLoadRequested();
             }
         }
         #endregion
@@ -280,6 +285,15 @@ namespace Player.View_Models
              * will be set as null in-between the null check and the handler call.
              */
             EventHandler handler = StopRequested;
+            if (handler != null) { handler(this, EventArgs.Empty); }
+        }
+
+        private void OnLoadRequested()
+        {
+            /* Make a local copy of the event to prevent the case where the handler
+             * will be set as null in-between the null check and the handler call.
+             */
+            EventHandler handler = LoadRequested;
             if (handler != null) { handler(this, EventArgs.Empty); }
         }
         #endregion

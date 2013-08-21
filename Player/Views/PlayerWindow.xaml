@@ -16,6 +16,13 @@
                 Property="Margin"
                 Value="5" />
         </Style>
+        <Storyboard 
+            x:Key="CaptionStoryboard"
+            x:Name="CaptionStoryboard">
+            <MediaTimeline 
+                Source="{Binding VideoUri}"
+                Storyboard.TargetName="Player"/>
+        </Storyboard>
     </Window.Resources>
     <DockPanel
         HorizontalAlignment="Stretch"
@@ -118,7 +125,6 @@
         <controls:StatefulMediaElement
             x:Name="Player"
             DockPanel.Dock="Top"
-            Source="{Binding VideoUri}"
             LoadedBehavior="Manual" 
             MediaOpened="Player_OnMediaOpened"/>
     </DockPanel>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using Player.View_Models;
 
@@ -20,10 +21,17 @@ namespace Player.Views
             var playerViewModel = new PlayerViewModel(Player);
             DataContext = playerViewModel;
 
+            var sb = Resources["CaptionStoryboard"] as Storyboard;
+
             //Set up ViewModel Event handlers
-            playerViewModel.PlayRequested  += (sender, args) => Player.Play();
-            playerViewModel.PauseRequested += (sender, args) => Player.Pause();
-            playerViewModel.StopRequested  += (sender, args) => Player.Stop();
+            playerViewModel.PlayRequested += (sender, args) => sb.Begin();
+            playerViewModel.PauseRequested += (sender, args) => sb.Pause();
+            playerViewModel.StopRequested  += (sender, args) => sb.Stop();
+            playerViewModel.LoadRequested += (sender, args) =>
+            {
+                Player.Play();
+                Player.Stop();
+            };
 
             //Set up timer
             TimelineTimer = new DispatcherTimer();
