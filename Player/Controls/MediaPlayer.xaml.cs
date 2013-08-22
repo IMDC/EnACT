@@ -25,7 +25,8 @@ namespace Player.Controls
             {
                 TextBlock t = new TextBlock
                 {
-                    Text = s
+                    Text = s,
+                    FontSize = 20,
                 };
                 i = CaptionGrid.Children.Add(t);
             }
