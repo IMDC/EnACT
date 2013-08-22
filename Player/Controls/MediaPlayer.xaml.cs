@@ -13,13 +13,22 @@ namespace Player.Controls
             InitializeComponent();
         }
 
+        private int i = -1;
         public void AddCaption(string s)
         {
-            TextBlock t = new TextBlock
+            if (0 <= i && i < CaptionGrid.Children.Count)
             {
-                Text = s
-            };
-            CaptionGrid.Children.Add(t);
+                CaptionGrid.Children.RemoveAt(i);
+                i = -1;
+            }
+            else
+            {
+                TextBlock t = new TextBlock
+                {
+                    Text = s
+                };
+                i = CaptionGrid.Children.Add(t);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿<Window xmlns:Player="clr-namespace:Player" 
+﻿<Window
+    xmlns:Player="clr-namespace:Player"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Player.Controls"
@@ -48,6 +49,10 @@
                     x:Name="MenuItemAbout"
                     Header="About" />
             </MenuItem>
+            <MenuItem
+                x:Name="MenuItemDebug"
+                Header="Debug"
+                Click="MenuItemDebug_OnClick"/>
         </Menu>
         <!--Holds Controls for the player-->
         <DockPanel
@@ -64,7 +69,7 @@
                 Minimum="0"
                 PreviewMouseDown="Timeline_OnPreviewMouseDown"
                 PreviewMouseUp="Timeline_OnPreviewMouseUp" />
-                <StackPanel
+            <StackPanel
                 Orientation="Horizontal"
                 HorizontalAlignment="Center"
                 DockPanel.Dock="Bottom">
@@ -111,21 +116,19 @@
                 <CheckBox
                     x:Name="CheckBoxHideControls"
                     Content="Hide Controls"
-                    Style="{StaticResource ControlPanelStyle}"
-                    Checked="CheckBoxHideControls_Checked" />
+                    Style="{StaticResource ControlPanelStyle}" />
             </StackPanel>
         </DockPanel>
         <!--Make Media Player the last Element so that it fills the remaining space-->
         <!--<controls:StatefulMediaElement
             x:Name="Player"
             DockPanel.Dock="Top"
-            LoadedBehavior="Manual" 
-            MediaOpened="Player_OnMediaOpened"/>-->
+            LoadedBehavior="Manual"
+            MediaOpened="Player_OnMediaOpened" />-->
         <controls:MediaPlayer
             x:Name="Player"
-            DockPanel.Dock="Top" 
-            />
-            <!--LoadedBehavior="Manual"
+            DockPanel.Dock="Top" />
+        <!--LoadedBehavior="Manual"
             MediaOpened="Player_OnMediaOpened" />-->
     </DockPanel>
 </Window>

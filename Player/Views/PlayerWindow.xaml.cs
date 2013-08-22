@@ -91,9 +91,9 @@ namespace Player.Views
             TimelineTimer.Start();
         }
 
-        private void CheckBoxHideControls_Checked(object sender, RoutedEventArgs e)
-        {   
-            Player.AddCaption("Helloooo");
+        private void MenuItemDebug_OnClick(object sender, RoutedEventArgs e)
+        {
+            Player.AddCaption("Helloooooo");
         }
     }
 }
