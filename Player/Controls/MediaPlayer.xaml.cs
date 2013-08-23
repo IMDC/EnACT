@@ -29,6 +29,8 @@ namespace Player.Controls
                     FontSize = 20,
                 };
                 i = CaptionGrid.Children.Add(t);
+                
+                Grid.SetZIndex(t,-1); //Should go before Children.Add?
             }
         }
     }
