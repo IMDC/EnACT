@@ -1,7 +1,6 @@
 ﻿using System;
-using EnACT.Core;
+using LibEnACT;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using EnACT;
 
 
 namespace EnACTUnitTestProject
