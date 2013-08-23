@@ -50,6 +50,7 @@
     <Compile Include="SettingsXML.cs" />
     <Compile Include="Speaker.cs" />
     <Compile Include="Timestamp.cs" />
+    <Compile Include="XMLReader.cs" />
     <Compile Include="XMLStrings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,179 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
-using EnACT.Miscellaneous;
-using LibEnACT;
 
-namespace EnACT.Core
+namespace LibEnACT
 {
-    //TODO Move this class out of Editor Namespace and use the class in LibEnACT
     /// <summary>
     /// A static class that contains XML reading methods.
     /// </summary>
     public static class XMLReader
     {
-        #region ParseProject
-        /// <summary>
-        /// Reads in and parses an enact Project file.
-        /// </summary>
-        /// <param name="path">The path of the project file.</param>
-        /// <returns>The ProjectInfo class containted in the file.</returns>
-        public static ProjectInfo ParseProject(string path)
-        {
-            string name;
-            string videoPath;
-            string settings;
-            string speakers;
-            string dialogues;
-            string projectPath = Path.GetDirectoryName(path);
-
-            using (XmlTextReader r = new XmlTextReader(path))
-            {
-                r.ReadStartElement("project");
-                {
-                    r.ReadStartElement("name");
-                    name = r.ReadString();
-                    r.ReadEndElement();
-
-                    r.ReadStartElement("video");
-                    videoPath = r.ReadString();
-                    r.ReadEndElement();
-
-                    r.ReadStartElement("settings");
-                    settings = r.ReadString();
-                    r.ReadEndElement();
-
-                    r.ReadStartElement("speakers");
-                    speakers = r.ReadString();
-                    r.ReadEndElement();
-
-                    r.ReadStartElement("dialogues");
-                    dialogues = r.ReadString();
-                    r.ReadEndElement();
-                }
-                r.ReadEndElement();
-            }
-
-            //Construct the project
-            ProjectInfo project = new ProjectInfo(name, videoPath, projectPath);
-
-            var tuple = ParseEngineXml(Path.Combine(projectPath, "engine" + ProjectInfo.EngineXmlExtension));
-
-            project.CaptionList = tuple.Item1;
-            project.SpeakerSet = tuple.Item2;
-            project.Settings = tuple.Item3;
-            return project;
-        }
-        #endregion
-
-        #region ParseSettings
-        /// <summary>
-        /// Reads in a settings xml file and creates a SettingsXML object out of it.
-        /// </summary>
-        /// <param name="path">The full path to the xml file.</param>
-        /// <returns>The SettingsXML object contained in the file.</returns>
-        public static SettingsXml ParseSettings(string path)
-        {
-            SettingsXml settings = Utilities.ConstructSettingsXml();
-
-            using (XmlTextReader r = new XmlTextReader(path))
-            {
-                //Ignore dtd as there is no need to validate it.
-                r.DtdProcessing = DtdProcessing.Ignore;
-
-                r.ReadStartElement("settings");
-                {
-                    r.ReadStartElement("meta");
-                    r.GetAttribute("name");
-                    settings.Base = r.GetAttribute("content");
-
-                    r.ReadStartElement("meta");
-                    r.GetAttribute("name");
-                    settings.Spacing = r.GetAttribute("content");
-
-                    r.ReadStartElement("meta");
-                    r.GetAttribute("name");
-                    settings.SeparateEmotionWords = r.GetAttribute("content");
-
-                    r.ReadStartElement("playback");
-                    settings.Playback.AutoPlay = Convert.ToBoolean(r.GetAttribute("autoPlay"));
-                    settings.Playback.AutoRewind = Convert.ToBoolean(r.GetAttribute("autoRewind"));
-                    settings.Playback.Seek = r.GetAttribute("seek");
-                    settings.Playback.AutoSize = Convert.ToBoolean(r.GetAttribute("autoSize"));
-                    settings.Playback.Scale = Convert.ToInt32(r.GetAttribute("scale"));
-                    settings.Playback.Volume = Convert.ToInt32(r.GetAttribute("volume"));
-                    settings.Playback.ShowCaptions = Convert.ToBoolean(r.GetAttribute("showCaptions"));
-
-                    r.ReadStartElement("skin");
-                    settings.Skin.Source = r.GetAttribute("src");
-                    settings.Skin.AutoHide = Convert.ToBoolean(r.GetAttribute("skinAutoHide"));
-                    settings.Skin.FadeTime = Convert.ToInt32(r.GetAttribute("skinFadeTime"));
-                    settings.Skin.BackGroundAlpha = Convert.ToInt32(r.GetAttribute("skinBackgroundAlpha"));
-                    settings.Skin.BackgroundColour = r.GetAttribute("skinBackgroundColor");
-
-                    r.ReadStartElement("content");
-                    {
-                        r.ReadStartElement("speakers");
-                        settings.SpeakersSource = r.GetAttribute("src");
-
-                        r.ReadStartElement("captions");
-                        settings.CaptionsSource = r.GetAttribute("src");
-
-                        r.ReadStartElement("video");
-                        settings.VideoSource = r.GetAttribute("src");
-                    }
-                    r.ReadEndElement();
-
-                    //These can be left alone for now as the values should stay as the default for now.
-                    r.ReadStartElement("emotions");
-                    {
-                        r.ReadStartElement("happy");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadEndElement();
-
-                        r.ReadStartElement("sad");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadEndElement();
-
-                        r.ReadStartElement("fear");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadEndElement();
-
-                        r.ReadStartElement("anger");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadStartElement("param");
-                        r.ReadEndElement();
-                    }
-                    r.ReadEndElement();
-                }
-                r.ReadEndElement();
-            }
-
-            return settings;
-        }
-        #endregion
-
         #region ParseEngineXML
         /// <summary>
         /// Reads in an engine.xml file and turns it into a CaptionList, SpeakerSet and engine 
@@ -183,9 +18,9 @@ namespace EnACT.Core
         /// <param name="path">The Path to the engine.xml file.</param>
         /// <returns>A 3-Tuple containing a CaptionList, a SpeakerSet, and a Settings 
         /// object in that specific order.</returns>
-        public static Tuple<List<EditorCaption>, Dictionary<string, Speaker>, SettingsXml> ParseEngineXml(string path)
+        public static Tuple<List<Caption>, Dictionary<string, Speaker>, SettingsXml> ParseEngineXml(string path)
         {
-            var captionList = new List<EditorCaption>();
+            var captionList = new List<Caption>();
             var speakerSet = new Dictionary<string, Speaker>();
             var settings = new SettingsXml();
 
@@ -304,7 +139,7 @@ namespace EnACT.Core
                         case XmlElements.Captions: break; //Do Nothing
                         case XmlElements.Caption:
                             r.AssertNode(XmlElements.Caption);
-                            EditorCaption c = new EditorCaption
+                            Caption c = new Caption
                             {
                                 Begin = r.GetNonNullAttribute(XmlAttributes.Begin),
                                 End = r.GetNonNullAttribute(XmlAttributes.End),
@@ -313,7 +148,7 @@ namespace EnACT.Core
                                 Alignment = (Alignment) r.GetIntAttribute(XmlAttributes.Align)
                             };
 
-                            List<EditorCaptionWord> wordList = new List<EditorCaptionWord>();
+                            List<CaptionWord> wordList = new List<CaptionWord>();
 
                             while (r.Read())
                             {
@@ -329,11 +164,10 @@ namespace EnACT.Core
                                     Intensity i = (Intensity)r.GetIntAttribute(XmlAttributes.Intensity);
 
                                     //Get word from node and add it to the list
-                                    EditorCaptionWord word = new EditorCaptionWord(e, i, r.ReadString(), 0);
+                                    CaptionWord word = new CaptionWord(e, i, r.ReadString());
                                     c.Words.Add(word);
                                 }
                             }
-                            c.ReindexWords(); //Set up proper indexes
                             captionList.Add(c);
                             break;
                         default: throw new ArgumentException("Value '" + r.Name + "' is not a valid node", r.Name);
@@ -343,6 +177,82 @@ namespace EnACT.Core
 
             return Tuple.Create(captionList,speakerSet,settings);
         }
+        #endregion
+
+        #region XmlReader Extention Methods
+
+        /// <summary>
+        /// Asserts that the current node name in the XmlReader is the same as the expected node 
+        /// name. If the two do not match, an ArgumentException is thrown.
+        /// </summary>
+        /// <param name="r">The XmlReader to with the current node to compare.</param>
+        /// <param name="expectedNodeName">The name that the current node is expected to have.</param>
+        public static void AssertNode(this XmlReader r, string expectedNodeName)
+        {
+            /* When using XmlReader, trying to access attributes that it can't find will return 
+             * null, which can be confusing if you don't realize the current node is not the 
+             * correct node.
+             */
+            if (!r.IsStartElement(expectedNodeName))
+                throw new ArgumentException(String.Format("Xml node '{0}' is not the current node.",
+                    expectedNodeName));
+        }
+
+        /// <summary>
+        /// Reads in an attribute from the current node and checks to make sure that the returned
+        /// string is not null. If the string is null, an ArgumentException is thrown, signifying
+        /// that the attribute was not found.
+        /// </summary>
+        /// <param name="r">The XmlReader being used to read xml.</param>
+        /// <param name="attributeName">The name of the attribute to read.</param>
+        /// <returns>The attribute string.</returns>
+        public static string GetNonNullAttribute(this XmlReader r, string attributeName)
+        {
+            string attributeString = r[attributeName];
+            if (attributeString == null)
+                throw new ArgumentException("Attribute " + attributeName + " not found.");
+            return attributeString;
+        }
+
+        /// <summary>
+        /// Reads in an attribute from the current node and checks to make sure that the returned
+        /// value is not null. If the value is null, an ArgumentException is thrown, signifying
+        /// that the attribute was not found. Returns the attribute as a boolean.
+        /// </summary>
+        /// <param name="r">The XmlReader being used to read xml.</param>
+        /// <param name="attributeName">The name of the attribute to read.</param>
+        /// <returns>The attribute as a boolean.</returns>
+        public static bool GetBoolAttribute(this XmlReader r, string attributeName)
+        {
+            return Convert.ToBoolean(r.GetNonNullAttribute(attributeName));
+        }
+
+        /// <summary>
+        /// Reads in an attribute from the current node and checks to make sure that the returned
+        /// value is not null. If the value is null, an ArgumentException is thrown, signifying
+        /// that the attribute was not found. Returns the attribute as an integer.
+        /// </summary>
+        /// <param name="r">The XmlReader being used to read xml.</param>
+        /// <param name="attributeName">The name of the attribute to read.</param>
+        /// <returns>The attribute as an integer.</returns>
+        public static int GetIntAttribute(this XmlReader r, string attributeName)
+        {
+            return Convert.ToInt32(r.GetNonNullAttribute(attributeName));
+        }
+
+        /// <summary>
+        /// Reads in an attribute from the current node and checks to make sure that the returned
+        /// value is not null. If the value is null, an ArgumentException is thrown, signifying
+        /// that the attribute was not found. Returns the attribute as a double.
+        /// </summary>
+        /// <param name="r">The XmlReader being used to read xml.</param>
+        /// <param name="attributeName">The name of the attribute to read.</param>
+        /// <returns>The attribute as a double.</returns>
+        public static double GetDoubleAttribute(this XmlReader r, string attributeName)
+        {
+            return Convert.ToDouble(r.GetNonNullAttribute(attributeName));
+        }
+
         #endregion
     }//Class
 }//Namepace

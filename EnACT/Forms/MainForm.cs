@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using EnACT.Core;
 using EnACT.Miscellaneous;
 using LibEnACT;
+using XMLReader = EnACT.Core.XMLReader;
 
 namespace EnACT.Forms
 {
