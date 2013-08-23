@@ -1,7 +1,7 @@
 ﻿<Application x:Class="Player.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="Views/PlayerWindow.xaml">
+             StartupUri="Views/PlayerView.xaml">
     <Application.Resources>
          
     </Application.Resources>

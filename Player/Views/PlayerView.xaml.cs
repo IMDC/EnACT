@@ -9,9 +9,9 @@ using Player.View_Models;
 namespace Player.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for PlayerView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PlayerView : Window
     {
         private bool isPaused = false;
 
@@ -19,7 +19,7 @@ namespace Player.Views
 
         public Storyboard CaptionStoryboard { get; private set; }
 
-        public MainWindow()
+        public PlayerView()
         {
             InitializeComponent();
 

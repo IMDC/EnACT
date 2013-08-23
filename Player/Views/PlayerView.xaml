@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Player.Controls"
-    x:Class="Player.Views.MainWindow"
+    x:Class="Player.Views.PlayerView"
     Title="EnACT Caption Player"
     Height="600"
     Width="800"
