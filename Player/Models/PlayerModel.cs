@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows.Documents;
+using LibEnACT;
 
 namespace Player.Models
 {
@@ -22,6 +25,29 @@ namespace Player.Models
                 NotifyPropertyChanged("VideoPath");
             }
         }
+
+        /// <summary>
+        /// Backing field for CaptionsFileFilePath
+        /// </summary>
+        private string bkCaptionsFilePath;
+        /// <summary>
+        /// A string that holds the path to the captions file.
+        /// </summary>
+        public string CaptionsFileFilePath
+        {
+            get { return bkCaptionsFilePath; }
+            set
+            {
+                bkCaptionsFilePath = value;
+                NotifyPropertyChanged("CaptionsFileFilePath");
+            }
+        }
+
+        public List<Caption> CaptionList { get; set; }
+
+        public Dictionary<string,Speaker>  SpeakerSet { get; set; }
+
+        public SettingsXml Settings { get; set; }
         #endregion
 
         #region Constructor

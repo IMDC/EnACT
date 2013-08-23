@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Input;
 using Microsoft.TeamFoundation.MVVM;
 using Player.Models;
@@ -94,6 +95,8 @@ namespace Player.View_Models
         public event EventHandler StopRequested;
 
         public event EventHandler LoadRequested;
+
+        public event EventHandler<EventArgs<PlayerModel>> LoadCaptionsRequested;
         #endregion
 
         #region Constructor
@@ -244,6 +247,16 @@ namespace Player.View_Models
                 PlayerModel.VideoPath = fileBrowserDialog.FileName;
                 VideoUri = new Uri(PlayerModel.VideoPath);
                 OnLoadRequested();
+
+                PlayerModel.CaptionsFileFilePath = Path.ChangeExtension(PlayerModel.VideoPath, ".enact");
+
+                var tuple = XMLReader.ParseEngineXml(PlayerModel.CaptionsFileFilePath);
+
+                PlayerModel.CaptionList = tuple.Item1;
+                PlayerModel.SpeakerSet = tuple.Item2;
+                PlayerModel.Settings = tuple.Item3;
+
+                OnLoadCaptionsRequested(new EventArgs<PlayerModel>(PlayerModel));
             }
         }
         #endregion
@@ -292,6 +305,16 @@ namespace Player.View_Models
              */
             EventHandler handler = LoadRequested;
             if (handler != null) { handler(this, EventArgs.Empty); }
+        }
+
+        private void OnLoadCaptionsRequested(EventArgs<PlayerModel> e)
+        {
+            /* Make a local copy of the event to prevent the case where the handler
+             * will be set as null in-between the null check and the handler call.
+             */
+            EventHandler<EventArgs<PlayerModel>> handler = LoadCaptionsRequested;
+
+            if (handler != null) { handler(this, e); }
         }
         #endregion
     }
