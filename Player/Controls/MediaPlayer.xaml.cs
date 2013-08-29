@@ -1,5 +1,8 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using LibEnACT;
 
 namespace Player.Controls
@@ -20,12 +23,28 @@ namespace Player.Controls
 
             TextBlock t = new TextBlock
             {
+                Name = "Item" + CaptionGrid.Children.Count.ToString(), //ItemX
                 Text = c.ToString(),
                 FontSize = s.Font.Size,
                 FontFamily = new FontFamily(s.Font.Family),
+                Visibility = Visibility.Hidden,
             };
 
-            CaptionGrid.Children.Add(t);
+            int captionIndex = CaptionGrid.Children.Add(t);
+            this.RegisterName(t.Name,t);
+
+            var storyboard = (Storyboard) this.FindResource("CaptionStoryboard");
+            
+            ObjectAnimationUsingKeyFrames visibilityAnimation = new ObjectAnimationUsingKeyFrames();
+            visibilityAnimation.Duration = TimeSpan.FromSeconds(c.Duration);
+            visibilityAnimation.BeginTime = TimeSpan.FromSeconds(c.Begin);
+
+            visibilityAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Visible, KeyTime.FromPercent(0)));
+            visibilityAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Collapsed, KeyTime.FromPercent(1)));
+            Storyboard.SetTargetName(visibilityAnimation, t.Name);
+            Storyboard.SetTargetProperty(visibilityAnimation, new PropertyPath(TextBlock.VisibilityProperty));
+
+            storyboard.Children.Add(visibilityAnimation);
         }
 
         private int i = -1;
