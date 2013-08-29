@@ -26,14 +26,23 @@ namespace Player.Controls
                 Text = c.ToString(),
 
                 //Confugure Speaker settings
-                FontSize = c.Speaker.Font.Size,
+                FontSize   = c.Speaker.Font.Size,
                 FontFamily = new FontFamily(c.Speaker.Font.Family),
+
+                //TODO Set alignment based on Caption Alignment
+                //Set Alignments
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment   = VerticalAlignment.Center,
 
                 //By default make t hidden
                 Visibility = Visibility.Hidden,
             };
 
             int captionIndex = CaptionGrid.Children.Add(t);
+            Grid.SetRow(t,GridLocation.BottomCentre.Row);
+            Grid.SetRowSpan(t,GridLocation.BottomCentre.RowSpan);
+            Grid.SetColumn(t, GridLocation.BottomCentre.Column);
+            Grid.SetColumnSpan(t, GridLocation.BottomCentre.ColumnSpan);
 
             //Give the control a name so that it can be used by the storyboard.
             this.RegisterName(t.Name,t); 

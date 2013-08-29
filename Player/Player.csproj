@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="Controls\StatefulMediaElement.cs" />
     <Compile Include="Controls\IMediaPlayer.cs" />
+    <Compile Include="GridLocation.cs" />
     <Compile Include="Models\PlayerState.cs" />
     <Compile Include="View Models\PlayerViewModel.cs" />
     <Compile Include="Views\PlayerView.xaml.cs">
