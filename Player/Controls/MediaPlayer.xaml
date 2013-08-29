@@ -39,14 +39,5 @@
             Grid.RowSpan="3"
             Grid.ColumnSpan="3"
             Grid.ZIndex="0"/>
-        <TextBlock
-            HorizontalAlignment="Center"
-            Grid.Row="1"
-            FontSize="20"
-            TextWrapping="Wrap"
-            Text="Is it possible to have a control that exists inside"
-            VerticalAlignment="Center"
-            Grid.ColumnSpan="3" 
-            Grid.Column="0" />
     </Grid>
 </UserControl>

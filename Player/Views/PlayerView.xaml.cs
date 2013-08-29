@@ -102,7 +102,6 @@ namespace Player.Views
 
         private void MenuItemDebug_OnClick(object sender, RoutedEventArgs e)
         {
-            Player.AddCaption("Helloooooo");
         }
     }
 }

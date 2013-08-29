@@ -120,15 +120,8 @@
             </StackPanel>
         </DockPanel>
         <!--Make Media Player the last Element so that it fills the remaining space-->
-        <!--<controls:StatefulMediaElement
-            x:Name="Player"
-            DockPanel.Dock="Top"
-            LoadedBehavior="Manual"
-            MediaOpened="Player_OnMediaOpened" />-->
         <controls:MediaPlayer
             x:Name="Player"
             DockPanel.Dock="Top" />
-        <!--LoadedBehavior="Manual"
-            MediaOpened="Player_OnMediaOpened" />-->
     </DockPanel>
 </Window>

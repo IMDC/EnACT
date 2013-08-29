@@ -29,6 +29,10 @@ namespace Player.Controls
                 FontSize   = c.Speaker.Font.Size,
                 FontFamily = new FontFamily(c.Speaker.Font.Family),
 
+                //Set Background and Foreground Colours
+                Background = Brushes.Black,
+                Foreground = Brushes.White,
+
                 //TODO Set alignment based on Caption Alignment
                 //Set Alignments
                 HorizontalAlignment = HorizontalAlignment.Center,
@@ -65,27 +69,6 @@ namespace Player.Controls
             Storyboard.SetTargetProperty(visibilityAnimation, new PropertyPath(TextBlock.VisibilityProperty));
 
             storyboard.Children.Add(visibilityAnimation);
-        }
-
-        private int i = -1;
-        public void AddCaption(string s)
-        {
-            if (0 <= i && i < CaptionGrid.Children.Count)
-            {
-                CaptionGrid.Children.RemoveAt(i);
-                i = -1;
-            }
-            else
-            {
-                TextBlock t = new TextBlock
-                {
-                    Text = s,
-                    FontSize = 20,
-                };
-                i = CaptionGrid.Children.Add(t);
-                
-                Grid.SetZIndex(t,-1); //Should go before Children.Add?
-            }
         }
     }
 }

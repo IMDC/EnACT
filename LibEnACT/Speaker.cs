@@ -73,6 +73,7 @@
     /// </summary>
     public class SpeakerBg
     {
+        //TODO Change Colour to type Color and get rid of visible, Alpha
         /// <summary>
         /// Whether or not the background is visible or not
         /// </summary>
@@ -105,6 +106,7 @@
     /// </summary>
     public class SpeakerFont
     {
+        //TODO Change Colour to type Color
         /// <summary>
         /// The font family/type of this font
         /// </summary>
