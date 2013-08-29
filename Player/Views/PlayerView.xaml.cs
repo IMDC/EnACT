@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using LibEnACT;
 using Player.Controls;
 using Player.View_Models;
 
@@ -62,7 +63,15 @@ namespace Player.Views
             TimelineTimer = new DispatcherTimer();
             TimelineTimer.Tick += TimelineTimer_Tick;
             TimelineTimer.Interval = new TimeSpan(0,0,0,0,50);
-        }
+
+            playerViewModel.LoadCaptionsRequested += (sender, args) =>
+            {
+                foreach (Caption c in args.Value.CaptionList)
+                {
+                    Player.AddCaption(c);
+                }
+            };
+        } 
 
         void TimelineTimer_Tick(object sender, EventArgs e)
         {
