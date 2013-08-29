@@ -19,28 +19,39 @@ namespace Player.Controls
 
         public void AddCaption(Caption c)
         {
-            Speaker s = c.Speaker;
-
             TextBlock t = new TextBlock
-            {
-                Name = "Item" + CaptionGrid.Children.Count.ToString(), //ItemX
+            {   
+                //Name t so that it is unique
+                Name = "Item" + CaptionGrid.Children.Count.ToString(), //Named in form of ItemXX
                 Text = c.ToString(),
-                FontSize = s.Font.Size,
-                FontFamily = new FontFamily(s.Font.Family),
+
+                //Confugure Speaker settings
+                FontSize = c.Speaker.Font.Size,
+                FontFamily = new FontFamily(c.Speaker.Font.Family),
+
+                //By default make t hidden
                 Visibility = Visibility.Hidden,
             };
 
             int captionIndex = CaptionGrid.Children.Add(t);
-            this.RegisterName(t.Name,t);
+
+            //Give the control a name so that it can be used by the storyboard.
+            this.RegisterName(t.Name,t); 
 
             var storyboard = (Storyboard) this.FindResource("CaptionStoryboard");
-            
-            ObjectAnimationUsingKeyFrames visibilityAnimation = new ObjectAnimationUsingKeyFrames();
-            visibilityAnimation.Duration = TimeSpan.FromSeconds(c.Duration);
-            visibilityAnimation.BeginTime = TimeSpan.FromSeconds(c.Begin);
 
+            //Create animation for visibility
+            ObjectAnimationUsingKeyFrames visibilityAnimation = new ObjectAnimationUsingKeyFrames
+            {
+                Duration = TimeSpan.FromSeconds(c.Duration),
+                BeginTime = TimeSpan.FromSeconds(c.Begin),
+            };
+
+            //Set visibility keyframes
             visibilityAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Visible, KeyTime.FromPercent(0)));
             visibilityAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Collapsed, KeyTime.FromPercent(1)));
+
+            //Bind animation to property
             Storyboard.SetTargetName(visibilityAnimation, t.Name);
             Storyboard.SetTargetProperty(visibilityAnimation, new PropertyPath(TextBlock.VisibilityProperty));
 
