@@ -40,8 +40,9 @@ namespace Player.Views
                 else //The video is right at the beginning
                 { 
                     //Ensure that player has a video source
-                    if(Player.Media.Source != null)
-                        CaptionStoryboard.Begin();
+                    try { CaptionStoryboard.Begin(); }
+                    catch (InvalidOperationException) { Console.WriteLine("No video source given."); }
+                    
                 }
             };
 
