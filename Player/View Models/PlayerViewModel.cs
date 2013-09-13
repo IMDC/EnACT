@@ -250,13 +250,20 @@ namespace Player.View_Models
 
                 PlayerModel.CaptionsFileFilePath = Path.ChangeExtension(PlayerModel.VideoPath, ".enact");
 
-                var tuple = XMLReader.ParseEngineXml(PlayerModel.CaptionsFileFilePath);
+                try
+                {
+                    var tuple = XMLReader.ParseEngineXml(PlayerModel.CaptionsFileFilePath);
 
-                PlayerModel.CaptionList = tuple.Item1;
-                PlayerModel.SpeakerSet = tuple.Item2;
-                PlayerModel.Settings = tuple.Item3;
+                    PlayerModel.CaptionList = tuple.Item1;
+                    PlayerModel.SpeakerSet = tuple.Item2;
+                    PlayerModel.Settings = tuple.Item3;
 
-                OnLoadCaptionsRequested(new EventArgs<PlayerModel>(PlayerModel));
+                    OnLoadCaptionsRequested(new EventArgs<PlayerModel>(PlayerModel));
+                }
+                catch (FileNotFoundException)
+                {
+                    Console.WriteLine("No captions found.");
+                }
             }
         }
         #endregion
