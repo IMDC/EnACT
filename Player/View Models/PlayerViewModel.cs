@@ -242,28 +242,28 @@ namespace Player.View_Models
 
             var result = fileBrowserDialog.ShowDialog();
 
-            if (result == true)
+            if(!result.Value)
+                return;     //Return if no file opened.
+
+            PlayerModel.VideoPath = fileBrowserDialog.FileName;
+            VideoUri = new Uri(PlayerModel.VideoPath);
+            OnLoadRequested();
+
+            PlayerModel.CaptionsFileFilePath = Path.ChangeExtension(PlayerModel.VideoPath, ".enact");
+
+            try
             {
-                PlayerModel.VideoPath = fileBrowserDialog.FileName;
-                VideoUri = new Uri(PlayerModel.VideoPath);
-                OnLoadRequested();
+                var tuple = XMLReader.ParseEngineXml(PlayerModel.CaptionsFileFilePath);
 
-                PlayerModel.CaptionsFileFilePath = Path.ChangeExtension(PlayerModel.VideoPath, ".enact");
+                PlayerModel.CaptionList = tuple.Item1;
+                PlayerModel.SpeakerSet = tuple.Item2;
+                PlayerModel.Settings = tuple.Item3;
 
-                try
-                {
-                    var tuple = XMLReader.ParseEngineXml(PlayerModel.CaptionsFileFilePath);
-
-                    PlayerModel.CaptionList = tuple.Item1;
-                    PlayerModel.SpeakerSet = tuple.Item2;
-                    PlayerModel.Settings = tuple.Item3;
-
-                    OnLoadCaptionsRequested(new EventArgs<PlayerModel>(PlayerModel));
-                }
-                catch (FileNotFoundException)
-                {
-                    Console.WriteLine("No captions found.");
-                }
+                OnLoadCaptionsRequested(new EventArgs<PlayerModel>(PlayerModel));
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("No captions found.");
             }
         }
         #endregion
