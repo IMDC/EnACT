@@ -32,13 +32,17 @@ namespace Player.Views
             //Set up ViewModel Event handlers
             playerViewModel.PlayRequested += (sender, args) =>
             {
-                if(isPaused)
+                if (isPaused)
                 {
                     CaptionStoryboard.Resume();
                     isPaused = false;
                 }
                 else //The video is right at the beginning
-                    CaptionStoryboard.Begin();
+                { 
+                    //Ensure that player has a video source
+                    if(Player.Media.Source != null)
+                        CaptionStoryboard.Begin();
+                }
             };
 
             //Pause the video and remember that it was paused.
