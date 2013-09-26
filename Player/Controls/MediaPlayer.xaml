@@ -16,6 +16,17 @@
                 Source="{Binding VideoUri}"
                 Storyboard.TargetName="Media" />
         </Storyboard>
+        <!-- Makes a character go up and down.-->
+        <DoubleAnimation 
+          x:Key="CharacterWaveAnimation" 
+          x:Shared="False" 
+          To="20"
+          AccelerationRatio="0.5" 
+          AutoReverse="True"
+          DecelerationRatio="0.5"       
+          Duration="0:0:1"
+          RepeatBehavior="Forever"
+          />
     </UserControl.Resources>
     <Grid
         x:Name="CaptionGrid"

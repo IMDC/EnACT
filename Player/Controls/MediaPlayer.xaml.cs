@@ -69,6 +69,36 @@ namespace Player.Controls
             Storyboard.SetTargetProperty(visibilityAnimation, new PropertyPath(TextBlock.VisibilityProperty));
 
             storyboard.Children.Add(visibilityAnimation);
+
+            //Texteffect
+            TextEffect effect = new TextEffect();
+
+            // Tell the effect which character 
+            // it applies to in the text.
+            effect.PositionStart = 0;
+            effect.PositionCount = t.Text.Length;
+
+            TransformGroup transGrp = new TransformGroup();
+            transGrp.Children.Add(new TranslateTransform());
+            transGrp.Children.Add(new RotateTransform());
+            effect.Transform = transGrp;
+
+            t.TextEffects.Add(effect);
+
+            DoubleAnimation anim = (DoubleAnimation) this.FindResource("CharacterWaveAnimation");
+
+            anim.BeginTime = TimeSpan.FromSeconds(c.Duration);
+
+            string path = //String.Format(
+                "TextEffects[0].Transform.Children[0].Y"
+                //,charIndex);
+                ;
+
+            PropertyPath propPath = new PropertyPath(path);
+            Storyboard.SetTargetName(anim,t.Name);
+            Storyboard.SetTargetProperty(anim, propPath);
+
+            storyboard.Children.Add(anim);
         }
     }
 }
