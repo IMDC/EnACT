@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -79,14 +81,17 @@ namespace Player.Controls
 
             storyboard.Children.Add(visibilityAnimation);
 
+            /*
             //Texteffect
-            TextEffect effect = new TextEffect();
+            TextEffect effect = new TextEffect
+            {
+                PositionStart = 0, 
+                PositionCount = t.Text.Length,
+            };
 
             // Tell the effect which character 
             // it applies to in the text.
-            effect.PositionStart = 0;
-            effect.PositionCount = t.Text.Length;
-
+            
             TransformGroup transGrp = new TransformGroup();
             transGrp.Children.Add(new TranslateTransform());
             transGrp.Children.Add(new RotateTransform());
@@ -108,6 +113,53 @@ namespace Player.Controls
             Storyboard.SetTargetProperty(anim, propPath);
 
             storyboard.Children.Add(anim);
+             */
+
+            TextEffect e1 = new TextEffect
+            {
+                PositionStart = 0,
+                PositionCount = t.Text.Length,
+            };
+
+
+            var formattedText = new FormattedText(
+                t.Text,
+                CultureInfo.CurrentUICulture,
+                FlowDirection.LeftToRight,
+                new Typeface(t.FontFamily, t.FontStyle, t.FontWeight, t.FontStretch),
+                t.FontSize,
+                Brushes.Black);
+
+            ScaleTransform st = new ScaleTransform 
+            {
+                CenterX = formattedText.Width/2,
+                CenterY = formattedText.Height,
+            };
+            e1.Transform = st;
+
+            t.TextEffects.Add(e1);
+
+            DoubleAnimation d1 = new DoubleAnimation()
+            {
+                BeginTime = TimeSpan.FromSeconds(c.Begin),
+                Duration = TimeSpan.FromSeconds(0.6/2),
+                From = 0.5,
+                To = 1.3,
+                AutoReverse = true,
+            };
+
+            Storyboard.SetTargetName(d1,t.Name);
+            Storyboard.SetTargetProperty(d1, new PropertyPath("TextEffects[0].Transform.ScaleX"));
+
+            storyboard.Children.Add(d1);
+
+            //Make second animation for y scale
+            DoubleAnimation d2 = d1.Clone();
+
+            Storyboard.SetTargetName(d2, t.Name);
+            Storyboard.SetTargetProperty(d2, new PropertyPath("TextEffects[0].Transform.ScaleY"));
+
+            storyboard.Children.Add(d2);
         }
     }
 }
