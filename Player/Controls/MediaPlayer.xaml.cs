@@ -139,14 +139,24 @@ namespace Player.Controls
 
             t.TextEffects.Add(e1);
 
-            DoubleAnimation d1 = new DoubleAnimation()
+            //DoubleAnimation d1 = new DoubleAnimation()
+            //{
+            //    BeginTime = TimeSpan.FromSeconds(c.Begin),
+            //    Duration = TimeSpan.FromSeconds(0.6/2),
+            //    From = 0.5,
+            //    To = 1.3,
+            //    AutoReverse = true,
+            //};
+
+            DoubleAnimationUsingKeyFrames d1 = new DoubleAnimationUsingKeyFrames
             {
                 BeginTime = TimeSpan.FromSeconds(c.Begin),
-                Duration = TimeSpan.FromSeconds(0.6/2),
-                From = 0.5,
-                To = 1.3,
-                AutoReverse = true,
+                Duration = TimeSpan.FromSeconds(0.6 / 2),
             };
+
+            d1.KeyFrames.Add(new LinearDoubleKeyFrame(0.5, KeyTime.FromPercent(0)));
+            d1.KeyFrames.Add(new LinearDoubleKeyFrame(1.3, KeyTime.FromPercent(0.5)));
+            d1.KeyFrames.Add(new LinearDoubleKeyFrame(1, KeyTime.FromPercent(1)));
 
             Storyboard.SetTargetName(d1,t.Name);
             Storyboard.SetTargetProperty(d1, new PropertyPath("TextEffects[0].Transform.ScaleX"));
@@ -154,7 +164,8 @@ namespace Player.Controls
             storyboard.Children.Add(d1);
 
             //Make second animation for y scale
-            DoubleAnimation d2 = d1.Clone();
+            //DoubleAnimation d2 = d1.Clone();
+            DoubleAnimationUsingKeyFrames d2 = d1.Clone();
 
             Storyboard.SetTargetName(d2, t.Name);
             Storyboard.SetTargetProperty(d2, new PropertyPath("TextEffects[0].Transform.ScaleY"));
