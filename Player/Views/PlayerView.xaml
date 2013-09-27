@@ -73,6 +73,13 @@
                 Orientation="Horizontal"
                 HorizontalAlignment="Center"
                 DockPanel.Dock="Bottom">
+                <Slider 
+                    Width="100"
+                    Minimum="0"
+                    Maximum="1"
+                    Value="{Binding Path=Volume, ElementName=Player}"
+                    Style="{StaticResource ControlPanelStyle}"
+                    />
                 <Button
                     x:Name="ButtonRewind"
                     Content="Rewind"

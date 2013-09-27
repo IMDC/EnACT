@@ -12,6 +12,15 @@ namespace Player.Controls
     /// </summary>
     public partial class MediaPlayer : UserControl
     {
+        /// <summary>
+        /// Volume property. Wraps the Media.Volume property so that it can be binded.
+        /// </summary>
+        public double Volume
+        {
+            get { return Media.Volume; }
+            set { Media.Volume = value; }
+        }
+
         public MediaPlayer()
         {
             InitializeComponent();
