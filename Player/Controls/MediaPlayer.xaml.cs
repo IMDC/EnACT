@@ -83,6 +83,7 @@ namespace Player.Controls
 
             //Duration for all animations
             Duration duration = TimeSpan.FromSeconds(0.6);
+            Duration halfDuration = TimeSpan.FromSeconds(0.6/2);
 
             TextEffect e1 = new TextEffect
             {
@@ -147,13 +148,39 @@ namespace Player.Controls
             };
 
             d3.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromPercent(0)));
-            d3.KeyFrames.Add(new LinearDoubleKeyFrame(-60, KeyTime.FromPercent(0.5)));
+            d3.KeyFrames.Add(new LinearDoubleKeyFrame(-10, KeyTime.FromPercent(0.5)));
             d3.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromPercent(1)));
 
             Storyboard.SetTargetName(d3, t.Name);
             Storyboard.SetTargetProperty(d3, new PropertyPath("TextEffects[1].Transform.Y"));
 
             storyboard.Children.Add(d3);
+
+            //alpha effect
+            TextEffect e3 = new TextEffect()
+            {
+                PositionStart = 0,
+                PositionCount = t.Text.Length,
+            };
+
+            e3.Foreground = new SolidColorBrush(Colors.White);
+            
+            t.TextEffects.Add(e3);
+
+            ColorAnimationUsingKeyFrames c1 = new ColorAnimationUsingKeyFrames
+            {
+                BeginTime = TimeSpan.FromSeconds(c.Begin),
+                Duration = duration,
+            };
+
+            c1.KeyFrames.Add(new LinearColorKeyFrame(Colors.White, KeyTime.FromPercent(0)));
+            c1.KeyFrames.Add(new LinearColorKeyFrame(Color.FromArgb(100, 255, 255, 255), KeyTime.FromPercent(0.5)));
+            c1.KeyFrames.Add(new LinearColorKeyFrame(Colors.White, KeyTime.FromPercent(1)));
+
+            Storyboard.SetTargetName(c1, t.Name);
+            Storyboard.SetTargetProperty(c1, new PropertyPath("TextEffects[2].Foreground." + SolidColorBrush.ColorProperty.ToString()));
+
+            storyboard.Children.Add(c1);
         }
     }
 }
