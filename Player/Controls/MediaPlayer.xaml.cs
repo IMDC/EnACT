@@ -81,39 +81,8 @@ namespace Player.Controls
 
             storyboard.Children.Add(visibilityAnimation);
 
-            /*
-            //Texteffect
-            TextEffect effect = new TextEffect
-            {
-                PositionStart = 0, 
-                PositionCount = t.Text.Length,
-            };
-
-            // Tell the effect which character 
-            // it applies to in the text.
-            
-            TransformGroup transGrp = new TransformGroup();
-            transGrp.Children.Add(new TranslateTransform());
-            transGrp.Children.Add(new RotateTransform());
-            effect.Transform = transGrp;
-
-            t.TextEffects.Add(effect);
-
-            DoubleAnimation anim = (DoubleAnimation) this.FindResource("CharacterWaveAnimation");
-
-            anim.BeginTime = TimeSpan.FromSeconds(c.Duration);
-
-            string path = //String.Format(
-                "TextEffects[0].Transform.Children[0].Y"
-                //,charIndex);
-                ;
-
-            PropertyPath propPath = new PropertyPath(path);
-            Storyboard.SetTargetName(anim,t.Name);
-            Storyboard.SetTargetProperty(anim, propPath);
-
-            storyboard.Children.Add(anim);
-             */
+            //Duration for all animations
+            Duration duration = TimeSpan.FromSeconds(0.6);
 
             TextEffect e1 = new TextEffect
             {
@@ -139,19 +108,10 @@ namespace Player.Controls
 
             t.TextEffects.Add(e1);
 
-            //DoubleAnimation d1 = new DoubleAnimation()
-            //{
-            //    BeginTime = TimeSpan.FromSeconds(c.Begin),
-            //    Duration = TimeSpan.FromSeconds(0.6/2),
-            //    From = 0.5,
-            //    To = 1.3,
-            //    AutoReverse = true,
-            //};
-
             DoubleAnimationUsingKeyFrames d1 = new DoubleAnimationUsingKeyFrames
             {
                 BeginTime = TimeSpan.FromSeconds(c.Begin),
-                Duration = TimeSpan.FromSeconds(0.6 / 2),
+                Duration = duration,
             };
 
             d1.KeyFrames.Add(new LinearDoubleKeyFrame(0.5, KeyTime.FromPercent(0)));
@@ -164,13 +124,36 @@ namespace Player.Controls
             storyboard.Children.Add(d1);
 
             //Make second animation for y scale
-            //DoubleAnimation d2 = d1.Clone();
             DoubleAnimationUsingKeyFrames d2 = d1.Clone();
 
             Storyboard.SetTargetName(d2, t.Name);
             Storyboard.SetTargetProperty(d2, new PropertyPath("TextEffects[0].Transform.ScaleY"));
 
             storyboard.Children.Add(d2);
+
+            TextEffect e2 = new TextEffect //Yfinish effect
+            {
+                PositionStart = 0,
+                PositionCount = t.Text.Length,
+                Transform = new TranslateTransform(),
+            };
+
+            t.TextEffects.Add(e2);
+
+            DoubleAnimationUsingKeyFrames d3 = new DoubleAnimationUsingKeyFrames
+            {
+                BeginTime = TimeSpan.FromSeconds(c.Begin),
+                Duration = duration,
+            };
+
+            d3.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromPercent(0)));
+            d3.KeyFrames.Add(new LinearDoubleKeyFrame(-60, KeyTime.FromPercent(0.5)));
+            d3.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromPercent(1)));
+
+            Storyboard.SetTargetName(d3, t.Name);
+            Storyboard.SetTargetProperty(d3, new PropertyPath("TextEffects[1].Transform.Y"));
+
+            storyboard.Children.Add(d3);
         }
     }
 }
