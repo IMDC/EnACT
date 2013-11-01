@@ -73,17 +73,62 @@ namespace EnACT.Core
         /// <summary>
         /// The path of the script supplied by the user, if given.
         /// </summary>
-        public string ScriptPath { set; get; }
+        public string ExternalScriptPath { set; get; }
 
         /// <summary>
         /// The path of the video supplied by the user.
         /// </summary>
-        public string VideoPath { set; get; }
+        public string ExternalVideoPath { set; get; }
 
         /// <summary>
         /// The path of this project directory on the computer.
         /// </summary>
         public string DirectoryPath { set; get; }
+
+        /// <summary>
+        /// The captions file used by this project.
+        /// </summary>
+        public ProjectFile CaptionsFile { private set; get; }
+
+        /// <summary>
+        /// The captions file used by this project.
+        /// </summary>
+        public ProjectFile EditorEngineFile { private set; get; }
+
+        /// <summary>
+        /// The engine file used by this project.
+        /// </summary>
+        public ProjectFile EngineFile { private set; get; }
+
+        /// <summary>
+        /// The engine Skin File file used by this project.
+        /// </summary>
+        public ProjectFile EngineSkinFile { private set; get; }
+
+        /// <summary>
+        /// The project file used by this project.
+        /// </summary>
+        public ProjectFile ProjectFile { private set; get; }
+
+        /// <summary>
+        /// The settings file used by this project.
+        /// </summary>
+        public ProjectFile SettingsFile { private set; get; }
+
+        /// <summary>
+        /// The speakers file used by this project.
+        /// </summary>
+        public ProjectFile SpeakersFile { private set; get; }
+
+        /// <summary>
+        /// The unifiedxml file used by this project.
+        /// </summary>
+        public ProjectFile UnifiedXmlFile { private set; get; }
+
+        /// <summary>
+        /// The video file used by this project.
+        /// </summary>
+        public ProjectFile VideoFile { private set; get; }
         #endregion Fields and Properties
 
         #region Constructor
@@ -100,27 +145,38 @@ namespace EnACT.Core
         /// Constructs a Project WITH a given script path.
         /// </summary>
         /// <param name="name">Name of the project and directory.</param>
-        /// <param name="scriptPath">Path of the script to use.</param>
+        /// <param name="externalScriptPath">Path of the script to use.</param>
         /// <param name="videoPath">The path of the video supplied by the user.</param>
         /// <param name="projectPath">The path that the project directory will be placed in.</param>
-        public ProjectInfo(string name, string scriptPath, string videoPath, string projectPath)
-            : this(name, scriptPath, true, videoPath, projectPath) { }
+        public ProjectInfo(string name, string externalScriptPath, string videoPath, string projectPath)
+            : this(name, externalScriptPath, true, videoPath, projectPath) { }
 
         /// <summary>
         /// Constructs a Project with the specified parameters.
         /// </summary>
         /// <param name="name">Name of the project and directory.</param>
-        /// <param name="scriptPath">Path of the script to use.</param>
+        /// <param name="externalScriptPath">Path of the script to use.</param>
         /// <param name="useExistingScript">Whether or not a script has been supplied</param>
-        /// <param name="videoPath">The path of the video supplied by the user.</param>
+        /// <param name="externalVideoPath">The path of the video supplied by the user.</param>
         /// <param name="projectPath">The path that the project directory will be placed in.</param>
-        private ProjectInfo(string name, string scriptPath, bool useExistingScript, string videoPath, string projectPath)
+        private ProjectInfo(string name, string externalScriptPath, bool useExistingScript, string externalVideoPath, string projectPath)
         {
             this.Name = name;
-            this.ScriptPath = scriptPath;
+            this.ExternalScriptPath = externalScriptPath;
             this.UseExistingScript = useExistingScript;
-            this.VideoPath = videoPath;
+            this.ExternalVideoPath = externalVideoPath;
             this.DirectoryPath = projectPath;
+
+            //Create project files
+            CaptionsFile = new ProjectFile(DirectoryPath,CaptionsFileName);
+            EditorEngineFile = new ProjectFile(DirectoryPath, EditorEngineFileName);
+            EngineFile = new ProjectFile(DirectoryPath, EngineFileName);
+            EngineSkinFile = new ProjectFile(DirectoryPath, EngineSkinName);
+            ProjectFile = new ProjectFile(DirectoryPath, Name + ProjectExtension);
+            SettingsFile = new ProjectFile(DirectoryPath, SettingsFileName);
+            SpeakersFile = new ProjectFile(DirectoryPath, SpeakersFileName);
+            UnifiedXmlFile = new ProjectFile(DirectoryPath, "engine" + ProjectInfo.EngineXmlExtension);
+            VideoFile = new ProjectFile(DirectoryPath, "video.flv");
 
             //Construct Core data structures
             this.SpeakerSet  = Utilities.ConstructSpeakerSet();

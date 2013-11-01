@@ -540,7 +540,7 @@ namespace EnACT.Forms
                 Properties.Resources.SkinOverPlayFullscreen);
 
             //Copy video to project folder
-            try{File.Copy(ProjectInfo.VideoPath, Path.Combine(ProjectInfo.DirectoryPath, "video.flv"));}
+            try{File.Copy(ProjectInfo.ExternalVideoPath, Path.Combine(ProjectInfo.DirectoryPath, "video.flv"));}
             catch (Exception){} //Nothing
         }
 

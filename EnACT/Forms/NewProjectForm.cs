@@ -70,7 +70,7 @@ namespace EnACT.Forms
         }
 
         /// <summary>
-        /// When checked, disables the ScriptPath controls and signals the program not to import a
+        /// When checked, disables the ExternalScriptPath controls and signals the program not to import a
         /// script/transcript file.
         /// </summary>
         /// <param name="sender">Sender</param>
@@ -136,20 +136,20 @@ namespace EnACT.Forms
             {
                 try //Attempt to parse file.
                 {
-                    var tuple = ScriptParser.Parse(ProjectInfo.ScriptPath);
+                    var tuple = ScriptParser.Parse(ProjectInfo.ExternalScriptPath);
                     ProjectInfo.CaptionList = tuple.Item1;
                     ProjectInfo.SpeakerSet = tuple.Item2;
                 }
                 catch (FormatException)
                 {
                     MessageBox.Show("Error trying to read in script file. " + ProjectInfo.DirectoryPath +
-                        " has an invalid file extension.", "Error: " + ProjectInfo.ScriptPath);
+                        " has an invalid file extension.", "Error: " + ProjectInfo.ExternalScriptPath);
                     return;
                 }
                 catch (Exception)
                 {
                     MessageBox.Show("Error trying to read in script file. File is either corrupted or not named with" +
-                        "the correct file extension.", "Error: " + ProjectInfo.ScriptPath);
+                        "the correct file extension.", "Error: " + ProjectInfo.ExternalScriptPath);
                     return;
                 }
             }

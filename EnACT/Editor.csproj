@@ -124,6 +124,7 @@
     <Compile Include="Core\ProjectInfo.cs" />
     <Compile Include="Forms\NewProjectFormEventArguments.cs" />
     <Compile Include="Core\XMLReader.cs" />
+    <Compile Include="Core\ProjectFile.cs" />
     <Compile Include="Miscellaneous\Paths.cs" />
     <Compile Include="Controls\PlayheadLabel.cs">
       <SubType>Component</SubType>

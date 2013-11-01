@@ -469,7 +469,7 @@ namespace EnACT.Core
                     w.WriteEndElement();
 
                     w.WriteStartElement("video");
-                    w.WriteString(project.VideoPath);
+                    w.WriteString(project.ExternalVideoPath);
                     w.WriteEndElement();
 
                     w.WriteStartElement("settings");
