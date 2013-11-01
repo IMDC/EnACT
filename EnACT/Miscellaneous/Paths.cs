@@ -2,6 +2,8 @@
 {
     public static class Paths
     {
+        public const string BlankSwf = @"C:\Test\blank.swf";
+
         public static readonly string EditorEngine
             = @"C:\Test\EditorEngine.swf";
 

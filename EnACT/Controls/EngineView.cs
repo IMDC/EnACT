@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml;
 using AxShockwaveFlashObjects;
+using EnACT.Miscellaneous;
 
 namespace EnACT.Controls
 {
@@ -17,6 +18,23 @@ namespace EnACT.Controls
         public EngineView() : base()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Reloads the located at the given path.
+        /// </summary>
+        /// <param name="path">The path of the swf to load.</param>
+        public void ReloadMovie(string path)
+        {
+            //Remember play head time
+            double time = GetPlayheadTime();
+
+            //Load blank and then specified swfs
+            LoadMovie(0,Paths.BlankSwf);
+            LoadMovie(0,path);
+
+            //Return to playhead time
+            SetPlayHeadTime(time);
         }
 
         /// <summary>

@@ -128,7 +128,7 @@ namespace EnACT.Forms
         private void InitVideoPlayer()
         {
             //This method can not be called in the EngineView constructor, so we will call it here.
-            EngineView.LoadMovie(0, Paths.EditorEngine);
+            EngineView.LoadMovie(0, Paths.BlankSwf);
         }
 
         /// <summary>
@@ -607,14 +607,15 @@ namespace EnACT.Forms
 
         private void Button_ReloadVideo_Click(object sender, EventArgs e)
         {
+            /* What is happening here is that the video is paused, then all of the captions are 
+             * saved to file. The EngineView is then loaded with a new .swf file, called 
+             * "blank.swf". This is so that all of the captions dissapear and are reset on reload.
+             * It seems that just calling the loadmovie function once does not seem to work when 
+             * loading the same swf file successively, so here is a hackish workaround.
+             */
             Pause();
             saveProjectToolStripMenuItem_Click(this, EventArgs.Empty);
-
-            //TODO make blank swf file
-            double time = EngineView.GetPlayheadTime(); //Preserve time
-            EngineView.LoadMovie(0, Paths.EditorEngine);
-            EngineView.LoadMovie(0, Path.Combine(ProjectInfo.DirectoryPath, ProjectInfo.EditorEngineFileName));
-            EngineView.SetPlayHeadTime(time);
+            EngineView.ReloadMovie(ProjectInfo.EditorEngineFile.AbsolutePath);
         }
     }//Class
 }//Namespace
