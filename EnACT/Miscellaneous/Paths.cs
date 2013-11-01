@@ -3,7 +3,7 @@
     public static class Paths
     {
         public static readonly string EditorEngine
-            = @"C:\Test\Engine.swf";
+            = @"C:\Test\EditorEngine.swf";
 
         public static readonly string TestScript = @"C:\Users\imdc\Documents\enact\Testing\testScript.txt";
 

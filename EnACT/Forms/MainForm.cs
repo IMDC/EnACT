@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using EnACT.Controls;
 using EnACT.Core;
 using EnACT.Miscellaneous;
 using LibEnACT;
@@ -604,5 +605,16 @@ namespace EnACT.Forms
         }
         #endregion
 
+        private void Button_ReloadVideo_Click(object sender, EventArgs e)
+        {
+            Pause();
+            saveProjectToolStripMenuItem_Click(this, EventArgs.Empty);
+
+            //TODO make blank swf file
+            double time = EngineView.GetPlayheadTime(); //Preserve time
+            EngineView.LoadMovie(0, Paths.EditorEngine);
+            EngineView.LoadMovie(0, Path.Combine(ProjectInfo.DirectoryPath, ProjectInfo.EditorEngineFileName));
+            EngineView.SetPlayHeadTime(time);
+        }
     }//Class
 }//Namespace
