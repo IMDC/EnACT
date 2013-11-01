@@ -516,32 +516,26 @@ namespace EnACT.Forms
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO Refactor this method
-
             //Write Project and Engine files
             EnactXMLWriter.WriteProject(ProjectInfo);
-            EnactXMLWriter.WriteEngineXml(ProjectInfo, Path.Combine(ProjectInfo.DirectoryPath, 
-                "engine" + ProjectInfo.EngineXmlExtension));
+            EnactXMLWriter.WriteEngineXml(ProjectInfo, ProjectInfo.UnifiedXmlFile.AbsolutePath);
 
             //Write three engine xml files
-            EnactXMLWriter.WriteCaptions(CaptionList,Path.Combine(ProjectInfo.DirectoryPath,
-                ProjectInfo.CaptionsFileName));
-            EnactXMLWriter.WriteSettings(Settings,Path.Combine(ProjectInfo.DirectoryPath,
-                ProjectInfo.SettingsFileName));
-            EnactXMLWriter.WriteSpeakers(SpeakerSet,Path.Combine(ProjectInfo.DirectoryPath,
-                ProjectInfo.SpeakersFileName));
+            EnactXMLWriter.WriteCaptions(CaptionList, ProjectInfo.CaptionsFile.AbsolutePath);
+            EnactXMLWriter.WriteSettings(Settings, ProjectInfo.SettingsFile.AbsolutePath);
+            EnactXMLWriter.WriteSpeakers(SpeakerSet, ProjectInfo.SpeakersFile.AbsolutePath);
 
             //Copy engine to project folder
-            File.WriteAllBytes(Path.Combine(ProjectInfo.DirectoryPath,ProjectInfo.EngineFileName),
-                Properties.Resources.Engine);
-            File.WriteAllBytes(Path.Combine(ProjectInfo.DirectoryPath,
-                ProjectInfo.EditorEngineFileName), Properties.Resources.EditorEngine);
-            File.WriteAllBytes(Path.Combine(ProjectInfo.DirectoryPath, ProjectInfo.EngineSkinName),
-                Properties.Resources.SkinOverPlayFullscreen);
+            File.WriteAllBytes(ProjectInfo.EngineFile.AbsolutePath,Properties.Resources.Engine);
+            File.WriteAllBytes(ProjectInfo.EngineSkinFile.AbsolutePath,Properties.Resources.SkinOverPlayFullscreen);
+            File.WriteAllBytes(ProjectInfo.EditorEngineFile.AbsolutePath,Properties.Resources.EditorEngine);
 
             //Copy video to project folder
-            try{File.Copy(ProjectInfo.ExternalVideoPath, Path.Combine(ProjectInfo.DirectoryPath, "video.flv"));}
-            catch (Exception){} //Nothing
+            if (!File.Exists(ProjectInfo.VideoFile.AbsolutePath))
+            {
+                try { File.Copy(ProjectInfo.ExternalVideoPath, ProjectInfo.VideoFile.AbsolutePath); }
+                catch (Exception ex) { Console.WriteLine(ex.StackTrace); } //Nothing
+            }
         }
 
         private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e)
