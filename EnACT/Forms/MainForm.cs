@@ -294,10 +294,7 @@ namespace EnACT.Forms
 
         private void debugMethodToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (CaptionView.UserInputEnabled)
-            //    CaptionView.UserInputEnabled = false;
-            //else
-            //    CaptionView.UserInputEnabled = true;
+            EngineView.LoadMovie(0, Path.Combine(ProjectInfo.DirectoryPath, ProjectInfo.EditorEngineFileName));
         }
         #endregion Debug Menu Items
 
@@ -512,13 +509,39 @@ namespace EnACT.Forms
             //Only read in file of OK button was pressed
             if (result == DialogResult.OK)
                 ProjectInfo = XMLReader.ParseProject(OpenProjectDialog.FileName);
+
+            //Load the video
+            EngineView.LoadMovie(0, Path.Combine(ProjectInfo.DirectoryPath, ProjectInfo.EditorEngineFileName));
         }
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //TODO Refactor this method
+
+            //Write Project and Engine files
             EnactXMLWriter.WriteProject(ProjectInfo);
             EnactXMLWriter.WriteEngineXml(ProjectInfo, Path.Combine(ProjectInfo.DirectoryPath, 
                 "engine" + ProjectInfo.EngineXmlExtension));
+
+            //Write three engine xml files
+            EnactXMLWriter.WriteCaptions(CaptionList,Path.Combine(ProjectInfo.DirectoryPath,
+                ProjectInfo.CaptionsFileName));
+            EnactXMLWriter.WriteSettings(Settings,Path.Combine(ProjectInfo.DirectoryPath,
+                ProjectInfo.SettingsFileName));
+            EnactXMLWriter.WriteSpeakers(SpeakerSet,Path.Combine(ProjectInfo.DirectoryPath,
+                ProjectInfo.SpeakersFileName));
+
+            //Copy engine to project folder
+            File.WriteAllBytes(Path.Combine(ProjectInfo.DirectoryPath,ProjectInfo.EngineFileName),
+                Properties.Resources.Engine);
+            File.WriteAllBytes(Path.Combine(ProjectInfo.DirectoryPath,
+                ProjectInfo.EditorEngineFileName), Properties.Resources.EditorEngine);
+            File.WriteAllBytes(Path.Combine(ProjectInfo.DirectoryPath, ProjectInfo.EngineSkinName),
+                Properties.Resources.SkinOverPlayFullscreen);
+
+            //Copy video to project folder
+            try{File.Copy(ProjectInfo.VideoPath, Path.Combine(ProjectInfo.DirectoryPath, "video.flv"));}
+            catch (Exception){} //Nothing
         }
 
         private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -582,6 +605,8 @@ namespace EnACT.Forms
 
             //Save project by calling the SaveProject menu item click handler.
             saveProjectToolStripMenuItem.PerformClick();
+
+            EngineView.LoadMovie(0,Path.Combine(ProjectInfo.DirectoryPath,ProjectInfo.EditorEngineFileName));
         }
         #endregion
 

@@ -24,6 +24,23 @@ namespace EnACT.Core
         /// The extension for Engine XML files.
         /// </summary>
         public const string EngineXmlExtension = ".enact";
+
+        /// <summary>
+        /// The name of the engine file
+        /// </summary>
+        public const string EngineFileName = "Engine.swf";
+        /// <summary>
+        /// The name of the engine file meant for the editor
+        /// </summary>
+        public const string EditorEngineFileName = "EditorEngine.swf";
+        /// <summary>
+        /// The name of the skin file required by Engine.swf
+        /// </summary>
+        public const string EngineSkinName = "SkinOverPlayFullscreen.swf";
+
+        public const string SpeakersFileName = "speakers.xml";
+        public const string SettingsFileName = "Settings.xml";
+        public const string CaptionsFileName = "dialogues.xml";
         #endregion
 
         #region Fields and Properties

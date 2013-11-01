@@ -120,7 +120,7 @@ namespace LibEnACT
         /// <summary>
         /// Constructs a Skin object with a default src of "SkinOverPlayMute.swf".
         /// </summary>
-        public Skin() : this("SkinOverPlayMute.swf"){}  //Default constructor
+        public Skin() : this("SkinOverPlayFullscreen.swf") { }  //Default constructor
 
         /// <summary>
         /// Constructs a Skin object with a given name for the file of the skin.
