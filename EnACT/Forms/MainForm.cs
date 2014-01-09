@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using EnACT.Controls;
 using EnACT.Core;
 using EnACT.Miscellaneous;
+using EnACT.Properties;
 using LibEnACT;
 using XMLReader = EnACT.Core.XMLReader;
 
@@ -81,6 +82,9 @@ namespace EnACT.Forms
         {
             InitializeComponent();
 
+            //Copy All .swfs into .exe directory
+            InitSwfs();
+
             ProjectInfo = ProjectInfo.NoProject;
 
             //Hook Up Controller Events
@@ -108,6 +112,16 @@ namespace EnACT.Forms
 
             //Make CaptionTextBox read only
             this.CaptionTextBox.ReadOnly = true;
+        }
+
+        /// <summary>
+        /// Copies the base swfs into the application's folder.
+        /// </summary>
+        private void InitSwfs()
+        {
+            //Copy engine to application folder
+            File.WriteAllBytes(Paths.BlankSwf, Resources.blank);
+            File.WriteAllBytes(Paths.EditorEngine, Resources.EditorEngine);
         }
 
         /// <summary>
@@ -295,7 +309,8 @@ namespace EnACT.Forms
 
         private void debugMethodToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EngineView.LoadMovie(0, Path.Combine(ProjectInfo.DirectoryPath, ProjectInfo.EditorEngineFileName));
+            //EngineView.LoadMovie(0, Path.Combine(ProjectInfo.DirectoryPath, ProjectInfo.EditorEngineFileName));
+            //Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
         }
         #endregion Debug Menu Items
 
