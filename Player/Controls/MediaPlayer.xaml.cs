@@ -34,10 +34,8 @@ namespace Player.Controls
             TextBlock t = new CaptionTextBlock(c, "Item" + CaptionGrid.Children.Count);
 
             int captionIndex = CaptionGrid.Children.Add(t);
-            Grid.SetRow(t,GridLocation.BottomCentre.Row);
-            Grid.SetRowSpan(t,GridLocation.BottomCentre.RowSpan);
-            Grid.SetColumn(t, GridLocation.BottomCentre.Column);
-            Grid.SetColumnSpan(t, GridLocation.BottomCentre.ColumnSpan);
+
+            SetCaptionPosition(t);
 
             //Give the control a name so that it can be used by the storyboard.
             this.RegisterName(t.Name,t); 
@@ -161,6 +159,19 @@ namespace Player.Controls
             Storyboard.SetTargetProperty(c1, new PropertyPath("TextEffects[2].Foreground." + SolidColorBrush.ColorProperty.ToString()));
 
             storyboard.Children.Add(c1);
+        }
+
+        /// <summary>
+        /// Sets the position of the given caption on a grid.
+        /// </summary>
+        /// <param name="t">The caption texblock to set the position of.</param>
+        private void SetCaptionPosition(TextBlock t)
+        {
+            //TODO base off of caption's given location
+            Grid.SetRow(t, GridLocation.BottomCentre.Row);
+            Grid.SetRowSpan(t, GridLocation.BottomCentre.RowSpan);
+            Grid.SetColumn(t, GridLocation.BottomCentre.Column);
+            Grid.SetColumnSpan(t, GridLocation.BottomCentre.ColumnSpan);
         }
     }
 }
