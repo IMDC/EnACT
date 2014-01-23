@@ -69,6 +69,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AnimationSet.cs" />
     <Compile Include="Controls\CaptionTextBlock.cs" />
     <Compile Include="Controls\StatefulMediaElement.cs" />
     <Compile Include="Controls\IMediaPlayer.cs" />
