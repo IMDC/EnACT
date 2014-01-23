@@ -35,7 +35,8 @@
             x:Name="Media"
             LoadedBehavior="Manual"
             HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch" 
+            VerticalAlignment="Stretch"
+            Volume="0"
             Grid.RowSpan="3"
             Grid.ColumnSpan="3"
             Grid.ZIndex="0"/>
