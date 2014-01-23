@@ -30,28 +30,8 @@ namespace Player.Controls
 
         public void AddCaption(Caption c)
         {
-            TextBlock t = new TextBlock
-            {   
-                //Name t so that it is unique
-                Name = "Item" + CaptionGrid.Children.Count.ToString(), //Named in form of ItemXX
-                Text = c.ToString(),
-
-                //Confugure Speaker settings
-                FontSize   = c.Speaker.Font.Size,
-                FontFamily = new FontFamily(c.Speaker.Font.Family),
-
-                //Set Background and Foreground Colours
-                Background = Brushes.Black,
-                Foreground = Brushes.White,
-
-                //TODO Set alignment based on Caption Alignment
-                //Set Alignments
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment   = VerticalAlignment.Center,
-
-                //By default make t hidden
-                Visibility = Visibility.Hidden,
-            };
+            //Create a new CaptionTextBlock with a unique name in the form "ItemXX"
+            TextBlock t = new CaptionTextBlock(c, "Item" + CaptionGrid.Children.Count);
 
             int captionIndex = CaptionGrid.Children.Add(t);
             Grid.SetRow(t,GridLocation.BottomCentre.Row);

@@ -69,6 +69,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\CaptionTextBlock.cs" />
     <Compile Include="Controls\StatefulMediaElement.cs" />
     <Compile Include="Controls\IMediaPlayer.cs" />
     <Compile Include="GridLocation.cs" />
