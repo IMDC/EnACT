@@ -65,11 +65,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Animations\AngerWordAnimation.cs" />
+    <Compile Include="Animations\FearWordAnimation.cs" />
+    <Compile Include="Animations\HappyWordAnimation.cs" />
+    <Compile Include="Animations\SadWordAnimation.cs" />
+    <Compile Include="Animations\WordAnimationFactory.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AnimationSet.cs" />
+    <Compile Include="Animations\WordAnimation.cs" />
     <Compile Include="Controls\CaptionTextBlock.cs" />
     <Compile Include="Controls\StatefulMediaElement.cs" />
     <Compile Include="Controls\IMediaPlayer.cs" />

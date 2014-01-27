@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using LibEnACT;
+using Player.Animations;
 
 namespace Player.Controls
 {
@@ -59,19 +60,14 @@ namespace Player.Controls
 
             storyboard.Children.Add(visibilityAnimation);
 
-            AnimationSet a = new AnimationSet(c, t);
-
-            /*
-            foreach (TextEffect effect in a.TextEffects)
+            foreach (CaptionWord w in c.Words)
             {
-                t.TextEffects.Add(effect);
-            }
+                //Skip words with no emotion in them
+                if(w.Emotion == Emotion.None || w.Emotion == Emotion.Unknown)
+                    continue;
 
-            foreach (AnimationTimeline animation in a.Animations)
-            {
-                storyboard.Children.Add(animation);
+                WordAnimation a = WordAnimationFactory.CreateWordAnimation(w,t);
             }
-            //*/
         }
 
         /// <summary>
