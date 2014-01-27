@@ -24,7 +24,7 @@ namespace Player.Animations
         /// </summary>
         public List<AnimationTimeline> Animations;
 
-        public WordAnimation(CaptionWord w, Caption c, TextBlock t)
+        public WordAnimation(CaptionWord w, int beginIndex, Caption c, TextBlock t)
         {
             //Construct lists
             TextEffects = new List<TextEffect>();

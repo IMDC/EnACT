@@ -11,7 +11,7 @@ namespace Player.Animations
 {
     public class WordAnimationFactory
     {
-        public static WordAnimation CreateWordAnimation(CaptionWord w, Caption c, TextBlock t)
+        public static WordAnimation CreateWordAnimation(CaptionWord w, int beginIndex, Caption c, TextBlock t)
         {
             WordAnimation animation;
 
@@ -20,7 +20,7 @@ namespace Player.Animations
             switch (w.Emotion)
             {
                 case Emotion.Happy:
-                    animation = new HappyWordAnimation(w,c,t);
+                    animation = new HappyWordAnimation(w,beginIndex,c,t);
                     break;
                 case Emotion.Sad:
                     break;

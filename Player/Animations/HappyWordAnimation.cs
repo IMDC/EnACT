@@ -22,7 +22,7 @@ namespace Player.Animations
         /// <param name="w">The CaptionWord to base the animation off of.</param>
         /// <param name="c">The Caption that the CaptionWord belongs to.</param>
         /// <param name="t">The Textblock that this animation will be applied to.</param>
-        public HappyWordAnimation(CaptionWord w, Caption c, TextBlock t) : base(w, c, t)
+        public HappyWordAnimation(CaptionWord w, int beginIndex, Caption c, TextBlock t) : base(w, beginIndex, c, t)
         {
             //Duration for all animations
             Duration duration = TimeSpan.FromSeconds(0.6);
@@ -30,12 +30,12 @@ namespace Player.Animations
 
             TextEffect e1 = new TextEffect
             {
-                PositionStart = 0,
-                PositionCount = t.Text.Length,
+                PositionStart = beginIndex,
+                PositionCount = w.Length,
             };
 
             var formattedText = new FormattedText(
-                t.Text,
+                w.Text,
                 CultureInfo.CurrentUICulture,
                 FlowDirection.LeftToRight,
                 new Typeface(t.FontFamily, t.FontStyle, t.FontWeight, t.FontStretch),
@@ -70,8 +70,8 @@ namespace Player.Animations
 
             TextEffect e2 = new TextEffect //Yfinish effect
             {
-                PositionStart = 0,
-                PositionCount = t.Text.Length,
+                PositionStart = beginIndex,
+                PositionCount = w.Length,
                 Transform = new TranslateTransform(),
             };
 
@@ -92,8 +92,8 @@ namespace Player.Animations
             //alpha effect
             TextEffect e3 = new TextEffect()
             {
-                PositionStart = 0,
-                PositionCount = t.Text.Length,
+                PositionStart = beginIndex,
+                PositionCount = w.Length,
             };
 
             e3.Foreground = new SolidColorBrush(Colors.White);
