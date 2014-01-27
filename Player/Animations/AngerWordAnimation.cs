@@ -11,7 +11,7 @@ namespace Player.Animations
 {
     public class AngerWordAnimation : WordAnimation
     {
-        public AngerWordAnimation(CaptionWord w, TextBlock t) : base(w, t)
+        public AngerWordAnimation(CaptionWord w, Caption c, TextBlock t) : base(w, c, t)
         {
         }
 

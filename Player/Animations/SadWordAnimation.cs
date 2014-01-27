@@ -11,7 +11,7 @@ namespace Player.Animations
 {
     public class SadWordAnimation : WordAnimation
     {
-        public SadWordAnimation(CaptionWord w, TextBlock t) : base(w, t)
+        public SadWordAnimation(CaptionWord w, Caption c, TextBlock t) : base(w, c, t)
         {
         }
 

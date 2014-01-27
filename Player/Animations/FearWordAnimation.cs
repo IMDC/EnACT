@@ -11,7 +11,7 @@ namespace Player.Animations
 {
     public class FearWordAnimation : WordAnimation
     {
-        public FearWordAnimation(CaptionWord w, TextBlock t) : base(w, t)
+        public FearWordAnimation(CaptionWord w, Caption c, TextBlock t) : base(w, c, t)
         {
         }
 

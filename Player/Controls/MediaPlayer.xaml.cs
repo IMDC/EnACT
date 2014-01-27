@@ -66,7 +66,9 @@ namespace Player.Controls
                 if(w.Emotion == Emotion.None || w.Emotion == Emotion.Unknown)
                     continue;
 
-                WordAnimation a = WordAnimationFactory.CreateWordAnimation(w,t);
+                WordAnimation a = WordAnimationFactory.CreateWordAnimation(w,c,t);
+
+                a.AddToMediaPlayer(storyboard, t);
             }
         }
 

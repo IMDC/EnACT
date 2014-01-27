@@ -11,13 +11,16 @@ namespace Player.Animations
 {
     public class WordAnimationFactory
     {
-        public static WordAnimation CreateWordAnimation(CaptionWord w, TextBlock t)
+        public static WordAnimation CreateWordAnimation(CaptionWord w, Caption c, TextBlock t)
         {
             WordAnimation animation;
+
+            animation = null; //TODO: remove this when all classes created
+
             switch (w.Emotion)
             {
                 case Emotion.Happy:
-                    animation = new HappyWordAnimation(w, t);
+                    animation = new HappyWordAnimation(w,c,t);
                     break;
                 case Emotion.Sad:
                     break;
@@ -29,8 +32,6 @@ namespace Player.Animations
                     //TODO: explicitly define this behaviour
                     throw new Exception("No emotion specified");
             }
-
-            animation = null; //TODO: remove this when all classes created
             return animation;
         }
     }
