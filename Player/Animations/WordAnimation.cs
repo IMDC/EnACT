@@ -36,6 +36,18 @@ namespace Player.Animations
         /// </summary>
         /// <param name="storyboard">The storyboard to add this WordAnimation to.</param>
         /// <param name="t">The textblock to add this WordAnimation to.</param>
-        public abstract void AddToMediaPlayer(Storyboard storyboard, TextBlock t);
+        public virtual void AddToMediaPlayer(Storyboard storyboard, TextBlock t)
+        {
+            foreach (TextEffect effect in TextEffects)
+            {
+                t.TextEffects.Add(effect);
+            }
+
+            foreach (AnimationTimeline animation in Animations)
+            {
+                Storyboard.SetTargetName(animation, t.Name);
+                storyboard.Children.Add(animation);
+            }
+        }
     }
 }

@@ -122,14 +122,7 @@ namespace Player.Animations
         public override void AddToMediaPlayer(Storyboard storyboard, TextBlock t)
         {
             //Remember the sizes of each collection before adding
-            int oldStoryboardSize = storyboard.Children.Count;
             int oldTextblockSize = t.TextEffects.Count;
-
-            //Add text effects to textblock
-            foreach (TextEffect effect in TextEffects)
-            {
-                t.TextEffects.Add(effect);
-            }
 
             //Set target property for animations and add them to the storyboard
 
@@ -144,13 +137,13 @@ namespace Player.Animations
             Storyboard.SetTargetProperty(Animations[2], new PropertyPath(
                 String.Format("TextEffects[{0}].Transform.Y", oldTextblockSize + 1)));
             Storyboard.SetTargetProperty(Animations[3], new PropertyPath(
-                String.Format("TextEffects[{0}].Foreground.{1}", oldTextblockSize + 2, SolidColorBrush.ColorProperty)));
+                String.Format("TextEffects[{0}].Foreground.{1}", oldTextblockSize + 2, 
+                SolidColorBrush.ColorProperty)));
 
-            foreach (AnimationTimeline animation in Animations)
-            {
-                Storyboard.SetTargetName(animation, t.Name);
-                storyboard.Children.Add(animation);
-            }
+            /* Do the rest of the animation processing. This function call must be performed after
+             * the oldTextblockSize is set.
+             */
+            base.AddToMediaPlayer(storyboard,t);
         }
     }
 }
