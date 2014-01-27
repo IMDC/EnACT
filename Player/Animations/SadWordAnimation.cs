@@ -9,6 +9,7 @@ using LibEnACT;
 
 namespace Player.Animations
 {
+    /*
     public class SadWordAnimation : WordAnimation
     {
         public SadWordAnimation(CaptionWord w, Caption c, TextBlock t) : base(w, c, t)
@@ -20,4 +21,5 @@ namespace Player.Animations
             throw new NotImplementedException();
         }
     }
+    */
 }
