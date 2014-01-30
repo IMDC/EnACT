@@ -66,11 +66,13 @@ namespace Player.Animations
             a1.KeyFrames.Add(new LinearDoubleKeyFrame(1, KeyTime.FromPercent(1)));
 
             this.Animations.Add(a1);
+            this.AnimationTargets.Add(new AnimationTargetString("Transform.ScaleX",0));
 
             //Make second animation for y scale
             DoubleAnimationUsingKeyFrames a2 = a1.Clone();
 
             this.Animations.Add(a2);
+            this.AnimationTargets.Add(new AnimationTargetString("Transform.ScaleY", 0));
 
             TextEffect e2 = new TextEffect //Yfinish effect
             {
@@ -92,6 +94,7 @@ namespace Player.Animations
             a3.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromPercent(1)));
 
             this.Animations.Add(a3);
+            this.AnimationTargets.Add(new AnimationTargetString("Transform.Y", 1));
 
             //alpha effect
             TextEffect e3 = new TextEffect()
@@ -115,39 +118,9 @@ namespace Player.Animations
             a4.KeyFrames.Add(new LinearColorKeyFrame(Colors.White, KeyTime.FromPercent(1)));
 
             this.Animations.Add(a4);
+            this.AnimationTargets.Add(new AnimationTargetString("Foreground."
+                + SolidColorBrush.ColorProperty.ToString(), 2));
         }
         #endregion
-
-        //// <summary>
-        /// Adds this instance of the HappyWordAnimation to the provided Storyboard and textblock.
-        /// </summary>
-        /// <param name="storyboard">The storyboard to add this HappyWordAnimation to.</param>
-        /// <param name="t">The textblock to add this HappyWordAnimation to.</param>
-        public override void AddToMediaPlayer(Storyboard storyboard, TextBlock t)
-        {
-            //Remember the sizes of each collection before adding
-            int oldTextblockSize = t.TextEffects.Count;
-
-            //Set target property for animations and add them to the storyboard
-
-            /* Target the specific properties by specifiying the element at the old last index +
-             * the offset. This has to be manually specified, because as far as I know there is not
-             * a simple way to automate this.
-             */
-            Storyboard.SetTargetProperty(Animations[0], new PropertyPath(
-                String.Format("TextEffects[{0}].Transform.ScaleX", oldTextblockSize + 0)));
-            Storyboard.SetTargetProperty(Animations[1], new PropertyPath(
-                String.Format("TextEffects[{0}].Transform.ScaleY", oldTextblockSize + 0)));
-            Storyboard.SetTargetProperty(Animations[2], new PropertyPath(
-                String.Format("TextEffects[{0}].Transform.Y", oldTextblockSize + 1)));
-            Storyboard.SetTargetProperty(Animations[3], new PropertyPath(
-                String.Format("TextEffects[{0}].Foreground.{1}", oldTextblockSize + 2, 
-                SolidColorBrush.ColorProperty)));
-
-            /* Do the rest of the animation processing. This function call must be performed after
-             * the oldTextblockSize is set.
-             */
-            base.AddToMediaPlayer(storyboard,t);
-        }
     }
 }

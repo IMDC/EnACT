@@ -69,6 +69,7 @@
     <Compile Include="Animations\FearWordAnimation.cs" />
     <Compile Include="Animations\HappyWordAnimation.cs" />
     <Compile Include="Animations\SadWordAnimation.cs" />
+    <Compile Include="Animations\AnimationTargetString.cs" />
     <Compile Include="Animations\WordAnimationFactory.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
