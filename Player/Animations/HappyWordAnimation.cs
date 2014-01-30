@@ -24,7 +24,6 @@ namespace Player.Animations
         /// <param name="w">The CaptionWord to base the animation off of.</param>
         /// <param name="beginIndex">The index of the caption string at which the CaptionWord
         /// begins.</param>
-        /// <param name="c">The Caption that the CaptionWord belongs to.</param>
         /// <param name="t">The Textblock that this animation will be applied to.</param>
         public HappyWordAnimation(CaptionWord w, int beginIndex, CaptionTextBlock t) : base(w, beginIndex, t)
         {

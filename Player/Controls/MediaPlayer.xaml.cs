@@ -29,6 +29,10 @@ namespace Player.Controls
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Adds an emotive caption to this MediaPlayer.
+        /// </summary>
+        /// <param name="c">The Caption to add.</param>
         public void AddCaption(Caption c)
         {
             //Create a new CaptionTextBlock with a unique name in the form "ItemXX"

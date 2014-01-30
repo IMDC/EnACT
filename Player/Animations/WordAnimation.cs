@@ -30,7 +30,7 @@ namespace Player.Animations
         /// </summary>
         public List<AnimationTargetString> AnimationTargets;
 
-        public WordAnimation(CaptionWord w, int beginIndex, CaptionTextBlock t)
+        protected WordAnimation(CaptionWord w, int beginIndex, CaptionTextBlock t)
         {
             //Construct lists
             TextEffects      = new List<TextEffect>();
@@ -53,11 +53,6 @@ namespace Player.Animations
                 t.TextEffects.Add(effect);
             }
 
-            //foreach (AnimationTimeline animation in Animations)
-            //{
-            //    Storyboard.SetTargetName(animation, t.Name);
-            //    storyboard.Children.Add(animation);
-            //}
             for (int i = 0; i < Animations.Count; i++)
             {
                 Storyboard.SetTargetName(Animations[i],t.Name);
