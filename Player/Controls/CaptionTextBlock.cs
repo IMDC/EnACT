@@ -14,12 +14,21 @@ namespace Player.Controls
     public class CaptionTextBlock : TextBlock
     {
         /// <summary>
+        /// A reference to the Caption this CaptionTextBlock represents.
+        /// </summary>
+        public Caption Caption { get; set; }
+
+        /// <summary>
         /// Constructs a CaptionTextBlock object representing the given Caption.
         /// </summary>
         /// <param name="c">The caption to represent.</param>
         /// <param name="name">The name of the CaptionTextBlock.</param>
         public CaptionTextBlock(Caption c, string name)
         {
+            //Set reference
+            this.Caption = c;
+
+            //Set Textblock properties
             Name = name;
             Text = c.ToString();
 

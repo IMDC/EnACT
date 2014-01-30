@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using LibEnACT;
+using Player.Controls;
 
 namespace Player.Animations
 {
@@ -25,7 +26,7 @@ namespace Player.Animations
         /// begins.</param>
         /// <param name="c">The Caption that the CaptionWord belongs to.</param>
         /// <param name="t">The Textblock that this animation will be applied to.</param>
-        public HappyWordAnimation(CaptionWord w, int beginIndex, Caption c, TextBlock t) : base(w, beginIndex, c, t)
+        public HappyWordAnimation(CaptionWord w, int beginIndex, CaptionTextBlock t) : base(w, beginIndex, t)
         {
             //Duration for all animations
             Duration duration = TimeSpan.FromSeconds(0.6);
@@ -57,7 +58,7 @@ namespace Player.Animations
 
             DoubleAnimationUsingKeyFrames a1 = new DoubleAnimationUsingKeyFrames
             {
-                BeginTime = TimeSpan.FromSeconds(c.Begin),
+                BeginTime = TimeSpan.FromSeconds(t.Caption.Begin),
                 Duration = duration,
             };
 
@@ -85,7 +86,7 @@ namespace Player.Animations
 
             DoubleAnimationUsingKeyFrames a3 = new DoubleAnimationUsingKeyFrames
             {
-                BeginTime = TimeSpan.FromSeconds(c.Begin),
+                BeginTime = TimeSpan.FromSeconds(t.Caption.Begin),
                 Duration = duration,
             };
 
@@ -109,7 +110,7 @@ namespace Player.Animations
 
             ColorAnimationUsingKeyFrames a4 = new ColorAnimationUsingKeyFrames
             {
-                BeginTime = TimeSpan.FromSeconds(c.Begin),
+                BeginTime = TimeSpan.FromSeconds(t.Caption.Begin),
                 Duration = duration,
             };
 

@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using LibEnACT;
+using Player.Controls;
 
 namespace Player.Animations
 {
     public class WordAnimationFactory
     {
-        public static WordAnimation CreateWordAnimation(CaptionWord w, int beginIndex, Caption c, TextBlock t)
+        public static WordAnimation CreateWordAnimation(CaptionWord w, int beginIndex, CaptionTextBlock t)
         {
             WordAnimation animation;
 
@@ -20,7 +21,7 @@ namespace Player.Animations
             switch (w.Emotion)
             {
                 case Emotion.Happy:
-                    animation = new HappyWordAnimation(w,beginIndex,c,t);
+                    animation = new HappyWordAnimation(w,beginIndex,t);
                     break;
                 case Emotion.Sad:
                     break;

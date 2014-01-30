@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using LibEnACT;
+using Player.Controls;
 
 namespace Player.Animations
 {
@@ -29,7 +30,7 @@ namespace Player.Animations
         /// </summary>
         public List<AnimationTargetString> AnimationTargets;
 
-        public WordAnimation(CaptionWord w, int beginIndex, Caption c, TextBlock t)
+        public WordAnimation(CaptionWord w, int beginIndex, CaptionTextBlock t)
         {
             //Construct lists
             TextEffects      = new List<TextEffect>();

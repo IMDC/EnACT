@@ -32,11 +32,11 @@ namespace Player.Controls
         public void AddCaption(Caption c)
         {
             //Create a new CaptionTextBlock with a unique name in the form "ItemXX"
-            TextBlock t = new CaptionTextBlock(c, "Item" + CaptionGrid.Children.Count);
+            CaptionTextBlock t = new CaptionTextBlock(c, "Item" + CaptionGrid.Children.Count);
 
             int captionIndex = CaptionGrid.Children.Add(t);
 
-            SetCaptionPosition(c, t);
+            SetCaptionPosition(t);
 
             //Give the control a name so that it can be used by the storyboard.
             this.RegisterName(t.Name,t); 
@@ -70,7 +70,7 @@ namespace Player.Controls
                 if(w.Emotion == Emotion.None || w.Emotion == Emotion.Unknown)
                     continue;
 
-                WordAnimation a = WordAnimationFactory.CreateWordAnimation(w,currentBeginIndex,c,t);
+                WordAnimation a = WordAnimationFactory.CreateWordAnimation(w,currentBeginIndex,t);
 
                 a.AddToMediaPlayer(storyboard, t);
             }
@@ -80,9 +80,9 @@ namespace Player.Controls
         /// Sets the position of the given caption on a grid.
         /// </summary>
         /// <param name="t">The caption texblock to set the position of.</param>
-        private void SetCaptionPosition(Caption c, TextBlock t)
+        private void SetCaptionPosition(CaptionTextBlock t)
         {
-            GridLocation l  = GridLocation.GetGridLocation(c.Location);
+            GridLocation l  = GridLocation.GetGridLocation(t.Caption.Location);
 
             Grid.SetRow(t, l.Row);
             Grid.SetRowSpan(t, l.RowSpan);
