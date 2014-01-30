@@ -10,7 +10,7 @@
         BottomCentre = 2,
         BottomRight  = 3,
         MiddleLeft   = 4,
-        MiddleCenter = 5,
+        MiddleCentre = 5,
         MiddleRight  = 6,
         TopLeft      = 7,
         TopCentre    = 8,

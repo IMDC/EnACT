@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibEnACT;
 
 namespace Player
 {
@@ -17,6 +18,34 @@ namespace Player
         public static readonly GridLocation TopLeft      = new GridLocation(0, 1, 0, 2);
         public static readonly GridLocation TopCentre    = new GridLocation(0, 1, 0, 3);
         public static readonly GridLocation TopRight     = new GridLocation(0, 1, 1, 2);
+
+        /// <summary>
+        /// This Dictionary provides a 1 to 1 mapping from the ScreenLocation enum to it's
+        /// equivalent grid location.
+        /// </summary>
+        public static readonly Dictionary<ScreenLocation, GridLocation> ScreenLocationMap
+            = new Dictionary<ScreenLocation, GridLocation>
+        {
+            {ScreenLocation.BottomLeft, GridLocation.BottomLeft},
+            {ScreenLocation.BottomCentre, GridLocation.BottomCentre},
+            {ScreenLocation.BottomRight, GridLocation.BottomRight},
+            {ScreenLocation.MiddleLeft, GridLocation.MiddleLeft},
+            {ScreenLocation.MiddleCentre, GridLocation.MiddleCentre},
+            {ScreenLocation.MiddleRight, GridLocation.MiddleRight},
+            {ScreenLocation.TopLeft, GridLocation.TopLeft},
+            {ScreenLocation.TopCentre, GridLocation.TopCentre},
+            {ScreenLocation.TopRight, GridLocation.TopRight},
+        };
+
+        /// <summary>
+        /// Translates a Screenlocation value into a GridLocation value using the ScreenLocationMap.
+        /// </summary>
+        /// <param name="location">The location to translate.</param>
+        /// <returns>The translated value.</returns>
+        public static GridLocation GetGridLocation(ScreenLocation location)
+        {
+            return ScreenLocationMap[location];
+        }
 
         /// <summary>
         /// The row position.

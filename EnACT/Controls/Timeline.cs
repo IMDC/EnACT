@@ -375,7 +375,7 @@ namespace EnACT.Controls
                             case ScreenLocation.TopCentre: y = 1 * h; break;
                             case ScreenLocation.TopRight: y = 2 * h; break;
                             case ScreenLocation.MiddleLeft: y = 3 * h; break;
-                            case ScreenLocation.MiddleCenter: y = 4 * h; break;
+                            case ScreenLocation.MiddleCentre: y = 4 * h; break;
                             case ScreenLocation.MiddleRight: y = 5 * h; break;
                             case ScreenLocation.BottomLeft: y = 6 * h; break;
                             case ScreenLocation.BottomCentre: y = 7 * h; break;
@@ -1048,7 +1048,7 @@ namespace EnACT.Controls
                 case 1: return ScreenLocation.TopCentre;
                 case 2: return ScreenLocation.TopRight;
                 case 3: return ScreenLocation.MiddleLeft;
-                case 4: return ScreenLocation.MiddleCenter;
+                case 4: return ScreenLocation.MiddleCentre;
                 case 5: return ScreenLocation.MiddleRight;
                 case 6: return ScreenLocation.BottomLeft;
                 case 7: return ScreenLocation.BottomCentre;

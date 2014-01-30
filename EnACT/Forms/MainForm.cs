@@ -443,7 +443,7 @@ namespace EnACT.Forms
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>
         private void RB_MiddleCenter_Click(object sender, EventArgs e)
-        { ChangeLocation(ScreenLocation.MiddleCenter); }
+        { ChangeLocation(ScreenLocation.MiddleCentre); }
 
         /// <summary>
         /// Changes the Caption's Location to the Location related to this button.

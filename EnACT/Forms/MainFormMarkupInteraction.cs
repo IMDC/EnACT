@@ -163,7 +163,7 @@ namespace EnACT.Forms
                 case ScreenLocation.TopCentre:      RB_TopCenter.Checked    = true; break;
                 case ScreenLocation.TopRight:       RB_TopRight.Checked     = true; break;
                 case ScreenLocation.MiddleLeft:     RB_MiddleLeft.Checked   = true; break;
-                case ScreenLocation.MiddleCenter:   RB_MiddleCenter.Checked = true; break;
+                case ScreenLocation.MiddleCentre:   RB_MiddleCenter.Checked = true; break;
                 case ScreenLocation.MiddleRight:    RB_MiddleRight.Checked  = true; break;
                 case ScreenLocation.BottomLeft:     RB_BottomLeft.Checked   = true; break;
                 case ScreenLocation.BottomCentre:   RB_BottomCenter.Checked = true; break;

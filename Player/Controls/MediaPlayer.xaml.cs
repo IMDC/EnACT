@@ -36,7 +36,7 @@ namespace Player.Controls
 
             int captionIndex = CaptionGrid.Children.Add(t);
 
-            SetCaptionPosition(t);
+            SetCaptionPosition(c, t);
 
             //Give the control a name so that it can be used by the storyboard.
             this.RegisterName(t.Name,t); 
@@ -60,8 +60,8 @@ namespace Player.Controls
 
             storyboard.Children.Add(visibilityAnimation);
 
-            //foreach (CaptionWord w in c.Words)
-            for (int i=0, currentBeginIndex=0; i<c.Words.Count; 
+            for (int i=0, currentBeginIndex=0;
+                i<c.Words.Count; 
                 currentBeginIndex+=c.Words[i].Length + Caption.SpaceWidth, i++)
             {
                 //TODO: Find a better way of keeping track of index
@@ -80,13 +80,14 @@ namespace Player.Controls
         /// Sets the position of the given caption on a grid.
         /// </summary>
         /// <param name="t">The caption texblock to set the position of.</param>
-        private void SetCaptionPosition(TextBlock t)
+        private void SetCaptionPosition(Caption c, TextBlock t)
         {
-            //TODO base off of caption's given location
-            Grid.SetRow(t, GridLocation.BottomCentre.Row);
-            Grid.SetRowSpan(t, GridLocation.BottomCentre.RowSpan);
-            Grid.SetColumn(t, GridLocation.BottomCentre.Column);
-            Grid.SetColumnSpan(t, GridLocation.BottomCentre.ColumnSpan);
+            GridLocation l  = GridLocation.GetGridLocation(c.Location);
+
+            Grid.SetRow(t, l.Row);
+            Grid.SetRowSpan(t, l.RowSpan);
+            Grid.SetColumn(t, l.Column);
+            Grid.SetColumnSpan(t, l.ColumnSpan);
         }
     }
 }
