@@ -27,9 +27,36 @@ namespace Player.Animations
         /// <param name="t">The Textblock that this animation will be applied to.</param>
         public HappyWordAnimation(CaptionWord w, int beginIndex, CaptionTextBlock t) : base(w, beginIndex, t)
         {
-            //Duration for all animations
-            Duration duration = TimeSpan.FromSeconds(0.6);
-            Duration halfDuration = TimeSpan.FromSeconds(0.6 / 2);
+            //Settings dependent on intensity
+            double dur = 0;
+            double scalefinish = 0;
+            double yFinish = 0;
+
+            switch (w.Intensity)
+            {
+                case Intensity.Low:
+                    dur = 0.75;
+                    scalefinish = 1.1;
+                    yFinish = 20;
+                    break;
+                case  Intensity.Medium:
+                    dur = 0.65;
+                    scalefinish = 1.2;
+                    yFinish = 40;
+                    break;
+                case Intensity.High:
+                    dur = 0.60;
+                    scalefinish = 1.3;
+                    yFinish = 40;
+                    break;
+                case Intensity.None:
+                default:
+                    //TODO handle exception
+                    break;
+            }
+
+            //Animation duration
+            Duration duration = TimeSpan.FromSeconds(dur);
 
             var formattedText = new FormattedText
             (
@@ -62,7 +89,7 @@ namespace Player.Animations
             };
 
             a1.KeyFrames.Add(new LinearDoubleKeyFrame(0.5, KeyTime.FromPercent(0)));
-            a1.KeyFrames.Add(new LinearDoubleKeyFrame(1.3, KeyTime.FromPercent(0.5)));
+            a1.KeyFrames.Add(new LinearDoubleKeyFrame(scalefinish, KeyTime.FromPercent(0.5)));
             a1.KeyFrames.Add(new LinearDoubleKeyFrame(1, KeyTime.FromPercent(1)));
 
             this.Animations.Add(a1);
@@ -90,7 +117,7 @@ namespace Player.Animations
             };
 
             a3.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromPercent(0)));
-            a3.KeyFrames.Add(new LinearDoubleKeyFrame(-10, KeyTime.FromPercent(0.5)));
+            a3.KeyFrames.Add(new LinearDoubleKeyFrame(-yFinish, KeyTime.FromPercent(0.5)));
             a3.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromPercent(1)));
 
             this.Animations.Add(a3);
