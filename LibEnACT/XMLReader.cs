@@ -122,19 +122,21 @@ namespace LibEnACT
                             
                             r.Read();
                             r.AssertNode(XmlElements.Background);
-                            bool visible = Convert.ToBoolean(r.GetNonNullAttribute(XmlAttributes.Visible));
+                            //Create background colour based on xml paramaters
+                            bool visible = r.GetBoolAttribute(XmlAttributes.Visible);
                             double alphaD = r.GetDoubleAttribute(XmlAttributes.Alpha);
-                            int colourCode = Convert.ToInt32(r.GetNonNullAttribute(XmlAttributes.Colour),16);
-
+                            int colourCode = r.GetHexAttribute(XmlAttributes.Colour);
                             int alpha = (int) ((visible) ? alphaD*0xFF : 0x00);
+
+                            // Bitshift alpha to the most significant byte of the integer
                             s.Font.BackgroundColour = Color.FromArgb(alpha << 24 | colourCode);
                            
                             r.Read();
                             r.AssertNode(XmlElements.Font);
                             s.Font.Family = r.GetNonNullAttribute(XmlAttributes.Name);
                             s.Font.Size = r.GetIntAttribute(XmlAttributes.Size);
-                            s.Font.ForegroundColour = Color.FromArgb(alpha << 24 | 
-                                Convert.ToInt32(r.GetNonNullAttribute(XmlAttributes.Colour),16));
+                            s.Font.ForegroundColour = Color.FromArgb(alpha << 24 
+                                | r.GetHexAttribute(XmlAttributes.Colour));
                             s.Font.Bold = r.GetIntAttribute(XmlAttributes.Bold);
                             r.ReadStartElement(XmlElements.Font);
                                     
@@ -243,6 +245,20 @@ namespace LibEnACT
         public static int GetIntAttribute(this XmlReader r, string attributeName)
         {
             return Convert.ToInt32(r.GetNonNullAttribute(attributeName));
+        }
+
+        /// <summary>
+        /// Reads in an attribute from the current node and checks to make sure that the returned
+        /// value is not null. If the value is null, an ArgumentException is thrown, signifying
+        /// that the attribute was not found. Returns the attribute as an integer if stored in the
+        /// form of a hex code (eg 0xFFACADEF)
+        /// </summary>
+        /// <param name="r">The XmlReader being used to read xml.</param>
+        /// <param name="attributeName">The name of the attribute to read.</param>
+        /// <returns>The attribute as an integer.</returns>
+        public static int GetHexAttribute(this XmlReader r, string attributeName)
+        {
+            return Convert.ToInt32(r.GetNonNullAttribute(attributeName), 16);
         }
 
         /// <summary>
