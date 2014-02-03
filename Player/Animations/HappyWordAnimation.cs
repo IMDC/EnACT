@@ -58,7 +58,21 @@ namespace Player.Animations
             //Animation duration
             Duration duration = TimeSpan.FromSeconds(dur);
 
-            var formattedText = new FormattedText
+            StringBuilder b = new StringBuilder(t.Caption.ToString());
+
+            //Formatted text up until the index of the caption
+            var captionFT = new FormattedText
+            (
+                b.ToString(0,beginIndex),
+                CultureInfo.CurrentUICulture,
+                FlowDirection.LeftToRight,
+                new Typeface(t.FontFamily, t.FontStyle, t.FontWeight, t.FontStretch),
+                t.FontSize,
+                Brushes.Black
+            );
+
+            //Formatted text of the emotive caption word
+            var wordFT = new FormattedText
             (
                 w.Text,
                 CultureInfo.CurrentUICulture,
@@ -68,6 +82,7 @@ namespace Player.Animations
                 Brushes.Black
             );
 
+
             TextEffect e1 = new TextEffect
             {
                 PositionStart = beginIndex,
@@ -75,8 +90,8 @@ namespace Player.Animations
                 Transform = new ScaleTransform
                 {
                     //TODO: Fix centering
-                    CenterX = formattedText.Width / 2,
-                    CenterY = formattedText.Height,
+                    CenterX = captionFT.Width + wordFT.Width/2,
+                    CenterY = captionFT.Height,
                 },
             };
 
