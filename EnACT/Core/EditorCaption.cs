@@ -132,7 +132,7 @@ namespace EnACT.Core
         /// <summary>
         /// Wrapper property for CaptionView. Gets and Sets the Words of this EditorCaption.
         /// </summary>
-        public string Text
+        public override string Text
         {
             set
             { 
@@ -223,7 +223,7 @@ namespace EnACT.Core
         /// with the same name (the Words property).
         /// </summary>
         /// <param name="line">The string to turn into a list of CaptionWords.</param>
-        public new void Feed(string line)
+        protected new void Feed(string line)
         {
             //Remove the previous line from the Words
             this.Words.Clear();
@@ -253,7 +253,7 @@ namespace EnACT.Core
         /// Caption as it modifies a different property with the same name (The Words property).
         /// </summary>
         /// <returns>A string containing all the CaptionWords in the list.</returns>
-        public override string GetAsString()
+        protected override string GetAsString()
         {
             //Stringbuilder is faster than string when it comes to appending text.
             StringBuilder s = new StringBuilder();

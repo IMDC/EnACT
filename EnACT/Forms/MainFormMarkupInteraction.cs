@@ -442,7 +442,7 @@ namespace EnACT.Forms
                 case EditorCaption.PropertyNames.Location: SetGB_Location(SelectedCaption.Location); break;
                 case EditorCaption.PropertyNames.Duration:      break;
                 case EditorCaption.PropertyNames.Speaker:       break;
-                case EditorCaption.PropertyNames.Text: CaptionTextBox.Text = SelectedCaption.GetAsString(); break;
+                case EditorCaption.PropertyNames.Text: CaptionTextBox.Text = SelectedCaption.Text; break;
                 case EditorCaption.PropertyNames.Words:         break;
                 default: throw new ArgumentException(string.Format("Property Name '{0}' isn't a valid property",
                         e.PropertyName), "e");

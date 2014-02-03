@@ -30,7 +30,7 @@ namespace Player.Controls
 
             //Set Textblock properties
             Name = name;
-            Text = c.ToString();
+            Text = c.Text;
 
             //Confugure Speaker settings
             FontSize = c.Speaker.Font.Size;

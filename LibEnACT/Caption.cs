@@ -33,6 +33,16 @@ namespace LibEnACT
         /// The list of words in the caption
         /// </summary>
         public virtual List<CaptionWord> Words { set; get; }
+
+        /// <summary>
+        /// The text of a Caption. Setting this value will also populate or re-populate the Words
+        /// list with the words derived from the caption text.
+        /// </summary>
+        public virtual string Text
+        {
+            set { Feed(value); }
+            get { return GetAsString(); }
+        }
         #endregion //#region Properties and Fields
 
         #region Timestamp Properties
@@ -165,7 +175,7 @@ namespace LibEnACT
         /// Clears the list, then feeds a string into the list and turns it into CaptionWords.
         /// </summary>
         /// <param name="line">The string to turn into a list of CaptionWords.</param>
-        public virtual void Feed(string line)
+        protected virtual void Feed(string line)
         {
             //Remove the previous line from the Words
             Words.Clear();
@@ -183,7 +193,7 @@ namespace LibEnACT
         /// Turns the list into a single string.
         /// </summary>
         /// <returns>A string containing all the CaptionWords in the list.</returns>
-        public virtual string GetAsString()
+        protected virtual string GetAsString()
         {
             //Stringbuilder is faster than string when it comes to appending text.
             StringBuilder s = new StringBuilder();

@@ -58,7 +58,7 @@ namespace Player.Animations
             //Animation duration
             Duration duration = TimeSpan.FromSeconds(dur);
 
-            StringBuilder b = new StringBuilder(t.Caption.ToString());
+            StringBuilder b = new StringBuilder(t.Caption.Text);
 
             //Formatted text up until the index of the caption
             var captionFT = new FormattedText
@@ -68,7 +68,7 @@ namespace Player.Animations
                 FlowDirection.LeftToRight,
                 new Typeface(t.FontFamily, t.FontStyle, t.FontWeight, t.FontStretch),
                 t.FontSize,
-                Brushes.Black
+                Brushes.Black //Colour does not matter here
             );
 
             //Formatted text of the emotive caption word
@@ -79,7 +79,7 @@ namespace Player.Animations
                 FlowDirection.LeftToRight,
                 new Typeface(t.FontFamily, t.FontStyle, t.FontWeight, t.FontStretch),
                 t.FontSize,
-                Brushes.Black
+                Brushes.Black //Colour does not matter here
             );
 
 
