@@ -1,4 +1,6 @@
-﻿namespace LibEnACT
+﻿using System.Drawing;
+
+namespace LibEnACT
 {
     /// <summary>
     /// Represents the speaker of a line of dialogue. Speakers can be customized
@@ -31,12 +33,6 @@
         public string Name { get; set; }
 
         /// <summary>
-        /// The background settings (color, transparency, etc) associated with captions 
-        /// spoken by this speaker
-        /// </summary>
-        public SpeakerBg Bg { get; set; }
-
-        /// <summary>
         /// The font settings (type, size, etc) associated with captions spoken by 
         /// this speaker
         /// </summary>
@@ -54,7 +50,6 @@
         public Speaker(string name)
         {
             this.Name = name;
-            Bg = new SpeakerBg();
             Font = new SpeakerFont();
         }
 
@@ -65,39 +60,6 @@
         public override string ToString()
         {
             return Name;
-        }
-    }
-
-    /// <summary>
-    /// Represents the background highlighting of a caption.
-    /// </summary>
-    public class SpeakerBg
-    {
-        //TODO Change Colour to type Color and get rid of visible, Alpha
-        /// <summary>
-        /// Whether or not the background is visible or not
-        /// </summary>
-        public bool Visible { set; get; }
-
-        /// <summary>
-        /// The transparency setting for the background
-        /// </summary>
-        public double Alpha { set; get; }
-
-        /// <summary>
-        /// The colour of the background.
-        /// </summary>
-        public string Colour { set; get; } //Colour is represented as hex eg 0x008040
-
-        /// <summary>
-        /// Constucts a SpeakerBG object with visibility set to true, alpha set
-        /// to 0.5 and Colour set to white.
-        /// </summary>
-        public SpeakerBg()
-        {
-            this.Visible = true;
-            this.Alpha = 0.5;
-            this.Colour = "0x000000";
         }
     }
 
@@ -120,7 +82,9 @@
         /// <summary>
         /// The colour of the text displayed in this font
         /// </summary>
-        public string Colour { set; get; }
+        public Color ForegroundColour { set; get; }
+
+        public Color BackgroundColour { set; get; }
 
         /// <summary>
         /// The boldness value of this font
@@ -135,7 +99,8 @@
         {
             this.Family = "Segoe UI";
             this.Size = 22;
-            this.Colour = "0xFFFFFF";
+            this.ForegroundColour = Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF);
+            this.BackgroundColour = Color.FromArgb(0x0F, 0xFF, 0xFF, 0xFF);
             this.Bold = 1;
         }
     }
