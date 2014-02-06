@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Printing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -80,6 +81,7 @@
     <Compile Include="Controls\StatefulMediaElement.cs" />
     <Compile Include="Controls\IMediaPlayer.cs" />
     <Compile Include="GridLocation.cs" />
+    <Compile Include="Miscellaneous\ExtensionMethods.cs" />
     <Compile Include="Models\PlayerState.cs" />
     <Compile Include="View Models\PlayerViewModel.cs" />
     <Compile Include="Views\PlayerView.xaml.cs">
@@ -128,6 +130,7 @@
       <Name>LibEnACT</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

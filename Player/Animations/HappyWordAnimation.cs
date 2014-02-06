@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using LibEnACT;
 using Player.Controls;
+using Player.Miscellaneous;
 
 namespace Player.Animations
 {
@@ -145,7 +147,7 @@ namespace Player.Animations
                 PositionCount = w.Length,
             };
 
-            e3.Foreground = new SolidColorBrush(Colors.White);
+            e3.Foreground = t.Foreground;
 
             this.TextEffects.Add(e3);
 
@@ -155,9 +157,12 @@ namespace Player.Animations
                 Duration = duration,
             };
 
-            a4.KeyFrames.Add(new LinearColorKeyFrame(Colors.White, KeyTime.FromPercent(0)));
-            a4.KeyFrames.Add(new LinearColorKeyFrame(Color.FromArgb(100, 255, 255, 255), KeyTime.FromPercent(0.5)));
-            a4.KeyFrames.Add(new LinearColorKeyFrame(Colors.White, KeyTime.FromPercent(1)));
+            System.Windows.Media.Color fgColor = t.Caption.Speaker.Font.ForegroundColour.ToMediaColor();
+
+            a4.KeyFrames.Add(new LinearColorKeyFrame(fgColor, KeyTime.FromPercent(0)));
+            a4.KeyFrames.Add(new LinearColorKeyFrame(Color.FromArgb(100,fgColor.R,fgColor.G, fgColor.B),
+                KeyTime.FromPercent(0.5)));
+            a4.KeyFrames.Add(new LinearColorKeyFrame(fgColor, KeyTime.FromPercent(1)));
 
             this.Animations.Add(a4);
             this.AnimationTargets.Add(new AnimationTargetString("Foreground."

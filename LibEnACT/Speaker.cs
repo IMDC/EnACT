@@ -68,26 +68,33 @@ namespace LibEnACT
     /// </summary>
     public class SpeakerFont
     {
-        //TODO Change Colour to type Color
         /// <summary>
-        /// The font family/type of this font
+        /// The Alpha value for all SpeakerFont ForegroundColours.
+        /// </summary>
+        public const byte ForegroundAlphaValue = 0xFF;
+
+        /// <summary>
+        /// The font family/type of this font.
         /// </summary>
         public string Family { set; get; }
 
         /// <summary>
-        /// The size of this font
+        /// The size of this font.
         /// </summary>
         public int Size { set; get; }
 
         /// <summary>
-        /// The colour of the text displayed in this font
+        /// The colour of the text displayed in this font.
         /// </summary>
         public Color ForegroundColour { set; get; }
 
+        /// <summary>
+        /// The background colour of the text displayed in this font.
+        /// </summary>
         public Color BackgroundColour { set; get; }
 
         /// <summary>
-        /// The boldness value of this font
+        /// The boldness value of this font.
         /// </summary>
         public int Bold { set; get; }
 

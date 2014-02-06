@@ -135,7 +135,7 @@ namespace LibEnACT
                             r.AssertNode(XmlElements.Font);
                             s.Font.Family = r.GetNonNullAttribute(XmlAttributes.Name);
                             s.Font.Size = r.GetIntAttribute(XmlAttributes.Size);
-                            s.Font.ForegroundColour = Color.FromArgb(alpha << 24 
+                            s.Font.ForegroundColour = Color.FromArgb(SpeakerFont.ForegroundAlphaValue << 24
                                 | r.GetHexAttribute(XmlAttributes.Colour));
                             s.Font.Bold = r.GetIntAttribute(XmlAttributes.Bold);
                             r.ReadStartElement(XmlElements.Font);
