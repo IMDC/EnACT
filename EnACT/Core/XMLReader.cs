@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Xml;
 using EnACT.Miscellaneous;
@@ -286,15 +287,21 @@ namespace EnACT.Core
                             
                             r.Read();
                             r.AssertNode(XmlElements.Background);
-                            s.Bg.Visible = Convert.ToBoolean(r.GetNonNullAttribute(XmlAttributes.Visible));
-                            s.Bg.Alpha = r.GetDoubleAttribute(XmlAttributes.Alpha);
-                            s.Bg.Colour = r.GetNonNullAttribute(XmlAttributes.Colour);
+                            //Create background colour based on xml paramaters
+                            bool visible = r.GetBoolAttribute(XmlAttributes.Visible);
+                            double alphaD = r.GetDoubleAttribute(XmlAttributes.Alpha);
+                            int colourCode = r.GetHexAttribute(XmlAttributes.Colour);
+                            int alpha = (int) ((visible) ? alphaD*0xFF : 0x00);
+
+                            // Bitshift alpha to the most significant byte of the integer
+                            s.Font.BackgroundColour = Color.FromArgb(alpha << 24 | colourCode);
                            
                             r.Read();
                             r.AssertNode(XmlElements.Font);
                             s.Font.Family = r.GetNonNullAttribute(XmlAttributes.Name);
                             s.Font.Size = r.GetIntAttribute(XmlAttributes.Size);
-                            s.Font.Colour = r.GetNonNullAttribute(XmlAttributes.Colour);
+                            s.Font.ForegroundColour = Color.FromArgb(alpha << 24
+                                | r.GetHexAttribute(XmlAttributes.Colour));
                             s.Font.Bold = r.GetIntAttribute(XmlAttributes.Bold);
                             r.ReadStartElement(XmlElements.Font);
                                     

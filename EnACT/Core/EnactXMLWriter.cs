@@ -55,10 +55,20 @@ namespace EnACT.Core
 
                             w.WriteStartElement("background");
                             {
-                                //bool hashcode returns a 0 or 1
-                                w.WriteAttributeString("visible", Convert.ToString(s.Bg.Visible.GetHashCode()));
-                                w.WriteAttributeString("alpha", Convert.ToString(s.Bg.Alpha));
-                                w.WriteAttributeString("colour", s.Bg.Colour);
+                                //visible is true if the background colour alpha is 0
+                                bool visible = (s.Font.BackgroundColour.A != 0x00);
+                                w.WriteAttributeString("visible", Convert.ToString(visible.GetHashCode()));
+
+                                //Alpha is represented in the xml as a double value between 0 and 1
+                                double alpha = s.Font.BackgroundColour.A/(double) 0xFF;
+                                w.WriteAttributeString("alpha", Convert.ToString(alpha));
+
+                                //Create a string form of the background colour
+                                string backgroundColourString = String.Format("0x{0}{1}{2}",
+                                    s.Font.BackgroundColour.R.ToString("X2"), 
+                                    s.Font.BackgroundColour.G.ToString("X2"), 
+                                    s.Font.BackgroundColour.B.ToString("X2"));
+                                w.WriteAttributeString("colour", backgroundColourString);
                             }
                             w.WriteEndElement();
 
@@ -66,7 +76,11 @@ namespace EnACT.Core
                             {
                                 w.WriteAttributeString("name", s.Font.Family);
                                 w.WriteAttributeString("size", Convert.ToString(s.Font.Size));
-                                w.WriteAttributeString("colour", s.Font.Colour);
+                                string foregroundColourString = String.Format("0x{0}{1}{2}",
+                                    s.Font.ForegroundColour.R.ToString("X2"),
+                                    s.Font.ForegroundColour.G.ToString("X2"),
+                                    s.Font.ForegroundColour.B.ToString("X2"));
+                                w.WriteAttributeString("colour", foregroundColourString);
                                 w.WriteAttributeString("bold", Convert.ToString(s.Font.Bold));
                             }
                             w.WriteEndElement();
@@ -602,15 +616,31 @@ namespace EnACT.Core
                                 w.WriteAttributeString(XmlAttributes.Name, s.Name);
 
                                 w.WriteStartElement(XmlElements.Background);
-                                w.WriteAttributeString(XmlAttributes.Visible, s.Bg.Visible.ToLowerString());
-                                w.WriteAttributeString(XmlAttributes.Alpha, s.Bg.Alpha.ToString());
-                                w.WriteAttributeString(XmlAttributes.Colour, s.Bg.Colour);
+
+                                //visible is true if the background colour alpha is 0
+                                bool visible = (s.Font.BackgroundColour.A != 0x00);
+                                w.WriteAttributeString(XmlAttributes.Visible, visible.ToLowerString());
+
+                                //Alpha is represented in the xml as a double value between 0 and 1
+                                double alpha = s.Font.BackgroundColour.A / (double)0xFF;
+                                w.WriteAttributeString(XmlAttributes.Alpha, alpha.ToString());
+
+                                //Create a string form of the background colour
+                                string backgroundColourString = String.Format("0x{0}{1}{2}",
+                                    s.Font.BackgroundColour.R.ToString("X2"),
+                                    s.Font.BackgroundColour.G.ToString("X2"),
+                                    s.Font.BackgroundColour.B.ToString("X2"));
+                                w.WriteAttributeString(XmlAttributes.Colour, backgroundColourString);
                                 w.WriteEndElement();
 
                                 w.WriteStartElement(XmlElements.Font);
                                 w.WriteAttributeString(XmlAttributes.Name, s.Font.Family);
                                 w.WriteAttributeString(XmlAttributes.Size, s.Font.Size.ToString());
-                                w.WriteAttributeString(XmlAttributes.Colour, s.Font.Colour);
+                                string foregroundColourString = String.Format("0x{0}{1}{2}",
+                                    s.Font.ForegroundColour.R.ToString("X2"),
+                                    s.Font.ForegroundColour.G.ToString("X2"),
+                                    s.Font.ForegroundColour.B.ToString("X2"));
+                                w.WriteAttributeString(XmlAttributes.Colour, foregroundColourString);
                                 w.WriteAttributeString(XmlAttributes.Bold, s.Font.Bold.ToString());
                                 w.WriteEndElement();
                             }
