@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -64,11 +65,7 @@ namespace EnACT.Core
                                 w.WriteAttributeString("alpha", Convert.ToString(alpha));
 
                                 //Create a string form of the background colour
-                                string backgroundColourString = String.Format("0x{0}{1}{2}",
-                                    s.Font.BackgroundColour.R.ToString("X2"), 
-                                    s.Font.BackgroundColour.G.ToString("X2"), 
-                                    s.Font.BackgroundColour.B.ToString("X2"));
-                                w.WriteAttributeString("colour", backgroundColourString);
+                                w.WriteAttributeString("colour", s.Font.BackgroundColour.ToRGBHexString());
                             }
                             w.WriteEndElement();
 
@@ -76,11 +73,7 @@ namespace EnACT.Core
                             {
                                 w.WriteAttributeString("name", s.Font.Family);
                                 w.WriteAttributeString("size", Convert.ToString(s.Font.Size));
-                                string foregroundColourString = String.Format("0x{0}{1}{2}",
-                                    s.Font.ForegroundColour.R.ToString("X2"),
-                                    s.Font.ForegroundColour.G.ToString("X2"),
-                                    s.Font.ForegroundColour.B.ToString("X2"));
-                                w.WriteAttributeString("colour", foregroundColourString);
+                                w.WriteAttributeString("colour", s.Font.ForegroundColour.ToRGBHexString());
                                 w.WriteAttributeString("bold", Convert.ToString(s.Font.Bold));
                             }
                             w.WriteEndElement();
@@ -626,21 +619,13 @@ namespace EnACT.Core
                                 w.WriteAttributeString(XmlAttributes.Alpha, alpha.ToString());
 
                                 //Create a string form of the background colour
-                                string backgroundColourString = String.Format("0x{0}{1}{2}",
-                                    s.Font.BackgroundColour.R.ToString("X2"),
-                                    s.Font.BackgroundColour.G.ToString("X2"),
-                                    s.Font.BackgroundColour.B.ToString("X2"));
-                                w.WriteAttributeString(XmlAttributes.Colour, backgroundColourString);
+                                w.WriteAttributeString(XmlAttributes.Colour, s.Font.BackgroundColour.ToRGBHexString());
                                 w.WriteEndElement();
 
                                 w.WriteStartElement(XmlElements.Font);
                                 w.WriteAttributeString(XmlAttributes.Name, s.Font.Family);
                                 w.WriteAttributeString(XmlAttributes.Size, s.Font.Size.ToString());
-                                string foregroundColourString = String.Format("0x{0}{1}{2}",
-                                    s.Font.ForegroundColour.R.ToString("X2"),
-                                    s.Font.ForegroundColour.G.ToString("X2"),
-                                    s.Font.ForegroundColour.B.ToString("X2"));
-                                w.WriteAttributeString(XmlAttributes.Colour, foregroundColourString);
+                                w.WriteAttributeString(XmlAttributes.Colour, s.Font.ForegroundColour.ToRGBHexString());
                                 w.WriteAttributeString(XmlAttributes.Bold, s.Font.Bold.ToString());
                                 w.WriteEndElement();
                             }

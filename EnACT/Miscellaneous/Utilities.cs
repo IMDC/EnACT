@@ -119,5 +119,20 @@ namespace EnACT.Miscellaneous
             return b.ToString().ToLower();
         }
         #endregion
+
+        #region String Colour
+        /// <summary>
+        /// Converts a Color struct to a 6 digit hex string in the form of "0xRRGGBB".
+        /// </summary>
+        /// <param name="c">The colour struct to be converted to a string.</param>
+        /// <returns>The Color struct as a hex string.</returns>
+        public static string ToRGBHexString(this Color c)
+        {
+            return String.Format("0x{0}{1}{2}",
+                c.R.ToString("X2"),
+                c.G.ToString("X2"),
+                c.B.ToString("X2"));
+        }
+        #endregion
     }
 }
