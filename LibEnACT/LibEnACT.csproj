@@ -43,6 +43,7 @@
     <Compile Include="Alignment.cs" />
     <Compile Include="Caption.cs" />
     <Compile Include="CaptionWord.cs" />
+    <Compile Include="CaptionWordCollection.cs" />
     <Compile Include="Emotion.cs" />
     <Compile Include="EventArgsT.cs" />
     <Compile Include="Intensity.cs" />

@@ -8,18 +8,7 @@ namespace LibEnACT
     /// </summary>
     public class Caption
     {
-        #region Constants
-        /// <summary>
-        /// The default value for the SpaceWidth Property
-        /// </summary>
-        public const int DefaultSpaceWitdh = 1;
-        #endregion
-
         #region Properties and Fields
-        /// <summary>
-        /// The width of spacing between words.
-        /// </summary>
-        public int SpaceWidth { set; get; }
 
         /// <summary>
         /// A reference to a speaker in the program's speaker list.
@@ -39,7 +28,7 @@ namespace LibEnACT
         /// <summary>
         /// The list of words in the caption
         /// </summary>
-        public virtual List<CaptionWord> Words { set; get; }
+        public virtual CaptionWordCollection Words { private set; get; }
 
         /// <summary>
         /// The text of a Caption. Setting this value will also populate or re-populate the Words
@@ -47,8 +36,8 @@ namespace LibEnACT
         /// </summary>
         public virtual string Text
         {
-            set { Feed(value); }
-            get { return GetAsString(); }
+            set { Words.Feed(value);}
+            get { return Words.ToString(); }
         }
         #endregion //#region Properties and Fields
 
@@ -149,7 +138,7 @@ namespace LibEnACT
         /// <param name="begin">The timestamp representing the beginning of the caption</param>
         /// <param name="end">The timestamp representing the ending of the caption</param>
         /// <param name="spaceWidth">The width in characters of the spacing between words.</param>
-        public Caption(string line, Speaker speaker, string begin, string end, int spaceWidth=DefaultSpaceWitdh)
+        public Caption(string line, Speaker speaker, string begin, string end, int spaceWidth=CaptionWordCollection.DefaultSpaceWidth)
         {
             //Set Timestamps. Duration is implicity set.
             this.Begin = new Timestamp(begin);
@@ -160,11 +149,8 @@ namespace LibEnACT
             this.Location = ScreenLocation.BottomCentre;
             this.Alignment = Alignment.Center;
 
-            //Set up word list and feed it words
-            this.Words = new List<CaptionWord>();
-            this.Feed(line);
-
-            this.SpaceWidth = spaceWidth;
+            //Set up word collection and feed it words
+            this.Words = new CaptionWordCollection(line,spaceWidth);
         }
         #endregion
 
@@ -180,46 +166,10 @@ namespace LibEnACT
         }
         #endregion
 
-        #region AsString Setter and Getter
-        /// <summary>
-        /// Clears the list, then feeds a string into the list and turns it into CaptionWords.
-        /// </summary>
-        /// <param name="line">The string to turn into a list of CaptionWords.</param>
-        protected virtual void Feed(string line)
+        public void SetWordList(List<CaptionWord> cwList)
         {
-            //Remove the previous line from the Words
-            Words.Clear();
-
-            //Split line up and add each word to the wordlist.
-            string[] words = line.Split(); //Separate by spaces
-
-            foreach (string word in words)
-            {
-                if (word != "") { Words.Add(new CaptionWord(word)); }
-            }
+            
         }
-
-        /// <summary>
-        /// Turns the list into a single string.
-        /// </summary>
-        /// <returns>A string containing all the CaptionWords in the list.</returns>
-        protected virtual string GetAsString()
-        {
-            //Stringbuilder is faster than string when it comes to appending text.
-            StringBuilder s = new StringBuilder();
-            //For every element but the last
-            for (int i = 0; i < Words.Count - 1; i++)
-            {
-                s.Append(Words[i].ToString());
-                s.Append(" ");
-            }
-            //Append the last element without adding a space after it
-            if (0 < Words.Count)
-                s.Append(Words[Words.Count - 1].ToString());
-
-            return s.ToString();
-        }
-        #endregion
 
         #region ToString
         /// <summary>
@@ -227,7 +177,7 @@ namespace LibEnACT
         /// Calls the WordListText method, and returns its value.
         /// </summary>
         /// <returns>The text of Words's words</returns>
-        public override string ToString() { return this.GetAsString(); }
+        public override string ToString() { return Words.ToString(); }
         #endregion
     }
 }

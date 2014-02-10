@@ -30,7 +30,7 @@ namespace Player.Animations
         /// </summary>
         public List<AnimationTargetString> AnimationTargets;
 
-        protected WordAnimation(CaptionWord w, int beginIndex, CaptionTextBlock t)
+        protected WordAnimation(CaptionWord w, CaptionTextBlock t)
         {
             //Construct lists
             TextEffects      = new List<TextEffect>();

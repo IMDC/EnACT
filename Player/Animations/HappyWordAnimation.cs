@@ -24,10 +24,9 @@ namespace Player.Animations
         /// specified paramaters.
         /// </summary>
         /// <param name="w">The CaptionWord to base the animation off of.</param>
-        /// <param name="beginIndex">The index of the caption string at which the CaptionWord
         /// begins.</param>
         /// <param name="t">The Textblock that this animation will be applied to.</param>
-        public HappyWordAnimation(CaptionWord w, int beginIndex, CaptionTextBlock t) : base(w, beginIndex, t)
+        public HappyWordAnimation(CaptionWord w, CaptionTextBlock t) : base(w, t)
         {
             //Settings dependent on intensity
             double dur = 0;
@@ -65,7 +64,7 @@ namespace Player.Animations
             //Formatted text up until the index of the caption
             var captionFT = new FormattedText
             (
-                b.ToString(0,beginIndex),
+                b.ToString(0,w.BeginIndex),
                 CultureInfo.CurrentUICulture,
                 FlowDirection.LeftToRight,
                 new Typeface(t.FontFamily, t.FontStyle, t.FontWeight, t.FontStretch),
@@ -87,7 +86,7 @@ namespace Player.Animations
 
             TextEffect e1 = new TextEffect
             {
-                PositionStart = beginIndex,
+                PositionStart = w.BeginIndex,
                 PositionCount = w.Length,
                 Transform = new ScaleTransform
                 {
@@ -120,7 +119,7 @@ namespace Player.Animations
 
             TextEffect e2 = new TextEffect //Yfinish effect
             {
-                PositionStart = beginIndex,
+                PositionStart = w.BeginIndex,
                 PositionCount = w.Length,
                 Transform = new TranslateTransform(),
             };
@@ -143,7 +142,7 @@ namespace Player.Animations
             //alpha effect
             TextEffect e3 = new TextEffect()
             {
-                PositionStart = beginIndex,
+                PositionStart = w.BeginIndex,
                 PositionCount = w.Length,
             };
 

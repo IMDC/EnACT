@@ -64,17 +64,13 @@ namespace Player.Controls
 
             storyboard.Children.Add(visibilityAnimation);
 
-            for (int i=0, currentBeginIndex=0;
-                i<c.Words.Count; 
-                currentBeginIndex+=c.Words[i].Length + c.SpaceWidth, i++)
+            foreach (CaptionWord w in c.Words)
             {
-                //TODO: Find a better way of keeping track of index
-                CaptionWord w = c.Words[i];
                 //Skip words with no emotion in them
                 if(w.Emotion == Emotion.None || w.Emotion == Emotion.Unknown)
                     continue;
 
-                WordAnimation a = WordAnimationFactory.CreateWordAnimation(w,currentBeginIndex,t);
+                WordAnimation a = WordAnimationFactory.CreateWordAnimation(w,t);
 
                 a.AddToMediaPlayer(storyboard, t);
             }

@@ -171,10 +171,11 @@ namespace LibEnACT
                                     Intensity i = (Intensity)r.GetIntAttribute(XmlAttributes.Intensity);
 
                                     //Get word from node and add it to the list
-                                    CaptionWord word = new CaptionWord(e, i, r.ReadString());
-                                    c.Words.Add(word);
+                                    CaptionWord word = new CaptionWord(e, i, r.ReadString(),0);
+                                    wordList.Add(word);
                                 }
                             }
+                            c.Words.SetWordList(wordList);
                             captionList.Add(c);
                             break;
                         default: throw new ArgumentException("Value '" + r.Name + "' is not a valid node", r.Name);
