@@ -33,12 +33,12 @@
         /// <summary>
         /// Represents the type of emotion (Happy, Sad, etc) of this CaptionWord
         /// </summary>
-        public Emotion Emotion { private set; get; }
+        public Emotion Emotion { set; get; }
 
         /// <summary>
         /// The level of intensity of the emotion
         /// </summary>
-        public Intensity Intensity { private set; get; }
+        public Intensity Intensity { set; get; }
 
         /// <summary>
         /// The text of the CaptionWord.

@@ -64,7 +64,7 @@ namespace EnACT.Core
         /// <param name="beginIndex">The index of this EditorCaptionWord in a string of 
         /// words.</param>
         public EditorCaptionWord(Emotion e, Intensity i, string text, int beginIndex)
-            : base(e, i, text)
+            : base(e, i, text, beginIndex)
         {
             //Set index positions
             this.BeginIndex = beginIndex;

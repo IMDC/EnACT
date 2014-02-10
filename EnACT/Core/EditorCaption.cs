@@ -239,11 +239,11 @@ namespace EnACT.Core
                 {
                     EditorCaptionWord cw = new EditorCaptionWord(word, cumulativePosition);
                     this.Words.Add(cw);
-                    cumulativePosition += cw.Length + SpaceWidth;
+                    cumulativePosition += cw.Length + CaptionWordCollection.DefaultSpaceWidth;
                 }
                 else
                     //Add a space to represent the empty word
-                    cumulativePosition += SpaceWidth;
+                    cumulativePosition += CaptionWordCollection.DefaultSpaceWidth;
             }
             NotifyPropertyChanged(PropertyNames.Words);
         }
@@ -253,7 +253,7 @@ namespace EnACT.Core
         /// Caption as it modifies a different property with the same name (The Words property).
         /// </summary>
         /// <returns>A string containing all the CaptionWords in the list.</returns>
-        protected override string GetAsString()
+        protected string GetAsString()
         {
             //Stringbuilder is faster than string when it comes to appending text.
             StringBuilder s = new StringBuilder();
@@ -282,7 +282,7 @@ namespace EnACT.Core
             foreach (EditorCaptionWord cw in Words)
             {
                 cw.BeginIndex = currentIndex;
-                currentIndex += cw.Length + SpaceWidth;
+                currentIndex += cw.Length + CaptionWordCollection.DefaultSpaceWidth;
             }
         }
         #endregion
