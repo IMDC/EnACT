@@ -1,4 +1,5 @@
-﻿using EnACT.Core;
+﻿using System.Collections.Generic;
+using EnACT.Core;
 using LibEnACT;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,6 +11,8 @@ namespace EnACTUnitTestProject
     [TestClass]
     public class CaptionUnitTest
     {
+        private const string NoTimeStamp = "00:00:00.0";
+
         /// <summary>
         /// This method tests the Timestamp properties of Caption
         /// </summary>
@@ -118,6 +121,43 @@ namespace EnACTUnitTestProject
             Assert.AreEqual(expectedBegin, c.Begin.AsDouble);
             Assert.AreEqual(expectedEnd, c.End.AsDouble);
             Assert.AreEqual(expectedDuration, c.Duration.AsDouble);
+        }
+
+        /// <summary>
+        /// This method tests the Caption.Text and Caption.Words properties.
+        /// </summary>
+        [TestMethod]
+        public void CaptionTextTest()
+        {
+            //Arrange
+            string[] testStrings =
+            {
+                "",
+                "Hello",
+                "Hello how are you?",
+            };
+
+            string twoSpaceWidth = "Hello  how  are  you?";
+
+            //Act and Assert
+            foreach (string s in testStrings)
+            {
+                Caption c = new Caption(s, new Speaker(), NoTimeStamp, NoTimeStamp, 1);
+
+                var tokens = s.Split();
+
+                //Test that each token is equal to each caption word.
+                for (int i = 0; i < tokens.Length; i++)
+                {
+                    Assert.AreEqual(tokens[i], c.Words[i].Text, false);
+                }
+
+                //Test that each string is equal to each caption
+                Assert.AreEqual(s, c.Text, false);
+            }
+
+            Caption tswCaption = new Caption(twoSpaceWidth, new Speaker(), NoTimeStamp, NoTimeStamp, 2);
+            Assert.AreEqual(twoSpaceWidth,tswCaption.Text,false);
         }
     }
 }

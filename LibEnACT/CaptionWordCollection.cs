@@ -36,6 +36,16 @@ namespace LibEnACT
         }
 
         /// <summary>
+        /// Retrieves the CaptionWord at the specified index in this Collection.
+        /// </summary>
+        /// <param name="index">The index of the element to retrieve.</param>
+        /// <returns>The element at the given index.</returns>
+        public CaptionWord this[int index]
+        {
+            get { return _wordList[index]; }
+        }
+
+        /// <summary>
         /// Creates a CaptionWordCollection with a given line and spaceWidth.
         /// </summary>
         /// <param name="line">The line to split into CaptionWords.</param>
@@ -101,6 +111,12 @@ namespace LibEnACT
         {
             //Remove the previous line from the Words
             _wordList.Clear();
+
+            if (String.IsNullOrWhiteSpace(line))
+            {
+                _wordList.Add(new CaptionWord(""));
+                return;
+            }
 
             //Split line up and add each word to the wordlist.
             string[] words = line.Split(); //Separate by spaces
