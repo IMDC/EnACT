@@ -66,7 +66,7 @@ namespace Player.Controls
 
             for (int i=0, currentBeginIndex=0;
                 i<c.Words.Count; 
-                currentBeginIndex+=c.Words[i].Length + Caption.SpaceWidth, i++)
+                currentBeginIndex+=c.Words[i].Length + c.SpaceWidth, i++)
             {
                 //TODO: Find a better way of keeping track of index
                 CaptionWord w = c.Words[i];

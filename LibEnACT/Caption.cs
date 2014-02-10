@@ -8,11 +8,18 @@ namespace LibEnACT
     /// </summary>
     public class Caption
     {
+        #region Constants
+        /// <summary>
+        /// The default value for the SpaceWidth Property
+        /// </summary>
+        public const int DefaultSpaceWitdh = 1;
+        #endregion
+
         #region Properties and Fields
         /// <summary>
         /// The width of spacing between words.
         /// </summary>
-        public const int SpaceWidth = 1;
+        public int SpaceWidth { set; get; }
 
         /// <summary>
         /// A reference to a speaker in the program's speaker list.
@@ -141,7 +148,8 @@ namespace LibEnACT
         /// <param name="speaker">The speaker of the caption</param>
         /// <param name="begin">The timestamp representing the beginning of the caption</param>
         /// <param name="end">The timestamp representing the ending of the caption</param>
-        public Caption(string line, Speaker speaker, string begin, string end)
+        /// <param name="spaceWidth">The width in characters of the spacing between words.</param>
+        public Caption(string line, Speaker speaker, string begin, string end, int spaceWidth=DefaultSpaceWitdh)
         {
             //Set Timestamps. Duration is implicity set.
             this.Begin = new Timestamp(begin);
@@ -155,6 +163,8 @@ namespace LibEnACT
             //Set up word list and feed it words
             this.Words = new List<CaptionWord>();
             this.Feed(line);
+
+            this.SpaceWidth = spaceWidth;
         }
         #endregion
 
