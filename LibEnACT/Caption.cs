@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace LibEnACT
@@ -6,29 +9,69 @@ namespace LibEnACT
     /// <summary>
     /// Represents a Caption used by EnACT.
     /// </summary>
-    public class Caption
+    public class Caption : INotifyPropertyChanged
     {
         #region Properties and Fields
+        //Backing Fields
+        private Speaker _speaker;
+        private ScreenLocation _location;
+        private Alignment _alignment;
+        private CaptionWordCollection _words;
+        private Timestamp _begin;
+        private Timestamp _end;
+        private Timestamp _duration;
 
         /// <summary>
         /// A reference to a speaker in the program's speaker list.
         /// </summary>
-        public virtual Speaker Speaker { set; get; }
+        public virtual Speaker Speaker
+        {
+            set
+            {
+                _speaker = value;
+                NotifyPropertyChanged();
+            }
+            get { return _speaker; }
+        }
 
         /// <summary>
         /// The location of a caption on the screen (Eg top left, centre right, etc)
         /// </summary>
-        public virtual ScreenLocation Location { set; get; }
+        public virtual ScreenLocation Location
+        {
+            set
+            {
+                _location = value;
+                NotifyPropertyChanged();
+            }
+            get { return _location; }
+        }
 
         /// <summary>
         /// The textual alignment of a caption (eg Left, Centre, Right)
         /// </summary>
-        public virtual Alignment Alignment { set; get; }
+        public virtual Alignment Alignment
+        {
+            set
+            {
+                _alignment = value;
+                NotifyPropertyChanged();
+            }
+            get { return _alignment; }
+        }
 
         /// <summary>
         /// The list of words in the caption
         /// </summary>
-        public virtual CaptionWordCollection Words { private set; get; }
+        public virtual CaptionWordCollection Words
+        {
+            private set
+            {
+                _words = value;
+                NotifyPropertyChanged();
+            }
+            get { return _words; }
+        }
 
         /// <summary>
         /// The text of a Caption. Setting this value will also populate or re-populate the Words
@@ -36,24 +79,16 @@ namespace LibEnACT
         /// </summary>
         public virtual string Text
         {
-            set { Words.Feed(value);}
+            set
+            {
+                Words.Feed(value);
+                NotifyPropertyChanged();
+            }
             get { return Words.ToString(); }
         }
         #endregion //#region Properties and Fields
 
         #region Timestamp Properties
-        /// <summary>
-        /// Backing field for the Begin property.
-        /// </summary>
-        private Timestamp bkBegin;
-        /// <summary>
-        /// Backing field for the End property.
-        /// </summary>
-        private Timestamp bkEnd;
-        /// <summary>
-        /// Backing field for the Duration property.
-        /// </summary>
-        private Timestamp bkDuration;
 
         /// <summary>
         /// A timestamp representing the begin time of a caption. Set in the 
@@ -63,20 +98,22 @@ namespace LibEnACT
         {
             set
             {
-                bkBegin = value;
-                if (bkEnd != null)
+                _begin = value;
+                if (_end != null)
                 {
-                    if (bkBegin < bkEnd)
-                        bkDuration = bkEnd - bkBegin;
+                    if (_begin < _end)
+                        _duration = _end - _begin;
                     else
                     {
                         //Make end time the same as begin time
-                        bkEnd = new Timestamp(bkBegin.AsDouble);
-                        bkDuration = 0;
+                        _end = new Timestamp(_begin.AsDouble);
+                        _duration = 0;
                     }
+                    //TODO: Notify that multiple timestamp properties were changed?
+                    NotifyPropertyChanged();
                 }
             }
-            get { return bkBegin; }
+            get { return _begin; }
         }
 
         /// <summary>
@@ -87,11 +124,13 @@ namespace LibEnACT
         {
             set
             {
-                bkEnd = value;
-                if (bkBegin != null)
-                    bkDuration = bkEnd - bkBegin;
+                _end = value;
+                if (_begin != null)
+                    _duration = _end - _begin;
+
+                NotifyPropertyChanged();
             }
-            get { return bkEnd; }
+            get { return _end; }
         }
 
         /// <summary>
@@ -103,15 +142,17 @@ namespace LibEnACT
         {
             set
             {
-                bkDuration = value;
-                if (bkBegin != null)
-                    bkEnd = bkBegin + bkDuration;
+                _duration = value;
+                if (_begin != null)
+                    _end = _begin + _duration;
                 //Assume a null value would be 0.0 seconds
                 else
                     //Create a new object instead of copying refrences.
-                    bkEnd = new Timestamp(bkDuration.AsDouble);
+                    _end = new Timestamp(_duration.AsDouble);
+
+                NotifyPropertyChanged();
             }
-            get { return bkDuration; }
+            get { return _duration; }
         }
         #endregion //#region Timestamp Properties
 
@@ -161,14 +202,16 @@ namespace LibEnACT
         /// <param name="beginTime">The time this Caption will begin at</param>
         public virtual void MoveTo(double beginTime)
         {
-            this.bkBegin = beginTime;
-            this.bkEnd = bkBegin + bkDuration;
+            this._begin = beginTime;
+            this._end = _begin + _duration;
+            NotifyPropertyChanged("Begin");
         }
         #endregion
 
         public void SetWordList(List<CaptionWord> cwList)
         {
-            
+            //TODO: this
+            throw new NotImplementedException("Not implemented yet");
         }
 
         #region ToString
@@ -178,6 +221,22 @@ namespace LibEnACT
         /// </summary>
         /// <returns>The text of Words's words</returns>
         public override string ToString() { return Words.ToString(); }
+        #endregion
+
+        #region NotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Notifies event subscribers that a property in this class has been changed.
+        /// </summary>
+        /// <param name="propertyName">The name of the property that has been changed.</param>
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
         #endregion
     }
 }
