@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using LibEnACT;
 using Player.Animations;
+using Player.Views;
 
 namespace Player.Controls
 {
@@ -27,6 +28,10 @@ namespace Player.Controls
         public MediaPlayer()
         {
             InitializeComponent();
+
+            //Set data context
+            var mediaPlayerViewModel = new MediaPlayerViewModel();
+            DataContext = mediaPlayerViewModel;
         }
 
         /// <summary>

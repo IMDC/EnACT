@@ -6,6 +6,9 @@ using LibEnACT;
 
 namespace Player.Models
 {
+    /// <summary>
+    /// Model for the Player window.
+    /// </summary>
     public class PlayerModel : INotifyPropertyChanged
     {
         #region Fields and Properties

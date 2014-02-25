@@ -8,6 +8,9 @@ using LibEnACT;
 
 namespace Player.View_Models
 {
+    /// <summary>
+    /// View Model for the Player Window.
+    /// </summary>
     public class PlayerViewModel : ViewModelBase
     {
         #region Fields and Properties
