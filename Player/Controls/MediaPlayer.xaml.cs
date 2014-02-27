@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Globalization;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,6 +10,7 @@ using System.Windows.Media.Animation;
 using LibEnACT;
 using Player.Animations;
 using Player.Views;
+using System.Collections.Specialized;
 
 namespace Player.Controls
 {
@@ -16,6 +19,31 @@ namespace Player.Controls
     /// </summary>
     public partial class MediaPlayer : UserControl
     {
+        private MediaPlayerViewModel _viewModel;
+
+        public MediaPlayerViewModel ViewModel
+        {
+            get { return _viewModel; }
+            set
+            {
+                //Unsubscribe from previous VM events
+                if (_viewModel != null)
+                {
+                    _viewModel.PropertyChanged -= this.ViewModel_PropertyChanged;
+                    if (_viewModel.CaptionList != null)
+                        _viewModel.CaptionList.CollectionChanged -= this.CaptionList_CollectionChanged;
+                }
+
+                _viewModel = value;
+                DataContext = value;
+
+                //Subscribe to events on new view model
+                _viewModel.PropertyChanged += this.ViewModel_PropertyChanged;
+                if (_viewModel.CaptionList != null)
+                    _viewModel.CaptionList.CollectionChanged += this.CaptionList_CollectionChanged;
+            }
+        }
+
         /// <summary>
         /// Volume property. Wraps the Media.Volume property so that it can be binded.
         /// </summary>
@@ -31,7 +59,7 @@ namespace Player.Controls
 
             //Set data context
             var mediaPlayerViewModel = new MediaPlayerViewModel();
-            DataContext = mediaPlayerViewModel;
+            ViewModel = mediaPlayerViewModel;
         }
 
         /// <summary>
@@ -48,9 +76,9 @@ namespace Player.Controls
             SetCaptionPosition(t);
 
             //Give the control a name so that it can be used by the storyboard.
-            this.RegisterName(t.Name,t); 
+            this.RegisterName(t.Name, t);
 
-            var storyboard = (Storyboard) this.FindResource("CaptionStoryboard");
+            var storyboard = (Storyboard)this.FindResource("CaptionStoryboard");
 
             //Create animation for visibility
             ObjectAnimationUsingKeyFrames visibilityAnimation = new ObjectAnimationUsingKeyFrames
@@ -72,10 +100,10 @@ namespace Player.Controls
             foreach (CaptionWord w in c.Words)
             {
                 //Skip words with no emotion in them
-                if(w.Emotion == Emotion.None || w.Emotion == Emotion.Unknown)
+                if (w.Emotion == Emotion.None || w.Emotion == Emotion.Unknown)
                     continue;
 
-                WordAnimation a = WordAnimationFactory.CreateWordAnimation(w,t);
+                WordAnimation a = WordAnimationFactory.CreateWordAnimation(w, t);
 
                 a.AddToMediaPlayer(storyboard, t);
             }
@@ -87,12 +115,22 @@ namespace Player.Controls
         /// <param name="t">The caption texblock to set the position of.</param>
         private void SetCaptionPosition(CaptionTextBlock t)
         {
-            GridLocation l  = GridLocation.GetGridLocation(t.Caption.Location);
+            GridLocation l = GridLocation.GetGridLocation(t.Caption.Location);
 
             Grid.SetRow(t, l.Row);
             Grid.SetRowSpan(t, l.RowSpan);
             Grid.SetColumn(t, l.Column);
             Grid.SetColumnSpan(t, l.ColumnSpan);
+        }
+
+        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+
+        }
+
+        private void CaptionList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }
