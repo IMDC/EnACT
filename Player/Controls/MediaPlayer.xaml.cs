@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,6 +38,12 @@ namespace Player.Controls
                 if (_viewModel.CaptionList != null)
                     _viewModel.CaptionList.CollectionChanged += this.CaptionList_CollectionChanged;
             }
+        }
+
+        public ObservableCollection<Caption> CaptionList
+        {
+            get { return ViewModel.CaptionList; }
+            set { ViewModel.CaptionList = value; }
         }
 
         /// <summary>

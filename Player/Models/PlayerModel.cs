@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Documents;
 using LibEnACT;
@@ -46,7 +47,7 @@ namespace Player.Models
             }
         }
 
-        public List<Caption> CaptionList { get; set; }
+        public ObservableCollection<Caption> CaptionList { set; get; }
 
         public Dictionary<string,Speaker>  SpeakerSet { get; set; }
 

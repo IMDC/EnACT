@@ -72,7 +72,7 @@ namespace Player.Views
 
             playerViewModel.LoadCaptionsRequested += (sender, args) =>
             {
-                Player.ViewModel.CaptionList = new ObservableCollection<Caption>(args.Value.CaptionList);
+                Player.ViewModel.CaptionList = args.Value.CaptionList;
             };
         } 
 

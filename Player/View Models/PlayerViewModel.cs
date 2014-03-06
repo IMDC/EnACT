@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Input;
 using Microsoft.TeamFoundation.MVVM;
@@ -258,7 +259,7 @@ namespace Player.View_Models
             {
                 var tuple = XMLReader.ParseEngineXml(PlayerModel.CaptionsFileFilePath);
 
-                PlayerModel.CaptionList = tuple.Item1;
+                PlayerModel.CaptionList = new ObservableCollection<Caption>(tuple.Item1);
                 PlayerModel.SpeakerSet = tuple.Item2;
                 PlayerModel.Settings = tuple.Item3;
 
