@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
@@ -71,10 +72,7 @@ namespace Player.Views
 
             playerViewModel.LoadCaptionsRequested += (sender, args) =>
             {
-                foreach (Caption c in args.Value.CaptionList)
-                {
-                    Player.AddCaption(c);
-                }
+                Player.ViewModel.CaptionList = new ObservableCollection<Caption>(args.Value.CaptionList);
             };
         } 
 

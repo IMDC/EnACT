@@ -1,11 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Globalization;
-using System.Runtime.Remoting.Channels;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using LibEnACT;
 using Player.Animations;
@@ -52,9 +48,13 @@ namespace Player.Controls
             set { Media.Volume = value; }
         }
 
+        public Storyboard Storyboard { get; private set; }
+
         public MediaPlayer()
         {
             InitializeComponent();
+
+            Storyboard = (Storyboard)this.FindResource("CaptionStoryboard");
 
             ViewModel = new MediaPlayerViewModel();
         }
@@ -75,8 +75,6 @@ namespace Player.Controls
             //Give the control a name so that it can be used by the storyboard.
             this.RegisterName(t.Name, t);
 
-            var storyboard = (Storyboard)this.FindResource("CaptionStoryboard");
-
             //Create animation for visibility
             ObjectAnimationUsingKeyFrames visibilityAnimation = new ObjectAnimationUsingKeyFrames
             {
@@ -92,7 +90,7 @@ namespace Player.Controls
             Storyboard.SetTargetName(visibilityAnimation, t.Name);
             Storyboard.SetTargetProperty(visibilityAnimation, new PropertyPath(TextBlock.VisibilityProperty));
 
-            storyboard.Children.Add(visibilityAnimation);
+            Storyboard.Children.Add(visibilityAnimation);
 
             foreach (CaptionWord w in c.Words)
             {
@@ -102,7 +100,7 @@ namespace Player.Controls
 
                 WordAnimation a = WordAnimationFactory.CreateWordAnimation(w, t);
 
-                a.AddToMediaPlayer(storyboard, t);
+                a.AddToMediaPlayer(Storyboard, t);
             }
         }
 
@@ -120,8 +118,32 @@ namespace Player.Controls
             Grid.SetColumnSpan(t, l.ColumnSpan);
         }
 
+        private void ResetCaptions()
+        {
+            //Hold onto the mediatimeline from before
+            var mediaTimeline = Storyboard.Children[0];
+
+            //Clear all children from the storyboard and add them again.
+            Storyboard.Children.Clear();
+
+            Storyboard.Children.Add(mediaTimeline);
+
+            foreach (Caption c in ViewModel.CaptionList)
+            {
+                this.AddCaption(c);
+            }
+        }
+
         private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            switch (e.PropertyName)
+            {
+                case "CaptionList":
+                    ResetCaptions();
+                    break;
+                default:
+                    throw new NotImplementedException("Property " + e.PropertyName + " is not handled.");
+            }
         }
 
         private void CaptionList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
