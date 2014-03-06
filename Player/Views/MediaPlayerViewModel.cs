@@ -29,7 +29,10 @@ namespace Player.Views
             }
         }
 
+
         public MediaPlayerViewModel()
         {}
+
+        //TODO: Add control commands for media player?
     }
 }

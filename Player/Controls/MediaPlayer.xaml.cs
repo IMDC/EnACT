@@ -35,7 +35,6 @@ namespace Player.Controls
                 }
 
                 _viewModel = value;
-                DataContext = value;
 
                 //Subscribe to events on new view model
                 _viewModel.PropertyChanged += this.ViewModel_PropertyChanged;
@@ -57,9 +56,7 @@ namespace Player.Controls
         {
             InitializeComponent();
 
-            //Set data context
-            var mediaPlayerViewModel = new MediaPlayerViewModel();
-            ViewModel = mediaPlayerViewModel;
+            ViewModel = new MediaPlayerViewModel();
         }
 
         /// <summary>
@@ -125,12 +122,10 @@ namespace Player.Controls
 
         private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-
         }
 
         private void CaptionList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            throw new NotImplementedException();
         }
     }
 }
