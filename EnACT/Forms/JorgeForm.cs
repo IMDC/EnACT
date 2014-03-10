@@ -9,12 +9,12 @@ namespace EnACT.Forms
     public partial class JorgeForm : Form
     {
         public Dictionary<string, Speaker> SpeakerSet { set; get; }
-        public List<EditorCaption> CaptionList { set; get; }
+        public List<Caption> CaptionList { set; get; }
         public SettingsXml Settings { set; get; }
 
         public MainForm M { set; get; }
 
-        public JorgeForm(Dictionary<string,Speaker> speakerSet, List<EditorCaption> captionList,SettingsXml settings, MainForm m)
+        public JorgeForm(Dictionary<string,Speaker> speakerSet, List<Caption> captionList,SettingsXml settings, MainForm m)
         {
             InitializeComponent();
             this.SpeakerSet = speakerSet;

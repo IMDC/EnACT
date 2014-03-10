@@ -10,28 +10,6 @@ namespace EnACT.Core
     {
         #region Fields and Properties
         /// <summary>
-        /// Backing field for BeginIndex
-        /// </summary>
-        private int beginIndex;
-        /// <summary>
-        /// The index of a caption that this word starts at.
-        /// </summary>
-        public int BeginIndex
-        {
-            set
-            {
-                beginIndex = value;
-                EndIndex = value + Length;
-            }
-            get { return beginIndex; }
-        }
-
-        /// <summary>
-        /// The index of a caption that this word ends at.
-        /// </summary>
-        public int EndIndex { private set; get; }
-
-        /// <summary>
         /// Whether or not this value is currently selected.
         /// </summary>
         public bool IsSelected { set; get; }
@@ -66,9 +44,6 @@ namespace EnACT.Core
         public EditorCaptionWord(Emotion e, Intensity i, string text, int beginIndex)
             : base(e, i, text, beginIndex)
         {
-            //Set index positions
-            this.BeginIndex = beginIndex;
-
             //Set word to unselected
             this.IsSelected = false;
         }

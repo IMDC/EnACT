@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using EnACT.Core;
+using LibEnACT;
 
 namespace EnACT.Controls
 {
@@ -39,11 +40,11 @@ namespace EnACT.Controls
         /// <summary>
         /// Backing field for Caption Property.
         /// </summary>
-        private EditorCaption bkCaption;
+        private Caption bkCaption;
         /// <summary>
         /// The Caption currently displayed in the Text Box
         /// </summary>
-        public EditorCaption Caption 
+        public Caption Caption 
         {
             set
             {

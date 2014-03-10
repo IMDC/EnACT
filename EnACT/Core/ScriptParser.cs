@@ -29,7 +29,7 @@ namespace EnACT.Core
         /// Parses a script file when given a path to the script to it.
         /// </summary>
         /// <param name="path">The absolute path to the script file.</param>
-        public static Tuple<List<EditorCaption>, Dictionary<string, Speaker>> Parse(string path)
+        public static Tuple<List<Caption>, Dictionary<string, Speaker>> Parse(string path)
         {
             //Get lowercase version of the extention
             string extension = Path.GetExtension(path).ToLower();
@@ -51,9 +51,9 @@ namespace EnACT.Core
         /// SpeakerSet
         /// </summary>
         /// <param name="scriptPath">The path of the script file</param>
-        public static Tuple<List<EditorCaption>,Dictionary<string, Speaker>> ParseScriptFile(string scriptPath)
+        public static Tuple<List<Caption>,Dictionary<string, Speaker>> ParseScriptFile(string scriptPath)
         {
-            List<EditorCaption> captionList = Utilities.ConstructCaptionList();
+            List<Caption> captionList = Utilities.ConstructCaptionList();
             Dictionary<string, Speaker> speakerSet = Utilities.ConstructSpeakerSet();
 
             string path = scriptPath; //Get path
@@ -91,12 +91,12 @@ namespace EnACT.Core
                         //If surrounded by [ and ], the word is a description
                     else if (lines[i][0] == '[' && lines[i][lastChar] == ']')
                     {
-                        captionList.Add(new EditorCaption(lines[i], descriptionSpeaker));
+                        captionList.Add(new Caption(lines[i], descriptionSpeaker));
                     }
                     //If anything else then it is a dialogue line
                     else
                     {
-                        captionList.Add(new EditorCaption(lines[i], currentSpeaker));
+                        captionList.Add(new Caption(lines[i], currentSpeaker));
                     }
                 }
             }//for
@@ -109,9 +109,9 @@ namespace EnACT.Core
         /// Parses an ESR File
         /// </summary>
         /// <param name="scriptPath">The path of the script file</param>
-        public static Tuple<List<EditorCaption>, Dictionary<string, Speaker>> ParseEsrFile(string scriptPath)
+        public static Tuple<List<Caption>, Dictionary<string, Speaker>> ParseEsrFile(string scriptPath)
         {
-            List<EditorCaption> captionList = Utilities.ConstructCaptionList();
+            List<Caption> captionList = Utilities.ConstructCaptionList();
             Dictionary<string, Speaker> speakerSet = Utilities.ConstructSpeakerSet();
 
             string[] lines = System.IO.File.ReadAllLines(@scriptPath); //Read in file
@@ -145,7 +145,7 @@ namespace EnACT.Core
                     //If the flag is true, then we have already read in a caption
                     if (fullCaptionParsedFlag)
                     {
-                        captionList.Add(new EditorCaption(captionLine, currentSpeaker, beginTime, endTime));
+                        captionList.Add(new Caption(captionLine, currentSpeaker, beginTime, endTime));
                         //Reset the captionFlag
                         fullCaptionParsedFlag = false;
                     }
@@ -216,7 +216,7 @@ namespace EnACT.Core
                     //If it's the last line and we have a full caption
                     if (i == lines.Length - 1 && fullCaptionParsedFlag)
                     {
-                        captionList.Add(new EditorCaption(captionLine, currentSpeaker, beginTime, endTime));
+                        captionList.Add(new Caption(captionLine, currentSpeaker, beginTime, endTime));
                     }
                 }//else
             }//for
@@ -233,9 +233,9 @@ namespace EnACT.Core
         /// for speakers, and every caption will be attributed to the default speaker.
         /// </summary>
         /// <param name="scriptPath">The full path of the SRT file to be parsed</param>
-        public static Tuple<List<EditorCaption>, Dictionary<string, Speaker>> ParseSrtFile(string scriptPath)
+        public static Tuple<List<Caption>, Dictionary<string, Speaker>> ParseSrtFile(string scriptPath)
         {
-            List<EditorCaption> captionList = Utilities.ConstructCaptionList();
+            List<Caption> captionList = Utilities.ConstructCaptionList();
             Dictionary<string, Speaker> speakerSet = Utilities.ConstructSpeakerSet();
 
             string[] lines = System.IO.File.ReadAllLines(@scriptPath); //Read in file
@@ -268,7 +268,7 @@ namespace EnACT.Core
                     //If the flag is true, then we have already read in a caption
                     if (continueCaptionFlag)
                     {
-                        captionList.Add(new EditorCaption(captionLine, currentSpeaker, beginTime, endTime));
+                        captionList.Add(new Caption(captionLine, currentSpeaker, beginTime, endTime));
                         //Reset the captionFlag
                         continueCaptionFlag = false;
                     }

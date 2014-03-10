@@ -184,9 +184,9 @@ namespace EnACT.Core
         /// <param name="path">The Path to the engine.xml file.</param>
         /// <returns>A 3-Tuple containing a CaptionList, a SpeakerSet, and a Settings 
         /// object in that specific order.</returns>
-        public static Tuple<List<EditorCaption>, Dictionary<string, Speaker>, SettingsXml> ParseEngineXml(string path)
+        public static Tuple<List<Caption>, Dictionary<string, Speaker>, SettingsXml> ParseEngineXml(string path)
         {
-            var captionList = new List<EditorCaption>();
+            var captionList = new List<Caption>();
             var speakerSet = new Dictionary<string, Speaker>();
             var settings = new SettingsXml();
 
@@ -311,7 +311,7 @@ namespace EnACT.Core
                         case XmlElements.Captions: break; //Do Nothing
                         case XmlElements.Caption:
                             r.AssertNode(XmlElements.Caption);
-                            EditorCaption c = new EditorCaption
+                            Caption c = new Caption
                             {
                                 Begin = r.GetNonNullAttribute(XmlAttributes.Begin),
                                 End = r.GetNonNullAttribute(XmlAttributes.End),
@@ -320,7 +320,7 @@ namespace EnACT.Core
                                 Alignment = (Alignment) r.GetIntAttribute(XmlAttributes.Align)
                             };
 
-                            List<EditorCaptionWord> wordList = new List<EditorCaptionWord>();
+                            List<CaptionWord> wordList = new List<CaptionWord>();
 
                             while (r.Read())
                             {
@@ -337,10 +337,10 @@ namespace EnACT.Core
 
                                     //Get word from node and add it to the list
                                     EditorCaptionWord word = new EditorCaptionWord(e, i, r.ReadString(), 0);
-                                    c.Words.Add(word);
+                                    wordList.Add(word);
                                 }
                             }
-                            c.ReindexWords(); //Set up proper indexes
+                            c.SetWordList(wordList);
                             captionList.Add(c);
                             break;
                         default: throw new ArgumentException("Value '" + r.Name + "' is not a valid node", r.Name);

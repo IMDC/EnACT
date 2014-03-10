@@ -2,6 +2,7 @@
 using EnACT.Core;
 using LibEnACT;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Caption = EnACT.Core.Caption;
 
 namespace EnACTUnitTestProject
 {
@@ -27,10 +28,10 @@ namespace EnACTUnitTestProject
 
             Speaker s = new Speaker("Guy");
 
-            EditorCaption c;
+            Caption c;
 
             //Act
-            c = new EditorCaption("Line,", s, begin1, end1);
+            c = new Caption("Line,", s, begin1, end1);
 
             //Assert
             Assert.AreEqual(expectedDuration, c.Duration.AsDouble);
@@ -52,10 +53,10 @@ namespace EnACTUnitTestProject
             double expectedEnd = 20;
             double expectedDuration = 5;
 
-            EditorCaption c;
+            Caption c;
 
             //Act
-            c = new EditorCaption("", new Speaker(), new Timestamp(beginTime), new Timestamp(endTime));
+            c = new Caption("", new Speaker(), new Timestamp(beginTime), new Timestamp(endTime));
 
             c.Begin = newBeginTime;
 
@@ -81,10 +82,10 @@ namespace EnACTUnitTestProject
             double expectedEnd = 25;
             double expectedDuration = 20;
 
-            EditorCaption c;
+            Caption c;
 
             //Act
-            c = new EditorCaption("", new Speaker(), new Timestamp(beginTime), new Timestamp(endTime));
+            c = new Caption("", new Speaker(), new Timestamp(beginTime), new Timestamp(endTime));
 
             c.End = newEndTime;
 
@@ -110,10 +111,10 @@ namespace EnACTUnitTestProject
             double expectedEnd = 35;
             double expectedDuration = 30;
 
-            EditorCaption c;
+            Caption c;
 
             //Act
-            c = new EditorCaption("", new Speaker(), new Timestamp(beginTime), new Timestamp(endTime));
+            c = new Caption("", new Speaker(), new Timestamp(beginTime), new Timestamp(endTime));
 
             c.Duration = newDurationTime;
 
@@ -142,7 +143,7 @@ namespace EnACTUnitTestProject
             //Act and Assert
             foreach (string s in testStrings)
             {
-                Caption c = new Caption(s, new Speaker(), NoTimeStamp, NoTimeStamp, 1);
+                LibEnACT.Caption c = new LibEnACT.Caption(s, new Speaker(), NoTimeStamp, NoTimeStamp, 1);
 
                 var tokens = s.Split();
 
@@ -156,7 +157,7 @@ namespace EnACTUnitTestProject
                 Assert.AreEqual(s, c.Text, false);
             }
 
-            Caption tswCaption = new Caption(twoSpaceWidth, new Speaker(), NoTimeStamp, NoTimeStamp, 2);
+            LibEnACT.Caption tswCaption = new LibEnACT.Caption(twoSpaceWidth, new Speaker(), NoTimeStamp, NoTimeStamp, 2);
             Assert.AreEqual(twoSpaceWidth,tswCaption.Text,false);
         }
     }

@@ -95,7 +95,7 @@ namespace EnACT.Core
         /// <param name="captionList">The List of Caption objects to write to a file.</param>
         /// <param name="captionsPath">The full path (file name and extension included) to write 
         /// the CaptionList to.</param>
-        public static void WriteCaptions(List<EditorCaption> captionList, string captionsPath)
+        public static void WriteCaptions(List<Caption> captionList, string captionsPath)
         {
             //NOTE: XmlTextWriter does not require curly braces between writeStartElement and 
             //writeCloseElement. It is put there to easily see what belongs to what node.
@@ -121,7 +121,7 @@ namespace EnACT.Core
                 w.WriteDocType("captions", null, "../captions.dtd", null);
                 w.WriteStartElement("captions");
                 {
-                    foreach (EditorCaption c in captionList)
+                    foreach (Caption c in captionList)
                     {
                         w.WriteStartElement("caption");
                         {
@@ -517,7 +517,7 @@ namespace EnACT.Core
         /// <param name="settings">The SettingsXML object to write to file.</param>
         /// <param name="path">The path (including name and extension) to write the file to.</param>
         public static void WriteEngineXml(Dictionary<string, Speaker> speakerSet, 
-            List<EditorCaption> captionList, SettingsXml settings, string path)
+            List<Caption> captionList, SettingsXml settings, string path)
         {
             using (XmlTextWriter w = new XmlTextWriter(path, Encoding.UTF8))
             {
@@ -634,7 +634,7 @@ namespace EnACT.Core
                     w.WriteEndElement();//Speakers
 
                     w.WriteStartElement(XmlElements.Captions);
-                        foreach (EditorCaption c in captionList)
+                        foreach (Caption c in captionList)
                         {
                             w.WriteStartElement(XmlElements.Caption);
                             {

@@ -11,6 +11,23 @@ namespace LibEnACT
     /// </summary>
     public class Caption : INotifyPropertyChanged
     {
+        #region Constants
+        /// <summary>
+        /// Contains names of the properties of this class as Strings.
+        /// </summary>
+        public static class PropertyNames
+        {
+            public const string Alignment = "Alignment";
+            public const string Begin = "Begin";
+            public const string End = "End";
+            public const string Location = "Location";
+            public const string Duration = "Duration";
+            public const string Speaker = "Speaker";
+            public const string Text = "Text";
+            public const string Words = "Words";
+        }
+        #endregion
+
         #region Properties and Fields
         //Backing Fields
         private Speaker _speaker;
@@ -204,14 +221,13 @@ namespace LibEnACT
         {
             this._begin = beginTime;
             this._end = _begin + _duration;
-            NotifyPropertyChanged("Begin");
+            NotifyPropertyChanged(PropertyNames.Begin);
         }
         #endregion
 
         public void SetWordList(List<CaptionWord> cwList)
         {
-            //TODO: this
-            throw new NotImplementedException("Not implemented yet");
+            Words.SetWordList(cwList);
         }
 
         #region ToString

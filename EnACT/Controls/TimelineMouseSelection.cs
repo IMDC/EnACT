@@ -1,5 +1,6 @@
 ﻿using System;
 using EnACT.Core;
+using LibEnACT;
 
 namespace EnACT.Controls
 {
@@ -32,7 +33,7 @@ namespace EnACT.Controls
         /// <summary>
         /// The selected caption, if any
         /// </summary>
-        public EditorCaption Caption { set; get; }
+        public Caption Caption { set; get; }
 
         /// <summary>
         /// The difference between the selected Caption.Begin and the mouseClickTime
@@ -57,7 +58,7 @@ namespace EnACT.Controls
         /// </summary>
         /// <param name="action">The TimelineMouseAction that is being performed.</param>
         /// <param name="selectedCaption">The caption selected for this TimelineMouseAction.</param>
-        public TimelineMouseSelection(TimelineMouseAction action, EditorCaption selectedCaption)
+        public TimelineMouseSelection(TimelineMouseAction action, Caption selectedCaption)
             : this(action, selectedCaption, 0) { }
 
         /// <summary>
@@ -68,7 +69,7 @@ namespace EnACT.Controls
         /// <param name="mouseClickTimeDifference">The caption selected for this 
         /// TimelineMouseAction.</param>
         /// <param name="selectedCaptionTimeDifference">The time difference.</param>
-        public TimelineMouseSelection(TimelineMouseAction action, EditorCaption mouseClickTimeDifference, 
+        public TimelineMouseSelection(TimelineMouseAction action, Caption mouseClickTimeDifference, 
             double selectedCaptionTimeDifference)
         {
             this.Action = action;

@@ -91,9 +91,9 @@ namespace EnACT.Miscellaneous
         /// CaptionLists.
         /// </summary>
         /// <returns>A List meant to be used as a CaptionList</returns>
-        public static List<EditorCaption> ConstructCaptionList()
+        public static List<Caption> ConstructCaptionList()
         {
-            return new List<EditorCaption>();
+            return new List<Caption>();
         }
 
         /// <summary>

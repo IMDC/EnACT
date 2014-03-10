@@ -17,6 +17,7 @@ namespace LibEnACT
         public const int DefaultSpaceWidth = 1;
         #endregion
 
+        #region Fields and Properties
         /// <summary>
         /// The List of words that this collection wraps.
         /// </summary>
@@ -44,7 +45,9 @@ namespace LibEnACT
         {
             get { return _wordList[index]; }
         }
+        #endregion
 
+        #region Constructor
         /// <summary>
         /// Creates a CaptionWordCollection with a given line and spaceWidth.
         /// </summary>
@@ -68,6 +71,7 @@ namespace LibEnACT
             this.SpaceWidth = spaceWidth;
             SetWordList(cwList);
         }
+        #endregion
 
         /// <summary>
         /// Sets this collection's internal list to the given list, and recalculates the indecies of

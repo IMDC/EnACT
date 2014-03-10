@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using EnACT.Core;
 using EnACT.Miscellaneous;
 using LibEnACT;
 
@@ -223,7 +222,7 @@ namespace EnACT.Controls
         /// <summary>
         /// A list of captions retrieved from a transcript file.
         /// </summary>
-        public List<EditorCaption> CaptionList { set; get; }
+        public List<Caption> CaptionList { set; get; }
         #endregion
 
         #region Events
@@ -359,7 +358,7 @@ namespace EnACT.Controls
             #region Draw Captions
             if (CaptionList != null)
             {
-                foreach (EditorCaption c in CaptionList)
+                foreach (Caption c in CaptionList)
                 {
                     if (((LeftBoundTime <= c.Begin && c.Begin <= RightBoundTime)//Begin is in drawing area
                     || (LeftBoundTime <= c.End && c.End <= RightBoundTime)      //End is in drawing area
@@ -518,7 +517,7 @@ namespace EnACT.Controls
             }
             else
             {
-                foreach (EditorCaption c in CaptionList)
+                foreach (Caption c in CaptionList)
                 {
                     //If the mouse click is not in the same Y location as c, then none of the following code
                     //needs to be applied

@@ -23,7 +23,7 @@ namespace EnACT.Forms
         /// <summary>
         /// The caption selected by the user to mark up with emotions.
         /// </summary>
-        public EditorCaption SelectedCaption { set; get; }
+        public Caption SelectedCaption { set; get; }
         #endregion Fields and Properties
 
         #region SubScribeToMarkupEvents
@@ -43,7 +43,7 @@ namespace EnACT.Forms
         /// Loads a Caption into the controls assosiated with this class.
         /// </summary>
         /// <param name="c">The caption to load.</param>
-        public void LoadCaption(EditorCaption c)
+        public void LoadCaption(Caption c)
         {
             //Clear Selected CaptionWord
             if (SelectedCaption != null)
@@ -436,14 +436,14 @@ namespace EnACT.Forms
             //Switch based on property name
             switch (e.PropertyName)
             {
-                case EditorCaption.PropertyNames.Alignment:     break;
-                case EditorCaption.PropertyNames.Begin:         break;
-                case EditorCaption.PropertyNames.End:           break;
-                case EditorCaption.PropertyNames.Location: SetGB_Location(SelectedCaption.Location); break;
-                case EditorCaption.PropertyNames.Duration:      break;
-                case EditorCaption.PropertyNames.Speaker:       break;
-                case EditorCaption.PropertyNames.Text: CaptionTextBox.Text = SelectedCaption.Text; break;
-                case EditorCaption.PropertyNames.Words:         break;
+                case Caption.PropertyNames.Alignment:     break;
+                case Caption.PropertyNames.Begin:         break;
+                case Caption.PropertyNames.End:           break;
+                case Caption.PropertyNames.Location: SetGB_Location(SelectedCaption.Location); break;
+                case Caption.PropertyNames.Duration:      break;
+                case Caption.PropertyNames.Speaker:       break;
+                case Caption.PropertyNames.Text: CaptionTextBox.Text = SelectedCaption.Text; break;
+                case Caption.PropertyNames.Words:         break;
                 default: throw new ArgumentException(string.Format("Property Name '{0}' isn't a valid property",
                         e.PropertyName), "e");
             }

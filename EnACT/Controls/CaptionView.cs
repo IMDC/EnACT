@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using EnACT.Core;
 using LibEnACT;
 
 namespace EnACT.Controls
@@ -49,13 +48,13 @@ namespace EnACT.Controls
         /// <summary>
         /// A list of captions retrieved from a transcript file.
         /// </summary>
-        public List<EditorCaption> CaptionList { private set; get; }
+        public List<Caption> CaptionList { private set; get; }
 
         /// <summary>
         /// A caption list that can automatically update the CaptionView. Use this object
         /// instead of CaptionList when coding in CaptionView
         /// </summary>
-        private BindingList<EditorCaption> BindingList { set; get; }
+        private BindingList<Caption> BindingList { set; get; }
 
         private DataGridViewColumn numberColumn;
         private DataGridViewColumn beginColumn;
@@ -70,7 +69,7 @@ namespace EnACT.Controls
         /// Sets the CaptionView's CaptionList and initializes it for Caption View.
         /// Gets the Captionlist.
         /// </summary>
-        public List<EditorCaption> CaptionSource
+        public List<Caption> CaptionSource
         {
             set
             {
@@ -79,7 +78,7 @@ namespace EnACT.Controls
                     return;
 
                 CaptionList = value;
-                BindingList = new BindingList<EditorCaption>(value);
+                BindingList = new BindingList<Caption>(value);
 
                 DataSource = BindingList;   //Bind list to view
                 BindingList.ListChanged += BindingList_ListChanged;
@@ -157,7 +156,7 @@ namespace EnACT.Controls
                 Name = ColumnNames.Begin,
                 HeaderText = ColumnNames.Begin,
                 ValueType = typeof (Timestamp),
-                DataPropertyName = EditorCaption.PropertyNames.Begin,
+                DataPropertyName = Caption.PropertyNames.Begin,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
                 MinimumWidth = MinimumColumnWidths.TimestampColumn
             };
@@ -167,7 +166,7 @@ namespace EnACT.Controls
                 Name = ColumnNames.End,
                 HeaderText = ColumnNames.End,
                 ValueType = typeof (Timestamp),
-                DataPropertyName = EditorCaption.PropertyNames.End,
+                DataPropertyName = Caption.PropertyNames.End,
                 MinimumWidth = MinimumColumnWidths.TimestampColumn,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             };
@@ -177,7 +176,7 @@ namespace EnACT.Controls
                 Name = ColumnNames.Duration,
                 HeaderText = ColumnNames.Duration,
                 ValueType = typeof (Timestamp),
-                DataPropertyName = EditorCaption.PropertyNames.Duration,
+                DataPropertyName = Caption.PropertyNames.Duration,
                 MinimumWidth = MinimumColumnWidths.TimestampColumn,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             };
@@ -186,7 +185,7 @@ namespace EnACT.Controls
             {
                 Name = ColumnNames.Speaker,
                 HeaderText = ColumnNames.Speaker,
-                DataPropertyName = EditorCaption.PropertyNames.Speaker,
+                DataPropertyName = Caption.PropertyNames.Speaker,
                 MinimumWidth = MinimumColumnWidths.SpeakerColumn,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             };
@@ -195,7 +194,7 @@ namespace EnACT.Controls
             {
                 Name = ColumnNames.Alignment,
                 HeaderText = ColumnNames.Alignment,
-                DataPropertyName = EditorCaption.PropertyNames.Alignment,
+                DataPropertyName = Caption.PropertyNames.Alignment,
                 MinimumWidth = MinimumColumnWidths.AlignmentColumn,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             };
@@ -204,7 +203,7 @@ namespace EnACT.Controls
             {
                 Name = ColumnNames.Location,
                 HeaderText = ColumnNames.Location,
-                DataPropertyName = EditorCaption.PropertyNames.Location,
+                DataPropertyName = Caption.PropertyNames.Location,
                 MinimumWidth = MinimumColumnWidths.LocationColumn,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             };
@@ -240,13 +239,13 @@ namespace EnACT.Controls
             //If there are no rows in the list, add a new row
             if (BindingList.Count == 0)
             {
-                BindingList.Add(new EditorCaption());
+                BindingList.Add(new Caption());
                 SetCurrentRow(0, ColumnNames.Text);
             }
             //Else insert new row under the currently selected row.
             else
             {
-                BindingList.Insert(CurrentRow.Index + 1, new EditorCaption());
+                BindingList.Insert(CurrentRow.Index + 1, new Caption());
                 SetCurrentRow(CurrentRow.Index + 1, ColumnNames.Text);
             }
         }
@@ -313,7 +312,7 @@ namespace EnACT.Controls
         /// <param name="index2">The second index to swap</param>
         private void SwapRows(int index1, int index2)
         {
-            EditorCaption temp = BindingList[index1];
+            Caption temp = BindingList[index1];
             BindingList[index1] = BindingList[index2];
             BindingList[index2] = temp;
         }

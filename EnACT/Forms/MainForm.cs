@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
-using EnACT.Controls;
 using EnACT.Core;
 using EnACT.Miscellaneous;
 using EnACT.Properties;
@@ -58,11 +57,11 @@ namespace EnACT.Forms
         /// <summary>
         /// Backing field for CaptionList.
         /// </summary>
-        private List<EditorCaption> bkCaptionList;
+        private List<Caption> bkCaptionList;
         /// <summary>
         /// A list of captions retrieved from a transcript file.
         /// </summary>
-        public List<EditorCaption> CaptionList
+        public List<Caption> CaptionList
         {
             get { return bkCaptionList; }
             set
@@ -70,12 +69,12 @@ namespace EnACT.Forms
                 this.bkCaptionList = value;
                 Timeline.CaptionList = value;
                 CaptionView.CaptionSource = value;
-                BindingCaptionList = new BindingList<EditorCaption>(value);
+                BindingCaptionList = new BindingList<Caption>(value);
                 BindingCaptionList.ListChanged += BindingCaptionList_ListChanged;
             }
         }
 
-        public BindingList<EditorCaption> BindingCaptionList { get; private set; } 
+        public BindingList<Caption> BindingCaptionList { get; private set; } 
 
         /// <summary>
         /// The object that represents the EnACT engine xml settings file
