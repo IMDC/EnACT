@@ -33,8 +33,8 @@ namespace EnACT.Controls
             LoadMovie(0,Paths.BlankSwf);
             LoadMovie(0,path);
 
-            //Return to playhead time
-            SetPlayHeadTime(time);
+            //Return up to 1 second before the original position to allow for delay in the engine
+            SetPlayHeadTime(Math.Max(time-1, 0));
         }
 
         /// <summary>

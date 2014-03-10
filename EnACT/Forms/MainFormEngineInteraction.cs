@@ -56,6 +56,12 @@ namespace EnACT.Forms
         /// </summary>
         public void Play()
         {
+            if (videoReloadRequested)
+            {
+                ReloadVideo();
+                videoReloadRequested = false;
+            }
+
             EngineView.Play();
             PlayheadTimer.Start();
             IsPlaying = true;

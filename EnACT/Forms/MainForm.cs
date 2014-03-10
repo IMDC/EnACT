@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
 using EnACT.Controls;
@@ -14,6 +15,9 @@ namespace EnACT.Forms
     public partial class MainForm : Form
     {
         #region Fields and Properties
+
+        private bool videoReloadRequested;
+
         /// <summary>
         /// Backing field for ProjectInfo.
         /// </summary>
@@ -66,8 +70,13 @@ namespace EnACT.Forms
                 this.bkCaptionList = value;
                 Timeline.CaptionList = value;
                 CaptionView.CaptionSource = value;
+                BindingCaptionList = new BindingList<EditorCaption>(value);
+                BindingCaptionList.ListChanged += BindingCaptionList_ListChanged;
             }
         }
+
+        public BindingList<EditorCaption> BindingCaptionList { get; private set; } 
+
         /// <summary>
         /// The object that represents the EnACT engine xml settings file
         /// </summary>
@@ -112,6 +121,8 @@ namespace EnACT.Forms
 
             //Make CaptionTextBox read only
             this.CaptionTextBox.ReadOnly = true;
+
+            videoReloadRequested = false;
         }
 
         /// <summary>
@@ -620,7 +631,12 @@ namespace EnACT.Forms
         }
         #endregion
 
-        private void Button_ReloadVideo_Click(object sender, EventArgs e)
+        #region Reload_Video
+        /// <summary>
+        /// This function reloads the video with updated state so that the video reflects changes
+        /// made in the editor.
+        /// </summary>
+        private void ReloadVideo()
         {
             /* What is happening here is that the video is paused, then all of the captions are 
              * saved to file. The EngineView is then loaded with a new .swf file, called 
@@ -632,5 +648,34 @@ namespace EnACT.Forms
             saveProjectToolStripMenuItem_Click(this, EventArgs.Empty);
             EngineView.ReloadMovie(ProjectInfo.EditorEngineFile.AbsolutePath);
         }
+
+        private void Button_ReloadVideo_Click(object sender, EventArgs e)
+        {
+            ReloadVideo();
+        }
+        #endregion
+
+        #region BindingList events
+        void BindingCaptionList_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            switch (e.ListChangedType)
+            {
+                case ListChangedType.ItemAdded:
+                case ListChangedType.ItemChanged:
+                case ListChangedType.ItemDeleted:
+                case ListChangedType.ItemMoved:
+                case ListChangedType.Reset:
+                    videoReloadRequested = true;
+                    break;
+                case ListChangedType.PropertyDescriptorAdded:
+                case ListChangedType.PropertyDescriptorChanged:
+                case ListChangedType.PropertyDescriptorDeleted:
+                    throw new NotImplementedException("Not implemented yet");
+                default: throw new InvalidEnumArgumentException("e.ListChangedType", e.ListChangedType.GetHashCode(), 
+                    typeof(ListChangedType));
+            }
+        }
+        #endregion
+
     }//Class
 }//Namespace
