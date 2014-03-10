@@ -677,5 +677,11 @@ namespace EnACT.Forms
         }
         #endregion
 
+        private void Button_Preview_Click(object sender, EventArgs e)
+        {
+            var window = new PreviewForm(ProjectInfo);
+            window.Show();
+        }
+
     }//Class
 }//Namespace

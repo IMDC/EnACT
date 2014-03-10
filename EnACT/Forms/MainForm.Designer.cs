@@ -33,11 +33,11 @@ namespace EnACT.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            LibEnACT.Timestamp timestamp3 = new LibEnACT.Timestamp();
-            LibEnACT.Timestamp timestamp4 = new LibEnACT.Timestamp();
+            LibEnACT.Timestamp timestamp1 = new LibEnACT.Timestamp();
+            LibEnACT.Timestamp timestamp2 = new LibEnACT.Timestamp();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MenuStrip_MainForm = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -121,6 +121,7 @@ namespace EnACT.Forms
             this.Timeline = new EnACT.Controls.Timeline();
             this.EngineView = new EnACT.Controls.EngineView();
             this.CaptionView = new EnACT.Controls.CaptionView();
+            this.Button_Preview = new System.Windows.Forms.Button();
             this.MenuStrip_MainForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_Timeline)).BeginInit();
             this.GB_Location.SuspendLayout();
@@ -330,7 +331,7 @@ namespace EnACT.Forms
             // windowsToolStripMenuItem
             // 
             this.windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
-            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.windowsToolStripMenuItem.Text = "Windows";
             // 
             // toolStripMenuItem1
@@ -843,15 +844,15 @@ namespace EnACT.Forms
             this.PlayheadLabel.AutoSize = true;
             this.PlayheadLabel.Location = new System.Drawing.Point(338, 32);
             this.PlayheadLabel.Name = "PlayheadLabel";
-            timestamp3.AsDouble = 0D;
-            timestamp3.AsString = "00:00:00.0";
-            this.PlayheadLabel.PlayheadTime = timestamp3;
+            timestamp1.AsDouble = 0D;
+            timestamp1.AsString = "00:00:00.0";
+            this.PlayheadLabel.PlayheadTime = timestamp1;
             this.PlayheadLabel.Size = new System.Drawing.Size(120, 13);
             this.PlayheadLabel.TabIndex = 23;
             this.PlayheadLabel.Text = "00:00:00.0 / 00:00:00.0";
-            timestamp4.AsDouble = 0D;
-            timestamp4.AsString = "00:00:00.0";
-            this.PlayheadLabel.VideoLength = timestamp4;
+            timestamp2.AsDouble = 0D;
+            timestamp2.AsString = "00:00:00.0";
+            this.PlayheadLabel.VideoLength = timestamp2;
             // 
             // Timeline
             // 
@@ -889,19 +890,19 @@ namespace EnACT.Forms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CaptionView.CaptionSource = null;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.CaptionView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.CaptionView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.CaptionView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CaptionView.Location = new System.Drawing.Point(12, 478);
             this.CaptionView.Name = "CaptionView";
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.CaptionView.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.CaptionView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.CaptionView.Size = new System.Drawing.Size(864, 192);
             this.CaptionView.SpeakerSet = null;
@@ -909,11 +910,22 @@ namespace EnACT.Forms
             this.CaptionView.UserInputEnabled = true;
             this.CaptionView.SelectionChanged += new System.EventHandler(this.CaptionView_SelectionChanged);
             // 
+            // Button_Preview
+            // 
+            this.Button_Preview.Location = new System.Drawing.Point(655, 142);
+            this.Button_Preview.Name = "Button_Preview";
+            this.Button_Preview.Size = new System.Drawing.Size(102, 30);
+            this.Button_Preview.TabIndex = 33;
+            this.Button_Preview.Text = "Preview Fullsize";
+            this.Button_Preview.UseVisualStyleBackColor = true;
+            this.Button_Preview.Click += new System.EventHandler(this.Button_Preview_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 682);
+            this.Controls.Add(this.Button_Preview);
             this.Controls.Add(this.Button_ReloadVideo);
             this.Controls.Add(this.Button_RightAlign);
             this.Controls.Add(this.Button_CenterAlign);
@@ -1044,6 +1056,7 @@ namespace EnACT.Forms
         private System.Windows.Forms.ToolStripMenuItem projectSettingsToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog OpenProjectDialog;
         private System.Windows.Forms.Button Button_ReloadVideo;
+        private System.Windows.Forms.Button Button_Preview;
     }
 }
 
