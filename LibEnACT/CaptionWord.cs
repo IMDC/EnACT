@@ -86,6 +86,30 @@
 
         #region Methods
         /// <summary>
+        /// Checks to see if a charIndex is contained in this EditorCaptionWord
+        /// </summary>
+        /// <param name="charIndex">The index of the character to check</param>
+        /// <returns>True if index is contained in the word, false if otherwise</returns>
+        public bool Contains(int charIndex)
+        {
+            return (BeginIndex <= charIndex && charIndex <= EndIndex );
+        }
+
+        /// <summary>
+        /// Checks to see if this EditorCaptionWord is contained in the given selection.
+        /// </summary>
+        /// <param name="selectionStart">The start position of the selection.</param>
+        /// <param name="selectionLength">The length of the selection.</param>
+        /// <returns>True if the selection</returns>
+        public bool ContainedInSelection(int selectionStart, int selectionLength)
+        {
+            int selectionEnd = selectionStart + selectionLength;
+            return ((BeginIndex <= selectionStart && selectionStart <= EndIndex)
+                    ||  (BeginIndex <= selectionEnd && selectionEnd <= EndIndex)
+                    ||  (selectionStart <= BeginIndex && EndIndex <= selectionEnd));
+        }
+
+        /// <summary>
         /// Returns the text that this word represents
         /// </summary>
         /// <returns>The text value</returns>
