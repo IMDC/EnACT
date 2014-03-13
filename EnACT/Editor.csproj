@@ -81,7 +81,6 @@
     <Compile Include="Controls\CaptionView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Core\EditorCaptionWord.cs" />
     <Compile Include="Forms\MainFormEngineInteraction.cs">
       <SubType>Form</SubType>
     </Compile>

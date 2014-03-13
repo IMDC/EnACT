@@ -132,7 +132,7 @@ namespace EnACT.Core
                             w.WriteAttributeString("location", Convert.ToString(c.Location.GetHashCode()));
                             w.WriteAttributeString("align", Convert.ToString(c.Alignment.GetHashCode()));
 
-                            foreach (EditorCaptionWord cw in c.Words)
+                            foreach (CaptionWord cw in c.Words)
                             {
                                 w.WriteStartElement("emotion");
                                 {
@@ -644,7 +644,7 @@ namespace EnACT.Core
                                 w.WriteAttributeString(XmlAttributes.Location, c.Location.GetHashCode().ToString());
                                 w.WriteAttributeString(XmlAttributes.Align, c.Alignment.GetHashCode().ToString());
 
-                                foreach (EditorCaptionWord cw in c.Words)
+                                foreach (CaptionWord cw in c.Words)
                                 {
                                     w.WriteStartElement(XmlElements.Word);
                                     w.WriteAttributeString(XmlAttributes.Emotion, cw.Emotion.GetHashCode().ToString());

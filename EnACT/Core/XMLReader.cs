@@ -320,7 +320,7 @@ namespace EnACT.Core
                                 Alignment = (Alignment) r.GetIntAttribute(XmlAttributes.Align)
                             };
 
-                            List<CaptionWord> wordList = new List<CaptionWord>();
+                            List<LibEnACT.CaptionWord> wordList = new List<LibEnACT.CaptionWord>();
 
                             while (r.Read())
                             {
@@ -336,7 +336,7 @@ namespace EnACT.Core
                                     Intensity i = (Intensity)r.GetIntAttribute(XmlAttributes.Intensity);
 
                                     //Get word from node and add it to the list
-                                    EditorCaptionWord word = new EditorCaptionWord(e, i, r.ReadString(), 0);
+                                    CaptionWord word = new CaptionWord(e, i, r.ReadString(), 0);
                                     wordList.Add(word);
                                 }
                             }

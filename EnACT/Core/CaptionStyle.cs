@@ -77,15 +77,15 @@ namespace EnACT.Core
 
         #region GetColour
         /// <summary>
-        /// Gets the Color of a EditorCaptionWord given the specified EditorCaptionWord.
+        /// Gets the Color of a CaptionWord given the specified CaptionWord.
         /// </summary>
-        /// <param name="cw">The EditorCaptionWord to get the style of.</param>
+        /// <param name="cw">The CaptionWord to get the style of.</param>
         /// <returns></returns>
-        public static CaptionStyle GetColourOf(EditorCaptionWord cw)
+        public static CaptionStyle GetColourOf(CaptionWord cw)
         { return GetStyleOf(cw.Emotion, cw.Intensity); }
 
         /// <summary>
-        /// Gets the Color of a EditorCaptionWord given the specified Emotion type and Intensity.
+        /// Gets the Color of a CaptionWord given the specified Emotion type and Intensity.
         /// </summary>
         /// <param name="e">The emotion of the colour.</param>
         /// <param name="i">The intensity of the colour.</param>

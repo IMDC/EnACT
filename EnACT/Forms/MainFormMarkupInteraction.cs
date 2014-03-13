@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using EnACT.Controls;
-using EnACT.Core;
 using LibEnACT;
 
 namespace EnACT.Forms
@@ -16,9 +15,9 @@ namespace EnACT.Forms
     {
         #region Fields and Properties
         /// <summary>
-        /// The EditorCaptionWord selected by the user if there is only one word selected.
+        /// The CaptionWord selected by the user if there is only one word selected.
         /// </summary>
-        public EditorCaptionWord SelectedCaptionWord { set; get; }
+        public CaptionWord SelectedCaptionWord { set; get; }
 
         /// <summary>
         /// The caption selected by the user to mark up with emotions.
@@ -82,12 +81,12 @@ namespace EnACT.Forms
 
         #region Load CaptionWord
         /// <summary>
-        /// Loads a single EditorCaptionWord into the controls assosiated with this class.
+        /// Loads a single CaptionWord into the controls assosiated with this class.
         /// </summary>
-        /// <param name="cw">The EditorCaptionWord to load.</param>
-        public void LoadWord(EditorCaptionWord cw)
+        /// <param name="cw">The CaptionWord to load.</param>
+        public void LoadWord(CaptionWord cw)
         {
-            //Set EditorCaptionWord
+            //Set CaptionWord
             SelectedCaptionWord = cw;
 
             //Set Emotion
@@ -249,7 +248,7 @@ namespace EnACT.Forms
             //Clear SelectedCaptionWord
             SelectedCaptionWord = null;
 
-            //Clear GroupBoxes related to EditorCaptionWord
+            //Clear GroupBoxes related to CaptionWord
             ClearGB_EmotionType();
             ClearGB_Intensity();
         }
@@ -257,7 +256,7 @@ namespace EnACT.Forms
 
         #region Change SelectedCaption Properties
         /// <summary>
-        /// Changes the emotion of the selected EditorCaptionWord or words.
+        /// Changes the emotion of the selected CaptionWord or words.
         /// </summary>
         /// <param name="e">The Emotion to set the Caption with.</param>
         public void ChangeEmotion(Emotion e)
@@ -280,7 +279,7 @@ namespace EnACT.Forms
                     }
                     break;
                 case CaptionTextBoxSelectionMode.MultiWordSelection:
-                    foreach (EditorCaptionWord cw in SelectedCaption.Words)
+                    foreach (CaptionWord cw in SelectedCaption.Words)
                     {
                         if (cw.IsSelected) { cw.Emotion = e; }  //Set emotion only if selected
                     }
@@ -297,7 +296,7 @@ namespace EnACT.Forms
         }
 
         /// <summary>
-        /// Changes the Intensity of the selected EditorCaptionWord or words.
+        /// Changes the Intensity of the selected CaptionWord or words.
         /// </summary>
         /// <param name="i">The Intensity to set the Caption with.</param>
         public void ChangeIntensity(Intensity i)
@@ -310,7 +309,7 @@ namespace EnACT.Forms
                     SelectedCaptionWord.Intensity = i;
                     break;
                 case CaptionTextBoxSelectionMode.MultiWordSelection:
-                    foreach (EditorCaptionWord cw in SelectedCaption.Words)
+                    foreach (CaptionWord cw in SelectedCaption.Words)
                     {
                         if (cw.IsSelected) { cw.Intensity = i; } //Set intensity only if selected.
                     }
@@ -391,7 +390,7 @@ namespace EnACT.Forms
 
         /// <summary>
         /// Event Handler for CaptionTextBox.CaptionWordSelected event. Loads the selected
-        /// EditorCaptionWord into the associated controls.
+        /// CaptionWord into the associated controls.
         /// </summary>
         /// <param name="sender">Sender</param>
         /// <param name="e">Event Args</param>

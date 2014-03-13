@@ -55,7 +55,7 @@ namespace EnACT.Controls
                 {
                     bkCaption = value;
                     Text = bkCaption.ToString();
-                    foreach (EditorCaptionWord cw in Caption.Words)
+                    foreach (CaptionWord cw in Caption.Words)
                     {
                         //Return it to the original Caption colour
                         SetTextBackgroundColour(cw, CaptionStyle.GetColourOf(cw));
@@ -73,12 +73,12 @@ namespace EnACT.Controls
         public event EventHandler NothingSelected;
 
         /// <summary>
-        /// An event that is fired when a single EditorCaptionWord is selected by the user.
+        /// An event that is fired when a single CaptionWord is selected by the user.
         /// </summary>
         public event EventHandler<CaptionWordSelectedEventArgs> CaptionWordSelected;
         
         /// <summary>
-        /// An event that is fired when more than 1 EditorCaptionWord is selected by the user.
+        /// An event that is fired when more than 1 CaptionWord is selected by the user.
         /// </summary>
         public event EventHandler MultipleCaptionWordsSelected;
         #endregion
@@ -137,8 +137,8 @@ namespace EnACT.Controls
             else
             {
                 int numSelections = 0;
-                //foreach (EditorCaptionWord cw in Caption.Words)
-                foreach (EditorCaptionWord cw in Caption.Words)
+                //foreach (CaptionWord cw in Caption.Words)
+                foreach (CaptionWord cw in Caption.Words)
                 {
                     if (cw.ContainedInSelection(SelectionStart, SelectionLength))
                     {
@@ -182,7 +182,7 @@ namespace EnACT.Controls
             int caret = SelectionStart;
             bool wordSelected = false;
 
-            foreach (EditorCaptionWord cw in Caption.Words)
+            foreach (CaptionWord cw in Caption.Words)
             {
                 //If the word contains the caret but hasn't been selected yet, highlight and then select it.
                 if (cw.Contains(caret) && !cw.IsSelected)
@@ -228,7 +228,7 @@ namespace EnACT.Controls
             if (Caption != null)
             {
                 //Deselect each caption
-                foreach (EditorCaptionWord cw in Caption.Words) { cw.IsSelected = false; }
+                foreach (CaptionWord cw in Caption.Words) { cw.IsSelected = false; }
             }
 
             //Clear Caption
@@ -241,9 +241,9 @@ namespace EnACT.Controls
         /// Sets the background colour of the text specified by the arguments. Preserves the previous
         /// selection, restoring it after highlighting is done.
         /// </summary>
-        /// <param name="word">The EditorCaptionWord to highlight.</param>
+        /// <param name="word">The CaptionWord to highlight.</param>
         /// <param name="style">The CaptionStyle to use.</param>
-        public void SetTextBackgroundColour(EditorCaptionWord word, CaptionStyle style)
+        public void SetTextBackgroundColour(CaptionWord word, CaptionStyle style)
         { this.SetTextBackgroundColour(word.BeginIndex, word.Length, style.TextColour, style.BackColour); }
 
         /// <summary>

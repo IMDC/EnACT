@@ -1,5 +1,5 @@
 ﻿using System;
-using EnACT.Core;
+using LibEnACT;
 
 namespace EnACT.Controls
 {
@@ -12,13 +12,13 @@ namespace EnACT.Controls
         /// <summary>
         /// The word selected by the user in CaptionTextBox.
         /// </summary>
-        public EditorCaptionWord SelectedWord { private set; get; }
+        public CaptionWord SelectedWord { private set; get; }
 
         /// <summary>
-        /// Constructs a CaptionWordSelectedEventArgs with a specified EditorCaptionWord.
+        /// Constructs a CaptionWordSelectedEventArgs with a specified CaptionWord.
         /// </summary>
-        /// <param name="selectedWord">The selected EditorCaptionWord.</param>
-        public CaptionWordSelectedEventArgs(EditorCaptionWord selectedWord)
+        /// <param name="selectedWord">The selected CaptionWord.</param>
+        public CaptionWordSelectedEventArgs(CaptionWord selectedWord)
         {
             this.SelectedWord = selectedWord;
         }

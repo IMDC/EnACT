@@ -41,6 +41,11 @@
         public Intensity Intensity { set; get; }
 
         /// <summary>
+        /// Whether or not this value is currently selected.
+        /// </summary>
+        public bool IsSelected { set; get; }
+
+        /// <summary>
         /// The text of the CaptionWord.
         /// </summary>
         public string Text { private set; get; }    //The part wrapped in <emotion> tag
