@@ -678,6 +678,7 @@ namespace EnACT.Forms
 
         private void Button_Preview_Click(object sender, EventArgs e)
         {
+            saveProjectToolStripMenuItem_Click(this, EventArgs.Empty);
             var window = new PreviewForm(ProjectInfo);
             window.Show();
         }
