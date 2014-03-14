@@ -127,7 +127,7 @@
             </StackPanel>
         </DockPanel>
         <!--Make Media Player the last Element so that it fills the remaining space-->
-        <controls:MediaPlayer
+        <controls:MediaControl
             x:Name="Player"
             DockPanel.Dock="Top" />
     </DockPanel>

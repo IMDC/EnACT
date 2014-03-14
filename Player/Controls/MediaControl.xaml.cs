@@ -12,13 +12,13 @@ using System.Collections.Specialized;
 namespace Player.Controls
 {
     /// <summary>
-    /// Interaction logic for MediaPlayer.xaml
+    /// Interaction logic for MediaControl.xaml
     /// </summary>
-    public partial class MediaPlayer : UserControl
+    public partial class MediaControl : UserControl
     {
-        private MediaPlayerViewModel _viewModel;
+        private MediaControlViewModel _viewModel;
 
-        public MediaPlayerViewModel ViewModel
+        public MediaControlViewModel ViewModel
         {
             get { return _viewModel; }
             set
@@ -57,17 +57,17 @@ namespace Player.Controls
 
         public Storyboard Storyboard { get; private set; }
 
-        public MediaPlayer()
+        public MediaControl()
         {
             InitializeComponent();
 
             Storyboard = (Storyboard)this.FindResource("CaptionStoryboard");
 
-            ViewModel = new MediaPlayerViewModel();
+            ViewModel = new MediaControlViewModel();
         }
 
         /// <summary>
-        /// Adds an emotive caption to this MediaPlayer.
+        /// Adds an emotive caption to this MediaControl.
         /// </summary>
         /// <param name="c">The Caption to add.</param>
         public void AddCaption(Caption c)

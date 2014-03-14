@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Player.Models
 {
     /// <summary>
-    /// Model for the MediaPlayer control.
+    /// Model for the MediaControl control.
     /// </summary>
     public class MediaPlayerModel
     {

@@ -105,6 +105,8 @@ namespace Player.Views
 
         private void MenuItemDebug_OnClick(object sender, RoutedEventArgs e)
         {
+            Console.Write("Video Natural Dimensions: {0}x{1}", Player.Media.NaturalVideoWidth,
+                Player.Media.NaturalVideoHeight);
         }
     }
 }

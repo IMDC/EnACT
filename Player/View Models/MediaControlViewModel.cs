@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 namespace Player.Views
 {
     /// <summary>
-    /// View model for the MediaPlayer control.
+    /// View model for the MediaControl control.
     /// </summary>
-    public class MediaPlayerViewModel : ViewModelBase
+    public class MediaControlViewModel : ViewModelBase
     {
         private ObservableCollection<Caption> _captionList;
 
@@ -30,7 +30,7 @@ namespace Player.Views
         }
 
 
-        public MediaPlayerViewModel()
+        public MediaControlViewModel()
         {}
 
         //TODO: Add control commands for media player?

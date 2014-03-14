@@ -106,7 +106,7 @@ namespace Player.View_Models
         #region Constructor
         public PlayerViewModel(IMediaPlayer mediaPlayer)
         {
-            //Set MediaPlayer
+            //Set MediaControl
             MediaPlayer = mediaPlayer;
 
             //Construct PlayerModel
@@ -133,8 +133,8 @@ namespace Player.View_Models
         private bool CanPlay(object parameter)
         {
             return true;
-//            return MediaPlayer.CurrentState == PlayerState.Paused 
-//                || MediaPlayer.CurrentState == PlayerState.Stopped;
+//            return MediaControl.CurrentState == PlayerState.Paused 
+//                || MediaControl.CurrentState == PlayerState.Stopped;
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace Player.View_Models
         private bool CanPause(object parameter)
         {
             return true;
-//            return MediaPlayer.CurrentState == PlayerState.Playing;
+//            return MediaControl.CurrentState == PlayerState.Playing;
         }
 
         /// <summary>
@@ -176,8 +176,8 @@ namespace Player.View_Models
         private bool CanStop(object parameter)
         {
             return true;
-//            return MediaPlayer.CurrentState == PlayerState.Paused
-//                || MediaPlayer.CurrentState == PlayerState.Playing;
+//            return MediaControl.CurrentState == PlayerState.Paused
+//                || MediaControl.CurrentState == PlayerState.Playing;
         }
 
         /// <summary>
